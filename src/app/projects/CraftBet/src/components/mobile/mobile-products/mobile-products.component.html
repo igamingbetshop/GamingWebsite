@@ -1,0 +1,8 @@
+<div class="mobile-live-casino-section min-height">
+
+    <div class="grouped-products-content flex_around">
+        <a class="grouped-products-content_item" routerLinkActive="active" *ngFor="let item of productList"
+           [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/products/' + item.Icon + '.png)'}"
+           (click)="openGame(item)"></a>
+    </div>
+</div>

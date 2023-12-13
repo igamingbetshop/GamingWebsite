@@ -1,0 +1,8 @@
+<div class="bottom-sideBar-section">
+    <ul class="b-sideBar">
+        <li *ngFor="let item of menuList" (click)="openTab(item)" class="b-sideBar__item">
+            <span class="b-sideBar__icon"><span class="{{item?.Icon}}"></span></span>
+            <span class="b-sideBar__text">{{item?.Title}}</span>
+        </li>
+    </ul>
+</div>

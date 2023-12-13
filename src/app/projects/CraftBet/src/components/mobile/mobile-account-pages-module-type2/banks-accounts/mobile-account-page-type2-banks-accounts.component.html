@@ -1,0 +1,53 @@
+<div class="mobile-tickets-section">
+  <h2 class="mobile-tickets-section_title">{{'User.Bank_Accounts' | translate}}</h2>
+
+  <div class="add-tickets">
+    <button type="button" class="craft_btn" (click)="addAccount()">{{'User.Add_Account' | translate}}</button>
+  </div>
+
+  <div class="tickets_history">
+    <div class="tickets_history_item"
+         *ngFor="let account of paymentService.bankAccounts">
+      <div class="tickets_history_item_topPanel">
+        <div>
+          {{'User.Id' | translate}}
+        </div>
+        <div>
+          {{account.Id}}
+        </div>
+      </div>
+      <div class="tickets_history_item_topPanel">
+        <div>
+          {{'User.NickName' | translate}}
+        </div>
+        <div>
+          {{account.NickName}}
+        </div>
+      </div>
+      <div class="tickets_history_item_topPanel">
+        <div>
+          {{'User.BankName' | translate}}
+        </div>
+        <div>
+          {{account.BankName}}
+        </div>
+      </div>
+      <div class="tickets_history_item_topPanel hide-form-row">
+        <div>
+          {{'User.Iban' | translate}}
+        </div>
+        <div>
+          {{account.IBAN}}
+        </div>
+      </div>
+      <div class="tickets_history_item_topPanel">
+        <div>
+          {{'User.BankAccountNumber' | translate}}
+        </div>
+        <div>
+          {{account.BankAccountNumber}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

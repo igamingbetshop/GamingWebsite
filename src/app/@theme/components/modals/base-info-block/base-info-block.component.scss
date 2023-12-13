@@ -1,0 +1,81 @@
+.Payments_Info {
+  width: 620px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+}
+.Affiliate_Confirmation {
+  background: var(--affiliate-confirmation-background, #1E2E48);
+  min-width: var(--affiliate-confirmation-min-width, 310px);
+  height: var(--affiliate-confirmation-height, 182px);
+  width: var(--affiliate-confirmation-width, 310px);
+  padding: var(--affiliate-confirmation-padding, 25px 20px);
+  margin: var(--affiliate-confirmation-margin, 250px 0 0 0) !important;
+  .modal-body {
+    color: var(--affiliate-confirmation-title-color, #fff);
+    text-align: var(--affiliate-confirmation-title-text-align, center);
+    font-size: var(--affiliate-confirmation-title-font-size, 18px);
+    font-weight: var(--affiliate-confirmation-title-font-weight, 600);
+    flex-direction: column;
+  }
+  .modal_content {
+    padding: var(--affiliate-confirmation-content-padding, 10px 0 0 0);
+    min-height: var(--affiliate-confirmation-title-min-height, auto);
+    color: var(--affiliate-confirmation-content-color, #fff);
+  }
+  .modal_footer {
+    width: 100%;
+    .Affiliate_Confirmation_btn {
+      display: var(--affiliate-confirmation-btn-display, flex);
+      justify-content: center;
+      align-items: center;
+      margin: var(--affiliate-confirmation-btn-margin, 30px auto 0);
+      border-radius: var(--affiliate-confirmation-btn-border-radius, 4px);
+      color: var(--affiliate-confirmation-btn-color, #fff);
+      background: var(--affiliate-confirmation-btn-background, #1CA7EC);
+      width: var(--affiliate-confirmation-btn-width, 90%);
+      height: var(--affiliate-confirmation-btn-height, 30px);
+      font-size: var(--affiliate-confirmation-btn-font-size, 16px);
+      font-weight: var(--affiliate-confirmation-btn-font-weight, 500);
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
+.modal_footer {
+  .close-btn {
+    display: none;
+  }
+}
+.modal-body {
+  width: 100%;
+
+  .Payments_Info_body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000000;
+  }
+  .Affiliate_Confirmation_body {
+    .Affiliate_Confirmation_icon {
+      display: none;
+    }
+  }
+
+  .fa {
+    font-size: 30px;
+    color: #000000;
+    cursor: pointer;
+  }
+}
+
+.modal_content {
+  min-height: 350px;
+  height: auto;
+  text-align: left;
+  color: #000;
+  font-size: 17px;
+  font-weight: 400;
+  padding: 5px;
+}

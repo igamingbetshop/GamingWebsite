@@ -1,0 +1,32 @@
+.about_us_section {
+  background: backgroundColor(about-us-section, $account-default-bg);
+  padding-top: paddingTop(about-us-section, 50px);
+
+  &_height {
+    min-height: 560px;
+    height: height(about-us, 700px);
+  }
+
+  &_content {
+    margin: 0 auto 0 auto;
+    background:backgroundColor(footer-section-content,$color-white);
+    padding: 20px;
+    .about-us-title {
+      font-size: fontSize(about_us_header, 24px);
+      font-weight: fontWeight(about_us_header, 700);
+      color: itemColor(about_us_header, #000);
+      text-align: textAlign(about_us_header, center);
+    }
+    h2 {
+      font-size: fontSize(about_us_title, 24px);
+      font-weight: fontWeight(about_us_title, 700);
+      color: itemColor(about_us_text_title, #000);
+    }
+
+    .content {
+      font-size: fontSize(about_us_content, 16px);
+      font-weight: fontWeight(about_us_content, normal);
+      color: itemColor(about_us_content_text, #000);
+    }
+  }
+}

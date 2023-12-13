@@ -1,0 +1,63 @@
+@mixin common-button {
+  background: linear-gradient(to bottom, color(settings-button-gradient-first) 0%, color(settings-button-gradient-second) 100%);
+  color: color(settings-button-text);
+  font-weight: 700;
+  padding: 0 20px;
+
+  //&:hover {
+  //  background: linear-gradient(to bottom, color(settings-button-gradient-active-first) 0%, color(settings-button-gradient-active-second) 100%);
+  //}
+}
+@mixin m-common-button
+{
+  background: -webkit-linear-gradient(90deg,var(--payment-button-background-gradient-first-color) 0,var(--payment-button-background-gradient-second-color) 100%);
+  color: $account-settings-btn;
+  font-weight: 700;
+  padding: 0 20px;
+}
+@mixin center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin flex-distance-between
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin account-underline {
+  height: 1px;
+  background: var(--account-content-header-underline-bg, linear-gradient(180deg, #48628E 0%, #111723 100%));
+  box-shadow: var(--account-content-header-underline-shadow, 0 4px 8px rgba(0, 0, 0, 0.94));
+  border-radius: 6px;
+  margin-top: var(--account-content-header-underline-margin-top, 10px);
+  margin-bottom: var(--account-content-header-underline-margin-bottom, 24px);
+}
+@mixin account-custom-select {
+  outline: none;
+  background: backgroundColor(history-select, #314566);
+  border-radius: var(--history-select-border-radius, 6px);
+  color: itemColor(history-select, #fff);
+  padding: var(--history-select-padding, 12px 16px);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--account-content-item-color1, #fff) 50%), linear-gradient(135deg, var(--account-content-item-color1, #fff) 50%, transparent 50%), linear-gradient(to right, transparent, transparent);
+  background-position: calc(100% - 16px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px), 100% 0;
+  background-size: 5px 5px, 6px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+  font-size: fontSize(history-select, 16px);
+  font-weight: fontWeight(history-select, 400);
+  border: var(--history-select-border, none);
+  height: height(history-select, 40px);
+}
+
+@mixin horizontal-scroll($height:5px,$border-radius:15px, $color:rgba(204, 204, 204, 0.2))
+{
+  &::-webkit-scrollbar-track { border-radius: $border-radius; background-color: transparent; }
+  &::-webkit-scrollbar {  height: $height;  background-color: transparent;  }
+  &::-webkit-scrollbar-thumb:hover { background: $color; }
+  &::-webkit-scrollbar-thumb {  border-radius: $border-radius;  background-color: $color; }
+}

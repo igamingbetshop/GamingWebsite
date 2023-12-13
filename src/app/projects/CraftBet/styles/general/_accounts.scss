@@ -1,0 +1,175 @@
+/*
+.payment-systems__userAccount {
+  min-height: 88px;
+  padding: 15px 20px 0;
+  float: left;
+  width: 100%;
+
+  border-bottom: 1px solid rgba(194, 194, 194, .3);
+
+  &__name {
+    float: left;
+    font-size: 16px;
+    color: black;
+
+    &_item {
+      font-size: 16px;
+      text-transform: capitalize;
+      color: #9e9e9e;
+      font-style: normal;
+    }
+  }
+
+  &_balance {
+    float: right;
+    font-size: 16px;
+    color: black;
+    text-align: right;
+
+    &_item {
+      font-style: normal;
+      font-size: 12px;
+      color: black;
+      margin-right: 6px;
+    }
+  }
+
+}
+
+.payment-systems__totalItem {
+  padding: 22px 20px 0;
+  width: 100%;
+  float: left;
+  border-top: 4px solid rgba(255, 255, 255, .3);
+  font-size: 16px;
+  color: black;
+  min-height: 88px;
+  border-bottom: 1px solid rgba(194, 194, 194, 0.3);
+  margin-bottom: 40px;
+
+  &_item {
+    font-style: normal;
+    float: right;
+    text-align: right;
+    font-size: 16px;
+  }
+}
+
+.payment-systems__infoText {
+  float: left;
+  color: #e50000;
+  font-style: normal;
+  font-size: 12px;
+  width: 100%;
+  margin: 8px 0 10px;
+}
+*/
+
+.payment-balance-section {
+  margin: var(--payment-balance-info-margin, 0);
+  box-shadow: var(--amount-withdraw-box-shadow, none);
+  background: var(--payment-balance-info-background, #314566) !important;
+  min-height: var(--payment-balance-info-min-height, 100%) !important;
+  width: var(--payment-balance-info-width, 100%) !important;
+  /*position: var(--payment-balance-info-position, relative);*/
+  left: var(--payment-balance-info-left, 0);
+  .payment-systems__userAccount {
+    width: var(--payment-balance-info-items-width, 100%) !important;
+    display: var(--payment-balance-info-items-display, block);
+    flex-direction: var(--payment-balance-info-items-flex-direction, column);
+    gap: var(--payment-balance-info-items-gap, 0px);
+    margin: var(--payment-balance-info-items-margin, 0 auto);
+    &__name {
+      background: var(--payment-balance-info-items-background, unset) !important;
+    }
+    &_balance {
+      background: var(--payment-balance-info-items-background, unset) !important;
+    }
+  }
+  .payment-systems__totalItem {
+    width: var(--payment-balance-info-items-width, 100%) !important;
+    background: var(--payment-balance-info-items-total-background, unset) !important;
+    margin: var(--payment-balance-info-items-total-margin, 20px auto 0) !important;
+  }
+  .payment-systems__infoText {
+    width: var(--payment-balance-info-items-width, 100%) !important;
+    background: var(--payment-balance-info-items-background, unset) !important;
+    margin: 0;
+  }
+}
+.payment-system-block
+{
+  background: var(--payment-client-info-background, $account-content-item-bg-color);
+  color: var(--payment-client-info-color, $account-content-item-color);
+  border-radius: var(--payment-client-info-border-radius, 8px);
+  width: var(--payment-client-info-width, 100%);
+  min-height: var(--payment-client-info-min-height, 120px);
+  height: var(--payment-client-info-height, auto);
+  margin-bottom: var(--payment-client-info-margin-bottom, 44px);
+  padding: var(--payment-client-info-padding, 14px);
+  display: var(--payment-client-info-display, flex);
+  flex-direction: var(--payment-client-info-flex-direction, column);
+  gap: var(--payment-client-info-gap, 34px);
+
+  .payment-systems__userAccount {
+    width: 100%;
+    &__name {
+      @include flex-distance-between;
+      font-size: var(--payment-client-info-font-size, 20px);
+      margin-bottom: var(--payment-client-info-name-margin-bottom, 0px);
+      padding: var(--payment-client-info-name-padding, 0px);
+      background: var(--payment-client-info-name-background, unset);
+    }
+
+    .payment-systems__infoText {
+      color: var(--payment-system-info-color, #FF5E5E);
+      padding: var(--payment-client-info-name-padding, 0px);
+      margin-bottom: var(--payment-client-info-used-margin-bottom, 0px);
+      background: var(--payment-client-info-used-background, unset);
+    }
+
+    &_balance {
+      @include flex-distance-between;
+      font-size: var(--payment-client-info-font-size2, 18px);
+      margin-bottom: var(--payment-client-info-balance-margin-bottom, 4px);
+      margin-top: var(--payment-client-info-balance-margin-top, 0px);
+      padding: var(--payment-client-info-name-padding, 0px);
+      background: var(--payment-client-info-name-background, unset);
+      i {
+        font-style: var(--payment-client-info-font-style, italic);
+      }
+    }
+  }
+  .payment-systems__totalItem {
+    @include flex-distance-between;
+    width: 100%;
+    font-size: var(--payment-client-info-font-size, 20px);
+    padding: var(--payment-client-info-name-padding, 0px);
+    background: var(--payment-client-info-name-background, unset);
+    margin: var(--payment-client-info-name-margin, 0);
+    &_balance {
+      color: var(--account-payment-amount-colors, #fff);
+      i {
+        font-style: var(--payment-client-info-font-style, italic);
+      }
+    }
+  }
+  .payment-systems__infoText {
+    @include flex-distance-between;
+    font-size: 11px;
+    width: 100%;
+    i {
+      font-style: var(--payment-client-info-font-style, italic);
+    }
+  }
+}
+
+.block-title
+{
+  font-size: 13px;
+  font-weight: bold;
+  color: black;
+  text-decoration: underline;
+  margin-bottom: 4px;
+}
+

@@ -1,0 +1,16 @@
+.zoom-btn
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  *{
+    color: black;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  fa-icon{cursor: pointer}
+  span{display: inline-block; font-weight: 700; margin-left: 10px; cursor: pointer}
+
+}

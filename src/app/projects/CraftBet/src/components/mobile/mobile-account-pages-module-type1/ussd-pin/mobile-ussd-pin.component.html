@@ -1,0 +1,105 @@
+<div class="mobile-settings-section" [ngStyle]="layoutService.layoutStyle">
+    <div class="mobile-settings-section">
+        <h2 class="mobile-settings-section_title">{{'Settings.Ussd-pin-title' | translate}}</h2>
+        <div class="underline"></div>
+        <div class="tab-content-mobile">
+            <form class="m-change-password_form" [formGroup]="formGroup" novalidate (ngSubmit)="saveUssdPin()"
+                  autocomplete="off">
+                <div class="form_row">
+                    <div class="form_field m-change-password-btn">
+                        <button class="craft_btn setting_btn cancel_btn" type="button" (click)="resetState()"
+                                [disabled]="!(formGroup.get('OldPin').value || formGroup.get('NewPin').value || formGroup.get('ConfirmPin').value)">
+                            <span class="icon-close-modal"></span>
+                            <span>{{'Settings.Cancel-changes' | translate}}</span>
+                        </button>
+                        <button class="craft_btn setting_btn" type="submit" (click)="saveUssdPin()"
+                                [disabled]="!(formGroup.get('OldPin').value || formGroup.get('NewPin').value || formGroup.get('ConfirmPin').value)">
+                            <fa-icon [icon]="['fas', 'save']" class="fas-save"></fa-icon>
+                            <span>{{'Settings.Save-Changes' | translate}}</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form_row">
+
+                    <div class="form_field" *ngIf="this.profileData?.USSDPin">
+                        <input class="setting-input" type="{{passwordType['old'] ? 'text' : 'password'}}" numbersOnly
+                               placeholder="{{'Settings.Old-pin-placeholder' | translate}}"
+                               formControlName="OldPin" reg-exp-input regExp="^[0-9_]{4,4}$" (keydown)="dotKey($event)"
+                               />
+                        <label>{{'Settings.Old-pin' | translate}}</label>
+                        <div (click)="passwordType['old'] = !passwordType['old']"
+                             class="change-password-field-type m-change-password-field-type2">
+                            <span [ngClass]="passwordType['old'] ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                        </div>
+                    </div>
+                    <div class="error_message"
+                         *ngIf="formGroup.get('OldPin').hasError('required') && !formGroup.get('OldPin').hasError('OldPin') && formGroup.get('OldPin').touched">
+                        <span>{{ 'Error.Required-field' | translate }}</span>
+                    </div>
+                    <div class="error_message"
+                         *ngIf="(formGroup.get('OldPin').hasError('maxlength') || formGroup.get('OldPin').hasError('minlength')) && formGroup.get('OldPin').touched">
+                        <span>{{ 'Error.Required-field-length' | translate }}</span>
+                    </div>
+                    <div class="mobile-comment error_message"
+                         *ngIf="formGroup.get('OldPin').touched && formGroup.get('OldPin').hasError('pattern')">
+                        {{'Error.Password_Validation' | translate}}
+                    </div>
+                </div>
+
+                <div class="form_row">
+                    <div class="form_field">
+                        <input type="{{passwordType['new'] ? 'text' : 'password'}}" numbersOnly class="setting-input"
+                               placeholder="{{'Settings.New-pin-placeholder' | translate}}" (keydown)="dotKey($event)"
+                               formControlName="NewPin" reg-exp-input regExp="^[0-9_]{4,4}$"
+                               [ngClass]="{'invalid-filed': ((formGroup.get('NewPin').hasError('required')  || formGroup.get('NewPin').hasError('minlength') || formGroup.get('NewPin').hasError('maxlength')) && formGroup.get('NewPin').touched)}"/>
+                        <label>{{'Settings.New-pin' | translate}}</label>
+                        <div (click)="passwordType['new'] = !passwordType['new']"
+                             class="change-password-field-type m-change-password-field-type2">
+                            <span [ngClass]="passwordType['new'] ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                        </div>
+                    </div>
+                    <div class="error_message"
+                         *ngIf="formGroup.get('NewPin').hasError('required') && !formGroup.get('NewPin').hasError('NewPin') && formGroup.get('NewPin').touched">
+                        <span>{{ 'Error.Required-field' | translate }}</span>
+                    </div>
+                    <div class="error_message"
+                         *ngIf="(formGroup.get('NewPin').hasError('maxlength') || formGroup.get('NewPin').hasError('minlength')) && formGroup.get('NewPin').touched">
+                        <span>{{ 'Error.Required-field-length' | translate }}</span>
+                    </div>
+
+                    <div class="mobile-comment error_message"
+                         *ngIf="formGroup.get('NewPin').touched && formGroup.get('NewPin').hasError('pattern')">
+                        {{'Error.PasswordValidation' | translate}}
+                    </div>
+                </div>
+
+
+                <div class="form_row">
+                    <div class="form_field">
+                        <input class="setting-input" type="{{passwordType['confirm'] ? 'text' : 'password'}}" numbersOnly
+                               [placeholder]="'Settings.Confirm-pin-placeholder' | translate" (keydown)="dotKey($event)"
+                               formControlName="ConfirmPin" reg-exp-input regExp="^[0-9_]{4,4}$"
+                               [ngClass]="{'invalid-filed': ((formGroup.get('ConfirmPin').hasError('required')  || formGroup.get('ConfirmPin').hasError('minlength') || formGroup.get('ConfirmPin').hasError('maxlength')) && formGroup.get('ConfirmPin').touched)}"/>
+                        <label>{{'Settings.Confirm-pin' | translate}}</label>
+                        <div (click)="passwordType['confirm'] = !passwordType['confirm']"
+                             class="change-password-field-type m-change-password-field-type2">
+                            <span [ngClass]="passwordType['confirm'] ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                        </div>
+                    </div>
+                    <div class="error_message"
+                         *ngIf="formGroup.get('NewPin').touched &&formGroup.get('OldPin').touched && formGroup.get('OldPin').value === formGroup.get('NewPin').value">
+                        <span>{{ 'Error.PinSame' | translate }}</span>
+                    </div>
+                    <div class="error_message"
+                         *ngIf="formGroup.get('ConfirmPin').hasError('matchTo') && formGroup.get('ConfirmPin').dirty && !formGroup.get('ConfirmPin').hasError('required')">
+                        <span>{{ 'Error.PasswordMatchTo' | translate }}</span>
+                    </div>
+                </div>
+
+                <div class="form_row">
+                    <div class="success_message">{{successChangeUssd}}</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

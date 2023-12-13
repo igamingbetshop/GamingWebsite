@@ -1,0 +1,48 @@
+<div class="{{itemClassname}}-type-Dpd"
+     [class.single-lang]="isSingleLang"
+      dropdown (click)="openedDropDown = !openedDropDown">
+
+    <div *ngIf="dropdownImage === '1'"
+         [ngStyle]="{
+            'background-image':
+              'url(../../../../../../../assets/images/languages/' +
+              currentLang?.key +
+              '.png)'
+          }"
+         class="custom_dropdown_img"></div>
+
+    <div class="dropdown-header-title" *ngIf="dropdownTitle === '1'">{{currentLang?.value}}</div>
+
+    <fa-icon [icon]="['fas', 'angle-down']" class="drop_down_icon"></fa-icon>
+
+    <ul class="custom_dropdown_list right-top {{itemClassname}}-custom-ul">
+        <div class="tail" *ngIf="!listTitle"></div>
+        <div class="tail" *ngIf="listTitle">{{'Choose language' | translate}}</div>
+        <div class="lang_grid" [ngStyle]="gridStyles">
+            <li *ngFor="let lang of languages"
+                [attr.data-id]="'language-' + lang.key"
+                (click)="changeLanguage(lang.key)" class="custom_dropdown_list_item" >
+                <div class="menu-list-section" *ngIf="currentLang.key !== lang?.key">
+                    <div *ngIf="dropdownImage === '1'" [ngStyle]="{
+                'background-image':
+                  'url(../../../../../../../assets/images/languages/' +
+                  lang?.key +
+                  '.png)'
+              }" class="lang_list_img"></div>
+                    <ng-container [ngSwitch]="itemTitle">
+                        <span *ngSwitchCase="'1'" class="lang_name">{{lang.value }}</span>
+                        <span *ngSwitchCase="'2'" class="lang_name">{{lang.key }}</span>
+                    </ng-container>
+                </div>
+            </li>
+        </div>
+    </ul>
+
+</div>
+
+<div class="overlay" [class.active] = "openedDropDown && isMobile" (click)="openedDropDown = false"></div>
+
+
+
+
+

@@ -1,0 +1,164 @@
+<div class="full-page">
+    <div class="profile-page-details">
+<!--        <div class="user-right-panel_title">{{'User.Personal-Information-top-title' | translate}}</div>-->
+        <div class="submit-details" *ngIf="(profileService.editState$ | async).value">
+            <button class="craft_btn setting_btn" type="button" (click)="resetProfileForm()"
+                    [ngClass]="{'cancel_btn': (profileService.editState$ | async).value}">
+                <span>{{'Settings.Cancel-changes' | translate}}</span>
+            </button>
+            <button class="craft_btn setting_btn" type="submit" (click)="updateProfile()">
+                <span>{{'Settings.Save-Profile-Changes' | translate}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="change-password-tab">
+        <div class="container-part">
+            <div class="titles" collapse="true">
+                <span class="change-password-tab-text">{{'Settings.PersonalInformation' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <div class="open-change-password">
+                <div class="profile-section">
+                    <div class="no-border container-part" style="margin-bottom: -18px">
+                        <div class="profile-part">
+                            <form [formGroup]="formGroup" *ngIf="formReady" class="profile-form-part">
+                                <div *ngFor="let formItem of formItems">
+                                    <div [ngSwitch]="formItem.Type">
+                                        <div *ngSwitchCase="'text'" class="items-part">
+                                            <div class="left-part">{{'User.' + formItem.Title | translate}}:</div>
+                                            <div class="right-part">
+                                                <input type="text" [formControlName]="formItem.Title">
+                                            </div>
+                                        </div>
+                                        <div *ngSwitchCase="'details'" class="items-part">
+                                            <div class="left-part">{{'User.' + formItem.Title | translate}}:</div>
+                                            <div class="right-part">
+                                                <span *ngIf="profileService.getProfile?.Title !== null">{{'User.' + profileService.getProfile?.Title | translate}}</span>
+                                                <span *ngIf="profileService.getProfile?.Title === null"></span>
+                                            </div>
+                                        </div>
+                                        <div *ngSwitchCase="'birth-date'" class="items-part">
+                                            <div class="left-part">{{'User.' + formItem.Title | translate}}:</div>
+                                            <div class="right-part">
+                                                {{profileService.getProfile.BirthDate | date: 'dd.MM.yyyy'}}
+                                            </div>
+                                        </div>
+                                        <div *ngSwitchCase="'send-code'">
+                                            <ng-container [ngSwitch]="formItem.Title">
+                                                <ng-container *ngSwitchCase="'Email'">
+                                                    <ng-template #emailRef></ng-template>
+                                                </ng-container>
+                                            </ng-container>
+                                        </div>
+                                        <div *ngSwitchCase="'region'">
+                                            <ng-container [ngSwitch]="formItem.Title">
+                                                <ng-container *ngSwitchCase="'CityId'">
+                                                    <ng-template #cityRef></ng-template>
+                                                </ng-container>
+                                                <ng-container *ngSwitchCase="'CountryId'">
+                                                    <ng-template #countryRef></ng-template>
+                                                </ng-container>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="success_message1" [ngClass]="{'error_message': updateDataMessage?.Error, 'success_message': !updateDataMessage?.Error }">
+                        <fa-icon [icon]="['fas', 'check']" class="success-verify" *ngIf="updateDataMessage?.Message === 'Success'"></fa-icon>
+                        <p>{{updateDataMessage?.Message}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="change-password-tab">
+        <div class="container-part">
+            <div class="titles" collapse>
+                <span class="change-password-tab-text">{{'Settings.Change-password-title' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <div class="open-change-password">
+                <app-account-page-type3-change-password></app-account-page-type3-change-password>
+            </div>
+        </div>
+<!--        <div class="container-part">-->
+<!--            <div class="titles" collapse>-->
+<!--                <span class="change-password-tab-text">{{'Settings.Ideas-title' | translate}}</span>-->
+<!--                <div class="change-icon">-->
+<!--                    <span class="icon-arrow-right"></span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="ideas">-->
+<!--                <div class="profile-part profile-part2">-->
+<!--                    <div class="items-part items-part2">-->
+<!--                        <div class="radio-buttons-title">{{'User.Mode' | translate }}</div>-->
+<!--                        <div class="radio-buttons-part">-->
+<!--                            <ul>-->
+<!--                                <li>-->
+<!--                                    <input type="radio" name="Light" id="Light" [checked]="!darkMode"-->
+<!--                                           (click)="switchMode(false)">-->
+<!--                                    <label for="Light"><span>{{'User.Light' | translate }}</span></label>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <input type="radio" name="Dark" id="Dark" [checked]="darkMode"-->
+<!--                                           (click)="switchMode(true)">-->
+<!--                                    <label for="Dark"><span>{{'User.Dark' | translate }}</span></label>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="items-part items-part2">-->
+<!--                        <div class="radio-buttons-title">{{'User.OddsFormat' | translate }}</div>-->
+<!--                        <div class="radio-buttons-part">-->
+<!--                            <ul>-->
+<!--                                <li>-->
+<!--                                    <input type="radio" name="decimal" id="Decimal" #Decimal [checked]="oddsFormat === 'Decimal'"-->
+<!--                                           (click)="oddsFormatMode(Decimal)">-->
+<!--                                    <label for="Decimal"><span>{{'User.Decimal' | translate }}</span></label>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <input type="radio" name="decimal" id="Break" #Break [checked]="oddsFormat === 'Break'"-->
+<!--                                           (click)="oddsFormatMode(Break)">-->
+<!--                                    <label for="Break"><span>{{'User.Break' | translate }}</span></label>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <input type="radio" name="decimal" id="American" #American [checked]="oddsFormat === 'American'"-->
+<!--                                           (click)="oddsFormatMode(American)">-->
+<!--                                    <label for="American"><span>{{'User.American' | translate }}</span></label>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+<!--    <div class="change-password-tab">-->
+<!--        <div class="container-part">-->
+<!--            <div class="titles" collapse>-->
+<!--                <span class="change-password-tab-text">{{'Settings.Automatic-Payout' | translate}}</span>-->
+<!--                <div class="change-icon">-->
+<!--                    <span class="icon-arrow-right"></span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="open-change-password">-->
+<!--                <div class="automatic-payout-info">-->
+<!--                    {{'Settings.Automatic-Payout-Info' | translate}}-->
+<!--                </div>-->
+<!--                <form class="automatic-payout-form">-->
+<!--                    <div class="automatic-payout">-->
+<!--                        <input type="number" class="automatic-payout-input">-->
+<!--                        <label class="limit-type-currency">{{ currencySymbol }}</label>-->
+<!--                    </div>-->
+<!--                    <input type="submit" value="{{'Settings.Change-Automatic-Payout' | translate}}" class="automatic-payout-submit">-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>

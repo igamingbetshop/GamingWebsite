@@ -1,0 +1,45 @@
+<div class="pay3000-section">
+    <div class="container-part" *ngIf="connected === false">
+        <div class="user-right-panel_title">{{ 'User.Pay-top-title' | translate }}</div>
+        <form class="pay3000-section-form" [formGroup]="formGroup" novalidate (ngSubmit)="savePay3000()">
+            <div class="form_field">
+                <label>{{ 'Settings.PayId' | translate }}</label>
+                <input type="text" formControlName="WalletNumber"
+                       placeholder="{{'Settings.PayId-Placeholder' | translate}}"/>
+            </div>
+            <div class="form_field-checkbox">
+                <input type="checkbox" class="pay3000-checkbox distans-right" formControlName="AcceptTerms"/>
+                <span [innerHTML]="'Settings.Accept-terms' | translate | sanitizer: 'html'"
+                      class="reg-conditions"></span>
+            </div>
+        </form>
+        <div class="pay3000-confirm">
+            <button class="craft_btn setting_btn" type="submit" (click)="savePay3000()"
+                    [disabled]="!formGroup.valid">
+                <span>{{ 'Settings.Further' | translate }}</span>
+            </button>
+        </div>
+        <div class="pay3000-download">
+            <div class="pay3000-download-title">{{ 'Settings.havent-registered' | translate }}</div>
+            <div class="pay3000-download-items"
+                 [innerHTML]="'Settings.Download-items' | translate | sanitizer: 'html'"></div>
+        </div>
+        <div class="error_message">{{ statusMessage }}</div>
+    </div>
+    <div class="container-part" *ngIf="connected === true">
+        <div class="show-text">
+            <div class="showed-text-player-id">{{ 'Settings.Player-Account-Id' | translate }} <span
+                    class="show-id">{{ playerDetails?.ClientName }} </span></div>
+            <div class="showed-texts">{{ 'User.Status' | translate }}: <span
+                    class="status-{{playerDetails?.State}}">{{ playerDetails?.StateName }}</span></div>
+        </div>
+<!--        <div class="showed-text-id">{{ messageBalanceKey }}</div>-->
+        <div class="showed-text-id">{{ 'Settings.Have-Questions' | translate }} <span
+                class="show-id" [innerHTML]="'Settings.Contact-Support' | translate | translate | sanitizer: 'html'"></span></div>
+        <div class="showed-text-id">{{ messageDateKey }}</div>
+        <div class="delete-btn-part">
+            <button class="delete-btn" (click)="deleteBinding()">{{ 'Settings.Delete-Binding' | translate }}</button>
+            <div class="error_message pay3000-error">{{ statusMessage }}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,379 @@
+.self-limitation-section2
+{
+  height: var(--payment-section-content-width, auto);
+  display: flex;
+  gap: 6px;
+  margin-top: var(--payment-section-content-margin-top, 0px);
+  .nav-tabs
+  {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 0 16px;
+    display: flex;
+    li
+    {
+      margin-right: 50px;
+      cursor: pointer;
+      outline: none;
+      &.active-tab{text-decoration: underline}
+    }
+  }
+  .self-limitation-tab
+  {
+    background: $account-main-bg-color;
+    border-radius: 6px;
+    padding: 20px;
+    height: auto;
+    .underline {
+      @include account-underline;
+    }
+    &.left-part {
+      width: var(--self-limitation-left-part-width, 896px);
+      position: relative;
+      box-shadow: var(--amount-withdraw-box-shadow, none);
+      .self-limit-title {
+        font-weight: fontWeight(self-limit-title, 500);
+        font-size: fontSize(self-limit-title, 22px);
+        line-height: var(--self-limit-title-line-height, 22px);
+        color: var(--self-limit-title-color, #ffffff);
+      }
+      .self-limit-warning {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: var(--self-limit-warning-margin-bottom, 0px);
+        .icon-warning {
+          color: var(--self-limit-warning-icon-color, #fff);
+          margin-right: 16px;
+          font-size: var(--self-limit-warning-icon-font-size, 28px);
+        }
+        .self-limit-warning-title {
+          color: var(--self-limit-warning-title-color, #fff);
+        }
+        .icon-warning-active {
+          color: var(--self-limit-warning-icon-active-color, #CEB700);
+        }
+      }
+      .limitation_header {
+        @include flex-distance-between;
+        height: var(--change-password-second-tab-heirght, 32px);
+        .limit_edit {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          justify-content: justifyContent(edit-button, unset);
+          width: width(edit-button, 53px);
+          height: height(edit-button, 40px);
+          background-color: backgroundColor(edit-button, none);
+          border-radius: var(--edit-button-border-radius, 0px);
+          cursor: pointer;
+          &_text {
+            background: none!important;
+            border: none;
+            padding: 0!important;
+            color: var(--edit-button-color, #4AA4FF);
+            text-decoration: var(--edit-button-text-decoration, underline);
+            font-size: fontSize(edit-button-text, 13px);
+            cursor: pointer;
+            white-space: nowrap;
+          }
+          .icon-edit{color: color(edit-icon)}
+          &.selected
+          {
+            button{ color: color(edit-button-selected)}
+            .icon-edit{color: color(edit-icon-selected)}
+          }
+        }
+        .setting_btn {
+          @include common-button;
+          font-weight: 500;
+          font-size: $font-size-5;
+        }
+        .submit-details {
+          display: flex;
+          gap: 20px;
+          justify-content: flex-end;
+          width: width(settings-submit-details, auto);
+          .setting_btn {
+            font-size: var(--settings-submit-details-font-size, 16px);
+            font-weight: var(--settings-submit-details-font-weight, 500);
+            padding: var(--settings-submit-details-padding, 0px 10px);
+            height: height(settings-submit-details, 44px);
+            .icon-close-modal {
+              margin-right: 13px;
+              font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
+            }
+            .fas-save {
+              margin-right: 13px;
+              font-size: calc(var(--settings-submit-details-font-size, 16px) + 2px);
+            }
+            &.cancel_btn {
+              background: var(--settings-cancel-btn-bg, rgba(13, 18, 32, 0.5));
+              color: var(--settings-cancel-btn-color, #fff);
+            }
+          }
+        }
+      }
+      form {
+        display: flex;
+        gap: 21px;
+        .limit-type {
+          .limit-underline {
+            @include account-underline;
+            width: var(--limit-type-underline-width, 0px);
+          }
+          &_row {
+            display: grid;
+            grid-template-columns: var(--limit-type-grid-templates, repeat(5,1fr));
+            gap: var(--limit-type-grid-gap, 28px);
+            align-items: center;
+            margin-bottom: var(--limit-type-margin-bottom, 28px);
+            position: relative;
+            .limit-type-title {
+              font-size: var(--limit-type-title-font-size, 16px);
+              font-weight: var(--limit-type-title-font-weight, 500);
+              white-space: nowrap;
+              width: var(--limit-type-title-width, 150px);
+              color: var(--limit-type-title-color, #ffffff);
+            }
+            .limit-type-field {
+              position: relative;
+              .validation-error {
+                position: absolute;
+                bottom: auto;
+                font-size: 12px;
+                color: red;
+              }
+              .validation-input-error {
+                border: 1px solid red;
+              }
+            }
+            .error-message {
+              width: var(--self-limitation-error-message, 100%);
+            }
+          }
+          &_row:nth-child(5) {
+            margin-bottom: var(--limit-type-last-margin-bottom, 28px);
+          }
+        }
+      }
+      .limitation-actions {
+        display: flex;
+        gap: 21px;
+        margin-top: 53px;
+        width: 96%;
+        position: absolute;
+        bottom: 20px;
+        .success-message {
+          position: absolute;
+          top: itemTop(limitation-actions,-30px);
+          color: itemColor(limitation-actions, #fff);
+          font-size: fontSize(limitation-actions, 16px);
+        }
+        button {
+          margin: 0;
+          background: var(--limit-btn-bg, linear-gradient(180deg, #1376F8 0%, #0A254A 100%));
+          border-radius: 6px;
+          width: 50%;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          font-size: $font-size-5;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          &.cancel_btn {
+            background: var(--limit-btn-cancel-bg, rgba(13, 18, 32, 0.5));
+          }
+        }
+      }
+      .error-message-self-limitation {
+        top: var(--self-limitation-error-message-top, 200px);
+        font-size: var(--self-limitation-error-message-font-size, 14px);
+        border-left: var(--self-limitation-error-message-border-left, 2px solid rgb(255, 72, 72));
+      }
+      .success-message-self-limitation {
+        top: var(--self-limitation-success-message-top, 200px);
+        color: var(--success-message-settings-color, #3c763d);
+      }
+    }
+    &.right-part {
+      width: var(--self-limitation-right-part-width, 590px);
+      display: var(--self-limitation-right-part-display, block);
+      box-shadow: var(--amount-withdraw-box-shadow, none);
+      .self-limit-title {
+        font-weight: fontWeight(self-limit-title, 500);
+        font-size: fontSize(self-limit-title, 22px);
+        line-height: var(--self-limit-title-line-height, 22px);
+        margin: var(--self-limit-title-margin, 0);
+        color: var(--self-limit-title-color, #ffffff);
+      }
+      .self-exclusion-section {
+        font-weight: fontWeight(self-limit-description, 500);
+        color: var(--self-limit-description-color, #ffffff);
+        margin-bottom: var(--self-limit-description-margin-bottom, 0);
+      }
+      .exclusion_header {
+        height: var(--change-password-second-tab-heirght, 32px);
+      }
+      .self-exclusion-box {
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - var(--account-content-header-underline-margin-top) - var(--account-content-header-underline-margin-bottom));
+        justify-content: space-between;
+        padding-bottom: 20px;
+        .self-exclusion-row-btn {
+          margin-top: var(--self-limit-btn-margin-top, auto);
+          margin-bottom: var(--self-limit-btn-margin-bottom, 0px);
+        }
+        .self-exclusion-row {
+          display: flex;
+          flex-direction: column;
+          gap: var(--self-exclusion-row-gap, 28px);
+          position: relative;
+          margin-top: var(--self-exclusion-row-margin-top, 20px);
+          input {
+            width: 100%;
+          }
+          .date-input {
+            position: unset;
+          }
+          input::-webkit-datetime-edit-fields-wrapper {
+            display: none;
+          }
+          .changed-date {
+            position: var(--self-limit-changed-date-position, absolute);
+            top: var(--self-limit-changed-date-top, 66px);
+            left: var(--self-limit-changed-date-left, 22px);
+          }
+          .self-tab-bar_item {
+            background: var(--self-tab-bar-item-background, #384f75);
+            box-shadow: var(--self-tab-bar-item-box-shadow, none);
+            border-radius: var(--self-tab-bar-item-border-radius, 4px);
+            padding: var(--self-tab-bar-item-padding, 14px 24px);
+            cursor: pointer;
+            &.active {
+              border: var(--self-tab-bar-item-active-color, 1px solid #C2394B);
+            }
+            &.active2 {
+              border: var(--self-tab-bar-last-item-active-color, 1px solid #ffffff);
+            }
+          }
+          .self-tab-bar_item:first-child {
+            color: var(--self-tab-bar-first-item-color, #C2394B);
+          }
+          .self-tab-bar_item:last-child {
+            color: var(--self-tab-bar-last-item-color, #ffffff);
+          }
+          .self-tab-bar_item:hover {
+            color: var(--self-tab-bar-item-hover-color, unset);
+          }
+        }
+        .periods {
+          display: var(--self-limit-reasons-display, block);
+        }
+        .self-exclusion-row-date {
+          position: relative;
+          margin-top: var(--self-limit-password-input-margin-top, 25px);
+          .self-exclusion-row-date-input {
+            width: 100%;
+          }
+          .change-password-self {
+            top: var(--self-limit-password-icon-top, 13px);
+            cursor: pointer;
+          }
+        }
+        .periods {
+          .period-label {
+            margin: 10px 0;
+          }
+          .change-icon2 {
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
+
+    .self-limitation, .self-exclusion-box
+    {
+      .session-limit
+      {
+        .error-message{margin-left: 10px}
+      }
+      button
+      {
+        margin: var(----settings-button-text-margin, 0 auto);
+        display: block;
+        background: linear-gradient(180deg, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
+        color: var(--settings-button-text-color, #FFFFFF);
+        font-weight: var(--tickets-list-title-font-weight, bold);
+        padding: var(--edit-button-padding, 0 32px);
+        height: var(--self-limitation-button-height, 40px);
+        border-radius: var(--edit-button-border-radius, 3px);
+        cursor: pointer;
+      }
+    }
+    label {
+      color: itemColor(change-password-input-label, #fff);
+      position: var(--self-limit-input-label-position, absolute);
+      top: itemTop(self-limit-input-label, 12px);
+      left: itemLeft(change-password-input-label, 8px);
+      height: height(change-password-input-label, 25px);
+      transform-origin: 0 50%;
+      transition: transform 200ms, color 200ms;
+      pointer-events: none;
+    }
+    input:focus ~ label {
+      height: height(change-password-input-label-focused, 11px);
+      background: var(--change-password-background-color, none);
+      color: var(--change-password-field-focus-label, #fff);
+      top: itemTop(self-limit-label, 12px);
+      font-size: var(--change-password-background-color-font-size, 16px);
+    }
+    input:focus ~ .cut,
+    input:not(:placeholder-shown) ~ .cut {
+      transform: translateY(8px);
+      display: block;
+    }
+    input:focus ~ .cut {
+      display: block;
+    }
+    input:focus::placeholder {
+      opacity: 1;
+    }
+    input::placeholder {
+      opacity: 0;
+    }
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
+      transform: var(--change-password-label-transform, translateY(-29px) translateX(10px) scale(0.75));
+      background-color: var(--self-limitation-background-color-focus-label-focused, #213454);
+      height: var(--change-password-label-focused-height, 20px);
+      font-size: var(--change-password-font-size-label, 20px);
+      color: var(--change-password-focus-label-focused, #fff);
+      text-align: var(--change-password-focus-label-focused-text-align, left);
+    }
+    input, select
+    {
+      width: var(--self-limitation-fields-width, auto);
+      height: var(--self-limitation-fields-height, 44px);
+      background-color: $account-content-item-bg-color;
+      padding: 12px 16px;
+      border: var(--self-limitation-fields-border, none);
+      outline: none;
+      border-radius: var(--self-limitation-fields-border-radius, 6px);
+      color: var(--self-limitation-fields-color, rgba(255, 255, 255, 0.6));
+      font-size: var(--self-limitation-fields-font-size, 16px);
+      &.active_item
+      {
+        border: 1px solid var(--self-limitation-fields-border-color, rgba(219, 237, 255, 0.8));
+      }
+    }
+    select
+    {
+      cursor: pointer;
+      color: itemColor(account-select,rgba(255, 255, 255, 0.6));
+    }
+  }
+}
+
+

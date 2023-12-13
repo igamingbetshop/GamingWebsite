@@ -1,0 +1,250 @@
+.animated {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+}
+
+
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.lds-ellipsis div {
+  position: absolute;
+  top: 27px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: color(responce-loader-background);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.lds-ellipsis div:nth-child(1) {
+  left: 6px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(2) {
+  left: 6px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(3) {
+  left: 26px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(4) {
+  left: 45px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes lds-ellipsis2 {
+  0% {
+    //transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(19px, 0);
+  }
+}
+
+
+//Marquee
+
+
+/* define the animation */
+@-webkit-keyframes marqueeUp {
+  0% {
+    -webkit-transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(0, -100%);
+  }
+}
+
+@keyframes marqueeUp {
+  0% {
+    -webkit-transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(0, -100%);
+  }
+}
+
+@keyframes messages-marquee-bottom-to-top {
+  0% {
+    transform: translateY(0)
+  }
+  12.5% {
+    transform: translateY(0)
+  }
+  25% {
+    transform: translateY(-14.5px)
+  }
+  37.5% {
+    transform: translateY(-14.5px)
+  }
+  50% {
+    transform: translateY(-29px)
+  }
+  62.5% {
+    transform: translateY(-29px)
+  }
+  75% {
+    transform: translateY(-43.5px)
+  }
+  87.5% {
+    transform: translateY(-43.5px)
+  }
+  100% {
+    transform: translateY(-56px)
+  }
+}
+@keyframes messages-marquee-top-to-bottom {
+  0% {
+    transform: translateY(-56px)
+  }
+  12.5% {
+    transform: translateY(-43.5px)
+  }
+  25% {
+    transform: translateY(-43.5px)
+  }
+  37.5% {
+    transform: translateY(-29px)
+  }
+  50% {
+    transform: translateY(-29px)
+  }
+  62.5% {
+    transform: translateY(-14.5px)
+  }
+  75% {
+    transform: translateY(-14.5px)
+  }
+  87.5% {
+    transform: translateY(0)
+  }
+  100% {
+    transform: translateY(0)
+  }
+}
+@keyframes marqueeRightToLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-35%);
+  }
+}
+@keyframes marqueeLeftToRight {
+  0% {
+    transform: translateX(-35%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.marqueeBottomToTop {
+  animation-name: messages-marquee-bottom-to-top;
+  animation-duration: 16s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-delay: 1.5s;
+}
+.marqueeTopToBottom {
+  animation-name: messages-marquee-top-to-bottom;
+  animation-duration: 16s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-delay: 1.5s;
+}
+.marqueeRightToLeft {
+  animation-name: marqueeRightToLeft;
+  animation-duration: 25s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.marqueeLeftToRight {
+  animation-name: marqueeLeftToRight;
+  animation-duration: 25s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.marqueeUp {
+  flex: 1;
+  cursor: pointer;
+  //padding: 0.2em 0.833em;
+  overflow: hidden;
+}
+
+
+
+
+

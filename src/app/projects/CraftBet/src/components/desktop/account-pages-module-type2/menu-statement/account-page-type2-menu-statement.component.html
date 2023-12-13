@@ -1,0 +1,27 @@
+<div class="account-page-type2-announcements menu-account-statement-section">
+
+    <div class="account-statement-section-content">
+        <div class="account-statement-section-title">
+            {{userData?.FirstName}}
+        </div>
+
+        <div class="menu-account-statement-section_row flex_between">
+            <div class="item_cell">{{'User.Balance' | translate}}:</div>
+            <div class="item_cell">
+                {{balanceInfo?.AvailableBalance | number}}
+                {{balanceInfo?.CurrencyId}}
+            </div>
+        </div>
+
+        <div class="menu-account-statement-section_row flex_between" *ngIf="balanceInfo?.BonusBalance != 0">
+            <div class="item_cell">{{'User.Balance' | translate}}:</div>
+            <div class="item_cell">
+                {{balanceInfo?.BonusBalance | number}}
+                {{balanceInfo?.CurrencyId}}
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="deposit-button common-button"
+            [routerLink]="'/user/' + configService.defaultOptions.AccountTemplateType + '/deposit'">{{'User.Deposit' | translate}}</button>
+</div>

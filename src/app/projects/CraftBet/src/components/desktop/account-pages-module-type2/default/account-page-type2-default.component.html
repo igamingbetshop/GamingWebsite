@@ -1,0 +1,70 @@
+<div class="user-default-section account-page-type2-default recponcive-height">
+
+    <div class="user-default-section_top tab-{{tabType}}">
+        <div class="user-left-panel">
+            <ul class="user-left-panel_topList">
+<!--                <li *ngFor="let item of menuList" class="user-left-panel_header" collapse-->
+<!--                    [ngClass]="{'opened': (savedDateService.selectedItem == item)}"-->
+<!--                     >-->
+                <li
+                        *ngFor="let item of menuList" class="user-left-panel_header" collapse (click)="toggleMenu(item, $event)"
+                        [ngClass]="{'opened': (currentOpenMenu == item) || (item.SubMenu.includes(currentOpenSubMenu))}">
+                    <div class="title_menu" (click)="savedDateService.getItem(item)"
+                         [ngClass]="(savedDateService.selectedItem == item) || (item.SubMenu.includes(savedDateService.currentSubItem)) ? 'active' : ''"
+                         [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + item.SubMenu[0].Href">
+                        <div>
+                            <div class="title_menu_icon" [ngStyle]="{'background-image':'url(../../../../../../../assets/images/account-tabs-list/' + item?.Icon + ')'}"></div>
+                            <span>{{'User.' + item?.Title | translate}}</span>
+                        </div>
+                        <fa-icon [icon]="faCaretDown" *ngIf="item?.Title !== item?.SubMenu[0].Title"></fa-icon>
+                    </div>
+<!--                    <ul class="user-left-panel_subList"  *ngIf="item?.Title !== item?.SubMenu[0].Title" [collapse]="(savedDateService.selectedItem == item)">-->
+                    <ul class="user-left-panel_subList" *ngIf="(currentOpenMenu == item) || (item.SubMenu.includes(currentOpenSubMenu))"
+                            [collapse]="true">
+                        <div>
+                            <li class="user-left-panel_list" *ngFor="let subItem of item?.SubMenu" (click)="savedDateService.getItem(item); $event.stopPropagation()">
+                                <a class="item_menu" routerLinkActive="active"
+                                   [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + subItem.Href"
+                                   *ngIf="subItem.Type != 4">
+                                    {{'User.' + subItem?.Title | translate}}
+                                </a>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="user-right-panel">
+            <div class="user-right-panel_top">
+                <ul>
+                    <li class="user-right-panel_list" *ngFor="let subItem of savedDateService.selectedItem?.SubMenu">
+                        <a class="item_menu" routerLinkActive="active"
+                           [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + subItem.Href"
+                           *ngIf="subItem.Type != 4">
+                            {{'User.' + subItem?.Title | translate}}
+                            <div class="selected"></div>
+                        </a>
+
+                    </li>
+                </ul>
+                <div class="user-info">
+                    <div class="user-icon">
+                        <span class="icon-user-info"></span>
+                        <div class="user-info_content">
+                            <app-account-page-type2-statement></app-account-page-type2-statement>
+                            <div class="selected"></div>
+                        </div>
+                    </div>
+                    <div class="user-info_text">
+                        {{'User.User info' | translate}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-right-panel_content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,9 @@
+.mobile-license {
+  display: block;
+  width: 100%;
+
+  & > div {
+    width: 50px;
+    margin: 0 auto;
+  }
+}

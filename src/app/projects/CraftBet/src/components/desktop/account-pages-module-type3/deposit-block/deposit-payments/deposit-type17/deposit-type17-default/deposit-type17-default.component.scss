@@ -1,0 +1,54 @@
+.qr-payment-box
+{
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-left: 25px;
+  margin-top: 10px;
+  input
+  {
+    background: transparent;
+    padding: 16px;
+    border:1px solid #3e4450;
+    color: rgba(222,228,236,.7);
+    max-width: var(--deposit-payment-section-input-max-width, 500px);
+  }
+  button
+  {
+    background: #ff172d;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  .address-box
+  {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    >div
+    {
+      &:first-of-type
+      {
+        font-weight: 700;
+      }
+      &:nth-of-type(2)
+      {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+ol
+{
+  li
+  {
+    padding: 8px 0;
+  }
+}
+.qr-payment-desc
+{
+  margin-top: 16px;
+  padding: 10px 10px 10px 43px;
+}

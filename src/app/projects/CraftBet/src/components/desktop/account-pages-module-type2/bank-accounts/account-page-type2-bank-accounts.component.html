@@ -1,0 +1,41 @@
+<div class="history-section">
+  <div *ngIf="!addBankAccount">
+    <div class="add-account">
+      <button type="button" class="craft_btn" (click)="addAccount()">{{'User.Add_Account' | translate}}</button>
+    </div>
+
+    <div class="banks-history-block-head block-head">
+      <div>{{'User.Id' | translate}}</div>
+      <div>{{'User.NickName' | translate}}</div>
+      <div>{{'User.BankName' | translate}}</div>
+      <div class="hide-form-row">{{'User.Iban' | translate}}</div>
+      <div>{{'User.BankAccountNumber' | translate}}</div>
+    </div>
+    <ng-container *ngIf="paymentService.bankAccounts.length > 0; else emptyBanks">
+      <section>
+        <div class="banks-block block" *ngFor="let account of paymentService.bankAccounts">
+          <div class="banks-block_item block_item">{{account.Id}}</div>
+          <div class="banks-block_item block_item">{{account.NickName}}</div>
+          <div class="banks-block_item block_item">{{account.BankName}}</div>
+          <div class="banks-block_item block_item hide-form-row">{{account.IBAN}}</div>
+          <div class="banks-block_item block_item">{{account.BankAccountNumber}}</div>
+        </div>
+      </section>
+    </ng-container>
+    <ng-template #emptyBanks>
+      <section class="empty-banks empty-block">
+        <span class="icon-transaction icon"></span>
+        <span class="empty-block-text">{{'User.Banks-empty' | translate}}</span>
+      </section>
+    </ng-template>
+  </div>
+  <div *ngIf="addBankAccount">
+
+    <div class="ticket-body flex_between">
+      <h2 *ngIf="selectedBankAccount === undefined">{{'User.Add_Account' | translate}}</h2>
+      <h2 *ngIf="selectedBankAccount !== undefined">{{'User.Edit_Account' | translate}}</h2>
+      <span class="icon-close-modal close-icon" (click)="closeAddPage()"></span>
+    </div>
+    <add-bank-account [isEditMode]="isEditMode" [selectedBankAccount]="selectedBankAccount" [addBankAccount]="addBankAccount"></add-bank-account>
+  </div>
+</div>

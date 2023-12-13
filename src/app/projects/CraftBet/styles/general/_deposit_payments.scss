@@ -1,0 +1,807 @@
+.deposit_payment_section2 {
+
+  .payment-form-field {
+    padding: 0;
+    width: 100%;
+    clear: both;
+    margin-bottom: 24px;
+
+    &.nominals-fields-3 {
+      height: 122px;
+    }
+
+    &.nominals-fields-4 {
+      /* height: 147px;*/
+    }
+
+
+    &__label {
+      font-size: $font-size-4;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.36;
+      letter-spacing: normal;
+      text-align: left;
+      text-decoration: underline;
+      color: itemColor(withdraw-input-label, #000000);
+      position: absolute;
+      top: itemTop(deposit-payments-input-label, 2px);
+      left: itemLeft(deposit-payments-input-label, 8px);
+      height: height(deposit-payments-input-label, 25px);
+      transform-origin: 0 50%;
+      transition: transform 200ms, color 200ms;
+      pointer-events: none;
+    }
+    .bonus-and-amount {
+      flex: 3;
+
+
+    }
+    label
+    {
+      font-size: var(--payment-form-floating-label-font-size, 14px);
+      pointer-events: none;
+      color: rgba(255, 255, 255, 0.4);
+      line-height: 32px;
+    }
+    .payment-form-field__column
+    {
+      width: 100%;
+      height: auto;
+      line-height: 40px;
+      min-height: 40px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #9aa8c461;
+      margin-bottom: marginBottom(payment-form-field, 24px);
+      .error_message
+      {
+        position: absolute;
+        top: 32px;
+        font-weight: 400;
+      }
+      .currency
+      {
+        font-size: .875rem;
+        color: itemColor(currency,#97a1c2);
+      }
+      input {
+        &[readonly] {
+          outline: none;
+        }
+
+        &[type="number"] {
+          -webkit-appearance: none;
+          -moz-appearance: textfield;
+        }
+      }
+      .search-field {
+        position: relative;
+
+        &__icon {
+          position: absolute;
+          height: 28px;
+          top: 49%;
+          transform: translateY(-50%);
+          left: 25px;
+        }
+      }
+      &.all-amount {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          width: 36%;
+          color: #fff;
+          border-radius: 4px;
+          outline: none;
+          font-size: 14px;
+          border: none;
+          cursor: pointer;
+          /* background-color: backgroundColor(activate-bonus-btn, #02887e);*/
+          background-image: linear-gradient(to bottom, backgroundColor(activate-bonus-btn-top, #9cbc3f), backgroundColor(activate-bonus-btn-bottom, #7fa309));
+          text-transform: capitalize;
+        }
+      }
+
+      .payment-input, select {
+
+        &.search-input {
+          padding: 0 0 0 45px;
+        }
+
+        border: none;
+        outline: none;
+        background: none;
+        padding: 0;
+        text-indent: 10px;
+        height: 100%;
+        min-height: 40px;
+        width: 84%;
+        color: white;
+      }
+
+      input:focus ~ .floating-label, select:focus ~ .floating-label
+      {
+        top: -25px;
+        font-size:  fontSize(payment-form-floating-label-focused, 13px)
+      }
+      input:valid ~ .floating-label, select:valid ~ .floating-label
+      {
+        top: -25px;
+        font-size: fontSize(payment-form-floating-label-focused, 13px)
+      }
+
+      input:not(:focus):valid ~ .floating-label, select:not(:focus):valid ~ .floating-label
+      {
+        top: -25px;
+        font-size:  fontSize(payment-form-floating-label-focused, 13px);
+      }
+      input:not(:placeholder-shown) ~ .floating-label {
+        top: -25px;
+        font-size:  fontSize(payment-form-floating-label-focused, 13px);
+      }
+      select:not([value=""]):valid ~ .floating-label
+      {
+        top: -25px;
+        font-size:  fontSize(payment-form-floating-label-focused, 13px);
+      }
+
+
+      .floating-label {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: fontSize(payment-form-floating-label, 14px);
+        pointer-events: none;
+        color: rgba(255,255,255,.4);
+        -webkit-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+      }
+      .payment-select {
+        border-radius: 4px;
+        text-indent: 10px;
+        opacity: 0.6;
+        width: 100%;
+        height: 100%;
+        min-height: 40px;
+        border: none;
+        outline: none;
+        color: rgba(255, 255, 255, 0.4) !important;
+        padding: 0 16px;
+        background-color: transparent!important;
+        option{ color: black !important;}
+      }
+
+
+    }
+    .payment-form-field__column_btn{
+      border-radius: 4px;
+      width: 100%;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.31;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+      height: height(payment-form-button, 48px);
+
+      .error_message {
+        width: fit-content;
+        margin: var(--payment-deposit-settings-error-message-margin,0 auto);
+        font-size: var(--payment-deposit-settings-error-message-font-size, 13px);
+        color: var(--payment-deposit-settings-error-message-color, #FF0029);
+        a {
+          color: var(--payment-deposit-settings-error-message-href-color, #fff);
+        }
+      }
+      button {
+        width: 100%;
+      }
+
+      &.long_width {
+        width: 80%;
+
+        button {
+          width: 52%;
+        }
+
+        .error_message {
+          margin: 0 auto;
+        }
+
+        .success_message {
+          margin-top: 5px;
+        }
+      }
+
+      .default_btn {
+        color: #fff;
+        padding: 0 32px;
+        font-size: 16px;
+        /* background-color: backgroundColor(activate-bonus-btn, #02887e);*/
+        background-image: linear-gradient(to bottom, backgroundColor(activate-bonus-btn-top, #9cbc3f), backgroundColor(activate-bonus-btn-bottom, #7fa309));
+        font-weight: 600;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 3px;
+        border: none;
+        cursor: pointer;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  &__form {
+    width: 27%;
+    margin: 0 auto;
+    &_top {
+      .payment-form-field {
+        line-height: 25px;
+        margin: 10px 0;
+      }
+
+      input[type="file"] {
+        width: 100%;
+        border: none;
+      }
+
+      .payment-form-field__column_btn {
+        height: 35px;
+        position: inherit;
+        width: 100%;
+      }
+
+      .error_message {
+        top: -1px;
+      }
+    }
+  }
+
+}
+
+.group-label_1 {
+
+  height: 255px;
+
+  .group-label {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: backgroundColor(payment-label, #e6e6e6);
+    color: itemColor(payment-label, #000);
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+  }
+
+}
+
+.group-label_2 {
+
+  .group-label {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: backgroundColor(payment-label, #e6e6e6);
+    color: itemColor(payment-label, #000);
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+  }
+}
+
+//.mobile-device {
+//  .payment-form-field {
+//    label {
+//      color: itemColor(mobile-field-label, #fff);
+//    }
+//
+//    .bonus-and-amount {
+//      label {
+//        color: itemColor(mobile-field-label, #fff);
+//      }
+//    }
+//  }
+//}
+
+
+.deposit_payment_section {
+
+  .payment-form-field {
+    padding: 0;
+    width: 100%;
+    clear: both;
+    float: left;
+    margin-bottom: 24px;
+    position: relative;
+    margin-bottom: var(--deposit-payment-margin-bottom, 24px);
+    margin-top: var(--deposit-payment-margin-top, 0);
+
+    &.withdraw-button
+    {
+      margin-top: marginTop(withdraw-confirm-button,24px);
+      margin-bottom: 0;
+      .success_message
+      {
+        color: itemColor(success-message, #3c763d);
+        font-size: fontSize(success-message, 14px);
+      }
+      .error_message
+      {
+        color: itemColor(error-message, #ff5e5e);
+        font-size: fontSize(error-message, 14px);
+      }
+    }
+    &.payment-form-field-button {
+      width: 30%;
+    }
+    &.payment-form-field-input {
+      width: 70%;
+    }
+    &.nominals-fields-3 {
+      height: 122px;
+    }
+
+    &.nominals-fields-4 {
+      /* height: 147px;*/
+    }
+    &__label {
+      font-size: var(--withdraw-input-label-font-size, 18px);
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      text-align: left;
+      color: itemColor(withdraw-input-label, #000000);
+      position: absolute;
+      top: itemTop(deposit-payments-input-label, 2px);
+      left: itemLeft(deposit-payments-input-label, 8px);
+      right: itemRight(deposit-payments-input-label, auto);
+      height: height(deposit-payments-input-label, 25px);
+      transform-origin: 0 50%;
+      transition: transform 200ms, color 200ms;
+      pointer-events: none;
+    }
+    input:focus ~ label {
+      width: width(register-form-field-label, inherit);
+      height: height(signup-input-label-focused, 11px);
+      background: var(--register-background-color, #FFFFFF);
+      color: var(--login-field-focus-label, #fff);
+      top: itemTop(deposit-payments-label, 2px);
+      font-size: var(--register-background-color-font-size, 16px);
+    }
+    input:focus ~ .floating-label,
+    input:not(:placeholder-shown) ~ .floating-label {
+      transform: var(--deposit-payments-label-transform, translateY(-29px) translateX(10px) scale(0.75));
+      background-color: var(--deposit-payments-background-color, unset);
+      height: height(deposit-payments-label-focused, 36px);
+      font-size: var(--deposit-payments-font-size-label, 20px);
+      color: var(--deposit-payments-focus-label-focused, #fff);
+    }
+    input:focus ~ .cut,
+    input:not(:placeholder-shown) ~ .cut {
+      transform: translateY(8px);
+      display: block;
+    }
+    input:focus ~ .cut {
+      display: block;
+    }
+    input:focus::placeholder {
+      opacity: var(--deposit-payments-input-placeholder-opacity, 1);
+    }
+    input::placeholder {
+      opacity: var(--deposit-payments-input-placeholder-opacity, 0);
+    }
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
+      transform: var(--deposit-payments-label-transform, translateY(-29px) translateX(10px) scale(0.75));
+      background-color: var(--deposit-payments-background-color, unset);
+      height: height(deposit-payments-label-focused, 36px);
+      font-size: var(--deposit-payments-font-size-label, 20px);
+      color: var(--deposit-payments-focus-label-focused, #fff);
+    }
+    select:focus~label,
+    select:not([value=""]):valid~label {
+      transform: var(--deposit-payments-label-transform, translateY(-29px) translateX(10px) scale(0.75));
+      background-color: var(--deposit-payments-background-color, unset);
+      height: height(deposit-payments-label-focused, 36px);
+      font-size: var(--deposit-payments-font-size-label, 20px);
+      color: var(--deposit-payments-focus-label-focused, #fff);
+    }
+    .custom-label {
+      transform: var(--deposit-payments-label-transform, translateY(-29px) translateX(10px) scale(0.75));
+      background-color: var(--deposit-payments-background-color, unset);
+      height: height(deposit-payments-label-focused, 36px);
+      font-size: var(--deposit-payments-font-size-label, 20px);
+      color: var(--deposit-payments-focus-label-focused, #fff);
+    }
+    .custom_dropdown_withdraw .current_item {
+      height: 100%;
+      text-indent: 10px;
+      min-height: var(--deposit-payments-select-bank-height, 40px);
+      font-size: var(--deposit-payments-select-bank-font-size, 14px);
+    }
+    .custom_dropdown_reg {
+      position: relative;
+        .current_item {
+          &:hover {
+            color: itemColor(withdraw-dpd-list-item-hover, #fff);
+          }
+        }
+        &.opened, &.open {
+          .custom_dropdown_list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            z-index: 1111;
+            background: color(auth-form-dropdown-background);
+            min-height: 21px;
+            max-height: height(custom_dropdown_list, 150px);
+            min-width: 50px;
+            overflow-y: auto;
+            margin: 0;
+            padding: 0;
+            box-shadow: var(--withdraw-dpd-list-item-box-shadow, none);
+            border-radius: var(--withdraw-dpd-list-item-border-radius, 0px);
+            border: var(--withdraw-dpd-list-item-border, none);
+            li {
+              line-height: var(--withdraw-dropdown-list-line-height, 21px);
+              height: height(withdraw-dropdown-list,21px);
+              font-size: fontSize(withdraw-dropdown-list,12px);
+              padding: padding(withdraw-dropdown-list, 0 10px);
+              width: 100%;
+              border-radius: 0;
+            }
+            .custom-add-list {
+              color: var(--withdraw-dpd-list-add-item-color, #fff);
+              display: flex;
+              align-items: center;
+              justify-content: unset;
+              span:last-child {
+                margin-left: 15px;
+              }
+            }
+          }
+        }
+    }
+
+
+
+    .bonus-and-amount {
+      width: 100%;
+      .payment-amount-label {
+        font-size: 13px;
+        text-align: left;
+        color: #666666;
+      }
+      //flex: 3;
+      //
+      //label {
+      //  font-size: 14px;
+      //  font-weight: 600;
+      //  font-stretch: normal;
+      //  font-style: normal;
+      //  line-height: 1.36;
+      //  letter-spacing: normal;
+      //  text-align: left;
+      //  color: color(field-label-text);
+      //}
+      //
+      //&:nth-of-type(2) {
+      //  flex: 1
+      //}
+    }
+    .payment-amount-label {
+      font-size: 13px;
+      text-align: left;
+      color: #666666;
+    }
+    &__column {
+      margin-top: var(--deposit-payments-columns-margin-top, 24px);
+      width: 100%;
+      height: auto;
+      line-height: 40px;
+      min-height: 40px;
+      position: relative;
+
+      input {
+        &[readonly] {
+          outline: none;
+          margin-left: 5px
+        }
+
+        &[type="number"] {
+          -webkit-appearance: none;
+          -moz-appearance: textfield;
+        }
+      }
+
+      .search-field {
+        position: relative;
+
+        &__icon {
+          position: absolute;
+          height: 28px;
+          top: 49%;
+          transform: translateY(-50%);
+          left: 25px;
+        }
+      }
+
+      &.all-amount {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        button {
+          width: var(--activate-bonus-btn-width, 180px);
+          min-height: var(--activate-bonus-btn-height, 44px);
+          color: $account-content-item-color;
+          border-radius: 6px;
+          outline: none;
+          font-size: $font-size-5;
+          border: none;
+          cursor: pointer;
+          background: var(--activate-bonus-btn-bg, linear-gradient(180deg, #1376F8 0%, #0A254A 100%));
+          text-transform: capitalize;
+          display: var(--activate-bonus-btn-display, block);
+        }
+
+        .payment-input {
+          height: var(--activate-bonus-btn-height2, 44px);
+          width: calc(100% -  var(--activate-bonus-btn-width2));
+        }
+      }
+      .payment-input-file {
+        padding: var(--activate-bonus-btn-choose-file-padding, 0);
+        text-indent: 10px;
+        background: $account-content-item-bg-color;
+        width: 100%;
+        min-height: var(--activate-bonus-btn-height-height, 44px);
+        border-radius: var(--activate-bonus-btn-border-radius, 6px);
+        color: var(--account-content-item-color-color, #fff);
+        margin: var(--account-content-item-margin, 0);
+        border: var(--account-content-item-border-color, none) !important;
+        font-size: var(--account-content-item-init-font-size, 13px);
+        cursor: pointer;
+      }
+      .payment-input {
+        &::placeholder {
+          color:  var(--payment-inpt-placeholder, rgba(255, 255, 255, 0.6));
+          font-size: var(--payment-inpt-placeholder-font-size, 18px);
+          text-align: var(--payment-inpt-placeholder-text-align, left);
+        }
+        &:focus {
+          border: 2px solid itemColor(login-field-focus, #fff);
+        }
+
+        &.search-input {
+          padding: 0 0 0 45px;
+        }
+
+        padding: 0;
+        text-indent: 10px;
+        background: $account-content-item-bg-color;
+        width: 100%;
+        min-height: var(--activate-bonus-btn-height-height, 44px);
+        border-radius: var(--activate-bonus-btn-border-radius, 6px);
+        color: var(--account-content-item-color-color, #fff);
+        margin: var(--account-content-item-margin, 0);
+        border: var(--account-content-item-border-color, none) !important;
+        font-size: var(--account-content-item-init-font-size, 13px);
+        &.date{padding-right: 16px;}
+      }
+
+      .payment-select {
+        border: 1px solid var(--account-content-withdraw-payment-select-border, #717171);
+        background-color: var(--account-content-withdraw-payment-select-background-color, #f6f5f5);
+        color: var(--account-content-item-color-color, #fff);
+        border-radius: var(--activate-bonus-btn-border-radius, 6px);
+        padding: 0;
+        text-indent: 10px;
+        opacity: var(--account-content-withdraw-payment-select-opacity, 0.6);
+        font-weight: var(--account-content-withdraw-payment-select-font-weight, 400);
+        font-size: var(--account-content-withdraw-payment-select-font-size, 14px);
+        width: 100%;
+        height: 100%;
+        min-height: var(--deposit-payments-select-bank-height, 40px);
+        -webkit-appearance: display(account-verify-select-icon-arrow-visible, auto);
+        appearance:  display(account-verify-select-icon-arrow-visible, auto);
+      }
+
+      &_btn {
+        opacity: 0.9;
+        border-radius: 4px;
+        width: 100%;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.31;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+        position: relative;
+        .error_message {
+          position: absolute;
+          top: var(--deposit-payments-item-top, 100%);
+          left: var(--deposit-payments-item-left, auto);
+          color: itemColor(error-message, #ff5e5e);
+          font-size: fontSize(error-message, 14px);
+        }
+        .success_message
+        {
+          color: itemColor(success-message, #3c763d);
+          font-size: fontSize(success-message, 14px);
+          text-align: left;
+          top: var(--deposit-payments-item-top, 100%);
+          position: absolute;
+        }
+
+        button {
+          width: 100%;
+        }
+
+        .default_btn {
+          color: var(--activate-bonus-btn-text-color, #fff);
+          padding: 0 32px;
+          font-size: var(--activate-bonus-btn-font-size, 20px);
+          font-weight: var(--activate-bonus-btn-font-weight, 400);
+          background: var(--activate-bonus-btn-bg, linear-gradient(180deg, #1376F8 0%, #0A254A 100%));
+          height: var(--activate-bonus-btn-height, 44px);
+          border-radius: var(--activate-bonus-btn-border-radius, 6px);
+          border: none;
+          cursor: pointer;
+          text-transform: capitalize;
+          display: display(activate-bonus-btn-withdraw, block);
+          justify-content: center;
+          align-items: center;
+          .to-right {
+            color: itemColor(continue-btn, #fff);
+            transform: rotate(180deg);
+            padding-right: paddingRight(continue-btn, 24px);
+            display: display(show-register-btn-icon, none);
+          }
+        }
+      }
+
+      .error_message {
+        position: absolute;
+        top: itemTop(deposit-payments-item, 35px);
+        left: itemLeft(deposit-payments-item, 0px);
+
+        .text {
+          color: itemColor(error-message, #ff5e5e);
+          font-size: fontSize(error-message, 14px);
+        }
+      }
+    }
+    .column-select:after {
+      content: '<>';
+      font: 17px "Consolas", monospace;
+      color: #202020;
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      right: 10px;
+      top: 14px;
+      padding: 0 0 2px;
+      position: absolute;
+      pointer-events: none;
+      display: display(account-verify-select-icon-arrow, none);
+    }
+  }
+
+  &__form {
+    &_top {
+      .payment-form-field {
+        line-height: 25px;
+        margin: var(--deposit-payment-select-margin, 10px 0);
+      }
+
+      input[type="file"] {
+        width: 100%;
+        border: none;
+      }
+
+      .payment-form-field__column_btn {
+        height: var(--deposit-payment-form-field-column-height, 35px);
+        position: inherit;
+        width: 100%;
+      }
+
+      .error_message {
+        top: -1px;
+      }
+    }
+  }
+
+}
+
+.group-label_1 {
+
+  height: 255px;
+
+  .group-label {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: backgroundColor(payment-label, #e6e6e6);
+    color: itemColor(payment-label, #000);
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+  }
+
+}
+
+.group-label_2 {
+
+  .group-label {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: backgroundColor(payment-label, #e6e6e6);
+    color: itemColor(payment-label, #000);
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+  }
+}
+
+.mobile-device {
+  .payment-form-field {
+    label {
+      color: itemColor(mobile-field-label, #fff);
+    }
+
+    .bonus-and-amount {
+      label {
+        color: itemColor(mobile-field-label, #fff);
+      }
+    }
+  }
+}
+
+.flex-items {
+  display: flex;
+  justify-content: space-between;
+
+  select {
+    border: 1px solid #717171;
+    height: 40px;
+  }
+
+  .payment-form-field, select {
+    width: 48%;
+  }
+
+
+}
+.account-page-type2-default
+{
+  .payment-form-field__column_btn
+  {
+    position: relative;
+    .error_message
+    {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .error_message {
+      position: absolute;
+      top: var(--deposit-payments-item-top, 100%);
+      left: var(--deposit-payments-item-left, auto);
+      color: itemColor(error-message, #ff5e5e);
+      font-size: fontSize(error-message, 14px);
+    }
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 1376px) {
+  .custom_dropdown_reg .current_item {
+    height: 100%;
+    min-height: var(--deposit-payments-select-bank-height, 40px);
+  }
+}

@@ -1,0 +1,227 @@
+@import "../../../../../../styles/helpers/variables";
+@import "../../../styles/helpers/variables";
+
+.mobile-filter-game-section {
+  margin-top: 60px;
+  padding-bottom: 15px;
+  min-height: calc(100vh - 60px);
+  background: color(m-product-background);
+
+  &_banners {
+   /* height: 110px;*/
+    width: 100%;
+    height: height(category-banner, calc(100vh / 4));
+    .banner_image {
+      //height: calc(100vh / 4);
+      height: height(category-banner-item, calc(100vh / 4));
+     /* width: 100%;
+      height: 110px;*/
+      img {
+        width: width(category-banner, 100%);
+      }
+      .banner-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(to left, itemColor(m-casino-banner-wrapper-bg-first, transparent), itemColor(m-casino-banner-wrapper-bg-second, transparent) 64%, itemColor(m-casino-banner-wrapper-bg-last, transparent) 55%);
+        border-width: width(m-casino-banner-wrapper-bg-first-border, 0);
+        border-color: itemColor(m-casino-banner-wrapper-bg-first, none);
+        border-style: solid;
+        border-radius: 15px;
+      }
+
+      .banner-wrapper2 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-image: linear-gradient(to right, itemColor(m-casino-banner-wrapper2-bg-first, transparent) 1%, itemColor(m-casino-banner-wrapper2-bg-second, transparent) 45%, itemColor(m-casino-banner-wrapper2-bg-last, transparent) 55%);
+      }
+
+      .banner-content {
+        position: relative;
+        .banner-description {
+          position: absolute;
+          white-space: nowrap;
+          text-transform: uppercase;
+          font-size: fontSize(m-banner-description, 12px);
+          font-weight: fontWeight(m-banner-description, 600);
+          line-height: var(--m-banner-description-line-height, 1.45);
+          color: color(banner-description);
+
+          top: itemTop(m-banner-description, auto);
+          left: itemLeft(m-banner-description, auto);
+          right: itemRight(m-banner-description, 20px);
+          bottom: itemBottom(m-banner-description, 90px);
+          text-align: textAlign(m-banner-description, right);
+
+        }
+
+        .banner-content-description {
+          position: absolute;
+          color: itemColor(m-banner-content-description, #b0a6a6);
+          line-height: var(--banner-m-content-description-line-height, 1.5);
+          font-weight: fontWeight(m-banner-content-description, 600);
+          font-size: fontSize(m-banner-content-description, 10px);
+
+          top: itemTop(m-banner-content-description, auto);
+          left: itemLeft(m-banner-content-description, auto);
+          right: itemRight(m-banner-content-description, 20px);
+          bottom: itemBottom(m-banner-content-description, 60px);
+          text-align: textAlign(m-banner-content-description, right);
+        }
+
+        .banner-action {
+          position: absolute;
+          padding-left: paddingLeft(m-banner-action-text, 12px);
+          padding-right: paddingRight(m-banner-action-text, 12px);
+          padding-top: paddingTop(m-banner-action-text, 8px);
+          padding-bottom: paddingBottom(m-banner-action-text, 8px);
+          color: color(m-banner-action-text);
+          font-size: fontSize(m-banner-action-text, 10px);
+          text-transform: uppercase;
+          height: height(m-banner-action-text,auto);
+          width: width(m-banner-action-text, auto);
+          margin-top: marginTop(m-banner-action-text, 0px);
+          margin-bottom: marginBottom(m-banner-action-text, 0px);
+          margin-left: marginLeft(m-banner-action-text, 0);
+          margin-right: marginRight(m-banner-action-text, 0);
+          border-radius: 3px;
+          display: inline-block;
+          background-image: linear-gradient(to top, var(--m-banner-action-gradient-color-2, #000), var(--m-banner-action-gradient-color-1, #000));
+
+          top: itemTop(m-banner-action-text, auto);
+          left: itemLeft(m-banner-action-text, auto);
+          right: itemRight(m-banner-action-text, 20px);
+          bottom: itemBottom(m-banner-action-text, 20px);
+          text-align: textAlign(m-banner-action-text, right);
+
+        }
+      }
+    }
+  }
+
+
+  &_items {
+    margin: 0 auto;
+  }
+
+
+  .product_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 160px);
+    justify-content: center;
+    grid-auto-rows: 140px;
+
+    &_item {
+      &:hover {
+        .game-title {
+          display: block;
+        }
+      }
+      width: 150px;
+      height: 100px;
+      display: inline-block;
+      margin: auto;
+      outline: none;
+
+      &.active-item {
+        .game-open {
+          visibility: visible;
+        }
+      }
+
+      .game-img {
+        width: 100%;
+        height: 100px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-bottom-left-radius: var(--casino-game-title-shown-border-bottom-left-radius, 0px);
+        border-bottom-right-radius: var(--casino-game-title-shown-border-bottom-right-radius, 0px);
+        border-top-left-radius: var(--casino-game-title-shown-border-top-left-radius, 0px);
+        border-top-right-radius: var(--casino-game-title-shown-border-top-right-radius, 0px);
+        position: relative;
+      }
+
+      .game-open {
+        height: 60%;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        top: 0;
+        visibility: hidden;
+
+        &.game-open-demo {
+          top: 60%;
+        }
+      }
+
+      .game-btn {
+        display: inline-block;
+        left: 13%;
+        width: 75%;
+        line-height: 27px;
+        cursor: pointer;
+        border-radius: 7px;
+        color: $color-white;
+        border: 1px solid #8c8c8c;
+        position: absolute;
+
+        &_real {
+          top: 15%;
+          background: color(product-real-button-background);
+        }
+
+        &_demo {
+          top: -14px;
+          background: color(product-demo-button-background);
+        }
+      }
+
+      .game-title {
+        font-size: 13px;
+        line-height: 20px;
+        color: color(m-filter-games-title);
+        padding: 0 10px;
+        background: var(--casino-game-title-shown-background-color, #1d2e4a);
+        white-space: nowrap;
+        height: 22px;
+        text-overflow: ellipsis;
+        border-bottom-left-radius: var(--casino-game-title-shown-border-bottom-left-radius, 0px);
+        border-bottom-right-radius: var(--casino-game-title-shown-border-bottom-right-radius, 0px);
+        overflow: hidden;
+        position: absolute;
+        bottom: -2px;
+        width: 100%;
+        display: none;
+      }
+    }
+  }
+  .more-button
+  {
+    display: inherit;
+    min-width: 126px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 16px;
+    color: #ffffff;
+    outline: none;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 44px 0 48px 10px;
+    padding: 0 10px;
+    border: solid 1px color(casino-more-button-border);
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, itemColor(casino-more-button-gradient1,rgba(25, 36, 56, 0.3)),
+            itemColor(casino-more-button-gradient2,rgba(22, 53, 99, 0.3)) 119%,
+            itemColor(casino-more-button-gradient3,rgba(21, 59, 115, 0.2)) 139%,
+            itemColor(casino-more-button-gradient4,rgba(12, 107, 232, 0.1)) 222%);
+    span{color:itemColor(casino-more-btn, #007AFF); margin-left: 6px}
+  }
+}

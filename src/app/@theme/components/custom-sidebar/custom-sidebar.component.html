@@ -1,0 +1,36 @@
+<div class="ti_navbar">
+  <div
+    class="ti_navbar_container"
+    [ngClass]="{ 'navbar-left': position === 'left',
+               'navbar-right': position === 'right',
+               'sidebar_open': isSidebarOpen,
+               'sidebar_closed': !isSidebarOpen}"
+    [ngStyle]="{
+      width: styles.width + this.widthExtension,
+      height: styles.height,
+      bottom: styles.bottom,
+      overflowY:styles.overflowY,
+      transform: position === 'left' && isSidebarOpen ? 'translateX(0px)' : position === 'left' && !isSidebarOpen ? 'translateX(-'+screenWidth+')': 'unset',
+      right: position === 'right' && isSidebarOpen ? '0px' : position === 'right' && !isSidebarOpen ? -styles.width + this.widthExtension : 'unset'
+  }">
+<!--
+    transform: position === 'right' && isSidebarOpen ? 'translateX(0px)' : position === 'right' && !isSidebarOpen ? 'translateX(-300px)': 'unset'
+    transform: position === 'left' && isSidebarOpen ? 'translateX(0px)' : position === 'left' && !isSidebarOpen ? 'translateX(-300px)': 'unset',
+-->
+
+
+    <div
+      class="ti_navbar_content"
+      (click)="closeOnSidebarClick && closeSidebar()"
+      style="background-color: var(--m-drawer-menu-background-color)"
+    >
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div
+    *ngIf="overlay"
+    class="ti_overlay"
+    [ngClass]="{ 'show_overlay': isSidebarOpen }"
+  ></div>
+</div>
+

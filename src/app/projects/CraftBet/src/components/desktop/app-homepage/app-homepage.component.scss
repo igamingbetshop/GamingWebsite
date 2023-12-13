@@ -1,0 +1,71 @@
+.home-page-section {
+  background-color: var(--home-background-color, #FFFFFF);
+  background-size: cover;
+  background-repeat: no-repeat;
+  &_banners {
+    height: var(--casino-game-section-banners-height, 360px);
+    max-height: calc(100vh - 205px);
+  }
+
+
+  .banner_image {
+    width: 100%;
+    height: 360px;
+    position: relative;
+
+    .banner-wrapper {
+      position: absolute;
+      left: 0;
+      top: 30%;
+      right: 0;
+      bottom: 0;
+      background: -webkit-linear-gradient(rgba(0, 0, 0, 0), color(product-background));
+    }
+
+    .banner-content {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 10%;
+
+      .banner-description {
+        width: 300px;
+        text-transform: uppercase;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.45;
+        color: #e7edf5;
+      }
+
+      .banner-content-description {
+        color: #e7edf5;
+        line-height: 2.5;
+        font-weight: 600;
+      }
+
+      .banner-action {
+        padding: 0 20px;
+        color: #fff;
+        font-size: 12px;
+        text-transform: uppercase;
+        height: 31px;
+        line-height: 31px;
+        margin-top: 5px;
+        border-radius: 3px;
+        display: inline-block;
+        background-image: linear-gradient(to top, var(--banner-action-gradient-color-2, #10ab8a) ,var(--banner-action-gradient-color-1, #02887e));
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 1280px) {
+  .home-page-section {
+
+    &_banners {
+    /*  height: calc(var(--casino-game-section-banners-height, 360px) * 0.7);*/
+      max-height: calc(100vh - 205px);
+    }
+  }
+  }

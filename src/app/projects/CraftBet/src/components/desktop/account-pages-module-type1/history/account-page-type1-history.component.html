@@ -1,0 +1,133 @@
+<div class="history-section">
+  <h2 class="history-section_title">{{'User.Bets-History_List' | translate}}</h2>
+  <div class="history-tools-panel">
+    <form [formGroup]="form" (ngSubmit)="submit(1)">
+      <div class="history-tools history-tools-field">
+        <select formControlName="timeFilter">
+          <option *ngFor="let item of historyTimeFilter; let i = index" [ngValue]="i">
+            {{item.Name | translate}}
+          </option>
+        </select>
+        <label>{{'User.Period-of-time' | translate}}</label>
+      </div>
+
+      <div *ngIf="customFilterShow" class="history-tools custom-tool">
+        <input type="datetime-local" formControlName="changedate">
+        <label>{{'User.From' | translate}}</label>
+      </div>
+
+      <div *ngIf="customFilterShow" class="history-tools custom-tool">
+        <input type="datetime-local" formControlName="changetTodate">
+        <label>{{'User.To' | translate}}</label>
+      </div>
+
+      <div class="history-tools history-tools-field">
+        <select formControlName="operationFilter"
+                [ngClass]="{'disable_item': getBetsHistoryService.betStatuses.length <= 0}">
+          <option *ngFor="let item of getBetsHistoryService.betStatuses; let i = index" [ngValue]="item.Value">
+            {{item?.Name}}
+          </option>
+        </select>
+        <label>{{'User.Status' | translate}}</label>
+      </div>
+
+      <div class="history-tools history-tools-field">
+        <select formControlName="productId">
+          <option *ngFor="let product of products" [ngValue]="product.Id">
+            {{product.Name}}
+          </option>
+        </select>
+        <label>{{'User.Products' | translate}}</label>
+      </div>
+
+      <div class="history-tools">
+        <label></label>
+        <button class="craft_btn show-btn">{{'User.Show' | translate}}</button>
+      </div>
+    </form>
+  </div>
+
+<!--  <table>-->
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--      <th>{{'User.Id' | translate}}</th>-->
+<!--      <th>{{'User.Date' | translate}}</th>-->
+<!--      <th>{{'User.Amount' | translate}}</th>-->
+<!--      <th>{{'User.Product-Name' | translate}}</th>-->
+<!--      <th>{{'User.Bet-Type' | translate}}</th>-->
+<!--      <th>{{'User.Status' | translate}}</th>-->
+<!--      <th>{{'User.Win-Amount' | translate}}</th>-->
+<!--      <th></th>-->
+<!--    </tr>-->
+<!--    <tr-->
+<!--      *ngFor="let item of getBetsHistoryService.betsHistoryList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getBetsHistoryService.betsHistoryListCount }, let i = index"-->
+<!--      [ngClass]="{'won': item.State == 2, 'lost': item.State == 3}">-->
+<!--      <td>{{item?.BetDocumentId}}</td>-->
+<!--      <td>{{item?.BetDate | date: 'dd/MM/yyyy h:mm'}}</td>-->
+<!--      <td>{{item?.BetAmount | number}}</td>-->
+<!--      <td>{{item?.ProductName}}</td>-->
+<!--      <td>{{'Bet.' + item?.statusTypeName | translate}}</td>-->
+<!--      <td class="status-{{item?.statusName}}">{{item?.statusName}}</td>-->
+<!--      <td>{{item?.WinAmount | number}}</td>-->
+<!--      <td>-->
+<!--        <button type="button" class="craft_btn" (click)="openInfo(item)"-->
+<!--                *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1">{{'User.Info' | translate}}</button>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+
+  <div class="bets-history-block-head block-head">
+    <div>{{'User.Date' | translate}}</div>
+    <div>{{'User.Id' | translate}}</div>
+    <div>{{'User.Product-Name' | translate}}</div>
+    <div>{{'User.Amount' | translate}}</div>
+    <div>{{'User.Win-Amount' | translate}}</div>
+    <div>{{'User.Bet-Type' | translate}}</div>
+    <div>{{'User.Status' | translate}}</div>
+    <div class="info-btn-head">{{'User.View' | translate}}</div>
+<!--    <div class="info-btn-head"></div>-->
+  </div>
+  <ng-container *ngIf="getBetsHistoryService.betsHistoryList.length > 0; else emptyBets">
+    <section>
+      <div class="bets-block block" *ngFor="let item of getBetsHistoryService.betsHistoryList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getBetsHistoryService.betsHistoryListCount }, let i = index"
+           [ngClass]="{'won': item.State == 2, 'lost': item.State == 3}">
+        <div class="bets-block_item block_item">{{item?.BetDate | date: 'dd/MM/yyyy H:mm'}}</div>
+        <div class="bets-block_item block_item">{{item?.BetDocumentId}}</div>
+        <div class="bets-block_item block_item">{{item?.ProductName}}</div>
+        <div class="bets-block_item block_item">{{item?.BetAmount | number}}</div>
+        <div class="bets-block_item block_item">{{item?.WinAmount | number}}</div>
+        <div class="bets-block_item block_item">{{'Bet.' + item?.statusTypeName | translate}}</div>
+        <div class="bets-block_item block_item status-{{item?.State}}">{{item?.betStatusName}}</div>
+        <div class="bets-block_item block_item info">
+<!--          <button type="button" class="info-btn" (click)="openInfo(item)"-->
+<!--                  *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80">{{'User.Info' | translate}}</button>-->
+          <span class="icon-eye-password eye-class" *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80"
+                (click)="openInfo(item)"></span>
+        </div>
+      </div>
+      <div class="pagination_section">
+        <div></div>
+        <pagination-controls autoHide="true" previousLabel="{{'User.Previous' | translate}}" nextLabel="{{'User.Next' | translate}}"
+                             (pageChange)="getBetsHistory($event)" class="ngx-pagination"></pagination-controls>
+        <div class="down-icons">
+          <span class="icon-printer" (click)="print()"></span>
+          <span class="icon-download" (click)="download(page)"></span>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+  <ng-template #emptyBets>
+    <section class="empty-bets empty-block">
+      <span class="icon-tickets icon"></span>
+      <span class="empty-block-text">{{'User.Bets-empty' | translate}}</span>
+      <span class="empty-history-text">{{noHistory}}</span>
+    </section>
+  </ng-template>
+
+
+  <!--  <loader></loader>-->
+
+
+
+</div>

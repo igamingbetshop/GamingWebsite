@@ -1,0 +1,24 @@
+<div class="mobile-account-statement-section" [ngStyle]="layoutService.layoutStyle">
+    <h2 class="account_title">
+        {{'User.Balance' | translate}}
+    </h2>
+    <div class="underline"></div>
+    <div class="mobile-payment-system-block">
+        <div class="payment-systems__userAccount2" *ngFor="let item of Accounts; let i = index">
+            <div class="payment-systems__userAccount2__name">
+                <span>{{item?.AccountTypeName}}</span>
+                <span>{{CurrencyId}} {{item?.Balance | toNumber | number: '.2'}}</span>
+            </div>
+        </div>
+
+        <div class="payment-systems__totalItem2">
+    <span class="payment-systems__totalItem2__name">
+       <span>{{'Balance.Total Available' | translate}}</span>
+    </span>
+            <span class="payment-systems__totalItem2_balance">
+      <span class="payment-systems__totalItem_balance_item">{{CurrencyId}} {{TotalAvailableBalance | toNumber | number: '.2'}}</span>
+    </span>
+        </div>
+    </div>
+
+</div>

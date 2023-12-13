@@ -1,0 +1,13 @@
+<div class="mobile-privacy-section" [ngStyle]="layoutService.layoutStyle">
+  <h2>{{ 'User.Privacy_policy' | translate }}</h2>
+  <ul class="privacy_container">
+    <li
+      *ngFor="let privacy of languageKeys"
+      [innerHTML]="'Privacy_policy.' + privacy | translate | sanitizer: 'html'"
+      class="{{privacy}}"
+    ></li>
+  </ul>
+  <div class="to_top" *ngIf="showScroll">
+    <fa-icon [icon]="faArrowCircleUp" [size]="'2x'" (click)="scrollToTop()"></fa-icon>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div [className]="fragmentConfig.Config.type">
+    <div class="search-category">
+        <div class="search_field flex_between">
+            <input type="text"
+                   [value]="casinoFilterService.gamePattern"
+                   (input)="casinoFilterService.onGamePatternChange($event)"
+                   placeholder="{{'Game.Search_game' | translate}}...">
+            <div class="search-icon">
+                <fa-icon [icon]="['fas', 'search']"></fa-icon>
+            </div>
+        </div>
+    </div>
+</div>

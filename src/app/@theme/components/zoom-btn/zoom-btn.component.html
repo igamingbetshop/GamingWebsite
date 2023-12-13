@@ -1,0 +1,9 @@
+<div class="zoom-btn">
+ <fa-icon [icon]="['fas', 'minus']" (click)="decrement()"></fa-icon>
+ <span>{{currentZoom}}%</span>
+ <fa-icon [icon]="['fas', 'plus']" (click)="increment()"></fa-icon>
+ <span class="reset" (click)="reset()">reset</span>
+</div>
+
+
+

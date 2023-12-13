@@ -1,0 +1,30 @@
+<div class="mobile-open-tickets">
+  <div class="modal-body ticket-body flex_between">
+    <h2>{{'User.New-Ticket' | translate}}</h2>
+    <fa-icon [icon]="faTimes" (click)="close()"></fa-icon>
+  </div>
+
+  <div class="modal_content">
+    <form [formGroup]="ticketForm" novalidate (ngSubmit)="submit()">
+      <div class="form_row">
+        <div class="form_field">
+          <input type="text" class="ticket_input" name="Subject" formControlName="Subject"/>
+          <label>{{'User.Subject' | translate}}</label>
+        </div>
+      </div>
+
+      <div class="form_row">
+        <div class="form_textarea">
+          <textarea name="Message" formControlName="Message"></textarea>
+          <label>{{'User.Ticket' | translate}}</label>
+        </div>
+      </div>
+
+      <div class="form_row">
+        <div class="form_field">
+          <button type="submit" class="setting_btn" [disabled]="ticketForm.invalid || clicked" (click)="close();">{{'User.Send' | translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

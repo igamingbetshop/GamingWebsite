@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="../../../assets/images/pwa-logo.png">
+    <link rel="manifest" href="assets/json/manifest.json">
+    <link rel="shortcut icon" href="../../../assets/images/favicon.ico"/>
+    <meta charset="utf-8"/>
+    <base href="/"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="viewport"
+          content="user-scalable=no,width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <script>
+        window.HostNameUrl = 'craftbetstage.com';
+        window.PartnerName = 'CraftBet';
+        window['debugPath'] = "";
+        if (window.location.origin.includes("localhost"))
+            window['debugPath'] = 'https://' + window.HostNameUrl;
+
+        let versionScript = document.createElement('script');
+        versionScript.setAttribute("src", window['debugPath'] + "/assets/js/version.js?=" + Math.random());
+        versionScript.onload = () => {
+            let linkElement = document.createElement('link');
+            linkElement.setAttribute("type", "text/css");
+            linkElement.setAttribute("rel", "stylesheet");
+            linkElement.setAttribute("href", window['debugPath'] + "/assets/css/skin.css" + '?=' + window.VERSION);
+            document.head.appendChild(linkElement);
+
+            let scriptElement = document.createElement('script');
+            scriptElement.setAttribute("src", window['debugPath'] + "/assets/js/common.js" + '?=' + window.VERSION);
+            document.head.appendChild(scriptElement);
+        };
+        versionScript.async = false;
+        document.head.appendChild(versionScript);
+    </script>
+</head>
+<body>
+<app-root>
+</app-root>
+</body>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+            .then(function (reg) {
+            }).catch(function (err) {
+        });
+    }
+    const userAgent = navigator.userAgent || navigator.vendor;
+    if (/iPad|iPhone|iPod/.test(userAgent)) {
+        window.onpageshow = function (event)
+        {
+            try
+            {
+                if (event.persisted)
+                {
+                    window.location.reload();
+                }
+            }
+            catch (e)
+            {
+
+            }
+        };
+    }
+</script>
+</html>

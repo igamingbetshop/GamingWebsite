@@ -1,0 +1,57 @@
+@import "../../../../../styles/helpers/variables";
+@import "../../../../../../../../styles/helpers/variables";
+:host
+{
+  ::-webkit-scrollbar {
+    height: 0;
+  }
+
+  .title
+  {
+    color: white;
+    text-align: center;
+  }
+  .image-bar
+  {
+    >*
+    {
+      cursor: pointer;
+      transition: transform 250ms;
+      &:hover
+      {
+        transform: scale(var(--fragment-image-bar-scale, 1.1));
+      }
+    }
+    &.icon
+    {
+      img{width: auto}
+    }
+    img
+    {
+      width: 100%;
+      max-width: 100%;
+      border-radius: inherit;
+    }
+    .image-bar-title
+    {
+      color: itemColor(m-fragment-image-bar, white);
+      top: 50%;
+      font-size: fontSize(m-fragment-image-bar, 30px);
+      right: itemRight(m-fragment-image-bar-title, 7px);
+      font-weight: fontWeight(m-fragment-image-bar, 700);
+      text-align: textAlign(m-fragment-image-bar-title, left);
+    }
+    .content-html
+    {
+      &:empty{display: none}
+      position: absolute;
+      text-shadow: none;
+      top: itemTop(m-fragment-image-bar-content-html, 0);
+      right: itemRight(m-fragment-image-bar-content-html, 0);
+      bottom: itemBottom(m-fragment-image-bar-content-html, 0);
+      left: itemLeft(m-fragment-image-bar-content-html, 0);
+    }
+  }
+}
+
+

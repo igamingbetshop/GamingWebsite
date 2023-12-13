@@ -1,0 +1,8 @@
+<div id="paymentFrame" class="modal-content" [ngClass]="deviceSize > 900 ? 'big-size' : 'small-size'">
+  <span class="icon-close-modal" (click)="onClose()"></span>
+  <iframe id="frame" [src]="url | sanitizer:'resourceUrl'"
+          frameborder="0"
+          allowfullscreen
+          allow="clipboard-read; clipboard-write">
+  </iframe>
+</div>

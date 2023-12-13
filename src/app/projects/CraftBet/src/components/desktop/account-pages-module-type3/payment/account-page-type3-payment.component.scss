@@ -1,0 +1,234 @@
+
+.pay3000-section {
+  //padding: 14px 17px 49px 27px;
+  .user-right-panel_title {
+    height: auto;
+    padding-bottom: 20px;
+    background: #fff;
+    justify-content: flex-start;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .container-part {
+    background: #fff;
+    margin-bottom: 18px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    padding: 10px 18px 17px 21px;
+    .delete-btn-part {
+      display: flex;
+      align-items: center;
+      position: relative;
+      .pay3000-error {
+        top: 100px;
+        position: absolute;
+      }
+      .delete-btn {
+        background: red;
+        border: none;
+        padding: 14px 43px;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 16px;
+        margin-top: -10px;
+        cursor: pointer;
+      }
+    }
+    .pay3000-section-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      .form_field {
+        width: 100%;
+        margin: 0 auto;
+        text-align: left;
+        label {
+          color: var(--payment-section-form-label-color, black);
+          font-size: var(--payment-section-form-label-font-size, 15px);
+          font-weight: var(--payment-section-form-label-font-weight, 600);
+        }
+        input {
+          height: var(--payment-section-form-input-height, 30px);
+          border: var(--payment-section-form-input-border, 1px solid #bebebe);
+          border-radius: var(--payment-section-form-input-border-radius, 5px);
+          margin-top: 0px;
+          text-align: var(--payment-section-form-input-text-align, center);
+        }
+        input::placeholder {
+          text-align: var(--payment-section-form-input-placeholder-text-align, center);
+          color: var(--payment-section-form-input-placeholder-color, #D9D9D9);
+        }
+      }
+      .form_field-checkbox {
+        display: flex;
+        width: 100%;
+        margin: 0 auto;
+        font-size: 15px;
+        align-items: center;
+        .distans-right {
+          margin-right: 10px;
+        }
+        .pay3000-checkbox {
+          width: var(--payment-section-form-checkbox-width, 20px);
+          height: var(--payment-section-form-checkbox-height, 20px);
+          margin-left: var(--payment-section-form-checkbox-margin-left, 0);
+          cursor: pointer;
+        }
+      }
+    }
+    .show-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      line-height: 44px;
+      .showed-texts {
+        text-align: left;
+        font-size: 14px;
+        .status-1 {
+          color: #00903D;
+          font-weight: 600;
+        }
+        .status-2 {
+          color: #f6a201;
+          font-weight: 600;
+        }
+        .status-3 {
+          color: red;
+          font-weight: 600;
+        }
+      }
+      .showed-text-player-id {
+        font-size: 14px;
+        .show-id {
+          font-weight: 600;
+        }
+      }
+    }
+
+    .showed-text-id {
+      text-align: left;
+      font-size: 14px;
+      margin-top: 24px;
+      .show-id {
+        font-weight: 600;
+      }
+    }
+    .delete-btn-part {
+      display: flex;
+      align-items: center;
+      .delete-btn {
+        background: var(--payment-section-delete-btn-background, #ED1C24);
+        border: var(--payment-section-delete-btn-border, none);
+        padding: var(--payment-section-delete-btn-padding, 14px 43px);
+        border-radius: var(--payment-section-delete-btn-border-radius, 6px);
+        color: var(--payment-section-delete-btn-color, #fff);
+        font-size: var(--payment-section-delete-btn-font-size, 16px);
+        font-weight: var(--payment-section-delete-btn-font-weight, 600);
+        margin-top: var(--payment-section-delete-btn-margin-top, 10px);
+        margin-bottom: var(--payment-section-delete-btn-margin-bottom, 10px);
+        width: var(--payment-section-delete-btn-width, 100%);
+        cursor: pointer;
+      }
+    }
+  }
+  .pay3000-confirm {
+    padding: var(--payment-section-form-confirm-padding, 0);
+    margin-top: var(--payment-section-form-confirm-margin-top, 19px);
+    margin-bottom: var(--payment-section-form-confirm-margin-bottom, 37px);
+    width: var(--payment-section-form-confirm-width, 302px);
+    button {
+      width: 100%;
+      margin: 0 auto;
+      background: var(--payment-section-form-confirm-background, #00934A);
+      color: var(--payment-section-form-confirm-color, #fff);
+      font-size: var(--payment-section-form-confirm-font-size, 15px);
+      font-weight: var(--payment-section-form-confirm-font-weight, 600);
+      height: var(--payment-section-form-confirm-height, 45px);
+      line-height: var(--payment-section-form-confirm-line-height, 22px);
+      border-radius: var(--payment-section-form-confirm-border-radius, 3px);
+      cursor: pointer;
+    }
+  }
+  .pay3000-download {
+    width: 98%;
+    margin: var(--payment-section-download-margin, 0 auto 18px);
+    text-align: left;
+    font-size: var(--payment-section-download-font-size, 15px);
+    font-weight: var(--payment-section-download-font-weight, 600);
+    line-height: var(--payment-section-download-line-height, 26px);
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .pay3000-section {
+    .user-right-panel_title {
+      font-size: 18px;
+      padding-bottom: 5px;
+    }
+    .pay3000-confirm {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .pay3000-download {
+      margin: 0 auto;
+      font-size: 12px;
+      line-height: 17px;
+    }
+    .container-part {
+      .pay3000-section-form {
+        gap: 10px;
+        .form_field {
+          label {
+            font-size: 12px;
+          }
+          input {
+            margin-top: 5px;
+          }
+          input::placeholder {
+            font-size: 12px;
+          }
+        }
+        .form_field-checkbox {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+  .pay3000-section {
+    .user-right-panel_title {
+      font-size: 20px;
+      padding-bottom: 5px;
+    }
+    .pay3000-confirm {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .pay3000-download {
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .container-part {
+      .pay3000-section-form {
+        gap: 14px;
+        .form_field {
+          label {
+            font-size: 14px;
+          }
+          input {
+            margin-top: 10px;
+          }
+          input::placeholder {
+            font-size: 14px;
+          }
+        }
+        .form_field-checkbox {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

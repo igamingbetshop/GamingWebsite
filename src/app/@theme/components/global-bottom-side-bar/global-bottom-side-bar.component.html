@@ -1,0 +1,17 @@
+<div class="bottom-sideBar-section" id="bottom-sideBar">
+    <ul class="b-sideBar">
+        <li *ngFor="let item of menuList" (click)="openTab(item)" class="b-sideBar__item"
+            [ngClass]="{ 'active-item': selectedOrder === item.Order}">
+            <div class="b-sideBar__image" *ngIf="item.Icon.includes('.')" [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/mobile-bottom-menu/' +
+                 item?.Icon
+                  + ')'}">
+            </div>
+
+            <span *ngIf="!item.Icon.includes('.')" class="b-sideBar__icon"><span class="{{item?.Icon}}"></span></span>
+
+            <span class="b-sideBar__text">{{'MobileBottomMenu.' + item?.Title | translate}}</span>
+            <div *ngIf="item.Type == 'Betslip' && betsCount" class="bets-count">{{betsCount}}</div>
+        </li>
+    </ul>
+</div>
+<app-mobile-more-menu *ngIf="selectedMoreItem" [selectedItem]="selectedItem"></app-mobile-more-menu>

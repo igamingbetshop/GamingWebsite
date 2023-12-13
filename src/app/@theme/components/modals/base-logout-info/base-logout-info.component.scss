@@ -1,0 +1,51 @@
+.modal-content {
+  &.LogOut_Info {
+    display: grid;
+    width: 500px;
+    padding: 0;
+
+    .LogOut_Info_body {
+      width: 100%;
+      text-align: left;
+      color: #000000;
+      font-weight: 700;
+      font-size: 18px;
+      height: 50px;
+      line-height: 50px;
+      padding: 0 20px;
+    }
+
+
+    .modal_content {
+      width: 100%;
+      padding: 0 20px;
+
+      p {
+        font-weight: 400;
+        font-size: 16px;
+        color: #000000;
+        text-align: left;
+      }
+    }
+
+    .modal_footer {
+      padding: 10px 20px;
+      text-align: center;
+
+      button {
+        border: none;
+        padding: 8px 15px;
+      }
+    }
+
+
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modal-content {
+    &.LogOut_Info {
+      width: 90%;
+    }
+  }
+}

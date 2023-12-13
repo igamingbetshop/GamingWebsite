@@ -1,0 +1,25 @@
+
+
+<div class="user-history-section">
+<!--    <h2 class="user-history-section_title common-title">{{'User.History' | translate}}</h2>-->
+<!--    <ul class="nav-tabs">-->
+<!--        <li [ngClass]="{ 'active-tab': showActiveTab == 'my-bets'}"-->
+<!--            (click)="changeTab('my-bets')">{{'User.Bets-History' | translate}}</li>-->
+<!--        <li [ngClass]="{ 'active-tab': showActiveTab == 'my-payments'}"-->
+<!--            (click)="changeTab('my-payments')"> {{'User.Payments' | translate}}</li>-->
+<!--        <li [ngClass]="{ 'active-tab': showActiveTab == 'my-transactions'}"-->
+<!--            (click)="changeTab('my-transactions')">{{'User.Transactions' | translate}}</li>-->
+<!--    </ul>-->
+    <div class="history-tab-content" *ngIf="showActiveTab === 'my-bets'">
+        <app-account-page-type2-history></app-account-page-type2-history>
+    </div>
+    <div class="history-tab-content" *ngIf="showActiveTab === 'my-payments'">
+        <app-account-page-type2-payments></app-account-page-type2-payments>
+    </div>
+    <div class="history-tab-content" *ngIf="showActiveTab === 'my-transactions'">
+        <app-account-page-type2-transactions></app-account-page-type2-transactions>
+    </div>
+
+</div>
+
+

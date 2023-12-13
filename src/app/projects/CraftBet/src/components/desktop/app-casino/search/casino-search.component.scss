@@ -1,0 +1,86 @@
+@import "../../../../../styles/helpers/variables";
+@import "../../../../../../../../styles/helpers/variables";
+
+.horizontal
+{
+  .search-category
+  {
+    position: relative;
+    color: itemColor(search-providers,#ffffff);
+    display: flex;
+    justify-content: var(--search-providers-justify-content, space-between);
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+
+    input {
+      width: width(search-providers-input, 250px);
+      height: height(search-providers-input, 50px);
+      outline: none;
+      color: itemColor(search-providers-input, #000);;
+      padding: padding(search-providers-input, 10px 30px 10px 10px) ;
+      border: 1px solid itemColor(search-providers-input-border, #e7e7e7);
+      border-radius: var(--search-providers-input-radius, 10px);
+      background: backgroundColor(search-providers-input, #fff);
+      font-size: fontSize(search-providers-input, 16px);
+    }
+    input::placeholder {
+      color: var(--search-providers-input-placeholder-color, #a8a8a8);
+    }
+    .search-icon {
+      margin-right: auto;
+      color: itemColor(search-providers-icon,#ff808e);
+      position: position(search-providers-icon, absolute);
+      left: itemLeft(search-providers-icon, 235px);
+      font-size: fontSize(search-providers-icon, 18px);
+    }
+  }
+}
+.vertical
+{
+  .search_field
+  {
+    border-top-left-radius: borderTopLeftRadius(search-field, 6px);
+    border-bottom-right-radius: borderBottomRightRadius(search-field, 6px);
+    border-top-right-radius: borderTopRightRadius(search-field, 6px);
+    border-bottom-left-radius: borderBottomLeftRadius(search-field, 6px);
+
+    border-top: borderTopWidth(search-field-border-top, 1px) solid itemColor(search-field-border-top, transparent);
+    border-bottom: borderBottomWidth(search-field-border-top, 1px) solid itemColor(search-field-border-bottom, transparent);
+    border-left: borderLeftWidth(search-field-border-top, 1px) solid itemColor(search-field-border-left, transparent);
+    border-right: borderRightWidth(search-field-border-top, 1px) solid itemColor(search-field-border-right, transparent);
+    height: height(search-field, 36px);
+    color: color(search-field);
+    padding-left: paddingLeft(search-field, 16px);
+    padding-right: paddingRight(search-field, 0);
+    background-color: backgroundColor(search-field,#1d2e4a);
+    margin-bottom: marginBottom(search-field, 26px);
+
+    .search-icon
+    {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+      background-image: linear-gradient(to bottom, itemColor(search-icon-gradient-first,#1376f8), itemColor(search-icon-gradient-second,#194074));
+      cursor: pointer;
+      font-size: 16px;
+      color: itemColor(search-games-icon, #ffffff);
+    }
+
+
+    input {
+      height: 100%;
+      border: none;
+      outline: none;
+      flex: 1;
+      padding: 0 0 0 5px;
+      background: none;
+      color: itemColor(search-input,rgba(255, 255, 255, 0.6));
+      font-size: 16px;
+    }
+    ::placeholder{font-size: 16px; color: itemColor(search-input-placeholder,rgba(255, 255, 255, 0.6))}
+  }
+}

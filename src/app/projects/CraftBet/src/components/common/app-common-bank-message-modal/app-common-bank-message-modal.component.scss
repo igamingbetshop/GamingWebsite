@@ -1,0 +1,92 @@
+@import "../../../../styles/helpers/variables";
+@import "../../../../../../../styles/helpers/variables";
+
+.modal-content {
+  margin-top: 180px;
+  max-width: var(--tickets-messages-modal-section-max-width, 1000px) !important;
+  height: var(--tickets-messages-modal-section-height, auto);
+  h2 {
+    color: var(--tickets-messages-title-color, #000);
+    font-weight: var(--tickets-messages-modal-header-font-weight, 500);
+    font-size: var(--tickets-messages-modal-header-font-size, 25px);
+    margin: 0;
+  }
+
+  .ng-fa-icon {
+    color: var(--tickets-messages-title-icon-color, #dadbe0);
+    font-size: var(--tickets-messages-title-icon-font-size, 18px);
+  }
+
+  .modal-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: var(--tickets-messages-modal-section-padding, 0);
+  }
+
+  .modal_content {
+    height: var(--tickets-messages-modal-section-height, 100px);
+    padding: var(--tickets-messages-modal-section-padding, 0);
+
+    &__message {
+      color: var(--tickets-messages-modal-content-color, #000000);
+      font-weight: var(--tickets-messages-modal-content-font-weight, 500);
+      font-size: var(--tickets-messages-modal-content-font-size, 25px);
+      text-align: var(--tickets-messages-modal-content-text-align, center);
+      margin-top: var(--tickets-messages-modal-content-margin-top, 35px);
+    }
+  }
+
+  .modal_footer {
+    width: 100%;
+    display: flex;
+    justify-content: var(--tickets-messages-modal-footer-justify-content, flex-end);
+    gap: var(--tickets-messages-modal-footer-gap, 10px);
+    padding: var(--tickets-messages-modal-section-padding, 0);
+
+    .craft_btn {
+      color: $color-white;
+      width: var(--tickets-messages-modal-footer-btn-width, 170px);
+      height: var(--tickets-messages-modal-footer-btn-height, 44px);
+      border-radius: var(--tickets-messages-modal-footer-btn-border-radius, 4px);
+      font-size: var(--tickets-messages-modal-footer-btn-font-size, 16px);
+      font-weight: var(--tickets-messages-modal-footer-btn-font-weight, 600);
+    }
+
+    .bg_recovery {
+      background: -webkit-linear-gradient(90deg, var(--tickets-button-background-gradient-first-color, #08131d) 0%, var(--tickets-button-background-gradient-second-color, #1c344a) 100%);
+      color: var(--tickets-button-accept-color, #fff);
+      border: var(--tickets-button-accept-border, none);
+    }
+
+    .bg_payment {
+      color: var(--tickets-button-cancel-color, #fff);
+      border: var(--tickets-button-cancel-border, none);
+      background: -webkit-linear-gradient(90deg, var(--tickets-cancel-button-background-gradient-first-color, #1376f8) 0%, var(--tickets-cancel-button-background-gradient-second-color, #194074) 100%);
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .modal-content {
+    width: 90%;
+    margin-left: 20px;
+    height: var(--m-delete-bank-modal-height, 25%);
+    min-width: 90%;
+    border-radius: 23px;
+
+    .modal_content {
+      &__message {
+        font-size: calc(var(--tickets-messages-modal-footer-btn-font-size, 16px) - 1px);
+      }
+    }
+
+    .modal_footer {
+      gap: 15px;
+      .craft_btn {
+        width: 100%;
+      }
+    }
+  }
+}

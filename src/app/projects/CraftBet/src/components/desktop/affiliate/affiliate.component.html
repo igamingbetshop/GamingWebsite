@@ -1,0 +1,159 @@
+<div class="about_us_section affiliate_section min-height">
+    <div class="affiliate affiliate_height">
+        <h2>{{'Affiliate.Affiliate-title' | translate}}</h2>
+        <form class="affiliate-section" [formGroup]="affiliateForm" autocomplete="off">
+            <div class="form_field">
+                <input type="text" placeholder="{{'Affiliate.Name-placeholder' | translate}}"
+                       formControlName="FirstName"/>
+                <label>{{'Affiliate.Name' | translate}}</label>
+                <div class="error_message"
+                     *ngIf="affiliateForm.get('FirstName').touched && affiliateForm.get('FirstName').hasError('required')">{{'Affiliate.Required-field' | translate}}</div>
+            </div>
+            <div class="form_field">
+                <input type="text" placeholder="{{'Affiliate.Surname-placeholder' | translate}}"
+                       formControlName="LastName"/>
+                <label>{{'Affiliate.Surname' | translate}}</label>
+                <div class="error_message"
+                     *ngIf="affiliateForm.get('LastName').touched && affiliateForm.get('LastName').hasError('required')">{{'Affiliate.Required-field' | translate}}</div>
+            </div>
+            <div class="form_field">
+                <input type="email" placeholder="{{'Affiliate.Email-placeholder' | translate}}"
+                       formControlName="Email"/>
+                <label>{{'Affiliate.Email' | translate}}</label>
+                <div class="error_message"
+                     *ngIf="affiliateForm.get('Email').touched && affiliateForm.get('Email').hasError('required')">{{'Affiliate.Required-field' | translate}}</div>
+                <div class="error_message" *ngIf="affiliateForm.get('Email').touched && affiliateForm.get('Email').hasError('pattern')">
+                    {{ 'Affiliate.Invalid-email' | translate }}
+                </div>
+            </div>
+            <div class="form_field">
+                <input type="number" placeholder="{{'Affiliate.MobileNumber-placeholder' | translate}}"
+                       formControlName="MobileNumber" autocomplete="off"/>
+                <label>{{'Affiliate.MobileNumber' | translate}}</label>
+                <div class="error_message"
+                     *ngIf="affiliateForm.get('MobileNumber').touched && affiliateForm.get('MobileNumber').hasError('required')">{{'Affiliate.Required-field' | translate}}</div>
+                <div class="error_message" *ngIf="affiliateForm.get('MobileNumber').touched && affiliateForm.get('MobileNumber').hasError('pattern')">
+                    {{ 'Affiliate.Invalid-MobileNumber' | translate }}
+                </div>
+            </div>
+            <div class="form_field">
+                <input type="{{passwordType['Password'] ? 'text' : 'password'}}" autocomplete="off"
+                       placeholder="{{'Affiliate.Password-placeholder' | translate}}" formControlName="Password"/>
+                <label>{{'Affiliate.Password' | translate}}</label>
+                <div (click)="passwordType['Password'] = !passwordType['Password']"
+                     class="change-password-field-type change-password-field-type2">
+                    <span [ngClass]="passwordType['Password'] ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                </div>
+                <div class="error_message"
+                     *ngIf="affiliateForm.get('Password').touched && affiliateForm.get('Password').hasError('required')">{{'Affiliate.Required-field' | translate}}</div>
+                <div class="error_message" *ngIf="affiliateForm.get('Password').touched && affiliateForm.get('Password').hasError('pattern')">
+                    {{ 'Affiliate.Invalid-Password' | translate }}
+                </div>
+            </div>
+            <div class="form_field">
+                <input type="{{passwordType['ConfirmPassword'] ? 'text' : 'password'}}" autocomplete="off"
+                       placeholder="{{'Affiliate.ConfirmPassword-placeholder' | translate}}"
+                       formControlName="ConfirmPassword"/>
+                <label>{{'Affiliate.ConfirmPassword' | translate}}</label>
+                <div (click)="passwordType['ConfirmPassword'] = !passwordType['ConfirmPassword']"
+                     class="change-password-field-type change-password-field-type2">
+                    <span [ngClass]="passwordType['ConfirmPassword'] ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                </div>
+                <div class="error_message"
+                     *ngIf="(affiliateForm.get('ConfirmPassword').hasError('required')  || affiliateForm.get('ConfirmPassword').hasError('matchTo')) && affiliateForm.get('ConfirmPassword').touched">
+                    <span>{{ 'Error.PasswordMatchTo' | translate }}</span>
+                </div>
+            </div>
+            <div class="form_field">
+                <input type="text" placeholder="{{'Affiliate.Username-placeholder' | translate}}"
+                       formControlName="UserName"/>
+                <label>{{'Affiliate.Username' | translate}}</label>
+                <div class="error_message"
+                     *ngIf="affiliateForm.get('UserName').touched && affiliateForm.get('UserName').hasError('required')">{{'Affiliate.Required-field' | translate}}</div>
+            </div>
+            <div class="form_field" *ngIf="!showCommunication">
+                <div class="communication-types">
+                    <div class="first-section">
+                        <p>{{'Affiliate.CommunicationType' | translate}}</p>
+                        <span>{{'Affiliate.Select Option' | translate}}</span>
+                    </div>
+                    <div class="second-section">
+                        <div class="second-section-types" *ngFor="let communication of communicationType">
+                            <!--                            <span class="icon-{{communication.Name}}" [ngClass]="{'active1':selectedType == 1, 'active2':selectedType == 2, 'active3':selectedType == 3}" (click)="selectType(communication.Id)"></span>-->
+                            <span class="icon-{{communication.Name}} tooltip" (click)="selectType(communication)">
+                                <span class="tooltiptext {{communication.Name}}">{{communication.Name}}</span>
+                                <!--                                <span class="tooltiptext tooltiptext1"></span>-->
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form_field" *ngIf="showCommunication">
+                <input type="text" placeholder="{{selectedTypeName}}"
+                       formControlName="CommunicationTypeValue"/>
+                <label>{{'Affiliate.CommunicationTypeValueText' | translate}}</label>
+                <div (click)="cancelType()"
+                     class="change-password-field-type change-password-field-type2">
+                    <span class="icon-close-modal"></span>
+                </div>
+                <div class="error_message"
+                     *ngIf="affiliateForm.get('CommunicationTypeValue').touched && affiliateForm.get('CommunicationTypeValue').hasError('required')">{{'Affiliate.Required-field' | translate}}</div>
+            </div>
+            <div class="form_field">
+                <div class="checkbox-field" (click)="toggleCheckbox()">
+                    <input type="checkbox" placeholder="{{'Affiliate.Accept-terms-placeholder' | translate}}"
+                           formControlName="TermsConditionsAccepted"/>
+                    <span [innerHTML]="'Affiliate.Accept-terms' | translate | sanitizer: 'html'"></span>
+                    <div class="error_message"
+                         *ngIf="affiliateForm.get('TermsConditionsAccepted').touched && affiliateForm.get('TermsConditionsAccepted').hasError('required')">{{'Affiliate.Required-field' | translate}}</div>
+                </div>
+            </div>
+            <div class="form_field">
+                <div class="submit-details">
+                    <button type="submit" class="craft_btn" (click)="submitAffiliate()"
+                            [disabled]="!affiliateForm.valid || !checkboxDetail">{{'Affiliate.Submit' | translate}}</button>
+                </div>
+            </div>
+        </form>
+        <div class="error_message">{{errorMessage}}</div>
+        <div class="affiliate-support-section">
+            <div class="support-part">
+                <div>
+                    <h3>{{'Affiliate.10 MINUTES' | translate}}</h3>
+                    <span>{{'Affiliate.Average Cash Out Time' | translate}}</span>
+                </div>
+                <div>
+                    <h3>{{'Affiliate.24/7' | translate}}</h3>
+                    <span>{{'Affiliate.Live Chat Support' | translate}}</span>
+                </div>
+                <div>
+                    <h3>{{'Affiliate.4,500+' | translate}}</h3>
+                    <span>{{'Affiliate.Casino Games' | translate}}</span>
+                </div>
+                <div>
+                    <h3>{{'Affiliate.2,700,00+' | translate}}</h3>
+                    <span>{{'Affiliate.Registered Players' | translate}}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="affiliate-right-part affiliate_height">
+        <div class="right-part-buttons">
+            <div class="submit-details">
+                <button type="submit" class="craft_btn"
+                        (click)="selectTab(tabs.affiliateAbout)"
+                        [ngClass]="{'active':selectedTab == tabs.affiliateAbout}">
+                    {{'Affiliate.About Affiliate' | translate}}</button>
+                <button type="submit" class="craft_btn" (click)="selectTab(tabs.affiliateCommissions)"
+                        [ngClass]="{'active':selectedTab == tabs.affiliateCommissions}">
+                    {{'Affiliate.About Commissions' | translate}}</button>
+            </div>
+        </div>
+        <div class="box" [innerHTML]="'Affiliate.About Affiliate Details' | translate | sanitizer: 'html'"
+             *ngIf="selectedTab === tabs.affiliateAbout"></div>
+        <div class="box" [innerHTML]="'Affiliate.About Commissions Details' | translate | sanitizer: 'html'"
+             *ngIf="selectedTab === tabs.affiliateCommissions"></div>
+    </div>
+</div>

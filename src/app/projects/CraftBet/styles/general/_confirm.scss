@@ -1,0 +1,281 @@
+.modal-content {
+  &.register {
+    background: color(register-background);
+    position:relative;
+    &::after
+    {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: backgroundColor(modal-content,transparent);
+      width: 100%;
+      height: height(modal-content, auto);
+      z-index: -1;
+    }
+    //overflow-y: auto;
+  }
+
+  .modal_content {
+    margin: var(--modal-content-margin, 0 auto);
+    //overflow: hidden;
+    //overflow-x: hidden;
+
+    h2 {
+      margin: 10px 0;
+      color: itemColor(login-title, #fff);
+    }
+  }
+
+  &.login_PSection {
+    width: width(modal-login-section, 570px);
+    max-height: height(modal-login-section, 400px);
+    height: auto;
+    min-height: height(min-modal-login-section, 250px);
+
+    .modal_content {
+      width: width(modal-login-content, 100%);
+    }
+
+    .login_button {
+      background: color(login-bg);
+      color: color(login-font-color);
+    }
+
+    .error_message {
+      max-width: 100%;
+      white-space: initial;
+      text-align: left;
+      line-height: var(--error-message-login-line-height, 12px);
+      font-size: var(--error-message-login-font-size, 13px);
+      top: itemTop(error-message-login, 4px);
+    }
+  }
+
+  &.register_PSection {
+    //width: width(modal-register-section, 800px);
+    //width: 936px;
+    .modal_content {
+      //width: width(modal-register-content, 100%);
+      //height: height(modal-register-content, 672px);
+    }
+  }
+
+
+  h2 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: $color-white;
+  }
+
+  &.bigSize {
+    width: 755px;
+    transform: translate(0, 0) !important;
+  }
+
+  &.smallSize {
+    width: 500px;
+  }
+
+  border-radius: 3px;
+  margin: 110px auto;
+  padding-top: paddingTop(modal-content, 24px);
+  padding-bottom: paddingBottom(modal-content, 24px);
+  padding-left: paddingLeft(modal-content, 32px);
+  padding-right: paddingRight(modal-content, 32px);
+
+  .modal-body {
+    text-align: right;
+    color: $font-color;
+    cursor: pointer;
+
+    .fa {
+      color: itemColor(modal_close_icon, #ccc);
+      cursor: pointer;
+    }
+
+    .icon-close-modal{
+      position: absolute;
+      right: itemRight(popup-close-icon, 38px);
+      top: itemTop(popup-close-icon, 12px);
+      z-index: 1;
+      color: itemColor(popup-close-icon, #fff);
+      display: display(popup-close-icon, block);
+    }
+
+    padding: 0;
+    display: initial;
+    float: right;
+
+  }
+}
+
+
+.register_PSection_redirect {
+  width: 100%;
+  //margin: 9px auto 0 auto;
+  color: itemColor(login-redirect-text, #ffffff);
+  cursor: default;
+
+  position: absolute;
+  left: itemLeft(register-redirect, 508px);
+  bottom: itemBottom(register-redirect, 0px);
+  font-size: fontSize(register-redirect, 16px);
+  display: display(register-redirect, block);
+
+  a {
+    text-decoration: var(--login-redirect-href-text-decoration, underline);
+    margin-left: marginLeft(login-redirect-href-text, 15px);
+    //margin-right: 15px;
+    cursor: pointer;
+    color: itemColor(login-redirect-href-text, #1376f8);
+  }
+}
+
+.login_PSection_redirect {
+  margin: var(--login-redirect-text-margin, 9px auto 0 auto);
+  cursor: default;
+  width: 100%;
+  font-size: fontSize(login-redirect-text, 14px);
+  color: itemColor(login-redirect-text, #ccc);
+  display: flex;
+  justify-content: var(--modal-login-footer-justify-content, space-between);
+  padding-left: var(--modal-login-footer-padding-left, 0px);
+  padding-right: var(--modal-login-footer-padding-right, 0px);
+  padding-top: var(--modal-login-footer-padding-top, 0px);
+
+  a {
+    text-decoration: var(--modal-login-footer-text-decoration, underline);
+    color: var(--modal-login-footer-text-color, var(--login-redirect-text-color));
+    position: var(--modal-login-footer-text-position, relative);
+    font-weight: var(--modal-login-footer-text-font-weight, 400);
+    margin-left: var(--modal-login-footer-text-margin-left, 15px);
+    margin-right: var(--modal-login-footer-text-margin-right, 15px);
+    cursor: pointer;
+
+    &:hover {
+      color: itemColor(login-redirect-text-hover, #ccc);
+    }
+  }
+  .safety-info{
+    width: width(login-safety-info, auto);
+    color: itemColor(register-safety-info, #dbedff);
+    font-size: fontSize(register-safety-info, 16px);
+
+    &_text{
+      display: flex;
+      justify-content: center;
+      span {
+        margin-left: marginLeft(login-safety-text, 8px);
+        margin-right: 0;
+      }
+    }
+
+  }
+}
+
+
+@media screen and (min-width: 0px) and (max-width: 1376px)
+{
+  .modal-content
+  {
+    .modal-body {
+      .icon-close-modal {
+        top: var(--popup-close-icon-small-top, 31px);
+        //right: 31px;
+        //right: 43px;
+        right: var(--popup-close-icon-small-right, 65px);
+      }
+    }
+    .modal_content {
+      margin: var(--modal-content-small-margin, 0 auto);
+    }
+    &.login_PSection {
+      width: calc(var(--modal-login-section-width, 570px) * 0.7);
+      max-height:  calc(var(--modal-login-section-height, 400px) * 0.7);
+      height: auto;
+      min-height:  calc(var(--min-modal-login-section-height, 250px) * 0.7);
+      .modal_content {
+        width: calc(var(--modal-login-content-width, 100%) * 0.7);
+      }
+    }
+  }
+
+  .login_PSection_redirect {
+    margin: 9px auto 0 auto;
+    font-size: calc(var(--login-redirect-text-font-size, 10px) * 0.7);
+    padding: 0;
+    line-height: var(--login-redirect-text-small-line-height, 12px);
+
+    a {
+      margin-left: 10.5px;
+      margin-right: 10.5px;
+    }
+    .safety-info{
+      width: calc(var(--login-safety-info-width, auto) * 0.7);
+      font-size: calc(var(--register-safety-info-font-size, 16px) * 0.7);
+
+      &_text{
+        span {
+          margin-left:calc(var(--login-safety-text-margin-left, 8px) * 0.7);
+          margin-right: 0;
+        }
+      }
+
+    }
+  }
+}
+@media screen and (min-width: 1600px) and (max-width: 1800px) {
+  .modal-content {
+    .modal-body {
+      .icon-close-modal {
+        right: var(--popup-close-icon-big-right, 120px);
+        //right: 94px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1377px) and (max-width: 1600px)
+{
+  .modal-content
+  {
+    .modal-body {
+      .icon-close-modal {
+        top: var(--popup-close-icon-medium-top, 35px);
+        //right: 70px;
+        right: var(--popup-close-icon-medium-right, 100px);
+      }
+    }
+    &.login_PSection {
+      width: calc(var(--modal-login-section-width, 570px) * 0.9);
+      max-height:  calc(var(--modal-login-section-height, 400px) * 0.9);
+      height: auto;
+      min-height:  calc(var(--min-modal-login-section-height, 250px) * 0.9);
+      .modal_content {
+        //width: calc(var(--modal-login-content-width, 100%) * 0.9);
+      }
+    }
+  }
+  .login_PSection_redirect {
+    margin: 9px auto 0 auto;
+    font-size: calc(var(--login-redirect-text-font-size, 12px) * 0.9);
+
+    a {
+      margin-left: 13.5px;
+      margin-right: 13.5px;
+    }
+    .safety-info{
+      width: calc(var(--login-safety-info-width, auto) * 0.9);
+      font-size: calc(var(--register-safety-info-font-size, 16px) * 0.9);
+
+      &_text{
+        span {
+          margin-left:calc(var(--login-safety-text-margin-left, 8px) * 0.9);
+          margin-right: 0;
+        }
+      }
+
+    }
+  }
+}

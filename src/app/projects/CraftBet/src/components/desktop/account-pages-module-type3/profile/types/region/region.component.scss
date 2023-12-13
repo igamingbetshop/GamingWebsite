@@ -1,0 +1,24 @@
+.items-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: #666666;
+  margin: 0 auto;
+  font-size: 15px;
+  cursor: default;
+  .right-part {
+    font-weight: 600;
+    display: block;
+    input {
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      text-align: right;
+      color: #000;
+      opacity: 1;
+      pointer-events: none;
+      background: transparent;
+    }
+  }
+}

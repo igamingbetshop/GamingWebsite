@@ -1,0 +1,78 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-open-game-section {
+ /* margin-top: 62px;
+  width: 100%;*/
+  background: $header-top-bg;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  //padding: 0 0 70px 0;
+
+  .gameName {
+    text-align: center;
+    color: $register-active-menu;
+    padding: 0 !important;
+  }
+
+  .tm-cancel-screen {
+    position: absolute;
+    display: flex;
+    background: rgba(0, 0, 0, 0.5);
+    width: auto;
+    height: auto;
+    padding: 10px;
+    left: 96%;
+    top: 20px;
+
+    .fa {
+      color: #cccccc;
+      font-size: 30px;
+      line-height: 30px;
+    }
+
+  }
+
+  .open-game-content {
+    width: 980px;
+    height: 552px;
+    background: $color-white;
+    margin: 0 auto;
+    //position: relative;
+    display: flex;
+
+    iframe {
+      width: 100%;
+    }
+
+    .game-buttons {
+      position: absolute;
+      width: auto;
+      display: flex;
+      background: rgba(0, 0, 0, 0.5);
+      height: auto;
+      padding: 0 10px;
+      left: 100%;
+
+      a {
+        &:not(:last-child) {
+          margin-right: 15px;
+        }
+
+      }
+
+      .fa-icon-arrows-alt {
+        &:before {
+          content: "\f0b2";
+        }
+      }
+
+      .fa {
+        color: #cccccc;
+        font-size: 30px;
+        line-height: 30px;
+      }
+    }
+  }
+}

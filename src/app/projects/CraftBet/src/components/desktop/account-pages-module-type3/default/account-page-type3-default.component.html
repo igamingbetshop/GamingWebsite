@@ -1,0 +1,40 @@
+<div class="user-default-section recponcive-height">
+
+    <div class="user-default-section_top tab-{{tabType}}">
+        <div class="user-default-section-top-title">
+            <div class="title"><b>{{ 'User.PersonalDetails' | translate }}</b></div>
+            <div class="icon-close" (click)="close()"></div>
+        </div>
+        <div class="user-base-panel">
+            <div class="user-default-header-section">
+                <div class="user-left-panel">
+                    <!--                <div class="icon-left-style" (click)="changeStep(-1)">-->
+                    <!--                    <span class="icon-arrow-right"></span>-->
+                    <!--                </div>-->
+                    <ul class="user-left-panel_topList" horizontal-scroll #horizontalScrollContainer>
+                        <li *ngFor="let item of menuList" class="user-left-panel_header">
+                            <div class="title_menu" (click)="savedDateService.getItem(item); onTabChange(item.Href)"
+                                 [ngClass]="(item.Href === savedDateService.currentSubItem.Href) ? 'active' : ''">
+                                <div>
+                                    <span>{{ 'User.' + item?.Title | translate }}</span>
+                                </div>
+                                <span class="icon-arrow-right"></span>
+                            </div>
+                        </li>
+                        <!--                    <li>Logout</li>-->
+                    </ul>
+                    <!--                <div class="icon-right-style" (click)="changeStep(1)">-->
+                    <!--                    <span class="icon-arrow-right"></span>-->
+                    <!--                </div>-->
+                </div>
+                <div class="left-panel-logout">
+                    <button class="left-panel-logout-btn" (click)="logout()">{{'Header.LogOut' | translate}}</button>
+                </div>
+            </div>
+            <div class="user-right-panel">
+                <ng-container #accountPageRef></ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+

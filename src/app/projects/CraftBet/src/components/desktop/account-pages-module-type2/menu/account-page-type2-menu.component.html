@@ -1,0 +1,38 @@
+<ul class="user-left-panel_topList">
+   <!-- <li *ngFor="let item of menuList" class="custom-dropdown menu-list" dropdown>
+        <a class="current-item">
+            {{'User.' + item?.Title | translate}}
+            <img src="../../../../../../../assets/images/register/down-arrow.png" aria-hidden="true"
+                 class="down-arrow">
+        </a>
+
+        <ul class="dropdown-list">
+            <li class="" *ngFor="let subItem of item?.SubMenu">
+                <a class="item_menu" routerLinkActive="active"
+                   [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + subItem.Href"
+                   *ngIf="subItem.Type != 4">
+                    {{'User.' + subItem?.Title | translate}}
+                </a>
+            </li>
+        </ul>
+    </li>-->
+
+    <li *ngFor="let item of menuList" class="custom-dropdown menu-list">
+       <!-- <a class="current-item">
+            {{'User.' + item?.Title | translate}}
+        </a>-->
+
+        <ul class="">
+            <li class="" *ngFor="let subItem of item?.SubMenu">
+                <a class="item_menu flex_between" routerLinkActive="active"
+                   [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + subItem.Href"
+                   *ngIf="subItem.Type != 4">
+                    {{'User.' + subItem?.Title | translate}}
+                    <img src="../../../../../../../assets/images/register/down-arrow.png" aria-hidden="true"
+                         class="down-arrow">
+                </a>
+            </li>
+        </ul>
+    </li>
+    <app-global-logout class="account-left-menu-logout-item" itemClassname="left-menu-logOut"></app-global-logout>
+</ul>

@@ -1,0 +1,85 @@
+<div class="mobile-settings-section" [ngStyle]="layoutService.layoutStyle">
+    <div class="mobile-settings-section">
+        <h2 class="mobile-settings-section_title">{{'User.Account Verification' | translate}}</h2>
+        <div class="underline"></div>
+        <div class="tab-content-mobile account-verification">
+            <div class="verification-message">
+                <p>{{'Account.DocumentIdentificationMessage' | translate}}:</p>
+                <ul>
+                    <li>{{'Account.DocumentFormatMessage' | translate}}</li>
+                    <li>{{'Account.DocumentValidityPeriod' | translate}}</li>
+                    <li>{{'Account.DocumentValidityColor' | translate}}</li>
+                    <li class="document-validity1">{{'Account.DocumentValidityOriginal' | translate}}</li>
+                    <li class="document-validity2">{{'Account.DocumentValiditySignature' | translate}}</li>
+                    <li class="document-validity3">{{'Account.DocumentValidityPresent' | translate}}</li>
+                </ul>
+            </div>
+            <form [formGroup]="uploadDocumentForm" (ngSubmit)="uploadDocument()">
+                <div class="form_row">
+
+                    <div class="verify_row">
+                        <div class="form_field distans-half-right">
+                            <select formControlName="documentItem" [value]="getSettingsInfoService.documentTypesList[0]?.Id" (change)="addedDocument($event)">
+                                <option value='' disabled *ngIf="!isSending" hidden>{{'Account.Document' | translate}}</option>
+                                <option *ngFor="let item of getSettingsInfoService.documentTypesList"
+                                        [value]="item.Id">{{item?.Name}}</option>
+                            </select>
+                            <label class="choose-document-label">{{'User.Document_verify' | translate}}</label>
+                        </div>
+                        <div class="form_field verify_buttons">
+                            <div class="form_field__top" style="width: 100%;">
+                                <input #documentFile type="file" (change)="handleInputChange($event)" class="choose_input"
+                                       name="file" [style.pointer-events]="selectedFile ? 'auto' : 'none'">
+                                <input class="mobile_settings_change_name" type="text" placeholder="{{'Account.SelectFile' | translate}}"
+                                       disabled style="opacity: 1" [ngClass]="{'change_name_active': selectedFile}">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="choose_file_Name">
+                    {{fileData?.Name}}
+                </div>
+                <button type="submit" class="craft_btn setting_btn full-width"
+                        [ngClass]="{'disable_item' : !getSettingsInfoService.checkDocumentSize || !uploadDocumentForm.get('documentItem').value}">{{'User.Verify' | translate}}</button>
+                <div class="error_message docError">{{selectedDocumentErrorMessage}}</div>
+                <div class="success_message docSuccess" *ngIf="documentUploadResponseMessageType === 'Success'" style="justify-content: center">
+                    {{documentUploadResponseMessage}}
+                </div>
+                <div class="error_message docError" *ngIf="documentUploadResponseMessageType === 'Error'">{{documentUploadResponseMessage}}</div>
+            </form>
+
+            <div>
+                <table class="bet-selections-info">
+                    <thead class="bet-selections-info__tbody">
+                    <tr class="bet-selections-info_thead__tr">
+                        <td class="bet-selections-info__td">{{'User.Id' | translate}}</td>
+                        <td class="bet-selections-info__td">{{'User.Document type' | translate}}</td>
+                        <td class="bet-selections-info__td">{{'User.Creation Date' | translate}}</td>
+                        <td class="bet-selections-info__td">{{'User.Status' | translate}}</td>
+                    </tr>
+                    </thead>
+
+                    <tbody class="bet-selections-info__tbody">
+                    <tr class="bet-selections-info__tr"
+                        *ngFor="let item of getSettingsInfoService?.identityModelsList">
+                        <td class="bet-selections-info__td">
+                            {{item?.Id}}
+                        </td>
+                        <td class="bet-selections-info__td">
+                            {{item?.DocumentTypeName}}
+                        </td>
+                        <td class="bet-selections-info__td">
+                            {{item?.CreationTime | date: 'd MMM y h:mm'}}
+                        </td>
+                        <td class="bet-selections-info__td mobile-account-status" [ngClass]="{'red1': item?.Status === 2,'yellow1': item?.Status === 3,'green1':item?.Status === 1,'black1': item?.Status === 4}">
+                            <span [ngClass]="{'icon-rejected': item?.Status === 2 || item?.Status === 4,'icon-pending': item?.Status === 3,'icon-verified':item?.Status === 1}"></span>
+                            <p class="item-status" [ngClass]="{'red': item?.Status === 2,'yellow': item?.Status === 3,'green':item?.Status === 1}">{{item?.StatusName}}</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

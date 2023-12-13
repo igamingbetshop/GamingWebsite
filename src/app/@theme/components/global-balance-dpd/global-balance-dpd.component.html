@@ -1,0 +1,25 @@
+
+<div class="custom_dropdown_style1 custom_dropdown {{itemClassname}}-type-Dpd" dropdown>
+  <div class="flex_between current_item">
+    <span> {{balance | toNumber | number: '.2'}} {{balanceInfo?.CurrencyId}}</span>
+    <fa-icon [icon]="['fas', 'angle-down']" class="drop_down_icon"></fa-icon>
+  </div>
+
+  <ul class="custom_dropdown_list right-top {{itemClassname}}-custom-ul">
+    <div class="title">{{'User.My account' | translate}}</div>
+
+    <div class="lang_grid">
+      <div>
+        <span class="tail">{{'User.Unused Balance' | translate}}</span>
+        <span class="balance"> {{balanceInfo?.UnusedBalance | toNumber | number: '.2'}}  {{balanceInfo?.CurrencyId}}</span>
+      </div>
+      <li class="custom_dropdown_list_item">
+        <div class="list-section">
+          <button type="button" class="button-style2 button-style1-type-btn" (click)="changePage('deposit')">{{'User.Deposit' | translate}}</button>
+          <button type="button" class="button-style2 button-style1-type-btn" (click)="changePage('withdraw')">{{'User.Withdraw' | translate}}</button>
+        </div>
+      </li>
+    </div>
+
+  </ul>
+</div>

@@ -1,0 +1,70 @@
+.form_row
+{
+  position: relative;
+  .error-field-message
+  {
+    font-size: var(--settings-profile-font-size, 15px);
+    color: red;
+    font-weight: var(--settings-profile-font-weight, 700);
+    position: absolute;
+    bottom: -32px;
+    left: 0;
+  }
+}
+.modal-content {
+  background: var(--open-ticket-content-background, #fff);
+  border-radius: var(--open-ticket-content-border-radius, 4px);
+  .ticket-content-body {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .ticket-content-title {
+      color: var(--open-ticket-content-title-color, #000);
+      font-size: var(--open-ticket-content-title-font-size, 30px);
+      font-weight: var(--open-ticket-content-title-font-weight, bold);
+    }
+    .ticket-content-icon {
+      color: var(--open-ticket-content-title-icon-color, #000);
+      font-size: var(--open-ticket-content-title-icon-font-size, 22px);
+    }
+  }
+  .modal_content {
+    .open-ticket-form-fields {
+      .form_row {
+        .ticket_label {
+          color: var(--open-ticket-content-form-label-color, #000);
+          height: var(--open-ticket-content-form-label-font-size, 16px);
+        }
+        .form_field, .form_textarea {
+          .ticket_input {
+            border: var(--open-ticket-content-form-input-border, 1px solid #000);
+            border-radius: var(--open-ticket-content-form-input-border-radius, 2px);
+            height: var(--open-ticket-content-form-input-height, 40px);
+            font-size: var(--open-ticket-content-form-input-font-size, 14px);
+            font-weight: var(--open-ticket-content-form-input-font-weight, 400);
+            background: var(--open-ticket-content-form-input-color, transparent);
+            color: var(--open-ticket-content-form-input-color, #000);
+          }
+
+          .ticket_textarea {
+            height: auto;
+            min-height: var(--open-ticket-content-form-input-min-height, 132px);
+            resize: none;
+            width: 100%;
+            max-width: 100%;
+          }
+          .open-ticket-btn {
+            width: var(--open-ticket-content-form-submit-width, 120px);
+            height: var(--open-ticket-content-form-submit-height, 30px);
+            background: var(--open-ticket-content-form-submit-background, transparent);
+            color: var(--open-ticket-content-form-submit-color, #000);
+            border: var(--open-ticket-content-form-submit-color, 1px solid #000);
+            border-radius: var(--open-ticket-content-form-submit-border-radius, 4px);
+            font-size: var(--open-ticket-content-form-submit-font-size, 16px);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<div class="payment-nominals">
+  <button
+    type="button"
+    *ngFor="let nominal of nominals"
+    (click)="changeNominal(nominal)"
+    [class.selected]="selectedNominal == nominal">{{nominal | number}}</button>
+</div>

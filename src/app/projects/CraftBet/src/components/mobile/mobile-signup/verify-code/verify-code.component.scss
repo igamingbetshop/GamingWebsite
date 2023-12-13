@@ -1,0 +1,77 @@
+.allFormItems
+{
+  width: 100%;
+  padding-top: 50px;
+  .form_field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 16px;
+    input{
+      width: 51px;
+      height: 50px;
+      border-radius: 7px;
+      font-size: 26px;
+      color: var(--verification-code-text-color, #000000);
+    }
+    .error-otp
+    {
+      color: var(--error-message-color, #FF0029);
+      display: inline-block;
+      position: absolute;
+      height: 27px;
+      bottom: -39px;
+      right: 42px;
+      font-size: 13px;
+    }
+  }
+  .otp-expire {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 48px;
+    span {
+      font-weight: var(--verify-code-otp-font-weight, 600);
+      font-size: var(--verify-code-otp-font-size, 16px);
+      &:first-child {
+        color: var(--verify-code-otp-color, #1D1D1B);
+      }
+    }
+    .timer-text {
+      color: var(--verify-timer-text-color, rgba(89, 159, 97, 1));
+      margin-left: var(--verify-timer-text-margin-left, 10px);
+    }
+  }
+  .otp-expire-resend {
+    text-decoration: underline;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+    cursor: pointer;
+    color: var(--verify-timer-resend-text-color, rgba(185, 187, 194, 1));
+    &.active {
+      color: var(--verify-timer-resend-acitve-text-color, #546BF9);
+      opacity: 1;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+  }
+  *[disabled="true"]
+  {
+    opacity: .5;
+    pointer-events: none;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 1610px)
+{
+  .allFormItems .form_field {
+    gap: 7px;
+    input {
+      width: 40px;
+      height: 40px;
+      padding-left: var(--m-verification-code-text-padding-left, 7px);
+    }
+  }
+}

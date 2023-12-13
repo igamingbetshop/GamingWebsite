@@ -1,0 +1,15 @@
+<button type="submit" class="global_register-btn {{itemClassname}}-type-btn"
+        (click)="showSignUp('open', $event)">
+  <div class="global_register-btn_leftIcon" *ngIf="hasIcon">
+  </div>
+  {{'Register.Registration' | translate}}
+  <i class="icon-eighteen"></i>
+  <ng-container *ngIf="menuItem?.Src; else menuItemIcon">
+    <img [src]="menuItem?.Src" alt="">
+  </ng-container>
+  <ng-template #menuItemIcon>
+    <fa-icon *ngIf="hasIcon" [icon]="['fas', 'angle-right']" class="global_register-btn_rightIcon"></fa-icon>
+  </ng-template>
+<!--  <fa-icon *ngIf="hasIcon" [icon]="['fas', 'angle-right']" class="global_register-btn_rightIcon"></fa-icon>-->
+</button>
+

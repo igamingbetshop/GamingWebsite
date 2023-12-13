@@ -1,0 +1,27 @@
+.section {
+
+  background: $account-default-bg;
+
+  &_content {
+    margin: 0 auto;
+    background:backgroundColor(footer-section-content,$color-white);
+    height: 100%;
+  }
+
+  &_list {
+    padding: 15px;
+
+    .Name {
+      font-size: fontSize(footer-sections_content_Name, 25px);
+      font-weight: fontWeight(footer-sections_content_Name, bold);
+      color: itemColor(footer-sections_content_Name, #000);
+      line-height: 35px;
+    }
+    .Content
+    {
+      font-size: fontSize(footer-sections_content, 16px);
+      font-weight: fontWeight(footer-sections_content, normal);
+      color: itemColor(footer-sections_content, #000);
+    }
+  }
+}

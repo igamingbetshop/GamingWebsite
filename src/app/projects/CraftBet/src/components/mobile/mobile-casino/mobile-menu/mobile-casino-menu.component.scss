@@ -1,0 +1,106 @@
+@import "../../../../../styles/helpers/variables";
+@import "../../../../../../../../styles/helpers/variables";
+
+.horizontal {
+  position: sticky;
+  top: 0;
+  background-color: backgroundColor(m-nav-bar, transparent);
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: paddingBottom(m-nav-bar, 12px);
+  padding-top: paddingTop(m-nav-bar, 0px);
+
+  ::-webkit-scrollbar {
+    height: 0;
+  }
+
+  .nav-bar {
+    padding: var(--m-nav-bar-head-padding, 0 0 0 0);
+    white-space: nowrap;
+    align-items: center;
+    color: color(m-product-navigation-tab);
+    display: flex;
+    font-size: var(--m-product-navigation-tab-font-size, 14px);
+    justify-content: var(--m-product-navigation-item-center, left);
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+
+    li {
+      position: relative;
+      position: relative;
+      /*height: height(product-nav-tab, 38px);
+      color: itemColor(product-nav-tab, #fff);
+      line-height: height(product-nav-tab-line, 38px);
+      width: width(product-nav-tab-width, auto);
+      margin-right: marginRight(product-nav-tab, 16px);
+      padding-left: paddingLeft(product-nav-tab, 8px);
+      padding-right: paddingRight(product-nav-tab, 8px);
+      padding-top: paddingTop(product-nav-tab, 0);
+      padding-bottom: paddingBottom(product-nav-tab, 0);
+      border-top-right-radius: borderTopRightRadius(product-nav-tab, 0);
+      border-top-left-radius: borderTopLeftRadius(product-nav-tab, 0);
+      border-bottom-right-radius: borderBottomRightRadius(product-nav-tab, 0);
+      border-bottom-left-radius: borderBottomLeftRadius(product-nav-tab, 0);
+      background-color: backgroundColor(product-nav-tab-background, rgba(42, 44, 56, 1));
+      border-radius: var(--m-product-nav-tab-border-radius);
+      cursor: pointer;
+      display: flex;
+      flex-direction: var(--product-nav-tab-direction, row);
+      align-items: center;
+      justify-content: var(--product-nav-tab-justify, unset);
+      transition: transform 1s;
+      -webkit-font-smoothing: antialiased;
+      backface-visibility: hidden;
+      font-size: fontSize(product-nav-tab, 16px);*/
+      img
+      {
+        width: var(--m-casino-menu-fragment-item-icon-size, 20px);
+      }
+      i
+      {
+        font-size: var(--m-casino-menu-fragment-item-icon-size, 16px);
+        color: var(--m-casino-menu-fragment-item-icon-color, #FFFFFF);
+      }
+      &.active
+      {
+        background-color: var(--m-casino-menu-fragment-item-bg-color, #1c3e3b);
+        color: var(--m-casino-menu-fragment-item-color, #1c3e3b);
+      }
+      &:hover
+      {
+        background-color: var(--m-casino-menu-fragment-item-hover-bg-color, transparent);
+        color: var(--m-casino-menu-fragment-item-hover-color, #FFFFFF);
+        transform:perspective(1px) scale(1.05);
+        transition: transform 1s;
+      }
+      .games-count
+      {
+        position: absolute;
+        padding: var(--m-casino-menu-games-count-padding, 0 10px);
+        color: var(--m-casino-menu-games-count-color, white);
+        font-size: var(--m-casino-menu-games-count-font-size, 10px);
+        top: var(--m-casino-menu-games-count-item-top, -2px);
+        right: var(--m-casino-menu-games-count-item-right, -8px);
+        font-weight: var(--m-casino-menu-games-count-font-weight, bold);
+        background: var(--m-casino-menu-games-count-background-color, red);
+        border-radius: var(--m-casino-menu-games-count-border-radius, 6px);
+        height: var(--m-casino-menu-games-count-height, 15px);
+        display: var(--m-casino-menu-games-count-display, flex);
+        align-items: center;
+        animation: fade 0.5s ease infinite alternate;
+      }
+    }
+  }
+}
+@keyframes fade {
+  0% {
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1.1);
+    -webkit-transform: scale(.9);
+  }
+}

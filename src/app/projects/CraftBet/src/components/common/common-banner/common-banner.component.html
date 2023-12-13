@@ -1,0 +1,27 @@
+<div id="banners">
+  <ngx-slick-carousel class="carousel"
+                      #slickModal="slick-carousel"
+                      [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+      <div class="banner_image" (click)="redirectAnotherUrl(slide.Link)">
+<!--           [ngStyle]="{'background': 'url(' + bannerService.bannersPath + slide?.Image + ')'+ 'no-repeat 100% 100% / cover'}">-->
+        <img [src]="bannerService.bannersPath + slide?.Image">
+        <div class="banner-wrapper"></div>
+        <div class="banner-wrapper2"></div>
+        <div class="banner-content">
+          <div class="banner-description">{{slide.Head}}</div>
+          <div class="banner-content-description">{{slide.Body}}</div>
+          <div *ngIf="slide.ShowRegistration" class="banner-action distans-right"
+               (click)="showConfirm(); $event.stopPropagation()">{{'Login.Sign Up' | translate}}</div>
+
+          <div *ngIf="slide.ShowLogin" class="banner-action"
+               (click)="showConfirm('open_login'); $event.stopPropagation()">{{'Login.Sign In' | translate}}</div>
+        </div>
+      </div>
+    </div>
+  </ngx-slick-carousel>
+ <!-- <div class="actions" *ngIf="slideConfig.arrows">
+    <span (click)="slickModal.slickPrev()" class="icon-banner-arrow-left"></span>
+    <span (click)="slickModal.slickNext()" class="icon-banner-arrow-right"></span>
+  </div>  -->
+</div>

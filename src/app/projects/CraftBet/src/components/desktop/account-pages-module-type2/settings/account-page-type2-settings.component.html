@@ -1,0 +1,220 @@
+<div class="settings-section">
+  <div class="tab-content left-part" [ngClass]="{ 'active-tab': showActiveTab == 'PersonalDetails' }">
+
+    <div class="settings_header">
+      <span>{{'User.' + tabList[0]?.Title | translate}}</span>
+      <div class="settings_edit" [ngClass]="editData? 'selected' : ''"> <!-- *ngIf="buttonName"-->
+        <span class="icon-edit"></span>
+        <button class="settings_edit_text" type="submit" (click)="toggleEdit()">
+          <span>{{'Settings.Edit' | translate}}</span>
+        </button>
+      </div>
+    </div>
+    <div class="underline"></div>
+
+    <form class="change_details_form" [formGroup]="profileForm">
+      <div *ngIf="updateDataMessage"
+              [ngClass]="{'error_message': updateDataMessage?.Error, 'success_message': !updateDataMessage?.Error }">
+        <fa-icon [icon]="['fas', 'check']" class="success-verify" *ngIf="updateDataMessage?.Message === 'Success'"></fa-icon>
+        <p>{{updateDataMessage?.Message}}</p>
+      </div>
+      <div class="form_row2">
+        <div class="form_field distans-right">
+          <label>{{'Settings.FirstName' | translate}}*</label>
+          <input type="text" placeholder="{{'Settings.FirstName' | translate}}" formControlName="uFirstName" required
+                 [ngClass]="{ 'disable_item': (!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData), 'invalid-filed': ((profileForm.get('uFirstName').hasError('required')  || profileForm.get('uFirstName').hasError('minlength') || profileForm.get('uFirstName').hasError('maxlength')) && profileForm.get('uFirstName').touched)}"/>
+
+          <div class="error_message error_message2"
+               *ngIf="(profileForm.get('uFirstName').hasError('required') && !profileForm.get('uFirstName').hasError('uFirstName') && !profileForm.get('uFirstName').hasError('maxlength') && profileForm.get('uFirstName').touched) || profileForm.get('uFirstName').value === depositValidationError">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+        <div class="form_field">
+          <label>{{'Settings.LastName' | translate}}*</label>
+          <input type="text" placeholder="{{'Settings.LastName' | translate}}" formControlName="uLastName"
+                 [ngClass]="{'disable_item': (!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData), 'invalid-filed': ((profileForm.get('uLastName').hasError('required')  || profileForm.get('uLastName').hasError('minlength') || profileForm.get('uLastName').hasError('maxlength')) && profileForm.get('uLastName').touched)}"/>
+          <div class="error_message error_message2"
+               *ngIf="(profileForm.get('uLastName').hasError('required') && !profileForm.get('uLastName').hasError('uLastName') && !profileForm.get('uLastName').hasError('maxlength') && profileForm.get('uLastName').touched) || profileForm.get('uLastName').value === depositValidationError">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="form_row2">
+        <div  class="birth_date">
+          <label>{{'Settings.Date-of-birth' | translate}}</label>
+          <div class="birth_date_select">
+            <div class="form_field distans-right">
+              <select
+                      [ngClass]="{'disable_item':(!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData)}"
+                      formControlName="birthDay">
+                <option *ngFor="let dayItem of Days" [value]="dayItem">{{dayItem}}</option>
+              </select>
+            </div>
+
+            <div class="form_field distans-right">
+              <select formControlName="birthMonth" [value]="Date.Month.Id"
+                      [ngClass]="{'disable_item':(!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData)}">
+                <option *ngFor="let monthItem of monthsList"
+                        [value]="monthItem.Id">{{monthItem?.Name | translate}}</option>
+              </select>
+
+            </div>
+
+            <div class="form_field">
+              <select formControlName="birthYear" [value]="Date.Year"
+                      [ngClass]="{'disable_item':(!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData)}">
+                <option *ngFor="let yearItem of Years"
+                        [value]="yearItem">{{yearItem}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="form_field">
+          <label>{{'User.Currency' | translate}}</label>
+          <input type="text" value="{{userData?.CurrencyId}}" disabled/>
+        </div>
+      </div>
+
+      <div class="form_row2 verify_row">
+        <div class="form_row">
+          <label>{{'Register.Email-verify' | translate}}</label>
+          <div class="form_field">
+            <input type="text" style="width: calc(50% - 8px)" class="distans-right" placeholder="Email"
+                   [ngClass]="{ 'disable_item': (!editData || userData?.IsEmailVerified), 'active_item': editData }"
+                   formControlName="uEmail" [style.border]="!editData || userData?.IsEmailVerified ? 'none' : '1px solid rgba(219, 237, 255, 0.8'"/>
+            <button type="submit" class="craft_btn verify_btn setting_btn"
+                    [ngClass]="{'disable_item': !editData, 'active_item': editData }" (click)="verify('email')"
+                    *ngIf="!userData?.IsEmailVerified">{{'User.Verify' | translate}}</button>
+            <fa-icon [icon]="['fas', 'check']" class="mobile_verify" *ngIf="userData?.IsEmailVerified"></fa-icon>
+          </div>
+          <div class="success_message" *ngIf="isEmailVerificationRequestSent">
+            {{'Settings.VerifyLink' | translate}}
+          </div>
+
+          <div class="error_message error_message2">
+            {{errorMessage}}
+          </div>
+        </div>
+
+        <div class="form_row">
+          <label>{{'Register.Mobile-number-verify' | translate}}</label>
+          <div class="form_field">
+            <input type="text" style="width: calc(45% - 86px);" class="distans-right"
+                   placeholder="{{'Register.Mobile-number-placeholder' | translate}}"
+                   formControlName="uMobileNumber"
+                   [ngClass]="{'disable_item':userData?.IsMobileNumberVerified || !editData, 'active_item': editData}"
+                   numbersOnly/>
+            <input type="text" style="width: 15%" class="distans-right number_input"
+                   *ngIf="(isMobileNumberVerificationRequestSent && !userData?.IsMobileNumberVerified)"
+                   placeholder="{{'Register.Mobile-sms-code-placeholder' | translate}}"
+                   [ngClass]="{ 'disable_item': userData?.IsMobileNumberVerified }"
+                   [(ngModel)]="mobileSmsCode" [ngModelOptions]="{standalone: true}">
+
+            <fa-icon *ngIf="userData?.IsMobileNumberVerified" [icon]="['fas', 'check']" class="mobile_verify"></fa-icon>
+
+            <button type="submit" class="craft_btn verify_btn setting_btn distans-right"
+                    [ngClass]="{ 'disable_item': !editData, 'active_item': editData }"
+                    *ngIf="!isMobileNumberVerificationRequestSent && !userData?.IsMobileNumberVerified"
+                    (click)="verify('mobile')">{{'Settings.Send_Code' | translate}}</button>
+
+            <button type="submit" class="craft_btn verify_btn setting_btn distans-right"
+                    *ngIf="(isMobileNumberVerificationRequestSent && !userData?.IsMobileNumberVerified)"
+                    (click)="sendVerificationCode('mobile')">{{'Settings.Verify' | translate}}</button>
+          </div>
+          <div class="mobile-verify-info">
+            <div class="success_message" *ngIf="showMobileVerifyMessage && !userData?.IsMobileNumberVerified">
+              {{'Settings.VerifyMobileNumberSendCode' | translate}}
+            </div>
+            <div class="error_message error_message2" *ngIf="mobileVerificationErrorMessage && !userData?.IsMobileNumberVerified">
+              {{mobileVerificationErrorMessage}}
+            </div>
+            <a class="not_receiveCode"
+               *ngIf="(isMobileNumberVerificationRequestSent && !userData?.IsMobileNumberVerified)"
+               (click)="verify('mobile')">{{'Settings.Resend-code' | translate}}</a>
+          </div>
+        </div>
+      </div>
+
+      <label>{{'User.Document' | translate}}</label>
+      <div class="form_row2">
+        <div class="form_field distans-right">
+          <input type="text" placeholder="{{'User.Document number' | translate}}"
+                 [ngClass]="{ 'disable_item': (!editData || userData?.IsDocumentVerified), 'active_item': editData, 'invalid-filed': ((profileForm.get('uDocumentNumber').hasError('required')  || profileForm.get('uDocumentNumber').hasError('minlength') || profileForm.get('uDocumentNumber').hasError('maxlength')) && profileForm.get('uDocumentNumber').touched)}"
+                 formControlName="uDocumentNumber" value="{{userData?.DocumentNumber}}"/>
+          <div class="error_message error_message2"
+               *ngIf="(profileForm.get('uDocumentNumber').hasError('required') && !profileForm.get('uDocumentNumber').hasError('uDocumentNumber') && !profileForm.get('uDocumentNumber').hasError('maxlength') && profileForm.get('uDocumentNumber').touched) || profileForm.get('uDocumentNumber').value === depositValidationError">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+        <div class="form_field">
+          <input type="text" placeholder="{{'User.Document issued by' | translate}}"
+                 value="{{userData?.DocumentIssuedBy}}" formControlName="uDocumentIssuedBy"
+                 [ngClass]="{ 'disable_item': (!editData || userData?.IsDocumentVerified), 'active_item': editData, 'invalid-filed': ((profileForm.get('uDocumentIssuedBy').hasError('required')  || profileForm.get('uDocumentIssuedBy').hasError('minlength') || profileForm.get('uDocumentIssuedBy').hasError('maxlength')) && profileForm.get('uDocumentIssuedBy').touched)}"/>
+          <div class="error_message error_message2"
+               *ngIf="(profileForm.get('uDocumentIssuedBy').hasError('required') && !profileForm.get('uDocumentIssuedBy').hasError('uDocumentIssuedBy') && !profileForm.get('uDocumentIssuedBy').hasError('maxlength') && profileForm.get('uDocumentIssuedBy').touched) || profileForm.get('uDocumentIssuedBy').value === depositValidationError">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form_row2">
+        <div class="form_field distans-right">
+          <label>{{'User.Country' | translate}}</label>
+          <select
+                  [ngClass]="{ 'disable_item': !editData, 'active_item': editData }"
+                  formControlName="uCountry">
+            <option *ngFor="let country of countryList"
+                    [value]="country.Id">{{country?.Name}}</option>
+          </select>
+        </div>
+        <div class="form_field">
+          <label>{{'User.City' | translate}}*</label>
+          <select
+                  [ngClass]="{ 'disable_item': !editData || !profileForm.get('uCountry').value, 'active_item': editData }"
+                  formControlName="uCity">
+            <option value="null">{{'User.City-option' | translate}}</option>
+            <option *ngFor="let city of cityList"
+                    [value]="city.Id">{{city?.Name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form_row2">
+        <div class="form_field distans-right">
+          <label>{{'Register.Address-placeholder' | translate}}*</label>
+          <input type="text" placeholder="{{'Register.Address-placeholder' | translate}}"
+                 value="{{userData?.Address}}"
+                 formControlName="uAddress"
+                 [ngClass]="{ 'disable_item': !editData, 'active_item': editData, 'invalid-filed': ((profileForm.get('uAddress').hasError('required')  || profileForm.get('uAddress').hasError('minlength') || profileForm.get('uAddress').hasError('maxlength')) && profileForm.get('uAddress').touched)}"/>
+          <div class="error_message error_message2"
+               *ngIf="(profileForm.get('uAddress').hasError('required') && !profileForm.get('uAddress').hasError('uAddress') && !profileForm.get('uAddress').hasError('maxlength') && profileForm.get('uAddress').touched) || profileForm.get('uAddress').value === depositValidationError">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+        <div class="form_field">
+          <label>{{'User.ZipCode' | translate}}*</label>
+          <input type="text" value="{{userData?.ZipCode}}"
+                 [ngClass]="{ 'disable_item': !editData, 'active_item': editData}"
+                 formControlName="uZipCode"/>
+        </div>
+      </div>
+
+      <div class="submit-details">
+        <button class="craft_btn setting_btn" type="submit" [disabled]="!editData" (click)="updateClientDetail()" [ngClass]="{ 'disable_item': !editData}" >
+          <span>{{'Settings.Save-Changes' | translate}}</span>
+        </button>
+        <button class="craft_btn setting_btn cancel_btn" type="submit" (click)="resetProfileForm()" [ngClass]="{ 'disable_item': !editData}" [disabled]="!editData">
+          <span>{{'Settings.Cancel-changes' | translate}}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="tab-content active-tab right-part">
+    <div class="settings_header">
+      <span>{{'User.' + tabList[1]?.Title | translate}}</span>
+    </div>
+    <div class="underline"></div>
+    <app-account-page-type2-change-password></app-account-page-type2-change-password>
+  </div>
+</div>

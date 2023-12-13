@@ -1,0 +1,391 @@
+.disable_item {
+  pointer-events: none;
+  opacity: 0.6;
+}
+.tickets-section {
+  height: var(--payment-section-content-width, auto);
+  background: $account-main-bg-color;
+  border-radius: 6px;
+  padding: 20px;
+
+  .craft_btn {
+    outline: none;
+  }
+
+  .ticket-body {
+    height: var(--change-password-second-tab-heirght, 32px);
+    h2 {
+      margin: 0;
+    }
+    .icon-close-modal {
+      cursor: pointer;
+    }
+  }
+
+  .add-tickets {
+    margin-bottom: marginBottom(tickets-list-title, 28px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: height(tickets-list-title, auto);
+    &_title {
+      display: display(tickets-list, none);
+      padding: 0 10px;
+      color: $label-color;
+      font-size: fontSize(tickets-list-title, 24px);
+      font-weight: fontWeight(tickets-list-title, normal);
+      margin: 0;
+    }
+  }
+  .underline {
+    height: 1px;
+    background: var(--account-content-header-underline-bg, linear-gradient(180deg, #48628E 0%, #111723 100%));
+    box-shadow: var(--account-content-header-underline-shadow, 0 4px 8px rgba(0, 0, 0, 0.94));
+    border-radius: 6px;
+    margin-top: var(--account-content-header-underline-margin-top, 10px);
+    margin-bottom: var(--account-content-header-underline-margin-bottom, 24px);
+    display: display(tickets-list-border, none);
+  }
+
+  button {
+    background: linear-gradient(to bottom, color(settings-button-gradient-first) 0%, color(settings-button-gradient-second) 100%);
+    color: color(settings-button-text);
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    font-weight: fontWeight(tickets-list-title, bold);
+    font-size: fontSize(tickets-list-edit-button, 16px);
+    padding: var(--edit-button-padding, 0 32px);
+    height: height(edit-button, 40px);
+    border-radius: var(--edit-button-border-radius, 3px);
+    //&:hover {
+    //  background: linear-gradient(to bottom, color(settings-button-gradient-active-first) 0%, color(settings-button-gradient-active-second) 100%);
+    //}
+  }
+
+
+  section .pagination_section {
+    width: 100%;
+    margin-top: 25px;
+    text-align: center;
+    position: var(--tickets-info-pagination-section-position, relative);
+    bottom: var(--tickets-info-pagination-section, auto);
+  }
+
+
+  .\message-block-head {
+    border-radius: 8px;
+    background-image:var(--tickets-block-head-bg, linear-gradient(to bottom, #16233a, #151a23));
+    padding-left: var(--tickets-block-head-pdleft, 16px);
+    padding-right: var(--tickets-block-head-pdright, 16px);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: var(--history-block-head-color, #fff);
+
+    div {
+      display: inline-block;
+      padding: 11px 0 11px 0;
+      width: 170px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    div:last-child {
+      width: 155px;
+      display: var(--tickets-section-actions-display, block);
+      text-align: var(--tickets-section-actions-text-align, center);
+    }
+
+  }
+  .empty-tickets {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--account-extra-big-gap, 16px);
+    border-radius: 6px;
+    background-color: var(--history-block-section-bg, #16233a);
+    padding: 15px 14px 32px 14px;
+    height: var(--history-block-section-height, 570px);
+    align-items: center;
+    justify-content: center;
+    .icon {
+      font-size: var(--history-info-pagination-section-icon-font-size, 90px);
+      color: var(--history-info-pagination-section-icon-color, #fff);
+    }
+  }
+
+  section {
+    //height: var(--tickets-block-section-height, 595px)!important;
+    .section-content {
+      //height: 525px!important;
+      height: 100%;
+      overflow: auto;
+      overflow-x: clip;
+      display: flex;
+      flex-direction: column;
+      gap: var(--account-extra-big-gap, 16px);
+      &::-webkit-scrollbar {
+        width: 0!important;
+      }
+    }
+  }
+
+  .messages-block {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &_top_row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      //height: var(--tickets-section-items-height, auto);
+    }
+
+    .ticket_icons {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      font-size: fontSize(ticket-icons, 19px);
+      font-weight: 400;
+      color: itemColor(ticket-icons, #fff);
+      cursor: pointer;
+
+      .fa-ban {
+        pointer-events: none;
+        cursor: no-drop;
+      }
+      .icon-arrow {
+        transform: rotate(90deg);
+      }
+      .opened {
+        transform: rotate(-90deg);
+      }
+
+      .activate-delete-item {
+        display: displayEvents(ticket-delete, block);
+      }
+
+    }
+
+    //border-bottom: 1px solid color(settings-table-border);
+
+
+    &.opened-message {
+      //background: $tickets-open-message-bg;
+    }
+
+    .ticket-small {
+      width: 160px;
+    }
+
+    .user-info_item_unreadMessagesCount {
+      background: #af0101;
+      display: flex;
+      justify-content: center;
+      border-radius: 16px;
+      position: absolute;
+      top: -12px;
+      height: 19px;
+      width: 19px;
+      line-height: 20px;
+      font-size: 13px;
+      right: 0;
+      color: #ffffff;
+    }
+
+    .ticket_icons {
+      position: relative;
+      span , i {
+        cursor: pointer;
+      }
+    }
+
+    &_item {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      .icon-star {
+        margin-right: 5px;
+      }
+      .unread-messages {
+        background: backgroundColor(tickets-unread-messages, #c2394b);
+        padding: var(--tickets-unread-messages-padding, 0 5px);
+        border-radius: var(--tickets-unread-messages-border-radius, 50%);
+        color: itemColor(tickets-unread-messages, #fff);
+      }
+    }
+
+    .message-header {
+      width: 170px;
+    }
+  }
+
+  .open-message-block {
+    width: 100%;
+    display: block;
+    background: $tickets-open-message-block;
+    text-overflow: ellipsis;
+    overflow-y: var(--tickets-messages-list-overflow, auto);
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    flex-direction: column;
+    gap: 10px;
+    background: $account-main-bg-color;
+    max-height: var(--tickets-messages-list-max-height, 272px);
+
+    .send-message {
+      clear: both;
+      float: var(--tickets-messages-send-message-float, right);
+      margin-right: var(--tickets-messages-send-message-margin-right, 20px);
+      width: width(tickets-area, 500px);
+      form {
+        display: var(--tickets-messages-send-message-display, block);
+        align-items: center;
+        .send-message-part {
+          width: 93%;
+          position: relative;
+          label {
+            color: itemColor(settings-input-label, #fff);
+            position: absolute;
+            top: itemTop(settings-input-label, 20px);
+            left: itemLeft(settings-input-label, 8px);
+            height: height(settings-input-label, 25px);
+            transform-origin: 0 50%;
+            transition: transform 200ms, color 200ms;
+            pointer-events: none;
+          }
+          textarea:focus ~ label {
+            width: width(settings-input-field-label, inherit);
+            height: height(settings-input-label-focused, 11px);
+            background: var(--settings-background-color, #FFFFFF);
+            color: var(--settings-field-focus-label, #fff);
+            top: itemTop(settings-label, 20px);
+            font-size: var(--settings-background-color-font-size, 16px);
+          }
+          textarea:focus ~ .cut,
+          textarea:not(:placeholder-shown) ~ .cut {
+            transform: translateY(8px);
+            display: block;
+          }
+          textarea:focus ~ .cut {
+            display: block;
+          }
+          textarea:focus::placeholder {
+            opacity: 1;
+          }
+          textarea::placeholder {
+            opacity: var(--tickets-send-message-input-placeholder-opacity, 0);
+          }
+          textarea:focus ~ label,
+          textarea:not(:placeholder-shown) ~ label {
+            transform: var(--tickets-label-transform, translateY(-22px) translateX(10px) scale(0.75));
+            background-color: var(--settings-background-color, unset);
+            height: height(settings-label-focused, 22px);
+            font-size: var(--settings-font-size-label, 16px);
+            color: var(--tickets-focus-label-focused, #fff);
+            text-align: var(--settings-focus-label-focused-text-align, left);
+            width: var(--settings-focus-label-focused-width, auto);
+            padding-left: var(--settings-padding-left-focus-label-focused, 5px);
+            padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+          }
+        }
+      }
+
+      textarea {
+        margin-top: marginTop(tickets-textarea, 10px);
+        width: width(tickets-textarea, 98%);
+        float: left;
+        margin-right: marginRight(tickets-textarea, 10px);
+        margin-left: marginLeft(tickets-textarea, 0px);
+        font-size: fontSize(tickets-textarea, 14px);
+        font-weight: fontWeight(tickets-textarea, 400);
+        line-height: var(--tickets-textarea-line-height, 18px);
+        border-radius: var(--tickets-textarea-border-radius, 6px);
+        height: height(tickets-textarea, 72px);
+        padding: var(--tickets-textarea-padding, 16px);
+        border: none;
+        overflow: auto;
+        outline: none;
+        resize: none;
+        font-family: unset;
+        background-color: backgroundColor(tickets-textarea, #16233a);
+        color: itemColor(tickets-textarea, #fff);
+        //box-shadow: inset 0 0 1px 0 $tickets-textarea-shadow;
+      }
+
+      button {
+        display: block;
+        float: right;
+        min-width: var(--tickets-send-button-min-width, 70px);
+        width: auto;
+        margin-top: marginTop(settings-button-text, 10px);
+        height: var(--tickets-send-button-height, 37px);
+        background: linear-gradient(to bottom, color(settings-button-gradient-first) 0%, color(settings-button-gradient-second) 100%);
+        color: color(settings-button-text);
+        padding: var(--settings-button-text-padding, 0 32px);
+        font-size: fontSize(settings-button-text, 16px);
+        font-weight: fontWeight(settings-button-text, 400);
+        &:hover {
+          background: linear-gradient(to bottom, color(settings-button-gradient-active-first) 0%, color(settings-button-gradient-active-second) 100%);
+        }
+      }
+    }
+
+    .all-message {
+      position: relative;
+      color: $color-black;
+      margin-top: 10px;
+      margin-right: var(--tickets-my-message-margin-right, 20px);
+      width: auto;
+      clear: both;
+      text-overflow: clip;
+      word-wrap: break-word;
+      border-radius: 100px;
+      font-size: 14px;
+      padding: var(--tickets-area-all-messages-padding, 8px 15px 8px 30px);
+      min-width: 190px;
+      max-width: 80%;
+
+      span {
+        display: block;
+        text-align: var(--tickets-area-message-text-align, left);
+      }
+
+      &.my-message {
+        float: right;
+        background: backgroundColor(tickets-my-message, rgb(191, 224, 167));
+        width: width(tickets-my-message, 300px);
+        border-radius: var(--tickets-my-message-border-radius, 100px);
+        text-align: var(--tickets-my-message-text-align, center);
+      }
+
+      &.your-message {
+        float: left;
+        background: backgroundColor(tickets-your-message, #cecece);
+        margin-left: marginLeft(tickets-your-message, 20px);
+        border-radius: var(--tickets-my-message-border-radius, 100px);
+      }
+
+      .author_message {
+        display: block;
+        font-weight: fontWeight(tickets-author-message, bolder);
+        font-size: fontSize(tikcets-author-message, 15px);
+        color: itemColor(tikcets-author-message, #000);
+        padding: var(--tikcets-author-message-padding, 2px 0);
+      }
+    }
+  }
+
+  .new_ticket {
+    form {
+      display: block;
+      .form_row .send-form_field {
+        text-align: textAlign(tickets-author-message-btn, left);
+        margin: var(--tickets-author-message-btn-margin, 0)
+      }
+    }
+  }
+}

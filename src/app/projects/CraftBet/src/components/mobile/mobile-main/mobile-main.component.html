@@ -1,0 +1,33 @@
+<div id="mobile-craft-bet" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
+    <app-mobile-left-sidebar></app-mobile-left-sidebar>
+    <app-mobile-right-sidebar></app-mobile-right-sidebar>
+    <app-mobile-header [hidden]="router.url.includes('/login') || router.url.includes('/signup')"></app-mobile-header>
+    <div *ngIf="configService.defaultOptions.ShowInfoPopup && isExpired">
+        <div class="mobile-popup-section" *ngIf="showMobilePopup">
+            <div class="mobile-popup-section_content" [ngClass]="deviceOS">
+                <div class="close-popup" (click)="closePopup()">
+                    <fa-icon [icon]="['far', 'times-circle']" [size]="'2x'"></fa-icon>
+                </div>
+                <div class="popup-icon-container">
+                    <img class="popup-icon" src="../../../../../../../assets/images/pwa-logo.png">
+                </div>
+                <div class="popup-content">
+                    <span>{{ 'Info.Text1' | translate }}<br></span>
+                    <span>{{ 'Info.Text2' | translate }}</span>&nbsp;
+                    <img *ngIf="deviceOS === 'ios'" class='share-button'
+                         src="../../../../../../../assets/images/pwa-download.png"/>&nbsp;
+                    <span *ngIf="deviceOS === 'android'">&nbsp;<i class='fa fa-ellipsis-v'></i>&nbsp;</span>
+                    <span>{{ 'Info.Text3' | translate }}</span>
+                    <span class="text-bold"> {{ 'Info.Text4' | translate }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+    <div class="scrollTop" [ngClass]="{'show': showScrollTop}" (click)="scrollToTop()"><i class="icon-next-arrow"></i></div>
+    <ng-template #bottomSideBarRef></ng-template>
+    <ng-template #mobileFooterRef></ng-template>
+    <div class="rotate-cover" *ngIf="isShowDeviceLayoutBackground">
+        <div>{{ 'Info.DeviceRotate' | translate }}</div>
+    </div>
+</div>

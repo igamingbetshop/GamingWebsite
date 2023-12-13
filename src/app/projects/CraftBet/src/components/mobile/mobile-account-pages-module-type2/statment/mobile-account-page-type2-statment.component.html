@@ -1,0 +1,25 @@
+<div class="mobile-account-statement-section" [ngStyle]="layoutService.layoutStyle">
+  <h2 class="account_title">
+    {{'User.Your_account' | translate}}
+  </h2>
+
+  <div class="mobile-account-statement-section_table">
+    <div class="mobile-account-statement-section_row_title">
+      <div class="item_cell">
+        {{'User.Account' | translate}}
+      </div>
+      <div class="item_cell">
+        {{'User.Balance' | translate}}
+      </div>
+    </div>
+    <div class="mobile-account-statement-section_row" *ngFor="let account of accountData">
+      <div class="item_cell"> {{account?.AccountTypeName}}</div>
+      <div class="item_cell">
+        {{account?.Balance | number}}
+        {{account?.CurrencyId}}
+      </div>
+    </div>
+  </div>
+
+</div>
+

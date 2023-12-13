@@ -1,0 +1,237 @@
+<div class="mobile-payment-section2" [ngStyle]="layoutService.layoutStyle">
+
+    <h2 class="common-title" *ngIf="activeWithdraws.length > 0">
+        {{'User.Withdraw-History' | translate}}
+    </h2>
+
+    <div *ngIf="activeWithdraws.length > 0">
+        <div class="paymet-item payments-section-active-withdraw"
+             *ngFor="let item of activeWithdraws, let i = index">
+            <div class="paymet-item_header Payments-{{item?.StatusName}}">
+                <span>{{item?.StatusTypeName}}</span>
+                {{item?.CreationTime | date: 'dd/MM/yyyy h:mm'}}
+            </div>
+
+            <div class="paymet-item_body" style="position: relative">
+                <div class="paymet-item_bodyInfo"><span class="title">{{'User.Id' | translate}}</span> {{item?.Id}}
+                </div>
+                <div class="paymet-item_bodyInfo"><span
+                        class="title">{{'User.Status' | translate}}</span> {{item?.Status}}</div>
+                <div class="paymet-item_bodyInfo"><span
+                        class="title">{{'User.BetShopId' | translate}}</span> {{item?.BetShopId}}
+                </div>
+
+                <div class="paymet-item_bodyInfo"><span
+                        class="title">{{'User.Amount' | translate}}</span> {{item?.Amount}}
+                </div>
+                <div class="paymet-item_bodyInfoMessage" *ngIf="(item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1 && allowCancelConfirmedWithdraw)">
+                    <span class="title">{{'User.PaymentInfo' | translate}}</span>
+
+                    <button class="default_btn" type="submit"
+                            (click)="canselPayment(item.Id)"
+                            *ngIf="(item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1 && allowCancelConfirmedWithdraw)">
+                        {{'User.Cancel' | translate}}
+                    </button>
+                </div>
+                <div class="error_message" style="right: 10px; text-align: right;top: 7px">{{errorMessage}}</div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <h2 class="account_title">
+        {{'User.Withdraw' | translate}}
+    </h2>
+
+    <div class="mobile-payment-section_content">
+
+        <div class="mobile-payment-section_content_block">
+            <div class="content_row default-scroll payment-list-column">
+                <ul class="payment_list">
+                    <li class="payment_list_item"
+                            *ngFor="let item of paymentSystemList;"
+                            [ngClass]="{'selected_payment':item?.PaymentSystemId == currentPayment?.PaymentSystemId}"
+                            (click)="selectPayment(item)" collapse>
+                        <div class="payment_list_item_content">
+                            <div class="payment-row">
+                                <div class="payment-row-item">
+                                    <div class="payment-img" [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/withdraw/' +  item.PaymentSystemId + '.png)'}"></div>
+
+                                </div>
+
+                                <div class="payment_list_item__info payment-row-item">
+                                    <div class="info_text" style="-webkit-box-orient: vertical"
+                                         [innerHTML]="'Withdraw.' + 'PAYMENT_MESSAGE' + item?.PaymentSystemId | translate | sanitizer: 'html'"></div>
+                                    <div class="balance_info">
+                                        <span>{{"Payments.Minimum" | translate}}:{{currentPayment?.MinAmount | number}} {{ currencyId}},</span>
+                                        <span>{{"Payments.Maximum" | translate}}:{{currentPayment?.MaxAmount | number}} {{ currencyId}}</span>
+                                    </div>
+                                    <ng-container *ngIf="item?.FixedFee;else commissionPercentRef">
+                                        <div class="balance_info">
+                                            <span>{{"Payments.CommissionFixedFee" | translate}} - {{item?.FixedFee | number}} ({{ currencyId}})</span>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #commissionPercentRef>
+                                        <div class="balance_info">
+                                            <span>{{"Payments.CommissionPercent" | translate}} - {{item?.CommissionPercent || 0 | number}} %</span>
+                                        </div>
+                                    </ng-template>
+                                </div>
+
+
+                                <fa-icon [icon]="faCaretDown"></fa-icon>
+                            </div>
+
+                        </div>
+                        <div class="content_row form-column" *ngIf="item.opened" (click)="$event.stopPropagation()">
+                            <ng-container [ngTemplateOutlet]="paymentTemplate" [ngTemplateOutletContext]="{paymentData:item}"></ng-container>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<ng-template #paymentTemplate let-paymentData="paymentData">
+    <ng-container [ngSwitch]="paymentData.PaymentSystemType">
+        <app-mobile-withdraw-type1-default
+                *ngSwitchCase="1"
+               [contentType]="paymentData.ContentType"
+               [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+               [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type1-default>
+        <app-mobile-withdraw-type2-default
+                *ngSwitchCase="2"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type2-default>
+        <app-mobile-withdraw-type3-default
+                *ngSwitchCase="3"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type3-default>
+        <app-mobile-withdraw-type4-default
+                *ngSwitchCase="4"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type4-default>
+        <app-mobile-withdraw-type5-default
+                *ngSwitchCase="5"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type5-default>
+        <app-mobile-withdraw-type6-default
+                *ngSwitchCase="6"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type6-default>
+        <app-mobile-withdraw-type7-default
+                *ngSwitchCase="7"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type7-default>
+        <app-mobile-withdraw-type8-default
+                *ngSwitchCase="8"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type8-default>
+        <app-mobile-withdraw-type9-default
+                *ngSwitchCase="9"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type9-default>
+        <app-mobile-withdraw-type10-default
+                *ngSwitchCase="10"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type10-default>
+        <app-mobile-withdraw-type11-default
+                *ngSwitchCase="11"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type11-default>
+        <app-mobile-withdraw-type13-default
+                *ngSwitchCase="13"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type13-default>
+        <app-mobile-withdraw-type14-default
+                *ngSwitchCase="14"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type14-default>
+        <app-mobile-withdraw-type15-default
+                *ngSwitchCase="15"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type15-default>
+        <app-mobile-withdraw-type16-default
+                *ngSwitchCase="16"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type16-default>
+        <app-mobile-withdraw-type17-default
+                *ngSwitchCase="17"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type17-default>
+        <app-mobile-withdraw-type18-default
+                *ngSwitchCase="18"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type18-default>
+        <app-mobile-withdraw-type19-default
+                *ngSwitchCase="19"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type19-default>
+        <app-mobile-withdraw-type20-default
+                *ngSwitchCase="20"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type20-default>
+        <app-mobile-withdraw-type22-default
+                *ngSwitchCase="22"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type22-default>
+        <app-mobile-withdraw-type24-default
+                *ngSwitchCase="24"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type24-default>
+        <app-mobile-withdraw-type25-default
+                *ngSwitchCase="25"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-withdraw-type25-default>
+    </ng-container>
+</ng-template>

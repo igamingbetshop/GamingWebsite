@@ -1,0 +1,563 @@
+<div class="mobile-settings-section">
+  <h2 class="mobile-settings-section_title">{{'Settings.Settings' | translate}}</h2>
+
+  <div class="form_row">
+    <div class="form_field">
+      <select (change)="changeTab($event.target.value)" class="change-tab">
+        <option *ngFor="let item of mobileTabList; let i = index" value="{{item.Title}}" [selected]="i==0">
+          {{'User.' + item?.Title | translate}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="tab-content" [ngClass]="{ 'active-tab': showActiveTab == 'AccountVerification'}">
+
+    <form [formGroup]="uploadDocumentForm" (ngSubmit)="uploadDocument()">
+      <div class="form_row">
+
+        <div class="verify_row">
+          <div class="form_field distans-half-right">
+            <select formControlName="documentItem" [value]="getSettingsInfoService.documentTypesList[0]?.Id">
+              <option value='' disabled>{{'Account.Document' | translate}}</option>
+              <option *ngFor="let item of getSettingsInfoService.documentTypesList"
+                      [value]="item.Id">{{item?.Name}}</option>
+            </select>
+            <label class="choose-document-label">{{'User.Document_verify' | translate}}</label>
+          </div>
+          <div class="form_field verify_buttons">
+            <div class="form_field__top">
+              <input #documentFile type="file" (change)="handleInputChange($event)" class="distans-right choose_input"
+                     name="file">
+              <input class="mobile_settings_change_name" type="text" placeholder="{{'Account.SelectFile' | translate}}"
+                     disabled>
+            </div>
+            <div class="choose_file_Name">
+              {{fileData?.Name}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="craft_btn setting_btn full-width"
+              [ngClass]="{'disable_item' : !getSettingsInfoService.checkDocumentSize}">{{'User.Verify' | translate}}</button>
+      <div class="error_message docError">{{selectedDocumentErrorMessage}}</div>
+      <div class="success_message">{{documentUploadResponseMessage}}</div>
+    </form>
+
+    <div>
+      <table class="bet-selections-info">
+        <thead class="bet-selections-info__tbody">
+        <tr class="bet-selections-info_thead__tr">
+          <td class="bet-selections-info__td">{{'User.Id' | translate}}</td>
+          <td class="bet-selections-info__td">{{'User.Document type' | translate}}</td>
+          <td class="bet-selections-info__td">{{'User.Creation Date' | translate}}</td>
+          <td class="bet-selections-info__td">{{'User.Status' | translate}}</td>
+        </tr>
+        </thead>
+
+        <tbody class="bet-selections-info__tbody">
+        <ng-container *ngIf="getSettingsInfoService?.identityModelsList.length > 0; else emptyDocuments">
+        <tr class="bet-selections-info__tr"
+            *ngFor="let item of getSettingsInfoService?.identityModelsList">
+          <td class="bet-selections-info__td">
+            {{item?.Id}}
+          </td>
+          <td class="bet-selections-info__td">
+            {{item?.DocumentTypeName}}
+          </td>
+          <td class="bet-selections-info__td">
+            {{item?.CreationTime | date: 'd MMM y h:mm'}}
+          </td>
+          <td class="bet-selections-info__td">
+            {{item?.StatusName}}
+          </td>
+        </tr>
+        </ng-container>
+        <ng-template #emptyDocuments>
+          <section class="empty-documents empty-block">
+            <span class="icon-documents icon"></span>
+            <span class="empty-block-text">{{'User.Documents-empty' | translate}}</span>
+          </section>
+        </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="tab-content" [ngClass]="{ 'active-tab': showActiveTab == 'ChangePassword'}">
+
+    <form class="m-change-password_form" [formGroup]="changePasswordForm" novalidate
+          autocomplete="off">
+      <div class="form_row">
+
+        <div class="form_field">
+          <input class="setting-input" type="password" placeholder="{{'Settings.Old-password-placeholder' | translate}}"
+                 formControlName="uOldPassword"
+                 [ngClass]="{'invalid-filed': ((changePasswordForm.get('uOldPassword').hasError('required')  || changePasswordForm.get('uOldPassword').hasError('minlength') || changePasswordForm.get('uOldPassword').hasError('maxlength')) && changePasswordForm.get('uOldPassword').touched)}"/>
+          <label>{{'Settings.Old-password' | translate}}</label>
+        </div>
+        <div class="error_message"
+             *ngIf="changePasswordForm.get('uOldPassword').hasError('required') && !changePasswordForm.get('uOldPassword').hasError('uOldPassword') && !changePasswordForm.get('uOldPassword').hasError('maxlength') && changePasswordForm.get('uOldPassword').touched">
+          <span>{{ 'Error.Required-field' | translate }}</span>
+        </div>
+        <div class="comment" *ngIf="changePasswordForm.get('uOldPassword').touched && changePasswordForm.get('uOldPassword').hasError('pattern')">
+          {{'Error.Password_Validation' | translate}}
+        </div>
+      </div>
+
+      <div class="form_row">
+        <div class="form_field">
+          <input type="password" class="setting-input" placeholder="{{'Settings.New-password-placeholder' | translate}}"
+                 formControlName="uNewPassword"
+                 [ngClass]="{'invalid-filed': ((changePasswordForm.get('uNewPassword').hasError('required')  || changePasswordForm.get('uNewPassword').hasError('minlength') || changePasswordForm.get('uNewPassword').hasError('maxlength')) && changePasswordForm.get('uNewPassword').touched)}"/>
+          <label>{{'Settings.New-password' | translate}}</label>
+        </div>
+        <div class="error_message"
+             *ngIf="changePasswordForm.get('uNewPassword').hasError('required') && !changePasswordForm.get('uNewPassword').hasError('uNewPassword') && !changePasswordForm.get('uNewPassword').hasError('maxlength') && changePasswordForm.get('uNewPassword').touched">
+          <span>{{ 'Error.Required-field' | translate }}</span>
+        </div>
+
+        <div class="comment" *ngIf="changePasswordForm.get('uNewPassword').touched && changePasswordForm.get('uNewPassword').hasError('pattern')">
+          {{'Error.Password_Validation' | translate}}
+        </div>
+      </div>
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <input class="setting-input" type="password" [placeholder]="'Settings.Confirm-password-placeholder' | translate"
+                 formControlName="confirmPassword"
+                 [ngClass]="{'invalid-filed': ((changePasswordForm.get('confirmPassword').hasError('required')  || changePasswordForm.get('confirmPassword').hasError('minlength') || changePasswordForm.get('confirmPassword').hasError('maxlength')) && changePasswordForm.get('confirmPassword').touched)}"/>
+          <label>{{'Settings.Confirm-password' | translate}}</label>
+        </div>
+        <div class="error_message"
+             *ngIf="changePasswordForm.get('confirmPassword').hasError('required') && changePasswordForm.get('confirmPassword').touched">
+          <span>{{ 'Error.Required-field' | translate }}</span>
+        </div>
+        <div class="error_message"
+             *ngIf="changePasswordForm.get('uNewPassword').touched &&changePasswordForm.get('uOldPassword').touched && changePasswordForm.get('uOldPassword').value === changePasswordForm.get('uNewPassword').value">
+          <span>{{ 'Error.PasswordSame' | translate }}</span>
+        </div>
+        <div class="error_message"
+             *ngIf="changePasswordForm.get('confirmPassword').hasError('matchTo') && changePasswordForm.get('confirmPassword').dirty && !changePasswordForm.get('confirmPassword').hasError('required')">
+          <span>{{ 'Error.PasswordMatchTo' | translate }}</span>
+        </div>
+      </div>
+
+      <div class="form_row">
+        <div class="form_field">
+<!--          <button type="submit"-->
+<!--                  class="craft_btn change-btn setting_btn">{{'Settings.Change-password' | translate}}</button>-->
+          <div class="submit-details">
+            <button class="craft_btn setting_btn cancel_btn" type="button" (click)="resetState()"
+                    [disabled]="!(changePasswordForm.get('uOldPassword').value || changePasswordForm.get('uNewPassword').value || changePasswordForm.get('confirmPassword').value)">
+              <span class="icon-close-modal"></span>
+              <span>{{'Settings.Cancel-changes' | translate}}</span>
+            </button>
+            <button class="craft_btn setting_btn" type="submit" (click)="saveResetPassword()"
+                    [disabled]="!(changePasswordForm.get('uOldPassword').value || changePasswordForm.get('uNewPassword').value || changePasswordForm.get('confirmPassword').value)">
+              <fa-icon [icon]="['fas', 'save']" class="fas-save"></fa-icon>
+              <span>{{'Settings.Save-Changes' | translate}}</span>
+            </button>
+          </div>
+        </div>
+        <div class="{{changePasswordMessage?.className}}">{{changePasswordMessage?.message}}</div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="tab-content" [ngClass]="{ 'active-tab': showActiveTab == 'PersonalDetails' }">
+    <form class="change_details_form" [formGroup]="profileForm">
+      <div class="form_row">
+        <div class="submit-details" *ngIf="!editData" [ngClass]="editData? 'selected' : ''" (click)="toggleEdit()">
+          <button class="craft_btn setting_btn setting_btn2" type="submit" (click)="toggleEdit()" *ngIf="!editData">
+            <span class="icon-edit"></span>
+            <span (click)="toggleEdit()">{{'Settings.Edit' | translate}}</span>
+          </button>
+        </div>
+        <div class="submit-details" *ngIf="editData">
+          <button class="craft_btn setting_btn" type="submit" (click)="resetProfileForm()" [ngClass]="{'cancel_btn': editData}">
+            <span class="icon-close-modal"></span>
+            <span>{{'Settings.Cancel-changes' | translate}}</span>
+          </button>
+          <button class="craft_btn setting_btn" type="submit" (click)="updateClientDetail()">
+            <fa-icon [icon]="['fas', 'save']" class="fas-save"></fa-icon>
+            <span>{{'Settings.Save-Changes' | translate}}</span>
+          </button>
+        </div>
+      </div>
+      <div
+        [ngClass]="{'error_message': updateDataMessage?.Error, 'success_message': !updateDataMessage?.Error }">{{updateDataMessage?.Message}}</div>
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <input class="setting-input" type="text" placeholder="{{'Settings.FirstName-placeholder' | translate}}"
+                 formControlName="uFirstName"
+                 [ngClass]="{ 'disable_item': (!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData), 'invalid-filed': ((profileForm.get('uFirstName').hasError('required')  || profileForm.get('uFirstName').hasError('minlength') || profileForm.get('uFirstName').hasError('maxlength')) && profileForm.get('uFirstName').touched)}"/>
+          <label>{{'Settings.FirstName' | translate}}</label>
+          <div class="error_message"
+               *ngIf="profileForm.get('uFirstName').hasError('required') && !profileForm.get('uFirstName').hasError('uFirstName') && !profileForm.get('uFirstName').hasError('maxlength') && profileForm.get('uFirstName').touched">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <input class="setting-input" type="text" placeholder="{{'Settings.LastName-placeholder' | translate}}"
+                 formControlName="uLastName"
+                 [ngClass]="{ 'disable_item': (!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData), 'invalid-filed': ((profileForm.get('uLastName').hasError('required')  || profileForm.get('uLastName').hasError('minlength') || profileForm.get('uLastName').hasError('maxlength')) && profileForm.get('uLastName').touched)}"/>
+          <label>{{'Settings.LastName' | translate}}</label>
+          <div class="error_message"
+               *ngIf="profileForm.get('uLastName').hasError('required') && !profileForm.get('uLastName').hasError('uLastName') && !profileForm.get('uLastName').hasError('maxlength') && profileForm.get('uLastName').touched">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form_row3 form_row">
+
+        <div class="form_field distans-half-right">
+          <select
+            [ngClass]="{'disable_item':(!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData)}"
+            formControlName="birthDay">
+            <option *ngFor="let dayItem of Days" [value]="dayItem">{{dayItem}}</option>
+          </select>
+          <label>{{'Settings.Date-of-birth' | translate}}</label>
+        </div>
+
+        <div class="form_field distans-half-right">
+          <select formControlName="birthMonth" [value]="Date.Month.Id"
+                  [ngClass]="{'disable_item':(!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData)}">
+            <option *ngFor="let monthItem of monthsList"
+                    [value]="monthItem.Id">{{monthItem?.Name}}</option>
+          </select>
+        </div>
+
+        <div class="form_field">
+          <select formControlName="birthYear" [value]="Date.Year"
+                  [ngClass]="{'disable_item':(!editData || userData?.IsDocumentVerified), 'active_item': (!userData?.IsDocumentVerified && editData)}">
+            <option *ngFor="let yearItem of Years"
+                    [value]="yearItem">{{yearItem}}</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <input class="setting-input" type="text" value="{{userData?.CurrencyId}}" class="disable_item"/>
+          <label>{{'User.Currency' | translate}}</label>
+        </div>
+      </div>
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <input type="text" class="" placeholder="Email"
+                 [ngClass]="{ 'disable_item': (!editData || userData?.IsEmailVerified), 'active_item': editData, 'email_verified':userData?.IsEmailVerified}"
+                 formControlName="uEmail"/>
+          <fa-icon [icon]="faCheck" class="mobile_verify" aria-hidden="true" *ngIf="userData?.IsEmailVerified"></fa-icon>
+          <label>{{'Register.Email-verify' | translate}}</label>
+        </div>
+        <button type="submit" class="craft_btn verify_btn setting_btn full-width"
+                [ngClass]="{ 'disable_item': !editData, 'active_item': editData }" (click)="verify('email')"
+                *ngIf="!userData?.IsEmailVerified">{{'User.Verify' | translate}}</button>
+
+        <div class="success_message" *ngIf="isEmailVerificationRequestSent">
+          {{'Settings.VerifyLink' | translate}}
+        </div>
+
+        <div class="error_message">
+          {{errorMessage}}
+        </div>
+      </div>
+
+
+
+      <div class="form_row">
+        <div class="form_field mobile_number_verify">
+          <div class="mobile_number_verify__item distans-right">
+            <input type="text" class="distans-right"
+                   placeholder="{{'Register.Mobile-number-placeholder' | translate}}" formControlName="uMobileNumber"
+                   [ngClass]="{'disable_item':userData?.IsMobileNumberVerified || !editData, 'active_item': editData}"
+                   numbersOnly/>
+            <label class="">{{'Register.Mobile-number-verify' | translate}}</label>
+          </div>
+          <div class="mobile_number_verify__item">
+            <input type="text" class="distans-right number_input"
+                   *ngIf="(isMobileNumberVerificationRequestSent && !userData?.IsMobileNumberVerified)"
+                   placeholder="{{'Register.Mobile-sms-code-placeholder' | translate}}"
+                   [ngClass]="{ 'disable_item': userData?.IsMobileNumberVerified }"
+                   [(ngModel)]="mobileSmsCode" [ngModelOptions]="{standalone: true}">
+
+            <a *ngIf="(isMobileNumberVerificationRequestSent && !userData?.IsMobileNumberVerified)"
+               class="not_receiveCode full-width"
+               (click)="verify('mobile')">{{'Settings.Resend-code' | translate}}</a>
+          </div>
+
+
+          <fa-icon [icon]="faCheck" class="mobile_verify" aria-hidden="true" *ngIf="userData?.IsMobileNumberVerified"></fa-icon>
+
+        </div>
+
+        <button type="submit" class="craft_btn verify_btn setting_btn full-width send-code"
+                *ngIf="!isMobileNumberVerificationRequestSent && !userData?.IsMobileNumberVerified"
+                [ngClass]="{ 'disable_item': !editData, 'active_item': editData }"
+                (click)="verify('mobile')">{{'Settings.Send_Code' | translate}}</button>
+
+        <button type="submit" class="craft_btn verify_btn setting_btn full-width"
+                *ngIf="isMobileNumberVerificationRequestSent && !userData?.IsMobileNumberVerified"
+                (click)="sendVerificationCode('mobile')">{{'Settings.Verify' | translate}}</button>
+
+        <div class="success_message" *ngIf="isMobileNumberVerificationRequestSent && !userData?.IsMobileNumberVerified">
+          {{'Settings.VerifyMobileNumberSendCode' | translate}}
+        </div>
+
+        <div class="error_message" *ngIf="mobileVerificationErrorMessage && !userData?.IsMobileNumberVerified">
+          {{mobileVerificationErrorMessage}}
+        </div>
+
+      </div>
+
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <input class="setting-input" type="text" placeholder="{{'User.Document number' | translate}}"
+                 [ngClass]="{ 'disable_item': (!editData || userData?.IsDocumentVerified), 'active_item': editData, 'invalid-filed': ((profileForm.get('uDocumentNumber').hasError('required')  || profileForm.get('uDocumentNumber').hasError('minlength') || profileForm.get('uDocumentNumber').hasError('maxlength')) && profileForm.get('uDocumentNumber').touched)}"
+                 formControlName="uDocumentNumber" value="{{userData?.DocumentNumber}}"/>
+          <label>{{'User.Document' | translate}}</label>
+          <div class="error_message"
+               *ngIf="profileForm.get('uDocumentNumber').hasError('required') && !profileForm.get('uDocumentNumber').hasError('uDocumentNumber') && !profileForm.get('uDocumentNumber').hasError('maxlength') && profileForm.get('uDocumentNumber').touched">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <input class="setting-input" type="text" placeholder="{{'User.Document issued by-placeholder' | translate}}"
+                 value="{{userData?.DocumentIssuedBy}}" formControlName="uDocumentIssuedBy"
+                 [ngClass]="{ 'disable_item': (!editData || userData?.IsDocumentVerified), 'active_item': editData, 'invalid-filed': ((profileForm.get('uDocumentIssuedBy').hasError('required')  || profileForm.get('uDocumentIssuedBy').hasError('minlength') || profileForm.get('uDocumentIssuedBy').hasError('maxlength')) && profileForm.get('uDocumentIssuedBy').touched)}"/>
+          <label>{{'User.Document issued by' | translate}}</label>
+          <div class="error_message"
+               *ngIf="profileForm.get('uDocumentIssuedBy').hasError('required') && !profileForm.get('uDocumentIssuedBy').hasError('uDocumentIssuedBy') && !profileForm.get('uDocumentIssuedBy').hasError('maxlength') && profileForm.get('uDocumentIssuedBy').touched">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <select [ngClass]="{ 'disable_item': !editData, 'active_item': editData }"
+                  formControlName="uCountry">
+            <option *ngFor="let country of countryList"
+                    [value]="country.Id">{{country?.Name}}</option>
+          </select>
+          <label>{{'User.Country' | translate}}</label>
+        </div>
+      </div>
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <select [ngClass]="{ 'disable_item': !editData || !profileForm.get('uCountry').value, 'active_item': editData }"
+                  formControlName="uCity">
+            <option *ngFor="let city of cityList"
+                    [value]="city.Id">{{city?.Name}}</option>
+          </select>
+          <label>{{'User.City' | translate}}</label>
+        </div>
+      </div>
+
+
+      <div class="form_row">
+
+        <div class="form_field">
+          <input class="setting-input" type="text" placeholder="{{'Settings.Address-placeholder' | translate}}"
+                 value="{{userData?.Address}}"
+                 formControlName="uAddress"
+                 [ngClass]="{ 'disable_item': !editData, 'active_item': editData, 'invalid-filed': ((profileForm.get('uAddress').hasError('required')  || profileForm.get('uAddress').hasError('minlength') || profileForm.get('uAddress').hasError('maxlength')) && profileForm.get('uAddress').touched)}"/>
+          <label>{{'Register.Address-placeholder' | translate}}</label>
+          <div class="error_message"
+               *ngIf="profileForm.get('uAddress').hasError('required') && !profileForm.get('uAddress').hasError('uAddress') && !profileForm.get('uAddress').hasError('maxlength') && profileForm.get('uAddress').touched">
+            <span>{{ 'Error.Required-field' | translate }}</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form_row">
+        <div class="form_field">
+          <input type="text" value="{{userData?.ZipCode}}"
+                 [ngClass]="{ 'disable_item': !editData, 'active_item': editData}"
+                 formControlName="uZipCode"/>
+          <label>{{'User.ZipCode' | translate}}</label>
+        </div>
+      </div>
+      <div class="submit-details" *ngIf="editData">
+        <button class="craft_btn setting_btn" type="submit" (click)="resetProfileForm()" [ngClass]="{'cancel_btn': editData}">
+          <span class="icon-close-modal"></span>
+          <span>{{'Settings.Cancel-changes' | translate}}</span>
+        </button>
+        <button class="craft_btn setting_btn" type="submit" (click)="updateClientDetail()">
+          <fa-icon [icon]="['fas', 'save']" class="fas-save"></fa-icon>
+          <span>{{'Settings.Save-Changes' | translate}}</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="tab-content" [ngClass]="{ 'active-tab': showActiveTab == 'SelfExclusion' }">
+    <form class="self-limitation" [formGroup]="limitForm">
+      <div class="mobile-self-limitation_edit"
+           [ngClass]="{'disable_item': saveSelfLimitation, 'active_item': !saveSelfLimitation}">
+        <button class="craft_btn setting_btn" type="submit" (click)="toggleEditSelfLimitation()">
+          <span>{{'Settings.Edit' | translate}}</span>
+        </button>
+      </div>
+      <h2 class="self-limit-title">{{'User.Limit Type' | translate}}</h2>
+      <div class="self-limit-warning">
+        <span class=" icon-warning" [ngClass]="{'icon-warning-active':editSelfLimitation}"></span>
+        <p class="self-limit-warning-title">{{'User.Note-Warning' | translate}}</p>
+      </div>
+      <div class="mobile-limit-type">
+        <p class="limit-type-title">{{'User.TotalDeposit' | translate}}</p>
+        <div class="limit-type_row">
+          <div class="limit-type-field">
+            <input class="mobile-limit-type-input" type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="DepositLimitDaily" placeholder="{{'User.Daily-placeholder' | translate}}">
+            <label>{{'User.Daily' | translate}}</label>
+          </div>
+          <div class="limit-type-field">
+            <input class="mobile-limit-type-input" type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="DepositLimitWeekly" placeholder="{{'User.Weekly-placeholder' | translate}}">
+            <label>{{'User.Weekly' | translate}}</label>
+          </div>
+          <div class="limit-type-field">
+            <input class="mobile-limit-type-input" type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="DepositLimitMonthly" placeholder="{{'User.Monthly-placeholder' | translate}}">
+            <label>{{'User.Monthly' | translate}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="limit-underline"></div>
+      <div class="mobile-limit-type">
+        <p class="limit-type-title">{{'User.TotalBets' | translate}}</p>
+        <div class="limit-type_row">
+          <div class="limit-type-field">
+            <input class="mobile-limit-type-input" type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="TotalBetAmountLimitDaily" placeholder="{{'User.Daily-placeholder' | translate}}">
+            <label>{{'User.Daily' | translate}}</label>
+          </div>
+          <div class="limit-type-field">
+            <input class="mobile-limit-type-input" type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="TotalBetAmountLimitWeekly" placeholder="{{'User.Weekly-placeholder' | translate}}">
+            <label>{{'User.Weekly' | translate}}</label>
+          </div>
+          <div class="limit-type-field">
+            <input class="mobile-limit-type-input" type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="TotalBetAmountLimitMonthly" placeholder="{{'User.Monthly-placeholder' | translate}}">
+            <label>{{'User.Monthly' | translate}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="limit-underline"></div>
+      <div class="mobile-limit-type">
+        <p class="limit-type-title">{{'User.TotalLost' | translate}}</p>
+        <div class="limit-type_row">
+          <div class="limit-type-field">
+            <input type="number" class="mobile-limit-type-input" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="TotalLossLimitDaily" placeholder="{{'User.Daily-placeholder' | translate}}">
+            <label>{{'User.Daily' | translate}}</label>
+          </div>
+          <div class="limit-type-field">
+            <input type="number" class="mobile-limit-type-input" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="TotalLossLimitWeekly" placeholder="{{'User.Weekly-placeholder' | translate}}">
+            <label>{{'User.Weekly' | translate}}</label>
+          </div>
+          <div class="limit-type-field">
+            <input type="number" class="mobile-limit-type-input" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="TotalLossLimitMonthly" placeholder="{{'User.Monthly-placeholder' | translate}}">
+            <label>{{'User.Monthly' | translate}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="limit-underline"></div>
+      <div class="mobile-limit-type">
+        <p class="limit-type-title">{{'User.SessionLimit' | translate}}</p>
+        <div class="limit-type_row">
+          <div class="limit-type-field">
+            <input type="number" class="mobile-limit-type-input" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                   formControlName="SessionLimit" placeholder="{{'User.Minutes-placeholder' | translate}}">
+            <label>{{'User.Minutes' | translate}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="error-message"
+           *ngIf="limitForm.get('SessionLimit').hasError('min')">{{'User.SessionMinLimitError' | translate}}</div>
+      <div class="mobile-submit-details" *ngIf="editSelfLimitation">
+        <button class="craft_btn setting_btn" type="submit" (click)="resetLimitFrom()"
+                [ngClass]="{'cancel_btn': editSelfLimitation}">
+          <span class="icon-close-modal"></span>
+          <span>{{'Settings.Cancel-changes' | translate}}</span>
+        </button>
+        <button class="craft_btn setting_btn" type="submit" (click)="updateSelfLimitation()">
+          <fa-icon [icon]="['fas', 'save']" class="fas-save"></fa-icon>
+          <span>{{'Settings.Save-Changes' | translate}}</span>
+        </button>
+      </div>
+      <div class="limit-underline"></div>
+    </form>
+    <div class="self-exclusion-box">
+      <div class="se-message se-message-title">
+        <p>{{'User.Self-Exclusion' | translate}}</p>
+      </div>
+      <div class="se-message">
+        <p>{{'User.SelfExclusionDescription' | translate}}:</p>
+      </div>
+<!--      <div class="se-row">-->
+<!--        <div class="form_field">-->
+<!--          <select-->
+<!--            [(ngModel)]="selectedExclusionType">-->
+<!--            <option disabled value="" selected="selected">{{'User.SelectType' | translate}}</option>-->
+<!--            <option *ngFor="let type of selfExclusionTypes" [value]="type">{{type}}</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--        <input *ngIf="selectedExclusionType == 'Temporary'" class="form_field" type="date" [(ngModel)]="exclusionDate" min="{{exclusionMinDate}}">-->
+
+<!--        <button type="button" style="margin-left: 10px" [disabled]="!selectedExclusionType" class="craft_btn setting_btn" (click)="openConfirmWindow()"-->
+<!--        >{{'User.Confirm' | translate}}</button>-->
+<!--      </div>-->
+      <div class="mobile-self-exclusion-row">
+        <div class="self-tab-bar_item" (click)="selectProduct(selfExclusionTypes.Permanently)"
+             [ngClass]="{'active':selectedExclusionType == selfExclusionTypes.Permanently}">{{'User.Permanently' | translate}}</div>
+        <div class="self-tab-bar_item" (click)="selectProduct(selfExclusionTypes.Temporary)"
+             [ngClass]="{'active2':selectedExclusionType == selfExclusionTypes.Temporary}">{{'User.Temporary' | translate}}</div>
+      </div>
+      <div class="mobile-self-exclusion-row" *ngIf="selectedExclusionType == 'Temporary'">
+        <label class="date-input">{{'User.Until Date' | translate}}</label>
+        <input class="self-tab-bar_item" type="date" [(ngModel)]="exclusionDate" min="{{exclusionMinDate}}">
+      </div>
+      <div class="mobile-self-exclusion-row-btn">
+        <div class="error-message" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="success-message">{{successMessage}}</div>
+        <button type="button" [disabled]="selectedExclusionType !== selfExclusionTypes.Permanently && exclusionDate === null" class="common-button"
+                (click)="openConfirmWindow()">{{'User.Confirm' | translate}}</button>
+      </div>
+      <div class="error-message" *ngIf="errorMessage1">{{errorMessage1}}</div>
+      <div class="success-message">{{successMessage1}}</div>
+    </div>
+  </div>
+
+</div>

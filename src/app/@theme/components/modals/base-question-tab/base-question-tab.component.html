@@ -1,0 +1,20 @@
+<div class="modal-content {{title}}">
+  <div class="modal-body">
+
+    <div class="{{title}}_body">
+      <fa-icon [icon]="['fas', 'times']" (click)="close()"></fa-icon>
+    </div>
+
+  </div>
+  <div class="modal_content">
+    <div class="modal_content__message">{{'Error.Are You Sure You Want To Delete The Bonuse' | translate}}</div>
+  </div>
+
+  <div class="modal_footer">
+    <button type="submit" class="craft_btn bg_recovery distans-right save-btn"
+            (click)="confirm()">{{'Settings.Ok' | translate}}</button>
+    <button type="submit" class="craft_btn bg_payment distans-right cancel-btn"
+            (click)="close()">{{'Settings.Cancel' | translate}}</button>
+  </div>
+
+</div>

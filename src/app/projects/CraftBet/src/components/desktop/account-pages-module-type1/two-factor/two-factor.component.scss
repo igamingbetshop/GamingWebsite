@@ -1,0 +1,110 @@
+.container {
+  background: var(--change-password-content-background-color, unset);
+  padding: 20px;
+  border-radius: 6px;
+  .two-factor-title {
+    margin: var(--two-factor-title-margin, 0);
+    font-size: var(--two-factor-title-font-size, 18px);
+    font-weight: var(--two-factor-title-font-weight, 500);
+    line-height: var(--two-factor-title-line-height, 23px);
+  }
+  .container-section {
+    margin: var(--two-factor-container-section-margin, 16px 0);
+    line-height: var(--two-factor-container-section-line-height, 25px);
+    .two-factor-section-authenticated {
+      .authentication-label {
+        .authentication-text {
+
+        }
+        .disable-otp-btn {
+          width: var(--two-factor-disable-btn-width, auto);
+          margin: var(--two-factor-disable-btn-margin, 0);
+          padding: var(--two-factor-disable-btn-padding, 0 10px);
+          background: var(--two-factor-disable-btn-background, #194e8e);
+          font-size: var(--two-factor-disable-btn-font-size, 16px);
+          font-weight: var(--two-factor-disable-btn-font-weight, 600);
+          border-radius: var(--two-factor-disable-btn-border-radius, 4px);
+          height: var(--two-factor-disable-btn-height, 44px);
+          color: var(--two-factor-disable-btn-color, #fff);
+          border: var(--two-factor-disable-btn-border, none);
+          cursor: pointer;
+        }
+      }
+    }
+    .two-factor-section {
+      .two-factor-ordered-list {
+        padding: var(--two-factor-section-list-padding, 0 20px);
+        li::marker {
+          color: var(--two-factor-step-text-title-color, #fff);
+        }
+      }
+      .two-factor-steps-title {
+        margin: var(--two-factor-step-text-title-margin, 10px 0);
+        font-size: var(--two-factor-step-text-title-font-size, 16px);
+        font-weight: var(--two-factor-step-text-title-font-weight, 600);
+        color: var(--two-factor-step-text-title-color, #fff);
+      }
+      .two-factor-steps-description {
+        margin: var(--two-factor-step-text-description-margin, 0 -16px);
+        font-size: var(--two-factor-step-text-description-font-size, 16px);
+        font-weight: var(--two-factor-step-text-description-font-weight, 400);
+        color: var(--two-factor-step-text-description-color, #fff);
+        .two-factor-input {
+          width: var(--two-factor-enable-btn-width, auto);
+          height: var(--two-factor-step-description-input-height, 44px);
+          color: var(--two-factor-step-description-input-color, #fff);
+          background: var(--two-factor-step-description-input-background, transparent);
+          border: var(--two-factor-step-description-input-border, 1px solid #dbedff);
+          border-radius: var(--two-factor-step-description-input-border-radius, 6px);
+          text-indent: var(--two-factor-step-description-input-text-indent, 16px);
+          margin: var(--two-factor-step-description-input-margin, 0px);
+          font-size: var(--two-factor-step-description-input-font-size, 16px);
+        }
+        .two-factor-img-part {
+          background: var(--two-factor-img-part-background, transparent);
+          box-shadow: var(--two-factor-img-part-box-shadow, none);
+          border-radius: var(--two-factor-img-part-border-radius, 6px);
+          width: var(--two-factor-img-part-width, 170px);
+          height: var(--two-factor-img-part-height, 161px);
+          margin: var(--two-factor-img-part-margin, 16px 0);
+          display: var(--two-factor-img-part-display, flex);
+          justify-content: center;
+          align-items: center;
+          img {
+            border-radius: var(--two-factor-img-border-radius, 6px);
+          }
+        }
+      }
+      .two-factor-steps-description-in {
+        margin: var(--two-factor-step-text-description-in-margin, 10px 0);
+      }
+      .enabled-mode {
+        position: relative;
+        .enable-otp-btn {
+          width: var(--two-factor-enable-btn-width, auto);
+          margin: var(--two-factor-enable-btn-margin, 0 0 0 40px);
+          padding: var(--two-factor-enable-btn-padding, 0 10px);
+          background: var(--two-factor-enable-btn-background, #194e8e);
+          font-size: var(--two-factor-enable-btn-font-size, 16px);
+          font-weight: var(--two-factor-enable-btn-font-weight, 600);
+          border-radius: var(--two-factor-enable-btn-border-radius, 4px);
+          height: var(--two-factor-enable-btn-height, 44px);
+          color: var(--two-factor-enable-btn-color, #fff);
+          border: var(--two-factor-enable-btn-border, none);
+          cursor: pointer;
+        }
+        .enable-otp-btn.disabled {
+          opacity: 0.6;
+        }
+        .error_message {
+          color: red;
+          position: absolute;
+          top: 51px;
+          font-size: 15px;
+          left: 42px;
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,220 @@
+.user-right-panel_title {
+  //padding: 10px 0 30px 0px;
+  //padding: 14px 27px 10px;
+  //height: 80px;
+  height: auto;
+  padding-bottom: 10px;
+  cursor: default;
+}
+.transactions-tab {
+  //padding: 14px 27px 10px;
+  //padding: 11px 27px 5px;
+}
+.container-part {
+  //margin-bottom: 10px;
+  .transactions-list-items {
+    .transactions-header-list {
+      background: var(--transactions-header-list-background, transparent);
+      display: flex;
+      justify-content: var(--transactions-list-justify-content, space-between);
+      align-items: center;
+      width: var(--transactions-list-width, 100%);
+      color: var(--transactions-list-color, #000);
+      margin: var(--transactions-list-margin, 0 auto 10px);
+      border-radius: var(--transactions-list-border-radius, 4px);
+      font-size: var(--transactions-list-font-size, 14px);
+      font-weight: var(--transactions-list-font-weight, 500);
+      gap: var(--transactions-list-gap, 20px);
+      padding: var(--transactions-list-padding, 10px 13px);
+      cursor: var(--transactions-list-cursor, pointer);
+      position: relative;
+      .transaction-type-name {
+        width: 205px;
+        text-align: var(--transaction-list-transaction-type-name-text-align, left);
+        word-break: break-all;
+      }
+      .transaction-type-amount {
+        white-space: nowrap;
+      }
+      .transaction-date {
+        width: 90px;
+      }
+    }
+    .transactions-list {
+      display: flex;
+      justify-content: var(--transactions-list-justify-content, space-between);
+      align-items: center;
+      background: var(--transactions-list-background, #fff);
+      width: var(--transactions-list-width, 100%);
+      color: var(--transactions-list-color, #000);
+      margin: var(--transactions-list-margin, 0 auto 10px);
+      border-radius: var(--transactions-list-border-radius, 4px);
+      font-size: var(--transactions-list-font-size, 14px);
+      font-weight: var(--transactions-list-font-weight, 500);
+      gap: var(--transactions-list-gap, 20px);
+      padding: var(--transactions-list-padding, 10px 13px);
+      cursor: var(--transactions-list-cursor, pointer);
+      position: relative;
+      .transaction-type-name {
+        width: 205px;
+        text-align: var(--transaction-list-transaction-type-name-text-align, left);
+        word-break: break-all;
+      }
+      .transaction-type-amount {
+        //width: 200px;
+        //text-align: right;
+        white-space: nowrap;
+      }
+      .transaction-account-type-name {
+        width: 170px;
+        text-align: left;
+        display: var(--transaction-list-account-type-name-display, block);
+      }
+      .transaction-date {
+        width: 90px;
+      }
+      .change-icon {
+        display: var(--transactions-list-icon-display, block);
+        transform: rotate(90deg);
+        font-size: 15px;
+        color: var(--transactions-list-icon-color, #d9d9d9);
+      }
+      .hide-icon {
+        opacity: 0;
+      }
+
+      .transactions-tab-text {
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+  }
+  .empty-transactions .empty-block-text {
+    cursor: default;
+  }
+  .history-options {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 8px;
+    .custom_dropdown_reg {
+      background: #fff;
+      color: #000;
+      border-radius: var(--history-select-border-radius, 4px);
+
+      .current_item {
+        height: 100%;
+        border-radius: var(--history-select-current-item-border-radius, 0px);
+        border: none;
+        justify-content: center;
+        font-size: var(--history-select-font-size, 20px);
+        background: var(--history-select-background-color, #fff);
+      }
+
+      .current_item:hover {
+        color: var(--history-select-color, #000);
+        background: var(--history-select-background-color, #fff);
+      }
+
+      .change-icon {
+        display: var(--history-select-icon-display, block);
+        transform: rotate(90deg);
+        font-size: 10px;
+        margin-left: auto;
+        color: #d9d9d9;
+      }
+      .custom_dropdown_list {
+        background: var(--history-select-dropdown-background, #fff);
+        border-color: var(--history-select-dropdown-border-color, #D0CECE);
+        height: var(--history-select-dropdown-height, 142px);
+        margin-top: var(--history-select-dropdown-margin-top, 10px);
+
+        .custom_dropdown_list_items {
+          font-size: var(--history-select-dropdown-list-font-size, 15px);
+          height: var(--history-select-dropdown-list-height, 35px);
+          border-bottom: var(--history-select-dropdown-list-border-bottom, 1px solid #D0CECE);
+          line-height: var(--history-select-dropdown-list-line-height, 35px);
+          background: var(--history-select-dropdown-list-background, #999);
+        }
+
+        .custom_dropdown_list_items:hover {
+          background: var(--history-select-dropdown-list-hover-background, #fff);
+          color: var(--history-select-dropdown-list-hover-color, #000);
+        }
+      }
+    }
+  }
+  .titles {
+    margin-bottom: 60px;
+    padding: 20px 18px;
+  }
+
+  .bets-selections-list-details {
+    background: white;
+    color: black;
+    display: none;
+    .betslipId {
+      font-size: 16px;
+      color: #F6A200;
+      font-weight: 600;
+      //margin-left: 156px;
+      margin-left: var(--bets-selections-transactionId-margin-left, 156px);
+    }
+    .clickable {
+      cursor: pointer;
+    }
+  }
+  .opened {
+    .bets-selections-list-details {
+      display: block;
+      margin-top: -12px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+     .change-icon {
+      transform: rotate(-90deg) !important;
+    }
+  }
+}
+::ng-deep .ngx-pagination {
+  margin-bottom: 0 !important;
+  margin-top: var(--pagination-margin-top, 0) !important;
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  .container-part .transactions-list-items .transactions-list {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .transactions-tab {
+    .user-right-panel_title {
+      font-size: 18px;
+    }
+    .container-part {
+      .history-options {
+        height: 40px;
+        .custom_dropdown_reg {
+          .current_item {
+            font-size: 12px;
+          }
+          .custom_dropdown_list {
+            .custom_dropdown_list_items {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+      .betslipId {
+        font-size: 12px !important;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+  .user-right-panel_title {
+    font-size: 20px;
+  }
+}

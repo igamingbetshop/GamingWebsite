@@ -1,0 +1,81 @@
+<div class="mobile-tickets-section">
+    <h2 class="mobile-tickets-section_title">{{'User.Bank_Accounts' | translate}}</h2>
+
+    <div class="add-tickets">
+        <button type="button" class="craft_btn" (click)="addAccount()">{{'User.Add_Account' | translate}}</button>
+    </div>
+    <!--  <div class="tickets_history">-->
+    <!--    <div class="tickets_history_item"-->
+    <!--         *ngFor="let account of paymentService.bankAccounts">-->
+    <!--      <div class="tickets_history_item_topPanel">-->
+    <!--        <div>-->
+    <!--          {{'User.Id' | translate}}-->
+    <!--        </div>-->
+    <!--        <div>-->
+    <!--          {{account.Id}}-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="tickets_history_item_topPanel">-->
+    <!--        <div>-->
+    <!--          {{'User.NickName' | translate}}-->
+    <!--        </div>-->
+    <!--        <div>-->
+    <!--          {{account.NickName}}-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="tickets_history_item_topPanel">-->
+    <!--        <div>-->
+    <!--          {{'User.BankName' | translate}}-->
+    <!--        </div>-->
+    <!--        <div>-->
+    <!--          {{account.BankName}}-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="tickets_history_item_topPanel">-->
+    <!--        <div>-->
+    <!--          {{'User.Iban' | translate}}-->
+    <!--        </div>-->
+    <!--        <div>-->
+    <!--          {{account.Iban}}-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="tickets_history_item_topPanel">-->
+    <!--        <div>-->
+    <!--          {{'User.BankAccountNumber' | translate}}-->
+    <!--        </div>-->
+    <!--        <div>-->
+    <!--          {{account.BankAccountNumber}}-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <div class="mobile-history-section">
+        <table>
+            <tbody>
+            <tr>
+<!--                <td><span>{{'User.NickName' | translate}}</span></td>-->
+                <td><span>{{'User.BankName' | translate}}</span></td>
+                <td><span>{{'User.BranchName' | translate}}</span></td>
+                <td><span>{{'User.AccountType' | translate}}</span></td>
+                <td class="hide-form-row"><span>{{'User.Iban' | translate}}</span></td>
+                <td><span>{{'User.BankAccountNumber' | translate}}</span></td>
+                <td></td>
+            </tr>
+            <tr
+                    *ngFor="let account of paymentService.bankAccounts">
+<!--                <td>{{account?.NickName}}</td>-->
+                <td>{{account?.BankName}}</td>
+                <td>{{account?.BranchName}}</td>
+                <td>{{account?.BankAccountTypeName}}</td>
+                <td class="hide-form-row">{{account?.Iban}}</td>
+                <td>{{account?.BankAccountNumber}}</td>
+                <td class="banks-block_item block_item form-row-icons">
+                    <span class="icon-edit" (click)="editBank(account)"></span>
+                    <span class="icon-delete-ticket" (click)="deleteBank(account.Id)"></span>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>

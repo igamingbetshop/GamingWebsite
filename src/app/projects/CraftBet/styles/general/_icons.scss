@@ -1,0 +1,642 @@
+
+/*
+[class^="icon-"], [class*=" icon-"] {
+  !* use !important to prevent issues with browser extensions that change fonts *!
+  font-family: 'internal' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  !* Better Font Rendering =========== *!
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-eye-password-close:before {
+  content: "\e934";
+  color: #dbedff;
+}
+
+.icon-eye-password:before {
+  content: "\e933";
+  color: #dbedff;
+}
+
+.icon-safety:before {
+  content: "\e932";
+  color: #dbedff;
+}
+
+.icon-arrow-to-left:before {
+  content: "\e931";
+  color: #fff;
+}
+
+.icon-close-modal:before {
+  content: "\e930";
+  color: #fff;
+}
+
+.icon-timezone:before {
+  content: "\e92d";
+  color: #fff;
+}
+
+.icon-arrow:before {
+  content: "\e92a";
+}
+
+.icon-back:before {
+  content: "\e92c";
+}
+
+.icon-log-out:before {
+  content: "\e92e";
+}
+
+.icon-settings:before {
+  content: "\e92f";
+}
+
+.icon-close-password-type:before {
+  content: "\e927";
+}
+
+.icon-open-password-type:before {
+  content: "\e928";
+}
+
+.icon-ball:before {
+  content: "\e929";
+}
+
+.icon-live-casino-home:before {
+  content: "\e92b";
+}
+
+.icon-home:before {
+  content: "\e920";
+}
+
+.icon-left-arrow:before {
+  content: "\e921";
+}
+
+.icon-more:before {
+  content: "\e922";
+}
+
+.icon-my-account:before {
+  content: "\e923";
+}
+
+.icon-result:before {
+  content: "\e924";
+}
+
+.icon-right-arrow:before {
+  content: "\e925";
+}
+
+.icon-statement:before {
+  content: "\e926";
+}
+
+.icon-excel:before {
+  content: "\e91d";
+}
+
+.icon-pdf:before {
+  content: "\e91e";
+}
+
+.icon-print:before {
+  content: "\e91f";
+}
+
+.icon-top-panel-announcements:before {
+  content: "\e91c";
+}
+
+.icon-top-panel-statement:before {
+  content: "\e917";
+}
+
+.icon-top-panel-result:before {
+  content: "\e918";
+}
+
+.icon-top-panel-settings:before {
+  content: "\e919";
+}
+
+.icon-top-panel-support:before {
+  content: "\e91a";
+}
+
+.icon-top-panel-bet-list:before {
+  content: "\e91b";
+}
+
+.icon-banner-arrow-left:before {
+  content: "\e916";
+}
+
+.icon-banner-arrow-right:before {
+  content: "\e915";
+}
+
+.icon-refresh:before {
+  content: "\e912";
+}
+
+.icon-printer:before {
+  content: "\e913";
+}
+
+.icon-arrow-right:before {
+  content: "\e914";
+}
+
+.icon-message:before {
+  content: "\e911";
+}
+
+.icon-backgammon:before {
+  content: "\e906";
+}
+
+.icon-cabinet:before {
+  content: "\e907";
+}
+
+.icon-casino:before {
+  content: "\e908";
+}
+
+.icon-crash:before {
+  content: "\e909";
+}
+
+.icon-hi-lo:before {
+  content: "\e90a";
+}
+
+.icon-keno:before {
+  content: "\e90b";
+}
+
+.icon-live-casino:before {
+  content: "\e90c";
+}
+
+.icon-live-sport:before {
+  content: "\e90d";
+}
+
+.icon-prematch-sport:before {
+  content: "\e90e";
+}
+
+.icon-skill-game:before {
+  content: "\e90f";
+}
+
+.icon-virtual-game:before {
+  content: "\e910";
+}
+
+.icon-close:before {
+  content: "\e900";
+  color: #fff;
+}
+
+.icon-full-screen:before {
+  content: "\e901";
+  color: #fff;
+}
+
+.icon-heart:before {
+  content: "\e902";
+  color: #fff;
+}
+
+.icon-heart-selected:before {
+  content: "\e903";
+  color: #fff;
+}
+
+.icon-star:before {
+  content: "\e904";
+  color: #fff;
+}
+
+.icon-star-selected:before {
+  content: "\e905";
+  color: #fac917;
+}
+*/
+
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'internal' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-withdraw1:before {
+  content: "\e900";
+}
+.icon-deposit1:before {
+  content: "\e901";
+}
+.icon-history1:before {
+  content: "\e902";
+}
+.icon-skill-games:before {
+  content: "\e903";
+}
+.icon-slots:before {
+  content: "\e904";
+}
+.icon-sport:before {
+  content: "\e905";
+}
+.icon-virtual-games:before {
+  content: "\e906";
+}
+.icon-virtual-sport:before {
+  content: "\e907";
+}
+.icon-call:before {
+  content: "\e908";
+}
+.icon-message:before {
+  content: "\e909";
+}
+.icon-social-icon1:before {
+  content: "\e90a";
+}
+.icon-social-icon2:before {
+  content: "\e90b";
+}
+.icon-social-icon3:before {
+  content: "\e90c";
+}
+.icon-social-icon4:before {
+  content: "\e90d";
+}
+.icon-close:before {
+  content: "\e90e";
+}
+.icon-full-screen:before {
+  content: "\e90f";
+}
+.icon-heart:before {
+  content: "\e910";
+}
+.icon-heart-selected:before {
+  content: "\e911";
+}
+.icon-star:before {
+  content: "\e912";
+}
+.icon-star-selected:before {
+  content: "\e913";
+}
+.icon-backgammon:before {
+  content: "\e914";
+}
+.icon-cabinet:before {
+  content: "\e915";
+}
+.icon-casino:before {
+  content: "\e916";
+}
+.icon-crash:before {
+  content: "\e917";
+}
+.icon-hi-lo:before {
+  content: "\e918";
+}
+.icon-keno:before {
+  content: "\e919";
+}
+.icon-live-casino:before {
+  content: "\e91a";
+}
+.icon-live-sport:before {
+  content: "\e91b";
+}
+.icon-prematch-sport:before {
+  content: "\e91c";
+}
+.icon-skill-game:before {
+  content: "\e91d";
+}
+.icon-virtual-game:before {
+  content: "\e91e";
+}
+.icon-message1:before {
+  content: "\e91f";
+}
+.icon-refresh:before {
+  content: "\e920";
+}
+.icon-printer:before {
+  content: "\e921";
+}
+.icon-arrow-right:before {
+  content: "\e922";
+}
+.icon-banner-arrow-right:before {
+  content: "\e923";
+}
+.icon-banner-arrow-left:before {
+  content: "\e924";
+}
+.icon-top-panel-statement:before {
+  content: "\e925";
+}
+.icon-top-panel-result:before {
+  content: "\e926";
+}
+.icon-top-panel-settings:before {
+  content: "\e927";
+}
+.icon-top-panel-support:before {
+  content: "\e928";
+}
+.icon-top-panel-bet-list:before {
+  content: "\e929";
+}
+.icon-top-panel-announcements:before {
+  content: "\e92a";
+}
+.icon-excel:before {
+  content: "\e92b";
+}
+.icon-pdf:before {
+  content: "\e92c";
+}
+.icon-print:before {
+  content: "\e92d";
+}
+.icon-home:before {
+  content: "\e92e";
+}
+.icon-left-arrow:before {
+  content: "\e92f";
+}
+.icon-more:before {
+  content: "\e930";
+}
+.icon-my-account:before {
+  content: "\e931";
+}
+.icon-result:before {
+  content: "\e932";
+}
+.icon-right-arrow:before {
+  content: "\e933";
+}
+.icon-statement:before {
+  content: "\e934";
+}
+.icon-close-password-type:before {
+  content: "\e935";
+}
+.icon-open-password-type:before {
+  content: "\e936";
+}
+.icon-ball:before {
+  content: "\e937";
+}
+.icon-arrow:before {
+  content: "\e938";
+}
+.icon-live-casino-home:before {
+  content: "\e939";
+}
+.icon-back:before {
+  content: "\e93a";
+}
+.icon-timezone:before {
+  content: "\e93b";
+}
+.icon-log-out:before {
+  content: "\e93c";
+}
+.icon-settings:before {
+  content: "\e93d";
+}
+.icon-close-modal:before {
+  content: "\e93e";
+}
+.icon-arrow-to-left:before {
+  content: "\e93f";
+}
+.icon-safety:before {
+  content: "\e940";
+}
+.icon-eye-password:before {
+  content: "\e941";
+}
+.icon-eye-password-close:before {
+  content: "\e942";
+}
+.icon-favorites:before {
+  content: "\e943";
+}
+.icon-specials:before {
+  content: "\e944";
+}
+.icon-table-games:before {
+  content: "\e945";
+}
+.icon-classic-slots:before {
+  content: "\e946";
+}
+.icon-layer:before {
+  content: "\e947";
+}
+.icon-table-games1:before {
+  content: "\e948";
+}
+.icon-top-games:before {
+  content: "\e949";
+}
+.icon-all-gmaes:before {
+  content: "\e94a";
+}
+.icon-arrow-up:before {
+  content: "\e94b";
+}
+.icon-arrow-down:before {
+  content: "\e94c";
+}
+.icon-balance:before {
+  content: "\e94d";
+}
+.icon-bool:before {
+  content: "\e94e";
+}
+.icon-ball1:before {
+  content: "\e94f";
+}
+.icon-next-arrow:before {
+  content: "\e950";
+}
+.icon-password:before {
+  content: "\e951";
+}
+.icon-error-message:before {
+  content: "\e952";
+}
+.icon-edit:before {
+  content: "\e953";
+}
+.icon-document-empty:before {
+  content: "\e954";
+}
+.icon-user-info:before {
+  content: "\e955";
+}
+.icon-bonus-close:before {
+  content: "\e956";
+}
+.icon-acount-verification:before {
+  content: "\e957";
+}
+.icon-bonus:before {
+  content: "\e958";
+}
+.icon-calendar:before {
+  content: "\e959";
+}
+.icon-close-ticket:before {
+  content: "\e95a";
+}
+.icon-delete-ticket:before {
+  content: "\e95b";
+}
+.icon-friends:before {
+  content: "\e95c";
+}
+.icon-plus:before {
+  content: "\e95d";
+}
+.icon-ticket:before {
+  content: "\e95e";
+}
+.icon-transaction:before {
+  content: "\e95f";
+}
+.icon-like:before {
+  content: "\e960";
+}
+.icon-exclamation:before {
+  content: "\e964";
+  color: #c2394b;
+}
+.icon-pending:before {
+  content: "\e961";
+  color: #FFD439;
+}
+.icon-verified:before {
+  content: "\e963";
+  color: #4F9961;
+}
+.icon-rejected:before {
+  content: "\e962";
+  color: #5EA8FF;
+}
+.icon-download:before {
+  content: "\e965";
+}
+.icon-person:before {
+  content: "\e966";
+}
+.icon-lock:before {
+  content: "\e967";
+}
+.icon-arrow-thick:before {
+  content: "\e968";
+}
+.icon-expand:before {
+  content: "\e969";
+}
+.icon-Grayhound:before {
+  content: "\e96a";
+  color: #fff;
+}
+.icon-Horse:before {
+  content: "\e96b";
+  color: #fff;
+}
+.icon-documents:before {
+  content: "\e96c";
+}
+.icon-history:before {
+  content: "\e96d";
+}
+.icon-tickets:before {
+  content: "\e96e";
+}
+.icon-transactions:before {
+  content: "\e96f";
+}
+.icon-skype:before {
+  content: "\e971";
+}
+.icon-telegram:before {
+  content: "\e973";
+}
+.icon-whatsapp:before {
+  content: "\e975";
+}
+.icon-warning:before {
+  content: "\e970";
+}
+.icon-Aktionen:before {
+  content: "\e972";
+  color: #fefffe;
+}
+.icon-Sportwetten:before {
+  content: "\e974";
+  color: #fefffe;
+}
+.icon-Livewetten:before {
+  content: "\e976";
+  color: #fefffe;
+}
+.icon-MobileApps:before {
+  content: "\e977";
+  color: #fefffe;
+}
+.icon-eighteen:before {
+  content: "\e978";
+}
+.icon-idea:before {
+  content: "\e979";
+  color: #fff;
+}
+.icon-clock:before {
+  content: "\e97a";
+}
+
+
+
+

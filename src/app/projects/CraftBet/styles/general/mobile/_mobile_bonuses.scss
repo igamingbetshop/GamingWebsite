@@ -1,0 +1,198 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-bonuses-section {
+
+  padding: 15px 10px;
+  margin-top: var(--m-user-views-margin-top, 62px);
+  min-height: calc(100vh - 62px);
+  background: color(m-user-views-background);
+  .success-message, .error-message {
+    white-space: nowrap;
+    width: 100%;
+  }
+  .send-promo-code-box {
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    align-items: center;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--m-bonuses-promo-code-gap, 0px);
+
+    &__form {
+      display: flex;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      flex: 1;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      gap: inherit;
+    }
+
+    .success-message, .error_message {
+      padding: 5px;
+      position: absolute;
+      bottom: -12px;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .success-message {
+      color: $success-message
+    }
+
+    .error-message {
+      color: $error-message
+    }
+
+    select {
+      //width: 220px;
+    }
+
+    input, select {
+      text-indent: 10px;
+      height: var(--m-bonuses-promo-code-height, 100%);
+      border: var(--m-bonuses-promo-code-border, none);
+      border-radius: var(--bonuses-select, 4px);
+      color: itemColor(m-bonuses-promo-code,#303030);
+      background: backgroundColor(m-bonuses-promo-code,transparent);
+      flex: 1;
+    }
+    select
+    {
+      option
+      {
+        color: itemColor(m-bonuses-select,#303030);
+      }
+    }
+    ::placeholder
+    {
+      color: itemColor(m-bonuses-promo-placeholder,#757575);
+    }
+    button {
+      height: 100%;
+      white-space: nowrap;
+      @include m-common-button;
+      padding: 0 20px;
+      width: width(m-promo-bonus-button, 120px);
+      border-radius: var(--m-promo-bonus-button-border-radius, 4px);
+    }
+  }
+
+  &_title {
+    color: color(m-user-views-title);
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: normal;
+    text-align: center;
+    margin-top: var(--m-user-views-title-bonuses-margin-top, 20px);
+  }
+
+  .bonus-tab-bar {
+    margin-top: 10px;
+    display: flex;
+
+    &_item {
+      padding: 10px 20px;
+      cursor: pointer;
+      background: backgroundColor(m-bonus-tab-bar, $header-top-bg);
+      color: $font-color;
+
+      &.active {
+        background: backgroundColor(m-bonus-tab-bar-active, $header-menu-active);
+        color: $font-color;
+      }
+    }
+  }
+
+  .bonus-tab-content {
+    min-height: 300px;
+    background: backgroundColor(m-bonus-tab-content, $header-menu-active);
+    color: $font-color;
+
+
+    .sport-bonus-box {
+      display: flex;
+      flex-direction: column;
+
+      .sport-bonus-column {
+
+        overflow-x: auto;
+
+        table {
+          width: 100%;
+          margin-top: 20px;
+          border-collapse: collapse;
+          border-spacing: 0;
+          font-size: 12px;
+
+          tr {
+            cursor: pointer;
+
+            td {
+              color: $font-color;
+              background: backgroundColor(m-bonus-box-header,$header-top-bg);
+              text-align: center;
+              vertical-align: middle;
+              margin: 0;
+              padding: 10px 5px;
+              font-weight: 500;
+              .craft_btn {
+                color: var(--m-bonus-box-info-btn-color, #000);
+              }
+              .delete-state {
+                height: var(--m-bonus-box-header-delete-icon, 44px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .mobile-bonus-delete-icon {
+                  font-size: var(--m-bonus-box-header-delete-icon-font-size, 16px);
+                }
+              }
+            }
+          }
+        }
+        .mobile-empty-bonuses {
+          position: relative;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border-radius: var(--m-history-empty-block-section-border-radius, 6px);
+          gap: var(--account-extra-big-gap, 16px);
+          .icon {
+            font-size: var(--m-bonuses-info-pagination-section-icon-font-size, 90px);
+            color: var(--m-bonuses-info-pagination-section-icon-color, #fff);
+            margin-top: var(--m-bonuses-info-pagination-section-icon-margin-top, 10px);
+          }
+          .empty-block-text {
+            font-size: var(--history-info-pagination-section-text-font-size, 16px);
+            color: var(--history-info-pagination-section-text-color, #fff);
+
+          }
+        }
+      }
+    }
+
+    .pagination_section {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    &.game-bonus {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      font-size: 20px;
+      justify-content: center;
+      font-weight: 400;
+      color: $font-color;
+    }
+  }
+}

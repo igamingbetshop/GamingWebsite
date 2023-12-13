@@ -1,0 +1,32 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-contact-us-section {
+  min-height: calc(100vh - 60px);
+  margin-top: 60px;
+  background-color: backgroundColor(mobile-info-section, #2a303d);
+  color: itemColor(mobile-info-section-text, #dadbe0);
+
+  h2 {
+    color: itemColor(mobile-info-section-title, #36b550);
+    text-align: center;
+    margin-top: var(--m-user-views-title-contact-us-margin-top, 20px);
+  }
+
+  .page_wrapper {
+    padding: 15px;
+
+    i {
+      color: $register-active-menu
+    }
+
+    .contact_paragraph {
+      margin: 15px 0;
+    }
+
+    .contact_title {
+      font-weight: bold;
+    }
+
+  }
+}

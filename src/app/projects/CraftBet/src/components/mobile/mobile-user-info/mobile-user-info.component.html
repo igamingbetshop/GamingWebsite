@@ -1,0 +1,78 @@
+<div class="mobile-modal-content mobile-info-modal-content">
+  <div class="modal-body flex_between">
+    <h1>{{'User.Info' | translate}}</h1>
+    <fa-icon [icon]="faTimes" (click)="close()"></fa-icon>
+  </div>
+  <div class="modal_content">
+    <ng-container *ngIf="isLoaded">
+      <ng-container *ngIf="userInfoList['Url']; else historyInfoRef">
+        <iframe [src]="userInfoList['Url'] | sanitizer:'resourceUrl'"></iframe>
+      </ng-container>
+      <ng-template #historyInfoRef>
+        <div class="mobile-user-history-content">
+          <div class="flex_between"><span class="mobile-user-history-content__label">{{'User.Transaction_Id' | translate}}
+            :</span>  {{userInfoList['TransactionId']}}</div>
+          <div class="flex_between"><span class="mobile-user-history-content__label">{{'User.Amount' | translate}}
+            :</span> {{userInfoList['BetAmount'] | number: '1.2-2'}} {{CurrencySymbol}}
+          </div>
+          <div class="flex_between"><span class="mobile-user-history-content__label">{{'User.Bet_Date' | translate}}
+            :</span> {{userInfoList['BetDate'] | date: 'dd/MM/yyyy HH:mm'}}</div>
+          <div class="flex_between" *ngIf="userInfoList['Status'] === 1"><span class="mobile-user-history-content__label">{{'User.Poss-Win' | translate}}
+            :</span> {{userInfoList['PossibleWin'] | number: '1.2-2'}}</div>
+          <div class="flex_between" *ngIf="userInfoList['Status'] !== 1"><span class="mobile-user-history-content__label">{{'User.Win-Amount' | translate}}
+            :</span> {{userInfoList['WinAmount'] | number: '1.2-2'}}</div>
+          <div class="flex_between" *ngIf="userInfoList['Coefficient'] !== 0"><span class="mobile-user-history-content__label">{{'User.Coefficient' | translate}}
+            :</span> {{userInfoList['Coefficient']}}</div>
+          <div class="flex_between"><span class="mobile-user-history-content__label">{{'User.Status' | translate}}
+            :</span> {{userInfoList['StatusName']}}</div>
+
+          <h3 *ngIf="userInfoList['BetSelections'] !== null || userInfoList['BetSelections'].length !== 0">{{'User.Bet_selections' | translate}}</h3>
+
+          <div *ngIf="userInfoList['BetSelections'] !== null || userInfoList['BetSelections'].length !== 0">
+            <div class="history-table" *ngFor="let item of userInfoList['BetSelections']">
+              <div class="table-list"  >
+                <div class="table-list__row">
+                  <div class="header-item header-item__1">{{'User.Round_Id' | translate}}</div>
+                  <div class="body-item body-item__1">{{item?.RoundId}}</div>
+                </div>
+                <div class="table-list__row">
+                  <div class="header-item header-item__2">{{'User.Unit_Name' | translate}}</div>
+                  <div class="body-item body-item__2">{{item?.UnitName}}</div>
+                </div>
+                <div class="table-list__row">
+                  <div class="header-item header-item__3">{{'User.Market_Name' | translate}}</div>
+                  <div class="body-item body-item__3">{{item?.MarketName}}</div>
+                </div>
+                <div class="table-list__row">
+                  <div class="header-item header-item__4">{{'User.Selection_Name' | translate}}</div>
+                  <div class="body-item body-item__4">{{item?.SelectionName}}</div>
+                </div>
+                <div class="table-list__row">
+                  <div class="header-item header-item__5">{{'User.Coefficient' | translate}}:</div>
+                  <div class="body-item body-item__5">{{item?.Coefficient}}</div>
+                </div>
+                <div class="table-list__row">
+                  <div class="header-item header-item__5">{{'User.Result' | translate}}</div>
+                  <div class="body-item body-item__5">{{item?.State}}</div>
+                </div>
+
+                <div class="table-list__row">
+                  <div class="header-item header-item__5">{{'User.Status' | translate}}</div>
+                  <div class="body-item body-item__5 status-{{item?.StatusName}}">{{item?.StatusName}}</div>
+                </div>
+
+                <div class="border-line"></div>
+                <div class="table-list__row event-date">
+                  <div class="header-item header-item__6">{{'User.Event_Date' | translate}}</div>
+                  <div class="body-item body-item__6">{{item?.EventDate | date: 'dd/MM h:mm'}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
+

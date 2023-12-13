@@ -1,0 +1,21 @@
+.payment-nominals
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 5px;
+  direction: ltr;
+  button
+  {
+    border:none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px;
+    color:  var(--payment-button-text-color, white);
+    background: -webkit-linear-gradient(90deg, var(--payment-button-background-default-gradient-first-color, #cccccc) 0, var(--payment-button-background-default-gradient-second-color, #000000) 100%);
+    &.selected
+    {
+      background: -webkit-linear-gradient(90deg, var(--payment-button-background-gradient-first-color) 0, var(--payment-button-background-gradient-second-color) 100%);
+      color: var(--payment-button-selected-text-color, white);
+    }
+  }
+}

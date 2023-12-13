@@ -1,0 +1,74 @@
+.transactions-section {
+  height: var(--payment-section-content-width, auto);
+
+  &_title {
+    padding: 0 10px;
+    color: $label-color;
+    font-size: 24px;
+    font-weight: normal;
+  }
+
+  .history-tools-panel {
+    display: flex;
+    align-items: center;
+
+    .history-tools {
+      display: grid;
+      //margin-right: 15px;
+
+      select {
+        //height: 40px;
+        //border-radius: 5px;
+        //min-width: 147px;
+        //border: 1px solid color(settings-table-border);
+
+        option {
+          background-color: backgroundColor(accoutPage-Dpd-option, transparent);
+          color: itemColor(accoutPage-Dpd, #000);
+
+          &:hover, &:checked {
+            background-color: backgroundColor(accoutPage-Dpd-checked, blue);
+            color: itemColor(accoutPage-Dpd-checked, #fff);
+          }
+
+        }
+      }
+
+      .show-btn {
+        color: color(settings-button-text);
+        //margin-top: 24px;
+        padding: 0 20px;
+
+        //&:hover {
+        //  background: linear-gradient(to bottom, color(settings-button-gradient-active-first) 0%, color(settings-button-gradient-active-second) 100%);
+        //}
+      }
+    }
+  }
+
+  form {
+    width: 100%;
+    display: inline-flex;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    tr {
+      font-size: 14px;
+      height: 48px;
+      border-bottom: 1px solid color(settings-table-border);
+    }
+
+    tbody {
+      tr {
+        //background: color(settings-table-header-background);
+
+        td {
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+}

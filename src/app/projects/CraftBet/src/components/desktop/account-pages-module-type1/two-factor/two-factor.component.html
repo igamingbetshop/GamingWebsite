@@ -1,0 +1,42 @@
+<div class="container">
+    <p class="two-factor-title">{{ 'Settings.Otp-required' | translate }}</p>
+    <div class="container-section">
+        <div class="two-factor-section" *ngIf="IsTwoFactorEnabled === false">
+            <ol class="two-factor-ordered-list">
+                <li>
+                    <div class="two-factor-steps-title">{{ 'Settings.Otp-step1-title' | translate }}</div>
+                    <div class="two-factor-steps-description">{{ 'Settings.Otp-step1-description' | translate }}</div>
+                </li>
+                <li>
+                    <div class="two-factor-steps-title">{{ 'Settings.Otp-step2-title' | translate }}</div>
+                    <div class="two-factor-steps-description">
+                        <div class="two-factor-img-part">
+                            <img *ngIf="qrCodeImageSrc" [src]="qrCodeImageSrc" alt="" [width]="_qrCodeWidth" [height]="_qrCodeHeight">
+                        </div>
+                        <div class="two-factor-steps-description-in" [innerHtml]="'Settings.Otp-step2-description' | translate | sanitizer: 'html'"></div>
+                        <div>{{ qrData?.Key }}</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="two-factor-steps-title">{{ 'Settings.Otp-step3-title' | translate }}</div>
+                    <div class="two-factor-steps-description">
+                        <input type="text" class="two-factor-input" maxlength="6" [(ngModel)]="twoFactorCode" (ngModelChange)="validateTwoFactorCode()" placeholder="{{ 'Settings.Otp-input' | translate }}"
+                               (input)="onInput($event)" (keydown)="preventKeys($event)">
+                        <div class="two-factor-steps-description-in">{{ 'Settings.Otp-step3-description' | translate }}</div>
+                    </div>
+                </li>
+            </ol>
+            <div class="enabled-mode">
+                <button class="enable-otp-btn" (click)="enableAuthentication()" [ngClass]="{ 'disabled': !isCodeValid }"
+                        [disabled]="isMaxReached()">{{ 'Settings.Enable-otp' | translate }}</button>
+                <div class="error_message">{{ errorMessage }}</div>
+            </div>
+        </div>
+        <div class="two-factor-section-authenticated" *ngIf="IsTwoFactorEnabled === true">
+            <div class="authentication-label">
+                <p class="authentication-text">{{ 'Settings.Otp-disable-activated-text' | translate }}</p>
+                <button class="disable-otp-btn" (click)="disableAuthentication()">{{ 'Settings.Disable-otp' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="allFormItems">
+    <div class="form_field33">
+        <input #fileRef id="file"
+               type="file"
+               class="inputfile"
+               accept="image/png, image/jpeg, image/jpg, application/pdf"
+               (change)="changeFile($event)" [disabled]="registerService.checkboxStates[formControlName]">
+        <label for="file" [attr.disabled]="registerService.checkboxStates[formControlName]" class="document-label">
+            <span class="m-file-box" *ngIf="!fileData.name">{{'Register.Select File to Upload' | translate}}</span>
+            <span id="file-name" class="m-file-box" *ngIf="fileData.name">{{fileData.name}}</span>
+            <span class="file-button">
+        <span class="icon-plus" aria-hidden="true"
+              [attr.disabled]="registerService.checkboxStates[formControlName]"></span>
+
+        </span>
+
+        </label>
+        <i class="icon-delete-ticket" (click)="reset()"
+           [attr.disabled]="registerService.checkboxStates[formControlName]"></i>
+    </div>
+    <div *ngIf="errorMessage" class="document-error-message">{{'Error.DocumentSizeError' | translate}}</div>
+    <div class="top-row">
+        <div class="info-reg-field1">
+            {{'Register.Maximum Size' | translate}}
+        </div>
+        <div>
+            <a *ngIf="!formOpenInRouting" href="{{formLink}}" class="document-verification-text"
+               target="_blank">{{'Register.DocumentVerification' | translate}}</a>
+            <a *ngIf="formOpenInRouting" href="{{formLink}}"
+               class="document-verification-text">{{'Register.DocumentVerification' | translate}}</a>
+        </div>
+
+    </div>
+    <br>
+    <div class="skip-box">
+        <input #skipRef type="checkbox" id="skip" [checked]="registerService.checkboxStates[formControlName]"
+               (change)="changeSkipValue(skipRef.checked)">
+        <span class="check-label">{{'Register.' + formControlName + 'WillUpload' | translate}}</span><br>
+    </div>
+</div>

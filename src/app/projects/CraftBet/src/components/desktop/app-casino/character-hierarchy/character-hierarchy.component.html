@@ -1,0 +1,36 @@
+<div class="map" *ngIf="userLogined.isAuthenticated">
+    <h2>{{'MR White`s Journey' | translate}}</h2>
+    <div class="character-hierarchy" >
+        <img class="map-image" src="../assets/images/characters/map.png">
+        <div class="character-hierarchy-content level{{i}}" *ngFor="let item of selfHierarchy; let i = index"
+             [class.last]="item.Id === lastItem.Id && selfHierarchy.length > 1">
+            <div  class="character-level"
+                  [class.active]="item.Selected == true"
+                  [class.next-levels]="item?.CompPoints > currentCompPoint"
+
+            >
+                <img *ngIf="item.Id === lastItem.Id && selfHierarchy.length > 1" class="level-bg"  src="../assets/images/characters/last-level.png">
+                <img *ngIf="selfHierarchy.length == 1" class="level-bg"  src="../assets/images/characters/level0.png">
+                <img *ngIf="item.Id !== lastItem.Id" class="level-bg" src="../assets/images/characters/level{{i}}.png">
+                <img class="level-item"  [src]="item?.ImageData">
+                <img *ngIf="item?.CompPoints < currentCompPoint || item?.CompPoints == 0" class="opened-lock lock"  src="../assets/images/characters/opened-lock.svg">
+                <img *ngIf="item?.CompPoints > currentCompPoint" class="closed-lock lock"  src="../assets/images/characters/closed-lock.svg">
+                <div *ngIf="item.Id !== lastItem.Id" class="wrapper"
+                     style="-webkit-mask-image: url('../assets/images/characters/level{{i}}.png');
+                            mask-image: url('../assets/images/characters/level{{i}}.png')"></div>
+                <div *ngIf="item.Id === lastItem.Id" class="wrapper"
+                     style="-webkit-mask-image: url('../assets/images/characters/last-level.png');
+                     mask-image: url('../assets/images/characters/last-level.png')"></div>
+            </div>
+            <div class="info">
+                <div>
+                    <span>{{item.Title | translate}}</span>
+                    <p>{{item.Description | translate}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

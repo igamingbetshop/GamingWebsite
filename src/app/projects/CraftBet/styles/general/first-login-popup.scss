@@ -1,0 +1,46 @@
+.modal-content__first-login {
+  width: 500px;
+
+
+  .toggle-info-block {
+    display: flex;
+
+
+  }
+
+  .info-section {
+    position: absolute;
+    top: 37px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: backgroundColor(first-login-info-section, #fff);
+
+    min-height: 180px;
+    height: auto;
+
+    &__header {
+      height: 50px;
+      padding: 5px 10px;
+      background-color: backgroundColor(first-login-info-header, #2b58e4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      i {
+        margin-right: 10px;
+      }
+    }
+
+    &__body {
+      min-height: 80px;
+      padding: 10px;
+      height: auto;
+      text-align: left;
+      color: #000000;
+    }
+
+
+  }
+
+
+}

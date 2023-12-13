@@ -1,0 +1,191 @@
+.allFormItems {
+  width: 100%;
+  .document-error-message {
+    font-size: 16px;
+    margin-top: 10px;
+    color: red;
+  }
+  .form_field33 {
+    position: relative;
+    margin-top: var(--document-verification-margin-top, 30px);
+
+    .inputfile {
+      display: none;
+    }
+
+    .document-label {
+      color: var(--file-type-label-color, #69696B);
+      border: 1px solid var(--file-type-label-border-color, #f7f7f7);
+      background: var(--file-type-label-background-color, #f2f2f4);
+      padding: var(--file-type-label-padding, 13px);
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+      opacity: 1;
+      visibility: visible;
+      top: -21px;
+      position: relative;
+      pointer-events: auto;
+    }
+
+    .icon-delete-ticket {
+      position: absolute;
+      right: var(--icon-delete-file-right, -67px);
+      top: var(--icon-delete-file-top, 0px);
+      font-size: var(--icon-delete-file-font-size, 25px);
+      color: var(--icon-delete-file-color, #808080);
+      cursor: pointer;
+    }
+
+    .file-box {
+      display: inline-block;
+      //width: 88%;
+      width: var(--file-type-label-width, 370px);
+      padding: 31px 0px 0px 0px;
+      box-sizing: border-box;
+      height: 40px;
+      font-size: var(--file-type-label-font-size, 16px);
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .file-button {
+      background: var(--file-button-background-color, #576CFB);
+      padding: var(--file-button-padding, 10px);
+      position: absolute;
+      border: none;
+      right: var(--file-button-right, -46px);
+      top: var(--file-button-top, 4px);
+      border-radius: 21px;
+      color: white;
+    }
+  }
+
+  .top-row{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    margin-top: 15px;
+    line-height: 20px;
+    .info-reg-field1 {
+      color: var(--max-size-verification, #4E7BA0);
+      width: auto;
+    }
+
+    .document-verification-text {
+      text-decoration: underline;
+      color: var(--document-verification-text-color, #546AF9);
+    }
+  }
+
+  .form_field2 {
+    height: 100%;
+    .text-verification-title {
+      text-transform: uppercase;
+      font-weight: var(--text-verification-title-font-weight, 700);
+      color: var(--text-verification-title-color, #000000);
+      height: 20px;
+    }
+
+    .text-verification-description {
+      font-weight: var(--text-verification-description-font-weight, 400);
+      color: var(--text-verification-description-color, #000000);
+      height: 100%;
+      line-height: 20px;
+    }
+  }
+
+  .skip-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+
+    input, .check-label {
+      height: unset;
+      width: auto;
+      opacity: 1;
+      visibility: visible;
+    }
+    input[type="checkbox"] {
+      accent-color: #599F61;
+    }
+
+    .check-label {
+      //left: -12px;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 18px;
+      opacity: 1;
+      visibility: visible;
+      color: black;
+      position: relative;
+      //top: 23px;
+    }
+    .check-label:focus {
+      color: black;
+    }
+  }
+}
+*[disabled="true"]
+{
+  opacity: .5;
+  pointer-events: none;
+}
+@media screen and (min-width: 1840px) {
+  .allFormItems {
+    .form_field33 {
+        .file-box {
+          //width: 79%;
+          width: 350px;
+        }
+        .icon-delete-ticket {
+          right: -37px;
+        }
+    }
+  }
+}
+@media screen and (min-width: 1610px) and (max-width: 1840px) {
+  .allFormItems {
+    .form_field33 {
+      .file-box {
+        //width: 68%;
+        width: 325px;
+      }
+      .icon-delete-ticket {
+        right: 0px;
+        top: 0px;
+      }
+    }
+    .top-row {
+      //flex-direction: column;
+      font-size: 14px;
+    }
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 1600px) {
+  .allFormItems {
+    .form_field33 {
+      .file-box {
+        //width: 77%;
+        width: 220px;
+      }
+      .icon-delete-ticket {
+        top: 0px;
+        right: -20px;
+      }
+      .file-button {
+        right: -33px;
+      }
+    }
+    .top-row {
+      font-size: 12px;
+    }
+    .skip-box .check-label {
+      font-size: 12px
+    }
+  }
+}

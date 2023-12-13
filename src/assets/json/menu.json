@@ -1,0 +1,1199 @@
+{
+  "MenuList": [
+    {
+      "Type": "AccountTabsList",
+      "Items": [
+        {
+          "Icon": "",
+          "Title": "Finances",
+          "Type": "",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 1,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "Account_Statement",
+              "Type": "2",
+              "Href": "account",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "Deposit",
+              "Type": "1",
+              "Href": "deposit",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "",
+              "Title": "Withdraw",
+              "Type": "1",
+              "Href": "withdraw",
+              "OpenInRouting": false,
+              "Order": 3
+            },
+            {
+              "Icon": "",
+              "Title": "Bank_Accounts",
+              "Type": "1",
+              "Href": "bankAccounts",
+              "OpenInRouting": false,
+              "Order": 4
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "History",
+          "Type": "",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 2,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "My_bets",
+              "Type": "1",
+              "Href": "history",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "My_payments",
+              "Type": "1",
+              "Href": "payments",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "",
+              "Title": "My_transactions",
+              "Type": "2",
+              "Href": "transactions",
+              "OpenInRouting": false,
+              "Order": 3
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Profile",
+          "Type": "",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 3,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "Settings",
+              "Type": "1",
+              "Href": "settings",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "My_tickets",
+              "Type": "1",
+              "Href": "tickets",
+              "OpenInRouting": false,
+              "Order": 2
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Profile_Settings",
+          "Type": "submenu",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 4,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "PersonalDetails",
+              "Type": "",
+              "Href": "",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "ChangePassword",
+              "Type": "",
+              "Href": "",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "",
+              "Title": "AccountVerification",
+              "Type": "",
+              "Href": "",
+              "OpenInRouting": false,
+              "Order": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Type": "CasinoMenu",
+      "Items": [
+        {
+          "Icon": "",
+          "Title": "AllGames",
+          "Type": "all-games",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 1,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "TopGames",
+          "Type": "top-games",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 2,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "ClassicSlots",
+          "Type": "classic-slots",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 3,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Specials",
+          "Type": "specials",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 4,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "TableGames",
+          "Type": "table-games",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 5,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "MyFavorites",
+          "Type": "my-favorites",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 6,
+          "SubMenu": []
+        }
+      ]
+    },
+    {
+      "Type": "FooterMenu",
+      "Items": [
+        {
+          "Icon": "",
+          "Title": "About_Us",
+          "Type": "",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 1,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "About Us",
+              "Type": "",
+              "Href": "about-us",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "FAQ",
+              "Type": "",
+              "Href": "faq",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "",
+              "Title": "Contacts Us",
+              "Type": "",
+              "Href": "contacts",
+              "OpenInRouting": false,
+              "Order": 3
+            },
+            {
+              "Icon": "",
+              "Title": "Terms & Conditions",
+              "Type": "",
+              "Href": "terms",
+              "OpenInRouting": false,
+              "Order": 4
+            },
+            {
+              "Icon": "",
+              "Title": "Privacy Policy",
+              "Type": "",
+              "Href": "privacy",
+              "OpenInRouting": false,
+              "Order": 5
+            },
+            {
+              "Icon": "",
+              "Title": "Betting Rules",
+              "Type": "",
+              "Href": "info/1",
+              "OpenInRouting": false,
+              "Order": 6
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Sport Bet",
+          "Type": "",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 2,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "Sports",
+              "Type": "",
+              "Href": "sport/prematch",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "Live",
+              "Type": "",
+              "Href": "sport/live",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "",
+              "Title": "Pre-match",
+              "Type": "",
+              "Href": "sport/prematch",
+              "OpenInRouting": false,
+              "Order": 3
+            },
+            {
+              "Icon": "",
+              "Title": "Live Results",
+              "Type": "",
+              "Href": "sport/live",
+              "OpenInRouting": false,
+              "Order": 4
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Casino games",
+          "Type": "",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 3,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "Slots",
+              "Type": "",
+              "Href": "casino",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "Table Games",
+              "Type": "",
+              "Href": "casino",
+              "OpenInRouting": false,
+              "Order": 2
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Payment List",
+          "Type": "2",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 4,
+          "SubMenu": [
+            {
+              "Icon": "27.png",
+              "Title": "PerfectMoney",
+              "Type": "1",
+              "Href": "user/deposit/1293",
+              "OpenInRouting": false,
+              "Order": 1
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Socials",
+          "Type": "icons",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 5,
+          "SubMenu": [
+            {
+              "Icon": "instagram.svg",
+              "Title": "Instagram",
+              "Type": "clickable",
+              "Href": "https://www.instagram.com",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "telegram.svg",
+              "Title": "Telegram",
+              "Type": "clickable",
+              "Href": "https://t.me/cup9O",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "18_.svg",
+              "Title": "18+",
+              "Type": "usual",
+              "Href": "",
+              "OpenInRouting": false,
+              "Order": 3
+            },
+            {
+              "Icon": "phone.svg",
+              "Title": "Mobile",
+              "Type": "device",
+              "Href": "https://cup90.net/home",
+              "OpenInRouting": false,
+              "Order": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Type": "HeaderPanel2Menu",
+      "Items": [
+        {
+          "Icon": "",
+          "Title": "Sport",
+          "Type": "standard_header-menu-item",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "sport/prematch",
+          "OpenInRouting": true,
+          "Orientation": false,
+          "Order": 1,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "In-Play",
+          "Type": "standard_header-menu-item",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "sport/live",
+          "OpenInRouting": true,
+          "Orientation": false,
+          "Order": 2,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Casino",
+          "Type": "standard_header-menu-item",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "casino",
+          "OpenInRouting": true,
+          "Orientation": false,
+          "Order": 3,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Live Casino",
+          "Type": "standard_header-menu-item",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "live-casino",
+          "OpenInRouting": true,
+          "Orientation": false,
+          "Order": 4,
+          "SubMenu": [
+            {
+              "Icon": "ezugi",
+              "Title": "Ezugi",
+              "Type": "",
+              "Href": "live-casino/5001/LiveCasino/real",
+              "OpenInRouting": true,
+              "Order": 1
+            },
+            {
+              "Icon": "evolution",
+              "Title": "Evolution",
+              "Type": "",
+              "Href": "live-casino/21001/LiveCasino/real",
+              "OpenInRouting": true,
+              "Order": 3
+            },
+            {
+              "Icon": "tvbet",
+              "Title": "TVBet",
+              "Type": "",
+              "Href": "live-casino/22001/LiveCasino/real",
+              "OpenInRouting": false,
+              "Order": 3
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Poker",
+          "Type": "standard_header-menu-item",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "skill-games/9001/poker/real",
+          "OpenInRouting": true,
+          "Orientation": false,
+          "Order": 5,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Promotions",
+          "Type": "standard_header-menu-item",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "promotions",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 6,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Virtual Games",
+          "Type": "standard_header-menu-item",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "virtual-games",
+          "OpenInRouting": true,
+          "Orientation": false,
+          "Order": 7,
+          "SubMenu": []
+        }
+      ]
+    },
+    {
+      "Type": "MobileFooterMenu",
+      "Items": [
+        {
+          "Icon": "",
+          "Title": "PaymentList",
+          "Type": "2",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": true,
+          "Orientation": true,
+          "Order": 1,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "PerfectMoney",
+              "Type": "1",
+              "Href": "user/deposit/1293",
+              "OpenInRouting": false,
+              "Order": 1
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Socials",
+          "Type": "3",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 2,
+          "SubMenu": [
+            {
+              "Icon": "instagram.svg",
+              "Title": "Instagram",
+              "Type": "clickable",
+              "Href": "https://www.instagram.com/",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "telegram.svg",
+              "Title": "Telegram",
+              "Type": "clickable",
+              "Href": "https://t.me/",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "18_.svg",
+              "Title": "18+",
+              "Type": "usual",
+              "Href": "",
+              "OpenInRouting": false,
+              "Order": 3
+            },
+            {
+              "Icon": "phone.svg",
+              "Title": "Mobile",
+              "Type": "device",
+              "Href": "https://cup90.net/home",
+              "OpenInRouting": false,
+              "Order": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Type": "MobileMenu",
+      "Items": [
+        {
+          "Icon": "",
+          "Title": "Products",
+          "Type": "",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": true,
+          "Orientation": false,
+          "Order": 1,
+          "SubMenu": [
+            {
+              "Icon": ".",
+              "Title": "Sport",
+              "Type": "",
+              "Href": "sport/prematch",
+              "OpenInRouting": true,
+              "Order": 1
+            },
+            {
+              "Icon": ".",
+              "Title": "In-Play",
+              "Type": "",
+              "Href": "sport/live",
+              "OpenInRouting": true,
+              "Order": 2
+            },
+            {
+              "Icon": ".",
+              "Title": "Casino",
+              "Type": "",
+              "Href": "casino/all-games",
+              "OpenInRouting": true,
+              "Order": 3
+            },
+            {
+              "Icon": ".",
+              "Title": "Live Casino",
+              "Type": "live-casino",
+              "Href": "live-casino",
+              "OpenInRouting": true,
+              "Order": 4
+            },
+            {
+              "Icon": "",
+              "Title": "Poker",
+              "Type": "skill-games",
+              "Href": "skill-games/9001/poker/real",
+              "OpenInRouting": false,
+              "Order": 5
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Adverts",
+          "Type": "",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": true,
+          "Orientation": false,
+          "Order": 2,
+          "SubMenu": [
+            {
+              "Icon": "promotion.png",
+              "Title": "Promotions",
+              "Type": "",
+              "Href": "promotions",
+              "OpenInRouting": true,
+              "Order": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Type": "MobileRightSidebar",
+      "Items": [
+        {
+          "Icon": "",
+          "Title": "Finances",
+          "Type": "2",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 1,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "Account_Statement",
+              "Type": "",
+              "Href": "account",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "",
+              "Title": "Deposit",
+              "Type": "",
+              "Href": "deposit",
+              "OpenInRouting": false,
+              "Order": 3
+            },
+            {
+              "Icon": "",
+              "Title": "Withdraw",
+              "Type": "",
+              "Href": "withdraw",
+              "OpenInRouting": false,
+              "Order": 4
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "History",
+          "Type": "2",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 2,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "My_bets",
+              "Type": "",
+              "Href": "history",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "My_payments",
+              "Type": "",
+              "Href": "payments",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "",
+              "Title": "My_transactions",
+              "Type": "",
+              "Href": "transactions",
+              "OpenInRouting": false,
+              "Order": 3
+            },
+            {
+              "Icon": "",
+              "Title": "My_bonuses",
+              "Type": "",
+              "Href": "bonuses",
+              "OpenInRouting": false,
+              "Order": 4
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Profile",
+          "Type": "2",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 3,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "Settings",
+              "Type": "",
+              "Href": "settings",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "My_tickets",
+              "Type": "",
+              "Href": "tickets",
+              "OpenInRouting": false,
+              "Order": 2
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Help",
+          "Type": "1",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 4,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "ContactUs",
+              "Type": "",
+              "Href": "contactus",
+              "OpenInRouting": true,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "AboutUs",
+              "Type": "",
+              "Href": "about-us",
+              "OpenInRouting": true,
+              "Order": 2
+            },
+            {
+              "Icon": "",
+              "Title": "FAQ",
+              "Type": "",
+              "Href": "faq",
+              "OpenInRouting": true,
+              "Order": 3
+            },
+            {
+              "Icon": "",
+              "Title": "Privacy_policy",
+              "Type": "",
+              "Href": "privacy",
+              "OpenInRouting": true,
+              "Order": 4
+            },
+            {
+              "Icon": "",
+              "Title": "Terms_conditions",
+              "Type": "",
+              "Href": "terms",
+              "OpenInRouting": true,
+              "Order": 5
+            },
+            {
+              "Icon": "",
+              "Title": "Web Device",
+              "Type": "device",
+              "Href": "",
+              "OpenInRouting": false,
+              "Order": 6
+            }
+          ]
+        },
+        {
+          "Icon": "",
+          "Title": "Login",
+          "Type": "loginBtn_button",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 5,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Regitration",
+          "Type": "signupBtn_button",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 6,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Profile_Settings",
+          "Type": "submenu",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 7,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "PersonalDetails",
+              "Type": "",
+              "Href": "",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "ChangePassword",
+              "Type": "",
+              "Href": "",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "",
+              "Title": "AccountVerification",
+              "Type": "",
+              "Href": "",
+              "OpenInRouting": false,
+              "Order": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Type": "NewsMenu",
+      "Items": []
+    },
+    {
+      "Type": "HeaderPanel1Menu",
+      "Items": [
+        {
+          "Icon": "",
+          "Title": "Logo",
+          "Type": "logoImg_image",
+          "StyleType": "\"{\\\"style\\\":\\\"style2\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 1,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Seperator",
+          "Type": "",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": true,
+          "Order": 2,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Login Button",
+          "Type": "loginBtn_button",
+          "StyleType": "\"{\\\"style\\\":\\\"style2\\\", \\\"visibility\\\":\\\"loggedOut\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 3,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Registration",
+          "Type": "signupBtn_button",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"loggedOut\\\", \\\"animated\\\":\\\"1\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 4,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Client Id",
+          "Type": "userIdTxt_text",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"loggedIn\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 5,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Tickets",
+          "Type": "ticketsImg_image",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"loggedIn\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 6,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Balance",
+          "Type": "balanceTxt_text",
+          "StyleType": "\"{\\\"style\\\":\\\"style2\\\", \\\"visibility\\\":\\\"loggedIn\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 7,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Bonus Balance",
+          "Type": "bonusBalanceTxt_text",
+          "StyleType": "\"{\\\"style\\\":\\\"style2\\\", \\\"visibility\\\":\\\"loggedIn\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 8,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Deposit",
+          "Type": "depositBtn_button",
+          "StyleType": "\"{\\\"style\\\":\\\"style3\\\", \\\"visibility\\\":\\\"loggedIn\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "user/deposit",
+          "OpenInRouting": true,
+          "Orientation": false,
+          "Order": 9,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Account Pages Dropdown",
+          "Type": "accountPagesDpd_dropdown",
+          "StyleType": "\"{\\\"style\\\":\\\"style2\\\", \\\"visibility\\\":\\\"loggedIn\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 10,
+          "SubMenu": []
+        },
+        {
+          "Icon": "fa-sign-out",
+          "Title": "Logout",
+          "Type": "logoutBtn_button",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"loggedIn\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 11,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Language Dropdown",
+          "Type": "languageDpd_dropdown",
+          "StyleType": "\"{\\\"style\\\":\\\"style1\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\", \\\"images\\\":\\\"1\\\", \\\"title\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 12,
+          "SubMenu": []
+        },
+        {
+          "Icon": "",
+          "Title": "Time",
+          "Type": "time_header-menu-item",
+          "StyleType": "\"{\\\"style\\\":\\\"style2\\\", \\\"visibility\\\":\\\"always\\\", \\\"animated\\\":\\\"0\\\"}\"",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 13,
+          "SubMenu": []
+        }
+      ]
+    },
+    {
+      "Type": "Registration",
+      "Items": [
+        {
+          "Icon": "",
+          "Title": "QuickRegister",
+          "Type": "",
+          "StyleType": "",
+          "Href": "",
+          "OpenInRouting": false,
+          "Orientation": false,
+          "Order": 8,
+          "SubMenu": [
+            {
+              "Icon": "",
+              "Title": "CurrencyId",
+              "Type": "Currency",
+              "Href": "{\"size\":\"2\", \"mandatory\":\"1\", \"hasLabel\":\"0\"}",
+              "OpenInRouting": false,
+              "Order": 1
+            },
+            {
+              "Icon": "",
+              "Title": "UserName",
+              "Type": "text",
+              "Href": "{\"size\":\"2\", \"mandatory\":\"1\", \"hasLabel\":\"0\"}",
+              "OpenInRouting": false,
+              "Order": 2
+            },
+            {
+              "Icon": "[{\"Type\":\"Mobile\"}, {\"Type\":\"Email\"}]",
+              "Title": "RegisterTypes",
+              "Type": "dropdown",
+              "Href": "{\"size\":\"2\", \"mandatory\":\"0\", \"hasLabel\":\"0\"}",
+              "OpenInRouting": false,
+              "Order": 3
+            },
+            {
+              "Icon": "",
+              "Title": "Mobile",
+              "Type": "MobileData",
+              "Href": "{\"size\":\"2\", \"mandatory\":\"1\", \"hasLabel\":\"0\"}",
+              "OpenInRouting": false,
+              "Order": 4
+            },
+            {
+              "Icon": "",
+              "Title": "Email",
+              "Type": "text",
+              "Href": "{\"size\":\"2\", \"mandatory\":\"1\", \"hasLabel\":\"0\"}",
+              "OpenInRouting": false,
+              "Order": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ProductCategories": [
+    {
+      "Type": "classic-slots",
+      "Products": [
+        6,
+        6001,
+        6002,
+        6003,
+        6004,
+        6005,
+        6006,
+        6007,
+        6008,
+        6009,
+        6010,
+        6011,
+        6013,
+        6014,
+        6015,
+        6016,
+        6017,
+        6018,
+        6019,
+        6020,
+        6021,
+        6025,
+        6037,
+        6041,
+        6042,
+        6043,
+        6044,
+        6045,
+        6046,
+        6047,
+        6048,
+        6049,
+        6050,
+        6062,
+        6063,
+        6064,
+        6065,
+        6066,
+        6067,
+        6070,
+        6071,
+        6072,
+        6073,
+        6074,
+        6075,
+        6076,
+        6077,
+        6078,
+        6079,
+        6080,
+        6086,
+        6087,
+        6088,
+        6089,
+        6090,
+        6091,
+        6093,
+        6094,
+        6096,
+        6097
+      ]
+    },
+    {
+      "Type": "virtual-games",
+      "Products": [
+        101,
+        103,
+        102
+      ]
+    },
+    {
+      "Type": "live-casino",
+      "Products": [
+        5001
+      ]
+    }
+  ]
+}

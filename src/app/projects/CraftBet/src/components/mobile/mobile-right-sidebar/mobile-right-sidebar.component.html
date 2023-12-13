@@ -1,0 +1,98 @@
+<div class="mobile-right-sidebar-section">
+    <app-custom-sidebar
+            [position]="position"
+            [overlay]="true"
+            [closeOnOutsideClick]="true"
+            [closeOnSidebarClick]="true"
+
+            [(isOpen)]="sidebarOpenState"
+    >
+
+        <div class="flex_container">
+            <div class="flex_child" *ngIf="!isLogin">
+                <div class="close_sidebar">
+                    <fa-icon [icon]="faUser" [size]="'2x'"></fa-icon>
+                    <span class="user_panel_title">
+            {{ 'User.Account' | translate }}
+          </span>
+                </div>
+                <div class="signup_signin" *ngIf="!isLogin">
+                    <button class="signin" [routerLink]="['/login']" *ngIf="isSignInButton?.Type == 'loginBtn_button'">
+                        {{ 'Login.Sign In' | translate }}
+                    </button>
+                    <button class="signup" [routerLink]="['/signup']"
+                            *ngIf="isSignUpButton?.Type == 'signupBtn_button'">
+                        {{ 'Login.Sign Up' | translate }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex_child" style="height: 100%">
+
+                <div class="close_sidebar right-close-sidebar" *ngIf="isLogin">
+                    <div class="user_panel_title_top">
+                        <fa-icon [icon]="['fas', 'user']" [size]="'2x'"></fa-icon>
+                        <span class="user_panel_title">{{userData?.Id}}</span>
+                        <span class="icon-close-modal" (click)="sidebarOpenState = !sidebarOpenState"></span>
+                    </div>
+                    <div class="ticket-info-block">
+                        <div class="info-block-top">
+                            <span class="info-block-top-label">{{'User.Balance' | translate}}</span>
+                            <span class="info-block-top-value"> {{balance | toNumber | number: '.2'}} {{userInfoData?.CurrencyId}}</span>
+                        </div>
+                        <ng-template #ticketsRef></ng-template>
+                    </div>
+                </div>
+
+                <div class="close_sidebar only-icon only-icon-close-sidebar">
+                    <div class="sidebar_heading"> {{'Header.More' | translate}}</div>
+                    <span class="icon-right-arrow sidebar_heading_icon"></span>
+                </div>
+
+                <ul class="general-menu">
+                    <div class="menu_items">
+                        <div *ngFor="let item of menuList">
+                            <li class="general-menu_header"
+                                *ngIf="isLogin ? (item.Type == 2 || item.Type == 1) : (item.Type == 1)">
+                                <a class="title_menu" *ngIf="menuList.length > 1">
+                                    {{'User.' + item?.Title | translate}}
+                                </a>
+                                <ul class="user-left-panel_subList">
+                                    <!--                  (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/'-->
+                                    <li class="general-menu_item" *ngFor="let subItem of item?.SubMenu"
+                                        routerLinkActive="active"
+                                        [routerLink]="(subItem?.Type === '1' ? '/' : '/user/' + this.configService.defaultOptions.AccountTemplateType+ '/') + subItem?.Href"
+                                        (click)="changePage(subItem, item)">
+
+                                        <div class="left-part-menuItem">
+                                            <ng-container *ngIf="subItem?.Src; else menuItemIcon">
+                                                <img [src]="subItem?.Src" alt="">
+                                            </ng-container>
+                                            <ng-template #menuItemIcon>
+                                                <span *ngIf="subItem?.Icon" class="item_menu__icon {{subItem?.Icon}}"></span>
+                                            </ng-template>
+                                            <!--                                            <span *ngIf="subItem.Icon" class="item_menu__icon {{subItem?.Icon}}"></span>-->
+                                            <a class="item_menu">
+                                                {{'User.' + subItem?.Title | translate}}
+                                            </a>
+                                        </div>
+                                        <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                    </div>
+
+                    <div class="logout_button" *ngIf="isLogin" (click)="logOut()">
+                        <li class="general-menu_item logout">
+                            <span class="icon-log-out"></span>
+                            <a class="log-out-link">{{'User.Logout' | translate}}</a>
+                            <fa-icon [icon]="['fas', 'sign-out-alt']" class="log-out-logo"></fa-icon>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </app-custom-sidebar>
+</div>
+

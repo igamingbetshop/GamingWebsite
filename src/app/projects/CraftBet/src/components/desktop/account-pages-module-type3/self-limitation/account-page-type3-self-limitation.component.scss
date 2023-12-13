@@ -1,0 +1,700 @@
+.user-right-panel_title {
+  //padding: 10px 0 30px 0px;
+  //height: 80px;
+  height: auto;
+  padding-bottom: 10px;
+}
+.self-limitation-credit {
+  margin: 25px 20px;
+  padding: 11px 14px 11px 15px !important;
+  border: 1px solid #bcbcbc;
+}
+.self-limitation-tab {
+  //padding: 14px 17px 49px 27px;
+  overflow-x: hidden;
+  .open-more-limits {
+    cursor: default;
+    text-align: left;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    font-size: var(--self-limitation-open-more-font-size, 15px);
+    .click-here {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+  .container-part2 {
+    border: var(--self-limitation-container-part-border, 1px solid #bcbcbc)!important;
+  }
+  .container-part {
+    margin-bottom: var(--self-limitation-container-margin-bottom, 10px);
+    border-radius: var(--self-limitation-container-border-radius, 4px);
+    border: 1px solid #fff;
+    .titles {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--self-limitation-container-background, #fff);
+      width: var(--self-limitation-container-width, 100%);
+      color: var(--self-limitation-container-color, #000);
+      margin: var(--self-limitation-container-margin, 0 auto);
+      padding: var(--self-limitation-container-padding, 14px 15px);
+      cursor: pointer;
+      .change-icon {
+        color: var(--self-limitation-container-icon-color, #000);
+        transform: rotate(90deg);
+        font-size: var(--self-limitation-container-icon-font-size, 15px);
+      }
+      .self-limitation-tab-text {
+        font-size: var(--self-limitation-container-text-font-size, 18px);
+        font-weight: var(--self-limitation-container-text-font-weight, 600);
+      }
+    }
+    .opened {
+      & + .tabs {
+        display: block
+      }
+
+      .change-icon {
+        transform: rotate(-90deg)
+      }
+    }
+    //.tabs-opened {
+    //  display: block !important;
+    //}
+    .tabs {
+      background: #fff;
+      color: #000;
+      padding-bottom: 16px;
+      padding-top: 13px;
+      display: none;
+      .self-limit-title {
+        text-align: left;
+        margin: var(--self-limit-title-margin, 0 auto 20px);
+        padding: var(--self-limit-title-padding, 0 20px);
+        font-size: var(--self-limit-title-font-size, 15px);
+        font-weight: var(--self-limit-title-font-weight, 400);
+        cursor: default;
+      }
+      .self-limit-title2 {
+        margin: var(--self-limit-title2-margin, 20px auto 20px);
+        cursor: default;
+      }
+      .self-limit-title3 {
+        display: var(--self-limit-title3-display, block);
+      }
+      .self-exclusion-section {
+        width: 90%;
+        text-align: left;
+        margin: var(--self-exclusion-section-margin, 0 auto);
+        list-style-type: disc;
+        font-weight: var(--self-exclusion-section-font-weight, 600);
+        font-size: var(--self-exclusion-section-font-size, 16px);
+        cursor: default;
+      }
+
+      .periods {
+        .period-label {
+          margin: 16px auto 3px;
+          text-align: left;
+          padding: 0 20px;
+          font-size: var(--self-limitation-time-select-label-font-size, 15px);
+          font-weight: var(--self-limitation-time-select-label-font-weight, 600);
+          cursor: default;
+        }
+        .custom_dropdown_reg {
+          background: var(--self-limitation-time-select-background, #fff);
+          border: var(--self-limitation-time-select-border, 1px solid #A0A0A0);
+          margin: var(--self-limitation-time-select-margin, 0 20px);
+          width: var(--self-limitation-time-select-width, 47%);
+
+          .current_item {
+            height: var(--self-limitation-time-select-height, 50px);
+            background: var(--self-limitation-time-select-background, #fff);
+            border-radius: var(--self-limitation-time-select-border-radius, 2px);
+            border: none;
+            font-size: var(--self-limitation-time-select-font-size, 15px);
+            color: var(--self-limitation-time-select-color, #000);
+            justify-content: var(--self-limitation-time-select-justify-content, space-between);
+            .selected-item {
+              display: inline-block;
+              overflow-x: hidden;
+              overflow-y: hidden;
+              word-break: break-word;
+              text-align: left;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
+
+          .current_item:hover {
+            color: var(--self-limitation-time-select-hover-color, #000);
+            background: var(--self-limitation-time-select-hover-background, #fff)
+          }
+
+          .change-icon2 {
+            transform: rotate(90deg);
+            font-size: var(--self-limitation-time-select-icon-font-size, 16px);
+            color: var(--self-limitation-time-select-icon-color, #000);
+            margin-left: 10px;
+          }
+          .custom_dropdown_list {
+            background: #fff;
+            border-color: var(--self-limitation-time-select-border-color, #A0A0A0);
+            height: auto;
+            //margin-top: 10px;
+
+            .custom_dropdown_list_items {
+              font-size: 15px;
+              height: 35px;
+              text-align: var(--self-limitation-time-select-item-text-align, left);
+              line-height: 35px;
+              background: var(--self-limitation-time-select-item-background, transparent);
+            }
+            .selected-reason {
+              background: var(--self-limitation-time-select-item-selected-background, #f6a201);
+            }
+            .selected-reason:hover {
+              background: var(--self-limitation-time-select-item-hover-background, #f6a201) !important;
+            }
+
+            .custom_dropdown_list_items:hover {
+              background: var(--self-limitation-time-select-list-item-hover-background, #fff);
+              color: var(--self-limitation-time-select-list-item-hover-color, #000);
+            }
+          }
+        }
+      }
+      .self-exclusion-row-date-password {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-top: var(--self-exclusion-row-margin-top, 20px);
+        width: var(--self-exclusion-row-width, 49.5%);
+        padding: 0 0 0 20px;
+        .date-input {
+          text-align: left;
+          color: white;
+        }
+        .self-exclusion-row-date-input {
+          display: block;
+          text-indent: 16px;
+          font-size: 15px;
+          height: var(--self-exclusion-row-input-height, 50px);
+          border: var(--self-exclusion-row-input-border, 1px solid #A0A0A0);
+          border-radius: var(--self-exclusion-row-input-border-radius, 2px);
+          background: var(--self-exclusion-row-input-background, #fff);
+        }
+        .self-limitation-password-field-type {
+          position: absolute;
+          right: var(--self-exclusion-row-input-icon-right, 12px);
+          top: var(--self-exclusion-row-input-icon-top, 33px);
+          cursor: pointer;
+          font-size: var(--self-exclusion-row-input-icon-font-size, 21px);
+        }
+      }
+      .self-exclusion-row-date {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-top: var(--self-exclusion-row-margin-top, 20px);
+        padding: 0 20px;
+        .date-input {
+          text-align: left;
+        }
+        .self-exclusion-row-date-input {
+          width: 47%;
+          display: block;
+          text-indent: 16px;
+          font-size: 15px;
+          text-align: center;
+          height: 50px;
+          border: 1px solid #A0A0A0;
+          border-radius: 2px;
+          background: #fff;
+        }
+      }
+      .save-button {
+        cursor: pointer;
+        margin: 25px 20px 0;
+        width: var(--self-exclusion-row-btn-width, 47%);
+        border: none;
+        background: var(--self-exclusion-row-btn-background, linear-gradient(180deg, #009640 0%, #008237 100%));
+        color: var(--self-exclusion-row-btn-color, #fff);
+        font-size: var(--self-exclusion-row-btn-font-size, 18px);
+        font-weight: var(--self-exclusion-row-btn-font-weight, 600);
+        text-align: center;
+        height: var(--self-exclusion-row-btn-height, 50px);
+        border-radius: var(--self-exclusion-row-btn-border-radius, 2px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .error-message-self-limitation-lock {
+        top: 16px;
+      }
+      .accountClosure-tab {
+        .accountClosure-tab-text {
+          text-align: left;
+          margin: 0 auto;
+          padding: 0 16px;
+          font-size: 15px;
+          font-weight: 400;
+          cursor: default;
+        }
+        .lost-tab-text {
+          text-align: var(--self-limit-lost-tab-text-align, left);
+          margin: var(--self-limit-lost-tab-text-margin, 0 auto);
+          padding: var(--self-limit-lost-tab-text-padding, 0 20px 10px);
+          font-size: var(--self-limit-lost-tab-text-font-size, 15px);
+          font-weight: var(--self-limit-lost-tab-text-font-weight, 400);
+          cursor: default;
+        }
+        .selected-tab-text {
+          text-align: var(--self-limit-selected-tab-text-align, left);
+        }
+        .limit-type-form {
+          .limit-type {
+            .show-percentage-info {
+              text-align: left;
+              padding: 5px 20px 0;
+              color: var(--deposit-limit-error-color, #FF0000);
+              font-weight: 600;
+            }
+            .limit-type-check-big-part {
+              width: 47%;
+              margin: 10px 20px 0px 20px;
+              border: 1px solid #a0a0a0;
+              border-radius: 2px;
+              padding: 9px 13px 15px;
+              .limit-type-check-part {
+                display: flex;
+                gap: 8px;
+                .limit-icon-user-info {
+                  font-size: 28px;
+                }
+                .limit-check-part-text {
+                  font-size: 13px;
+                  text-align: left;
+                  line-height: 19px;
+                  .limit-check-part-btn-part {
+                    margin-top: 10px;
+                    .limit-check-part-btn {
+                      width: 60%;
+                      height: 35px;
+                      background: linear-gradient(180deg, #009640 0%, #008237 100%);
+                      color: #fff;
+                      font-size: 15px;
+                      font-weight: 600;
+                      border: none;
+                      border-radius: 2px;
+                      cursor: pointer;
+                    }
+                  }
+                }
+              }
+            }
+            .limit-type_row-flex {
+              display: var(--self-limit-type-row-display, block);
+              justify-content: var(--self-limit-type-row-justify-content, space-between);
+              align-items: var(--self-limit-type-row-align-items, center);
+            }
+            .limit-type_row {
+              position: relative;
+              .items-list {
+                display: flex;
+                align-items: center;
+                padding: 0 20px;
+                gap: 10px;
+                margin-bottom: 15px;
+                .item-list {
+                  border-radius: 50px;
+                  padding: var(--self-limit-list-item-padding, 8px 25px);
+                  font-size: var(--self-limit-list-item-font-size, 16px);
+                  background: var(--self-limit-list-item-background, #fff);
+                  border: var(--self-limit-list-item-border, 1px solid #bcbcbc);
+                  cursor: pointer;
+                }
+                .selected {
+                  background: var(--self-limit-list-item-selected-background, #F6A200);
+                  color: var(--self-limit-list-item-selected-color, #fff);
+                  font-weight: var(--self-limit-list-item-selected-font-weight, 600);
+                  border: none;
+                }
+              }
+              .last-change-date {
+                text-align: left;
+                margin: 5px 0 0 0;
+                padding: 0 20px;
+                cursor: default;
+              }
+              .limit-type-text {
+                text-align: left;
+                margin: 0 auto;
+                padding: 0 20px;
+                font-size: 15px;
+                font-weight: 400;
+                cursor: default;
+              }
+              .limit-type-text-deposit-monthly {
+                text-align: left;
+                margin: var(--self-limit-type-text-deposit-margin, 0 auto);
+                padding: var(--self-limit-type-text-deposit-padding, 0 20px 5px);
+                font-size: var(--self-limit-type-text-deposit-monthly-font-size, 15px);
+                font-weight: var(--self-limit-type-text-deposit-monthly-font-weight, 700);
+                width: var(--self-limit-type-text-deposit-width, 100%);
+                color: var(--self-limit-type-text-deposit-monthly-color, #000);
+                display: block;
+                cursor: default;
+              }
+              .limit-type-text-deposit-monthly2 {
+                font-size: var(--self-limit-type-text-deposit-font-size, 15px);
+                font-weight: var(--self-limit-type-text-deposit-font-weight, 600);
+                color: var(--self-limit-type-text-deposit-color, #000)
+              }
+              .limit-type-text-monthly {
+                text-align: left;
+                margin: var(--self-limit-type-text-monthly-margin, 0 auto);
+                padding: var(--self-limit-type-text-monthly-padding, 0 20px 5px);
+                font-size: var(--self-limit-type-text-monthly-font-size, 15px);
+                font-weight: var(--self-limit-type-text-monthly-font-weight, 400);
+                width: var(--self-limit-type-text-monthly-width, 100%);
+                display: block;
+                cursor: default;
+              }
+              .limit-type-span {
+                text-align: left;
+                padding: 8px 20px 5px;
+                font-size: 15px;
+                font-weight: 400;
+                color: #BCBCBC;
+                width: 100%;
+                display: block;
+              }
+              .limit-type-input {
+                height: 34px;
+                border: 1px solid #BCBCBC;
+                border-radius: 5px;
+                width: 47%;
+                display: block;
+                margin: 0 20px;
+                background: #fff;
+                text-indent: 16px;
+                font-size: 15px;
+                text-align: center;
+              }
+              .limit-type-input-deposit {
+                height: 50px;
+                border: 1px solid #BCBCBC;
+                border-radius: 2px;
+                width: 47%;
+                display: block;
+                margin: 0 20px;
+                background: #fff;
+                text-indent: 16px;
+                font-size: 18px;
+                font-weight: 700;
+                text-align: left;
+                cursor: default;
+              }
+              .limit-type-input-deposit::placeholder {
+                font-weight: 400;
+                font-size: 16px;
+                color: #A0A0A0;
+              }
+              .limit-type-currency {
+                position: absolute;
+                width: auto;
+                bottom: var(--self-limit-type-currency-bottom, 11px);
+                font-size: var(--self-limit-type-currency-font-size, 22px);
+                right: var(--self-limit-type-currency-right, 0);
+                //left: 0;
+                //right: -40px;
+              }
+              .limit-type-currency-monthly {
+                display: var(--self-limit-type-currency-display, block);
+              }
+              .limit-amount-label {
+                color: #a0a0a0;
+                left: 40px;
+                position: absolute;
+                width: auto;
+                transform-origin: 0 50%;
+                transition: transform 200ms, color 200ms;
+                pointer-events: none;
+                top: 53px;
+                font-size: 20px;
+                display: var(--self-limit-amount-label-display, block);
+              }
+              .limit-amount-label.active {
+                transform: translateY(-16px) translateX(0px) scale(0.75);
+                font-size: 18px;
+              }
+              input:focus ~ .limit-amount-label {
+                top: 53px;
+                font-size: 18px;
+              }
+              input:focus ~ .limit-amount-label,
+              input:not(:placeholder-shown) ~ .limit-amount-label {
+                transform: translateY(-16px) translateX(0px) scale(0.75);
+                font-size: 18px;
+              }
+              .limit-type-field-submit {
+                height: 37px;
+                border-radius: 5px;
+                width: 47%;
+                display: block;
+                margin: 34px 20px 0 20px;
+                font-size: 15px;
+                background: #F6A201;
+                color: #fff;
+                border: none;
+                cursor: pointer;
+              }
+              .limit-buttons {
+                display: flex;
+                width: var(--change-limit-buttons-width, 47%);
+                margin: var(--change-limit-buttons-margin, 34px 20px 5px 20px);
+                align-items: center;
+                gap: 12px;
+                height: var(--change-limit-buttons-height, 50px);
+                .limit-type-field-opened-submit {
+                  height: 100%;
+                  border-radius: 2px;
+                  width: 50%;
+                  display: block;
+                  font-size: var(--change-limit-buttons-font-size, 18px);
+                  font-weight: 600;
+                  background: linear-gradient(180deg, #009640 0%, #008237 100%);
+                  color: #fff;
+                  border: none;
+                  cursor: pointer;
+                }
+                .limit-type-field-opened-cancel {
+                  height: 100%;
+                  border-radius: var(--change-limit-buttons-border-radius, 3px);
+                  width: 50%;
+                  display: block;
+                  font-size: var(--change-limit-buttons-font-size, 18px);
+                  font-weight: 600;
+                  background: linear-gradient(180deg, #E30613 0%, #C10000 100%);
+                  color: #fff;
+                  border: none;
+                  cursor: pointer;
+                }
+              }
+              .change-limit-type-field-submit {
+                height: var(--change-limit-button-height, 50px);
+                border-radius: var(--change-limit-button-border-radius, 2px);
+                width: var(--change-limit-button-width, 47%);
+                display: block;
+                margin: 34px 20px 10px 20px;
+                font-size: var(--change-limit-button-font-size, 18px);
+                font-weight: var(--change-limit-button-font-weight, 400);
+                background: linear-gradient(#009640, #008237);
+                color: #fff;
+                border: none;
+                cursor: pointer;
+              }
+              .validation-error {
+                position: absolute;
+                bottom: -24px;
+                left: 20px;
+                font-size: 12px;
+                color: red;
+              }
+              .validation-input-error {
+                border: 1px solid red;
+              }
+            }
+            .limit-type_row-input {
+              position: relative;
+              width: var(--self-limit-deposit-input-width, 47%);
+              .limit-type-input-deposit {
+                height: var(--self-limit-input-height, 50px);
+                border: var(--self-limit-input-border, 1px solid #BCBCBC);
+                border-radius: var(--self-limit-input-border-radius, 2px);
+                width: var(--self-limit-input-width, 100%);
+                display: block;
+                margin: var(--self-limit-input-margin, 0 20px);
+                background: var(--self-limit-input-background, #fff);
+                text-indent: 16px;
+                font-size: var(--self-limit-input-font-size, 18px);
+                font-weight: var(--self-limit-input-font-weight, 700);
+                text-align: left;
+              }
+              .limit-type-input-deposit::placeholder {
+                font-size: var(--self-limit-input-font-size, 18px);
+              }
+              .limit-type-input-deposit2 {
+                height: var(--self-limit-deposit-input-height, 50px);
+                border: var(--self-limit-deposit-input-border, 1px solid #BCBCBC);
+                border-radius: var(--self-limit-deposit-input-border-radius, 2px);
+                width: 100%;
+                display: block;
+                margin: var(--self-limit-deposit-input-margin, 0 20px);
+                background: var(--self-limit-deposit-input-background, #fff);
+                text-indent: 16px;
+                font-size: var(--self-limit-deposit-input-font-size, 18px);
+                font-weight: var(--self-limit-deposit-input-font-weight, 700);
+                text-align: left;
+              }
+            }
+            .limit-type-opened-row {
+              padding-top: 17px;
+            }
+          }
+        }
+        .success-message-self-limitation {
+          text-align: left;
+          padding: 3px 10px;
+          color: green;
+        }
+        .error-message-self-limitation {
+          top: 10px;
+          left: 20px;
+          border-left: none;
+          background: transparent;
+          height: 14px;
+          font-weight: 600;
+          padding-left: 0;
+        }
+        .accountClosure-tab-form {
+          display: flex;
+          flex-direction: column;
+          gap: var(--accountClosure-form-gap, 23px);
+          padding: var(--accountClosure-form-padding, 18px 20px 0px 20px);
+          width: var(--accountClosure-form-width, 47%);
+          .form_field {
+            position: relative;
+            .put-password-input {
+              height: var(--accountClosure-password-input-height, 50px);
+              border: var(--accountClosure-password-input-border, 1px solid #A0A0A0);
+              border-radius: var(--accountClosure-password-input-border-radius, 2px);
+              font-size: var(--accountClosure-password-input-font-size, 15px);
+              background: var(--accountClosure-password-input-background, #fff);
+            }
+            .self-limitation-account-password-field-type {
+              position: absolute;
+              right: var(--accountClosure-password-input-icon-right, 12px);
+              top: var(--accountClosure-password-input-icon-top, 14px);
+              cursor: pointer;
+              font-size: var(--accountClosure-password-input-icon-font-size, 21px);
+            }
+            .put-password-input:focus::placeholder {
+              opacity: var(--accountClosure-password-input-placeholder-opacity, 0);
+            }
+            .submit-password-input {
+              background: var(--accountClosure-password-btn-background, linear-gradient(180deg, #009640 0%, #008237 100%));
+              color: var(--accountClosure-password-btn-color, #fff);
+              font-size: var(--accountClosure-password-btn-font-size, 18px);
+              font-weight: var(--accountClosure-password-btn-font-weight, 600);
+              text-align: center;
+              height: var(--accountClosure-password-btn-height, 50px);
+              border-radius: var(--accountClosure-password-btn-border-radius, 2px);
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+  }
+  //.container-part:last-child {
+  //  margin-bottom: 50px;
+  //}
+}
+@media screen and (min-width: 0px) and (max-width: 1299px)
+{
+  .limit-type-currency {
+    left: 275px;
+  }
+}
+@media screen and (min-width: 1300px) and (max-width: 1376px)
+{
+  .limit-type-currency {
+    left: 295px;
+  }
+}
+@media screen and (min-width: 1377px) and (max-width: 1588px)
+{
+  .limit-type-currency {
+    left: 330px;
+  }
+}
+@media screen and (min-width: 1558px) and (max-width: 1599px)
+{
+  .limit-type-currency {
+    left: 340px;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .self-limitation-tab {
+    .user-right-panel_title {
+      font-size: 22px;
+    }
+    .open-more-limits {
+      font-size: 12px;
+    }
+    .container-part {
+      .tabs {
+        .accountClosure-tab {
+          .accountClosure-tab-form {
+            .form_field {
+              .put-password-input {
+                height: 40px;
+              }
+              .submit-password-input {
+                height: 40px;
+                font-size: 12px;
+              }
+              .self-limitation-account-password-field-type {
+                font-size: 15px;
+              }
+            }
+          }
+        }
+        .self-exclusion-row-date-password {
+          .self-exclusion-row-date-input {
+            height: 40px;
+          }
+          .self-exclusion-row-date-input::placeholder {
+            font-size: 12px;
+          }
+          .self-limitation-password-field-type {
+            font-size: 15px;
+          }
+        }
+        .self-limit-title, .self-exclusion-section {
+          font-size: 12px;
+        }
+        .save-button {
+          font-size: 12px;
+          height: 40px;
+        }
+        .periods {
+          .period-label {
+            font-size: 12px;
+          }
+          .custom_dropdown_reg {
+            height: 40px;
+            font-size: 12px;
+            .current_item {
+              height: 40px;
+              min-height: 40px;
+              font-size: 12px;
+              .change-icon2 {
+                font-size: 12px;
+              }
+            }
+            .custom_dropdown_list {
+              .custom_dropdown_list_items {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

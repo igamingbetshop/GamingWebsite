@@ -1,0 +1,40 @@
+.asian-statment {
+
+  &_title {
+    height: 36px;
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    background-color: #e8f0fe;
+    border-bottom: 1px solid #c2d0e4;
+  }
+
+  &_content {
+
+  }
+
+  &_table {
+
+  }
+
+  &_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: normal;
+    color: #000000;
+    height: 44px;
+    border-bottom: 1px solid #c2d0e4;
+  }
+
+  .label {
+    font-weight: 500;
+  }
+
+
+}

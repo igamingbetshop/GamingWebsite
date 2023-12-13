@@ -1,0 +1,60 @@
+<div class="betting_statment">
+  <div class="betting_statment__caption">
+    <div class="mainTitle" title="{{'Betting-Statement.Statement' | translate}}"><span
+      class="icon-cabinet"></span> <span class="prev-page" [routerLink]="['/custom/betting-statement']">{{'Betting-Statement.Statement' | translate}}</span>
+      <span class="icon-arrow-right betting-statment-arrow-right"></span> <span class="prev-page" [routerLink]="['/custom/betting-statement/item/1']">{{'Betting-Statement.Betting-Statement' | translate}}</span>
+      <span class="icon-arrow-right betting-statment-arrow-right"></span> <span>{{'Betting-Statement.Sportsbook' | translate}}</span></div>
+
+    <div class="right-icons">
+      <span class="icon-printer"></span>
+      <span class="icon-refresh"></span>
+    </div>
+  </div>
+
+  <ul class="announcements-content__tabNav">
+    <li class="announcements-content__tabNav_li" (click)="changeTab('1')" [ngClass]="{'active': activeTabItem == '1'}">
+      {{'Betting-Statement.Bet List' | translate}}
+    </li>
+    <li class="announcements-content__tabNav_li" (click)="changeTab('2')" [ngClass]="{'active': activeTabItem == '2'}">
+      {{'Betting-Statement.Bet Summary' | translate}}
+    </li>
+  </ul>
+
+  <div class="betting_statment__messageContainer">
+    <div class="betting_statment__messageContainer_noInfo">
+      {{'Betting-Statement.No information is available' | translate}}
+    </div>
+    <div class="betting_statment__table">
+      <div class="tableHead">
+        <div class="date-smaller">
+          Date
+        </div>
+        <div class="betTypes">betTypes</div>
+        <div class="match">match</div>
+        <div class="stake">stake</div>
+        <div class="credit">credit</div>
+      </div>
+
+      <div class="tableBody">
+        <div class="tableRow">
+          <div class="date-smaller">date-smaller</div>
+          <div class="betTypes">betTypes</div>
+          <div class="match">match</div>
+          <div class="stake">stake</div>
+          <div class="credit">credit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  (itemData)='{id: 1, info: 1}'-->
+
+  <!--  <div class="pagination_section announcements-pagination" *ngIf="announcementsList.length > 0">-->
+  <!--    <div class="count-showed-items">{{announcementsList.length}} of {{announcementsItemsCount}}-->
+  <!--    </div>-->
+  <!--&lt;!&ndash;    <pagination-controls&ndash;&gt;-->
+  <!--&lt;!&ndash;      autoHide="true"&ndash;&gt;-->
+  <!--&lt;!&ndash;      (pageChange)="getAnnouncementsData($event)"></pagination-controls>&ndash;&gt;-->
+  <!--  </div>-->
+
+</div>

@@ -1,0 +1,122 @@
+.container {
+  margin-top: var(--m-user-views-margin-top, 62px);
+  min-height: calc(100vh - 62px);
+  background: var(--m-user-views-background-color);
+  padding: var(--m-user-views-padding, 15px 0);
+  .mobile-factor-section_title {
+    padding: var(--m-two-factor-title-padding, 0 16px);
+    color: var(--m-user-views-title-color);
+    font-size: var(--m-two-factor-title-font-size, 20px);
+    font-weight: var(--m-two-factor-title-font-weight, 500);
+    margin-top: var(--m-user-views-title-margin-top, 64px);
+  }
+  .two-factor-section {
+    padding: 20px 0 30px;
+  }
+  .container-section {
+    margin: var(--m-two-factor-container-section-margin, 0px 8px);
+    background: var(--m-two-factor-container-section-background, transparent);
+    .two-factor-section-authenticated {
+      padding: 20px 0 30px;
+      .authentication-label {
+        padding: var(--m-two-factor-enable-btn-padding, 0 14px);
+        .authentication-text {
+          color: var(--m-two-factor-authentication-text-color, #fff);
+          margin-top: var(--m-two-factor-authentication-text-margin-top, 0);
+        }
+        .disable-otp-btn {
+          width: var(--m-two-factor-disable-btn-width, 100%);
+          margin: var(--m-two-factor-disable-btn-margin, 0);
+          padding: var(--m-two-factor-disable-btn-padding, 0 10px);
+          background: var(--m-two-factor-disable-btn-background, #194e8e);
+          font-size: var(--m-two-factor-disable-btn-font-size, 18px);
+          font-weight: var(--m-two-factor-disable-btn-font-weight, 500);
+          border-radius: var(--m-two-factor-disable-btn-border-radius, 6px);
+          height: var(--m-two-factor-disable-btn-height, 44px);
+          color: var(--m-two-factor-disable-btn-color, #fff);
+          border: var(--m-two-factor-disable-btn-border, none);
+          cursor: pointer;
+        }
+      }
+    }
+    .two-factor-section {
+      .two-factor-ordered-list {
+        padding: var(--m-two-factor-section-list-padding, 0 16px 0 32px);
+        li {
+          color: var(--m-two-factor-step-list-color, #fff);
+        }
+        li::marker {
+          color: var(--m-two-factor-step-text-title-color, #fff);
+          font-weight: var(--m-two-factor-step-text-title-font-weight, 600);
+        }
+      }
+      .two-factor-steps-title {
+        margin: var(--m-two-factor-step-text-title-margin, 10px 0);
+        font-size: var(--m-two-factor-step-text-title-font-size, 16px);
+        font-weight: var(--m-two-factor-step-text-title-font-weight, 600);
+        color: var(--m-two-factor-step-text-title-color, #fff);
+      }
+      .two-factor-steps-description {
+        margin: var(--m-two-factor-step-text-description-margin, 0 0 0 -16px);
+        font-size: var(--m-two-factor-step-text-description-font-size, 16px);
+        font-weight: var(--m-two-factor-step-text-description-font-weight, 400);
+        color: var(--m-two-factor-step-text-description-color, #fff);
+        .two-factor-input {
+          height: var(--m-two-factor-step-description-input-height, 32px);
+          color: var(--m-two-factor-step-description-input-color, #fff);
+          background: var(--m-two-factor-step-description-input-background, transparent);
+          border: var(--m-two-factor-step-description-input-border, 1px solid #dbedff);
+          border-radius: var(--m-two-factor-step-description-input-border-radius, 6px);
+          text-indent: var(--m-two-factor-step-description-input-text-indent, 16px);
+          margin: var(--m-two-factor-step-description-input-margin, 0px);
+          font-size: var(--m-two-factor-step-description-input-font-size, 14px);
+          width: var(--m-two-factor-step-description-input-width, 96%);
+        }
+        .two-factor-img-part {
+          background: var(--two-factor-img-part-background, transparent);
+          box-shadow: var(--two-factor-img-part-box-shadow, none);
+          border-radius: var(--two-factor-img-part-border-radius, 6px);
+          width: var(--two-factor-img-part-width, 170px);
+          height: var(--two-factor-img-part-height, 161px);
+          margin: var(--m-two-factor-img-part-margin, 0 auto);
+          display: var(--two-factor-img-part-display, flex);
+          justify-content: center;
+          align-items: center;
+          img {
+            border-radius: var(--two-factor-img-border-radius, 6px);
+          }
+        }
+      }
+      .two-factor-steps-description-in {
+        margin: var(--m-two-factor-step-text-description-in-margin, 10px 0);
+      }
+      .enabled-mode {
+        position: relative;
+        padding: var(--m-two-factor-enable-btn-padding, 0 14px);
+        .enable-otp-btn {
+          width: var(--m-two-factor-enable-btn-width, 96%);
+          margin: var(--m-two-factor-enable-btn-margin, 0);
+          background: var(--m-two-factor-enable-btn-background, #194e8e);
+          font-size: var(--m-two-factor-enable-btn-font-size, 18px);
+          font-weight: var(--m-two-factor-enable-btn-font-weight, 500);
+          border-radius: var(--m-two-factor-enable-btn-border-radius, 6px);
+          height: var(--m-two-factor-enable-btn-height, 44px);
+          color: var(--m-two-factor-enable-btn-color, #fff);
+          border: var(--m-two-factor-enable-btn-border, none);
+          cursor: pointer;
+        }
+        .enable-otp-btn.disabled {
+          opacity: 0.6;
+        }
+        .error_message {
+          color: red;
+          position: absolute;
+          top: 51px;
+          font-size: 15px;
+          left: 42px;
+        }
+      }
+
+    }
+  }
+}

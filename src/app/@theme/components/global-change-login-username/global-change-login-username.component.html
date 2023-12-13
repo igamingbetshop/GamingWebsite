@@ -1,0 +1,49 @@
+<div class="nickname-form form_{{className}}">
+    <form [formGroup]="userNameForm" novalidate (ngSubmit)="saveChanges()">
+        <div class="password-form-content">
+            <div class="form-cell form-cell_3">
+
+                <div class="form-field"
+                     [ngClass]="{'required-input': (userNameForm.get('ChangeNickName').hasError('required') || userNameForm.get('ChangeNickName').hasError('minlength')) && !userNameForm.get('ChangeNickName').hasError('ChangeNickName') && userNameForm.get('ChangeNickName').touched}">
+                    <label>
+                        {{'User.NickName' | translate}}
+                    </label>
+                    <fa-icon *ngIf="showIcons" [icon]="['fas', 'unlock-alt']" class="pass-icon"></fa-icon>
+                    <input type="text" formControlName="ChangeNickName" class="setting_field"
+                           placeholder="{{'User.NickName-placeholder' | translate}}"/>
+                </div>
+
+                <div class="error_message change-password-form"
+                     *ngIf="userNameForm.get('ChangeNickName').hasError('required') && !userNameForm.get('ChangeNickName').hasError('ChangeNickName') && userNameForm.get('ChangeNickName').touched">
+                    <span>{{ 'Error.Required-field' | translate }}</span>
+                </div>
+
+                <div class="error_message change-password-form"
+                     *ngIf="userNameForm.get('ChangeNickName').hasError('minlength') && userNameForm.get('ChangeNickName').touched">
+                    <span>{{ 'Error.Min-length' | translate }}</span>
+                </div>
+
+            </div>
+
+            <div class="change-type-section">
+                <input type="radio" checked="true"/>
+                <div class="change-type-section__label">
+                    {{'User.Login-by-nickname' | translate}}
+                </div>
+            </div>
+
+
+            <div class="form-row form_btn_{{className}}">
+                <div class="form-cell">
+                    <button type="submit" class="default_btn default_btn_blue change_btn">
+                        {{'User.Change Nickname' | translate}}
+                    </button>
+                </div>
+                <div style="position: relative">
+                    <div class="error_message">{{errorMessage}}</div>
+                    <div class="success_message">{{successMessage}}</div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

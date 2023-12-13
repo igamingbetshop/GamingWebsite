@@ -1,0 +1,71 @@
+.Login_Info {
+  width: 200px;
+  border-radius: 10px;
+  margin-top: 160px !important;
+  background: var(--login-info-content-background, #fff);
+  .modal-body {
+    width: 100%;
+    cursor: default;
+    user-select: none;
+    .Login_Info_body {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #000;
+      margin: var(--login-info-body-title-margin, 0px);
+      .showUserName {
+        display: var(--login-info-body-title-display, none);
+      }
+    }
+    .extra-title {
+      text-align: left;
+      width: 100%;
+      color: #E39600;
+      font-weight: 700;
+      font-size: 18px;
+      display: var(--login-info-header-extra-title, block);
+    }
+    .modal_content {
+      margin: 14px auto 0;
+      .Login_Info_list {
+        font-size: 18px;
+        font-weight: 400;
+        color: #000;
+        .item_list {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: var(--login-info-content-list-margin, 0);
+        }
+      }
+    }
+    .modal_footer {
+      text-align: center;
+      .Login_Info_btn {
+        padding: var(--login-info-footer-btn-padding, 8px 20px);
+        border: none;
+        border-radius: var(--login-info-footer-btn-border-radius, 5px);
+        margin: var(--login-info-footer-btn-margin, 40px 0 0 0);
+        font-weight: var(--login-info-footer-btn-font-weight, 400);
+        font-size: var(--login-info-footer-btn-font-size, 16px);
+        width: var(--login-info-footer-btn-width, 100%);
+      }
+      .extra-footer {
+        display: var(--login-info-body-footer-display, none);
+        text-align: var(--login-info-body-footer-text-align, center);
+        color: #000;
+        margin: 20px 0 0 0;
+      }
+    }
+  }
+
+}
+@media screen and (min-width: 0px) and (max-width: 1200px) {
+  .Login_Info {
+    min-width: 300px;
+    width: 90%;
+    .modal-body {
+      display: block;
+    }
+  }
+}

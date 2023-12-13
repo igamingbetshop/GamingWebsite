@@ -1,0 +1,25 @@
+<div [className]="fragmentConfig.Config.type"
+     [class.close]="fragmentConfig.Config.showAll && (stateService.providersPopupState$ | async)"
+     [class.opened]="!fragmentConfig.Config.showAll && (stateService.providersPopupState$ | async)"
+     [ngStyle]="fragmentConfig.Config.style">
+    <div class="filter_field">
+        <div class="search-providers">
+            <input type="text"
+                   [value]="casinoFilterService.providerPattern"
+                   (input)="casinoFilterService.onProviderPatternChange($event)"
+                   placeholder="{{'Game.Search_provider' | translate}}...">
+            <i class="icon-arrow-down" (click)="stateService.changeProvidersPopupState(false)"></i>
+        </div>
+        <ul class="provider-list" [style.grid-template-columns]="'repeat(' + gridFrCount +',1fr)'">
+            <li *ngFor="let provider of fragmentConfig.Config.showAll ? providers :  (providers | filterByName : casinoFilterService.providerPattern); let i = index"
+                (click)="stateService.changeProvidersPopupState(false);selectProvider(provider)"
+                [ngStyle]="provider.style"
+                [class.all-providers]="provider.Id == 0"
+                [class.selected]="casinoFilterService.providers | compareByKey: provider : 'Id'">
+                <img [src]="provider.imageSrc">
+                <span>{{provider?.Label}}</span>
+            </li>
+            <button *ngIf="fragmentConfig.Config.showAll"  (click)="stateService.changeProvidersPopupState(true)" class="providers-see-all">{{ 'Providers.SeeAll' | translate }}</button>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="modal-content {{title}} {{title}}_type_{{type}}">
+    <div class="modal-body-message-block">
+
+        <div>
+            <app-base-error-message [infoText]="message" *ngIf="type == '2'"></app-base-error-message>
+            <app-base-success-message [infoText]="message" *ngIf="type == '1'"></app-base-success-message>
+        </div>
+
+        <div class="modal_footer">
+            <button type="submit" (click)="close()" class="{{title}}_btn">{{'Info.Ok' | translate}}</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="mobile-terms-section" [ngStyle]="layoutService.layoutStyle">
+  <h2>{{ 'User.Terms_conditions' | translate }}</h2>
+  <ul class="terms_container">
+    <li
+      *ngFor="let termsText of languageKeys"
+      [innerHTML]="'Terms_conditions.' + termsText | translate | sanitizer: 'html'"
+      class="{{termsText}}"
+    ></li>
+  </ul>
+  <div class="to_top" *ngIf="showScroll">
+    <fa-icon [icon]="['fas', 'arrow-circle-up']" [size]="'2x'" (click)="scrollToTop()"></fa-icon>
+  </div>
+</div>
+

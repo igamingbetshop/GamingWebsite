@@ -1,0 +1,64 @@
+.m-security-questions
+{
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  margin-top: 20px;
+  .form_field {
+    .m-security-questions-label {
+      position: unset;
+      pointer-events: auto;
+      background: var(--register-background-color, #FFFFFF);
+      padding: 0;
+    }
+  }
+  .m-answers
+  {
+    li
+    {
+      display: flex;
+      >div
+      {
+        &:first-of-type{
+          width: 30px;
+          color: var(--number-question-color, #84868D);
+          font-weight: var(--number-question-wight,700);
+          font-size: 20px;
+        }
+        &:last-of-type{
+          width: 30px;
+          cursor: pointer;
+          color: var(--icon-delete-question-color, #797979);
+          font-weight: var(--question-text-font-weight, 600);
+        }
+        &:nth-of-type(2)
+        {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          //color: var(--question-text-color, #96989A);
+          .answer-text {
+            color: var(--answer-text-color, #6C7CBF);
+            font-weight: var(--answer-text-font-weight, 600);
+          }
+        }
+      }
+      border-bottom: 1px solid #CCCCCC;
+      line-height: 39px;
+    }
+  }
+  .answer-action
+  {
+    display: flex;
+    gap: 16px;
+    .form_field{flex:1}
+    .craft_btn
+    {
+      height: 40px;
+      width: 20%;
+      line-height: 39px;
+      color: var(--answer-action, #fff);
+      background-color: var(--answeer-add-button-background-color, #546AF9);
+    }
+  }
+}

@@ -1,0 +1,128 @@
+<div class="deposit_payment_section deposit-cash">
+
+  <div class="deposit_payment_section__form">
+    <div class="deposit_payment_section__form_top">
+      <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit(paymentForm)">
+
+
+        <div class="scrallablePart" [ngClass]="{'shortHeight': nominals}">
+
+          <div class="payment-form-field">
+            <div class="payment-form-field__column">
+              <select formControlName="BankName" class="payment-select" (ngModelChange)="selectBank($event)">
+                <option *ngFor="let bank of banks"
+                        [value]="bank?.BankName">{{bank?.BankName}}</option>
+              </select>
+              <label class="payment-form-field__label">{{'Withdraw.BankName' | translate}}</label>
+            </div>
+          </div>
+
+          <div class="payment-form-field">
+            <div class="payment-form-field__column" (click)="editField = true">
+              <input type="text" class="payment-input" placeholder="{{'Withdraw.NameSurname-placeholder' | translate}}"
+                     formControlName="BankAccountHolder"
+                     ngModel="{{NameSurname}}"
+                     [ngClass]="{'active': editField, 'disable-item': !editField}"/>
+              <label class="payment-form-field__label">{{'Withdraw.NameSurname' | translate}}</label>
+            </div>
+          </div>
+
+          <div class="payment-form-field">
+
+
+            <div class="payment-form-field__column relative-section">
+
+
+              <input type="text" [(ngModel)]="bankNumberFilter.BankAccountNumber" [ngModelOptions]="{standalone: true}"
+                     class="payment-input" numbersOnly
+                     (ngModelChange)="reSearch()"
+                     placeholder="{{'Withdraw.Choose_Bank_Account_Number' | translate}}">
+              <label class="payment-form-field__label">{{'Withdraw.AccountNumber' | translate}}</label>
+              <div *ngIf="showList">
+                <div *ngFor="let account of accounts | filterBy: bankNumberFilter"
+                     class="bank-account-container">
+                  <div class="BankAccountNumber-item" (click)="chooseBankAccountNumber(account)" *ngIf="showList">
+                    {{account.BankAccountNumber}}</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="payment-form-field">
+            <div class="payment-form-field__column">
+              <input type="text" class="payment-input"
+                     placeholder="{{'Withdraw.CardNumber-placeholder' | translate}}"
+                     formControlName="CardNumber"
+                     [ngClass]="{'invalid-filed': paymentForm.get('CardNumber').hasError('pattern')}"/>
+              <label class="payment-form-field__label">{{'Withdraw.CardNumber' | translate}}</label>
+            </div>
+
+            <div class="error_message" *ngIf="paymentForm.get('CardNumber').hasError('pattern')">
+              {{'err.wrongCardNumber' | translate}}
+            </div>
+          </div>
+
+
+          <div class="payment-form-field">
+            <div class="payment-form-field__column">
+              <input type="text" class="payment-input" placeholder="{{'Withdraw.BankACH-placeholder' | translate}}"
+                     formControlName="BankACH"
+                     [ngClass]="{'invalid-filed': paymentForm.get('BankACH').hasError('pattern')}"/>
+              <label class="payment-form-field__label">{{'Withdraw.BankACH' | translate}}</label>
+            </div>
+
+            <div class="error_message" *ngIf="paymentForm.get('BankACH').hasError('pattern')">
+              {{'err.wrongShebaNumber' | translate}}
+            </div>
+          </div>
+
+
+        </div>
+        <div class="payment-form-field"
+             [ngClass]="{'nominals-fields-3': ((nominals !== null) && (nominals && nominals.length <= 9)), 'nominals-fields-4': ((nominals !== null) && (nominals && nominals.length > 9))}">
+          <div class="payment-form-field__column">
+            <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input"
+                   [(ngModel)] = "amount" placeholder="{{'Withdraw.Amount-placeholder' | translate}}"
+                   formControlName="Amount" numbersOnly/>
+            <label class="payment-form-field__label">{{'Withdraw.Amount' | translate}} ({{currencyId}})</label>
+            <div class="error_message" *ngIf="hasMinMaxError">
+              <span class="text" *ngIf = "amount < maxMinAmount?.MinAmount">{{'Deposit.AmountLessThen' | translate : { amount: maxMinAmount?.MinAmount, currency: currencyId} }}</span>
+              <span class="text" *ngIf = "this.amount > this.maxMinAmount?.MaxAmount">{{'Deposit.AmountMoreThen' | translate : { amount: maxMinAmount?.MaxAmount, currency: currencyId} }}</span>
+            </div>
+            <ng-template #nominalsRef>
+              <app-common-payment-nominals [nominals]="nominals"
+                                           (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+            </ng-template>
+          </div>
+        </div>
+
+
+        <div class="payment-form-field">
+          <div class="payment-form-field__column_btn">
+            <button type="submit" [disabled]="submitted || paymentForm.invalid || this.hasMinMaxError" class="default_btn default_btn_red payment-btn">
+              <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
+            </button>
+
+            <loader></loader>
+
+            <div class="error_message longTag">
+              {{errorMessage}}
+            </div>
+            <div class="success_message" *ngIf="successMessage">
+              {{'Withdraw.' + successMessage | translate}}
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+

@@ -1,0 +1,15 @@
+<div class="horizontal" [ngStyle]="fragmentConfig.Config.style">
+    <ul class="nav-bar">
+        <li *ngFor="let menuItem of menuItems; let first = first"
+            [class.active]="menuItem.Id == casinoFilterService.selectedCategory?.Id"
+            [ngStyle]="menuItem.style"
+            (click)="selectCategory(menuItem)">
+            <img [src]="menuItem?.IconSrc" alt="" *ngIf="menuItem?.IconSrc; else menuItemIconRef">
+            <ng-template #menuItemIconRef><i class="icon-{{menuItem?.Icon}}"></i></ng-template>
+            <a>{{ 'Game.' + menuItem?.Title | translate }}</a>
+            <div class="games-count" *ngIf="first && allGamesCount">{{allGamesCount}}</div>
+        </li>
+    </ul>
+</div>
+
+

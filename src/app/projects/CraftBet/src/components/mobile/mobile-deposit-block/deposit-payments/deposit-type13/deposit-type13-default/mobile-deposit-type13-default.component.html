@@ -1,0 +1,90 @@
+<div class="deposit_payment_section mobile-device">
+
+  <div class="deposit_payment_section__form">
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()">
+      <div class="deposit_payment_section__form_top">
+
+        <div class="payment-form-field">
+          <div class="payment-form-field__column">
+            <input type="text" class="payment-input" disabled ngModel="{{NameSurname}}"
+                   [ngModelOptions]="{standalone:true}"
+                   placeholder="{{'Deposit.NameSurname-placeholder' | translate}}"
+            />
+            <label class="payment-form-field__label">{{'Deposit.NameSurname' | translate}}</label>
+          </div>
+        </div>
+
+        <div class="payment-form-field">
+
+          <div class="payment-form-field__column">
+            <select formControlName="BankId" class="payment-select">
+              <option *ngFor="let bank of banks"
+                      [ngValue]="bank?.Id">{{bank?.BankName}}</option>
+            </select>
+            <label class="payment-form-field__label">{{'Deposit.BankName' | translate}}</label>
+          </div>
+        </div>
+        <ng-container *ngIf="selectedBank">
+          <ng-container  *ngFor="let account of selectedBank.Accounts">
+            <div class="payment-form-field">
+              <div class="payment-form-field__column">
+                <input type="text" class="payment-input"
+                       readonly
+                       [value]="account.OwnerName"/>
+                <label class="payment-form-field__label">{{'Deposit.OwnerName' | translate}}</label>
+              </div>
+            </div>
+            <div class="payment-form-field">
+              <div class="payment-form-field__column">
+                <input type="text" class="payment-input"
+                       readonly
+                       [value]="account.IBAN"/>
+                <label class="payment-form-field__label">{{'Deposit.IBAN' | translate}}</label>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+        <div class="payment-form-field"
+             [ngClass]="{'nominals-fields-3': ((nominals !== null) && (nominals && nominals.length <= 9)), 'nominals-fields-4': ((nominals !== null) && (nominals && nominals.length > 9))}">
+          <div class="flex_between">
+            <div class="bonus-and-amount">
+              <div class="payment-form-field__column">
+                <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input" placeholder="{{'Deposit.Amount-placeholder' | translate}}"
+                       [ngClass]="{'invalid-filed': ((paymentForm.get('Amount').hasError('required')  || paymentForm.get('Amount').hasError('minlength') || paymentForm.get('Amount').hasError('maxlength')) && paymentForm.get('Amount').touched)}"
+                       formControlName="Amount" numbersOnly/>
+                <label class="payment-form-field__label">{{'Deposit.Amount' | translate}}({{currencyId}})</label>
+                <ng-template #nominalsRef>
+                  <app-common-payment-nominals [nominals]="nominals" (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+                </ng-template>
+                <div class="error_message" *ngIf="submitted && paymentForm.get('Amount').hasError('required')">
+                  <span>{{ 'Error.Required-field' | translate }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-form-field">
+          <div class="payment-form-field__column_btn">
+            <button type="submit" [disabled]="submitted" class="default_btn default_btn_red payment-btn">
+              <span class="payment-btn__span"> {{'Deposit.Confirm' | translate}} </span>
+            </button>
+
+            <loader></loader>
+
+            <div class="error_message">
+              {{errorMessage}}
+            </div>
+            <div class="success_message"
+                 *ngIf="successMessage && successMessage.length != 0">{{'Deposit.' + successMessage | translate}}</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+
+

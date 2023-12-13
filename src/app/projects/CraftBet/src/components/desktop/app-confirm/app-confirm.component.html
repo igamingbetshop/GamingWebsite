@@ -1,0 +1,33 @@
+<!--[ngClass]="changeWidth ? 'smallSize' : 'bigSize'"-->
+<!--<div class="modal-content register {{popupWidthName}}"-->
+<!--     [ngStyle]="{'max-height': modalMaxHeight, 'margin-top': topSize + 'px'}" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">-->
+<div class="modal-content register {{popupWidthName}}"
+     [ngStyle]="{'margin-top': topSize + 'px'}" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
+  <div class="modal-body">
+    <span class="icon-close-modal" (click)="close()"></span>
+  </div>
+  <div class="modal_content">
+<!--    <p class="login-title" *ngIf="showLogin">{{'Login.Sign In' | translate}}</p>-->
+    <p class="login-title" *ngIf="showLogin"></p>
+    <div *ngIf="!showLogin">
+      <app-registration></app-registration>
+      <div *ngIf="showRegister" class="{{popupWidthName}}_redirect">{{'Login.Already_have_an_account' | translate}}  <a
+        (click)="redirectPage(true)">{{'Login.Sign In' | translate}}</a></div>
+    </div>
+    <div *ngIf="showLogin">
+      <app-login [mainClass]="'modal_section login_modal_section'"></app-login>
+      <div *ngIf="showRegister" class="{{popupWidthName}}_redirect">
+        <div>
+          {{'Login.Dont_have_an_account' | translate}} <a
+                (click)="redirectPage(false)">{{'Login.Sign Up' | translate}}</a>
+        </div>
+<!--        <div class="safety-info">-->
+<!--          <div class="safety-info_text">-->
+<!--            <span class="icon-safety"></span>-->
+<!--            <span class="login-safety-text">{{'Register.Safety info' | translate}}</span>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+</div>

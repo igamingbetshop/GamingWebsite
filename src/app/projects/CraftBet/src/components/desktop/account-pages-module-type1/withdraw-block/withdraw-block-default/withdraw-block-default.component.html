@@ -1,0 +1,49 @@
+<div class="payment-section">
+    <div class="payment-section_content">
+
+        <div class="payment-section_content_block flex_around">
+            <div class="content_row default-scroll payment-list-column">
+                <div class="payment_header flex_around">{{'User.Select_payment' | translate}}</div>
+                <div class="underline"></div>
+                <ul class="payment_list">
+                    <li *ngFor="let item of paymentSystemList; let i = index"
+                        (click)="selectPayment(item)"
+                        [ngClass]="{'selected':item?.PaymentSystemId == currentPayment?.PaymentSystemId}"
+                        class="payment_list_item">
+                        <div class="payment_list_item_img" [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/withdraw/' +  item.PaymentSystemId + '.png)'}"></div>
+<!--                        <img src="../../../../../../../assets/images/payments/{{item.PaymentSystemId}}.png"/>-->
+                        <div class="payment_list_item__info">
+                            <div  class="info_text" style="-webkit-box-orient: vertical"
+                                  [innerHTML]="'Withdraw.' + 'PAYMENT_MESSAGE' + item.PaymentSystemId | translate | sanitizer: 'html'"></div>
+
+                            <div class="balance_info">
+                                <div>{{"Payments.Minimum" | translate}} - {{item?.MinAmount | number}} ({{currencyId}})</div>
+                                <div>{{"Payments.Maximum" | translate}} - {{item?.MaxAmount | number}} ({{currencyId}})</div>
+                            </div>
+                            <div class="balance_info" *ngIf="item?.CommissionPercent !== 0"
+                            [ngClass]="{'balance_info_commission' : item?.CommissionPercent !== 0}">
+                                <div>{{"Payments.CommissionPercent" | translate}} - {{item?.CommissionPercent | number}} %</div>
+                            </div>
+                            <div class="balance_info" *ngIf="item?.FixedFee !== 0"
+                                 [ngClass]="{'balance_info_commission' : item?.FixedFee !== 0, 'balance_info_fixed': item?.CommissionPercent !== 0 && item?.FixedFee !== 0}">
+                                <div>{{"Payments.CommissionFixedFee" | translate}} - {{item?.FixedFee | number}} ({{currencyId}})</div>
+                            </div>
+                            <div class="balance_info balance_info_commission" *ngIf="item?.CommissionPercent === 0 && item?.FixedFee === 0">
+                                <div>{{"Payments.Commission" | translate}} - {{ 0 | number}}</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content_row form-column right-part">
+                <div class="payment_header flex_around">{{'User.Enter_payment_withdraw' | translate}}</div>
+                <label class="checkbox"><input type="checkbox" [(ngModel)]="paymentControllerService.savePaymentDetails"> {{'User.SavePaymentDetails' | translate}}</label>
+                <div class="underline"></div>
+                <app-common-accounts></app-common-accounts>
+                <template #loadComponent></template>
+            </div>
+        </div>
+    </div>
+
+</div>

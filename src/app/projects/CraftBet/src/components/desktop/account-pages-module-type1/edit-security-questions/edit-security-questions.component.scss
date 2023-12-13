@@ -1,0 +1,209 @@
+.security-questions-section {
+  padding: var(--account-content-row-paddding);
+  background: var(--account-main-bg-color);
+  border-radius: 6px;
+  height: auto;
+  margin: 0;
+  display: block;
+  .security-questions_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--change-password-second-tab-heirght, 32px);
+    .submit-details {
+      display: flex;
+      gap: 20px;
+      width: var(--settings-submit-details-width, auto);
+      .setting_btn {
+        font-size: var(--settings-submit-details-font-size, 16px);
+        font-weight: var(--settings-submit-details-font-weight, 500);
+        padding: var(--settings-security-questions-submit-details-padding, 0px 10px);
+        border-radius: var(--settings-security-questions-submit-details-border-radius, 6px);
+        height: var(--settings-submit-details-height, 44px);
+        background: linear-gradient(to bottom, var(--settings-button-gradient-first-color) 0%, var(--settings-button-gradient-second-color) 100%);
+        color: var(--settings-button-text-color);
+        .icon-close-modal {
+          margin-right: 13px;
+          font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
+        }
+
+        .fas-save {
+          margin-right: 13px;
+          font-size: calc(var(--settings-submit-details-font-size, 16px) + 2px);
+        }
+        &.cancel_btn {
+          background: var(--settings-cancel-btn-bg, rgba(13, 18, 32, 0.5));
+          color: var(--settings-cancel-btn-color, #fff);
+          border: 1px solid var(--settings-cancel-btn-color, #fff);
+          .icon-close-modal:before {
+            color: var(--settings-cancel-btn-color, #fff);;
+          }
+        }
+      }
+    }
+  }
+  .underline {
+    height: 1px;
+    background: var(--account-content-header-underline-bg, linear-gradient(180deg, #48628E 0%, #111723 100%));
+    box-shadow: var(--account-content-header-underline-shadow, 0 4px 8px rgba(0, 0, 0, 0.94));
+    border-radius: 6px;
+    margin-top: var(--account-content-header-underline-margin-top, 10px);
+    margin-bottom: var(--account-content-header-underline-margin-bottom, 24px);
+  }
+  .security-questions_container{
+    height: var(--security-questions-container-height, 650px);
+    display: flex;
+    justify-content: center;
+    .change-security-questions {
+      width: 494px;
+      .answer-action
+      {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-top: 24px;
+        .form_field{
+          flex:1;
+          height: var(--security-questions-answer-text-height, 50px);
+          input {
+            background-color: var(--security-questions-answer-select-background-color, #F9F9FB);
+            border:  var(--security-questions-question-select-border, 1px solid rgba(29, 29, 27, 0.7));
+          }
+        }
+        .craft_btn
+        {
+          height: var(--security-questions-answer-add-button-height, 50px);
+          line-height: 39px;
+          color: var(--security-questions-answer-action, #fff);
+          background-color: var(--security-questions-answer-add-button-background-color, #546AF9);
+          width: var(--security-questions-answer-text-width, 30%);
+          border-radius: var(--security-questions-answer-add-button-border-radius, 6px);
+        }
+      }
+      .form_field {
+
+        .custom_dropdown_reg {
+          height: var(--security-questions-question-text-height, 50px);
+          background-color: var(--security-questions-question-select-background-color, #F9F9FB);
+          border:  var(--security-questions-question-select-border, 1px solid rgba(29, 29, 27, 0.7));
+        }
+
+        select {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          text-indent: 1px;
+          text-overflow: '<>';
+        }
+        .security-questions-label {
+          padding: 0;
+          opacity: 1;
+          visibility: visible;
+        }
+        label {
+          width: width(register-form-field-label, inherit);
+          color: itemColor(register-label-text-color, #ffffff);
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          z-index: 1;
+          position: relative;
+          height: 25px;
+          padding: padding(signup-input-label, 0 8px);
+          background: var(--register-background-color, #FFFFFF);
+          pointer-events: auto;
+          top: 0;
+        }
+        label:after {
+          content: '<>';
+          font: 18px "Consolas", monospace;
+          color: rgba(29, 29, 27, 0.7);
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+          right: 16px;
+          top: -1px;
+          padding: 0 0 2px;
+          position: absolute;
+          pointer-events: none;
+        }
+      }
+      .answers {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+        >div
+        {
+          &:first-of-type{width: 30px;
+            color: var(--security-question-number-question-color, #84868D);
+            font-weight: var(--security-question-number-question-wight,700);
+            font-size: var(--security-question-number-question-size,22px);
+          }
+          &:last-of-type{
+            width: 30px;
+            cursor: pointer;
+            color: var(--icon-delete-security-question-color, #000000);
+          }
+          &:nth-of-type(2)
+          {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+            .question-text {
+              padding-bottom: var(--question-text-padding-bottom, 5px);
+              padding-top: var(--question-text-padding-top, 10px);
+              color: var(--question-text-color, #96989A);
+              font-weight: var(--security-question-text-font-weight, 500);
+              font-size: var(--security-question-text-font-size, 20px);
+              line-height: 28px;
+            }
+
+            .answer-text {
+              padding-bottom: var(--answer-text-padding-bottom, 5px);
+              padding-top: var(--answer-text-padding-top, 0px);
+              color: var(--answer-text-color, #6C7CBF);
+              font-weight: var(--answer-text-font-weight, 600);
+              font-size: var(--answer-text-font-size, 16px);
+              line-height: 30px;
+            }
+          }
+          .icon-delete-ticket {
+            font-size: 18px;
+          }
+        }
+      }
+      p {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        color: #1D1D1B;
+      }
+    }
+    .security-questions-verification-code {
+      width: 336px;
+      margin-top: var(--security-questions-verification-code-section, 40px);
+      //display: flex;
+      //flex-direction: column;
+      //justify-content: center;
+      //align-items: center;
+      p {
+
+      }
+      button {
+        width: 336px;
+        height: 54px;
+        text-align: center;
+        background-color: var(--security-questions-container-small-btn-background-color, #1376f8);
+        color: var(--settings-button-text-color);
+        border-radius: var(--security-questions-container-small-btn-border-radius, 6px);
+      }
+    }
+  }
+  .error_message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: var(--security-questions-error-message, -100px);
+    font-size: var(--security-questions-error-message, 16px);
+  }
+}

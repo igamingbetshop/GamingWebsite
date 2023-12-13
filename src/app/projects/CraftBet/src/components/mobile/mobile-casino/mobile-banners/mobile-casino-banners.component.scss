@@ -1,0 +1,76 @@
+@import "../../../../../styles/helpers/variables";
+@import "../../../../../../../../styles/helpers/variables";
+
+::ng-deep app-mobile-casino-banners {
+  display: block;
+  position: relative;
+  direction: ltr;
+
+  @media  only screen and (max-width: 1200px)
+  {
+    .slick-next
+    {
+      right: 12px!important;
+      z-index: 1;
+    }
+    .slick-prev {
+      z-index: 1;
+    }
+  }
+  .slick-prev:before {
+    content: "←"!important;
+  }
+  .slick-next:before {
+    content: "→"!important;
+  }
+
+  .slick-next, .slick-prev {
+    display: none
+  }
+
+  .actions {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    button {
+      background: none;
+      border: none;
+      outline: none;
+      transform: scale(0.6);
+      cursor: pointer;
+    }
+
+    span {
+      outline: none;
+      transform: scale(0.6);
+      cursor: pointer;
+      color: color(banner-arrow);
+      font-size: 54px;
+      position: absolute;
+
+      &:first-child {
+        left: 10px;
+      }
+
+      &:nth-child(2) {
+        right: 10px;
+      }
+    }
+  }
+
+  .slick-list {
+    .slick-track {
+      :focus {
+        outline: none
+      }
+
+    }
+  }
+  .banner_image
+  {
+    img{width: 100%}
+  }
+}
+

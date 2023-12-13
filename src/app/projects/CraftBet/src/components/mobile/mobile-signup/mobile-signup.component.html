@@ -1,0 +1,992 @@
+<!--<img class="login-bg"   [src]="bgUrl"  (error)="errorHandlerBg($event)"/>-->
+<div class="mobile-registration-section"
+     [ngClass]="{'showPaddingTop': this.configService.defaultOptions.ShowMobileNavPanel == '1' }">
+    <div class="reg-header">{{'Registration' | translate}}</div>
+    <div class="mobile-registration-section_header">
+        <div class="mobile-registration-section_menu" *ngIf="defaultOptions?.RegisterType.length > 1; else showRegText">
+            <a class="reg_item" *ngFor="let item of defaultOptions?.RegisterType" (click)="selectRegType(item)"
+               [ngClass]="[(item.Title == registerType?.Title) ? 'active' : 'disabled',
+               (currentStep !> 1) ? 'hidden':'']">{{'Register.' + item.Title | translate}}</a>
+
+            <a type="submit" (click)="prevBtn(currentStep - 1)" class="reg_item go_back"
+               *ngIf="((stepsLength.length != 1) && (currentStep != '1')  && (checkBackBtnShowingList[currentStep - 1] !== '1') && !showSuccessMessage)">
+                <span class="icon-arrow-to-left"></span>
+                <span> {{'Register.Prev' | translate}}</span>
+            </a>
+        </div>
+        <span class="icon-close-modal close-icon" (click)="getMobileLoginPreviousState()"></span>
+    </div>
+
+    <ng-template #showRegText>
+        <a type="submit" (click)="prevBtn(currentStep - 1)" class="reg_item go_back"
+           *ngIf="((stepsLength.length != 1) && (currentStep != '1')  && (checkBackBtnShowingList[currentStep - 1] !== '1'))">
+            <span class="icon-arrow-to-left"></span>
+            <span> {{'Register.Prev' | translate}}</span>
+        </a>
+        <h2 class="register-text">{{ 'Register.Registration' | translate }}</h2>
+    </ng-template>
+
+    <div class="mobile-sign-up-container" *ngIf="(registerType?.Title == registerTypes.FULL && regFormSteps.length > 0) || (registerType === undefined)">
+        <ul class="regSteps" *ngIf="regFormSteps.length > 1">
+            <li *ngFor="let elem of regFormSteps; let i = index" class="regStep"
+                [ngClass]="{'regStep_active': (i+1) == currentStep, 'regStep_prev': ((currentStep-1) > 0) &&
+                            (i <= (currentStep-2))}"></li>
+        </ul>
+        <div class="title-error" *ngIf="userRegisterService.errorMessage">
+            {{userRegisterService.errorMessage}}
+        </div>
+
+        <form *ngIf="!showSuccessMessage" [formGroup]="regFormSteps[currentStep - 1]" autocomplete="off" novalidate>
+
+            <div class="allFormItems" *ngIf="formTemplates[currentStep - 1].length > 0">
+                <div *ngFor="let form_elem of formTemplates[currentStep - 1]"
+                     [ngClass]="{'form-row-item__autoHeight': form_elem?.Type === 'Region4',
+                      'newHeight': ((this.stepsLength.length > 1) && (form_elem?.Type == 'password')),
+                      'form-row-item_withLabel':form_elem?.HasLabel,
+                      'form-row-item_withoutLabel':!form_elem?.HasLabel}"
+                     class="form-row-item form-row {{form_elem?.Type}}-mobile form-row{{form_elem?.FieldSize == '1' ? form_elem?.FieldSize : 0.5*form_elem?.FieldSize}}">
+
+                    <div [ngSwitch]="form_elem.Type" class="top-row">
+
+                        <div *ngSwitchCase="'info'" class="info-reg-field">
+                            {{'Register.' + form_elem?.Title | translate : translationKeys}}
+                        </div>
+
+                        <div *ngSwitchCase="'verify-sms'">
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">
+                                <span class="required-field-text">{{'Register.' + form_elem?.Title | translate}}</span>
+                            </label>
+                            <verify-code-type
+                                    [activePeriodInMinutes]="otpTimer"
+                                    [formGroup]="regFormSteps[currentStep - 1]"
+                                    [prevFormGroup]="regFormSteps[currentStep - 2]"
+                                    [verificationCodeType]="verificationCodeType"
+                                    [formControlName]="form_elem?.Title"
+                                    [type]="'mobile'"></verify-code-type>
+                        </div>
+
+                        <div *ngSwitchCase="'verify-email'">
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">
+                                <span class="required-field-text">{{'Register.' + form_elem?.Title | translate}}</span>
+                            </label>
+                            <verify-code-type [formGroup]="regFormSteps[currentStep - 1]"
+                                              [prevFormGroup]="regFormSteps[currentStep - 2]"
+                                              [verificationCodeType]="verificationCodeType"
+                                              [formControlName]="form_elem?.Title"
+                                              [type]="'email'" [activePeriodInMinutes]="otpTimer"></verify-code-type>
+                        </div>
+
+                        <div *ngSwitchCase="'security-questions'">
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            <security-questions [formGroup]="regFormSteps[currentStep - 1]"></security-questions>
+                        </div>
+
+                        <div *ngSwitchCase="'password'" class="password_form_field form_field"
+                             [ngClass]="{'autoHeight': stepsLength.length > 1}">
+
+                            <div class="password_form_field_top password_form_field_top_mobile">
+
+                                <div>
+                                    <div class="form_field">
+                                        <input type="{{changePasswordType ? 'text' : 'password'}}"
+                                               placeholder="{{'Register.Password-placeholder-p' | translate}}"
+                                               reg-exp-input [regExp]="form_elem.RegExp"
+                                               [name]="form_elem.Title"
+                                               formControlName="{{form_elem?.Title}}"
+                                               [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Password').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Password').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword').hasError('matchTo')) && regFormSteps[currentStep - 1].get('Password').touched)}"/>
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                                        <div (click)="changePassType()" class="m-change-password-field-type m-change-password-field-type2">
+                                            <span [ngClass]="changePasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                                        </div>
+                                        <span class="error-field-message error-field-message-pass" *ngIf="((regFormSteps[currentStep - 1].get('Password').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Password').hasError('required')  &&  regFormSteps[currentStep - 1].get('Password').touched)); else passRef">{{'Error.PasswordFieldNotValid' | translate}}</span>
+                                        <ng-template #passRef>
+                                        <span class="error-field-message error-field-message-pass" *ngIf="validationMessages.Password">{{'Error.' + validationMessages.Password | translate}}</span></ng-template>
+                                    </div>
+
+                                </div>
+
+                                <div>
+
+                                    <div class="form_field">
+                                        <input type="{{changeConfirmPasswordType ? 'text' : 'password'}}" formControlName="confirmPassword"
+                                               reg-exp-input [regExp]="form_elem.RegExp"
+                                               placeholder="{{'Register.Confirm-password-p' | translate}}"
+                                               [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('confirmPassword').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('confirmPassword').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword').hasError('matchTo')) && regFormSteps[currentStep - 1].get('confirmPassword').touched || (regFormSteps[currentStep - 1].get('Password').hasError('required') && submitted))}"/>
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.ConfirmPassword' | translate}}</label>
+                                        <div (click)="changeConfirmPassType()" class="m-change-password-field-type m-change-password-field-type2">
+                                            <span [ngClass]="changeConfirmPasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                                        </div>
+                                        <span class="error-field-message" *ngIf="(regFormSteps[currentStep - 1].get('confirmPassword').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword').hasError('matchTo')) && regFormSteps[currentStep - 1].get('confirmPassword').touched">{{ 'Error.PasswordMatchTo' | translate }}</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'text'" class="form_field">
+
+
+                            <input reg-exp-input [regExp]="form_elem.RegExp" type="text" [formControlName]="form_elem.Title"
+                                   [name]="form_elem.Title"
+                                   placeholder="{{'Register.' + form_elem?.Title + 'placeholder' | translate}}"
+                                   *ngIf="form_elem.Title !== 'LastName'"
+                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched), 'disable-item': (form_elem?.Title == 'PromoCode' && router.url.includes('ReferenceCode'))}"/>
+
+
+                            <input reg-exp-input [regExp]="form_elem.RegExp" type="text" [formControlName]="form_elem.Title"
+                                   [name]="form_elem.Title"
+                                   placeholder="{{'Register.' + form_elem?.Title + 'placeholder' | translate}}"
+                                   *ngIf="form_elem.Title === 'LastName'"
+                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}"/>
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            <span class="error-field-message" *ngIf="((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('pattern')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched">{{'Error.' + form_elem?.Title + 'FieldNotValid' | translate}}</span>
+                        </div>
+
+                        <div *ngSwitchCase="'file'" class="form_field">
+                            <file-type [formGroup]="regFormSteps[currentStep - 1]"
+                                       [formControlName]="form_elem?.Title"
+                                       [formLink]="form_elem?.Link"
+                                       [formOpenInRouting]="form_elem?.OpenInRouting"
+                                       [prevFormGroup]="regFormSteps[currentStep - 2]">
+                            </file-type>
+                        </div>
+
+                        <div *ngSwitchCase="'MobileData'" class="form_field">
+
+                            <div class="mobileData_tabs">
+                                <div class="custom_dropdown_reg" dropdown>
+                                    <div class="flex_between current_item" (click)="focusInput(mobileCodeInput)">
+                                        <input #mobileCodeInput [(ngModel)]="mobileCodePattern" [ngModelOptions]="{standalone:true}">
+                                        <div>
+                                            <img src="../../../../../../../assets/images/countries/{{currentValueMobileCode?.Title | lowercase}}.png"/>
+                                            <span>{{currentValueMobileCode?.Title}}
+                                                ({{currentValueMobileCode?.Type}})</span>
+                                        </div>
+<!--                                        <fa-icon [icon]="['fas', 'sort-down']"></fa-icon>-->
+                                    </div>
+
+                                    <ul class="custom_dropdown_list right-top" [ngStyle]="{'height': mobileCodesList.length > 7? '150px': 'fit-content'}">
+                                        <li *ngFor="let code of mobileCodesList | filterByMobileCode : mobileCodePattern" (click)="selectMobileCode(code)">
+                                            <img src="../../../../../../../assets/images/countries/{{code?.Title | lowercase}}.png"/>
+                                            <span> {{code?.Title}}
+                                                ({{code?.Type}})</span>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                <div class="custom_dropdown_reg2">
+                                <input type="text" formControlName="MobileNumber"
+                                       [showMaskTyped]="true"
+                                       placeHolderCharacter="0"
+                                       [name]="form_elem.Title"
+                                       [mask]="currentValueMobileCode.Mask"
+                                       placeholder="{{currentValueMobileCode.Mask ? currentValueMobileCode.Mask : 'Register.Mobile-number-placeholder' | translate}}"
+                                       [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('MobileNumber').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('MobileNumber').hasError('required')  || regFormSteps[currentStep - 1].get('MobileNumber').hasError('MobileNumber') || regFormSteps[currentStep - 1].get('MobileNumber').hasError('maxlength')) && regFormSteps[currentStep - 1].get('MobileNumber').touched)}"/>
+                                    <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                                </div>
+                            </div>
+                            <span class="error-field-message" *ngIf="((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('pattern')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched">{{'Error.' + form_elem?.Title + 'FieldNotValid' | translate}}</span>
+                        </div>
+
+                        <div *ngSwitchCase="'BirthDate'" class="form_field">
+
+                            <div class="birthDate_tabs">
+                                <select [formControlName]="'BirthYear'" class="custom_dropdown_reg"
+                                        [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('BirthYear').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('BirthYear').hasError('required')  || regFormSteps[currentStep - 1].get('BirthYear').hasError('minlength') || regFormSteps[currentStep - 1].get('BirthYear').hasError('maxlength')) && regFormSteps[currentStep - 1].get('BirthYear').touched)}"
+                                        (change)="changeYear($event.target.value, currentStep)">
+                                    <option value="">{{'Register.Year' | translate}}</option>
+                                    <option *ngFor="let year of Years" [value]="year">{{year}}</option>
+                                </select>
+
+                                <select [formControlName]="'BirthMonth'" class="custom_dropdown_reg" id="birth-month"
+                                        (change)="changeMonth($event.target.value, currentStep)"
+                                        [ngClass]="{'disable-item': regFormSteps[currentStep - 1].controls['BirthYear'].value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('BirthMonth').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('BirthMonth').hasError('required')  || regFormSteps[currentStep - 1].get('BirthMonth').hasError('minlength') || regFormSteps[currentStep - 1].get('BirthMonth').hasError('maxlength')) && regFormSteps[currentStep - 1].get('BirthMonth').touched)}">
+
+                                    <option value="">{{'Register.Month' | translate}}</option>
+                                    <option *ngFor="let month of Months" [value]="month.Id">
+                                        {{'Register.' + month?.Name | translate}}
+                                    </option>
+                                </select>
+
+
+                                <select [formControlName]="form_elem.Title"
+                                        [ngClass]="{'disable-item': regFormSteps[currentStep - 1].controls['BirthMonth'].value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
+                                    <option value="">{{'Register.Day' | translate}}</option>
+                                    <option *ngFor="let day of Days" [value]="day">
+                                        {{day}}
+                                    </option>
+                                </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            </div>
+
+                        </div>
+
+                        <div *ngSwitchCase="'BirthDateDMY'">
+                            <div class="form_field">
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+
+                                <div class="birthDate_tabs">
+                                    <select [formControlName]="form_elem.Title"
+                                            class="custom_dropdown_reg"
+                                            (change)="dayDMY($event.target.value, currentStep)"
+                                            [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
+                                        <option value="">{{'Register.Day' | translate}}</option>
+                                        <option *ngFor="let day of Days" [value]="day">
+                                            {{day}}
+                                        </option>
+                                    </select>
+                                    <select [formControlName]="'BirthMonth'" class="custom_dropdown_reg"
+                                            id="birth-month"
+                                            (change)="monthDMY($event.target.value, currentStep)"
+                                            [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('BirthMonth').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('BirthMonth').hasError('required')  || regFormSteps[currentStep - 1].get('BirthMonth').hasError('minlength') || regFormSteps[currentStep - 1].get('BirthMonth').hasError('maxlength')) && regFormSteps[currentStep - 1].get('BirthMonth').touched)}">
+                                        <option value="">{{'Register.Month' | translate}}</option>
+                                        <option *ngFor="let month of Months" [value]="month.Id">
+                                            {{'Register.' + month?.Name | translate}}
+                                        </option>
+                                    </select>
+                                    <select [formControlName]="'BirthYear'"
+                                            (change)="yearDMY($event.target.value, currentStep)"
+                                            [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('BirthYear').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('BirthYear').hasError('required')  || regFormSteps[currentStep - 1].get('BirthYear').hasError('minlength') || regFormSteps[currentStep - 1].get('BirthYear').hasError('maxlength')) && regFormSteps[currentStep - 1].get('BirthYear').touched)}">
+                                        <option value="">{{'Register.Year' | translate}}</option>
+                                        <option *ngFor="let year of Years" [value]="year">{{year}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="error_message error_message_regForm" *ngIf="showAllowedAgeError">
+                                <span>{{ 'Error.Check-AllowedAge' | translate }}</span>
+                            </div>
+
+                        </div>
+
+                        <div *ngSwitchCase="'Currency'" class="form_field">
+
+
+
+                            <select class="currency" [formControlName]="form_elem.Title"
+                                    [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
+                                <option *ngFor="let currency of currencyList; let i = index" [value]="currency"
+                                        [selected]="i==0">{{currency}}</option>
+                            </select>
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                        </div>
+
+                        <div *ngSwitchCase="'Gender'" class="form_field">
+
+                            <select [formControlName]="form_elem.Title"
+                                    [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}"
+                                    class="custom_dropdown_reg">
+
+                                <option value="">{{'Register.Gender-placeholder' | translate}}</option>
+                                <option value="1">{{'User.Male' | translate}}</option>
+                                <option value="2">{{'User.Female' | translate}}</option>
+                            </select>
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                        </div>
+
+                        <div *ngSwitchCase="'Region2'" class="form_field form_field__{{form_elem?.Type}}">
+
+
+                            <div class="begion_tabs begion_tabs__{{form_elem?.Type}} default-select">
+
+                                <select [formControlName]="form_elem.Title" class="custom_dropdown_reg"
+                                        (change)="changeCountry($event.target.value, form_elem?.Type, currentStep)"
+                                        [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
+
+                                    <option value="">{{'Register.Country-option' | translate}}</option>
+                                    <option *ngFor="let country of countryList"
+                                            [value]="country.Id">{{country?.Name}}</option>
+                                </select>
+
+                                <select [formControlName]="'City'" class="custom_dropdown_reg"
+                                        (ngModelChange)="changeCity($event, currentStep)"
+                                        [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('Country').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
+                                    <option value="">{{'Register.City-option' | translate}}</option>
+                                    <option *ngFor="let city of cityList; let i = index" [selected]="i==0"
+                                            [ngValue]="city.Id">{{city?.Name}}</option>
+                                </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            </div>
+
+                        </div>
+                        <div *ngSwitchCase="'Region3'" class="form_field form_field__{{form_elem?.Type}}">
+<!--                            <label *ngIf="form_elem?.HasLabel">{{'Register.' + form_elem?.Title | translate}}</label>-->
+
+                            <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
+
+                                <select [formControlName]="form_elem.Title" class="custom_dropdown_reg"
+                                        (change)="changeCountry($event.target.value, form_elem?.Type, currentStep)"
+                                        [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
+
+                                    <option value="">{{'Register.Country-option' | translate}}</option>
+                                    <option *ngFor="let country of countryList"
+                                            [value]="country.Id">{{country?.Name}}</option>
+                                </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            </div>
+                            <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
+                                <select [formControlName]="'District'"
+                                        (change)="changeDistrict($event.target.value, form_elem?.Type, currentStep)"
+                                        [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('Country').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('District').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('District').hasError('required')  || regFormSteps[currentStep - 1].get('District').hasError('minlength') || regFormSteps[currentStep - 1].get('District').hasError('maxlength')) && regFormSteps[currentStep - 1].get('District').touched)}">
+                                    <option value="">{{'Register.District-option' | translate}}</option>
+                                    <option *ngFor="let district of districtList"
+                                            [value]="district.Id">{{district?.Name}}
+                                    </option>
+                                </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.District' | translate}}</label>
+                            </div>
+                            <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
+                                <select [formControlName]="'City'" class="custom_dropdown_reg"
+                                        (ngModelChange)="changeCity($event, currentStep)"
+                                        [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('District').value == '' || regFormSteps[currentStep - 1].get('Country').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
+                                    <option value="">{{'Register.City-option' | translate}}</option>
+                                    <option *ngFor="let city of cityList; let i = index" [selected]="i==0"
+                                            [ngValue]="city.Id">{{city?.Name}}</option>
+                                </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.City' | translate}}</label>
+                               <!-- <select [formControlName]="'Town'" class="custom_dropdown_reg"
+                                        (ngModelChange)="changeTown($event, currentStep)"
+                                        [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('District').value == '' || regFormSteps[currentStep - 1].get('Country').value == '' || regFormSteps[currentStep - 1].get('City').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
+                                    <option value="">{{'Register.Town-option' | translate}}</option>
+                                    <option *ngFor="let town of townList"
+                                            [ngValue]="town.Id">{{town?.Name}}</option>
+                                </select>-->
+                            </div>
+
+                        </div>
+
+                        <div *ngSwitchCase="'Region1'" class="form_field form_field__{{form_elem?.Type}}">
+
+                            <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
+
+                                <select [formControlName]="form_elem.Title"
+                                        (change)="changeRegion1(form_elem['Title'], $event.target.value, currentStep)"
+                                        [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}"
+                                        class="custom_dropdown_reg">
+                                    <option value="">{{'Register.' + form_elem?.Title | translate}}</option>
+                                    <option *ngFor="let country of countryList"
+                                            [value]="country.Id">{{country?.Name}}</option>
+                                </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            </div>
+
+                        </div>
+
+                        <div *ngSwitchCase="'RegionP'" class="form_field form_field__{{form_elem?.Type}}">
+                            <div class="begion_tabs begion_tabs__{{form_elem?.Type}}" style="flex-wrap: nowrap"
+                                 [ngClass]="{'flex-column': form_elem.HasLabel}">
+                                <div class="begion_tabs-item">
+                                    <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Nationality' | translate}}</label>
+
+                                    <select [formControlName]="'Country'"
+                                            (change)="changeCountry($event.target.value, form_elem?.Type, currentStep)"
+                                            [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Country').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Country').hasError('required')  || regFormSteps[currentStep - 1].get('Country').hasError('minlength') || regFormSteps[currentStep - 1].get('Country').hasError('maxlength')) && regFormSteps[currentStep - 1].get('Country').touched)}"
+                                            class="custom_dropdown_reg">
+                                        <option value="">{{'Register.Country-option' | translate}}</option>
+                                        <option *ngFor="let country of countryList; let i = index"
+                                                [value]="country.Id">{{country?.Name}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                                <ng-container *ngIf="form_elem?.Title == currentRegion.IsoCode; else commonLocationRef">
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Province'| translate}}</label>
+
+                                        <select [formControlName]="'State'"
+                                                (ngModelChange)="changeRegionP($event, form_elem?.Type, currentStep)"
+                                                [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('Country').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('State').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('State').hasError('required')  || regFormSteps[currentStep - 1].get('State').hasError('minlength') || regFormSteps[currentStep - 1].get('State').hasError('maxlength')) && regFormSteps[currentStep - 1].get('State').touched)}">
+                                            <option value="">{{'Register.State-option' | translate}}</option>
+                                            <option *ngFor="let region of regionList; let i = index" [selected]="i==0"
+                                                    [ngValue]="region.Id">{{region?.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.District' | translate}}</label>
+
+
+                                        <select [formControlName]="'District'"
+                                                (ngModelChange)="changeDistrict($event, form_elem?.Type, currentStep)"
+                                                [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('State').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('District').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('District').hasError('required')  || regFormSteps[currentStep - 1].get('District').hasError('minlength') || regFormSteps[currentStep - 1].get('District').hasError('maxlength')) && regFormSteps[currentStep - 1].get('District').touched)}">
+                                            <option value="">{{'Register.District-option' | translate}}</option>
+                                            <option *ngFor="let district of districtList; let i = index"
+                                                    [selected]="i==0"
+                                                    [ngValue]="district.Id">{{district?.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Coregemento' | translate}}</label>
+
+                                        <select [formControlName]="'City'"
+                                                (ngModelChange)="changeCity($event, currentStep)"
+                                                [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('District').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('City').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('City').hasError('required')  || regFormSteps[currentStep - 1].get('City').hasError('minlength') || regFormSteps[currentStep - 1].get('City').hasError('maxlength')) && regFormSteps[currentStep - 1].get('City').touched)}">
+                                            <option value="">{{'Register.Coregemento-option' | translate}}</option>
+                                            <option *ngFor="let city of cityList; let i = index" [selected]="i==0"
+                                                    [ngValue]="city.Id">{{city?.Name}}
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Neighbourhood' | translate}}</label>
+                                        <div class="custom_dropdown_reg">
+                                            <input type="text" formControlName="Address"
+                                                   [name]="'Address'"
+                                                   placeholder="{{'Register.Neighbourhood-Placeholder'| translate}}"
+                                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Address').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Address').hasError('required')  || regFormSteps[currentStep - 1].get('Address').hasError('minlength') || regFormSteps[currentStep - 1].get('Address').hasError('maxlength')) && regFormSteps[currentStep - 1].get('Address').touched)}"/>
+                                        </div>
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.BuildingNumber' | translate}}</label>
+                                        <div class="custom_dropdown_reg">
+                                            <input type="text" formControlName="BuildingNumber"
+                                                   [name]="'BuildingNumber'"
+                                                   placeholder="{{'Register.BuildingNumber'| translate}}"
+                                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('BuildingNumber').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('BuildingNumber').hasError('required')  || regFormSteps[currentStep - 1].get('BuildingNumber').hasError('minlength') || regFormSteps[currentStep - 1].get('BuildingNumber').hasError('maxlength')) && regFormSteps[currentStep - 1].get('BuildingNumber').touched)}"/>
+                                        </div>
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Apartment' | translate}}</label>
+                                        <div class="custom_dropdown_reg">
+                                            <input type="text" formControlName="Apartment"
+                                                   [name]="'Apartment'"
+                                                   placeholder="{{'Register.Apartment'| translate}}"
+                                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Apartment').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Apartment').hasError('required')  || regFormSteps[currentStep - 1].get('Apartment').hasError('minlength') || regFormSteps[currentStep - 1].get('Apartment').hasError('maxlength')) && regFormSteps[currentStep - 1].get('Apartment').touched)}"/>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <ng-template #commonLocationRef>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.City' | translate}}</label>
+                                        <div class="custom_dropdown_reg">
+                                            <input type="text" [formControlName]="'City'"
+                                                   [name]="'City'"
+                                                   [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('Country').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('City').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('City').hasError('required')  || regFormSteps[currentStep - 1].get('City').hasError('minlength') || regFormSteps[currentStep - 1].get('City').hasError('maxlength')) && regFormSteps[currentStep - 1].get('City').touched)}"
+                                                   placeholder="{{'Register.City-option'| translate}}">
+                                        </div>
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Address' | translate}}</label>
+                                        <div class="custom_dropdown_reg">
+                                            <input type="text" formControlName="Address"
+                                                   [name]="'Address'"
+                                                   placeholder="{{'Register.Address'| translate}}"
+                                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Address').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Address').hasError('required')  || regFormSteps[currentStep - 1].get('Address').hasError('minlength') || regFormSteps[currentStep - 1].get('Address').hasError('maxlength')) && regFormSteps[currentStep - 1].get('Address').touched)}"/>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchCase="'select'" class="form_field">
+
+
+                            <select [formControlName]="form_elem.Title"
+                                    (change)="changeCustomDropdownValue(form_elem.Title, $event.target.value, currentStep)"
+                                    [ngClass]="{'disable-selected-Item' : form_elem['selectList']?.length == 1,
+                                    'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}"
+                                    class="custom_dropdown_reg">
+                                <option value="">{{'Register.' + form_elem.Title + '-option' | translate}}</option>
+                                <option *ngFor="let selectItem of form_elem['selectList']" [value]="selectItem.Value">
+                                    {{selectItem?.Name}}
+                                </option>
+                            </select>
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                        </div>
+
+                        <div *ngSwitchCase="'dropdown'" class="form_field">
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+
+                            <div class="form_field_top">
+
+                                <select (change)="changeQuickRegisterType($event)"
+                                        class="custom_dropdown_reg">
+                                    <option value="">{{quickRegisterType?.Type}}</option>
+                                    <option *ngFor="let item of currentRegTypeList"
+                                            [ngClass]="{'disable-selected-Item': quickRegisterType.Type === item.Type}">
+                                        {{item?.Type}}
+                                    </option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
+
+                        <div *ngSwitchCase="'checkbox'" class="form_field">
+
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+
+                            <div class="form_field_checked">
+
+                                <div class="form_field_checked_bottom">
+                                    <input type="checkbox" class="reg-checkbox distans-right"
+                                           [formControlName]="form_elem.Title"
+                                           [ngClass]="{'invalid-filed': ((!regFormSteps[currentStep - 1].get(form_elem?.Title).value && submitted) || regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}"/>
+                                    <!--                         *ngIf="submitted && !regFormSteps[currentStep - 1].get(form_elem?.Title).value">-->
+
+                                    <span (click)="onTemplateClick($event)" class="reg-conditions" [innerHTML]="'Register.' + form_elem?.Title | translate | sanitizer: 'html'"></span>
+                                </div>
+                            </div>
+
+                            <div class="error-field-message"
+                                 *ngIf="regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && regFormSteps[currentStep - 1].get(form_elem?.Title).touched">
+                                <span>{{'Error.' + form_elem?.Title + 'FieldNotValid' | translate}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+<!--                <div *ngIf="showSuccessMessage" class="reg-success-message">-->
+<!--                    {{'Register.Success-Message' | translate}}-->
+<!--                </div>-->
+
+                <div class="error-message" *ngIf="errorMessage">
+                    <span class="icon-error-message"></span>
+                    <span class="error-message-text">{{errorMessage}}</span>
+<!--                    <span class="icon-close-modal"></span>-->
+                </div>
+            </div>
+        </form>
+        <div *ngIf="showSuccessMessage" class="reg-success-message">
+            <fa-icon class="check-circle-icon" [icon]="['fas', 'check-circle']"></fa-icon>
+            {{'Register.Success-Message' | translate}}
+            <p class="successfully-registered">{{'Register.You-have-successfully-registered' | translate}}</p>
+            <p class="successfully-registered">{{'Register.successful-welcome' | translate}}</p>
+        </div>
+        <div class="reg-step-navigate-buttons" *ngIf="!showSuccessMessage"
+             [ngClass]="{'flex-center': stepsLength.length == 1, 'flex-end': ((currentStep == '1') || (checkBackBtnShowingList[currentStep - 1] == '1')),  'flex-between': ((stepsLength.length != 1) && (currentStep != '1') && (checkBackBtnShowingList[currentStep - 1] != '1'))}">
+
+            <button *ngIf="formValidationType === 'blur'" type="submit" (click)="nextBtn(currentStep + 1, currentStep)" class="craft_btn"
+                    [ngClass]="{'reg_btn':stepsLength.length == 1, 'next-btn': (stepsLength.length != 1), 'not_active': (!regFormSteps[currentStep - 1].valid || (stepsLength.length == 1 &&
+                                !regFormSteps[currentStep - 1].get('AcceptTerms').value) || showAllowedAgeError ||
+                                ((stepsLength.length === currentStep) &&
+                                !regFormSteps[currentStep - 1].get('AcceptTerms').value))}">
+                <span
+                    *ngIf="(stepsLength.length == 1) || (stepsLength.length == currentStep)"> {{'Register.Register' | translate}} </span>
+                <span
+                        *ngIf="(stepsLength.length != 1) && (stepsLength.length != currentStep)"> {{'Register.Next' | translate}} </span>
+            </button>
+            <button *ngIf="formValidationType === 'submit'" type="submit" (click)="nextBtn(currentStep + 1, currentStep)" class="craft_btn"
+                    [ngClass]="{'reg_btn':stepsLength.length == 1, 'next-btn': (stepsLength.length != 1)}">
+                <span
+                        *ngIf="(stepsLength.length == 1) || (stepsLength.length == currentStep)"> {{'Register.Register' | translate}} </span>
+                <span
+                        *ngIf="(stepsLength.length != 1) && (stepsLength.length != currentStep)"> {{'Register.Next' | translate}} </span>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="registerType?.Title == registerTypes.QUICK">
+        <form [formGroup]="quickRegForm" autocomplete="off" novalidate>
+            <div class="allFormItems" *ngIf="quickFormTemplate.length > 0">
+                <div *ngFor="let form_elem of quickFormTemplate; trackBy: trackByMethod"
+
+                     class="form-row-item form-row {{form_elem?.Type}}-mobile form-row{{form_elem?.FieldSize == '1' ? form_elem?.FieldSize : 0.5*form_elem?.FieldSize}}"
+                     [ngClass]="{'form-row-item__autoHeight': form_elem?.Type === 'Region4',
+                     'form-row-item_withLabel':form_elem?.HasLabel,
+                     'form-row-item_withoutLabel':!form_elem?.HasLabel}">
+
+                    <div [ngSwitch]="form_elem.Type" class="top-row">
+
+                        <div *ngSwitchCase="'password'" class="password_form_field form_field"
+                             [ngClass]="{'autoHeight': stepsLength.length > 1}">
+                            <div class="password_form_field_top password_form_field_top_mobile">
+                                <div>
+                                    <div class="form_field">
+                                        <input type="password"
+                                               placeholder="{{'Register.Password-placeholder-p' | translate}}"
+                                               [name]="form_elem.Title"
+                                               formControlName="{{form_elem?.Title}}"
+                                               [ngClass]="{'invalid-filed': ((quickRegForm.get('Password').hasError('required') && submitted) || (quickRegForm.get('Password').hasError('required')  || quickRegForm.get('confirmPassword').hasError('matchTo')) && quickRegForm.get('Password').touched)}"/>
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                                        <span class="error-field-message" *ngIf="((quickRegForm.get('Password').hasError('required') && submitted) || (quickRegForm.get('Password').hasError('required')  && quickRegForm.get('Password').touched)); else passRef">{{'Error.PasswordFieldNotValid' | translate}}</span>
+                                        <ng-template #passRef>
+                                            <span class="error-field-message" *ngIf="validationMessages.Password">{{'Error.' + validationMessages.Password | translate}}</span></ng-template>
+                                    </div>
+                                </div>
+
+                                <div>
+
+                                    <div class="form_field">
+                                        <input type="password" formControlName="confirmPassword"
+                                               placeholder="{{'Register.Confirm-password-p' | translate}}"
+                                               [ngClass]="{'invalid-filed': ((quickRegForm.get('confirmPassword').hasError('required') || quickRegForm.get('confirmPassword').hasError('matchTo')) && quickRegForm.get('confirmPassword').touched || (quickRegForm.get('Password').hasError('required') && submitted))}"/>
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.ConfirmPassword' | translate}}</label>
+                                        <span class="error-field-message" *ngIf="(quickRegForm.get('confirmPassword').hasError('required')  || quickRegForm.get('confirmPassword').hasError('matchTo')) && quickRegForm.get('confirmPassword').touched">{{ 'Error.PasswordMatchTo' | translate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'text'" class="form_field">
+
+
+                            <input type="text" [formControlName]="form_elem.Title"
+                                   [name]="form_elem.Title"
+                                   placeholder="{{'Register.' + form_elem?.Title + 'placeholder' | translate}}"
+                                   *ngIf="form_elem.Title !== 'LastName'"
+                                   [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched), 'disable-item': (form_elem?.Title == 'PromoCode' && router.url.includes('ReferenceCode'))}"/>
+
+
+                            <input type="text" [formControlName]="form_elem.Title"
+                                   [name]="form_elem.Title"
+                                   placeholder="{{'Register.' + form_elem?.Title + 'placeholder' | translate}}"
+                                   *ngIf="form_elem.Title === 'LastName'"
+                                   [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}"/>
+
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            <!--              <div class="error_message"-->
+                            <!--                   *ngIf="(quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || quickRegForm.get(form_elem?.Title).hasError('required') && !quickRegForm.get(form_elem?.Title).hasError(form_elem?.Title) && !quickRegForm.get(form_elem?.Title).hasError('maxlength') && quickRegForm.get(form_elem?.Title).touched">-->
+                            <!--                <span>{{ 'Error.Required-field' | translate }}</span>-->
+                            <!--              </div>-->
+
+                        </div>
+
+                        <div *ngSwitchCase="'MobileData'" class="form_field">
+
+                            <div class="mobileData_tabs">
+                                <div class="custom_dropdown_reg" dropdown>
+                                    <div class="flex_between current_item" (click)="focusInput(mobileCodeInput)">
+                                        <input #mobileCodeInput [(ngModel)]="mobileCodePattern" [ngModelOptions]="{standalone:true}">
+                                        <div>
+                                            <img
+                                                    src="../../../../../../../assets/images/countries/{{currentValueMobileCode?.Title | lowercase}}.png"/>
+                                            <span>{{currentValueMobileCode?.Title}}
+                                                ({{currentValueMobileCode?.Type}})</span>
+                                        </div>
+<!--                                        <fa-icon [icon]="['fas', 'sort-down']"></fa-icon>-->
+                                    </div>
+
+                                    <ul class="custom_dropdown_list right-top">
+                                        <li *ngFor="let code of mobileCodesList | filterByMobileCode : mobileCodePattern" (click)="selectMobileCode(code)"
+                                            (click)="selectMobileCode(code, 'quick')">
+                                            <img
+                                                    src="../../../../../../../assets/images/countries/{{code?.Title | lowercase}}.png"/>
+                                            <span> {{code?.Title}}
+                                                ({{code?.Type}})</span>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                <div class="custom_dropdown_reg2">
+                                <input type="text" formControlName="MobileNumber"
+                                       mask="{{currentValueMobileCode.Mask}}"
+                                       [name]="'MobileNumber'"
+                                       placeholder="{{currentValueMobileCode.Mask ? currentValueMobileCode.Mask : 'Register.Mobile-number-placeholder' | translate}}"
+                                       [ngClass]="{'invalid-filed': ((quickRegForm.get('MobileNumber').hasError('required') && submitted) || (quickRegForm.get('MobileNumber').hasError('required')  || quickRegForm.get('MobileNumber').hasError('MobileNumber') || quickRegForm.get('MobileNumber').hasError('maxlength')) && quickRegForm.get('MobileNumber').touched)}"/>
+                                    <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                                </div>
+                            </div>
+                            <span class="error-field-message" *ngIf="((quickRegForm.get('MobileNumber').hasError('required') && submitted) || (quickRegForm.get('MobileNumber').hasError('required')  || quickRegForm.get('MobileNumber').hasError('MobileNumber') || quickRegForm.get('MobileNumber').hasError('maxlength')) && quickRegForm.get('MobileNumber').touched)">{{'Error.MobileNumberFieldNotValid' | translate}}</span>
+                            <!--              <div class="error_message"-->
+                            <!--                   *ngIf="(quickRegForm.get('MobileNumber').hasError('required') && submitted) || quickRegForm.get('MobileNumber').hasError('required') && !quickRegForm.get('MobileNumber').hasError('MobileNumber') && !quickRegForm.get('MobileNumber').hasError('maxlength') && quickRegForm.get('MobileNumber').touched">-->
+                            <!--                <span>{{ 'Error.Required-field' | translate }}</span>-->
+                            <!--              </div>-->
+                        </div>
+
+                        <div *ngSwitchCase="'BirthDate'" class="form_field">
+
+                            <div class="birthDate_tabs">
+
+                                <select [formControlName]="'BirthYear'" class="custom_dropdown_reg"
+                                        [ngClass]="{'invalid-filed': ((quickRegForm.get('BirthYear').hasError('required') && submitted) || (quickRegForm.get('BirthYear').hasError('required')  || quickRegForm.get('BirthYear').hasError('minlength') || quickRegForm.get('BirthYear').hasError('maxlength')) && quickRegForm.get('BirthYear').touched)}"
+                                        (change)="changeYear($event.target.value, 'quick')">
+                                    <option value="">{{'Register.Year' | translate}}</option>
+                                    <option *ngFor="let year of Years" [value]="year">{{year}}</option>
+                                </select>
+
+                                <select [formControlName]="'BirthMonth'" class="custom_dropdown_reg" id="birth-month"
+                                        [ngClass]="{'disable-item': quickRegForm.controls['BirthYear'].value == '', 'invalid-filed': ((quickRegForm.get('BirthMonth').hasError('required') && submitted) || (quickRegForm.get('BirthMonth').hasError('required')  || quickRegForm.get('BirthMonth').hasError('minlength') || quickRegForm.get('BirthMonth').hasError('maxlength')) && quickRegForm.get('BirthMonth').touched)}"
+                                        (change)="changeMonth($event.target.value, 'quick')">
+                                    <option value="">{{'Register.Month' | translate}}</option>
+                                    <option *ngFor="let month of Months" [value]="month.Id">
+                                        {{'Register.' + month?.Name | translate}}
+                                    </option>
+                                </select>
+
+
+                                <select [formControlName]="form_elem.Title"
+                                        [ngClass]="{'disable-item': quickRegForm.controls['BirthMonth'].value == '', 'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}">
+                                    <option value="">{{'Register.Day' | translate}}</option>
+                                    <option *ngFor="let day of Days" [value]="day">
+                                        {{day}}
+                                    </option>
+                                </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'RegionP'" class="form_field form_field__{{form_elem?.Type}}">
+                            <div class="begion_tabs begion_tabs__{{form_elem?.Type}}" style="flex-wrap: nowrap"
+                                 [ngClass]="{'flex-column': form_elem.HasLabel}">
+                                <div class="begion_tabs-item">
+                                    <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Nationality' | translate}}</label>
+
+                                    <select [formControlName]="'Country'"
+                                            (ngModelChange)="changeCountry($event, form_elem?.Type, currentStep)"
+                                            [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Country').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Country').hasError('required')  || regFormSteps[currentStep - 1].get('Country').hasError('minlength') || regFormSteps[currentStep - 1].get('Country').hasError('maxlength')) && regFormSteps[currentStep - 1].get('Country').touched)}"
+                                            class="custom_dropdown_reg">
+                                        <option value="">{{'Register.Country-option' | translate}}</option>
+                                        <option *ngFor="let country of countryList; let i = index" [selected]="i==0"
+                                                [ngValue]="country.Id">{{country?.Name}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                                <ng-container *ngIf="form_elem?.Title == currentRegion.IsoCode; else commonLocationRef">
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Province'| translate}}</label>
+
+                                        <select [formControlName]="'State'"
+                                                (ngModelChange)="changeRegionP($event, form_elem?.Type, currentStep)"
+                                                [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('Country').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('State').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('State').hasError('required')  || regFormSteps[currentStep - 1].get('State').hasError('minlength') || regFormSteps[currentStep - 1].get('State').hasError('maxlength')) && regFormSteps[currentStep - 1].get('State').touched)}">
+                                            <option value="">{{'Register.State-option' | translate}}</option>
+                                            <option *ngFor="let region of regionList; let i = index" [selected]="i==0"
+                                                    [ngValue]="region.Id">{{region?.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.District' | translate}}</label>
+
+
+                                        <select [formControlName]="'District'"
+                                                (ngModelChange)="changeDistrict($event, form_elem?.Type, currentStep)"
+                                                [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('State').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('District').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('District').hasError('required')  || regFormSteps[currentStep - 1].get('District').hasError('minlength') || regFormSteps[currentStep - 1].get('District').hasError('maxlength')) && regFormSteps[currentStep - 1].get('District').touched)}">
+                                            <option value="">{{'Register.District-option' | translate}}</option>
+                                            <option *ngFor="let district of districtList; let i = index"
+                                                    [selected]="i==0"
+                                                    [ngValue]="district.Id">{{district?.Name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.City' | translate}}</label>
+
+                                        <select [formControlName]="'City'"
+                                                (ngModelChange)="changeCity($event, currentStep)"
+                                                [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('District').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('City').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('City').hasError('required')  || regFormSteps[currentStep - 1].get('City').hasError('minlength') || regFormSteps[currentStep - 1].get('City').hasError('maxlength')) && regFormSteps[currentStep - 1].get('City').touched)}">
+                                            <option value="">{{'Register.City-option' | translate}}</option>
+                                            <option *ngFor="let city of cityList; let i = index" [selected]="i==0"
+                                                    [ngValue]="city.Id">{{city?.Name}}
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Neighbourhood' | translate}}</label>
+                                        <div class="custom_dropdown_reg">
+                                            <input type="text" formControlName="Address"
+                                                   [name]="'Address'"
+                                                   placeholder="{{'Register.Neighbourhood-Placeholder'| translate}}"
+                                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Address').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Address').hasError('required')  || regFormSteps[currentStep - 1].get('Address').hasError('minlength') || regFormSteps[currentStep - 1].get('Address').hasError('maxlength')) && regFormSteps[currentStep - 1].get('Address').touched)}"/>
+                                        </div>
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.BuildingNumber' | translate}}</label>
+                                        <div class="custom_dropdown_reg">
+                                            <input type="text" formControlName="BuildingNumber"
+                                                   [name]="'BuildingNumber'"
+                                                   placeholder="{{'Register.BuildingNumber'| translate}}"
+                                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('BuildingNumber').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('BuildingNumber').hasError('required')  || regFormSteps[currentStep - 1].get('BuildingNumber').hasError('minlength') || regFormSteps[currentStep - 1].get('BuildingNumber').hasError('maxlength')) && regFormSteps[currentStep - 1].get('BuildingNumber').touched)}"/>
+                                        </div>
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Apartment' | translate}}</label>
+                                        <div class="custom_dropdown_reg">
+                                            <input type="text" formControlName="Apartment"
+                                                   [name]="'Apartment'"
+                                                   placeholder="{{'Register.Apartment'| translate}}"
+                                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Apartment').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Apartment').hasError('required')  || regFormSteps[currentStep - 1].get('Apartment').hasError('minlength') || regFormSteps[currentStep - 1].get('Apartment').hasError('maxlength')) && regFormSteps[currentStep - 1].get('Apartment').touched)}"/>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <ng-template #commonLocationRef>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.City' | translate}}</label>
+
+                                        <select [formControlName]="'City'" class="custom_dropdown_reg"
+                                                [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('Country').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get('City').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('City').hasError('required')  || regFormSteps[currentStep - 1].get('City').hasError('minlength') || regFormSteps[currentStep - 1].get('City').hasError('maxlength')) && regFormSteps[currentStep - 1].get('City').touched)}"
+                                                (ngModelChange)="changeCity($event, currentStep)">
+                                            <option value="">{{'Register.City-option' | translate}}</option>
+                                            <option *ngFor="let city of cityList; let i = index" [selected]="i==0"
+                                                    [ngValue]="city.Id">{{city?.Name}}</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="begion_tabs-item">
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.Address' | translate}}</label>
+                                        <div class="custom_dropdown_reg">
+                                            <input type="text" formControlName="Address"
+                                                   [name]="'Address'"
+                                                   placeholder="{{'Register.Address'| translate}}"
+                                                   [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Address').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Address').hasError('required')  || regFormSteps[currentStep - 1].get('Address').hasError('minlength') || regFormSteps[currentStep - 1].get('Address').hasError('maxlength')) && regFormSteps[currentStep - 1].get('Address').touched)}"/>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchCase="'Currency'" class="form_field">
+
+                            <select class="currency" [formControlName]="form_elem.Title"
+                                    [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}">
+                                <option *ngFor="let currency of currencyList; let i = index" [value]="currency"
+                                        [selected]="i==0">{{currency}}</option>
+                            </select>
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                        </div>
+
+
+                        <div *ngSwitchCase="'Gender'" class="form_field">
+
+                            <select [formControlName]="form_elem.Title"
+                                    [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}">
+                                <option [ngValue]="">{{'Register.Gender-placeholder' | translate}}</option>
+                                <option value="1">{{'User.Male' | translate}}</option>
+                                <option value="2">{{'User.Female' | translate}}</option>
+                            </select>
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                        </div>
+
+
+                        <div *ngSwitchCase="'Region2'" class="form_field form_field__{{form_elem?.Type}}">
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
+
+                                <select [formControlName]="form_elem.Title" class="custom_dropdown_reg"
+                                        (ngModelChange)="changeCountry($event, form_elem?.Type, currentStep)"
+                                        [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}">
+
+                                    <option value="">{{'Register.Country-option' | translate}}</option>
+                                    <option *ngFor="let country of countryList let i = index" [ngValue]="country.Id"
+                                            [selected]="i==0">{{country?.Name}}</option>
+                                </select>
+
+                                <select [formControlName]="'City'" class="custom_dropdown_reg"
+                                        (ngModelChange)="changeCity($event, currentStep)"
+                                        [ngClass]="{'disable-item': quickRegForm.get('Country').value == '', 'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}">
+                                    <option value="">{{'Register.City-option' | translate}}</option>
+                                    <option *ngFor="let city of cityList; let i = index" [selected]="i==0"
+                                            [ngValue]="city.Id">{{city?.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div *ngSwitchCase="'Region1'" class="form_field form_field__{{form_elem?.Type}}">
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+
+                            <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
+                                <select [formControlName]="form_elem.Title" class="custom_dropdown_reg"
+                                        [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}"
+                                        (ngModelChange)="changeRegion1(form_elem['Title'], $event, currentStep)">
+                                    <option value="">{{'Register.' + form_elem?.Title | translate}}</option>
+                                    <option *ngFor="let country of countryList"
+                                            [ngValue]="country.Id">{{country?.Name}}</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div *ngSwitchCase="'select'" class="form_field">
+
+                            <select [formControlName]="form_elem.Title"
+                                    (ngModelChange)="changeCustomDropdownValue(form_elem.Title, $event, currentStep)"
+                                    [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}"
+                                    class="custom_dropdown_reg">
+                                <option value="">{{'Register.' + form_elem.Title | translate}}</option>
+                                <option *ngFor="let selectItem of form_elem['selectList']; let i = index"
+                                        [selected]="i==0"
+                                        [ngValue]="selectItem.Id">
+                                    {{selectItem?.Value}}
+                                </option>
+                            </select>
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                        </div>
+
+
+                        <div *ngSwitchCase="'dropdown'" class="form_field">
+
+                            <div class="form_field_top">
+
+                                <select (change)="changeQuickRegisterType($event.target.value)"
+                                        class="custom_dropdown_reg">
+                                    <option *ngFor="let item of quickRegTypeList" [value]="item.Type">
+                                        {{item?.Type}}
+                                    </option>
+                                </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+                            </div>
+
+                        </div>
+
+                        <div *ngSwitchCase="'checkbox'" class="form_field">
+
+                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
+
+                            <div class="form_field_checked">
+
+                                <div class="form_field_checked_bottom">
+                                    <input type="checkbox" class="reg-checkbox distans-right"
+                                           [formControlName]="form_elem.Title"
+                                           id="acceptTerms">
+
+                                    <span (click)="onTemplateClick($event)" class="reg-conditions" [innerHTML]="'Register.' + form_elem?.Title | translate | sanitizer: 'html'"></span>
+                                </div>
+                                <div class="error-field-message"
+                                     *ngIf="quickRegForm.get(form_elem?.Title).hasError('required') && quickRegForm.get(form_elem?.Title).touched">
+                                    <span>{{'Error.' + form_elem?.Title + 'FieldNotValid' | translate}}</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div *ngIf="showSuccessMessage" class="reg-success-message">
+                    {{'Register.Success-Message' | translate}}
+                </div>
+
+
+
+
+            </div>
+        </form>
+        
+        <div class="error-message" *ngIf="errorMessage">
+            <span class="icon-error-message"></span>
+            <span class="error-message-text">{{errorMessage}}</span>
+<!--            <span class="icon-close-modal"></span>-->
+        </div>
+        <div class="reg-step-navigate-buttons flex-center">
+            <button *ngIf="formValidationType === 'blur'"
+                    type="submit" class="craft_btn next-btn" [ngClass]="{'not_active': (!quickRegForm.valid ||
+                                !quickRegForm?.get('AcceptTerms')?.value)}"
+                    (click)="nextStep('', 'quick')">
+                {{'Register.Register' | translate}}
+            </button>
+            <button *ngIf="formValidationType === 'submit'"
+                    type="submit" class="craft_btn next-btn"
+                    (click)="nextStep('', 'quick')">
+                {{'Register.Register' | translate}}
+            </button>
+        </div>
+        <div class="reg-step-navigate-buttons reg-step-navigate-button-login">{{'Login.Already_have_an_account' | translate}}
+            <a [routerLink]="['/login']">{{'Login.Sign In' | translate}}</a>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<loader></loader>

@@ -1,0 +1,67 @@
+<div class="withdraw_payment_section2 deposit-cash">
+
+    <div class="withdraw_payment_section2__form">
+        <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()">
+            <div class="scrallablePart">
+                <app-common-accounts [templateType]="2"></app-common-accounts>
+            </div>
+            <div class="payment-form">
+                <div class="payment-form-field">
+                    <div class="payment-form-field__column all-amount">
+                            <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input"
+                                   [(ngModel)] = "amount"
+                                   required
+                                   formControlName="Amount" numbersOnly
+                                   (click)="$event.stopPropagation()"/>
+                            <span class="floating-label">{{'Withdraw.Amount' | translate}} *</span>
+                            <span class="currency">{{currencyId}}</span>
+                            <div class="error_message" *ngIf="hasMinMaxError">
+                                <span class="text" *ngIf = "amount < maxMinAmount?.MinAmount">{{'Deposit.AmountLessThen' | translate : { amount: maxMinAmount?.MinAmount, currency: currencyId} }}</span>
+                                <span class="text" *ngIf = "this.amount > this.maxMinAmount?.MaxAmount">{{'Deposit.AmountMoreThen' | translate : { amount: maxMinAmount?.MaxAmount, currency: currencyId} }}</span>
+                            </div>
+
+                        </div>
+                    <ng-template #nominalsRef>
+                        <app-common-payment-nominals [nominals]="nominals"
+                                                     (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+                    </ng-template>
+                    <button type="button" (click)="fullWithdraw();$event.stopPropagation()" class="default_btn default_btn_red payment-btn">
+                        {{'Withdraw.FullWithdraw' | translate}}
+                    </button>
+                </div>
+                <div class="payment-form-field">
+                    <div class="payment-form-field__column">
+                        <input type="text" class="payment-input" required=""
+                               formControlName="WalletNumber"
+                               (click)="$event.stopPropagation()"/>
+                        <span class="floating-label">{{'Withdraw.WalletNumber' | translate}}*</span>
+                    </div>
+                </div>
+                <div class="payment-form-field">
+                    <div class="payment-form-field__column">
+                        <input type="text" class="payment-input" required=""
+                               formControlName="AccountType"
+                               (click)="$event.stopPropagation()"/>
+                        <span class="floating-label">{{'Withdraw.AccountType' | translate}}*</span>
+                    </div>
+                </div>
+                <div class="payment-form-field__column_btn">
+                    <button type="submit" (click)="$event.stopPropagation()" [disabled]="submitted || paymentForm.invalid || this.hasMinMaxError" class="default_btn default_btn_red payment-btn">
+                        <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
+                    </button>
+
+                    <div class="error_message longTag">
+                        {{errorMessage}}
+                    </div>
+                    <div class="success_message" *ngIf="successMessage">
+                        {{'Withdraw.' + successMessage | translate}}
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+

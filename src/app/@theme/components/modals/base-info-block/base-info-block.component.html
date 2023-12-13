@@ -1,0 +1,18 @@
+<div class="modal-content {{title}} modal-content__{{className}}">
+    <div class="modal-body">
+        <div class="{{title}}_body">
+            <span *ngIf="title">{{'Info.' + title | translate}}</span>
+            <fa-icon class="{{title}}_icon" [icon]="['fas', 'times']" (click)="close()"></fa-icon>
+        </div>
+
+        <div class="modal_content">
+            <span *ngIf="info">{{'Info.' + info | translate}}</span>
+            <div *ngIf="message">
+                {{message ? message : ''}}
+            </div>
+        </div>
+        <div class="modal_footer">
+            <button type="submit" (click)="close()" class="{{title}}_btn close-btn">{{'Info.Yes' | translate}}</button>
+        </div>
+    </div>
+</div>

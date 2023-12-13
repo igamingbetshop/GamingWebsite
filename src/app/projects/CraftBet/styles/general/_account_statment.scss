@@ -1,0 +1,198 @@
+.account-page-type2-announcements {
+  &.menu-account-statement-section {
+    background: black;
+    color: white;
+    padding: 36px 12px;
+
+    .account-statement-section-title {
+      flex-wrap: wrap;
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .item_cell {
+      line-height: 20px;
+      white-space: nowrap;
+    }
+
+    &_row {
+      flex-wrap: wrap
+    }
+  }
+}
+
+.account-page-type2-announcements {
+  &.account-statement-section2 {
+
+    padding: 0 10px;
+
+    &_table {
+      margin-top: 35px;
+      margin-left: 0;
+      min-width: 400px;
+      transform: scale(1);
+      border-collapse: collapse;
+    }
+
+    &_row {
+      &_title {
+        font-weight: 500;
+        background: backgroundColor(settings-header, #F2F2F2);
+        color: itemColor(settings-table-header, #333);
+
+        tr {
+          position: relative;
+
+          .item_cell {
+            width: 220px;
+
+            &:nth-child(1) {
+              border-right: 1px solid color(settings-table-border);
+            }
+
+            border-bottom: 1px solid color(settings-table-header-background);
+          }
+        }
+      }
+    }
+
+    .item_cell {
+      margin-left: 2px;
+      vertical-align: middle;
+      padding: 9px 35px;
+      white-space: nowrap;
+    }
+
+
+  }
+}
+
+
+.account-statement-section2 {
+
+  padding: 0 10px;
+
+  &_table {
+    margin-top: 35px;
+    margin-left: 0;
+    min-width: 400px;
+    transform: scale(1);
+    border-collapse: collapse;
+  }
+
+  &_row {
+    &_title {
+      font-weight: 500;
+      background: backgroundColor(settings-header, #F2F2F2);
+      color: itemColor(settings-table-header, #333);
+
+      tr {
+        position: relative;
+
+        .item_cell {
+          width: 220px;
+
+          &:nth-child(1) {
+            border-right: 1px solid color(settings-table-border);
+          }
+
+          border-bottom: 1px solid color(settings-table-header-background);
+        }
+      }
+    }
+  }
+
+  .item_cell {
+    margin-left: 2px;
+    vertical-align: middle;
+    padding: 9px 35px;
+    white-space: nowrap;
+  }
+
+
+}
+
+.account-statement-section {
+  background: backgroundColor(account-content-item, #000000);
+  border-radius: var(--account-info-border-radius, 4px);
+  padding: var(--account-info-padding, 16px);
+  color: var(--acount-info-color, #213454);
+  width: var(--account-info-width, 373px);
+  position: absolute;
+  right: var(--account-info-right, -7px);
+  top: var(--account-info-top, auto);
+  border: var(--account-info-border, none);
+  box-shadow: var(--account-info-box-shadow, none);
+  z-index: 999;
+
+  &_row {
+    @include flex-distance-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--acount-info-color);
+    color: color(account-statement-item);
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    &_title {
+      display: table-row;
+      font-weight: 500;
+      background: color(settings-table-header-background);
+
+      .item_cell {
+        display: table-cell;
+        width: 220px;
+        text-align: center;
+
+        &:nth-child(1) {
+          border-right: 1px solid color(settings-table-border);
+        }
+
+        border-bottom: 1px solid color(settings-table-header-background);
+        /* font-weight: 500;
+         background: backgroundColor(settings-header, black);
+         color:color(settings-table-header);*/
+        background: backgroundColor(settings-table-header, #FFFFFF);
+
+        tr {
+          position: relative;
+
+          .item_cell {
+            width: 220px;
+
+            &:nth-child(1) {
+              border-right: 1px solid color(settings-table-border);
+            }
+
+            border-bottom: 1px solid color(settings-table-header-background);
+          }
+
+          /*  &::after
+            {
+              content: "";
+              position: absolute;
+              top:0;
+              left:0;
+              background-image: linear-gradient(to bottom, rgba(126, 73, 79, 1),rgba(63, 37, 38, 1));
+              height: 6px;
+              width: 100%;
+            }*/
+        }
+      }
+    }
+
+    .item_cell {
+      display: table-cell;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+
+  }
+}

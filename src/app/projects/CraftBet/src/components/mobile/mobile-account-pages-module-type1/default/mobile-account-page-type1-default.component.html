@@ -1,0 +1,11 @@
+<div class="mobile-user-default" [ngStyle]="layoutService.layoutStyle">
+    <ul class="user-default-list">
+        <li class="user-default-list-item" *ngFor="let subItem of savedDateService.selectedItem?.SubMenu" routerLinkActive="active">
+            <div class="user-default-list-item-link"
+               [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + subItem?.Href">
+                {{'User.' + subItem?.Title | translate}}
+            </div>
+        </li>
+    </ul>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,38 @@
+<div class="filter-game-section min-height full-width recponcive-height">
+
+  <div class="filter-game-section_banners max-width-banner">
+
+    <common-banner *ngIf="slideKey != -1" [slideKey]="slideKey"></common-banner>
+  </div>
+
+  <div class="filter-game-section_items max-width">
+    <ul class="product_list" id="product-grid">
+      <li class="product_list_item" id="casino_game_item" *ngFor="let item of filterGamesList">
+        <div class="game-img" [ngStyle]="{'background-image': 'url(' + item?.gameImage + ')'}">
+          <div class="game-img-wrapper"></div>
+          <div class="game-open"  [ngClass]="item.hasDemo ?'game-open-top':'game-open-center'">
+            <a class="game-btn game-btn_real" title="{{'Game.Real' | translate}}"
+               (click)="openGame(item?.productId,  'real', item?.openMode)">
+              {{'Game.Real' | translate}}
+            </a>
+          </div>
+          <div class="game-open game-open-demo" *ngIf="item.hasDemo">
+            <a class="game-btn game-btn_demo" title="{{'Game.Demo' | translate}}"
+               (click)="openGame(item?.productId, 'demo', item?.openMode)">
+              {{'Game.Demo' | translate}}
+            </a>
+          </div>
+
+          <div class="game-title">
+            {{item.providerName}}
+            <div class="game-rating">
+              <fa-icon [icon]="['fas', 'star']" class="game-rating__star" aria-hidden="true"></fa-icon> {{item?.rating}}
+            </div>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+  </div>
+
+</div>

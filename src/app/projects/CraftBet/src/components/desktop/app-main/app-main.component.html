@@ -1,0 +1,9 @@
+<div id="main-container" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
+  <app-header *ngIf="showHeader"></app-header>
+  <div class="router_section {{contentClassesName}}" id="default_sectioon">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="scrollTop" [ngClass]="{'show': showScrollTop}" (click)="scrollToTop()"><i class="icon-next-arrow"></i></div>
+  <app-footer *ngIf="!!showFooterComponent"></app-footer>
+</div>
+<loader></loader>

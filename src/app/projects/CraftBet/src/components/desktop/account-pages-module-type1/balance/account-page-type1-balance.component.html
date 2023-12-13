@@ -1,0 +1,17 @@
+<div class="payment-system-block payment-balance-section">
+    <div class="payment-systems__userAccount" *ngFor="let item of Accounts; let i = index">
+        <div class="payment-systems__userAccount__name">
+            <span>{{item?.AccountTypeName}}</span>
+            <span>{{CurrencyId}} {{item?.Balance | toNumber | number: '.2'}}</span>
+        </div>
+    </div>
+
+    <div class="payment-systems__totalItem">
+    <span class="payment-systems__totalItem__name">
+       <span>{{'Balance.Total Available' | translate}}</span>
+    </span>
+        <span class="payment-systems__totalItem_balance">
+      <span class="payment-systems__totalItem_balance_item">{{CurrencyId}} {{TotalAvailableBalance | toNumber | number: '.2'}}</span>
+    </span>
+    </div>
+</div>

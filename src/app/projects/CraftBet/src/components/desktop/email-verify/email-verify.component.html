@@ -1,0 +1,9 @@
+<div class="verify_email_box">
+
+  <div class="error" *ngIf="isEmailNotVerified">{{'Verify.NotVerify' | translate}}</div>
+
+  <div class="verify_email_complete" *ngIf="isEmailVerified">
+    <fa-icon [icon]="['fas', 'check']"></fa-icon>
+    <h1>{{'Verify.SuccessVerify' | translate}}!</h1>
+  </div>
+</div>

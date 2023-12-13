@@ -1,0 +1,48 @@
+.dropdown-container{display: none}
+.payment-form-field__column
+{
+  &.opened
+  {
+    .dropdown-container{
+      display: block;
+      background: #fff;
+      border: 1px solid #9d9d9d;
+      margin-top: 1px;
+      .items {
+        .item {
+          font-size: 20px;
+          height: 1.2em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &:hover {
+            background: #1967d2;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+.deposit-self-limitation-part {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 10px;
+  //position: absolute;
+  //top: 60px;
+  .route-self {
+    color: #F6A201;
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+  }
+}
+.deposit-error18 {
+  top: 70% !important;
+}
+.deposit-success18 {
+  top: 70% !important;
+  right: 0;
+  left: auto;
+}

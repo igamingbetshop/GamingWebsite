@@ -1,0 +1,681 @@
+@import "buttons";
+@import "../helpers/variables";
+@import "../../../../../styles/helpers/variables";
+
+
+/*
+** Deafult style
+*/
+
+.margin-left-auto {
+  margin-left: auto;
+}
+
+.min-height {
+  min-height: 560px;
+}
+
+.max-width {
+  max-width: var(--container-max-width, 1600px);
+}
+
+.full-width {
+  width: 100%;
+  float: left;
+}
+
+.full-percent-width {
+  width: 100%
+}
+
+.distans {
+  &-right {
+    margin-right: 15px;
+  }
+
+  &-left {
+    margin-left: 15px;
+  }
+
+  &-half-right {
+    margin-right: 8px;
+  }
+
+  &-half-left {
+    margin-left: 8px;
+  }
+
+}
+
+.flex {
+
+  &_vertical-center {
+    display: flex;
+    align-items: center;
+  }
+
+  &_around {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  &_between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &_column_center {
+    flex-direction: column;
+    display: flex;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover, &:active {
+    text-decoration: none;
+  }
+}
+
+
+.disable-item {
+  pointer-events: none;
+}
+
+
+/*
+** Form section style(Input, textarea..)
+*/
+::-webkit-scrollbar-track {
+  border-radius: 15px;
+  background-color: color(scrollbar-track);
+}
+
+::-webkit-scrollbar {
+  width: 4.8px;
+  background-color: color(scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color(scrollbar-thumb-hover);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background-color: color(scrollbar-thumb);
+}
+
+.form_field {
+  //height: 40px;
+  //line-height: 40px;
+
+  .place-holder {
+    color: rgb(135, 143, 162);
+  }
+
+  select {
+    color: color(text);
+  }
+
+  input {
+    color: $color-black;
+
+    &::-webkit-input-placeholder {
+      color: rgb(135, 143, 162);
+    }
+
+    &::-moz-placeholder {
+      color: rgb(135, 143, 162);
+    }
+
+    &:-ms-input-placeholder {
+      color: rgb(135, 143, 162);
+    }
+
+    &::-moz-placeholder {
+      color: rgb(135, 143, 162);
+    }
+  }
+
+  input, select {
+    width: 100%;
+    height: 40px;
+    background: backgroundColor(input-select-style, transparent);
+    border: 1px solid $register-input-border;
+    //border-radius: $register-border-radius;
+    border-radius: var(--input-select-style-border-radius, 2px);
+    font-size: fontSize(input-select-style, 14px);
+    font-weight: fontWeight(input-select-style, 400);
+    padding: 0 10px;
+
+    option {
+      background: color(select-background);
+      color: color(text);
+      height: height(select-height, 40px);
+    }
+  }
+}
+
+.form_row {
+  padding: 0;
+  width: 100%;
+  clear: both;
+  float: left;
+  margin: 15px 0;
+  line-height: 40px;
+
+  .form_field {
+    width: 100%;
+    position: relative;
+  }
+}
+
+.form_row2 {
+  margin: 15px 0;
+  display: flex;
+
+  .form_field {
+    width: 50%;
+    position: relative;
+  }
+}
+
+
+.form_row3 {
+  display: flex;
+  margin: 15px 0;
+
+  .form_field {
+    width: 33.333333%;
+  }
+}
+
+.form_field {
+  .quarter-width {
+    width: 25%
+  }
+
+  .half-width {
+    width: 50%
+  }
+
+  .full-width {
+    width: 100%;
+  }
+}
+
+.common-field {
+  background: $color-white;
+  border-radius: 6px;
+  line-height: unset;
+  border: 1px solid rgba(219, 237, 255, 0.7);
+  background: transparent;
+  width: 100%;
+  height: 44px;
+  font-size: 14px;
+  color: #d4d4d4;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 13px;
+
+  .inputText{
+    width: 100%;
+    outline: none;
+    border:none;
+    color: #d4d4d4;
+    background: none;
+    height: 100%;
+  }
+  .floating-label {
+    position: absolute;
+    pointer-events: none;
+    top: -10px;
+    left: 10px;
+    font-size: 16px;
+    background: backgroundColor(m-register-view, rgba(19, 26, 44, 0.75));
+    padding-left: 4px;
+    padding-right: 4px;
+    color: #dbedff;
+  }
+
+  .input_field
+  {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-color, rgba(219, 237, 255, 0.3));
+
+    &::-webkit-input-placeholder {
+      color: itemColor(login-placeholder, #fff);
+      opacity: 0.3;
+      font-weight: 400;
+    }
+
+    &::-moz-placeholder {
+      color: itemColor(login-placeholder, #fff);
+      font-weight: 400;
+    }
+
+    &:-ms-input-placeholder {
+      color: itemColor(login-placeholder, #fff);
+      font-weight: 400;
+    }
+
+    &::-moz-placeholder {
+      color: itemColor(login-placeholder, #fff);
+      font-weight: 400;
+    }
+
+    &.password
+    {
+      width: 90%;
+    }
+  }
+  .icon-open-password-type{font-size: 20px}
+  .login-info-icon {
+    display: display(login-section-info, inline-block);
+  }
+
+  &.invalid-filed {
+    border:1px solid #ff4848;
+    .floating-label
+    {
+      color: #ff4848;
+    }
+  }
+
+
+  &_top {
+    //height: 100%;
+    position: relative;
+  }
+
+}
+/*
+** Custom Fields(custom dropdown..)
+*/
+.common-title
+{
+  padding: 6px 10px;
+  text-transform: uppercase;
+  background: backgroundColor(payments-info-header, #333);
+  color: itemColor(payments-info-header, #fff);
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1.48px;
+  position: relative;
+  &::after
+  {
+    content: "";
+    position: absolute;
+    top:0;
+    left:0;
+    background-image: linear-gradient(to bottom, var(--payments-info-header-border-color1 ,rgba(126, 73, 79, 1)),var(--payments-info-header-border-color2 ,rgba(63, 37, 38, 1)));
+    height: 6px;
+    width: 100%;
+  }
+}
+.common-button
+{
+  width: 100%;
+  margin-top: 8px;
+  padding: 0 32px;
+  text-transform: uppercase;
+  font-size: 16px;
+  border-radius: 4px;
+  background-image: linear-gradient(to bottom,  backgroundColor(btn-top, #9cbc3f), backgroundColor(btn-bottom,#7fa309));
+  font-weight: 600;
+  height: 40px;
+  line-height: 40px;
+  opacity: 0.9;
+  color: itemColor(btn, #fff);
+  border: none;
+  cursor: pointer;
+}
+.custom-dropdown {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  padding:4px 16px;
+  background: #f2f2f2;
+  border-radius: 8px;
+
+  .current-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: capitalize;
+    font-size: 20px;
+    .down-arrow {
+      transition: all 0.4s ease;
+      height: 6px;
+      width: 10px;
+    }
+  }
+
+  .dropdown-list {
+    position: absolute;
+    left: 0;
+    top: 62px;
+    width: 100%;
+    display: none;
+    z-index: 1;
+    box-shadow: 0 2px 4px 0 rgba(29, 39, 51, 0.47);
+    border: solid 1px #ebebeb;
+    border-radius: 8px;
+    max-height: 240px;
+    overflow-y: auto;
+
+    li {
+      border-bottom: 1px solid rgba(105, 122, 143, 0.2);
+      padding: 4px 16px;
+      display: flex;
+      align-items: center;
+      img{margin-right: 8px; height: 50px}
+    }
+  }
+
+  &.opened {
+    .current-item {
+      .down-arrow {
+        transition: all 0.4s ease;
+        transform: rotateZ(-180deg);
+      }
+    }
+
+    .dropdown-list {
+      display: block;
+      background: white;
+    }
+  }
+}
+
+
+
+.custom_dropdown {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 10px;
+
+  .current_item {
+    width: 100%;
+    text-transform: capitalize;
+    height: 40px;
+  }
+
+  &_img {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .right-top {
+    right: 0;
+    top: 50px;
+    height: height(custom_dropdown_list-item-header, 295px);
+  }
+
+  &_list {
+    position: absolute;
+    min-width: 130px;
+    padding: 10px 10px 10px 17px;
+    border-radius: 3px;
+    height: height(custom_dropdown_list-item, auto);
+    min-height: 20px;
+
+
+    .tail {
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: -10px;
+      right: 20px;
+      margin-left: -5px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid $header-tail;
+      -webkit-transform: rotateZ(180deg);
+      transform: rotateZ(180deg);
+    }
+
+    &_item {
+      cursor: pointer;
+
+      .list-section {
+      /*  padding: 0 10px;*/
+        width: 100%;
+        display: flex;
+        align-items: center;
+        height: 40px;
+        a
+        {
+          height: inherit;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          .icon{margin-right: marginRight(account-list-icon, 0)}
+        }
+        app-global-logout {
+          height: inherit;
+          width: 100%;
+        }
+      }
+    }
+
+  }
+}
+
+
+/*
+** Account Pages style
+*/
+
+.account_title {
+  color: $account-right-block-title;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+
+/*
+** Games list style(game item)
+*/
+
+/*.game-open {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  top: 0;
+  height: 50%;
+
+  .real-btn {
+    background: $games-real-btn-bg;
+    color: $color-white;
+    border: 1px solid $games-real-btn;
+  }
+}*/
+
+
+/*
+** Pagination
+*/
+
+.ngx-pagination a, .ngx-pagination button {
+  color: color(pagination-text) !important;
+}
+
+.ngx-pagination li {
+  &.current {
+    background: color(pagination-selected-background);
+    color: color(pagination-selected-text);
+    border-radius: var(--pagination-selected-text-border-radius, 0px);
+  }
+
+  a {
+    border-radius: 4px;
+  }
+}
+
+
+/*
+** Messages Style (Error, Success messages...)
+*/
+
+.error-message
+{
+  height: 32px;
+  line-height: 32px;
+  width: 47%;
+  border-radius: var(--error-message-mobile, 4px);
+  background-color: backgroundColor(error-message, #fff);
+  border-left: 2px solid rgba(255, 72, 72, 1);
+  color: itemColor(error-message, #FF0029);
+  font-size: 14px;
+  padding: 0 10px;
+  top: itemTop(error-message, -6px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  .icon-error-message
+  {
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  .icon-close-modal
+  {
+    color: #131A2C;
+    font-size: 8px;
+    margin-left: auto;
+  }
+}
+.error_message {
+  color: itemColor(error-message, #FF0029);
+  font-size: 13px;
+  white-space: nowrap;
+  top: itemTop(error-message, -6px);
+  position: relative;
+  display: block;
+  //max-width: 165px;
+
+  &.change-password-form {
+    top: 0;
+  }
+
+  &.different-values {
+    top: 0;
+    text-align: left;
+    max-width: 100%;
+  }
+
+  &.longTag {
+    max-width: 210px;
+  }
+
+
+  .link {
+    color: #FFF;
+    text-decoration: underline;
+  }
+
+  //text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.invalid-filed {
+  border-color: $error-border-color !important;
+}
+
+.success_message {
+    font-size: fontSize(success-message-settings, 19px);
+    color: itemColor(success-message-settings, #3c763d);
+    position: absolute;
+    bottom: itemBottom(success-message-settings, 50px);
+    left: itemLeft(success-message-settings, 0px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    height: 20px;
+    padding: 0 10px;
+    background-color: var(--success-message-background-color, unset);
+    p {
+      font-weight: bold;
+      font-size: fontSize(success-message-settings, 16px);
+      padding-left: 5px;
+    }
+    .success-verify {
+      font-size: 15px;
+    }
+}
+.show-message {
+  position: absolute;
+  bottom: 5px;
+  color: itemColor(error-message, #FF0029);
+}
+
+button, input {
+  outline: none;
+
+  &.disabled, &[disabled] {
+    pointer-events: none;
+    opacity: .5;
+  }
+}
+
+
+/*
+** scroll style
+*/
+
+
+.default-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #F2F2F2;
+}
+
+.default-scroll::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #717171;
+}
+
+
+.default-scroll::-webkit-scrollbar-track {
+  border-radius: 15px;
+  background-color: #F2F2F2;
+}
+
+.flex-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.jackpot {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+  font-style: fontStyle(casino-jackpot-text-style, normal);
+  background: backgroundColor(casino-jackpot, #0c6be8);
+  opacity: itemOpacity(casino-jackpot, 0.8);
+  color: itemColor(casino-jackpot-text, #FFFFFF);
+}

@@ -1,0 +1,220 @@
+.account-verification {
+  background: $account-main-bg-color;
+  border-radius: 6px;
+  padding: 19px 20px;
+  margin: 0!important;
+  section {
+    height: var(--account-verify-section-height, 300px)!important;
+    overflow-y: auto;
+  }
+  .verification-message {
+    p {
+      margin-bottom: 24px;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      gap: 14px;
+      margin-bottom: 32px;
+      list-style: none;
+      .document-validity1,.document-validity2,.document-validity3{
+        display: display(verification-message-validity, block);
+      }
+      li::before {
+        content: '';
+        display: inline-block;
+        height: 10px;
+        width: 10px;
+        background: itemColor(verif-points, #0C6BE8);
+        border-radius: 100%;
+        margin-right: 20px;
+      }
+    }
+  }
+  form {
+    flex-direction: column;
+    margin-bottom: marginBottom(account-verification-form,32px);
+    padding: var(--account-verification-form-padding, 0);
+    .docError
+    {
+      position: relative;
+      top: itemTop(m-error-message, auto);
+      bottom: itemBottom(m-error-message, 0);
+      left: itemLeft(m-error-message, 0);
+      right: itemRight(m-error-message, auto);
+      width: 90%;
+      white-space: unset;
+    }
+    .docSuccess {
+      bottom: auto;
+    }
+    .form_row2 {
+      margin-top: marginTop(account-verification-form, 16px);
+      .verify_field_col2 {
+        //flex-direction: var(--account-verification-form-select-flex-direction, unset);
+        //align-items: var(--account-verification-form-select-align-items, center);
+        //padding-bottom: var(--account-verification-form-select-padding-bottom, 15px);
+        //.form_field-col2 {
+        //  width: 100%;
+        //}
+      }
+      .choose-document{
+        position: relative;
+      }
+      .choose-document:after {
+        content: '<>';
+        font: 17px "Consolas", monospace;
+        color: #202020;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        right: 10px;
+        top: 14px;
+        padding: 0 0 2px;
+        position: absolute;
+        pointer-events: none;
+        display: display(account-verify-select-icon-arrow, none);
+      }
+      .choose-document-label {
+        position: absolute;
+        top: itemTop(account-verify-input-label, 0px);
+        left: itemLeft(account-verify-input-label, 14px);
+        transform-origin: 0 50%;
+        transition: transform 200ms, color 200ms;
+        pointer-events: none;
+        background-color: backgroundColor(account-verify-label, #314566);
+        color: itemColor(account-verify-label, #ffffff);
+        display: display(account-verify-label, block);
+      }
+      select {
+        color: var(--account-verify-select-color, rgba(255, 255, 255, 0.6));
+        font-size: 16px;
+        background: $account-content-item-bg-color;
+        border-radius: var(--account-verify-select-border-radius, 4px);
+        border: var(--account-verify-border, none);
+        appearance: none;
+        background-image: var(--account-verify-background-image, linear-gradient(
+                        45deg, transparent 50%, #fff 50%), linear-gradient(
+                        135deg, #fff 50%, transparent 50%), linear-gradient(to right, transparent, transparent));
+        background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px), 100% 0;
+        background-size: 12px 8px, 12px 8px, 2.5em 2.5em;
+        background-repeat: no-repeat;
+        height: height(account-verify-select, 40px);
+        margin: var(--account-verify-select-margin, 10px 0 24px 0);
+      }
+      .select-select {
+        position: absolute;
+        top: 15px;
+        right: 13px;
+        font-size: 26px;
+      }
+      .select:focus {
+        .select-select {
+          transform: rotate(180deg);
+        }
+      }
+      .file-box {
+        display: inline-block;
+        width: var(--account-verification-label-width, 230px);
+        //padding: 14px 0px;
+        padding: var(--account-verification-label-padding, 33px 0px 0);
+        box-sizing: border-box;
+        height: var(--account-verification-label-inline-height, 49px);
+        font-size: var(--account-verification-label-font-size, 16px);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .file-button {
+        background: var(--account-verification-file-button-background-color, none);
+        padding: var(--account-verification-file-button-padding, 10px);
+        position: absolute;
+        border: none;
+        right: var(--account-verification-file-button-right, 4px);
+        top: var(--account-verification-file-button-top, 6px);
+        border-radius: var(--account-verification-file-button-border-radius, 21px);
+        color: var(--account-verification-file-button-color, #fff);
+        font-size: var(--account-verification-file-button-font-size, 4px);
+        span {
+          font-size: var(--account-verification-file-button-span-font-size, 13px);
+        }
+      }
+      .document-label {
+        color: var(--account-verification-label-color, rgba(255, 255, 255, 0.6));
+        border: 1px solid var(--account-verification-label-border-color, transparent);
+        background: var(--account-verification-label-background-color, linear-gradient(180deg, #314566 0%, #192333 100%));
+        padding: var(--account-verification-file-label-padding, 11px);
+        cursor: pointer;
+        width: 100%;
+        border-radius: var(--account-verification-label-border-radius, 6px);
+        opacity: 1;
+        visibility: visible;
+        position: relative;
+        top: -16px;
+        pointer-events: auto;
+      }
+      &.change_name_active {
+        background: var(--choosed-document-file-bacground, green);
+      }
+      input {
+        margin-top: 0;
+        margin-bottom: 0;
+        &.change_name, &.choose_input {
+          min-width: 308px;
+          background: var(--select-file-bg, linear-gradient(180deg, #314566 0%, #192333 100%));
+          border-radius: var(--account-verification-choose-input-border-radius, 6px);
+          border: none;
+          height: height(account-verification-choose-input, 40px);
+          width: width(account-verification-choose-input, 100%);
+          margin: var(--settings-inputs-margin, 10px 0 24px 0);
+          &::placeholder {
+            color: #fff!important;
+            font-weight: 300 !important;
+            font-size: 16px;
+          }
+        }
+        &.change_name_active {
+          background: var(--choosed-document-file-bacground, green);
+        }
+      }
+      .verify_btn {
+        width: auto;
+        margin: 8px;
+        text-transform: none;
+        background-image: linear-gradient(to bottom, var(--account-verification-btn-top-background-color, #9cbc3f), var(--account-verification-btn-bottom-background-color, #7fa309));
+        font-size: fontSize(account-verification-btn, 16px);
+        font-weight: fontWeight(account-verification-btn, 600);
+        border-radius: var(--account-verification-btn-border-radius, 4px);
+        height: height(account-verification-btn, 40px);
+      }
+    }
+  }
+}
+.empty-block {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  .icon {
+    font-size: var(--history-info-pagination-section-icon-font-size, 90px);
+    color: var(--history-info-pagination-section-icon-color, #fff);
+  }
+  .empty-block-text {
+    color: var(--history-info-pagination-section-text-color, #fff);
+  }
+  .empty-history-text {
+    color: var(--history-search-empty-text-color, #fff);
+    font-size: var(--history-search-empty-text-font-size, 16px);
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1700px) {
+  .account-verification .form_row2 .verify_field_col2 {
+    width: var(--small-account-verification-form-col-width, 50%);
+  }
+}
+input[type="file"]::-webkit-file-upload-button {
+  display: none;
+}

@@ -1,0 +1,23 @@
+.add-account {
+  padding: 0 10px;
+  margin: 25px 0;
+  text-align: right;
+
+
+  button {
+    border-radius: var(--settings-button-text-border-radius, 3px);
+    background: linear-gradient(to bottom, color(settings-button-gradient-first) 0%, color(settings-button-gradient-second) 100%);
+    color: color(settings-button-text);
+    box-shadow: none;
+    font-weight: fontWeight(settings-button-text, 700);
+    font-size: fontSize(settings-button-text, 16px);
+    padding: 0 32px;
+
+    &:hover {
+      background: linear-gradient(to bottom, color(settings-button-gradient-active-first) 0%, color(settings-button-gradient-active-second) 100%);
+    }
+  }
+}
+.banks-block-section {
+  overflow: var(--banks-block-section-overflow, auto);
+}

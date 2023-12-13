@@ -1,0 +1,49 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-terms-section {
+  min-height: calc(100vh - 62px);
+  //background: color(m-user-views-background);
+  background: itemColor(m-user-terms-background, #000000);
+  color: itemColor(m-user-views-content,$font-color);
+  padding-top: paddingTop(m-user-terms, 15px);
+  padding-bottom: paddingBottom(m-user-terms, 15px);
+  padding-left: paddingLeft(m-user-terms, 10px);
+  padding-right: paddingRight(m-user-terms, 10px);
+  margin-top: 62px;
+
+  h2 {
+    color: color(m-user-views-title);
+    text-align: center;
+    margin-bottom:0.8rem;
+  }
+
+  .terms_container {
+    text-align: justify;
+
+    li {
+      margin-bottom: 7px;
+      p{
+        color: itemColor(terms-conditions, #ffffff);
+      }
+    }
+
+    [class*='Title'] {
+      font-weight: bold;
+    }
+
+    .to_top {
+      position: fixed;
+      bottom: 60px;
+      right: 20px;
+    }
+
+
+  }
+  ol
+  {
+    margin: 0;
+    padding: 0
+  }
+  div{padding-left: 0!important;}
+}

@@ -1,0 +1,31 @@
+<div [ngStyle]="fragmentConfig?.Config.style">
+    <div class="title" *ngIf="'HomeMenu.' + fragmentConfig.Config.titleVisibility" [innerHTML]="fragmentConfig.Title | translate | sanitizer: 'html'"></div>
+    <img src="../../../../../../../../assets/images/slider-arrow-left.svg" alt="" class="custom-arrow custom-slick-prev"
+         *ngIf="fragmentConfig.Config?.customArrows" (click)="slickCarousel.slickPrev()">
+    <ngx-slick-carousel class="carousel"
+                        [config]="fragmentConfig.Config"
+                        (beforeChange)="currentSlide = $event.currentSlide" #slickCarousel>
+        <div ngxSlickItem *ngFor="let banner of banners; let i = index"
+             class="banner" (click)="navigateByBanner(banner.Link, $event)">
+            <div class="banner_image" [class.has-href]="banner.Link">
+                <picture>
+                    <source *ngFor="let source of banner.sources" [media]="banner.media" [srcset]="banner.srcset">
+                    <img [src]="bannerService.bannersPath + banner?.Image">
+                </picture>
+                <div class="banner-wrapper"></div>
+                <div class="banner-wrapper2"></div>
+                <div class="banner-content">
+                    <div class="banner-description">{{banner.Head}}</div>
+                    <div class="banner-content-description">{{banner.Body}}</div>
+                    <div *ngIf="banner.ShowRegistration" class="banner-action distans-right"
+                         (click)="onRegisterOpen(); $event.stopPropagation()">{{'Login.Sign Up' | translate}}</div>
+
+                    <div *ngIf="banner.ShowLogin" class="banner-action"
+                         (click)="onLoginOpen(); $event.stopPropagation()">{{'Login.Sign In' | translate}}</div>
+                </div>
+            </div>
+        </div>
+    </ngx-slick-carousel>
+    <img src="../../../../../../../../assets/images/slider-arrow-right.svg" alt="" class="custom-arrow custom-slick-next"
+         *ngIf="fragmentConfig.Config?.customArrows" (click)="slickCarousel.slickNext()">
+</div>

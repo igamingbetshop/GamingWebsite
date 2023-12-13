@@ -1,0 +1,39 @@
+@import "../helpers/variables";
+@import "../../../../../styles/helpers/variables";
+
+* {
+  box-sizing: border-box;
+  touch-action: manipulation;
+}
+
+body {
+  margin: 0;
+}
+input, textarea, button {font-family: inherit}
+
+.fixedSection {
+  position: fixed;
+}
+
+.fullHeight {
+  height: 100%;
+}
+
+#default_sectioon {
+  &.removeFooter {
+    .recponcive-height:nth-child(1) {
+      height: 100%;
+    }
+  }
+
+}
+
+.uppercase
+{
+  text-transform: uppercase;
+}
+.capitalize
+{
+  text-transform: capitalize;
+}
+

@@ -1,0 +1,170 @@
+<div class="mobile-payment-section2" [ngStyle]="layoutService.layoutStyle">
+    <h2 class="account_title">
+        {{'User.Deposit' | translate}}
+    </h2>
+
+    <div class="mobile-payment-section_content">
+
+        <div class="mobile-payment-section_content_block">
+            <div class="content_row default-scroll payment-list-column">
+                <ul class="payment_list">
+                    <li class="payment_list_item"
+                        *ngFor="let item of paymentSystemList; let i = index"
+                        (click)="selectPayment(item, false)"
+                        [ngClass]="item.Opened? 'opened' : ''">
+                        <div class="payment_list_item_content">
+                            <div class="payment-row">
+                                <div class="payment-row-item">
+                                    <div class="payment-img"
+                                         [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/deposit/' +  item.PaymentSystemId + '.png)'}"></div>
+
+                                </div>
+
+                                <div class="payment_list_item__info payment-row-item">
+                                    <div class="payment-row-header">{{"Deposit with" | translate}} </div>
+                                    <div class="info_text" style="-webkit-box-orient: vertical"
+                                         [innerHTML]="'Deposit.' + 'PAYMENT_MESSAGE' + item?.PaymentSystemId | translate | sanitizer: 'html'"></div>
+                                    <div class="balance_info">
+                                        <span>{{"Payments.Minimum" | translate}}
+                                            :{{item?.MinAmount | number}} {{ CurrencyId}},</span>
+                                        <span>{{"Payments.Maximum" | translate}}
+                                            :{{item?.MaxAmount | number}} {{ CurrencyId}}</span>
+                                    </div>
+                                    <ng-container *ngIf="item?.FixedFee;else commissionPercentRef">
+                                        <div class="balance_info">
+                                            <span>{{"Payments.CommissionFixedFee" | translate}} - {{item?.FixedFee | number}} ({{ currencyId}})</span>
+                                        </div>
+                                    </ng-container>
+                                    <ng-template #commissionPercentRef>
+                                        <div class="balance_info">
+                                            <span>{{"Payments.CommissionPercent" | translate}} - {{item?.CommissionPercent || 0 | number}} %</span>
+                                        </div>
+                                    </ng-template>
+                                </div>
+
+                                <fa-icon [icon]="faCaretDown"></fa-icon>
+                            </div>
+
+                        </div>
+                        <div class="content_row">
+                            <app-common-bonuses *ngIf="this.bonusData.length"
+                                                [bonusesList]="this.bonusData"></app-common-bonuses>
+                            <label class="bonus-refused" (change)="bonusCheckboxChanged()" (click)="$event.stopPropagation();preventUncheck()">
+                                <input type="checkbox" [(ngModel)]="paymentControllerService.bonusRefused">
+                                {{'User.BonusRefused' | translate}}
+                            </label>
+                            <div class="content_row form-column" *ngIf="item.Opened" (click)="$event.stopPropagation()">
+                                <div class="content_row_header">
+                                    <span>{{'User.Deposit with' | translate}}</span>
+                                    <span class="" style="-webkit-box-orient: vertical"
+                                          [innerHTML]="'Deposit.' + 'PAYMENT_MESSAGE' + item?.PaymentSystemId | translate | sanitizer: 'html'"></span>
+                                </div>
+                                <ng-container [ngTemplateOutlet]="paymentTemplate "
+                                              [ngTemplateOutletContext]="{paymentData:item}"></ng-container>
+
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #paymentTemplate let-paymentData="paymentData">
+    <ng-container [ngSwitch]="paymentData.PaymentSystemType">
+        <app-mobile-deposit-type1-default *ngSwitchCase="1"></app-mobile-deposit-type1-default>
+        <app-mobile-deposit-type2-default
+                *ngSwitchCase="2"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type2-default>
+        <app-mobile-deposit-type3-default
+                *ngSwitchCase="3"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type3-default>
+        <app-mobile-deposit-type4-default
+                *ngSwitchCase="4"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type4-default>
+        <app-mobile-deposit-type5-default
+                *ngSwitchCase="5"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type5-default>
+        <app-mobile-deposit-type6-default
+                *ngSwitchCase="6"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type6-default>
+        <app-mobile-deposit-type7-default
+                *ngSwitchCase="7"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type7-default>
+        <app-mobile-deposit-type8-default
+                *ngSwitchCase="8"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type8-default>
+        <app-mobile-deposit-type9-default
+                *ngSwitchCase="9"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type9-default>
+        <app-mobile-deposit-type10-default
+                *ngSwitchCase="10"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type10-default>
+        <app-mobile-deposit-type11-default
+                *ngSwitchCase="11"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type11-default>
+        <app-mobile-deposit-type13-default
+                *ngSwitchCase="13"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type13-default>
+        <app-mobile-deposit-type14-default
+                *ngSwitchCase="14"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type14-default>
+        <app-mobile-deposit-type15-default
+                *ngSwitchCase="15"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type15-default>
+        <app-mobile-deposit-type16-default
+                *ngSwitchCase="16"
+                [contentType]="paymentData.ContentType"
+                [maxMinAmount]="{MaxAmount:paymentData.MaxAmount, MinAmount:paymentData.MinAmount}"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type16-default>
+        <app-mobile-deposit-type17-default
+                *ngSwitchCase="17"
+                [contentType]="paymentData.ContentType"
+                [walletAddress]="paymentData.Address"
+                [destinationTag]="paymentData.DestinationTag"
+                [paymentSystemId]="paymentData.PaymentSystemId">
+        </app-mobile-deposit-type17-default>
+    </ng-container>
+</ng-template>

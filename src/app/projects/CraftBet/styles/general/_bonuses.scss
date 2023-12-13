@@ -1,0 +1,452 @@
+.bonuses-section {
+  height: var(--payment-section-content-width, auto);
+  padding: 15px 10px;
+  background: $account-main-bg-color;
+  border-radius: 6px;
+  section {
+    height: var(--bonuses-block-section-height, 538px)!important;
+    overflow-y: auto;
+    //.bonuses-block {
+    //  &_item {
+    //    width: calc(100% / 8);
+    //  }
+    //
+    //}
+  }
+  //.bonuses-block-head.block-head >div , section .bonuses-block_item {
+  //  &:nth-child(1) {
+  //    width: 6%;
+  //  }
+  //  &:nth-child(2) {
+  //    width: 18.5%;
+  //  }
+  //  &:nth-child(3) {
+  //    width: 19%;
+  //  }
+  //  &:nth-child(4) {
+  //    width: 17%;
+  //  }
+  //  &:nth-child(5) {
+  //    width: 14%;
+  //  }
+  //  &:nth-child(6) {
+  //    width: 12.5%;
+  //  }
+  //  &:nth-child(7) {
+  //    width: 13%;
+  //  }
+  //}
+  .displayed {
+    display:flex; flex-flow:row wrap;
+    p:first-child {
+      text-align: left;
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-right: 10px;
+    }
+    p:last-child {
+      text-align: right;
+      margin-top: 0;
+      margin-bottom: 0;
+      width: 28%;
+    }
+  }
+
+  .send-promo-code-box {
+    height: 40px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .success-message, .error-message {
+      position: absolute;
+      bottom: -12px;
+      font-size: 11px;
+    }
+
+    .success-message {
+      color: $success-message
+    }
+
+    .error-message {
+      color: $error-message
+    }
+
+    input {
+      //text-indent: 10px;
+      //height: 100%;
+      //border: 1px solid #cecece;
+      //color: #303030;
+      //background: transparent;
+      //flex: 1;
+      min-width: var(--history-select-width, 234px);
+      outline: none;
+      background: var(--account-content-item-bg-color, #314566);
+      border-radius: var(--promo-code-input-field-border-radius, 6px);
+      color: var(--account-content-item-color, #fff);
+      padding: var(--history-select-padding, 12px 16px);
+      font-size: var(--font-size-16, 16px);
+      border: none;
+      &::placeholder {
+        color: var(--bonuses-promo-placeholder-color, rgb(117, 117, 117));
+      }
+    }
+
+    button {
+      flex: 1;
+      margin-left: var(--promo-code-activate-margin-left, 20px);
+      height: 100%;
+      border-radius: var(--promo-code-activate-border-radius, 4px);
+      background: linear-gradient(to bottom, color(settings-button-gradient-first) 0%, color(settings-button-gradient-second) 100%);
+      color: color(settings-button-text);
+      font-weight: var(--promo-code-activate-font-weight, 700);
+      font-size: var(--promo-code-activate-font-size, 16px);
+      padding: var(--promo-code-activate-padding, 0 20px);
+    }
+  ;
+  }
+
+  .bonus-tab-bar {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .bonus-tab-bar_top {
+      display: flex;
+      gap: var(--bonuses-items-btn-gap, 0);
+      div:first-child {
+        display: var(--bonuses-show-platform-display, block);
+      }
+      div:last-child {
+        display: var(--bonuses-show-sportsbook-display, block);
+      }
+    }
+
+    &_item {
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      letter-spacing: 1.48px;
+      background-color: var(--bonuses-items-btn-background-color, unset);
+      color: var(--bonuses-items-btn-color, #fff);
+      border: var(--bonuses-items-btn-border, none);
+      border-radius: var(--bonuses-items-btn-border-radius, 0px);
+      &.active {
+        text-decoration: underline;
+        background-color: var(--bonuses-items-btn-selected-background-color, unset);
+        color: var(--bonuses-items-btn-selected-color, #fff);
+      }
+    }
+    &_item:hover {
+      background-color: var(--bonuses-items-btn-hover-background-color, unset);
+      color: var(--bonuses-items-btn-hover-color, #fff);
+    }
+  }
+
+  .bonus-tab-content {
+    min-height: 300px;
+    //background: color(settings-tab-bar-background-active);
+
+    .sport-bonus-box {
+      display: flex;
+      background-color: var(--history-block-section-bg, #16233a);
+      .sport-bonus-column {
+        width: 100%;
+        display: grid;
+        grid-row-gap: 10px;
+        .bonus-header-name {
+          position: sticky;
+          background-image: var(--history-block-head-bg, linear-gradient(to bottom, #16233a, #151a23));
+          margin-bottom: var(--history-block-head-mrgbottom, 8px);
+          color: var(--history-block-head-color, #fff);
+          font-size: var(--history-block-head-font-size, 16px);
+          padding-top: var(--bonus-block-header-padding-top, 11px);
+          padding-bottom: var(--bonus-block-header-padding-bottom, 11px);
+          &:first-child {
+            padding-left: var(--bonus-block-header-padding-left, 5px);
+          }
+        }
+        .bonus-body-name {
+          background-color: var(--history-block-section-bg, #16233a);
+          padding-left: var(--bonus-block-body-padding-left, 5px);
+          padding-right: var(--bonus-block-body-padding-right, 0px);
+          padding-top: var(--bonus-block-body-padding-top, 5px);
+          padding-bottom: var(--bonus-block-body-padding-bottom, 3px);
+          word-break: var(--bonuses-block-item-word-break);
+          .info-btn {
+            height: var(--history-info-btn-height, 25px);
+            background: linear-gradient(
+                            180deg, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
+            border: none;
+            color: var(--history-info-btn-color, #fff);
+            display: var(--history-info-btn-display, block);
+            font-size: $font-size-3;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+        }
+
+        table {
+          flex: 1;
+          border-collapse: collapse;
+          border-spacing: 0;
+          table-layout: fixed;
+          width: 100%;
+
+
+          tr {
+            cursor: pointer;
+
+            td {
+              //background: color(bonuses-table-head-background);
+              background: linear-gradient(180deg, #16233A 0%, #151A23 100%);
+              text-align: center;
+              vertical-align: middle;
+              margin: 0;
+              padding: 10px 15px;
+              font-weight: 500;
+
+              &:nth-child(2) {
+                word-break: break-all;
+              }
+
+              button {
+                background: linear-gradient(to bottom, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
+                color: var(--settings-button-text-color, #FFFFFF);
+                font-weight: 700;
+                line-height: unset;
+                height: 30px;
+              }
+            }
+
+            &.expanded-row {
+              td {
+                background: color(settings-tab-bar-background-active);
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+    &.game-bonus {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      font-size: 20px;
+      justify-content: center;
+      font-weight: 400;
+      color: $color-black;
+    }
+  }
+
+  .bonus-error-message, .bonus-success-message {
+    position: absolute;
+    top: var(--promo-error-top, -28px);
+    left: var(--promo-rror-left, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--bonus-error-message-border-color, #fff);
+    border-radius: var(--bonus-error-message-border-radius, 10px);
+    padding: var(--bonus-error-message-padding, 0 10px);
+    color: $error-message;
+    height: var(--bonus-error-message-height, 40px);
+    white-space: var(--bonus-error-message-white-space, nowrap);
+    p {
+      margin-left: 10px;
+      width: var(--bonus-error-message-width, auto);
+    }
+  }
+  .bonus-success-message {
+    color: $success-message;
+  }
+}
+
+.modal-content {
+  &.triggers, &.confirm {
+    .triggers-section {
+      margin: var(--triggers-section-title-margin, 25px 0);
+    }
+    .actions {
+      display: flex;
+      justify-content: var(--triggers-modal-justify-content, flex-end);
+      gap: 32px;
+      width: 100%;
+
+      //button:first-of-type {
+      //  margin-right: 10px
+      //}
+
+      .form_field {
+        width: 50%;
+        button {
+          font-weight: var(--self-exclude-btn-font-weight, 700);
+          font-size: var(--self-exclude-btn-font-size, 18px);
+          height: var(--self-exclude-btn-height, 44px);
+          padding: var(--self-exclude-btn-padding, 0 20px);
+          width: var(--self-exclude-btn-width, 100%);
+          white-space: nowrap;
+        }
+        .cancel_btn {
+          color: var(--tickets-button-cancel-color, #fff);
+          border: var(--tickets-button-cancel-border, none);
+          background: -webkit-linear-gradient(90deg, var(--tickets-cancel-button-background-gradient-first-color, #1376f8) 0%, var(--tickets-cancel-button-background-gradient-second-color, #194074) 100%);
+        }
+        .confirm_btn {
+          color: var(--settings-button-text-color, #FFFFFF);
+          background: linear-gradient(to bottom, var(--self-exclude-button-gradient-first-color, #194074) 0%, var(--self-exclude-button-gradient-second-color, #1376f8) 100%)
+        }
+      }
+    }
+    .action {
+      display: flex;
+      justify-content: var(--authenticate-modal-justify-content, center);
+      width: 100%;
+      .form_field {
+        width: 100%;
+        .authenticate-modal-input {
+          margin-bottom: 20px;
+        }
+
+        button {
+          font-weight: var(--self-exclude-btn-font-weight, 700);
+          font-size: var(--self-exclude-btn-font-size, 18px);
+          height: var(--self-exclude-btn-height, 44px);
+          padding: var(--self-exclude-btn-padding, 0 20px);
+          width: var(--self-exclude-btn-width, 100%);
+          white-space: nowrap;
+        }
+        .confirm_btn {
+          color: var(--settings-button-text-color, #FFFFFF);
+          background: linear-gradient(to bottom, var(--self-exclude-button-gradient-first-color, #194074) 0%, var(--self-exclude-button-gradient-second-color, #1376f8) 100%)
+        }
+      }
+    }
+
+    .modal-body {
+      float: none !important;
+      display: flex;
+      justify-content: space-between;
+      align-content: inherit;
+      align-items: center;
+      .popup-icon-bonus {
+        color: #000000;
+      }
+    }
+    .modal_content {
+      margin: 0;
+    }
+
+    max-width: var(--triggers-modal-max-width, 500px) !important;
+    padding: var(--triggers-modal-padding, 24px 32px);
+    height: var(--triggers-modal-height, auto);
+
+    .trigger-item {
+      padding: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 10px;
+      margin-bottom: 10px;
+
+      .trigger-row {
+        line-height: 25px;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+
+        .wrap-text {
+          word-break: break-all;
+          text-align: right;
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+
+}
+
+
+.filter-panel {
+
+  form {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .history-tools {
+    margin-right: 15px;
+
+    select {
+      min-width: var(--history-select-width, 234px);
+      outline: none;
+      background: var(--account-content-item-bg-color, #314566);
+      border-radius: var(--promo-code-status-select-border-radius, 6px);
+      color: var(--account-content-item-color, #fff);
+      padding: var(--history-select-padding, 12px 16px);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: linear-gradient(
+                      45deg
+              , transparent 50%, var(--account-content-item-color, #fff) 50%), linear-gradient(
+                      135deg
+              , var(--account-content-item-color, #fff) 50%, transparent 50%), linear-gradient(to right, transparent, transparent);
+      background-position: calc(100% - 16px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px), 100% 0;
+      background-size: 5px 5px, 6px 5px, 2.5em 2.5em;
+      background-repeat: no-repeat;
+      font-size: var(--font-size-16, 16px);
+      border: none;
+      height: 44px;
+    }
+
+    button {
+      background: linear-gradient(to bottom, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
+      height: var(--settings-button-text-height, 44px);
+      width: var(--settings-button-text-width, 50px);
+      color: var(--settings-button-text-color, #FFFFFF);
+      border-radius: var(--promo-code-status-show-border-radius, 4px);
+      font-weight: 700;
+      line-height: unset;
+    }
+  }
+}
+
+.sport-bonus-column {
+  table {
+    thead {
+      tr {
+        td:nth-child(4) {
+          width: 135px;
+        }
+      }
+    }
+  }
+}
+
+
+.rightToLeft
+{
+  .send-promo-code-box
+  {
+    button
+    {
+      margin-left: 0;
+      margin-right: 20px;
+    }
+  }
+}
+@media (max-width: 1200px) {
+  .modal-content {
+    &.triggers, &.confirm {
+      max-width: var(--m-triggers-modal-max-width, 90%) !important;
+      min-width: var(--m-triggers-modal-min-width, auto);
+      height: var(--m-triggers-modal-height, 50%);
+      margin: var(--m-triggers-modal-margin, 0 auto);
+      border-radius: var(--m-triggers-modal-border-radius, 0);
+      }
+    }
+}

@@ -1,0 +1,63 @@
+<div class="deposit_payment_section deposit-cash mobile-device">
+    <app-common-accounts style="position: relative; top:5px"></app-common-accounts>
+    <div class="deposit_payment_section__form">
+        <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()">
+            <div class="payment-form-field">
+
+                <div class="payment-form-field__column">
+                    <div class="payment-form-field__column">
+                        <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input"
+                               placeholder="{{'Withdraw.Amount-placeholder' | translate}}"
+                               formControlName="Amount" numbersOnly/>
+                        <label class="payment-form-field__label">{{'Withdraw.Amount' | translate}} ({{currencyId}})</label>
+                        <ng-template #nominalsRef>
+                            <app-common-payment-nominals [nominals]="nominals"
+                                                         (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+                        </ng-template>
+                        <!--<button type="button" (click)="fullWithdraw()" class="default_btn default_btn_red payment-btn">
+                            <span class="payment-btn__span"> {{'Withdraw.FullWithdraw' | translate}} </span>
+                        </button>-->
+                    </div>
+                </div>
+            </div>
+            <div class="payment-form-field">
+
+                <div class="payment-form-field__column">
+                    <input type="text" class="payment-input" placeholder="{{'Withdraw.WalletNumber-placeholder' | translate}}"
+                           formControlName="WalletNumber"/>
+                    <label class="payment-form-field__label">{{'Withdraw.WalletNumber' | translate}}</label>
+                </div>
+            </div>
+            <div class="payment-form-field">
+
+                <div class="payment-form-field__column">
+                    <select formControlName="AccountType" class="payment-select">
+                        <option value="">{{'Withdraw.SelectAccountType' | translate}}</option>
+                        <option *ngFor="let accountType of accountTypes"
+                                [value]="accountType.BankCode">{{accountType.BankName}}</option>
+                    </select>
+                    <label class="payment-form-field__label">{{'Withdraw.AccountType' | translate}}</label>
+                </div>
+            </div>
+            <div class="payment-form-field">
+                <div class="payment-form-field__column_btn">
+                    <button type="submit" [disabled]="submitted" class="default_btn default_btn_red payment-btn">
+                        <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
+                    </button>
+
+                    <loader></loader>
+
+                    <div class="error_message longTag">
+                        {{errorMessage}}
+                    </div>
+                    <div class="success_message" *ngIf="successMessage">
+                        {{'Withdraw.' + successMessage | translate}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

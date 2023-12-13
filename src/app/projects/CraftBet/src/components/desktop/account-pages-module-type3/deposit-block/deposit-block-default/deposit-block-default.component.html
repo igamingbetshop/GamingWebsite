@@ -1,0 +1,50 @@
+<!--<div class="user-right-panel_title">{{ 'User.Deposit-top-title' | translate }}</div>-->
+<!--<div class="deposit-block">-->
+<div class="payment-section_content_block">
+    <div class="payment_header">{{ 'User.Deposit-Limit' | translate }}</div>
+    <div class="payment_header">{{ 'User.Deposit-Min-Max' | translate }}</div>
+    <ul class="payment_list">
+        <li *ngFor="let item of paymentSystemList; let i = index"
+            (click)="selectPayment(item)"
+            [ngClass]="{'selected':item?.PaymentSystemId == currentPayment?.PaymentSystemId}"
+            class="payment_list_item">
+            <input class="payment_list_item_radio_button" type="radio" [(ngModel)]="currentPayment" [value]="item" id="paymentSystem{{i}}" [hidden]="true">
+            <div class="payment_list_item_img"
+                 [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/deposit/' +  item.PaymentSystemId + '.svg)'}"></div>
+<!--            [ngStyle]="{'background-image': 'url(https://bet3k-stage.net/assets/images/deposit/' +  item.PaymentSystemId + '.svg)'}"></div>-->
+            <div class="payment_list_item_min_amount">
+                {{'Deposit.Min-Amount' | translate}} {{item.MinAmount}}
+                <span *ngIf="item.CurrencyId === CurrencyId">{{CurrencySymbol}}</span>
+                <span *ngIf="item.CurrencyId !== CurrencyId">{{item.CurrencyId}}</span>
+            </div>
+        </li>
+    </ul>
+    <div class="content_row right-part">
+        <div class="content_row form-column">
+            <div class="content_row-bonuses">
+                <app-common-bonuses *ngIf="this.bonusData.length"
+                                    [bonusesList]="this.bonusData"></app-common-bonuses>
+            </div>
+            <div class="deposit-self-limitation-part">
+                <div>{{ messageKey }}</div>
+                <div class="route-self" (click)="redirectToSelfLimitation()">{{ 'User.Change-Deposit-Limit' | translate }}</div>
+            </div>
+            <template #loadComponent></template>
+            <div class="deposit-self-limitation-popup">{{ 'User.Deposit-Choose-Note' | translate }}</div>
+        </div>
+    </div>
+<!--    <div class="deposit-self-limitation-part">-->
+<!--        <div>{{ 'User.Deposit-Choose-Note' | translate }}</div>-->
+<!--        <div>{{messageKey}}</div>-->
+<!--        <div class="route-self">{{ 'User.Change-Deposit-Limit' | translate }}</div>-->
+<!--    </div>-->
+<!--    <div class="bank-transfer-part">-->
+<!--        <div class="bank-transfer-text">{{ 'User.Other-Deposit-Methods' | translate }}</div>-->
+<!--        <button class="bank-transfer-btn" (click)="showBankTransfer()">{{ 'User.Bank-Transfer' | translate }}</button>-->
+<!--        <div class="bank-transfer-text2">{{ 'User.Not-Permitted-Deposit' | translate }}</div>-->
+<!--        <div class="bank-transfer-text2">{{ 'User.Payment-Account-Holder' | translate }}</div>-->
+<!--        <div class="opened-bank-transfer-part" *ngIf="bankTransferValue">-->
+<!--            test-->
+<!--        </div>-->
+<!--    </div>-->
+</div>

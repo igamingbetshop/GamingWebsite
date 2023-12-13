@@ -1,0 +1,20 @@
+<div class="mobile-contact-us-section" [ngStyle]="layoutService.layoutStyle">
+  <div class="page_wrapper">
+    <h2 [innerHTML]="'Contact.ContactUs' | translate | sanitizer: 'html'"></h2>
+    <div class="contact_paragraph">
+      <div class="contact_title" [innerHTML]="'Contact.Live_Chat' | translate | sanitizer: 'html'"></div>
+      <div [innerHTML]="'Contact.Live_Support' | translate | sanitizer: 'html'"></div>
+    </div>
+    <div class="contact_paragraph">
+      <div class="contact_title" [innerHTML]="'Contact.Email' | translate | sanitizer: 'html'"></div>
+      <div [innerHTML]="'Contact.Queries' | translate | sanitizer: 'html'"></div>
+    </div>
+    <div class="contact_paragraph">
+      <div class="contact_title whatsapp">
+        <fa-icon [icon]="faWhatsapp" [size]="'lg'"></fa-icon>
+        <span [innerHTML]="'Contact.Devices' | translate | sanitizer: 'html'"></span>
+      </div>
+      <div [innerHTML]="'Contact.Number' | translate | sanitizer: 'html'"></div>
+    </div>
+  </div>
+</div>

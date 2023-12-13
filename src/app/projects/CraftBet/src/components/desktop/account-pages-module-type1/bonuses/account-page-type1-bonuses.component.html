@@ -1,0 +1,78 @@
+<div class="bonuses-section history-section">
+    <div class="bonus-tab-bar">
+        <div class="bonus-tab-bar_top">
+            <div class="bonus-tab-bar_item" *ngFor="let tab of tabs" (click)="selectTab(tab)"
+                 [ngClass]="{'active':selectedTab.Title == tab.Title}">{{'User.' + tab.Title | translate}}
+            </div>
+        </div>
+
+        <div class="filter-panel">
+            <form [formGroup]="form" (ngSubmit)="submit()">
+                <div class="history-tools">
+                    <select formControlName="status">
+                        <option value="">{{'User.Select Status' | translate}}</option>
+                        <option *ngFor="let item of statusList, let i = index"
+                                [ngValue]="item.Id">{{item?.Name | translate}}</option>
+                    </select>
+                </div>
+
+
+                <div class="history-tools">
+                    <label></label>
+                    <button class="craft_btn show-btn">{{'User.Show' | translate}}</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="send-promo-code-box">
+        <input id="name" name="name" #name="ngModel" [(ngModel)]="promoCode"
+               placeholder="{{'Account.PromoCode' | translate}}">
+        <button class="craft_btn verify_btn setting_btn" (click)="activatePromoCode()"
+                [ngClass]="{'disabled' : !promoCode}">
+      <span>
+        {{'Payments.ActivateBonus' | translate}}
+      </span>
+        </button>
+        <div class="bonus-success-message" *ngIf="promoCodeSuccessMessage">
+            {{promoCodeSuccessMessage}}
+        </div>
+        <div class="bonus-error-message" *ngIf="promoCodeErrorMessage">
+            {{promoCodeErrorMessage}}
+        </div>
+    </div>
+    <div class="bonus-tab-content">
+
+        <div class="sport-bonus-box">
+            <div class="sport-bonus-column" [ngStyle]="{'grid-template-columns' : 'repeat(' + (bonusesData?.headers.length + 1) +' , minmax(20px, auto))'}">
+
+                <ng-container *ngIf="bonusesData?.headers.length !== 0">
+                    <div class="bonus-header-name" *ngFor="let head of bonusesData?.headers">{{'User.' + head | translate}}</div>
+                    <div class="bonus-header-name"></div>
+                </ng-container>
+                <ng-container *ngIf="bonusesData?.body.length > 0; else emptyBonuses">
+                    <ng-container *ngFor="let bonus of bonusesData?.body">
+                        <div class="bonus-body-name" *ngFor="let head of bonusesData?.headers">{{bonus[head]}}</div>
+                        <div class="bonus-body-name" style="display: flex; align-items: center; gap: 8px">
+                            <div *ngIf="bonus.IsCampaign">
+                                <button type="button" class="info-btn"
+                                        (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
+                            </div>
+                            <div class="delete-icon">
+                                <fa-icon [icon]="['fas', 'trash-alt']" (click)="deleteBonus(bonus, $event)" [ngStyle]="{'visibility' : (bonus?.StatusId === 1 && bonus?.TypeIdActive) ? 'visible' : 'hidden'}"></fa-icon>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <ng-template #emptyBonuses>
+                    <section class="empty-bonuses empty-block">
+                        <span class="icon-bonus icon"></span>
+                        <span class="empty-block-text">{{'User.Bonuses-empty' | translate}}</span>
+                        <span class="empty-history-text">{{noHistory}}</span>
+                    </section>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</div>

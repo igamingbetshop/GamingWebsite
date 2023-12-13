@@ -1,0 +1,281 @@
+.friends-section, {
+  height: var(--payment-section-content-width, auto);
+  padding: 20px;
+  background: $account-main-bg-color;
+  border-radius: 8px;
+
+  .friends-block-head {
+    border-radius: 8px;
+    background-image: linear-gradient(to bottom, #16233a, #151a23);
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    div {
+      padding-top: 11px;
+      padding-bottom: 11px;
+      width: calc(100% / 6);
+    }
+  }
+  section {
+    //height: var(--friends-block-section-height, 530px)!important;
+    .friends-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &_item {
+        width: calc(100%/6);
+      }
+    }
+  }
+  .mobile-empty-friends {
+    height: var(--m-friends-block-section-height, 230px)!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    .icon-friends {
+      color: itemColor(--m-icon-friends, #fff);
+      margin-right: 10px;
+    }
+    .empty-block-text {
+      color: itemColor(--m-empty-block-text, #fff);
+    }
+  }
+
+  &_title {
+    padding: 0 10px;
+    color: itemColor(friends-table-header-text, #fff);
+    font-size: 24px;
+    font-weight: normal;
+    margin: var(--friends-table-header-text-margin, 0);
+  }
+  .referral-link
+  {
+    word-break: break-all;
+    padding: 10px;
+    color: itemColor(referral-link-text, #fff);
+    text-decoration: underline;
+  }
+
+  .history-tools-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    label {
+      color: itemColor(--m-history-tools, #fff);
+    }
+    select, input {
+      border: none;
+      border-radius: 8px;
+      background-color: var(--account-content-item-bg-color);
+      height: 44px;
+      color: var(--account-content-item-color);
+      font-size: $font-size-3;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .history-tools, .send-email {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .history-tools {
+      select {
+        @include account-custom-select;
+        min-width: 234px;
+        //border: 1px solid color(settings-table-border);
+
+        option {
+          background-color: backgroundColor(accoutPage-Dpd-option, transparentize);
+          color: itemColor(accoutPage-Dpd, #000);
+
+          &:hover, &:checked {
+            background-color: backgroundColor(accoutPage-Dpd-checked, blue);
+            color: itemColor(accoutPage-Dpd-checked, #fff);
+          }
+
+        }
+
+      }
+
+      .show-btn {
+        background: linear-gradient(to bottom, color(settings-button-gradient-first) 0%, color(settings-button-gradient-second) 100%);
+        color: color(settings-button-text);
+        margin-top: 24px;
+        padding: 0 20px;
+        transform: translateY(-3px);
+
+        &:hover {
+          background: linear-gradient(to bottom, color(settings-button-gradient-active-first) 0%, color(settings-button-gradient-active-second) 100%);
+        }
+      }
+
+      &_mobile {
+        width: 100%;
+        label, th{
+          color: var(--m-friends-label-color, #fff);
+        }
+        input, select {
+          background-color: var(--m-select-bg-color, #314566);
+          color: var(--m-select-color, #fff);
+        }
+      }
+    }
+    .send-email {
+
+      &_top {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        position: relative;
+      }
+
+      &_input {
+        min-width: 400px;
+        &::placeholder {
+          color: var(--friends-list-input-placeholder-color, #fff);
+        }
+      }
+
+      &_btn {
+        //color: color(send-email-button);
+        color: var(--send-email-button-color, #fff);
+        outline: none;
+        font-size: var(--send-email-button-font-size, 16px);
+        border-radius: var(--send-email-button-border-radius, 8px);
+        border: none;
+        cursor: pointer;
+        //background-color:backgroundColor(send-email-button,#02887e);
+        background-image: linear-gradient(to bottom, itemColor(send-email-button-first,#1376f8), itemColor(send-email-button-last, #173b6d));
+        min-height: 44px;
+        min-width: 153px;
+        width: auto;
+      }
+
+    }
+  }
+  .friends-list_mobile {
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+      height: 0;
+      width: 0;
+    }
+    color: var(--m-friends-list-color, #fff);
+    tr {
+      background-color: var(--m-friends-list-bg, transparent);
+    }
+    margin-bottom: 20px;
+  }
+  .mobile-empty-friends {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--m-history-empty-block-section-border-radius, 6px);
+    gap: var(--account-extra-big-gap, 16px);
+    .icon {
+      font-size: var(--history-info-pagination-section-icon-font-size, 90px);
+      color: var(--history-info-pagination-section-icon-color, #fff);
+    }
+    .empty-block-text {
+      font-size: var(--history-info-pagination-section-text-font-size, 16px);
+      color: var(--history-info-pagination-section-text-color, #fff);
+
+    }
+  }
+
+  .send-email_mobile {
+    .send-email_top {
+      width: 100%;
+    }
+    label {
+      color: var(--m-friends-send-email-label-color, #fff);
+      font-size: var(--m-friends-send-email-label-font-size, 16px);
+    }
+    input, button {
+      background: var(--m-select-bg-color, #314566);
+      color: var(--m-select-color, #fff);
+      border: none;
+      border-radius: 8px;
+      background-color: var(--account-content-item-bg-color);
+      height: 44px;
+      font-size: var(--font-size-3, 16px);
+      padding-left: 16px;
+      padding-right: 16px;
+      width: 100%;
+      margin-bottom: 15px;
+      &::placeholder {
+        color: var(--m-select-color, #fff);
+      }
+    }
+    button {
+      background-color: var(--m-friends-button-bg-color, unset);
+      background-image: var(--m-friends-button-bg-image, linear-gradient(to bottom, #1376f8, #173b6d));
+    }
+  }
+
+  .referralLink {
+    color: itemColor(referral-link-text, #fff);
+    text-decoration: underline;
+    font-size: $font-size-3;
+    margin-top: 14px;
+    margin-bottom: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    tr {
+      font-size: 14px;
+      height: 48px;
+      border-bottom: 1px solid color(settings-table-border);
+    }
+
+    tbody {
+      height: 100px;
+      overflow-y: scroll;
+
+      tr {
+        background: color(settings-table-header-background);
+
+        td {
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+
+
+  form {
+    width: 100%;
+    display: inline-flex;
+  }
+
+  .error_message {
+    top: 55px;
+    position: absolute;
+  }
+  .success-message {
+    color: #3c763d;
+    top: 55px;
+    position: absolute;
+  }
+
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .friends-section {
+    margin: 54px auto 0;
+    min-height: calc(100vh - 54px);
+    width: 95%;
+  }
+}

@@ -1,0 +1,108 @@
+@import "../styles/helpers/variables";
+@import "../../../../../../../styles/helpers/variables";
+.birth_date {
+  width: 100%;
+  margin-right: 20px;
+  .birth_date_select {
+    display: flex;
+    align-items: center;
+    .form_field {
+      width: 100%;
+      position: relative;
+      .active_item {
+        pointer-events: unset;
+      }
+
+      .disable_item {
+        pointer-events: none;
+        opacity: .8;
+        border-color: #cecece !important;
+      }
+      label {
+        color: itemColor(settings-input-label, #fff);
+        position: absolute;
+        top: itemTop(settings-input-label, 20px);
+        left: itemLeft(settings-input-label, 8px);
+        height: height(settings-input-label, 25px);
+        transform-origin: 0 50%;
+        transition: transform 200ms, color 200ms;
+        pointer-events: none;
+      }
+      input:focus ~ label {
+        width: width(settings-input-field-label, inherit);
+        height: height(settings-input-label-focused, 11px);
+        background: var(--settings-background-color, #FFFFFF);
+        color: var(--settings-field-focus-label, #fff);
+        top: itemTop(settings-label, 20px);
+        font-size: var(--settings-background-color-font-size, 16px);
+      }
+      input:focus ~ .cut,
+      input:not(:placeholder-shown) ~ .cut {
+        transform: translateY(8px);
+        display: block;
+      }
+      input:focus ~ .cut {
+        display: block;
+      }
+      input:focus::placeholder {
+        opacity: 1;
+      }
+      input::placeholder {
+        opacity: 0;
+      }
+      input:focus ~ label,
+      input:not(:placeholder-shown) ~ label {
+        transform: var(--settings-label-transform, translateY(-27px) translateX(10px) scale(0.75));
+        background-color: var(--settings-background-color, unset);
+        height: height(settings-label-focused, 22px);
+        font-size: var(--settings-font-size-label, 16px);
+        color: var(--settings-focus-label-focused, #fff);
+        text-align: var(--settings-focus-label-focused-text-align, left);
+        width: var(--settings-focus-label-focused-width, auto);
+        padding-left: var(--settings-padding-left-focus-label-focused, 5px);
+        padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+      }
+      select:focus~label,
+      select:not([value=""]):valid~label {
+        transform:var(--register-select-label-transform, translateY(-27px) translateX(10px) scale(0.75));
+        top: itemTop(register-focused-select-label, 20px);
+        font-size: fontSize(register-focused-label, 16px);
+        color: var(--settings-focus-label-focused, #fff);
+        background-color: var(--settings-background-color-focus-label-focused, unset);
+        padding-left: var(--settings-padding-left-focus-label-focused, 5px);
+        padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+      }
+      input, select {
+        &:not(.choose_input) {
+          //border: 1px solid $border-color;
+          color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+          font-size: var(--settings-field-font-size, 16px);
+          text-indent: 0;
+          padding-left: 16px;
+          border: var(--settings-field-border, none);
+          background: var(--account-content-item-bg-color);
+          border-radius: var(--settings-field-border-radius, 6px);
+          height: var(--settings-field-height, 40px);
+          appearance: var(--open-ticket-appearance, auto);
+        }
+        border: 1px solid rgba(219, 237, 255, 0.8);
+      }
+      ::placeholder {
+        color: var(--settings-field-color, rgba(255, 255, 255, 0.6))!important;
+      }
+      input, .mobile_verify, >select {
+        margin: 10px 0 24px 0;
+      }
+    }
+  }
+  .required-field
+  {
+    &:after
+    {
+      content: "*";
+      position: absolute;
+      top:-5px;
+      right: -6px;
+    }
+  }
+}

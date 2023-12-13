@@ -1,0 +1,275 @@
+.modal-content1 {
+  margin-top: 180px !important;
+  //height: auto !important;
+}
+.modal-content2 {
+  margin-top: 0px ;
+  margin-bottom: 0px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: var(--forgot-password-confirmation-content-border-radius, 6px);
+  width: var(--forgot-password-confirmation-content-width, 568px);
+  height: var(--forgot-password-confirmation-content-height, 586px);
+  padding-top: 0px;
+  box-shadow: var(--forgot-password-confirmation-content-box-shadow, none);
+  background: var(--recovery-verify-code-background, #1d2e4a);
+  display: flex;
+  flex-direction: column;
+  .modal-body {
+    text-align: center;
+    display: var(--forgot-password-confirmation-body-display, flex);
+    align-items: center;
+    .icon-arrow-to-left {
+      cursor: pointer;
+      font-size: var(--recovery-logo-back-icon-font-size, 16px);
+    }
+    img {
+      width: var(--recovery-logo-width, auto);
+      padding: var(--recovery-logo-padding, 0);
+      margin: var(--recovery-logo-margin, 0 auto);
+    }
+    .ng-fa-icon {
+      cursor: pointer;
+      font-size: 18px;
+    }
+  }
+  .modal_content {
+    margin: 0;
+    padding: var(--security-logo-bottom-padding, 32px);
+    .modal-item-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .ng-fa-icon {
+        cursor: pointer;
+        font-size: 18px;
+      }
+    }
+    .forgot-password-title-bottom {
+      margin: var(--recovery-logo-title-margin, 0);
+      color: var(--recovery-logo-color, #fff);
+      font-size: var(--recovery-logo-font-size, 20px);
+      font-weight: var(--recovery-logo-font-weight, normal);
+      display: var(--recovery-logo-bottom-display, block);
+      text-align: left;
+    }
+    p {
+      color: var(--recovery-logo-color, #fff);
+    }
+    .prefix-title {
+      display: var(--verification-code-predix-title-display, block);
+    }
+    .form_field {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      position: relative;
+      margin-top: 20px;
+      .input{
+        width: 51px;
+        height: 50px;
+        border-radius: 7px;
+        font-size: 26px;
+        color: var(--verification-code-text-color, #ffffff);
+        text-indent: var(--verification-code-text-indent, 16px);
+        border: var(--verification-code-border, 1px solid #dbedff)
+      }
+      .error-otp
+      {
+        color: var(--error-message-color, #FF0029);
+        display: inline-block;
+        position: absolute;
+        height: 27px;
+        bottom: -39px;
+        right: 42px;
+        font-size: 13px;
+      }
+    }
+    .otp-expire {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 28px;
+      span {
+        font-weight: var(--verify-code-otp-font-weight, 600);
+        font-size: 16px;
+        &:first-child {
+          color: var(--verify-code-otp-color, #ffffff);
+        }
+      }
+      .timer-text {
+        color: rgba(89, 159, 97, 1);
+        margin-left: 10px;
+      }
+    }
+    .otp-expire-resend {
+      text-decoration: underline;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 8px;
+      cursor: pointer;
+      color: var(--otp-expire-resend-color, rgba(185, 187, 194, 1));
+      &.active {
+        color: #546BF9;
+        opacity: 1;
+        pointer-events: auto;
+        cursor: pointer;
+      }
+    }
+    *[disabled="true"]
+    {
+      opacity: .5;
+      pointer-events: none;
+    }
+    .security-questions-modal {
+      p {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        color: rgba(29, 29, 27, 0.7);
+      }
+      .security-questions-form {
+        position: relative;
+        label {
+          color: var(--forgot-password-label-color);
+          position: position(forgot-password-label, absolute);
+          top: var(--forgot-password-label-top,10px);
+          left: var(--forgot-password-label-left, 0);
+          font-size: var(--forgot-password-label-font-size, 16px);
+          font-weight: var(--forgot-password-label-font-weight, 500);
+          transition: transform 200ms, color 200ms;
+          transform-origin: 0 50%;
+          pointer-events: none;
+          z-index: 1;
+          padding: var(--forgot-password-label-padding, 0 8px);
+          background-color: var(--forgot-password-label-f-background-color, unset);
+        }
+        input:focus ~ .cut,
+        input:not(:placeholder-shown) ~ .cut {
+          transform: translateY(8px);
+          display: block;
+        }
+        input:focus ~ .cut {
+          display: block;
+        }
+        input:focus::placeholder {
+          opacity: 1;
+        }
+        input::placeholder {
+          opacity: 0;
+        }
+        input:focus ~ label {
+          width: var(--forgot-password-form-field-label-width, inherit);
+          height: var(--forgot-password-input-label-focused-height, 11px);
+          background: var(--forgot-password-background-color, #FFFFFF);
+          color: var(--forgot-password-field-focus-label, #fff);
+          top: var(--forgot-password-input-label-top, 10px);
+          font-size: var(--forgot-password-background-color-font-size, 16px);
+        }
+        input:focus ~ label,
+        input:not(:placeholder-shown) ~ label {
+          transform: var(--forgot-password-input-label-transform, translateY(-25px) translateX(10px) scale(0.75));
+          background-color: var(--forgot-password-background-color, #1d2e4a);
+          height: var(--signin-label-focused-height, 20px);
+          font-size: var(--register-background-color-font-size-label, 20px);
+          color: var(--login-field-focus-label-focused, #fff);
+          left: var(--login-field-focus-label-focused-left, -12px);
+          width: var(--login-field-focus-label-focused-width, auto);
+        }
+        input {
+          height: 48px;
+          width: 100%;
+          background: #FFFFFF;
+          border: 1px solid #ECECEC;
+          border-radius: 4px;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 22px;
+          color: #1D1D1B;
+          padding: 0 24px;
+        }
+      }
+    }
+  }
+  .message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--recovery-verify-code-errors-message-margin, 0px 32px);
+    padding: 8px 16px;
+    background: #F9EBED;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    color: #C2394B;
+    .security-questions-icon {
+      font-size: 20px;
+    }
+    span {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 22px;
+      margin-right: auto;
+      margin-left: 20px;
+    }
+  }
+  .modal_footer {
+    padding: var(--security-logo-bottom-padding, 32px);
+    margin: var(--security-logo-bottom-margin, 0);
+    button {
+      color: var(--forgot-password-button-text-color, #ffffff);
+      font-weight: var(--forgot-password-button-text-font-weight, normal);
+      border-radius: var(--forgot-password-button-text, 6px);
+      font-size: var(--recovery-btn-font-size, 18px);
+      background-image: var(--recovery-btn-background-image, linear-gradient(to bottom, #1376f8, #194074));
+      width: 100%;
+      margin-top: var(--recovery-btn-margin-top, 24px);
+      height: var(--forgot-password-button-text-height, 44px);
+    }
+  }
+  .icon-arrow-to-left
+  {
+    position: absolute;
+    top: 30px;
+    left: 16px;
+    cursor: pointer;
+    color: var(--recovery-logo-back-icon-color, #fff);
+    display: var(--recovery-logo-back-icon-display, block);
+  }
+}
+@media (max-width: 1200px) {
+  .modal-content2 {
+    width: 90%;
+    margin-left: 20px;
+    height: 60%;
+    margin-top: 60px !important;
+    overflow: auto;
+    .modal_content {
+      p {
+        font-size: 14px;
+        margin: 0;
+      }
+      .form_field {
+        margin-top: 25px;
+        gap: 8px;
+        .input {
+          width: 35px;
+          height: 35px;
+        }
+      }
+    }
+    .modal_footer {
+      width: 100%;
+      margin-bottom: 10px;
+      button {
+        height: calc(var(--forgot-password-button-text-height, 44px) - 10px);
+      }
+    }
+  }
+}
+
+
+
+

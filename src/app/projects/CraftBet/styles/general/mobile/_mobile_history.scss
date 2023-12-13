@@ -1,0 +1,209 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+.ngx-pagination {
+  text-align: center;
+}
+.mobile-history-section {
+
+  margin-top: var(--m-user-views-margin-top, 62px);
+  min-height: calc(100vh - 62px);
+  background: $register-btn-bg;
+  padding: 15px 0;
+
+  &_title {
+    text-align: center;
+    //color: $register-active-menu;
+    font-size: 24px;
+    font-weight: normal;
+  }
+
+  .history-tools-panel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 20px 20px;
+
+    label {
+      color: itemColor(account-dropdown-label, #dadbe0);
+    }
+
+    .history-tools {
+      margin-bottom: 10px;
+
+      &:not(&:last-child) {
+        display: flex;
+        flex-direction: column;
+        width: 48%;
+      }
+
+      &:last-child {
+        width: 100%;
+      }
+
+      select, input {
+        height: 40px;
+        padding: 0 8px;
+        border-radius: 5px;
+        border: 1px solid #dadada;
+        outline: none;
+        background: $header-top-bg;
+        color: $font-color;
+        color-scheme: dark;
+        option {
+          background-color: backgroundColor(accoutPage-Dpd, transparentize);
+          color: itemColor(accoutPage-Dpd, #000);
+
+          &:hover, &:checked {
+            background-color: backgroundColor(accoutPage-Dpd-checked, blue);
+            color: itemColor(accoutPage-Dpd-checked, #fff);
+          }
+
+        }
+      }
+
+      ::ng-deep .wc-date-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+        padding: 0 8px;
+        border-radius: 5px;
+        border: 1px solid #dadada;
+        outline: none;
+        background: $header-top-bg;
+
+        * {
+          color: $font-color;
+        }
+      }
+
+      .show-btn {
+        background: backgroundColor(show-btn, #36b550);
+        color: itemColor(show-btn, #fff);
+        padding: 0 20px;
+        margin-top: 8px;
+        width: width(show-btn, 175px);
+        border-radius: var(--show-btn-border-radius, 4px);
+
+        &.craft_btn-mobile {
+          background: backgroundColor(mobile-btn, #36b550);
+          color: itemColor(mobile-btn, #fff);
+        }
+
+        &:hover {
+          //background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(151, 0, 24, 1)), color-stop(100%, rgba(201, 0, 32, 1)));
+          background: backgroundColor(show-btn-hover, #36b550);
+        }
+
+      }
+    }
+  }
+  .empty-bets {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--m-history-empty-block-section-bg, #16233a);
+    justify-content: center;
+    align-items: center;
+    height: var(--m-history-empty-block-section-height, 200px);
+    margin-top: var(--m-history-empty-block-section-margin-top, 10px);
+    border-radius: var(--m-history-empty-block-section-border-radius, 6px);
+    gap: var(--account-extra-big-gap, 16px);
+    .icon {
+      font-size: var(--history-info-pagination-section-icon-font-size, 90px);
+      color: var(--history-info-pagination-section-icon-color, #fff);
+    }
+    .empty-block-text {
+      font-size: var(--history-info-pagination-section-text-font-size, 16px);
+      color: var(--history-info-pagination-section-text-color, #fff);
+
+    }
+  }
+  .down-icons {
+    text-align: right;
+    margin-right: 10px;
+    font-size: var(--history-info-pagination-section-icons-font-size, 23px);
+    color: var(--history-info-pagination-section-icons-color, #fff);
+    span:first-child {
+      margin-right: 10px;
+    }
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+
+    tr {
+      font-size: var(--m-bet-history-table-font-size, 12px);
+      height: 36px;
+    }
+
+    tbody {
+      tr {
+        background: backgroundColor(bet-history-table-header, #000);
+        color: itemColor(bet-history-table-header, #fff);
+        .hide-form-row {
+          display: var(--bank-account-hide-field-display, block);
+        }
+        .form-row-icons {
+          display: var(--bank-account-hide-icons-display, block);
+          font-size: var(--bank-account-icons-font-size, 14px);
+          cursor: pointer;
+          span:last-child {
+            margin-left: var(--m-bank-account-icons-margin-left, 20px);
+          }
+          span {
+            color: var(--m-bank-account-icons-color, #fff);
+            &:hover {
+              color: var(--bank-account-icons-hover-color, #fff);
+            }
+          }
+        }
+        td {
+          text-align: center;
+          outline-offset: 10px;
+          width: 80px;
+          min-width: var(--m-bet-history-table-min-width, auto);
+
+          &.status-Deleted {
+            color: itemColor(mobile-status-deleted, #000);
+          }
+
+          &.status-Cashouted {
+            color: itemColor(mobile-status-cashouted, #000);
+          }
+
+          &.status-Lost {
+            color: itemColor(mobile-status-lost, #000);
+          }
+
+          &.status-Won {
+            color: itemColor(mobile-status-won, #000);
+          }
+        }
+        &.status-Deleted {
+          background-color: backgroundColor(mobile-status-deleted, #000);
+        }
+
+        &.status-New {
+          background-color: backgroundColor(mobile-status-new, #000);
+        }
+
+        &.status-Cashouted {
+          background-color: backgroundColor(mobile-status-cashouted, #000);
+        }
+
+        &.status-Lost {
+          background-color: backgroundColor(mobile-status-lost, #000);
+        }
+
+        &.status-Won {
+          background-color: backgroundColor(mobile-status-won, #000);
+        }
+      }
+    }
+  }
+}
+

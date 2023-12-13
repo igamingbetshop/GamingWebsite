@@ -1,0 +1,310 @@
+.full-page {
+  //padding: 14px 20px 0px 27px;
+
+  .change-password-tab, .profile-section {
+    .no-border {
+      border: none !important;
+
+      .profile-part {
+        background: #d9d9d9 !important;
+        padding: 0px !important;
+      }
+    }
+
+    .container-part {
+      margin-bottom: 18px;
+      border-radius: 4px;
+      //border: 1px solid #fff;
+
+      .titles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        width: 100%;
+        color: #000;
+        margin: 0 auto;
+        padding: 16px 18px;
+        cursor: pointer;
+
+        .change-icon {
+          color: #a9a9a9;
+          font-size: 14px;
+          transform: rotate(90deg);
+        }
+
+        .change-password-tab-text {
+          font-size: 15px;
+          font-weight: 700;
+        }
+      }
+
+      .ideas {
+        background: var(--change-password-content-background-color, unset);
+        color: #000;
+        display: none;
+      }
+
+      .open-change-password {
+        display: none;
+      }
+
+      .opened {
+        & + .ideas, & + .open-change-password {
+          display: block;
+        }
+
+        .change-icon {
+          transform: rotate(-90deg);
+        }
+      }
+      .profile-part2 {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .profile-part {
+        background: #fff;
+        padding: 20px 20px;
+        .right-part {
+          display: block;
+        }
+        .profile-form-part {
+          background: #fff;
+          padding: 16px 18px;
+          //border-radius: 4px;
+        }
+        .items-part {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          color: #666666;
+          margin: 0 auto;
+          font-size: 15px;
+          line-height: 22px;
+          cursor: default;
+
+          .right-part {
+            font-weight: 600;
+            color: #000;
+
+            input {
+              font-weight: 600;
+              font-size: 15px;
+              border: none;
+              text-align: right;
+              color: #000;
+              opacity: 1;
+              pointer-events: none;
+              background: transparent;
+            }
+          }
+          .radio-buttons-title {
+            margin: 19px 0 0;
+          }
+          .radio-buttons-part {
+
+            ul li {
+              //display: inline-block;
+              position: relative;
+              padding: 0 6px;
+              margin: 10px 0 0;
+
+              input[type='radio'] {
+                display: none;
+              }
+
+              label {
+                position: relative;
+                cursor: pointer;
+                //width: 127px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                span {
+                  padding-top: 12px;
+                  //text-align: left;
+                  //width: inherit;
+                  width: 65px;
+                  text-align: var(--ideas-part-text-align, right);
+                }
+              }
+
+              label:before {
+                content: " ";
+                display: inline-block;
+                position: relative;
+                top: 5px;
+                margin: 0 7px 0 0;
+                //width: 40px;
+                //height: 28px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                border: 2px solid #BCBCBC;
+                background-color: transparent;
+              }
+
+              input[type=radio]:checked + label:after {
+                border-radius: 11px;
+                //width: 22px;
+                //height: 22px;
+                width: 16px;
+                height: 16px;
+                position: absolute;
+                //top: 5.5px;
+                //top: -5px;
+                //top: 12px;
+                //left: 5px;
+                top: 12px;
+                left: 4px;
+                content: " ";
+                display: block;
+                background-color: #F6A201;
+              }
+
+            }
+          }
+        }
+        .items-part2 {
+          align-items: flex-start;
+        }
+      }
+    }
+  }
+
+  .change-password-tab {
+    //margin-bottom: 50px;
+  }
+  .automatic-payout-info {
+    text-align: left;
+    background: #fff;
+    width: 100%;
+    color: #000;
+    margin: 0 auto;
+    padding: 0px 18px 10px;
+    font-size: 15px;
+    cursor: default;
+  }
+  .automatic-payout-form {
+    width: 100%;
+    background: #fff;
+    padding: 5px 0 10px;
+    position: relative;
+    .automatic-payout {
+      position: relative;
+      .automatic-payout-input {
+        display: flex;
+        align-items: center;
+        border-radius: 9px;
+        outline: none;
+        border: 1px solid #707070;
+        margin: 0 16px;
+        padding: 6px 0;
+        text-indent: 16px;
+        font-size: 20px;
+        width: 151px;
+        text-align: center;
+      }
+      .limit-type-currency {
+        position: absolute;
+        width: auto;
+        bottom: 6px;
+        font-size: 22px;
+        left: 22%;
+      }
+    }
+    .automatic-payout-submit {
+      cursor: pointer;
+      width: 96%;
+      background: #F6A201;
+      border: none;
+      border-radius: 9px;
+      padding: 10px 0;
+      font-size: 15px;
+      font-weight: 600;
+      margin: 12px auto;
+    }
+  }
+
+
+  .profile-page-details {
+    display: flex;
+    //padding: 10px 0 30px 0px;
+    .user-right-panel_title {
+      height: auto;
+      padding-bottom: 10px;
+      cursor: default;
+    }
+
+    .submit-details {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: flex-end;
+      //margin-top: 10px;
+      gap: 15px;
+
+      .setting_btn {
+        font-size: 11px;
+        color: #fff;
+        background: #003672;
+        height: 33px;
+        line-height: 33px;
+        border-radius: 5px;
+      }
+
+      .cancel_btn {
+        background: #7B7B7B;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 1600px) {
+  .full-page {
+    .change-password-tab, .profile-section {
+      .container-part {
+        .profile-part {
+          .items-part {
+            .radio-buttons-part {
+              ul li {
+                input[type=radio]:checked + label:after {
+                  //top: 10px;
+                  top: 10.5px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .full-page {
+    .profile-page-details {
+      .user-right-panel_title {
+        font-size: 18px;
+      }
+    }
+  }
+  .limit-type-currency {
+    left: 35% !important;
+  }
+}
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+  .limit-type-currency {
+    left: 30% !important;
+  }
+  .user-right-panel_title {
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 1700px) and (max-width: 1900px) {
+  .limit-type-currency {
+    left: 25% !important;
+  }
+}

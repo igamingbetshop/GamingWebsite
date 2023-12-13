@@ -1,0 +1,21 @@
+<div class="game-action" *ngIf = "isGamePage">
+    <div class="back btn" (click)="goBack()">
+        <i class="icon-arrow-thick icon"></i>
+        <span class="text">{{'Game.Back' | translate}}</span>
+    </div>
+    <div class="favorite btn" (click)="toggleFavorite()">
+        <fa-icon [icon]="game.isFavorite ? ['fas', 'star'] : ['far', 'star']" class="icon-star-info2"
+                  aria-hidden="true"></fa-icon>
+        <span class="text">{{'Game.Favorite' | translate}}</span>
+    </div>
+    <div class="expand" (click)="openGameInFullScreen()">
+        <i class="icon-expand icon"></i>
+        <span class="text">{{'Game.Expand' | translate}}</span>
+    </div>
+</div>
+
+
+<div class="game-content" id="full-window-game-container" (fullscreenchange)="onFullScreenChange($event)">
+    <i *ngIf="isFullscreen" class="icon-full-screen" (click)="exitFullscreen()"></i>
+    <iframe [scrolling]="scrollBar" id="main-game-iframe" allowfullscreen allow="clipboard-write"></iframe>
+</div>

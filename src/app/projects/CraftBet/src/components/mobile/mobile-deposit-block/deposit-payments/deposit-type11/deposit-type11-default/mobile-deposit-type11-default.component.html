@@ -1,0 +1,152 @@
+<div class="deposit_payment_section mobile-device">
+
+  <div class="deposit_payment_section__form">
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()">
+      <div class="deposit_payment_section__form_top">
+
+        <div class="group-label_1">
+          <div class="group-label">{{'Deposit.Partner_Bank_account_details' | translate}}</div>
+
+
+          <div class="payment-form-field">
+            <div class="payment-form-field__column">
+              <select formControlName="BankName" class="payment-select" (ngModelChange)="selectBankAccount($event)">
+                <option *ngFor="let bankItem of getPaymentsService.banksList"
+                        [value]="bankItem.Id">{{bankItem?.BankName}}</option>
+              </select>
+              <label class="payment-form-field__label">{{'Withdraw.BankName' | translate}}</label>
+            </div>
+          </div>
+
+          <div class="payment-form-field">
+
+            <div class="payment-form-field__column">
+              <select formControlName="BankAccountNumber" class="payment-select">
+                <option *ngFor="let account of selectedBank?.Accounts; let i = index"
+                        [value]="account" [selected]="i==0">{{account?.BankAccountNumber}} - {{selectedBank?.OwnerName}}</option>
+              </select>
+              <label class="payment-form-field__label">{{'Deposit.CardNumber' | translate}}</label>
+              <div class="error_message"
+                   *ngIf="paymentForm.get('BankAccountNumber').hasError('required') && paymentForm.get('BankAccountNumber').touched">
+                <span>{{ 'Error.Required-field' | translate }}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class="group-label_2">
+          <div class="group-label">{{'Deposit.Costumer_Bank_account_details' | translate}}</div>
+
+          <div class="payment-form-field">
+            <div class="payment-form-field__column">
+              <input type="text" class="payment-input" disabled ngModel="{{NameSurname}}"
+                     [ngModelOptions]="{standalone:true}"
+                     placeholder="{{'Deposit.NameSurname-placeholder' | translate}}"
+              />
+              <label class="payment-form-field__label">{{'Deposit.NameSurname' | translate}}</label>
+            </div>
+          </div>
+
+          <div class="payment-form-field">
+            <div class="payment-form-field__column">
+
+              <div class="payment-form-field__column relative-section">
+
+
+                <input type="text" [(ngModel)]="bankNumberFilter.BankAccountNumber" [ngModelOptions]="{standalone: true}"
+                       class="payment-input"
+                       (ngModelChange)="reSearch($event)"
+                       placeholder="{{'Deposit.Choose_Bank_Account_Number' | translate}}">  <!--numbersOnly-->
+                <label class="payment-form-field__label">{{'Deposit.CardNumber' | translate}}</label>
+                <div *ngIf="showList">
+                  <div *ngFor="let account of accounts | filterBy: bankNumberFilter"
+                       class="bank-account-container">
+                    <div class="BankAccountNumber-item" (click)="chooseBankAccountNumber(account)" *ngIf="showList">
+                      {{account.BankAccountNumber}}</div>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="error_message"
+                   *ngIf="paymentForm.get('OperatorCardNumber').hasError('required') && paymentForm.get('OperatorCardNumber').touched">
+                <span>{{ 'Error.Required-field' | translate }}</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="payment-form-field">
+
+            <div class="payment-form-field__column">
+              <input type="text" class="payment-input" placeholder="{{'Deposit.TransactionId-placeholder' | translate}}"
+                     formControlName="TransactionId"/> <!-- numbersOnly-->
+              <label class="payment-form-field__label">{{'Deposit.TransactionId' | translate}}</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="payment-form-field"
+             [ngClass]="{'nominals-fields-3': ((nominals !== null) && (nominals && nominals.length <= 9)), 'nominals-fields-4': ((nominals !== null) && (nominals && nominals.length > 9))}">
+          <div class="flex_between">
+            <div class="bonus-and-amount">
+
+              <div class="payment-form-field__column">
+                <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input"
+                       placeholder="{{'Deposit.Amount-placeholder' | translate}}"
+                       [ngClass]="{'invalid-filed': ((paymentForm.get('Amount').hasError('required')  || paymentForm.get('Amount').hasError('minlength') || paymentForm.get('Amount').hasError('maxlength')) && paymentForm.get('Amount').touched)}"
+                       formControlName="Amount" numbersOnly/>  <!--numbersOnly-->
+                <label class="payment-form-field__label">{{'Deposit.Amount' | translate}}</label>
+                <ng-template #nominalsRef>
+                  <app-common-payment-nominals [nominals]="nominals"
+                                               (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+                </ng-template>
+                <div class="error_message" *ngIf="submitted && paymentForm.get('Amount').hasError('required')">
+                  <span>{{ 'Error.Required-field' | translate }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="error_message">
+          {{selectedDocumentErrorMessage}}
+        </div>
+
+        <div class="payment-form-field" *ngIf="promoData.length > 0">
+          <div class="payment-form-field__column">
+            <input type="text" class="payment-input" placeholder="{{'Deposit.PromoCode-placeholder' | translate}}"
+                   formControlName="PromoCode"/>
+            <label class="payment-form-field__label">{{'Deposit.PromoCode' | translate}}</label>
+          </div>
+        </div>
+
+        <div class="payment-form-field">
+          <div class="payment-form-field__column_btn">
+            <button type="submit" [disabled]="submitted" class="default_btn default_btn_red payment-btn">
+              <span class="payment-btn__span"> {{'Deposit.Confirm' | translate}} </span>
+            </button>
+
+            <loader></loader>
+
+            <div class="error_message">
+              {{errorMessage}}
+            </div>
+            <div class="success_message"
+                 *ngIf="successMessage && successMessage.length != 0">{{'Deposit.' + successMessage | translate}}</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+
+

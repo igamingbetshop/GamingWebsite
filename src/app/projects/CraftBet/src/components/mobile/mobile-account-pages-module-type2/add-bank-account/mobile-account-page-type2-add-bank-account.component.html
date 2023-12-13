@@ -1,0 +1,109 @@
+<div class="modal-content modal-content_tickets mobile-add-bank-account">
+    <div class="modal-body ticket-body flex_between">
+        <h2 *ngIf="data?.selectedBankAccount === undefined">{{'User.Add_Account' | translate}}</h2>
+        <h2 *ngIf="data?.selectedBankAccount !== undefined">{{'User.Edit_Account' | translate}}</h2>
+        <fa-icon [icon]="['fas', 'times']" (click)="close()"></fa-icon>
+    </div>
+
+    <div class="modal_content">
+        <form [formGroup]="addBankAccountForm" *ngIf="!addNewTicket" novalidate (ngSubmit)="submit()">
+            <div class="form_row">
+                <div class="form_field">
+                    <input type="text" class="ticket_input" placeholder="{{maskType}}" mask="{{maskType}}" formControlName="BankAccountNumber" numbersOnly
+                           (keypress)="keyCode($event)"/>
+                    <label>{{'User.BankAccountNumber' | translate}} *</label>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_field">
+                    <select formControlName="PaymentSystemId" class="payment-select" (change)="changedPayment($event.target.value)">
+                        <option *ngFor="let paymentSystem of paymentSystemList"
+                                [value]="paymentSystem.PaymentSystemId">{{'Withdraw.' + 'PAYMENT_MESSAGE' + paymentSystem.PaymentSystemId | translate}}</option>
+                    </select>
+                    <label>{{'User.Select_payment' | translate}} *</label>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_field">
+                    <select formControlName="BankName" class="payment-select" (change)="changedBankName($event.target.value)"
+                            [disabled]="clientBanksList.length === 0"
+                            [ngClass]="{'disable_item':paymentSystemId === null, 'active_item': paymentSystemId !== null,
+                            'disable_item':clientBanksList.length === 0}">
+                        <option *ngFor="let clientBank of clientBanksList | orderBy :'BankName'" [value]="clientBank.BankName">{{clientBank.BankName}}</option>
+                    </select>
+                    <label>{{'User.BankName' | translate}} *</label>
+                </div>
+            </div>
+            <div class="form_row">
+                <div class="form_field">
+                    <select formControlName="BranchName" class="payment-select"
+                            [ngClass]="{'disable_item':paymentSystemId === null, 'active_item': paymentSystemId !== null,
+                            'disable_item':bankBranches.length === 0}">
+                        <option *ngFor="let branch of bankBranches | orderBy:'BranchName'"
+                                [value]="branch.BranchName">{{branch.BranchName }}</option>
+                    </select>
+                    <label>{{'User.BranchName' | translate}} *</label>
+                </div>
+            </div>
+
+            <div class="form_row hide-account-types">
+                <div class="form_field">
+                    <select formControlName="BankAccountType" class="payment-select">
+                        <option *ngFor="let bankAccountType of bankAccountTypes"
+                                [value]="bankAccountType?.Value">{{bankAccountType?.Name }}</option>
+                    </select>
+                    <label>{{'User.AccountType' | translate}} *</label>
+                </div>
+            </div>
+
+            <div class="form_row hide-form-row">
+                <div class="form_field">
+                    <input type="text" class="ticket_input" name="Iban" formControlName="Iban"/>
+                    <label>{{'User.Iban' | translate}}</label>
+                </div>
+            </div>
+
+            <div class="form_row">
+
+                <div class="form_field">
+                    <input type="text" class="ticket_input" name="NickName" formControlName="NickName"/>
+                    <label>{{'Deposit.NameSurname' | translate}} *</label>
+                </div>
+            </div>
+            <div class="form_row">
+
+                <div class="form_field">
+                    <input type="text" class="ticket_input" name="NickName" formControlName="LastName"/>
+                    <label>{{'Deposit.Surname' | translate}} *</label>
+                </div>
+            </div>
+
+            <!--      <div class="form_row">-->
+            <!--        <label>{{'User.Code' | translate}}</label>-->
+            <!--        <div class="form_field flex_between">-->
+            <!--          <input type="text" class="ticket_input" name="Code" formControlName="Code"/>-->
+            <!--          <button type="button" class="setting_btn" [ngClass]="{'disabled' : isCodeSend}" (click)="sendVerificationCode()">{{'User.Send_Code' | translate}}</button>-->
+            <!--        </div>-->
+            <!--      </div>-->
+            <div *ngIf="statusMessage" class="show-message">{{statusMessage}}</div>
+
+            <div class="form_row">
+                <div class="form_field">
+                    <button type="submit" [ngClass]="{'disabled' : !addBankAccountForm.valid}" class="setting_btn">{{'User.Send' | translate}}</button>
+                </div>
+            </div>
+        </form>
+        <div class="add-bank-success-message" *ngIf="addNewTicket && !data?.selectedBankAccount">
+            <fa-icon class="check-circle-icon" [icon]="['fas', 'check-circle']"></fa-icon>
+            {{'Register.Success-Message' | translate}}
+            <p class="successfully-registered">{{'Deposit.Your-bank-profile-successfully-registered' | translate}}</p>
+        </div>
+        <div class="add-bank-success-message" *ngIf="addNewTicket && data?.selectedBankAccount">
+            <fa-icon class="check-circle-icon" [icon]="['fas', 'check-circle']"></fa-icon>
+            {{'Register.Success-Message' | translate}}
+            <p class="successfully-registered">{{'Deposit.Your-bank-profile-successfully-edited' | translate}}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="privaci-policy-section {{pageTitle}}-section min-height">
+  <div class="section_content max-width">
+    <ul class="section_list">
+      <li *ngFor="let language of languageKeys" class="{{language}}"
+          [innerHTML]=" pageTitle + '.' + language | translate | sanitizer: 'html'">
+      </li>
+    </ul>
+  </div>
+</div>

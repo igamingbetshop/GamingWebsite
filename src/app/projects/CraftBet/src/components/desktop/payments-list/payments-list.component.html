@@ -1,0 +1,9 @@
+<div class="footer-section_boxMenu_bottom" *ngIf="paymentLogoList.length > 0">
+  <div class="payments_section">
+    <ng-container *ngFor="let item of paymentLogoList">
+      <a *ngIf="item.Type == 1" class="payments_section_item" routerLinkActive="active"
+         [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' +  item?.Icon}"></a>
+      <div *ngIf="item.Type == 2" class="license" [innerHtml]="item.Href | sanitizer: 'html'"></div>
+    </ng-container>
+  </div>
+</div>

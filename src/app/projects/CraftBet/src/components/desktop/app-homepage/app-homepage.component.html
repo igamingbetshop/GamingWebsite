@@ -1,0 +1,66 @@
+<div class="home-page-section full-width recponcive-height"
+     [ngStyle]="{'background': defaultOption?.HomeBGImage ? 'url(../../../../../../../assets/images/home/' + defaultOption?.HomeBGImage + ')' : ''}">
+  <div class="home-page-section_banners">
+    <common-banner [slideKey]="slideKey"></common-banner>
+  </div>
+  <div class="websitePagesContent" *ngIf="homeMenuList?.length > 0">
+    <div class="websitePagesContent__content" *ngFor="let item of homeMenuList" [ngClass]="{'topProducts': item?.Icon}">
+<!--        <div class="websitePagesContent__content_title" *ngIf="item?.titleVisibility" [innerHTML]="'HomeMenu.' + item.Title | translate | sanitizer: 'html'">-->
+<!--            <i class="fa {{item?.Icon}}" *ngIf="item?.Icon"></i>-->
+<!--        </div>-->
+
+        <ng-container [ngSwitch]="item.Type">
+            <ng-container *ngSwitchCase="'imageBar'">
+                <div class="websitePagesContent__content_title" *ngIf="item?.titleVisibility" [ngStyle]="{'textAlign': item?.textAlign, 'fontSize': item?.fontSize}" [innerHTML]="'HomeMenu.' + item.Title | translate | sanitizer: 'html'">
+                    <i class="fa {{item?.Icon}}" *ngIf="item?.Icon"></i>
+                </div>
+                <div [className]="'imageBar ' + item.className + ' line'" ></div>
+                <div *ngIf="item.Title.startsWith('ImageBar2')" [className]="item.className ? 'imageBar ' + item.className +  ' imageBar2-carousel': 'imageBar'" class="content-row">
+
+                    <ngx-slick-carousel class="carousel horizontal"
+                                        #slickCarousel
+                                        [config]="slideConfig1">
+                        <div class="content-item" ngxSlickItem *ngFor="let subItem of item.SubMenu; let i = index"
+                             (click)="navigateTo(subItem.Href)"
+                             [attr.index]="i"
+                             [ngStyle]="{'background-image':
+              'url(../../../../../../../assets/images/home/home-menu/' + item?.Icon + ')'}">
+                            <div class="contentImage-path" [ngStyle]="{'background-image':
+              'url(../../../../../../../assets/images/home/home-menu/' + subItem?.Icon + ')'}"
+                                >
+                                <div class="img-wrapper"></div>
+                                <div class="play-button" (click)="navigateTo(subItem.Href)">{{'Home.Play Now' | translate}}</div>
+                            </div>
+                            <div class="item-title">
+                                {{'HomeMenu.' + subItem?.Title | translate}}
+                            </div>
+                        </div>
+                    </ngx-slick-carousel>
+                </div>
+                <div *ngIf="!item.Title.startsWith('ImageBar2')" [className]="item.className ? 'imageBar ' + item.className : 'imageBar'" class="content-row">
+                    <div class="content-item" *ngFor="let subItem of item.SubMenu; let i = index" (click)="navigateTo(subItem.Href)"
+                         [ngStyle]="{'background-image':
+              'url(../../../../../../../assets/images/home/home-menu/' + item?.Icon + ')'}">
+                        <div class="contentImage-path" [ngStyle]="{'background-image':
+              'url(../../../../../../../assets/images/home/home-menu/' + subItem?.Icon + ')'}">
+                            <div class="img-wrapper" [ngStyle]="{'-webkit-mask-image':
+              'url(../../../../../../../assets/images/home/home-menu/' + subItem?.Icon + ')'}"></div>
+                            <div class="play-button" (click)="navigateTo(subItem.Href)">{{'Home.Play Now' | translate}}</div>
+                        </div>
+                        <div class="item-title">
+                            {{'HomeMenu.' + subItem?.Title | translate}}
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </ng-container>
+      <div *ngIf="item.Type === 'iframe' && item.Href"
+           [ngStyle]="{'width': '100%', 'height': item.titleVisibility ? 'calc('+ item.height +' - 30px)' : item?.height}">
+          <iframe [src]="item.Href | sanitizer:'resourceUrl'"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+

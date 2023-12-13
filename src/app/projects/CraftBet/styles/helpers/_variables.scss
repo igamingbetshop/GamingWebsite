@@ -1,0 +1,522 @@
+/*
+**  Header
+*/
+
+
+@function color($color-name) {
+  @return var(--#{$color-name}-color, #FFFFFF);
+}
+
+
+@function width($veriable-name, $item-size) {
+  @return var(--#{$veriable-name}-width, $item-size);
+}
+
+@function max-width($veriable-name, $item-size) {
+  @return var(--#{$veriable-name}-max-width, $item-size);
+}
+
+@function min-width($veriable-name, $item-size) {
+  @return var(--#{$veriable-name}-max-width, $item-size);
+}
+
+
+@function height($veriable-name, $item-size) {
+  @return var(--#{$veriable-name}-height, $item-size);
+}
+
+
+/**
+Display
+**/
+
+
+@function display($veriable-name, $item-display) {
+  @return var(--#{$veriable-name}-display, $item-display);
+}
+
+
+/**
+  Display Flex
+**/
+
+
+@function justifyContent($veriable-name, $justify-content) {
+  @return var(--#{$veriable-name}-justify-content, $justify-content);
+}
+
+@function flexDirection($veriable-name, $flex-direction) {
+  @return var(--#{$veriable-name}-flex-direction, $flex-direction);
+}
+
+
+@function flexGrow($veriable-name, $flex-grow) {
+  @return var(--#{$veriable-name}-flex-grow, $flex-grow);
+}
+
+/**
+  Border Radius
+**/
+
+@function borderRadius($veriable-name, $border-top-radius, $border-right-radius, $border-bottom-radius, $border-left-radius) {
+  @return var(--#{$veriable-name}-border-radius, $border-top-radius $border-right-radius $border-bottom-radius $border-left-radius);
+}
+
+@function borderTopRightRadius($veriable-name, $border-top-right-radius) {
+  @return var(--#{$veriable-name}-border-top-right-radius, $border-top-right-radius);
+}
+
+@function borderTopLeftRadius($veriable-name, $border-top-left-radius) {
+  @return var(--#{$veriable-name}-border-top-left-radius, $border-top-left-radius);
+}
+
+@function borderBottomLeftRadius($veriable-name, $border-bottom-left-radius) {
+  @return var(--#{$veriable-name}-border-bottom-left-radius, $border-bottom-left-radius);
+}
+
+@function borderBottomRightRadius($veriable-name, $border-bottom-right-radius) {
+  @return var(--#{$veriable-name}-border-bottom-right-radius, $border-bottom-right-radius);
+}
+
+/**
+  Border Width
+**/
+
+@function borderWidth($veriable-name, $border-top-width, $border-right-width, $border-bottom-width, $border-left-width) {
+  @return var(--#{$veriable-name}-border-width, $border-top-width, $border-right-width, $border-bottom-width, $border-left-width);
+}
+
+@function borderTopWidth($veriable-name, $border-top-width) {
+  @return var(--#{$veriable-name}-border-top-width, $border-top-width);
+}
+
+@function borderBottomWidth($veriable-name, $border-bottom-width) {
+  @return var(--#{$veriable-name}-border-bottom-width, $border-bottom-width);
+}
+
+@function borderRightWidth($veriable-name, $border-right-width) {
+  @return var(--#{$veriable-name}-border-right-width, $border-right-width);
+}
+
+@function borderLeftWidth($veriable-name, $border-left-width) {
+  @return var(--#{$veriable-name}-border-left-width, $border-left-width);
+}
+
+
+/**
+  Background
+**/
+
+@function backgroundImage($veriable-name, $background-url) {
+  @return var(--#{$veriable-name}-background-image, $background-url);
+}
+
+@function backgroundColor($veriable-name, $background-color) {
+  @return var(--#{$veriable-name}-background-color, $background-color);
+}
+
+
+@function backgroundSize($veriable-name, $background-size) {
+  @return var(--#{$veriable-name}-background-size, $background-size);
+}
+
+@function backgroundPositionX($veriable-name, $background-position-x) {
+  @return var(--#{$veriable-name}-background-position-x, $background-position-x);
+}
+
+@function backgroundPositionY($veriable-name, $background-position-y) {
+  @return var(--#{$veriable-name}-background-position-y, $background-position-y);
+}
+
+@function backgroundRepeat($veriable-name, $background-repeat) {
+  @return var(--#{$veriable-name}-background-reapet, $background-repeat);
+}
+
+
+/**
+  Item Color
+**/
+
+
+@function itemColor($veriable-name, $color) {
+  @return var(--#{$veriable-name}-color, $color);
+}
+
+/**
+  Item Disable
+**/
+
+
+@function pointerEvents($veriable-name, $pointer) {
+  @return var(--#{$veriable-name}-pointer-events, $pointer);
+}
+
+
+/**
+  Display Field
+**/
+
+
+@function displayEvents($veriable-name, $display) {
+  @return var(--#{$veriable-name}-display-events, $display);
+}
+
+
+/**
+  Border Color
+**/
+
+@function borderColor($veriable-name, $border-top-color, $border-right-color, $border-bottom-color, $border-left-color) {
+  @return var(--#{$veriable-name}-border-color, $border-top-color, $border-right-color, $border-bottom-color, $border-left-color);
+}
+
+
+@function borderTopColor($veriable-name, $border-top-color) {
+  @return var(--#{$veriable-name}-border-top-color, $border-top-color);
+}
+
+@function borderBottomColor($veriable-name, $border-bottom-color) {
+  @return var(--#{$veriable-name}-border-bottom-color, $border-bottom-color);
+}
+
+@function borderLeftColor($veriable-name, $border-left-color) {
+  @return var(--#{$veriable-name}-border-left-color, $border-left-color);
+}
+
+@function borderRightColor($veriable-name, $border-right-color) {
+  @return var(--#{$veriable-name}-border-right-color, $border-right-color);
+}
+
+/**
+  Positions
+**/
+
+@function position($variable-name, $position) {
+  @return var(--#{$variable-name}-position, $position);
+}
+
+@function itemTop($veriable-name, $item-top) {
+  @return var(--#{$veriable-name}-top, $item-top);
+}
+
+@function itemBottom($veriable-name, $item-bottom) {
+  @return var(--#{$veriable-name}-bottom, $item-bottom);
+}
+
+@function itemLeft($veriable-name, $item-left) {
+  @return var(--#{$veriable-name}-left, $item-left);
+}
+
+@function itemRight($veriable-name, $item-right) {
+  @return var(--#{$veriable-name}-right, $item-right);
+}
+
+
+/**
+  Border Style
+**/
+
+@function borderStyle($veriable-name, $border-top-style, $border-right-style, $border-bottom-style, $border-left-style) {
+  @return var(--#{$veriable-name}-border-style, $border-top-style, $border-right-style, $border-bottom-style, $border-left-style);
+}
+
+@function borderBottomStyle($veriable-name, $border-bottom-style) {
+  @return var(--#{$veriable-name}-border-bottom-style, $border-bottom-style);
+}
+
+@function borderTopStyle($veriable-name, $border-top-style) {
+  @return var(--#{$veriable-name}-border-top-style, $border-top-style);
+}
+
+@function borderLeftStyle($veriable-name, $border-left-style) {
+  @return var(--#{$veriable-name}-border-left-style, $border-left-style);
+}
+
+@function borderRightStyle($veriable-name, $border-right-style) {
+  @return var(--#{$veriable-name}-border-right-style, $border-right-style);
+}
+
+
+/**
+  Opacity
+**/
+
+@function itemOpacity($veriable-name, $opacity-value) {
+  @return var(--#{$veriable-name}-opacity, $opacity-value);
+}
+
+
+/**
+  Padding
+**/
+
+@function padding($veriable-name, $padding) {
+  @return var(--#{$veriable-name}-padding, $padding);
+}
+
+@function paddingTop($veriable-name, $padding-top-size) {
+  @return var(--#{$veriable-name}-padding-top, $padding-top-size);
+}
+
+
+@function paddingRight($veriable-name, $padding-right-size) {
+  @return var(--#{$veriable-name}-padding-right, $padding-right-size);
+}
+
+
+@function paddingBottom($veriable-name, $padding-bottom-size) {
+  @return var(--#{$veriable-name}-padding-bottom, $padding-bottom-size);
+}
+
+
+@function paddingLeft($veriable-name, $padding-left-size) {
+  @return var(--#{$veriable-name}-padding-left, $padding-left-size);
+}
+
+
+/**
+  Margin
+**/
+
+@function margin($veriable-name, $margin-top-size, $margin-right-size, $margin-bottom-size, $margin-left-size) {
+  @return var(--#{$veriable-name}-margin, $margin-top-size, $margin-right-size, $margin-bottom-size, $margin-left-size);
+}
+
+@function marginTop($veriable-name, $margin-top-size) {
+  @return var(--#{$veriable-name}-margin-top, $margin-top-size);
+}
+
+@function marginRight($veriable-name, $margin-right-size) {
+  @return var(--#{$veriable-name}-margin-right, $margin-right-size);
+}
+
+@function marginBottom($veriable-name, $margin-bottom-size) {
+  @return var(--#{$veriable-name}-margin-bottom, $margin-bottom-size);
+}
+
+
+@function marginLeft($veriable-name, $margin-left-size) {
+  @return var(--#{$veriable-name}-margin-left, $margin-left-size);
+}
+
+
+/**
+  Align
+**/
+
+@function textAlign($veriable-name, $align-name) {
+  @return var(--#{$veriable-name}-text-align, $align-name);
+}
+
+@function itemAlign($veriable-name, $align-name) {
+  @return var(--#{$veriable-name}-item-align, $align-name);
+}
+
+
+@function whiteSpace($veriable-name, $white-space) {
+  @return var(--#{$veriable-name}-item-align, $white-space);
+}
+
+/**
+  Font
+**/
+
+@function fontSize($veriable-name, $font-size)
+{
+  @return var(--#{$veriable-name}-font-size, $font-size);
+}
+
+
+
+@function fontWeight($veriable-name, $font-weight) {
+  @return var(--#{$veriable-name}-font-weight, $font-weight);
+}
+
+@function fontFamily($variable-name, $font-family) {
+  @return var(--#{$variable-name}-font-family, $font-family);
+}
+
+
+/**
+   Grid Functions
+**/
+
+@function gridGap($veriable-name, $grid-row-gap-size, $grid-column-gap-size) {
+  @return var(--#{$veriable-name}-grid-gap, $grid-row-gap-size, $grid-column-gap-size);
+}
+
+@function gridRow($veriable-name, $rowNumber) {
+  @return var(--#{$veriable-name}-grid-row, $rowNumber);
+}
+
+@function gridColumn($veriable-name, $columnNumber) {
+  @return var(--#{$veriable-name}-grid-column, $columnNumber);
+}
+
+
+@function gridColumnCount($veriable-name, $columnCount) {
+  @return var(--#{$veriable-name}-column-count, $columnCount);
+}
+
+
+$header-bg: #101824;
+$header-top-bg: #19212c;
+$header-bottom-bg: #222d3e;
+$header-menu-item-bg: #d0d9e7;
+$header-menu-active: #2e3c51;
+$header-menu-active-border: #0fa989;
+$header-tail: color(drop-down-tail);
+
+/*
+** Footer
+*/
+
+$footer-colomn-color: #bbbbbb;
+$footer-colomn-title: #5d5d5d;
+$footer-company-info-color: #524e58;
+$footer-company-info-hover: #c2c52e;
+$footer-open-btn-bg: #19212c;
+$footer-open-btn-border: #6f6f6f;
+$footer-open-btn-bg-hover: #222d3e;
+$footer-open-btn-border-hover: #10ab8a;
+
+
+/*
+** Login , Registration
+*/
+
+
+$info-icon-bg: #19212c;
+$placeholder-color: #b9c5d6;
+$forgot-password: #19212c;
+$register-modal-bg: #2a303d;
+$register-active-menu: #36b550;
+$register-btn-bg: #252c37;
+$register-btn-cl: #9ba4b3;
+$register-input-border: #dbedff;
+$register-border-radius: borderRadius(form-filed,6px,6px,6px,6px);
+
+
+/*
+** Account Pages
+*/
+
+$account-default-bg: #101824;
+$account-edit-color: var(--account-edit-color, #4AA4FF);
+$account-left-menu-hover: #464646;
+$account-left-menu-active: #737373;
+$account-left-menu-active-bg: #232323;
+$account-left-menu-header: #6B6B6B;
+$account-right-block-title: rgba(255, 255, 255, 0.6);
+$account-deposit-section-bg: #F2F2F2;
+$account-deposit-payment-border: #dcdcdc;
+$account-deposit-header-bg: #3F3F3F;
+$account-deposit-input-shadow: rgba(0, 0, 0, 0.3);
+$account-settings-comment: #DBEDFF;
+$account-settings-btn: #fefefe;
+$account-bonus-item-bg: rgba(244, 244, 244, 0.44);
+$account-bonus-list-bg: rgba(206, 206, 206, 0.7);
+$account-transaction-border: #dadada;
+$account-transaction-btn: rgb(67, 131, 183);
+$account-settings-active-item: rgba(219, 237, 255, 0.8);
+$account-settings-active-cl: #36b54f;
+$account-payments-btn: rgb(67, 131, 183);
+$account-main-bg-color: var(--account-main-bg-color, #213454);
+$account-small-gap: var(--account-small-gap, 6px);
+$account-middle-gap: var(--account-middle-gap, 8px);
+$account-big-gap: var(--account-big-gap, 12px);
+$account-extra-big-gap: var(--account-extra-big-gap, 16px);
+$account-content-item-color: var(--account-content-item-color, #fff);
+$account-content-item-bg-color: var(--account-content-item-bg-color, #314566);
+$account-content-item-selected-bg-color: var(--account-content-item-selected-bg-color, #384F75);
+$account-content-item-selected-hover-bg-color: var(--account-content-item-selected-hover-bg-color, #384F75);
+$font-size-biggest-6: var(--font-size-6, 24px);
+//$font-size-24: var(--font-size-24, 24px);
+$font-size-5: var(--font-size-5, 20px);
+//$font-size-20: var(--font-size-20, 20px);
+$font-size-4: var(--font-size-4, 18px);
+//$font-size-18: var(--font-size-18, 18px);
+$font-size-3: var(--font-size-3, 16px);
+//$font-size-16: var(--font-size-16, 16px);
+$font-size-2: var(--font-size-2, 14px);
+$font-size-7: var(--font-size-13, 13px);
+//$font-size-14: var(--font-size-14, 14px);
+$font-size-1: var(--font-size-1, 12px);
+
+/*
+** Live Casino Pages
+*/
+$live-casino-default-bg: #101824;
+
+
+/*
+** Promotions page
+*/
+
+$promotion-item-bg: color(promotion-item-background);
+$promotion-bg: #101824;
+
+
+/*
+** Password Recovery
+*/
+
+$recovery-info-bg: #efefef;
+$recovery-support: #ffffff;
+$recovery-success-check: #59c10f;
+
+
+/*
+** Message Error, Success...
+*/
+
+$error-message: #ff0029;
+$error-border-color: #ff0000;
+$recovery-success-message: #414141;
+$success-message: #3c763d;
+
+
+/*
+** Filter Games
+*/
+
+$games-title: #d0d0d0;
+$games-real-btn: #8c8c8c;
+$games-real-btn-bg: rgba(0, 0, 0, 0.9);
+$games-product-item-border: #373737;
+$games-product-title: #292929;
+$games-product-tab-active: #006550;
+$games-product-real-bg: rgba(0, 0, 0, 0.9);
+$games-product-cancel-screen: rgba(0, 0, 0, 0.5);
+
+/*
+** Tickets page
+*/
+
+$tickets-add-message-btn: #58aa08;
+$tickets-open-message-bg: #f4f4f4;
+$tickets-open-message-block: rgba(171, 171, 171, 0.2);
+$tickets-textarea-shadow: rgba(0, 0, 0, 0.3);
+$tickets-my-message: rgb(191, 224, 167);
+
+
+/*
+** Input, Select.. Styles
+*/
+
+$border-color: #474f60;
+$font-color: #dadbe0;
+$label-color: #303030;
+$border-color: #cecece;
+$border-shadow: rgba(0, 0, 0, .3);
+
+
+/*
+** Table, tr, td...
+*/
+
+$table-header-bg: rgba(250, 250, 250, 0.8);
+
+
+
+

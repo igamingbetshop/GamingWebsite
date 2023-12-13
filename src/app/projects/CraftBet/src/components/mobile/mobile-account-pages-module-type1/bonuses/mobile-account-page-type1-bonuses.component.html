@@ -1,0 +1,83 @@
+<!--<div class="mobile-bonuses-section" [ngStyle]="layoutService.layoutStyle">-->
+<div class="mobile-bonuses-section">
+
+  <h2 class="mobile-bonuses-section_title">Bonuses</h2>
+  <div class="send-promo-code-box">
+    <input  id="name" name="name" #name="ngModel"  [(ngModel)]="promoCode" placeholder="{{'Account.PromoCode' | translate}}">
+    <button class="craft_btn verify_btn setting_btn" (click)="activatePromoCode()" [ngClass]="{'disabled' : !promoCode}">
+      <span>
+        {{'Payments.ActivateBonus' | translate}}
+      </span>
+    </button>
+    <div class="success-message">
+      {{promoCodeSuccessMessage}}
+    </div>
+    <div class="error_message" >
+      {{promoCodeErrorMessage}}
+    </div>
+  </div>
+
+  <div class="send-promo-code-box">
+
+    <form class="send-promo-code-box__form" [formGroup]="form" (ngSubmit)="submit()">
+        <select formControlName="status">
+          <option value="">Select Status</option>
+          <option *ngFor="let item of statusList, let i = index"
+                  [ngValue]="item?.Id">{{item?.Name | translate}}</option>
+        </select>
+
+
+      <div class="history-tools">
+        <button class="craft_btn show-btn">{{'User.Show' | translate}}</button>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="bonus-tab-bar">
+    <div class="bonus-tab-bar_item" *ngFor="let tab of tabs" (click)="selectTab(tab)"
+         [ngClass]="{'active':selectedTab.Title == tab.Title}">{{'User.' + tab.Title | translate}}
+    </div>
+  </div>
+  <div class="bonus-tab-content">
+
+    <div class="sport-bonus-box">
+      <div class="sport-bonus-column">
+        <table>
+          <thead>
+          <tr>
+            <td *ngFor="let head of bonusesData?.headers">{{'User.' + head | translate}}</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let bonus of bonusesData?.body">
+            <td *ngFor="let head of bonusesData?.headers">{{bonus[head]}}</td>
+            <td >
+              <div class="delete-state" (click)="deleteBonus(bonus, $event)"
+                   [ngStyle]="{'visibility' : (bonus?.StatusId == 1 && bonus?.TypeIdActive) ? 'visible' : 'hidden'}">
+                <fa-icon [icon]="['fas', 'trash-alt']" class="mobile-bonus-delete-icon"></fa-icon>
+              </div>
+            </td>
+            <td *ngIf="bonus.IsCampaign">
+              <button type="button" class="craft_btn" (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="mobile-empty-bonuses empty-block" *ngIf="bonusesData?.body.length == 0">
+          <section class="mobile-empty-bonuses empty-block">
+            <span class="icon-bonus icon"></span>
+            <span class="empty-block-text">{{'User.Bonuses-empty' | translate}}</span>
+            <span class="empty-history-text">{{noHistory}}</span>
+          </section>
+        </div>
+        <div class="pagination_section">
+          <pagination-controls
+            autoHide="true"
+            (pageChange)="page = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

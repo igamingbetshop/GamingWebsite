@@ -1,0 +1,46 @@
+<div [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
+
+    <div class="new_ticket">
+        <form [formGroup]="ticketForm" novalidate>
+            <div class="form_row" *ngIf="data?.notLogin">
+                <div class="form_field">
+                    <label>{{'Register.Email' | translate}}</label>
+                    <input type="text" class="ticket_input" name="Email" formControlName="Email"
+                           placeholder="{{'Register.Email-placeholder' | translate}}"/>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_field">
+                    <label>{{'User.Subject' | translate}}</label>
+                    <input type="text" class="ticket_input" name="Subject" formControlName="Subject"
+                           placeholder="{{'User.Subject-placeholder' | translate}}"/>
+                    <div class="error-form"
+                         *ngIf="ticketForm.get('Subject').touched && ticketForm.get('Subject').value === ''">
+                        {{'User.Subject Error' | translate}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_textarea">
+                    <label>{{'User.Ticket' | translate}}</label>
+                    <textarea name="Message" formControlName="Message"
+                              placeholder="{{'User.Ticket-placeholder' | translate}}"></textarea>
+                    <div class="error-form"
+                         *ngIf="ticketForm.get('Message').touched && ticketForm.get('Message').value === ''">
+                        {{'User.Message Error' | translate}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_field send-form_field">
+                    <button type="submit" class="craft_btn" [disabled]="ticketForm.invalid || clicked"
+                            (click)="submit();clicked = true;">{{'Ticket.Send' | translate}}</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="statusMessage">{{statusMessage}}</div>
+    </div>
+</div>

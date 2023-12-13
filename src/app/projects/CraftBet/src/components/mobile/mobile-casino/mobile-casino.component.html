@@ -1,0 +1,47 @@
+<div class="mobile-casino-section flex_column_center">
+
+  <app-mobile-casino-banners *ngFor="let fragment of fragments?.Banners?.Items"
+                             [fragmentConfig]="fragment"
+                             [style.order]="fragment.Order"
+                             [style.margin-top.px]="fragment.Config.marginTop">
+  </app-mobile-casino-banners>
+  <app-mobile-casino-menu *ngFor="let fragment of fragments?.Menus?.Items"
+                          [style.order]="fragment.Order"
+                          [style.margin-top.px]="fragment.Config.marginTop"
+                          [fragmentConfig]="fragment">
+  </app-mobile-casino-menu>
+
+  <app-mobile-casino-providers *ngFor="let fragment of fragments?.Providers?.Items"
+                               [style.order]="fragment.Order"
+                               [fragmentConfig]="fragment">
+  </app-mobile-casino-providers>
+  <app-mobile-casino-category  *ngFor="let fragment of fragments?.Categories?.Items"
+                               [style.order]="fragment.Order"
+                               class="{{fragment.Config.type}}"
+                               [position]="position"
+                               [class.search-view]="stateService.categoriesSearchViewState$ | async"
+                               [fragmentConfig]="fragment">
+  </app-mobile-casino-category>
+  <app-mobile-casino-search *ngFor="let fragment of fragments?.Search?.Items"
+                            [style.margin-top.px]="fragment.Config.marginTop"
+                            [style.order]="fragment.Order"
+                            [fragmentConfig]="fragment">
+  </app-mobile-casino-search>
+
+  <mobile-progress-bar *ngFor="let fragment of fragments?.ProgressBar?.Items"
+                       [style.margin-top.px]="fragment.Config.marginTop"
+                       [style.order]="fragment.Order"
+                       [fragmentConfig]="fragment">
+  </mobile-progress-bar>
+
+  <mobile-character-hierarchy *ngFor="let fragment of fragments?.CharacterHierarchy?.Items"
+                              [style.margin-top.px]="fragment.Config.marginTop"
+                              [style.order]="fragment.Order"
+                              [fragmentConfig]="fragment">
+
+  </mobile-character-hierarchy>
+
+  <div class="open-lucky-game" (click)="openLuckyGame()">
+    <img class="" src="../assets/images/lucky-icon.svg">
+  </div>
+</div>

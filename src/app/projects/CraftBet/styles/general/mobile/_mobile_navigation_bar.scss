@@ -1,0 +1,68 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-navigation-bar {
+ /* background: backgroundColor(mobile-nav-bar, #f06b11);*/
+  background: linear-gradient(180deg, backgroundColor(mobile-nav-bar-first, #0e1b32) 0%, backgroundColor(mobile-nav-bar-last, #0e1b32) 100%);
+  display: flex;
+  overflow: auto hidden;
+  height: height(mobile-nav-bar, 50px);
+
+  padding-right: paddingRight(mobile-nav-bar, 0);
+  padding-left: paddingLeft(mobile-nav-bar, 0);
+  padding-bottom: paddingBottom(mobile-nav-bar, 0);
+  padding-top: paddingTop(mobile-nav-bar, 0);
+  margin-top: marginTop(mobile-nav-bar, 0);
+
+  .mobile-navigation-bar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: flexDirection(mobile-nav-bar, column);
+    justify-content: justifyContent(mobile-nav-bar, center);
+    font-size: fontSize(mobile-nav-bar, 12px);
+    font-weight: fontWeight(mobile-nav-bar, normal);
+    margin-left: marginLeft(mobile-nav-bar, 10px);
+    color: itemColor(mobile-nav-bar, #fff);
+    align-items: itemAlign(mobile-nav-bar, center);
+    min-width: width(mobile-nav-bar-min, 78px);
+    border: var(--m-nav-bar-border-size, 0px) solid var(--m-nav-bar-border-color, #ffffff);
+    outline: none;
+    white-space: nowrap;
+
+    &.active {
+      background-color: backgroundColor(mobile-nav-bar-active, none);
+      background-image: backgroundImage(mobile-nav-bar-active, none);
+      color: itemColor(mobile-nav-bar-active, #fff);
+
+    }
+
+    .image-item {
+      background-repeat: no-repeat;
+      background-position: center;
+      display: display(mobile-nav-bar-img, inline-table);
+      background-size: backgroundSize(mobile-nav-bar-img, 100%);
+      width: width(mobile-nav-bar-img, 25px);
+      height: height(mobile-nav-bar-img, 25px);
+    }
+
+    .text-item {
+      max-width: width(mobile-nav-bar-text-max, 50px);
+      white-space: whiteSpace(mobile-nav-bar-text, normal);
+      text-align: itemAlign(mobile-nav-bar-text, center);
+    }
+
+    i {
+      font-size: fontSize(mobile-nav-bar-icon, 26px);
+      color: color(m-nav-bar-icon);
+      margin-bottom: 3px;
+    }
+
+    &:first-child {
+      margin-left: 0
+    }
+  }
+
+  &::-webkit-scrollbar {
+    height: 0 !important;
+  }
+}

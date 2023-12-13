@@ -1,0 +1,16 @@
+<div class="characters-fragment"  [ngStyle]="fragmentConfig?.Config.style">
+    <div class="wrapper">
+        <img src="../assets/images/characters/polygon.png">
+    </div>
+    <div class="left-block">
+        <div class="block-header">Choose your hero</div>
+        <p>Please note that The Character you choose can not be changed and if you decided
+            to select one the system will do it for you</p>
+        <div class="buttons">
+            <button (click)=" onRegisterOpen()">{{'User.Get Started' | translate}}</button>
+            <button (click)="onLoginOpen()">{{'User.Log In' | translate}}</button>
+        </div>
+    </div>
+
+    <characters  [Id]="'homeCharacters'" [scaleMultiplier]="1" [radius]="240"></characters>
+</div>

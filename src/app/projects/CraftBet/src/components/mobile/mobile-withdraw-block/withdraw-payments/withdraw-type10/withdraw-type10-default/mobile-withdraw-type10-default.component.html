@@ -1,0 +1,99 @@
+<div class="deposit_payment_section deposit-cash mobile-device">
+  <app-common-accounts style="position: relative; top:5px"></app-common-accounts>
+  <div class="deposit_payment_section__form">
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit(paymentForm)">
+
+      <div class="payment-form-field">
+
+        <div class="payment-form-field__column">
+          <select formControlName="BankId" class="payment-select" (ngModelChange)="selectBank($event)">
+            <option *ngFor="let bank of banks"
+                    [value]="bank?.Branches[0]?.Id">{{bank?.BankName}}</option>
+          </select>
+          <label class="payment-form-field__label">{{'Withdraw.BankName' | translate}}</label>
+        </div>
+      </div>
+      <div class="payment-form-field">
+
+        <div class="payment-form-field__column">
+          <input type="text" class="payment-input" placeholder="{{'Withdraw.NameSurname-placeholder' | translate}}"
+                 disabled ngModel="{{NameSurname}}" [ngModelOptions]="{standalone:true}"
+          />
+          <label class="payment-form-field__label">{{'Withdraw.NameSurname' | translate}}</label>
+        </div>
+      </div>
+
+      <div class="payment-form-field">
+
+
+
+        <div class="payment-form-field__column relative-section">
+
+
+          <input type="text" [(ngModel)]="bankNumberFilter.BankAccountNumber" [ngModelOptions]="{standalone: true}"
+                 class="payment-input"
+                 (ngModelChange)="reSearch($event)"
+                 placeholder="{{'Withdraw.Choose_Bank_Account_Number' | translate}}">
+          <label class="payment-form-field__label">{{'Withdraw.AccountNumber' | translate}}</label>
+          <div *ngIf="showList">
+            <div *ngFor="let account of accounts | filterBy: bankNumberFilter"
+                 class="bank-account-container">
+              <div class="BankAccountNumber-item" (click)="chooseBankAccountNumber(account)" *ngIf="showList">
+                {{account.BankAccountNumber}}</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="payment-form-field">
+
+        <div class="payment-form-field__column">
+          <input type="text" class="payment-input" placeholder="{{'Withdraw.CardNumber-placeholder' | translate}}"
+                 formControlName="CardNumber"/>
+          <label class="payment-form-field__label">{{'Withdraw.CardNumber' | translate}}</label>
+        </div>
+      </div>
+
+      <div class="payment-form-field" >
+
+        <div class="payment-form-field__column">
+          <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input" placeholder="{{'Withdraw.Amount-placeholder' | translate}}"
+                 formControlName="Amount" [(ngModel)]="amountValue" numbersOnly/>
+          <label class="payment-form-field__label">{{'Withdraw.Amount' | translate}}</label>
+          <ng-template #nominalsRef>
+            <app-common-payment-nominals [nominals]="nominals" (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+          </ng-template>
+        </div>
+
+        <div class="info-message" *ngIf="amountValue && CommissionPercent > 0">
+          {{'Withdraw.Tax-amount' | translate}}
+          : {{ (amountValue * CommissionPercent) / 100 | number: '.2'}} {{'Withdraw.Payout' | translate}}
+          : {{amountValue - (amountValue * CommissionPercent) / 100 | number: '.2'}}
+        </div>
+
+      </div>
+
+      <div class="payment-form-field">
+        <div class="payment-deposit-btn-field">
+          <button type="submit" [disabled]="submitted" class="payment-deposit-btn">
+            <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
+          </button>
+
+          <div class="error_message error_message_bottom longTag">
+            {{errorMessage}}
+          </div>
+
+          <div class="success_message" *ngIf="successMessage">
+            {{'Withdraw.'+ successMessage | translate}}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+

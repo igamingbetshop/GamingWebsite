@@ -1,0 +1,369 @@
+.affiliate_section {
+  background: var(--affiliate-section-background, #131a2c);
+  padding-top: var(--affiliate-section-padding-top, 0);
+  padding-bottom: var(--affiliate-section-padding-bottom, 0);
+  display: flex;
+}
+
+.affiliate {
+  background: var(--affiliate-background-color, #131a2c);
+  //margin: 0 auto 0 auto;
+  //padding: 38px 36px 0;
+  padding: 0 36px;
+  width: 45%;
+
+  h2 {
+    color: var(--affiliate-title-color, #fff);
+    font-size: var(--affiliate-title-font-size, 20px);
+    font-weight: var(--affiliate-title-font-weight, 500);
+    margin: 20px 0;
+  }
+
+  &_height {
+    min-height: 560px;
+    height: var(--about-us-height, auto);
+  }
+
+  //&_max-width {
+  //  max-width: 800px;
+  //}
+  .success_message {
+    left: var(--affiliate-success-message-settings, auto);
+    bottom: -15px;
+  }
+}
+
+.submit-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    padding: var(--affiliate-submit-btn-padding, 0 20px);
+    font-weight: var(--affiliate-submit-btn-font-weight, 500);
+    font-size: var(--affiliate-submit-btn-font-size, 16px);
+    background: var(--affiliate-submit-btn-background, linear-gradient(rgba(25, 64, 116, 1), rgba(19, 118, 248, 1)));
+    color: var(--affiliate-submit-btn-color, #fff);
+    width: var(--affiliate-submit-btn-width, 100%);
+  }
+}
+
+.error_message {
+  font-size: 15px;
+  top: 15px;
+}
+
+.affiliate-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 50px;
+  row-gap: 25px;
+  align-items: center;
+
+  .form_field {
+    width: 100%;
+    position: relative;
+    height: 100%;
+
+    .communication-types {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+
+      .first-section {
+        p {
+          margin: 0;
+          color: var(--affiliate-types-first-title-color, #fff);
+          font-size: var(--affiliate-types-first-title-font-size, 16px);
+          font-weight: var(--affiliate-types-first-title-font-weight, 400);
+          white-space: nowrap;
+        }
+
+        span {
+          color: var(--affiliate-types-second-title-color, rgba(219, 237, 255, 0.3));
+          font-size: var(--affiliate-types-first-title-font-size, 16px);
+          font-weight: var(--affiliate-types-first-title-font-weight, 400);
+          white-space: nowrap;
+        }
+      }
+
+      .second-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+
+        .second-section-types {
+          span {
+            cursor: pointer;
+            font-size: 36px;
+            padding: 4px;
+            background: var(--affiliate-types-icons-background-color, #3d4658);
+            color: var(--affiliate-types-icons-background-color, #fff);
+            border-radius: var(--affiliate-types-icons-border-radius, 5px);
+          }
+
+          .icon-skype:hover {
+            background: #00a9f0;
+          }
+
+          .icon-telegram:hover {
+            background: #1c8adb;
+          }
+
+          .icon-whatsapp:hover {
+            background: #27a11a;
+          }
+
+          .tooltip {
+            position: relative;
+          }
+
+          .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 80px;
+            text-align: center;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 1;
+            top: -31px;
+            height: 23px;
+            font-size: 16px;
+            background: #fff;
+            line-height: 12px;
+            left: -14px;
+          }
+
+          .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -11px;
+            border-width: 7px;
+            border-style: solid;
+            border-color: #fff transparent transparent transparent;
+          }
+
+          .tooltip:hover .tooltiptext {
+            visibility: visible;
+          }
+
+          .tooltip:hover .tooltiptext1 {
+            visibility: visible;
+          }
+
+          .skype {
+            color: #00a9f0;
+            visibility: visible;
+          }
+
+          .telegram {
+            color: #1c8adb;
+            visibility: visible;
+          }
+
+          .whatsapp {
+            color: #27a11a;
+            visibility: visible;
+          }
+
+        }
+
+      }
+    }
+
+    .checkbox-field {
+      display: var(--affiliate-field-checkbox-display, flex);
+      justify-content: var(--affiliate-field-checkbox-justify-content, flex-start);
+      align-items: center;
+      height: var(--affiliate-field-height, 40px);
+      //padding: 0 10px;
+
+      input {
+        width: 17px;
+        height: 17px;
+        vertical-align: middle;
+        //margin-left: auto;
+        margin-right: 15px;
+      }
+
+      span {
+        color: var(--affiliate-checbox-text-color, #fff);
+      }
+    }
+
+    label {
+      color: var(--affiliate-input-label-color, #fff);
+      position: absolute;
+      top: var(--affiliate-input-label-top, 11px);
+      left: var(--affiliate-input-label-left, 8px);
+      height: var(--affiliate-input-label-height, 25px);
+      transform-origin: 0 50%;
+      transition: transform 200ms, color 200ms;
+      pointer-events: none;
+    }
+
+    select, input {
+      color: var(--affiliate-field-color, #fff);
+      border-radius: var(--affiliate-field-border-radius, 5px);
+    }
+
+    input:focus ~ label {
+      width: var(--affiliate-input-field-label-width, inherit);
+      height: var(--affiliate-input-label-focused-height, 11px);
+      background: var(--affiliate-background-color, #FFFFFF);
+      color: var(--affiliate-field-focus-label, #fff);
+      top: var(--affiliate-label-top, 20px);
+      font-size: var(--affiliate-background-color-font-size, 16px);
+    }
+
+    input:focus ~ .cut,
+    input:not(:placeholder-shown) ~ .cut {
+      transform: translateY(8px);
+      display: block;
+    }
+
+    input:focus ~ .cut {
+      display: block;
+    }
+
+    input:focus::placeholder {
+      opacity: 1;
+    }
+
+    input::placeholder {
+      opacity: 0;
+    }
+
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
+      transform: var(--affiliate-label-transform, translateY(-27px) translateX(10px) scale(0.75));
+      background-color: var(--affiliate-background-color, #131a2c);
+      height: var(--affiliate-label-focused-height, 22px);
+      font-size: var(--affiliate-font-size-label, 16px);
+      color: var(--affiliate-focus-label-focused, #fff);
+      text-align: var(--affiliate-focus-label-focused-text-align, left);
+      width: var(--affiliate-focus-label-focused-width, auto);
+      padding-left: var(--affiliate-padding-left-focus-label-focused, 5px);
+      padding-right: var(--affiliate-padding-right-focus-label-focused, 10px);
+      top: var(--affiliate-focused-input-label-top, 17px);
+    }
+
+    select:focus ~ label,
+    select:not([value=""]):valid ~ label {
+      transform: var(--affiliate-select-label-transform, translateY(-27px) translateX(10px) scale(0.75));
+      top: var(--affiliate-focused-select-label-top, 17px);
+      font-size: var(--affiliate-focused-label-font-size, 16px);
+      color: var(--affiliate-focus-label-focused, #fff);
+      background-color: var(--affiliate-background-color-focus-label-focused, #131a2c);
+      padding-left: var(--affiliate-padding-left-focus-label-focused, 5px);
+      padding-right: var(--affiliate-padding-right-focus-label-focused, 10px);
+    }
+  }
+}
+
+.affiliate-support-section {
+  padding-top: 75px;
+
+  .support-part {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
+    row-gap: 25px;
+    align-items: center;
+
+    div {
+      background: var(--affiliate-support-part-background-color, rgba(45, 52, 69, 1));
+      height: var(--affiliate-support-part-height, 124px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: var(--affiliate-support-part-color, rgba(19, 26, 44, 1));
+      border-radius: var(--affiliate-support-part-border-radius, 5px);
+
+      h3 {
+        margin-bottom: 3px;
+        margin-top: 0px;
+        font-size: var(--affiliate-support-part-title-font-size, 30px);
+        font-weight: var(--affiliate-support-part-title-font-weight, 700);
+      }
+
+      span {
+        font-size: var(--affiliate-support-part-section-font-size, 18px);
+        font-weight: var(--affiliate-support-part-section-font-weight, 500);
+      }
+    }
+  }
+}
+
+.affiliate-right-part {
+  width: 55%;
+  //margin: 38px 16px 0 0;
+  margin: 0 16px;
+
+  h2 {
+    color: var(--affiliate-title-color, #fff);
+    font-size: var(--affiliate-title-font-size, 20px);
+    font-weight: var(--affiliate-title-font-weight, 500);
+  }
+
+  .right-part-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px 0;
+
+    button {
+      font-weight: var(--affiliate-submit-btn-font-weight, 500);
+      font-size: var(--affiliate-submit-btn-font-size, 16px);
+      background: var(--affiliate-Commission-btn-background, #42495A);
+      color: var(--affiliate-submit-btn-color, #fff);
+      white-space: nowrap;
+      margin-right: 10px;
+    }
+
+    .active {
+      background: var(--affiliate-about-btn-background, linear-gradient(rgba(25, 64, 116, 1), rgba(19, 118, 248, 1)));
+    }
+  }
+
+  .box {
+    border-radius: var(--affiliate-right-part-border-radius, 5px);
+    padding: 24px;
+    background: var(--affiliate-right-part-background-color, radial-gradient(rgba(208, 217, 231, 0.3), rgba(196, 196, 196, 0), rgba(196, 196, 196, 0.3)));
+    height: var(--affiliate-right-part-height, 650px);
+    color: var(--affiliate-right-part-color, #000);
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1680px) {
+  .affiliate {
+    width: 70%;
+
+    .affiliate-support-section {
+      .support-part {
+        column-gap: 20px;
+      }
+    }
+  }
+  .affiliate-section {
+    column-gap: 20px;
+
+    .form_field {
+      .communication-types {
+        .second-section {
+          .second-section-types {
+            span {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+}

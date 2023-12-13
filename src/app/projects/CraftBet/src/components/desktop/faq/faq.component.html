@@ -1,0 +1,12 @@
+<div class="section {{pageTitle}}-section min-height">
+
+    <div class="section_content max-width">
+      <ul class="section_list">
+        <li
+          *ngFor="let language of languageKeys"
+          [innerHTML]=" pageTitle + '.' + language | translate | sanitizer : 'html'"
+          class="{{language}}"
+        ></li>
+      </ul>
+    </div>
+</div>

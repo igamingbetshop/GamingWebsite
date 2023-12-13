@@ -1,0 +1,29 @@
+<div class="allFormItems m-security-questions">
+    <ul class="m-answers">
+        <li *ngFor="let answer of answers; let i = index">
+            <div>{{i + 1}}</div>
+            <div>
+                <span class="question-text">{{answer.QuestionText}}</span>
+                <span class="answer-text">{{answer.AnswerText}}</span>
+            </div>
+            <div (click)="removeAnswer(answer.Id)"><i class="icon-delete-ticket"></i></div>
+        </li>
+    </ul>
+    <ng-container *ngIf="answers.length <= 2">
+        <div class="form_field">
+            <label class="m-security-questions-label">
+                <select #questionsRef class="custom_dropdown_reg"
+                        (change)="selectQuestion($event)">
+                    <option *ngFor="let question of questions" [attr.hidden]="question.hidden" [value]="question.Id">{{question.QuestionText}}</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="answer-action">
+            <div class="form_field">
+                <input class="form_field" [(ngModel)]="answerModel" (ngModelChange)="trimAnswerData()"  placeholder="{{'Register.Answer' | translate}}">
+            </div>
+            <button class="craft_btn" (click)="addAnswer()" [disabled]="!answerModel">{{'Register.Add' | translate}}</button>
+        </div>
+    </ng-container>
+</div>

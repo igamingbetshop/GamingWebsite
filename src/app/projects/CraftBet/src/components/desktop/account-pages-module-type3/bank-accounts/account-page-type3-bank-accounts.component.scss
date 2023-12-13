@@ -1,0 +1,55 @@
+.bank-accounts-section {
+  padding: 14px 27px 10px;
+  cursor: default;
+  .user-right-panel_title {
+    height: auto;
+    cursor: default;
+  }
+  .add-account-title {
+    margin: 0;
+  }
+}
+@media screen and (min-width: 1700px) and (max-width: 1900px) {
+  .bank-accounts-section {
+    .banks-history-block-head {
+      font-size: 13px;
+    }
+  }
+}
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+  .user-right-panel_title {
+    font-size: 20px;
+  }
+  .add-account {
+    margin: 0 0 10px;
+    button {
+      height: 29px;
+      line-height: 19px;
+      font-size: 11px;
+    }
+  }
+  .bank-accounts-section {
+    .banks-history-block-head {
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .user-right-panel_title {
+    font-size: 18px;
+  }
+  .add-account {
+    margin: 0 0 10px;
+    button {
+      height: 29px;
+      line-height: 19px;
+      font-size: 11px;
+    }
+  }
+  .bank-accounts-section {
+    .banks-history-block-head {
+      font-size: 10px;
+    }
+  }
+}

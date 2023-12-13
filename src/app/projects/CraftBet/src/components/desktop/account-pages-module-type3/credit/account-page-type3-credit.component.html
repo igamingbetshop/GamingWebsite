@@ -1,0 +1,59 @@
+<div class="credit-tab">
+<!--    <div class="user-right-panel_title">{{'User.Credit-top-title' | translate}}</div>-->
+    <div class="container-part">
+        <div class="credits">
+            <div class="credit-tab-text">{{ 'Settings.Settings' | translate }}</div>
+            <div class="selected-wallet">
+
+            </div>
+            <div class="payment-systems__userAccount" *ngFor="let item of Accounts; let i = index">
+                <div class="payment-systems__userAccount__name" [ngClass]="{'selected': selected?.Id === item.Id}" (click)="selectedAccountBalance($event, item)">
+                    <div class="credit-account">
+                        <img class="credit-account-image" src="../../../../../../../assets/images/accounts/{{item?.TypeId}}_{{item.PaymentSystemId}}_{{item.hasBetShop}}.svg">
+                        <span class="credit-account-type-name">{{ item?.AccountTypeName }}</span>
+                    </div>
+                    <div class="credit-account">
+                        <div>{{ 'Settings.Balance' | translate }}</div>
+                        <div class="balance_item_change">
+                            <span *ngIf="currencySymbol">{{ currencySymbol }}</span>
+                            <span *ngIf="!currencySymbol">{{ CurrencyId}}</span>
+                            {{ item?.Balance | toNumber | number: '.2' }}
+                        </div>
+                    </div>
+                    <div class="credit-account">
+                        <div>{{ 'Settings.CreatedDate' | translate }}</div>
+                        <div>{{ item?.CreationTime | date: 'dd.MM.YY HH:mm'}}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<!--    to edit-->
+    <div class="deposit-tab">
+        <div class="container-part">
+            <div class="titles" collapse>
+                <span class="change-password-tab-text">{{'Settings.Deposit' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <div class="opened-deposit-tab">
+                <app-deposit-block-default></app-deposit-block-default>
+            </div>
+        </div>
+    </div>
+    <div class="deposit-tab">
+        <div class="container-part">
+            <div class="titles" collapse>
+                <span class="change-password-tab-text">{{'Settings.Withdraw' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <div class="opened-withdraw-tab">
+                <app-withdraw-block-default></app-withdraw-block-default>
+            </div>
+        </div>
+    </div>
+</div>

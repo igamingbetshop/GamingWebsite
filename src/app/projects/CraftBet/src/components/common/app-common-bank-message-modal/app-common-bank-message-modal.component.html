@@ -1,0 +1,16 @@
+<div class="modal-content">
+    <div class="modal-body">
+        <h2>{{'User.Delete_Bank_Account' | translate}}</h2>
+        <fa-icon [icon]="['fas', 'times']" (click)="close()"></fa-icon>
+    </div>
+
+    <div class="modal_content">
+        <div class="modal_content__message">{{'Error.Are You Sure You Want To Delete The Bank' | translate}}</div>
+    </div>
+
+    <div class="modal_footer">
+        <button type="submit" class="craft_btn bg_payment" (click)="close()">{{'Ticket.No' | translate}}</button>
+        <button type="submit" class="craft_btn bg_recovery"
+                (click)="saveChanges()">{{'Ticket.Yes' | translate}}</button>
+    </div>
+</div>

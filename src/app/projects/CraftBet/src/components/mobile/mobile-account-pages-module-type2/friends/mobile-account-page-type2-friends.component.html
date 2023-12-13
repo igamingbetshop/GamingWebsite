@@ -1,0 +1,76 @@
+<div class="friends-section">
+
+  <h2 class="friends-section_title">{{'Account.MyFriends' | translate}}</h2>
+
+
+  <div class="history-tools-panel">
+    <div class="history-tools">
+      <label>
+        {{'Account.Period' | translate}}
+      </label>
+      <select class="uk-select" [(ngModel)]="selectedTimeFilter" (ngModelChange)="onTimeFilterChange($event)">
+        <option *ngFor="let timeFilter of friendsTimeFilter"
+                [ngValue]="timeFilter">{{timeFilter.Name | translate}}</option>
+      </select>
+    </div>
+  </div>
+
+
+  <table class="friends-list_mobile">
+    <thead>
+    <tr class="tm-table-separator">
+      <td colspan="6">
+        <div></div>
+      </td>
+    </tr>
+    <tr>
+      <th>ID:</th>
+      <th>{{'Friends.FirstName' | translate}}:</th>
+      <th>{{'Friends.LastName' | translate}}:</th>
+      <th>{{'Friends.Amount' | translate}}:</th>
+      <th>{{'Friends.Status' | translate}}:</th>
+      <th>{{'Friends.Register' | translate}}:</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="friends.length > 0">
+    <tr *ngFor="let friend of friends">
+      <td>{{friend.Id}}</td>
+      <td>{{friend.FirstName}}</td>
+      <td>{{friend.LastName}}</td>
+      <td>{{friend.BonusAmount}}</td>
+      <td><span *ngIf="friend.BonusAmount > 0">{{'Friends.Active' | translate}}</span><span
+        *ngIf="!(friend.BonusAmount == 0)">{{'Friends.InActive' | translate}}</span></td>
+      <td>{{friend.CreationTime | date:'HH:mm dd/MM/yyyy'}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="mobile-empty-friends" *ngIf="friends.length === 0">
+    <span class="icon-friends icon"></span>
+    <span class="empty-block-text">{{'User.Friends-empty' | translate}}</span>
+  </div>
+
+  <div class="send-email_mobile">
+    <div class="send-email_top">
+      <input id="name" class="send-email_input" name="name" #name="ngModel"
+             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$" [(ngModel)]="email"
+             placeholder="{{'Account.Email' | translate}}">
+    </div>
+    <button class="send-email_btn" (click)="inviteFriend()" [ngClass]="{'uk-disabled' : name.invalid || !email}">
+      <span>
+        {{'Friends.SendLetter' | translate}}
+      </span>
+    </button>
+  </div>
+
+
+  <div class="referral-link">{{referralLink}}</div>
+  <div [ngClass]="{'error_message' : showError == 2, 'success-message' : showError == 1}" *ngIf="!!showError">
+    {{inviteMessage}}
+  </div>
+
+  <div class="error_message" *ngIf="name.invalid && (name.dirty && name.touched)">
+    {{'Auth.EmailMustValid' | translate}}
+  </div>
+
+</div>
+

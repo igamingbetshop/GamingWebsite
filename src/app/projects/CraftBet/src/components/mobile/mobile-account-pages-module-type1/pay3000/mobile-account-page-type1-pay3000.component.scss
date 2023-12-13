@@ -1,0 +1,119 @@
+.container {
+  background: var(--m-user-views-background-color, #FFFFFF);
+  padding: 20px;
+  border-radius: 6px;
+  .container-part {
+    .pay3000-section-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--m-pay3000-section-form-gap, 22px);
+      .form_field {
+        width: 100%;
+        margin: 0 auto;
+        text-align: left;
+        label {
+          color: var(--m-pay3000-section-form-label-color, #fff);
+          font-size: var(--m-pay3000-section-form-label-font-size, 15px);
+          font-weight: var(--m-pay3000-section-form-label-font-weight, 600);
+        }
+        input {
+          height: var(--m-pay3000-section-form-input-height, 40px);
+          color: var(--m-pay3000-section-form-input-color, #fff);
+          border: var(--m-pay3000-section-form-input-border, 1px solid #bebebe);
+          border-radius: var(--m-pay3000-section-form-input-border-radius, 5px);
+          margin-top: var(--m-pay3000-section-form-input-margin-top,20px);
+          text-align: var(--m-pay3000-section-form-input-text-align, left);
+        }
+        input::placeholder {
+          text-align: var(--m-pay3000-section-form-input-placeholder-text-align, center);
+          color: var(--m-pay3000-section-form-input-placeholder-color, #D9D9D9);
+        }
+        input:focus::placeholder {
+          opacity: 0;
+        }
+      }
+      .form_field-checkbox {
+        display: flex;
+        align-items: center;
+        width: var(--m-pay3000-section-form-checkbox-width, 100%);
+        margin: var(--m-pay3000-section-form-checkbox-margin, 0 auto);
+        font-size: var(--m-pay3000-section-form-checkbox-font-size,15px);
+        color: var(--m-pay3000-section-form-checkbox-color,#fff);
+        .distans-right {
+          margin-right: 10px;
+        }
+        .pay3000-checkbox {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .showed-texts {
+    text-align: left;
+    font-size: 18px;
+    color: var(--m-pay3000-section-form-connected-color, #fff);
+    .status-1 {
+      color: #00903D;
+      font-weight: 600;
+    }
+    .status-2 {
+      color: #f6a201;
+      font-weight: 600;
+    }
+    .status-3 {
+      color: red;
+      font-weight: 600;
+    }
+  }
+  .showed-text-id {
+    text-align: left;
+    font-size: 15px;
+    color: var(--m-pay3000-section-form-connected-showed-color, #fff);
+    .show-id {
+      font-weight: 600;
+    }
+  }
+  .delete-btn-part {
+    display: flex;
+    align-items: center;
+    .delete-btn {
+      background: var(--m-pay3000-section-form-delete-btn-background, red);
+      border: var(--m-pay3000-section-form-delete-btn-border, none);
+      padding: var(--m-pay3000-section-form-delete-btn-padding, 14px 43px);
+      border-radius: var(--m-pay3000-section-form-delete-btn-border-radius, 6px);
+      color: var(--m-pay3000-section-form-delete-btn-color, #fff);
+      font-size: var(--m-pay3000-section-form-delete-btn-font-size, 16px);
+      margin-top: var(--m-pay3000-section-form-delete-btn-margin-top, 10px);
+      cursor: pointer;
+    }
+  }
+
+  .pay3000-confirm {
+    padding: var(--m-pay3000-section-form-confirm-padding, 0);
+    margin-top: var(--m-pay3000-section-form-confirm-margin-top, 19px);
+    margin-bottom: var(--m-pay3000-section-form-confirm-margin-bottom, 19px);
+    width: var(--m-pay3000-section-form-confirm-width, 100%);
+    button {
+      width: var(--m-pay3000-section-form-confirm-btn-width, 100%);
+      margin: var(--m-pay3000-section-form-confirm-btn-margin, 0 auto);
+      background: var(--m-pay3000-section-form-confirm-btn-background, #00934A);
+      color: var(--m-pay3000-section-form-confirm-btn-color, #fff);
+      font-size: var(--m-pay3000-section-form-confirm-btn-font-size, 15px);
+      font-weight: var(--m-pay3000-section-form-confirm-btn-font-weight, 600);
+      height: var(--m-pay3000-section-form-confirm-btn-height, 45px);
+      cursor: pointer;
+    }
+  }
+  .pay3000-download {
+    width: var(--m-pay3000-section-download-width, 98%);
+    margin: var(--m-pay3000-section-download-margin, 0 auto 18px);
+    text-align: var(--m-pay3000-section-download-text-align, left);
+    font-size: var(--m-pay3000-section-download-font-size, 15px);
+    font-weight: var(--m-pay3000-section-download-font-weight, 600);
+    line-height: var(--m-pay3000-section-download-line-height, 26px);
+    display: var(--m-pay3000-section-download-display, none);
+  }
+}

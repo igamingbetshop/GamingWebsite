@@ -1,0 +1,102 @@
+<!--<div class="mobile-payments-section" [ngStyle]="layoutService.layoutStyle">-->
+<div class="mobile-payments-section">
+  <h2 class="mobile-payments-section_title">{{'User.Payments' | translate}}</h2>
+  <form [formGroup]="form" (ngSubmit)="submit(1)">
+    <div class="history-tools-panel">
+      <div class="history-tools history-tools-field">
+        <label>{{'User.Period-of-time' | translate}}</label>
+        <select formControlName="timeFilter">
+          <option *ngFor="let item of historyTimeFilter, let i = index"
+                  [ngValue]="item">{{item.Name | translate}}</option>
+        </select>
+      </div>
+
+      <div class="history-tools history-tools-field">
+        <label>{{'User.Status' | translate}}</label>
+        <select formControlName="status">
+          <option *ngFor="let statusFilter of paymentsFilter"
+                  [ngValue]="statusFilter">{{statusFilter.Name | translate}}</option>
+        </select>
+      </div>
+
+      <div class="history-tools history-tools-field">
+        <label>{{'User.PaymentType' | translate}}</label>
+        <select formControlName="type">
+          <option *ngFor="let typeFilter of getPaymentsService.paymentTypesList"
+                  [ngValue]="typeFilter.Value">{{typeFilter?.Name}}</option>
+        </select>
+      </div>
+
+      <div class="history-tools custom-tool" *ngIf="customFilterShow">
+        <label>{{'User.From' | translate}}</label>
+        <input type="datetime-local" formControlName="changedate">
+      </div>
+
+      <div class="history-tools custom-tool" *ngIf="customFilterShow">
+        <label>{{'User.To' | translate}}</label>
+        <input type="datetime-local" formControlName="changetTodate">
+      </div>
+
+      <div class="history-tools">
+        <label></label>
+        <button class="craft_btn show-btn">{{'User.Show' | translate}}</button>
+      </div>
+    </div>
+  </form>
+  <ng-container *ngIf="getPaymentsService.paymentHistoryItemsList.length > 0; else emptyPayments">
+  <div class="paymet-item"
+       *ngFor="let item of getPaymentsService.paymentHistoryItemsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getPaymentsService.paymentHistoryItemsCount }, let i = index">
+    <div class="paymet-item_header Payments-{{item?.StatusName}}">
+      <span>{{item?.StatusTypeName}}</span>
+
+      {{item?.CreationTime | date: 'dd/MM/yyyy H:mm'}}
+    </div>
+
+    <div class="paymet-item_body">
+      <div class="paymet-item_bodyInfo"><span class="title">{{'User.Id' | translate}}</span> {{item?.Id}}</div>
+      <div class="paymet-item_bodyInfo"><span class="title">{{'User.Status' | translate}}</span> {{item?.StatusName}}</div>
+      <div class="paymet-item_bodyInfo"><span class="title">{{'User.BetShopId' | translate}}</span> {{item?.BetShopId}}
+      </div>
+
+      <div class="paymet-item_bodyInfo"><span class="title">{{'User.Amount' | translate}}</span> {{item?.Amount}}
+      </div>
+      <div class="paymet-item_bodyInfo">
+        <button class="info-btn" type="submit" (click)="canselPayment(item.Id)"
+                *ngIf="(item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1 && allowCancelConfirmedWithdraw)">
+          {{'User.Cancel' | translate}}
+        </button>
+      </div>
+      <div class="paymet-item_bodyInfoMessage" *ngIf="item.Comment !== null && item.Comment !== ''">
+        <span class="title">{{'User.PaymentInfo' | translate}}</span>
+
+        <div>
+          {{item?.Comment}}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  </ng-container>
+  <ng-template #emptyPayments>
+    <section class="empty-payments empty-block">
+      <span class="icon-transaction icon"></span>
+      <span class="empty-block-text">{{'User.Payments-empty' | translate}}</span>
+      <span class="empty-history-text">{{noHistory}}</span>
+    </section>
+  </ng-template>
+  <div class="error_message">{{errorMessage}}</div>
+
+<!--  <loader></loader>-->
+
+  <div class="pagination_section" *ngIf="getPaymentsService.paymentHistoryItemsList.length >= takeCount">
+    <div class="">{{getPaymentsService.paymentHistoryItemsList.length}}
+      of {{getPaymentsService.paymentHistoryItemsCount}}</div>
+    <pagination-controls previousLabel="{{'User.Previous' | translate}}" nextLabel="{{'User.Next' | translate}}"
+      autoHide="true"
+      (pageChange)="getPaymentData($event)"></pagination-controls>
+  </div>
+
+</div>
+
+

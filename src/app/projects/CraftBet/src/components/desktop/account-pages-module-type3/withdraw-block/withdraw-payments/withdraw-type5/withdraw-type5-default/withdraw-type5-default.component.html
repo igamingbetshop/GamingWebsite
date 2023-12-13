@@ -1,0 +1,42 @@
+<div class="deposit_payment_section deposit-cash">
+
+  <div class="deposit_payment_section__form">
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()">
+      <div class="scrallablePart">
+        <div class="payment-form-field">
+          <div class="payment-form-field__column all-amount">
+            <input type="text" class="payment-input" placeholder="{{'Withdraw.Amount-placeholder' | translate}}"
+                   formControlName="CardNumber"/>
+            <label class="payment-form-field__label">{{'Withdraw.Amount' | translate}} ({{currencyId}})</label>
+          </div>
+        </div>
+
+        <div class="payment-form-field">
+          <div class="payment-form-field__column">
+            <input type="text" class="payment-input" placeholder="MM/YYYY" mask="00/0000"
+                   formControlName="ExpirationDate"/>
+            <label class="payment-form-field__label">{{'Withdraw.ExpiryDate' | translate}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="payment-form-field">
+        <div class="payment-form-field__column_btn">
+          <button type="submit" [disabled]="submitted || paymentForm.invalid" class="default_btn default_btn_red payment-btn">
+            <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
+          </button>
+          <loader></loader>
+          <div class="error_message longTag">
+            {{errorMessage}}
+          </div>
+          <div class="success_message" *ngIf="successMessage">
+            {{'Withdraw.' + successMessage | translate}}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+

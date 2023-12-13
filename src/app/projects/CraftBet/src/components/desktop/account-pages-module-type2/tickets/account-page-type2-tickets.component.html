@@ -1,0 +1,89 @@
+<div class="tickets-section history-section">
+  <!--  <h2 class="tickets-section_title">{{'Ticket.Tickets' | translate}}</h2>-->
+
+  <div *ngIf="!newTicket">
+    <div class="add-tickets">
+      <button type="button" class="craft_btn" (click)="openNewTicketContent()">{{'Ticket.New Ticket' | translate}}</button>
+      <!--    (click)="openNewTicket()"-->
+    </div>
+
+    <div class="message-block-head block-head">
+      <div>{{'User.Id' | translate}}</div>
+      <div>{{'User.Status' | translate}}</div>
+      <div>{{'User.Subject' | translate}}</div>
+      <div>{{'User.Creation Date' | translate}}</div>
+      <div>{{'User.Actions' | translate}}</div>
+    </div>
+    <ng-container *ngIf="ticketsList.length > 0; else emptyTickets">
+      <section>
+        <div class="section-content" #ticketMessagesSection>
+          <div class="messages-block opened-message"
+               *ngFor="let ticket of ticketsList | paginate:{ itemsPerPage: 10, currentPage: page, totalItems: ticketsCount }; trackBy: trackByMethod, let i = index">
+            <div class="messages-block_top_row">
+              <div class="message-header messages-block_item">{{ticket.Id}}</div>
+              <div class="message-header messages-block_item">{{ticket.Status == 1 ? ('Settings.Active' | translate) : ('Settings.Closed' | translate)}}</div>
+              <div class="message-header messages-block_item">{{ticket.Subject}}</div>
+              <div class="message-header messages-block_item">{{ticket.CreationTime | date : 'HH:mm dd/MM/yyyy'}}</div>
+              <div class="ticket-small messages-block_item">
+                <div class="ticket_icons">
+                  <!--                <fa-icon [icon]="['fas', 'trash-alt']" class="activate-delete-item" (click)="deleteTicket(ticket)" title="{{'Account.Delete' | translate}}"></fa-icon>-->
+                  <span class="icon-close-ticket" (click)="closeTicket(ticket)" title="{{ticket.Status == 1 ? ('Settings.Active' | translate) : ('Settings.Closed' | translate)}}" [ngClass]="{'disable_item': ticket.Status == 2}"></span>
+                  <span class="icon-delete-ticket activate-delete-item" (click)="deleteTicket(ticket)" title="{{'Account.Delete' | translate}}"></span>
+                  <!--                <fa-icon (click)="closeTicket(ticket)" [icon]="['fas', ticket.Status == 1 ? 'times' : 'ban']"-->
+                  <!--                         title="{{ticket.Status == 1 ? ('Settings.Active' | translate) : ('Settings.Closed' | translate)}}"></fa-icon>-->
+                  <span class="icon-plus" *ngIf="(i !== expandedIndex)" (click)="openMessage(ticket, i)" title="{{'Settings.Open_Message' | translate}}"></span>
+                  <fa-icon *ngIf="(i === expandedIndex)" [icon]="['fas', 'minus']"  (click)="openMessage(ticket, i)" title="{{'Settings.Close_message' | translate}}"></fa-icon>
+                  <!--                <fa-icon [icon]="['fas', (i === expandedIndex) ? 'minus' : 'plus']"  (click)="openMessage(ticket, i)" title="{{(i === expandedIndex) ? ('Settings.Close_message' | translate) : ('Settings.Open_Message' | translate)}}"></fa-icon>-->
+                  <!--                              <span *ngIf="ticket?.UnreadMessagesCount > 0"-->
+                  <!--                                    class="user-info_item_unreadMessagesCount user-info_item_unreadMessagesCount_ticket">{{ticket?.UnreadMessagesCount}}</span>-->
+                </div>
+              </div>
+            </div>
+            <div class="open-message-block" #ticketMessagesBox *ngIf="i === expandedIndex">
+              <div class="all-message" *ngFor="let item of messageList"
+                   [ngClass]="{'my-message':item.Type == 1, 'your-message': item.Type != 1}">
+                <span class="author_message">{{item.Type == 1 ? ('User.You' | translate) : ('User.Support' | translate)}}</span>
+                <span>{{item?.Message}}</span>
+                <span>{{item?.CreationTime | date : 'd MMMM y HH:mm'}}</span>
+              </div>
+
+
+              <div class="send-message messages-block_item" *ngIf="messagesFetched && ticket.Status == 1">
+                <form [formGroup]="sendMessageForm" novalidate (ngSubmit)="submit(ticket)">
+                  <textarea type="text" formControlName="Message"></textarea>
+                  <button class="craft_btn">{{'User.Send' | translate}}</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="pagination_section">
+          <pagination-controls
+                  autoHide="true"
+                  (pageChange)="getTicketsHistory($event)"></pagination-controls>
+        </div>
+      </section>
+    </ng-container>
+    <ng-template #emptyTickets>
+      <section class="empty-tickets empty-block">
+        <span class="icon-ticket icon"></span>
+        <span class="empty-block-text">{{'User.Tickets-empty' | translate}}</span>
+      </section>
+    </ng-template>
+
+  </div>
+
+  <div *ngIf="newTicket">
+    <div class="ticket-body flex_between">
+      <h2>{{'User.New-Ticket' | translate}}</h2>
+      <span class="icon-close-modal close-icon" (click)="closeNewTicketContent()"></span>
+      <!--      <fa-icon [icon]="['fas', 'times']"></fa-icon>-->
+      <!--    (click)="close()"-->
+    </div>
+    <app-account-page-type2-open-tickets (onClose)="this.closeNewTicketContent()"></app-account-page-type2-open-tickets>
+  </div>
+
+</div>
+

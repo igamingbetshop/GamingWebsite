@@ -1,0 +1,194 @@
+.lucky-game-container
+{
+  background: #FFFFFF;
+  min-width: 935px;
+  width: 50%;
+  position: relative;
+  box-shadow: -2px -2px 6px 0px rgba(0, 0, 0, 0.12);
+  margin: 90px auto;
+  border-radius: 16px;
+  padding: 82px 0;
+  .modal-body
+  {
+    position: absolute;
+    top: 21px;
+    right: 21px;
+    cursor: pointer;
+    span{}
+  }
+  .header
+  {
+    color: var(--black-b-100, #272727);
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 48px;
+    text-transform: uppercase;
+    margin-bottom: 45px
+  }
+  .lucky-game-content
+  {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .animation-container
+    {
+      position: relative;
+      width: 378px;
+      height: 511px;
+      .animation-frame
+      {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        max-width: 100%;
+        cursor: pointer;
+        img
+        {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .animated-games-box
+      {
+        position: absolute;
+        top: 48%;
+        left: 16%;
+        display: flex;
+        gap: 2px;
+        width: 212px;
+        height: 87px;
+        .animated-block {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          flex: 1;
+          .animated-games {
+            /* transform: translateY(0); */
+            transition: transform 1s ease-in-out;
+            width: 100%;
+            height: 100%;
+
+            .game-image
+            {
+              width: 69px;
+              height: 85px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 25px;
+              img{
+                width: 54px;
+                height: 54px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .right-side
+    {
+      height: 511px;
+      display: flex;
+      flex-direction: column;
+      .waiting-box
+      {
+        width: 260px;
+        height: 220px;
+        border-radius: 8px;
+        background: #E7E7E7;
+        box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        .waiting-box-header
+        {
+          color: #696969;
+          text-align: center;
+          font-size: 20px;
+          font-weight: 700;
+          line-height: 28px; /* 140% */
+          width: 58%;
+          margin-bottom: 16px;
+        }
+        .progress-bar
+        {
+          width: 174px;
+          height: 16px;
+          border-radius: 10px;
+          background: #C6C6C6;
+          .progress-bar-track
+          {
+            height: 100%;
+            border-radius: 10px;
+            background-color: #E15341;
+          }
+        }
+        img
+        {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          height: 100%;
+          width: 100%;
+          border-radius: 8px;
+        }
+      }
+      .game-name
+      {
+        color: #272727;
+        font-size: 24px;
+        font-weight: 900;
+        text-transform: uppercase;
+        width: 260px;
+      }
+      .buttons
+      {
+        display: flex;
+        flex-direction: column;
+        margin-top: auto;
+        button
+        {
+          width: 260px;
+          height: 48px;
+          line-height: 48px;
+          border-radius: 36px;
+          text-align: center;
+          font-size: 16px;
+          font-weight: 800;
+          text-transform: uppercase;
+          cursor: pointer;
+          outline: none;
+          border: none;
+          &.spin-button
+          {
+            margin-bottom: var(--lucy-game-spin-btn-margin-bottom, 12px);
+            color: var(--lucy-game-spin-btn-color, #272727);
+            background: var(--yellow-button, #FFD246);
+            &.disabled
+            {
+              color: var(--lucy-game-spin-btn-disabled-color, #FFFFFF);
+              background: var(--lucy-game-spin-btn-disabled-background, #BFBFBF);
+              pointer-events: none;
+            }
+          }
+          &.play-button
+          {
+            color: var(--lucy-game-play-btn-color, #FFFFFF);
+            background: var(--lucy-game-play-btn-background, #BFBFBF);
+            pointer-events: none;
+            &.active
+            {
+              background-color: var(--lucy-game-play-btn-active-background, rgba(225, 83, 65, 1));
+              pointer-events: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}

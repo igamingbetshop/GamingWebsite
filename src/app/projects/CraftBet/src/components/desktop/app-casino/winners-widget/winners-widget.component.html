@@ -1,0 +1,32 @@
+<div class="winners-widget">
+    <header>
+        <i class="pointer icon-{{widgetItem?.data?.icon}}"></i>
+        <div class="pointer">{{'Game.' + widgetItem?.Title | translate}}</div>
+        <div></div>
+    </header>
+    <main>
+        <div class="widget-container">
+            <ngx-slick-carousel class="carousel widget-carousel"
+                                #slickModal="slick-carousel"
+                                (afterChange)="afterChangeSlide($event)"
+                                [config]="widgetItem.data">
+                <div ngxSlickItem *ngFor="let winner of winners"  class="widget-item">
+                    <div class="content" [style.height.px]="widgetItem?.data?.height">
+                        <img [src]="winner?.ImageUrl" alt="">
+                        <div class="details">
+                            <div>
+                                <span>{{'Game.PlayerName' | translate}}</span>
+                                <span>{{winner.CreationDate | date: 'HH:mm:ss'}}</span>
+                            </div>
+                            <div>{{winner.ClientName}}</div>
+                            <div>{{'Game.Winning' | translate}}</div>
+                            <div> {{winner.CurrencyId}} {{winner.Amount}}</div>
+                        </div>
+                    </div>
+                </div>
+            </ngx-slick-carousel>
+        </div>
+    </main>
+</div>
+
+

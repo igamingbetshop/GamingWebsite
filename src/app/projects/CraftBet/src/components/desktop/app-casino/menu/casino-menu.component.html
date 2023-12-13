@@ -1,0 +1,43 @@
+<ng-container *ngIf="type == 'vertical' else horizontalHref">
+    <div class="vertical">
+        <div class="title"> {{'Game.AllGames' | translate}}</div>
+        <ul class="default_scroll">
+            <li *ngFor="let menuItem of menuItems"
+                [class.active]="menuItem.Id == casinoFilterService.selectedCategory?.Id"
+                (click)="selectCategory(menuItem)">
+                <ng-container [ngTemplateOutlet]="menuItem?.IconSrc ? hasImageSrc : noImageSrc"
+                              [ngTemplateOutletContext]="{menuItem:menuItem}">
+                </ng-container>
+                <a>{{'Game.' + menuItem?.Title | translate}}</a>
+            </li>
+        </ul>
+    </div>
+</ng-container>
+<ng-template #horizontalHref>
+    <div class="horizontal" [ngStyle]="fragmentConfig.Config.style">
+        <casino-search *ngFor="let fragment of fragments?.Search?.Items"
+                       [style.margin-top.px]="fragment.Config.marginTop"
+                       [style.order]="fragment.Order"
+                       [fragmentConfig]="fragment">
+        </casino-search>
+        <ul class="nav-bar">
+            <li *ngFor="let menuItem of menuItems; let first = first"
+                [class.active]="menuItem.Id == casinoFilterService.selectedCategory?.Id"
+                [ngStyle]="menuItem.style"
+                (click)="selectCategory(menuItem)">
+                <ng-container [ngTemplateOutlet]="menuItem?.IconSrc ? hasImageSrc : noImageSrc"
+                              [ngTemplateOutletContext]="{menuItem:menuItem}">
+                </ng-container>
+                <span>{{'Game.' + menuItem?.Title | translate}}</span>
+                <div class="games-count" *ngIf="first && allGamesCount">{{allGamesCount}}</div>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+<ng-template #hasImageSrc let-menuItem='menuItem'>
+    <img [src]="menuItem?.IconSrc" alt="">
+</ng-template>
+<ng-template #noImageSrc let-menuItem='menuItem'>
+    <i class="icon-{{menuItem?.Icon}}"></i>
+</ng-template>

@@ -1,0 +1,12 @@
+<div class="mobile-navigation-bar">
+    <div class="mobile-navigation-bar-item" *ngFor="let menuitem of menuItems" (click)="clickInRoute(menuitem)"
+         routerLinkActive="active"
+         [ngClass]="{'active': ((selectedOrder.includes(menuitem['Href'])) || (menuitem['Href'] == selectedOrder))}">
+
+        <div class="image-item" *ngIf="menuitem.Icon.includes('.')"
+             [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/mobile-central-menu/' + menuitem?.Icon + ')'}">
+        </div>
+        <i *ngIf="!menuitem.Icon.includes('.')" class="icon-{{menuitem.Icon}}"></i>
+        <p class="text-item">{{'Header.' + menuitem?.Title | translate}}</p>
+    </div>
+</div>

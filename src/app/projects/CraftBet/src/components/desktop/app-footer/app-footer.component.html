@@ -1,0 +1,164 @@
+<div class="footer-section" id="footerSection"
+     [ngClass]="{'showFooter':animateFooter, 'fixFooter':!animateFooter, 'opened':openFooter}"
+     (clickOutside)="onClickedOutside($event)" [emitOnBlur]='true'>
+  <div class="footer-open-button not-selectable"
+       [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-arrow.png'}"
+       (click)="toggleFooter()" *ngIf="animateFooter"
+       [ngClass]="openFooter ? 'rotate-180' : 'rotate-0'">
+
+  </div>
+
+  <ng-container *ngFor="let commonItem of commonItems">
+    <ng-container [ngSwitch]="commonItem.Type">
+      <div *ngSwitchCase="'ft-menu-item'">
+        <div class="footer-section_boxMenu {{customStyleName}}_boxMenu">
+          <div class="footer-section_boxMenu_top {{customStyleName}}_boxMenu_top">
+            <div  [attr.data-id]="'footer-menu-' + menuItem.Title"
+                  class="footer-column {{customStyleName}}" *ngFor="let menuItem of commonItem.Menu"
+                 [ngClass]="{'showFooter':animateFooter}">
+
+              <div class="footer-column_title" [class.has-href]="menuItem.Href" (click)="redirectInToPag(menuItem)">
+                {{'Footer.' + menuItem.Title | translate}}
+
+              </div>
+              <div class="footer-column_line"></div>
+              <ng-container *ngFor="let item of menuItem?.SubMenu">
+                <a  [attr.data-id]="'footer-menu-' + menuItem.Title + '-' + item.Title"
+                    [class.has-href]="item.Href"
+                    class="footer-column_item" *ngIf="item?.OpenInRouting; else openNewTab" routerLinkActive="active"
+                   (click)="goDepositPage(item)"
+                   [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' + item?.Icon
+             + ')'}">
+                  <div  [innerHtml]="'Footer.' + item.Title | translate | sanitizer: 'html'"></div>
+                </a>
+                <ng-template #openNewTab>
+                  <a  [attr.data-id]="'footer-menu-' + menuItem.Title + '-' + item.Title"
+                      class="footer-column_item" target="_blank" [attr.href]="item?.Href ? item?.Href : null">
+                    <img *ngIf="item?.Icon" src="../../../../../../../assets/images/footer-menu/{{item?.Icon}}"/>
+                    <div [innerHtml]="'Footer.' + item.Title | translate | sanitizer: 'html'"></div>
+                  </a>
+                </ng-template>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngSwitchCase="'ft-images'" [className]="commonItem.className ? 'ft-images ' + commonItem.className : 'ft-images'">
+        <ng-container *ngFor="let item of commonItem.SubMenu">
+          <ng-container [ngSwitch]="item.Type">
+            <!--Payments-->
+            <div *ngSwitchCase="'1'"
+                 [attr.data-id]="'footer-menu-' + commonItem.Title + '-' + item.Title"
+                 class="ft-images-type1">
+                <img class="ft-images-type1-item" routerLinkActive="active"
+                   (click)="goDepositPage(item)" src="../../../../../../../assets/images/footer-menu/{{item?.Icon}}"
+                   >
+             <!-- [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' +  item?.Icon}"-->
+            </div>
+
+            <!--License-->
+            <div *ngSwitchCase="'2'">
+              <div  class="ft-images-type2 license" [innerHtml]="item.Href | sanitizer: 'html'"></div>
+            </div>
+
+            <!--Socials-->
+            <div *ngSwitchCase="'3'">
+              <div class="ft-images-type3">
+                <a class="ft-images-type3-item"  (click)="socialChange(item)"
+                   [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' + item?.Icon
+             + ')'}">
+                </a>
+              </div>
+            </div>
+
+            <!--Others-->
+            <div *ngSwitchDefault>
+
+            </div>
+          </ng-container>
+        </ng-container>
+
+      </div>
+      <div *ngSwitchCase="'ft-text'" [className]="commonItem.className ? 'ft-text ' + commonItem.className : 'ft-text'">
+        <ng-container *ngFor="let item of commonItem.SubMenu">
+          <ng-container [ngSwitch]="item.Type">
+            <!--License-->
+            <div *ngSwitchCase="'1'">
+              <div  class="ft-images-type2 license" [innerHtml]="item.Href | sanitizer: 'html'"></div>
+            </div>
+            <!--Text-->
+            <div *ngSwitchCase="'2'" class="info-text">
+               <div [innerHTML]="'Footer.' + item.Title | translate | sanitizer: 'html'"></div>
+            </div>
+          </ng-container>
+        </ng-container>
+
+      </div>
+      <div *ngSwitchCase="'ft-contacts'" [className]="commonItem.className ? 'ft-contacts ' + commonItem.className : 'ft-contacts'">
+        <ng-container *ngFor="let item of commonItem.SubMenu">
+          <ng-container [ngSwitch]="item.Type">
+
+           <!-- IDQ-->
+            <div *ngSwitchCase="'1'">
+              <img src="../../../../../../../assets/images/footer-menu/{{item?.Icon}}"/>
+            </div>
+
+           <!-- mobile device-->
+            <div *ngSwitchCase="'device'">
+              <img (click)="socialChange(item)" src="../../../../../../../assets/images/footer-menu/{{item?.Icon}}"/>
+            </div>
+
+            <!--+18-->
+            <div *ngSwitchCase="'3'">
+              <img (click)="socialChange(item)" src="../../../../../../../assets/images/footer-menu/{{item?.Icon}}"/>
+            </div>
+
+           <!-- contacts-->
+          <div *ngSwitchCase="'4'" class="ft-contacts-item">
+            <span class="icon-{{item?.Icon}}"  (click)="socialChange(item)"> </span>
+            <span (click)="socialChange(item)">{{item?.Title | translate}}</span>
+          </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+<!--  <div class="footer-social-icons" *ngIf="configService?.defaultOptions?.SocialNetworkProviders.length">
+  <img *ngFor="let item of configService?.defaultOptions?.SocialNetworkProviders"
+       [src]="'../../../../../../../assets/images/register/' + item?.Title +
+                    '.png'">
+  </div>-->
+
+
+
+
+<!--  <ng-container *ngFor="let contactUs of contactUsItems">
+    <div class="footer-bottom-info">
+      <div class="info-item" *ngFor="let item of contactUs.SubMenu">
+        <span class="icon-{{item?.Icon}}"  (click)="socialChange(item)"> </span>
+        <span>{{item?.Title | translate}}</span>
+      </div>
+    </div>
+  </ng-container>-->
+
+  <!-- <div class="footer-section_boxMenu_bottom" *ngIf="footerLogoList.length > 0">
+       <div class="payments_section">
+         <ng-container *ngFor="let item of footerLogoList">
+           <a *ngIf="item.Type == 1" class="payments_section_item" routerLinkActive="active"
+              (click)="goDepositPage(item)"
+              [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' +  item?.Icon}"></a>
+           <div *ngIf="item.Type == 2" class="license" [innerHtml]="item.Href | safeStyle: 'html'"></div>
+         </ng-container>
+       </div>
+     </div>-->
+  <!--<div class="social-icons" *ngIf="menuItem?.BackgroundType !== 'text'">
+    <a  class="footer-column__image cursor_{{item?.Type}}" *ngFor="let item of menuItem?.SubMenu" (click)="socialChange(item)"
+        [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' + item?.Icon
+       + ')'}" [ngClass]="item.Type == 'icons' ? item.Icon : 'sport-element'">
+    </a>
+  </div>-->
+
+
+
+

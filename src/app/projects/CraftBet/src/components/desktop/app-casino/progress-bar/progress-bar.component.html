@@ -1,0 +1,40 @@
+
+<div class="progress-bar"  *ngIf="userLogged.isAuthenticated">
+    <div class="progress-bar-container">
+        <div class="progress-bar-info">
+            <div>
+                <img src="../assets/images/characters/Info.png">
+                <span>{{'Current points' | translate}}</span>
+            </div>
+            <div class="point">{{characterCurrentState?.Current}}</div>
+        </div>
+
+        <div class="progress-next" *ngIf="characterCurrentState?.Next !== null">
+            <i class="icon-star"></i>
+            <span>{{characterCurrentState?.Next?.CompPoints}}</span>
+        </div>
+        <div class="progress-bar-thumb">
+            <div class="data-progress" [style.width.%]="progressTrack"></div>
+            <div class="progress" *ngIf="characterCurrentState?.Current != 0" [style.right.%]="progressTrack"></div>
+            <div class="layout-range">
+                <div class="step" *ngFor="let item of percentage, let i = index"
+                [class.item-opacity]="item < characterCurrentState.Current">{{item}}</div>
+            </div>
+            <img [src]="characterCurrentState?.Parent.ImageData" [routerLink]="['/character-hierarchy']">
+        </div>
+        <div class="character-level-box">
+            <div class="next-level" *ngIf="characterCurrentState?.Next !== null">
+                <span>{{'Next up' | translate}}</span>
+                <div class="next-character">
+                    <img class="" [src]="characterCurrentState?.Next.ImageData">
+                </div>
+            </div>
+            <div class="previous-level">
+                <span>{{'Previous' | translate}}</span>
+                <div class="previous-character">
+                    <img class="" [src]="characterCurrentState?.Previous.ImageData">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

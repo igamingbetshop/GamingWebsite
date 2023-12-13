@@ -1,0 +1,128 @@
+<div class="mobile-settings-section" [ngStyle]="layoutService.layoutStyle">
+    <h2 class="mobile-settings-section_title">{{ 'User.Limitation' | translate }}</h2>
+    <form class="self-limitation" [formGroup]="limitForm">
+        <table>
+            <tr>
+                <th></th>
+                <th>{{'User.Daily' | translate}}</th>
+                <th>{{'User.Weekly' | translate}}</th>
+                <th>{{'User.Monthly' | translate}}</th>
+            </tr>
+            <tr>
+                <td>{{'User.TotalDeposit' | translate}}</td>
+                <td>
+                    <input type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="DepositLimitDaily">
+                </td>
+                <td>
+                    <input type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="DepositLimitWeekly">
+                </td>
+                <td>
+                    <input type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="DepositLimitMonthly">
+                </td>
+            </tr>
+            <tr>
+                <td>{{'User.TotalBets' | translate}}</td>
+                <td>
+                    <input type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="TotalBetAmountLimitDaily">
+                </td>
+                <td>
+                    <input type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="TotalBetAmountLimitWeekly">
+                </td>
+                <td>
+                    <input type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="TotalBetAmountLimitMonthly">
+                </td>
+            </tr>
+            <tr>
+                <td>{{'User.TotalLost' | translate}}</td>
+                <td>
+                    <input type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="TotalLossLimitDaily">
+                </td>
+                <td>
+                    <input type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="TotalLossLimitWeekly">
+                </td>
+                <td>
+                    <input type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="TotalLossLimitMonthly">
+                </td>
+            </tr>
+            <tr>
+                <td>{{'User.SessionLimit' | translate}}</td>
+                <td>
+                    <input type="number" class="session-limit-input" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"
+                           formControlName="SessionLimit"
+                           (keydown)="preventMinutesKeys($event)" (keypress)="onMinutesInput($event)">
+                </td>
+                <td>{{'User.Minutes' | translate}}</td>
+            </tr>
+        </table>
+        <div class="error-message"
+             *ngIf="limitForm.get('SessionLimit').hasError('min')">{{'User.SessionMinLimitError' | translate}}</div>
+        <div class="error-message"
+             *ngIf="limitForm.get('SessionLimit').hasError('max')">{{'User.SessionMaxLimitError' | translate}}
+        </div>
+        <div class="mobile-self-limitation_edit" *ngIf="!editSelfLimitation"
+             [ngClass]="editSelfLimitation? 'selected' : ''"
+             (click)="toggleEditSelfLimitation()">
+            <button class="craft_btn setting_btn" type="submit" (click)="toggleEditSelfLimitation()">
+                <span class="icon-edit"></span>
+                <span (click)="toggleEditSelfLimitation()">{{'Settings.Edit' | translate}}</span>
+            </button>
+        </div>
+        <div class="mobile-submit-details" *ngIf="editSelfLimitation">
+            <button class="craft_btn setting_btn" type="submit" (click)="resetLimitFrom()"
+                    [ngClass]="{'cancel_btn': editSelfLimitation}">
+                <span class="icon-close-modal"></span>
+                <span>{{'Settings.Cancel-changes' | translate}}</span>
+            </button>
+            <button class="craft_btn setting_btn" type="submit" (click)="updateSelfLimitation()">
+                <fa-icon [icon]="['fas', 'save']" class="fas-save"></fa-icon>
+                <span>{{'Settings.Save-Changes' | translate}}</span>
+            </button>
+        </div>
+    </form>
+    <div class="error-message m-error-message-self-limitation" *ngIf="errorMessage1">{{errorMessage1}}</div>
+    <div class="success-message m-success-message-self-limitation">{{successMessage1}}</div>
+    <div class="self-exclusion-box">
+        <div class="se-message">
+            <p>{{'User.SelfExclusionDescription' | translate}}:</p>
+        </div>
+        <div class="mobile-self-exclusion-row">
+            <div class="self-tab-bar_item" (click)="selectProduct(selfExclusionTypes.Permanently)"
+                 [ngClass]="{'active':selectedExclusionType == selfExclusionTypes.Permanently}">{{'User.Permanently' | translate}}</div>
+            <div class="self-tab-bar_item" (click)="selectProduct(selfExclusionTypes.Temporary)"
+                 [ngClass]="{'active2':selectedExclusionType == selfExclusionTypes.Temporary}">{{'User.Temporary' | translate}}</div>
+        </div>
+        <div class="mobile-self-exclusion-row" *ngIf="selectedExclusionType == 'Temporary'">
+            <label class="date-input">{{'User.Until Date' | translate}}</label>
+            <input class="self-tab-bar_item" type="date" [(ngModel)]="exclusionDate" min="{{exclusionMinDate}}">
+        </div>
+        <div class="mobile-self-exclusion-row-btn">
+            <div class="error-message" *ngIf="errorMessage">{{errorMessage}}</div>
+            <div class="success-message">{{successMessage}}</div>
+            <button type="button" [disabled]="!selectedExclusionType" class="common-button"
+                    (click)="openConfirmWindow()">{{'User.Confirm' | translate}}</button>
+        </div>
+        <!--            <div class="se-row">-->
+        <!--                <div class="form_field">-->
+        <!--                    <select-->
+        <!--                            [(ngModel)]="selectedExclusionType">-->
+        <!--                        <option disabled value="" selected="selected">{{'User.SelectType' | translate}}</option>-->
+        <!--                        <option *ngFor="let type of selfExclusionTypes" [value]="type">{{type}}</option>-->
+        <!--                    </select>-->
+        <!--                </div>-->
+        <!--                <input *ngIf="selectedExclusionType == 'Temporary'" class="form_field" type="date" [(ngModel)]="exclusionDate" min="{{exclusionMinDate}}">-->
+
+        <!--                <button type="button" style="margin-left: 10px" [disabled]="!selectedExclusionType" class="craft_btn setting_btn" (click)="openConfirmWindow()"-->
+        <!--                >{{'User.Confirm' | translate}}</button>-->
+        <!--            </div>-->
+
+    </div>
+</div>

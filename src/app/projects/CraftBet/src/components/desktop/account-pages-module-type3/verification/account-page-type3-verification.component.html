@@ -1,0 +1,43 @@
+<div class="verification-page" *ngIf="!clickedVerificationUrl">
+<!--    <div class="user-right-panel_title">{{ 'User.Verification-top-title' | translate }}</div>-->
+    <div class="container-part">
+<!--        <div class="text-part" [innerHTML]="message | translate | sanitizer: 'html'">-->
+<!--        </div>-->
+        <div class="history-options">
+            <div class="custom_dropdown_reg">
+                <div class="flex_between current_item" (click)="getVerificationPageUrl()">
+                    <div class="selected-item">{{ 'User.ID-Recognition' | translate }}</div>
+                    <div class="change-icon">
+                        <span class="icon-open-selection"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    <div class="parts">-->
+    <!--        <img src="../../../../../assets/images/sofort.svg" alt="">-->
+    <!--        <div class="verification-title" [innerHTML]="'User.Verification-part1' | translate | sanitizer: 'html'"></div>-->
+    <!--        <div class="verification-buttons">-->
+    <!--            <a href="" target="_blank">{{'User.VerifyDeposit' | translate}}</a>-->
+    <!--            <a href="" target="_blank">{{'User.Verify' | translate}}</a>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="parts">-->
+    <!--        <img src="../../../../../assets/images/idnow.svg" alt="">-->
+    <!--        <div class="verification-title" [innerHTML]="'User.Verification-part2' | translate | sanitizer: 'html'"></div>-->
+    <!--        <div class="verification-buttons">-->
+    <!--            <a href="" target="_blank">{{'User.Choose' | translate}}</a>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="parts">-->
+    <!--        <img src="../../../../../assets/images/Options.png" alt="">-->
+    <!--        <div class="verification-title" [innerHTML]="'User.Verification-part3' | translate | sanitizer: 'html'"></div>-->
+    <!--        <div class="verification-buttons">-->
+    <!--            <a href="" target="_blank">{{'User.Choose' | translate}}</a>-->
+    <!--        </div>-->
+    <!--    </div>-->
+</div>
+<div class="error_message">{{ statusMessage }}</div>
+<div class="verification-iframe">
+    <iframe #verificationIframe frameborder="0" width="100%" height="100%"></iframe>
+</div>

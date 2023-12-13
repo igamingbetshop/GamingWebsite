@@ -1,0 +1,97 @@
+<div class="casino-game"
+     (click)="chooseGame()"
+     [class.active-item] = "this.selectedProductId === this.game.productId"
+     [class.has-game-name]="configService.defaultOptions.ShowGameNames"
+     [ngStyle]="game.style">
+    <img class="category-icon" *ngIf="fragmentConfig?.itemIcon" src="../../../../../../../assets/images/{{fragmentConfig.itemIcon}}"/>
+    <fa-icon [icon]="game?.isFavorite ? ['fas', 'star'] : ['far', 'star']" class="icon-star-info"
+             (click)="toggleFavorite(game)" aria-hidden="true"></fa-icon>
+<!--    <div class="show-hovered-game-names">-->
+<!--        <fa-icon [icon]="game.isFavorite ? ['fas', 'star'] : ['far', 'star']" class="icon-star-info2"-->
+<!--                 (click)="toggleFavorite(game)" aria-hidden="true"></fa-icon>-->
+<!--        <span class="title">{{game?.name}}</span>-->
+<!--        <span class="game-rating">-->
+<!--            <fa-icon class="game-title__heart" aria-hidden="true" [icon]="['fas', 'thumbs-up']"></fa-icon>-->
+<!--            <span>{{game?.rating}}</span>-->
+<!--        </span>-->
+<!--    </div>-->
+    <div class="title">{{game?.providerName}}</div>
+    <ng-container *ngIf="!showInfobox; else gameInfoRef">
+        <div class="game-img">
+            <img style="max-height: 200px" loading="lazy" [src]="game?.gameImage">
+            <div class="game-img-wrapper"></div>
+        </div>
+<!--        <span class="icon-layer"></span>-->
+        <div class="game-open"
+             [ngClass]="{'game-open-top': game.hasDemo, 'game-open-center': !game.hasDemo}">
+            <div class="game-btn game-btn_real" title="{{'Game.Real' | translate}}"
+               (click)="openGame(game, 'real')">
+                {{'Game.Real' | translate}}
+            </div>
+        </div>
+        <div class="game-open game-open-demo" *ngIf="game.hasDemo">
+            <div class="game-btn game-btn_demo" title="{{'Game.Demo' | translate}}"
+               (click)="openGame(game, 'demo')">
+                {{'Game.Demo' | translate}}
+            </div>
+        </div>
+        <div class="jackpot"
+             *ngIf="game['jackpotValue']">{{currencySymbol}} {{game?.jackpotValue | toNumber | number: '.2'}}
+        </div>
+    </ng-container>
+    <ng-template #gameInfoRef>
+        <div class="detailed-info" [class.detailed-info-height]="!configService.defaultOptions.ShowGameNames">
+            <div>
+                <div class="name">
+                    <span (click)="toggleInfo()" class="icon icon-back"></span>
+                    {{game?.name}}
+                </div>
+                <div class="text">{{game?.providerName}}</div>
+            </div>
+            <div class="line"></div>
+
+            <div>
+                <div class="title flex_vertical-center">
+                    <span class="icon icon-inform"></span>
+                    <span>INFORMATION</span>
+                </div>
+
+                <div class="content">
+                    <div>
+                        <span>VOLATILITY</span>
+                        <div class="flex_vertical-center gap-8">
+                            <span>{{productInfo.Volatility}}</span>
+                            <img src="../../../../../../../assets/images/speed-meter.png"/>
+                        </div>
+                    </div>
+                    <div>
+                        <span>RTP </span>
+                        <div class="flex_vertical-center gap-8">
+                            <span>{{productInfo.RTP}}</span>
+                            <img src="../../../../../../../assets/images/percent.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="line"></div>
+
+            <div>
+                <div class="title flex_vertical-center">
+                    <span class="icon icon-statistics"></span>
+                    <span>CURRENT STATISTICS</span>
+                </div>
+
+                <div class="content">
+                    <div>
+                        <span>PROFIT</span>
+                        <span>{{currencySymbol}}&nbsp;{{productInfo.Profit}}</span>
+                    </div>
+                    <div>
+                        <span>TURNOVER</span>
+                        <span>{{currencySymbol}}&nbsp;{{productInfo.Turnover}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

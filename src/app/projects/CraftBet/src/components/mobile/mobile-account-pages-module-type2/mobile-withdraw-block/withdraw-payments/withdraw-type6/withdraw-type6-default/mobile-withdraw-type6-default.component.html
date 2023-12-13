@@ -1,0 +1,144 @@
+<div class="deposit_payment_section mobile-payment mobile-device">
+  <app-common-accounts [templateType]="2"></app-common-accounts>
+  <div class="deposit_payment_section__form">
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()">
+      <div class="payment-form-field">
+        <label class="payment-form-field__label">{{'Withdraw.Amount' | translate}}({{currencyId}})</label>
+        <div class="payment-form-field__column">
+          <div class="payment-form-field__column">
+
+            <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input" placeholder="{{'Withdraw.Amount-placeholder' | translate}}"
+                   formControlName="Amount" [(ngModel)]="amountValue" numbersOnly/>
+
+            <ng-template #nominalsRef>
+              <app-common-payment-nominals [nominals]="nominals" (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+            </ng-template>
+
+<!--            <button type="button" (click)="fullWithdraw()" class="default_btn default_btn_red payment-btn">-->
+<!--              <span class="payment-btn__span"> {{'Withdraw.FullWithdraw' | translate}} </span>-->
+<!--            </button>-->
+
+          </div>
+
+          <div class="info-message" *ngIf="amountValue && CommissionPercent > 0">
+            {{'Withdraw.Tax-amount' | translate}}
+            : {{ (amountValue * CommissionPercent) / 100 | number: '.2'}} {{'Withdraw.Payout' | translate}}
+            : {{amountValue - (amountValue * CommissionPercent) / 100 | number: '.2'}}
+          </div>
+
+        </div>
+      </div>
+
+      <div class="payment-form-field">
+        <label class="payment-form-field__label">{{'Withdraw.Cash_Code' | translate}}</label>
+        <div class="payment-form-field__column">
+          <input type="text" class="payment-input" placeholder="{{'Withdraw.Cash_Code-placeholder' | translate}}"
+                 formControlName="CashCode"/>
+        </div>
+      </div>
+
+<!--      <div class="betshop_section betshop_section__mobile">-->
+<!--        <div class="custom-dropdown payment-list" dropdown>-->
+<!--          <div class="flex_between current-item">-->
+<!--            <span *ngIf="selectedBetShopRegion?.RegionName">{{selectedBetShopRegion?.RegionName}}</span>-->
+<!--            <span *ngIf="!selectedBetShopRegion?.RegionName">{{'Withdraw.RegionList' | translate}}</span>-->
+<!--            <img src="../../../../../../../assets/images/register/down-arrow.png" aria-hidden="true"-->
+<!--                 class="down-arrow">-->
+<!--          </div>-->
+
+<!--          <ul class="dropdown-list">-->
+<!--            <ng-container *ngFor="let region of partnerBetShopsList">-->
+<!--              <li *ngFor="let betshop of region?.Betshops | filterBy: searchText | orderBy : 'RegionId'"-->
+<!--                  (click)="selectBetShopRegion(region)"-->
+<!--                  [ngClass]="{'selected': betshop?.Id == selectedBetShopRegion?.Id}">-->
+<!--                <span> {{betshop?.RegionName}}</span>-->
+<!--              </li>-->
+<!--            </ng-container>-->
+<!--          </ul>-->
+
+<!--        </div>-->
+
+<!--        <div class="custom-dropdown payment-list" dropdown-->
+<!--             [ngClass]="{'disable-item': !selectedBetShopRegion?.Betshops.length}">-->
+<!--          <div class="flex_between current-item">-->
+<!--            <span *ngIf="selectedBetShop?.Address">{{selectedBetShop?.Address}}</span>-->
+<!--            <span *ngIf="!selectedBetShop?.Address">{{'Withdraw.ShopList' | translate}}</span>-->
+<!--            <img src="../../../../../../../assets/images/register/down-arrow.png" aria-hidden="true"-->
+<!--                 class="down-arrow">-->
+<!--          </div>-->
+
+<!--          <ul class="dropdown-list">-->
+<!--            <li *ngFor="let betshop of selectedBetShopRegion?.Betshops | filterBy: searchText | orderBy : 'RegionId'"-->
+<!--                (click)="selectBetShop(betshop)"-->
+<!--                [ngClass]="{'selected': betshop?.Id == selectedBetShop?.Id}">-->
+<!--              <span> {{betshop?.Address}}</span>-->
+<!--            </li>-->
+<!--          </ul>-->
+
+<!--        </div>-->
+
+        <div class="flex-items flex-items-mobile">
+          <select name="region" [(ngModel)]="regionValue" (ngModelChange)="changeRegion($event)"
+                   [ngModelOptions]="{standalone: true}">
+            <option [value]="undefined" selected>{{'Withdraw.RegionList' | translate}}</option>
+            <option *ngFor="let region of groupRegionId" [ngValue]="region">{{region.Name}}</option>
+          </select>
+
+          <select [formControlName]="'BetShopId'" [(ngModel)]="betshopValue"
+                  (change)="changeBetshop($event.target.value)">
+            <option [value]="undefined" selected>{{'Withdraw.ShopList' | translate}}</option>
+            <option *ngFor="let betshop of selectedBetShopRegion" [value]="betshop.Id">{{betshop.Address}}</option>
+          </select>
+
+        </div>
+
+
+<!--      </div>-->
+
+<!--      <div class="payment-form-field">-->
+<!--        <label class="payment-form-field__label">{{'Withdraw.BetShopList' | translate}}</label>-->
+<!--        <div class="payment-form-field__column mobile-search-field">-->
+<!--          <img src="../../../../../../../assets/images/mobile/search.png" class="mobile-search-field__icon"/>-->
+<!--          <input type="text" class="payment-input search-input" [(ngModel)]="searchText.Address" formControlName="BetShopName"-->
+<!--                 placeholder="Search"/>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="betshop_section scroll-y">-->
+<!--        <ul class="betshop_section__list" *ngFor="let region of partnerBetShopsList">-->
+<!--          <li class="betshop_section__item">-->
+<!--            {{region?.Name}}-->
+<!--          </li>-->
+<!--          <li class="betshop_section__item">-->
+<!--            <ul>-->
+<!--              <li class="subItem" *ngFor="let betshop of region?.Betshops | filterBy: searchText | orderBy : 'RegionId'" [ngClass]="{'selected': betshop?.Id == selectedBetShop?.Id}" (click)="selectBetShop(betshop)">{{betshop?.Address}}</li>-->
+<!--            </ul>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+
+
+      <div class="payment-form-field">
+        <div class="payment-form-field__column_btn">
+          <button type="submit" [disabled]="submitted" class="default_btn default_btn_red payment-btn">
+            <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
+          </button>
+
+          <loader></loader>
+
+          <div class="error_message longTag">
+            {{errorMessage}}
+          </div>
+          <div class="success_message" *ngIf="successMessage">
+            {{'Withdraw.' + successMessage | translate}}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+
+

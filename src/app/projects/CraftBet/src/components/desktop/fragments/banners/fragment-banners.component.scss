@@ -1,0 +1,95 @@
+@import "../../../../../styles/helpers/variables";
+@import "../../../../../../../../styles/helpers/variables";
+:host
+{
+  display: block;
+  position: relative;
+  direction: ltr;
+  margin: 0 auto;
+  width: 100%;
+  .title
+  {
+    color: white;
+    text-align: center;
+  }
+  //.slick-next:before, .slick-prev:before{display: none}
+  .slick-next, .slick-prev{display: none}
+  .custom-arrow {
+    width: var(--home-fragment-banner-icon-width, 20px);
+    height: var(--home-fragment-banner-icon-height, 40px);
+    position: absolute;
+    z-index: 1;
+    top: var(--home-fragment-banner-icon-top, 46%);
+    cursor: pointer;
+  }
+  .custom-slick-next {
+    right: 2%;
+  }
+  .custom-slick-prev {
+    left: 2%;
+  }
+  .slick-prev:before {
+    content: "←"!important;
+  }
+  .slick-next:before {
+    content: "→"!important;
+  }
+  .actions
+  {
+    position: absolute;
+    width: 100%;
+    /* display: flex;
+     justify-content: space-between;*/
+    top:50%;
+    transform: translateY(-50%);
+
+    button{
+      background: none;
+      border: none;
+      outline: none;
+      transform: scale(0.6);
+      cursor: pointer;
+    }
+    span
+    {
+      outline: none;
+      transform: scale(0.6);
+
+
+      cursor: pointer;
+      /* color: #3a9e86;*/
+      color: color(banner-arrow);
+      font-size: 54px;
+      position: absolute;
+      &:first-child
+      {
+        left: 10px;
+      }
+      &:nth-child(2)
+      {
+        right: 10px;
+      }
+    }
+  }
+  .slick-list
+  {
+    .slick-track
+    {
+      :focus
+      {
+        outline: none
+      }
+
+    }
+  }
+}
+::ng-deep fragment-banners
+{
+  .slick-prev:before {
+    content: "←"!important;
+  }
+  .slick-next:before {
+    content: "→"!important;
+  }
+}
+

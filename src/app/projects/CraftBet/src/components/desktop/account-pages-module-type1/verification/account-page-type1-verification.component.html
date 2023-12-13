@@ -1,0 +1,101 @@
+<div class="account-verification history-section" [ngClass]="{ 'active-tab': showActiveTab == 'AccountVerification'}">
+    <div class="verification-message">
+        <p>{{'Account.DocumentIdentificationMessage' | translate}}:</p>
+        <ul>
+            <li>{{'Account.DocumentFormatMessage' | translate}}</li>
+            <li>{{'Account.DocumentValidityPeriod' | translate}}</li>
+            <li>{{'Account.DocumentValidityColor' | translate}}</li>
+            <li class="document-validity1">{{'Account.DocumentValidityOriginal' | translate}}</li>
+            <li class="document-validity2">{{'Account.DocumentValiditySignature' | translate}}</li>
+            <li class="document-validity3">{{'Account.DocumentValidityPresent' | translate}}</li>
+        </ul>
+    </div>
+    <form [formGroup]="uploadDocumentForm" (ngSubmit)="uploadDocument()">
+        <div class="form_row2">
+            <div class="form_field distans-right verify_field choose-document">
+                <label class="choose-document-label">{{'Account.Choose document' | translate}}</label>
+                <select formControlName="documentItem" class="choose-document-select">
+                    <option value='' disabled *ngIf="!isSending" hidden>{{'Account.Document' | translate}}</option>
+                    <option *ngFor="let item of getSettingsInfoService.documentTypesList"
+                            [value]="item.Id">{{item?.Name}}</option>
+                </select>
+            </div>
+            <div class="form_field verify_field_col2">
+                <div class="form_field__top distans-right form_field-col2">
+                    <input #documentFile type="file" (change)="handleInputChange($event)"
+                           class="distans-right choose_input"
+                           name="file" id="file">
+                    <label for="file" class="document-label">
+                        <span class="file-box" *ngIf="!fileData?.Name">{{'Account.SelectFile' | translate}}</span>
+                        <span id="file-name" class="file-box" *ngIf="fileData?.Name">{{fileData?.Name}}</span>
+                        <span class="file-button">
+                            <span class="icon-plus" aria-hidden="true"></span>
+                        </span>
+                    </label>
+                </div>
+                <button type="submit" class="common-button verify_btn"
+                        [ngClass]="{'disable_item' : isSending || !getSettingsInfoService.checkDocumentSize || !uploadDocumentForm.get('documentItem').value}">{{'User.Verify' | translate}}</button>
+            </div>
+        </div>
+    </form>
+    <div class="error_message docError">{{selectedDocumentErrorMessage}}</div>
+    <div class="success_message" *ngIf="documentUploadResponseMessageType === 'Success'">{{documentUploadResponseMessage}}</div>
+    <div class="error_message docError" *ngIf="documentUploadResponseMessageType === 'Error'">{{documentUploadResponseMessage}}</div>
+
+    <!--        <div>-->
+    <!--            <table class="bet-selections-info">-->
+    <!--                <thead>-->
+    <!--                <tr class="bet-selections-info__tr">-->
+    <!--                    <td class="bet-selections-info__td">{{'User.Id' | translate}}</td>-->
+    <!--                    <td class="bet-selections-info__td">{{'User.Document type' | translate}}</td>-->
+    <!--                    <td class="bet-selections-info__td">{{'User.Creation Date' | translate}}</td>-->
+    <!--                    <td class="bet-selections-info__td">{{'User.Status' | translate}}</td>-->
+    <!--                </tr>-->
+    <!--                </thead>-->
+    <!--                <tbody class="bet-selections-info__tbody">-->
+
+    <!--                <tr class="bet-selections-info__tr"-->
+    <!--                    *ngFor="let item of getSettingsInfoService?.identityModelsList">-->
+    <!--                    <td class="bet-selections-info__td">-->
+    <!--                        {{item?.Id}}-->
+    <!--                    </td>-->
+    <!--                    <td class="bet-selections-info__td">-->
+    <!--                        {{item?.DocumentTypeName }}-->
+    <!--                    </td>-->
+    <!--                    <td class="bet-selections-info__td">-->
+    <!--                        {{item?.CreationTime | date: 'd MMM y h:mm'}}-->
+    <!--                    </td>-->
+    <!--                    <td class="bet-selections-info__td">-->
+    <!--                        {{item?.StatusName}}-->
+    <!--                    </td>-->
+    <!--                </tr>-->
+    <!--                </tbody>-->
+    <!--            </table>-->
+    <!--        </div>-->
+    <div class="account-verif-head block-head">
+        <div>{{'User.Creation Date' | translate}}</div>
+        <div>{{'User.Id' | translate}}</div>
+        <div>{{'User.Document type' | translate}}</div>
+        <div>{{'User.Status' | translate}}</div>
+    </div>
+    <ng-container *ngIf="getSettingsInfoService?.identityModelsList.length > 0; else emptyDocuments">
+        <section>
+            <div class="account-verif-block block"
+                 *ngFor="let item of getSettingsInfoService?.identityModelsList">
+                <div class="document-block_item block_item">{{item?.CreationTime | date: 'dd/MM/yyyy HH:mm'}}</div>
+                <div class="document-block_item block_item">{{item?.Id}}</div>
+                <div class="document-block_item block_item">{{item?.DocumentTypeName }}</div>
+                <div class="document-block_item block_item account-status" [ngClass]="{'red1': item?.Status === 2,'yellow1': item?.Status === 3,'green1':item?.Status === 1,'black1': item?.Status === 4}">
+                    <span [ngClass]="{'icon-rejected': item?.Status === 2 || item?.Status === 4,'icon-pending': item?.Status === 3,'icon-verified':item?.Status === 1}"></span>
+                    <p class="item-status" [ngClass]="{'red': item?.Status === 2,'yellow': item?.Status === 3,'green':item?.Status === 1}">{{item?.StatusName}}</p>
+                </div>
+            </div>
+        </section>
+    </ng-container>
+    <ng-template #emptyDocuments>
+        <section class="empty-documents empty-block">
+            <span class="icon-documents icon"></span>
+            <span class="empty-block-text">{{'User.Documents-empty' | translate}}</span>
+        </section>
+    </ng-template>
+</div>

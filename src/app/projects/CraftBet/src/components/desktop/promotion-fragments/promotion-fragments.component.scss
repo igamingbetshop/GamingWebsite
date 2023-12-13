@@ -1,0 +1,276 @@
+.promotion-item-header
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 64px 24px 32px 24px;
+  button
+  {
+    min-width: 124px;
+    height: 44px;
+    line-height: 44px;
+    background-color: var(--promotion-tab-background-color, #1D2E4A);
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    &.selected
+    {
+      background: linear-gradient(180deg, var(--promotion-filter-btn-gredient-first-color, #1376F8) 0%, var(--promotion-filter-btn-gredient-second-color, #194074) 100%);
+    }
+  }
+  .promotion-item-title
+  {
+    font-size: 26px;
+    color: var(--promotion-item-title-color,rgba(255, 255, 255, 1));
+    font-weight: 500;
+  }
+
+}
+.promotion-item {
+  //display: flex;
+  padding-bottom: 40px;
+  height: calc(100% - 76px);
+
+  .promotions-slider {
+    height: calc((var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px)) * 3.4);
+    max-width: 396px;
+    min-width: 320px;
+    flex: 1;
+    margin-right: 24px;
+    position: relative;
+    background: linear-gradient(180deg, var(--promotions-slider-gradient1-color,#142C44) 0%, var(--promotions-slider-gradient2-color,rgba(20, 44, 68, 0.4)) 100%);
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    .slider
+    {
+      width: 100%;
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .actions {
+      span
+      {
+        display: inline-block;
+        background-color: var(--slider-actions-background-color,#3c3c4b);
+        color: #FFFFFF;
+        border-radius: 50%;
+        font-size: 12px;
+        height: 28px;
+        width: 28px;
+        text-align: center;
+        line-height: 28px;
+        cursor: pointer;
+      }
+      span:first-child
+      {
+        position: absolute;
+        top: 6px;
+        bottom: unset;
+        left: 46%;
+        transform: rotate(90deg);
+
+      }
+      span:last-child
+      {
+        position: absolute;
+        bottom: 6px;
+        top: unset;
+        left: 46%;
+        transform: rotate(90deg);
+      }
+    }
+    .products-list {
+      padding: var(--promotions-products-list-padding, 64px 16px 0 16px);
+      width: 100%;
+      background: var(--promotions-products-list-background, var(--product-background-color, #FFFFFF));
+      &_item {
+        background: none;
+        box-shadow: none;
+        outline: none;
+        max-width: 364px;
+        width: 100%;
+        height: unset;
+        border-radius: 6px;
+        padding: 0;
+        margin-bottom: 16px;
+        border: none;
+        .promotions_item {
+          position: relative;
+          width: 100% !important;
+          height: var(--promotions-item-height, 200px);
+          display: flex;
+          outline: none;
+          border-radius: 6px;
+          img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+          }
+          &:before
+          {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(29, 46, 74, 0.5);
+            backdrop-filter: blur(2px);
+            border-radius: 6px;
+            display: none;
+          }
+          .see-more-btn
+          {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            display: none;
+            i{font-size: var(--promotions-see-more-icon-font-size, 28px); color: var(--promotions-see-more-icon-color, #ffffff);}
+            button
+            {
+              min-width: var(--promotions-see-more-btn-min-width, 104px);
+              height: var(--promotions-see-more-btn-height, 36px);
+              line-height: var(--promotions-see-more-btn-line-height, 36px);
+              text-align: center;
+              border: var(--promotions-see-more-btn-border, 1px solid rgba(28, 170, 240, 1));
+              background: var(--promotions-see-more-btn-background, rgba(28, 170, 240, 1));
+              outline: none;
+              cursor: pointer;
+              border-radius: var(--promotions-see-more-btn-border-radius, 6px);
+              color: var(--promotions-see-more-btn-color, rgba(19, 26, 44, 1));
+              font-weight: var(--promotions-see-more-btn-font-weight, 500);
+              font-size: var(--promotions-see-more-btn-font-size, 14px);
+            }
+          }
+          &:hover
+          {
+            &:before{display: block}
+            .see-more-btn
+            {
+              display: flex;
+            }
+          }
+        }
+
+
+        .promotions_text {
+          display: block;
+          width: 100%;
+          height: var(--promotions-text-height,93px);
+          font-size: var(--promotions-text-font-size,14px);
+          box-shadow: 5px 0px 7px 0px rgba(0, 0, 0, 0.4) inset;
+          background: linear-gradient(0deg, var(--promotions-text-gradient1-color,#142C44), var(--promotions-text-gradient2-color,#142C44));
+          border-radius: var(--promotions-text-border-radius, 6px);
+          margin-top: 4px;
+          padding: 14px;
+          position: relative;
+          .promotions_title
+          {
+            color: var(--promotions-title-color,rgba(28, 167, 236, 1));
+            font-weight: 500;
+            font-size: var(--promotions-title-font-size,16px);
+            margin-bottom: 8px;
+          }
+          p {
+            height: unset;
+            overflow: unset;
+            text-overflow: unset;
+            color: var(--promotions-text-color,rgba(219, 237, 255, 0.9));
+            margin: 0;
+          }
+          &:before
+          {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: var(--promotions-item-border-radius, 6px);
+            border: 2px solid transparent;
+            background: var(--promotions-item-border-background, linear-gradient(0deg, #142C44, #142C44) padding-box,
+                    linear-gradient(0deg, rgba(28, 167, 236, 0.7) 19.11%, rgba(28, 167, 236, 0) 58.46%)  border-box);
+
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+          }
+        }
+      }
+    }
+  }
+  .promotion-item-content
+  {
+    flex: 3;
+    height: 100%;
+    .promotion-item-image
+    {
+      width: 100%;
+      height: calc(var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px) + 8px);
+      box-shadow: var(--promotion-item-img-box-shadow, 0px 5px 7px 0px rgba(0, 0, 0, 0.4));
+      background: var(--promotion-item-img-background-color,rgba(20, 44, 68, 1));
+      border-radius: 6px;
+      padding: 16px;
+      img
+      {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+    .promotion-description
+    {
+      height: calc(((var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px)) * 2.4) - 23px);
+      overflow-y: auto;
+      padding-right: 16px;
+      margin-top: 16px;
+
+      h2
+      {
+        color: var(--promotion-description-title-color,rgba(31, 179, 253, 1));
+        font-size: var(--promotion-description-title-font-size, 22px);
+        font-weight: var(--promotion-description-title-font-weight, 500);
+        margin-top: 0;
+        p{margin: 0}
+      }
+      .text-content
+      {
+        color: var(--text-content-color, #ffffff);
+        background: linear-gradient(179.46deg, var(--text-content-gradient1-color,#142C44) 0.45%, var(--text-content-gradient2-color,#131A2C) 104.46%);
+        box-shadow: 5px 0px 7px 0px rgba(0, 0, 0, 0.4);
+        border-radius: 6px;
+        padding: 20px;
+      }
+      .publish-date {
+        color: var(--promotion-description-publish-date-color, #fff);
+      }
+    }
+  }
+}
+
+.promotion-fragments
+{
+  background: var(--promotions-products-list-background, var(--product-background-color, #FFFFFF));
+  .fragment-title
+  {
+    padding: 64px 0 0 18px;
+    font-size: 26px;
+    color: var(--promotion-item-title-color, rgb(255, 255, 255));
+    font-weight: 500;
+
+  }
+}

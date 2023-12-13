@@ -1,0 +1,55 @@
+<div class="modal-content {{title}}">
+  <div class="modal-body">
+    <div class="{{title}}_body">
+      {{'User.' + title | translate}}
+      <div class="showUserName">{{loginData['UserName']}}</div>
+    </div>
+    <div class="extra-title">
+      {{'Info.LoginInfoHeader' | translate}}
+    </div>
+
+
+    <div class="modal_content">
+      <ul class="{{title}}_list">
+        <li class="item_list" *ngIf="loginData['LastLogin'] !== null">
+          <div class="title">{{'User.LastLogin' | translate}}</div>
+          <div class="value">{{loginData['LastLogin'] | date: 'dd/MM/yyyy HH:mm'}}</div>
+        </li>
+
+        <li class="item_list" *ngIf="loginData['LastLoginIp'] !== null">
+          <div class="title">{{'User.LastLoginIp' | translate}}</div>
+          <div class="value">{{loginData['LastLoginIp']}}</div>
+        </li>
+
+        <li class="item_list" *ngIf="loginData['LastLogout'] !== null">
+          <div class="title">{{'User.LastLogout' | translate}}</div>
+          <div class="value">{{loginData['LastLogout']}}</div>
+        </li>
+
+        <li class="item_list" *ngIf="loginData['SportWins'] !== undefined">
+          <div class="title">{{'User.SportWins' | translate}}</div>
+          <div class="value" *ngIf="loginData['SportWins'] !== null">{{loginData['CurrencySymbol']}} {{loginData['SportWins'] | number: '1.2-2'}}</div>
+          <div class="value" *ngIf="loginData['SportWins'] === null">{{loginData['CurrencySymbol']}} {{ 0 | number: '1.2-2'}}</div>
+        </li>
+
+        <li class="item_list" *ngIf="loginData['SportBets'] !== undefined">
+          <div class="title">{{'User.SportBets' | translate}}</div>
+          <div class="value" *ngIf="loginData['SportBets'] !== null">{{loginData['CurrencySymbol']}} {{loginData['SportBets'] | number: '1.2-2'}}</div>
+          <div class="value" *ngIf="loginData['SportBets'] === null">{{loginData['CurrencySymbol']}} {{ 0 | number: '1.2-2'}}</div>
+        </li>
+
+        <li class="item_list" *ngIf="loginData['SportProfit'] !== undefined">
+          <div class="title">{{'User.SportProfit' | translate}}</div>
+          <div class="value" *ngIf="loginData['SportProfit'] !== null">{{loginData['CurrencySymbol']}} {{loginData['SportProfit'] | number: '1.2-2'}}</div>
+          <div class="value" *ngIf="loginData['SportProfit'] === null">{{loginData['CurrencySymbol']}} {{ 0 | number: '1.2-2'}}</div>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="modal_footer">
+      <div class="extra-footer">{{'Info.LoginInfoFooter' | translate}}</div>
+      <button type="submit" (click)="confirm()" class="{{title}}_btn">{{'Info.Yes' | translate}}</button>
+    </div>
+  </div>
+</div>

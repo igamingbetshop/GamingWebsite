@@ -1,0 +1,198 @@
+.mobile-map
+{
+  background-color: #FFFFFF;
+  padding: 4px 0 55px 0;
+  h2
+  {
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    z-index: 1;
+    width: 100%;
+    height: fit-content;
+    padding: 0;
+  }
+  .m-character-hierarchy
+  {
+    width: 100%;
+    height: fit-content;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    margin: 0 auto;
+    padding: 17px 20px 138px 20px;
+    background-image: url("~assets/images/character-hierarchy/mobile-map.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    .m-character-hierarchy-content
+    {
+      width: 46vw;
+      height: 45vw;
+      position: relative;
+      .character-level
+      {
+        position: relative;
+        width: 100%;
+        /*height: 100%;*/
+
+        img
+        {
+          max-width: 100%;
+          max-height: 100%;
+          width: 100%;
+         /* height: 100%;*/
+          &.level-item
+          {
+            width: 24vw;
+            height: 24vw;
+            position: absolute;
+            top: 23%;
+            left: 22%;
+            max-width: 100%;
+            max-height: 100%;
+          }
+          &.opened-lock
+          {
+            width: 21px;
+            height: 30px;
+            position: absolute;
+            top: 63%;
+            left: 14%;
+          }
+          &.closed-lock
+          {
+            width: 28px;
+            height: 40px;
+            position: absolute;
+            top: 39%;
+            left: 48%;
+            transform: translate(-48%);
+            z-index: 1;
+          }
+        }
+        &.active
+        {
+          filter: grayscale(0);
+          .wrapper{-webkit-mask-image:none!important; background-color: transparent; opacity: 1; filter: grayscale(0);}
+        }
+        &.next-levels{
+          filter: grayscale(.6);
+          img{filter: grayscale(1);}
+          .wrapper
+          {
+            /*-webkit-mask-image: url("~assets/images/character-hierarchy/last-level.png");
+        mask-image: url("~assets/images/character-hierarchy/last-level.png");*/
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            mask-size: 100%;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-color: #000844;
+            opacity: 0.6;
+            filter: brightness(6.5);
+          }
+        }
+      }
+      .info
+      {
+        height: 22vw;
+        width: 43vw;
+        background-image: url("~assets/images/character-hierarchy/popover-box.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        top: 2%;
+        left: 55%;
+        z-index: 1;
+        display: none;
+        div
+        {
+          height: 100%;
+          width: 100%;
+          position: relative;
+
+          p
+          {
+            width: 72%;
+            display: -webkit-box;
+            color: #000;
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            position: absolute;
+            top: 24%;
+            right: 4%;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+          }
+          span
+          {
+            position: absolute;
+            top: 1%;
+            right: 16%;
+            color: #FFF;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            width: 30%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+        }
+      }
+      &:hover
+      {
+        .info
+        {
+          display: block;
+        }
+      }
+      &:nth-child(even)
+      {
+        margin-left: auto;
+        .info
+        {
+          left: -55%;
+          transform: scale(-1, 1);
+          span, p {transform: scale(-1, 1);}
+          p{right: 12%!important;}
+        }
+      }
+      &.last
+      {
+        margin-left: unset;
+        margin-top: auto;
+        width: 60vw;
+        height: 69vw;
+        .character-level
+        {
+          .level-item
+          {
+            width: 33vw;
+            height: 32vw;
+            top: 32%;
+          }
+          .closed-lock
+          {
+            width: 39px;
+            height: 55px;
+            top: 32%;
+            left: 51%;
+          }
+        }
+      }
+    }
+  }
+}

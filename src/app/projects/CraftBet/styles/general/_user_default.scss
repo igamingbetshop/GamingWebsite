@@ -1,0 +1,674 @@
+.user-default-section {
+  min-height: 560px;
+  width: 100%;
+  background: color(product-background);
+  color: $account-content-item-color;
+
+  a {
+    color: $account-content-item-color;
+  }
+
+
+  &_top {
+    /*width: width(user-view-size, 1524px);*/
+    width: width(user-panel,83%);
+    margin-top: marginTop(user-panel, 0);
+    margin-bottom: marginBottom(user-panel, 0);
+    margin-left: marginLeft(user-panel, auto);
+    margin-right: marginRight(user-panel, auto);
+    display: flex;
+    justify-content: space-between;
+    gap: $account-middle-gap;
+    flex-direction: column;
+
+    .user-left-panel {
+      //background: color(settings-left-menu-background);
+      display: flex;
+      width: width(user-panel-menu, auto);
+
+      &_topList {
+        display: flex;
+        gap: $account-small-gap;
+        width: 100%;
+        justify-content: space-between;
+        .profile-info-details {
+          display: var(--profile-info-details-display, none);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .user-icon {
+            position: relative;
+            width: var(--user-icon-width, 100%);
+            text-align: var(--user-icon-text-align, right);
+            color: color(user-icon);
+            .user-info_content {
+              display: none;
+            }
+            .icon-user-info {
+              font-size: var(--user-default-icon-font-size, 24px);
+              position: var(--user-default-icon-position, absolute);
+              top: var(--user-default-icon-position-top, 0);
+              right: var(--user-default-icon-position-right, 0);
+              cursor: pointer;
+            }
+          }
+          .user-icon:hover {
+            .user-info_content {
+              display: block;
+            }
+          }
+          .profile-verified-state {
+            background: var(--profile-info-details-background, #FFFFFF);
+            border-radius: var(--profile-info-details-border-radius, 3px);
+            padding: var(--profile-info-details-padding, 5px);
+            font-size: var(--profile-info-details-font-size, 12px);
+            margin-top: 5px;
+          }
+          .status-1 {
+            border: 1px solid #c2394b;
+            color: #c2394b;
+          }
+          .status-2 {
+            border: 1px solid #ceb700;
+            color: #ceb700;
+          }
+          .status-3 {
+            border: 1px solid green;
+            color: green;
+          }
+        }
+      }
+
+      &_header {
+        margin-top: marginTop(account-item, 15px);
+        letter-spacing: 1px;
+        position: relative;
+        flex: 1;
+
+        .title_menu {
+          background: color(account-item-title-bg);
+          box-shadow: var(--account-item-title-box-shadow, 0 4px 8px rgba(0, 0, 0, 0.94));
+          border-bottom-left-radius: borderBottomLeftRadius(account-item-title, 6px);
+          border-bottom-right-radius: borderBottomRightRadius(account-item-title, 6px);
+          border-top-right-radius: borderTopRightRadius(account-item-title, 6px);
+          border-top-left-radius: borderTopLeftRadius(account-item-title, 6px);
+          font-size: fontSize(account-item-title, 18px);
+          font-weight: fontWeight(account-item-title, 500);
+          color: color(account-item-title);
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-top: paddingTop(account-item-title, 12px);
+          padding-bottom: paddingBottom(account-item-title, 12px);
+          padding-left: paddingLeft(account-item-title, 20px);
+          padding-right: paddingRight(account-item-title, 20px);
+          .title_menu_dropdown_icon {
+            display: display(account-item-title-dropdown-icon, block);
+          }
+          .icon-arrow-right {
+            display: display(account-item-title-dropdown-icon-mode, none);
+            transform: rotate(90deg);
+            font-size: fontSize(account-item-title-dropdown-icon-mode, 14px);
+          }
+          div {
+            display: flex;
+            align-items: center;
+            gap: $account-big-gap;
+            text-align: var(--account-item-title-text-align, center);
+
+            .title_menu_icon {
+              height: height(account-item-title-icon, 24px);
+              width: width(account-item-title-icon, 24px);
+              display: display(account-item-title-icon, block);
+              background-size: contain;
+              background-repeat: no-repeat;
+            }
+          }
+
+          &:hover {
+            background: var(--account-item-title-hover-bg, #0052BE);
+            color: color(account-item-title-hover);
+
+            fa-icon {
+              transform: var(--user-left-panel-sublist-rotate, rotate(-180deg));
+              transition: all .1s;
+            }
+          }
+
+          &.active {
+            background: color(account-item-title-selected-bg);
+            color: color(account-item-title-selected);
+            font-weight: var(--account-item-title-selected-font-weight, 500);
+
+            .user-left-panel_subList {
+              display: block;
+              z-index: 999;
+            }
+
+            fa-icon {
+              transform: var(--user-left-panel-sublist-icon-rotate, rotate(0deg));
+              transition: all .1s;
+            }
+            .icon-arrow-right {
+              transform: var(--user-left-panel-sublist-icon-rotate, rotate(0deg));
+              transition: all .1s;
+            }
+          }
+
+          &.active:hover {
+            fa-icon {
+              transform: var(--user-left-panel-sublist-icon-rotate-hovered, rotate(-180deg));
+            }
+          }
+        }
+
+        .user-left-panel_subList-display {
+          display: display(user-left-panel-sublist, none) !important;
+        }
+
+        .user-left-panel_subList {
+          position: absolute;
+          opacity: var(--user-left-panel-sublist-opacity, 0);
+          padding-top: paddingTop(account-item-sublist, 6px);
+          left: 0;
+          width: 100%;
+          background: transparent;
+
+          div {
+            background: $account-main-bg-color;
+            border-radius: 6px;
+            overflow: hidden;
+
+            .user-left-panel_list {
+              background: backgroundColor(account-item-sublist, none);
+              border-radius: var(--account-item-sublist-border-radius, 2px);
+              box-shadow: var(--account-item-sublist-box-shadow, none);
+
+              .item_menu {
+                font-size: fontSize(account-item-sublist, 16px);
+                display: block;
+                padding-top: paddingTop(account-submenu-item, 16px);
+                padding-bottom: paddingBottom(account-submenu-item, 16px);
+                margin-left: marginLeft(account-submenu-item, 20px);
+                margin-right: marginRight(account-submenu-item, 20px);
+                padding-left: paddingLeft(account-submenu-item, 0px);
+                padding-right: paddingRight(account-submenu-item, 0px);
+                text-decoration: none;
+                border-bottom: 1px solid itemColor(account-submenu-item-border-bottom, #131A2C);
+                a
+                {
+                  color: color(account-submenu-item);
+                }
+              }
+
+              .active {
+                background: backgroundColor(account-item-title-selected-active, none);
+                //color: itemColor(account-item-title-selected-active, #000);
+              }
+
+              &:hover {
+                background: color(settings-left-menu-item-active-background);
+
+                a {
+                  color: color(account-submenu-item-hover);
+                }
+              }
+            }
+          }
+
+          &.active {
+            display: none;
+          }
+        }
+
+        &:hover {
+          .user-left-panel_subList {
+            opacity: var(--user-left-panel-sublist-opacity-hovered, 1);
+            z-index: 999;
+          }
+
+          .user-left-panel_subList-display {
+            display: display(user-left-panel-sublist-hovered, block) !important;
+          }
+        }
+      }
+    }
+
+
+    .user-right-panel {
+      //background:color(user-right-panel-background);
+      height: var(--user-right-panel-height, 831px);
+      background: transparent;
+      padding: var(--user-right-panel-padding, 16px);
+      flex: 1;
+      position: relative;
+      border: 2px solid $account-main-bg-color;
+      box-sizing: border-box;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: $account-middle-gap;
+
+      &_top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        ul {
+          display: flex;
+          gap: $account-middle-gap;
+
+          .user-right-panel_list {
+            .item_menu {
+              font-size: fontSize(account-content-item, 16px);
+              color: color(account-menu-list);
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              font-weight: fontWeight(account-content-item, 500);
+              padding-top: paddingTop(account-content-item, 8px);
+              padding-bottom: paddingBottom(account-content-item, 8px);
+              padding-left: paddingLeft(account-content-item, 16px);
+              padding-right: paddingRight(account-content-item, 16px);
+              background: $account-main-bg-color;
+              border-radius: 6px;
+              text-decoration: none;
+              position: relative;
+
+
+              &.active {
+                color: color(account-right-content-item);
+
+                .selected {
+                  color: color(account-right-content-item-selected);
+                  width: 0;
+                  height: 0;
+                  border-left: 35px solid transparent;
+                  border-right: 35px solid transparent;
+                  border-bottom: 18px solid $account-main-bg-color;
+                  position: absolute;
+                  top: 34px;
+                }
+              }
+            }
+          }
+        }
+
+        .user-info {
+          display: flex;
+          align-items: center;
+          gap: $account-big-gap;
+          margin-left: var(--user-info-section-icon-margin-left, auto);
+          .user-icon {
+            position: relative;
+            color: color(user-icon);
+
+            .icon-user-info {
+              font-size: $font-size-biggest-6;
+
+              &:before {
+                /*  color: $account-content-item-color;*/
+              }
+            }
+
+            .user-info_content {
+              display: none;
+            }
+          }
+
+          .user-info_text {
+            color: itemColor(user-info-text, #000)
+          }
+
+          .user-icon:hover {
+            color: color(user-icon-hover);
+
+            .user-info_content {
+              display: block;
+
+              .selected {
+                color: $account-content-item-color;
+                width: 0;
+                height: 0;
+                border-left: 9px solid transparent;
+                border-right: 9px solid transparent;
+                border-bottom: 7px solid $account-content-item-color;
+                position: absolute;
+                right: 3px;
+                top: 20px;
+              }
+            }
+          }
+        }
+      }
+
+      &_title {
+        color: itemColor(user-right-panel-title, #000000);
+        width: width(user-right-panel-title, 100%);
+        height: height(user-right-panel-title, 52px);
+        background: backgroundColor(user-right-panel-title, #FFE200);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: marginBottom(user-right-panel-title, -10px);
+        font-size: fontSize(user-right-panel-title, 16px);
+        text-transform: var(--user-right-panel-title-text-transform, unset);
+        border-radius: var(--user-right-panel-title-border-radius, 0px);
+      }
+      //.user-right-panel_content
+      &_content {
+
+      }
+    }
+
+    &.tab-left {
+      flex-direction: var(--user-tab-left-flex-direction, row);
+
+      .user-left-panel {
+        &_topList {
+          flex-direction: column;
+          justify-content: start;
+        }
+
+        &_header {
+          flex: none;
+
+          .title_menu {
+            &.active {
+              box-shadow: none;
+              border-left: 2px solid itemColor(account-title-border-left, transparent);
+            }
+          }
+
+          .user-left-panel_subList {
+            display: none;
+            position: static;
+          }
+
+          &:hover {
+            .user-left-panel_subList {
+              display: none;
+              z-index: 999;
+            }
+          }
+
+          &.opened {
+            .user-left-panel_subList {
+              display: block;
+              z-index: 999;
+            }
+
+            fa-icon {
+              transform: rotate(-180deg);
+              transition: all .1s;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+}
+
+.account-page-type2-default {
+  &.user-default-section {
+    min-height: 560px;
+    width: 100%;
+    background: color(product-background);
+    color: $account-content-item-color;
+
+    a {
+      color: $account-content-item-color;
+    }
+
+
+    .user-default-section_top {
+      /*width: width(user-view-size, 1524px);*/
+      width: 83%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: $account-middle-gap;
+      flex-direction: row;
+
+      .user-left-panel {
+        //background: color(settings-left-menu-background);
+        display: flex;
+
+        .user-left-panel_topList {
+          display: flex;
+          gap: $account-small-gap;
+          width: 100%;
+          flex-direction: column;
+          justify-content: start;
+        }
+        .opened {
+          display: block!important;
+        }
+        .user-left-panel_header {
+          margin-top: marginTop(account-item, 15px);
+          letter-spacing: 1px;
+          position: relative;
+          flex: none;
+
+          .title_menu {
+            background: color(account-item-title-bg);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.94);
+            border-bottom-left-radius: borderBottomLeftRadius(account-item-title, 6px);
+            border-bottom-right-radius: borderBottomRightRadius(account-item-title, 6px);
+            border-top-right-radius: borderTopRightRadius(account-item-title, 6px);
+            border-top-left-radius: borderTopLeftRadius(account-item-title, 6px);
+            font-size: fontSize(account-item-title, 18px);
+            color: color(account-item-title);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: paddingTop(account-item-title, 12px);
+            padding-bottom: paddingBottom(account-item-title, 12px);
+            padding-left: paddingLeft(account-item-title, 20px);
+            padding-right: paddingRight(account-item-title, 20px);
+
+            div {
+              display: flex;
+              align-items: center;
+              gap: $account-big-gap;
+
+              .title_menu_icon {
+                height: height(account-item-title-icon, 24px);
+                width: width(account-item-title-icon, 24px);
+                background-size: contain;
+                background-repeat: no-repeat;
+              }
+            }
+
+            &:hover {
+              background: var(--account-item-title-hover-bg, #0052BE);
+              color: color(account-item-title-hover);
+            }
+
+            &.active {
+              background: color(account-item-title-selected-bg);
+              color: color(account-item-title-selected);
+              box-shadow: none;
+              border-left: 2px solid itemColor(account-title-border-left, transparent);
+            }
+
+          }
+
+          .user-left-panel_subList {
+            padding-top: paddingTop(account-item-sublist, 6px);
+            left: 0;
+            width: 100%;
+            background: transparent;
+            display: none;
+            position: static;
+
+            div {
+              background: $account-main-bg-color;
+              border-radius: 6px;
+              overflow: hidden;
+
+              .user-left-panel_list {
+                .item_menu {
+                  font-size: fontSize(account-item-sublist, 16px);
+                  display: block;
+                  padding-top: paddingTop(account-submenu-item, 16px);
+                  padding-bottom: paddingBottom(account-submenu-item, 16px);
+                  margin-left: marginLeft(account-submenu-item, 20px);
+                  margin-right: marginRight(account-submenu-item, 20px);
+                  text-decoration: none;
+                  border-bottom: 1px solid itemColor(account-submenu-item-border-bottom, #131A2C);
+
+                  a {
+                    color: color(account-submenu-item);
+                  }
+                }
+              }
+            }
+          }
+
+          &.opened {
+            .user-left-panel_subList {
+              display: block;
+              z-index: 999;
+            }
+
+            fa-icon {
+              transform: rotate(-180deg);
+              transition: all .1s;
+            }
+          }
+        }
+
+      }
+
+
+      .user-right-panel {
+        //background:color(user-right-panel-background);
+        height: auto;
+        background: transparent;
+        padding-top: paddingTop(user-right-panel-padding, 16px);
+        padding-bottom: paddingBottom(user-right-panel-padding, 16px);
+        padding-left: paddingLeft(user-right-panel-padding, 0);
+        padding-right: paddingRight(user-right-panel-padding, 0);
+        flex: 1;
+        position: relative;
+        border: none;
+        box-sizing: border-box;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: $account-middle-gap;
+
+        &_top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          ul {
+            display: flex;
+            gap: $account-middle-gap;
+
+            .user-right-panel_list {
+              .item_menu {
+                font-size: fontSize(account-content-item, 16px);
+                color: color(account-menu-list);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-weight: fontWeight(account-content-item, 500);
+                padding-top: paddingTop(account-content-item, 8px);
+                padding-bottom: paddingBottom(account-content-item, 8px);
+                padding-left: paddingLeft(account-content-item, 16px);
+                padding-right: paddingRight(account-content-item, 16px);
+                background: $account-main-bg-color;
+                border-radius: 6px;
+                text-decoration: none;
+                position: relative;
+                white-space: nowrap;
+
+
+                &.active {
+                  color: color(account-right-content-item);
+
+                  .selected {
+                    color: color(account-right-content-item-selected);
+                    width: 0;
+                    height: 0;
+                    border-left: 35px solid transparent;
+                    border-right: 35px solid transparent;
+                    border-bottom: 18px solid $account-main-bg-color;
+                    position: absolute;
+                    top: 34px;
+                  }
+                }
+              }
+            }
+          }
+
+          .user-info {
+            display: flex;
+            align-items: center;
+            gap: $account-big-gap;
+
+            .user-icon {
+              position: relative;
+              color: color(user-icon);
+
+              .icon-user-info {
+                font-size: $font-size-biggest-6;
+
+                &:before {
+                  /*  color: $account-content-item-color;*/
+                }
+              }
+
+              .user-info_content {
+                display: none;
+              }
+            }
+
+            .user-info_text {
+              color: itemColor(user-info-text, #000);
+              white-space: nowrap;
+            }
+
+            .user-icon:hover {
+              color: color(user-icon-hover);
+
+              .user-info_content {
+                display: block;
+
+                .selected {
+                  color: $account-content-item-color;
+                  width: 0;
+                  height: 0;
+                  border-left: 9px solid transparent;
+                  border-right: 9px solid transparent;
+                  border-bottom: 7px solid $account-content-item-color;
+                  position: absolute;
+                  right: 3px;
+                  top: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+    }
+
+
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  //.user-default-section_top .user-left-panel_header .title_menu {
+  //  font-size: calc(var(--account-item-title-font-size) * 0.6);
+  //}
+  //.user-default-section_top .user-left-panel_header .user-left-panel_subList div .user-left-panel_list .item_menu {
+  //  font-size: calc(var(--account-item-sublist-font-size, 16px) * 0.6);
+  //}
+}

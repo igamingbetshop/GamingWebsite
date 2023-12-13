@@ -1,0 +1,90 @@
+<!--<div class="mobile-payment-section" [ngStyle]="layoutService.layoutStyle">-->
+<div class="mobile-payment-section">
+
+    <h2 class="common-title" *ngIf="activeWithdraws.length > 0">
+        {{'User.Withdraw-History' | translate}}
+    </h2>
+
+    <div *ngIf="activeWithdraws.length > 0">
+        <div class="paymet-item payments-section-active-withdraw"
+             *ngFor="let item of activeWithdraws, let i = index">
+            <div class="paymet-item_header Payments-{{item?.StatusName}}">
+                <span>{{item?.StatusTypeName}}</span>
+
+                {{item?.CreationTime | date: 'dd/MM/yyyy h:mm'}}
+            </div>
+
+            <div class="paymet-item_body">
+                <div class="paymet-item_bodyInfo"><span class="title">{{'User.Id' | translate}}</span> {{item?.Id}}
+                </div>
+                <div class="paymet-item_bodyInfo"><span
+                        class="title">{{'User.Status' | translate}}</span> {{item?.Status}}</div>
+                <div class="paymet-item_bodyInfo"><span
+                        class="title">{{'User.BetShopId' | translate}}</span> {{item?.BetShopId}}
+                </div>
+
+                <div class="paymet-item_bodyInfo"><span
+                        class="title">{{'User.Amount' | translate}}</span> {{item?.Amount}}
+                </div>
+                <div class="paymet-item_bodyInfoMessage" *ngIf="(item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1 && allowCancelConfirmedWithdraw)">
+                    <span class="title">{{'User.PaymentInfo' | translate}}</span>
+
+                    <button class="default_btn" type="submit"
+                            (click)="canselPayment(item.Id)"
+                            *ngIf="(item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1 && allowCancelConfirmedWithdraw)">
+                        {{'User.Cancel' | translate}}
+                    </button>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <h2 class="account_title">
+        {{'User.Withdraw' | translate}}
+    </h2>
+
+    <div class="mobile-payment-section_content">
+
+        <div class="mobile-payment-section_content_block">
+            <div class="content_col">
+                <ul class="payment_list">
+                    <li
+                            *ngFor="let item of paymentSystemList;"
+                            [ngClass]="{'selected_payment':item?.PaymentSystemId == currentPayment?.PaymentSystemId}"
+                            (click)="selectPayment(item)">
+                        <img src="../../../../../../../assets/images/withdraw/{{item.PaymentSystemId}}.png"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="content_col mobile_info">
+                <div class="info_text" style="-webkit-box-orient: vertical"
+                     [innerHTML]="'Withdraw.' + 'PAYMENT_MESSAGE' + currentPayment?.PaymentSystemId | translate | sanitizer: 'html'"></div>
+                <div class="balance_info">
+                    <div>{{"Payments.Minimum" | translate}} - {{currentPayment?.MinAmount | number}} ({{ currencyId}})
+                    </div>
+                    <div>{{"Payments.Maximum" | translate}} - {{currentPayment?.MaxAmount | number}} ({{ currencyId}})
+                    </div>
+                    <div *ngIf="currentPayment?.CommissionPercent !== 0">
+                        {{"Payments.CommissionPercent" | translate}} - {{currentPayment?.CommissionPercent | number}} %
+                    </div>
+                    <div *ngIf="currentPayment?.FixedFee !== 0">
+                        {{"Payments.CommissionFixedFee" | translate}} - {{currentPayment?.FixedFee | number}} ({{currencyId}})
+                    </div>
+                    <div *ngIf="currentPayment?.CommissionPercent === 0 && currentPayment?.FixedFee === 0">
+                        {{"Payments.Commission" | translate}} - {{ 0 | number}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="content_col">
+                <label class="checkbox"><input type="checkbox" [(ngModel)]="paymentControllerService.savePaymentDetails"> {{'User.SavePaymentDetails' | translate}}</label>
+                <template #loadComponent></template>
+            </div>
+
+        </div>
+    </div>
+</div>

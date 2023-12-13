@@ -1,0 +1,30 @@
+<div class="mobile-news-section recponcive-height">
+  <div class="mobile-news-section_top">
+
+    <div class="mobile-products-list">
+
+      <h1 class="news-title">{{'News.News' | translate}}</h1>
+
+      <div class="mobile-products-list_item" *ngFor="let item of news | paginate: { itemsPerPage: paginationCount, currentPage: page }" [routerLink]="['/news', item.id]">
+        <div class="news_item">
+          <img src="../../../../../../../assets/images/news/medium/{{item.image}}"/>
+          <div class="news_title" [innerHtml]="item.title"></div>
+        </div>
+
+        <div class="news_text">
+          <p [innerHtml]="item.description"></p>
+          <a>{{'Promotions.Keep Reading' | translate}}</a>
+        </div>
+      </div>
+
+      <div class="tm-pagination">
+        <pagination-controls
+          nextLabel=""
+          autoHide="true"
+          previousLabel=""
+          (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+
+  </div>
+</div>

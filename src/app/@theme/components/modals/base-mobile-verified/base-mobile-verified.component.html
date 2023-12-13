@@ -1,0 +1,16 @@
+<div class="modal-content {{title}}">
+    <div class="modal-body">
+        <div class="{{title}}_body">
+            {{'User.' + title | translate}}
+        </div>
+
+
+        <div class="modal_content">
+            <div [innerHTML]="'Info.' + 'title' | translate | sanitizer: 'html'"></div>
+        </div>
+
+        <div class="modal_footer">
+            <button type="submit" (click)="close()" class="{{title}}_btn">{{'Info.Yes' | translate}}</button>
+        </div>
+    </div>
+</div>

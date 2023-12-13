@@ -1,0 +1,12 @@
+<div class="live-casino-section min-height recponcive-height">
+  <div class="grouped-products-content max-width flex_center">
+    <a class="grouped-products-content_item" routerLinkActive="active" *ngFor="let item of productList"
+       (click)="openGame(item.Href)">
+      <img src="{{'../../../../../../../assets/images/products/' + item.Icon + '.png'}}">
+      <div class="game-img-wrapper"></div>
+      <div class="game-btn">
+        {{'Game.PlayNow' | translate}}
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+.user-right-panel_title {
+  padding: 10px 0 30px 0px;
+  height: 80px;
+}
+
+.payment-section_content_block {
+  display: block;
+  padding: 35px 38px 15px;
+  background: #fff;
+  .payment_header {
+    text-align: left;
+    font-size: 13px;
+    line-height: 30px;
+    padding: 0 10px;
+    color: #000;
+    cursor: default;
+  }
+  .payment_list {
+    display: var(--payment-display, grid);
+    grid-template-columns: var(--payment-grid-template-columns, repeat(4, 1fr));
+    align-items: center;
+    gap: var(--payment-grid-gap, 17px);
+    width: var(--payment-width, 477px);
+    margin: 25px 0 0 0;
+    overflow-y: auto;
+    height: var(--payment-height, calc(100% - 55px));
+    padding: var(--payment-padding, 0 10px);
+
+    &_item {
+      width: var(--account-content-item-width, 100%);
+      min-height: var(--account-content-item-min-height, 98px);
+      background: var(--account-content-item-bg-color, #314566);
+      border-radius: var(--account-content-item-border-radius, 10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+
+      img {
+        background-color: #fff;
+        border-radius: 4px;
+      }
+
+      &_img {
+        width: var(--account-content-item-img-width, 100%);
+        height: var(--account-content-item-img-height, 40px);
+        margin-right: var(--account-content-item-img-margin-right, 0);
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 10px;
+        background-size: contain;
+      }
+      &_min_amount {
+        font-size: 13px;
+        font-weight: 400;
+      }
+      &_radio_button {
+        display: block;
+      }
+
+      &.selected {
+        background: var(--account-content-item-selected-bg-color, #384F75);
+      }
+    }
+  }
+  .content_row {
+    background: transparent;
+    padding: 0;
+    margin-top: 0px;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    .payment_header {
+      text-align: left;
+      font-size: 18px;
+      color: #818181;
+      cursor: default;
+    }
+  }
+  .deposit-self-limitation-popup {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 0 10px;
+    margin-top: 15px;
+  }
+}
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+  .payment-section_content_block {
+    .content_row {
+      margin-top: 10px;
+      .payment_header {
+        font-size: 15px;
+      }
+    }
+
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .payment-section_content_block {
+    .content_row {
+      margin-top: 5px;
+      .payment_header {
+        font-size: 14px;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,244 @@
+.filter-game-section {
+  background: color(product-background);
+  margin: 0 auto;
+  /* position: relative;
+   left:var(--header-panel2-width, 0);
+   top:var(--header-top-height, 0);
+   width: calc(100% - var(--header-panel2-width, 0px));*/
+  .max-width-banner {
+    max-width: var(--banner-max-width, 1600px);
+  }
+  &_banners {
+    height: height(games-banner,360px);
+    //margin-bottom: marginBottom(games-banner, 0px);
+    margin: var(--games-banner-margin, 0px);
+
+    .banner_image {
+      width: width(casino-banner, 100%);
+      height: height(banner, 450px);
+      position: relative;
+      background-image: linear-gradient(to right, #131a2c 1%, rgba(83, 83, 83, 0.02) 36%, rgba(84, 84, 84, 0) 45%);
+      background-size: 100% 100% !important;
+      background-repeat: no-repeat!important;
+      /* url("../../assets/images/b/jackpot_banner.png"),*/
+      img {
+        width: var(--casino-banner-image-width, 100%);
+      }
+
+      .banner-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        /*background: backgroundColor(banner-gradient, -webkit-linear-gradient(rgba(0,0,0,0), #151515));*/
+        background-image: linear-gradient(to left, itemColor(casino-banner-wrapper-bg-first,#131a2c), itemColor(casino-banner-wrapper-bg-second,rgba(83, 83, 83, 0.02)) 64%, itemColor(casino-banner-wrapper-bg-last,rgba(84, 84, 84, 0)) 55%);
+        border-width: width(casino-banner-wrapper-bg-first-border, 0);
+        border-color: itemColor(casino-banner-wrapper-bg-first, none);
+        border-style: solid;
+      }
+
+      .banner-wrapper2 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        /*background: backgroundColor(banner-gradient, -webkit-linear-gradient(rgba(0,0,0,0), #151515));*/
+        background-image: linear-gradient(to right, itemColor(casino-banner-wrapper2-bg-first,#131a2c) 1%, itemColor(casino-banner-wrapper2-bg-second,rgba(83, 83, 83, 0.02)) 45%, itemColor(casino-banner-wrapper2-bg-last,rgba(84, 84, 84, 0)) 55%);
+      }
+
+      .banner-content {
+        position: absolute;
+        top: itemTop(casino-banner-content, 50%);
+        transform: translateY(-50%);
+        left: itemLeft(casino-banner-content, 10%);
+
+        .banner-description {
+          width: var(--banner-description-width, 500px);
+          font-family: var(--banner-description-font-family, Roboto);
+          text-transform: uppercase;
+          font-size: fontSize(banner-description,24px);
+          font-weight: fontWeight(banner-description, 600);
+          line-height: var(--banner-description-line-height, 1.45);
+          color: color(banner-description);
+        }
+
+        .banner-content-description {
+          font-family: var(--banner-content-description-font-family, Roboto);
+          color: itemColor(banner-content-description, #fff);
+          line-height: var(--banner-content-description-line-height, 2.5);
+          font-weight: fontWeight(banner-content-description, 600);
+          font-size: fontSize(banner-content-description, 16px);
+        }
+
+        .banner-action {
+          position: absolute;
+          padding-left: paddingLeft(banner-action-text, 20px);
+          padding-right: paddingRight(banner-action-text, 20px);
+          padding-top: paddingTop(banner-action-text, 0px);
+          padding-bottom: paddingBottom(banner-action-text, 0px);
+          color: color(banner--action-text);
+          font-size: fontSize(banner-action-text, 12px);
+          font-family: var(--banner-action-text-font-family, Roboto);
+          text-transform: uppercase;
+          height: height(banner-action-text, 31px);
+          width: width(banner-action-text, auto);
+          text-align: textAlign(banner-action-text, center);
+          line-height: 31px;
+          margin-top: marginTop(banner-action-text, 5px);
+          margin-bottom: marginBottom(banner-action-text, 0px);
+          left: marginLeft(banner-action-text, 0px);
+          right: marginRight(banner-action-text, 0px);
+          border-radius: 3px;
+          display: inline-block;
+          background-image: linear-gradient(to top, var(--banner-action-gradient-color-2, #10ab8a), var(--banner-action-gradient-color-1, #02887e));
+          cursor: pointer;
+          &:hover {
+            background-image: linear-gradient(to top, var(--banner-action-gradient-color-4, #fff), var(--banner-action-gradient-color-3, #fff));
+            color: itemColor(banner-action-text, #000000);
+            transform: var(--banner-action-text-transform, scale(1));
+          }
+        }
+      }
+    }
+  }
+
+  &_items {
+    margin: 0 auto;
+  }
+
+
+  .product_list {
+    margin-bottom: 25px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    &_item {
+      width: var(--category-list-item-width, 240px);
+      height: 180px;
+      border-radius: 10px;
+      //display: inline-block;
+      box-sizing: border-box;
+      -ms-flex: auto;
+      position: relative;
+      margin: 11px;
+
+      &:hover {
+        .game-open {
+          visibility: visible;
+        }
+        .game-title {
+          display: block;
+        }
+      }
+      .game-img {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        border-radius: 10px;
+        transition: all 0.3s;
+        .game-img-wrapper
+        {
+          transition: opacity .3s;
+          opacity: 0;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          border-radius: 10px;
+          background: rgba(39,51,70,.5);
+        }
+        &:hover
+        {
+          transform: scale(1.07);
+          .game-img-wrapper{opacity: 1}
+        }
+      }
+
+      .game-open {
+        height: 60%;
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        top: 0;
+        visibility: hidden;
+
+        &.game-open-center {
+          height: 100%;
+        }
+
+        &.game-open-demo {
+          top: 60%;
+        }
+      }
+
+      .game-btn {
+        display: inline-block;
+        left: var(--category-list-item-game-btn-left, 25%);
+        width: 106px;
+        line-height: 32px;
+        cursor: pointer;
+        border-radius: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 8px;
+        color: $color-white;
+        position: absolute;
+
+        &_real {
+          top: 42%;
+          background-color: backgroundColor(game-btn_real, #000000);
+          opacity: itemOpacity(game-btn_real, 0.6);
+        }
+
+        &_demo {
+          top: -15%;
+          background-color: backgroundColor(game-btn_demo, #273346);
+          opacity: itemOpacity(game-btn_demo, 1);
+        }
+      }
+
+      .game-title {
+        width: 100%;
+        color: color(filter-games-title);
+        text-indent: 5px;
+        white-space: nowrap;
+        height: var(--filter-games-title-height, 60px);
+        font-size: var(--filter-games-title-font-size, 16px);
+        text-overflow: ellipsis;
+        border-bottom-left-radius: var(--casino-game-title-shown-border-bottom-left-radius, 0px);
+        border-bottom-right-radius: var(--casino-game-title-shown-border-bottom-right-radius, 0px);
+        position: absolute;
+        bottom: 0;
+        background: var(--casino-game-title-shown-background-color, #1d2e4a);
+        display: none;
+
+        &__heart {
+          color: $color-white;
+          font-size: 14px;
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+
+  .game-rating {
+    float: right;
+    margin-right: 5px;
+    color: itemColor(filter-game-title-rating, #fff);
+
+    &__star {
+      font-size: 14px;
+      color: itemColor(filter-game-title-icon, #FAC917);
+      margin-right: 3px;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+#main-container {
+  background-image: var(--main-background-image, unset);
+  background-size: var(--main-background-image-size, unset);
+  background-repeat: var(--main-background-image-repeat, no-repeat);
+  overflow: hidden;
+}
+.router_section {
+  background: color(header-background);
+  display: flow-root;
+  transform: translate(var(--header-transform, 0px)) ;
+  margin-top: var(--header-margin-top, 0);
+}
+.scrollTop {
+  opacity: 0;
+  .icon-next-arrow
+  {
+    position: fixed;
+    bottom: itemBottom(main-icon-to-top-item, 68px);
+    right: itemRight(main-icon-to-top-item, 24px);
+    display: var(--main-icon-top-display, inline-block);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 50%;
+    box-shadow: var(--main-icon-top-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
+    background-image: var(--main-icon-to-top-bgImage, linear-gradient(to bottom, #1376f8, #194074));
+    background-color: backgroundColor(main-icon-to-top, unset);
+    color: var(--main-icon-top-color, #000);
+    transform: rotate(-90deg);
+    cursor: pointer;
+    outline: none;
+    transition: opacity 0.3s ease;
+  }
+}
+.scrollTop.show {
+  opacity: 1;
+}
+

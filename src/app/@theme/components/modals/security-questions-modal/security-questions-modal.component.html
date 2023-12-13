@@ -1,0 +1,33 @@
+<div class="modal-content">
+    <div class="modal-body" *ngIf="isModal">
+        <img class="recovery-logo" [src]="logoUrl" (error)="errorHandler($event)"/>
+        <fa-icon class="security-close-icon" [icon]="['fas', 'times']" (click)="close();errorMessage='';"></fa-icon>
+    </div>
+    <div class="modal_content">
+        <div class="modal-item-title">
+            <h2 class="forgot-password-title-bottom">{{'Recovery.Security-questions' | translate}}</h2>
+            <fa-icon *ngIf="!isModal" [icon]="['fas', 'times']" (click)="close()"></fa-icon>
+        </div>
+        <div class="security-questions-modal" *ngFor="let item of securityQuestions">
+            <p>{{item.QuestionText}}</p>
+            <div class="security-questions-form">
+                <input [(ngModel)]="item.Answer" type="text" placeholder="{{'User.security-questions-placeholder' | translate}}"
+                required name="answer" #answer="ngModel">
+                <label for="">{{'User.security-questions-answer' | translate}}</label>
+            </div>
+            <div class="error-security-message" *ngIf="(answer.touched && !answer.valid)">
+                {{'Error.Security-questions-error' | translate}}
+            </div>
+        </div>
+    </div>
+    <div class="message" *ngIf="errorMessage">
+        <span class="icon-exclamation security-questions-icon"></span>
+        <span>{{errorMessage}}</span>
+    </div>
+    <div class="modal_footer">
+        <button type="submit" class="craft_btn bg_recovery" (click)="submit()" [disabled]="!getSecurityValidation()">{{'Verify.Confirm' | translate}}</button>
+    </div>
+<!--    <div *ngIf="showMessage" class="error-security-message">-->
+<!--        {{'Error.Security-questions-error' | translate}}-->
+<!--    </div>-->
+</div>

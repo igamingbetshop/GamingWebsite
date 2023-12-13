@@ -1,0 +1,275 @@
+.tab-content {
+  padding: var(--account-content-row-paddding);
+  background: var(--account-main-bg-color);
+  border-radius: 6px;
+  height: auto;
+  margin: 0;
+  display: block;
+}
+.settings_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--change-password-second-tab-heirght, 32px);
+  .settings_edit {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: var(--edit-button-justify-content, unset);
+    width: var(--edit-button-width, 53px);
+    height: var(--edit-button-height, 40px);
+    background-color: var(--edit-button-background-color, none);
+    border-radius: var(--edit-button-border-radius, 0px);
+    cursor: pointer;
+    &_text {
+      background: none!important;
+      border: none;
+      padding: 0!important;
+      color: var(--edit-button-color, #4AA4FF);
+      text-decoration: var(--edit-button-text-decoration, underline);
+      font-size: var(--edit-button-text-font-size, 13px);
+      cursor: pointer;
+    }
+    .icon-edit{color: var(--edit-icon-color, #FFFFFF)}
+    &.selected
+    {
+      button{ color: var(--edit-button-selected-color)}
+      .icon-edit{color: var(--edit-icon-selected-color)}
+    }
+  }
+  .submit-details {
+    display: flex;
+    gap: 20px;
+    width: var(--settings-submit-details-width, auto);
+    .setting_btn {
+      font-size: var(--settings-submit-details-font-size, 16px);
+      border-radius: var(--settings-submit-details-border-radius, 4px);
+      font-weight: var(--settings-submit-details-font-weight, 500);
+      padding: var(--settings-submit-details-padding, 0px 10px);
+      height: var(--settings-submit-details-height, 44px);
+      background: linear-gradient(to bottom, var(--settings-button-gradient-first-color) 0%, var(--settings-button-gradient-second-color) 100%);
+      color: var(--settings-button-text-color);
+      .icon-close-modal {
+        margin-right: 13px;
+        font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
+      }
+      .fas-save {
+        margin-right: 13px;
+        font-size: calc(var(--settings-submit-details-font-size, 16px) + 2px);
+      }
+      &.cancel_btn {
+        background: var(--settings-cancel-btn-bg, rgba(13, 18, 32, 0.5));
+        color: var(--settings-cancel-btn-color, #fff);
+        border: 1px solid var(--settings-cancel-btn-color, #fff);
+        .icon-close-modal:before {
+          color: var(--settings-cancel-btn-color, #fff);
+         }
+      }
+    }
+  }
+}
+.underline {
+  height: 1px;
+  background: var(--account-content-header-underline-bg, linear-gradient(180deg, #48628E 0%, #111723 100%));
+  box-shadow: var(--account-content-header-underline-shadow, 0 4px 8px rgba(0, 0, 0, 0.94));
+  border-radius: 6px;
+  margin-top: var(--account-content-header-underline-margin-top, 10px);
+  margin-bottom: var(--account-content-header-underline-margin-bottom, 24px);
+}
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  column-gap: 100px;
+  row-gap: var(--profile-settings-form-row-gap, 0px);
+  position: relative;
+  height: 100%;
+  width: var(--profile-settings-form-width, 99%);
+  .active_item {
+    pointer-events: unset;
+  }
+
+  .disable_item {
+    pointer-events: none;
+    opacity: .8;
+    border-color: #cecece !important;
+  }
+  .form_field {
+    width: 100%;
+    position: relative;
+    .error-field-message
+    {
+      font-size: var(--settings-profile-font-size, 15px);
+      color: red;
+      font-weight: var(--settings-profile-font-weight, 700);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    .verify-icons {
+      position: absolute;
+      top: 18px;
+      right: -29px;
+      font-size: 24px;
+      cursor: pointer;
+      .tooltip {
+        display: none;
+        position: absolute;
+        top: 35px;
+        left: -3px;
+        .selected {
+          color: var(--verify-tooltip-icon-color, #111115);
+          width: 0;
+          height: 0;
+          border-left: 9px solid transparent;
+          border-right: 9px solid transparent;
+          border-bottom: 7px solid var(--verify-tooltip-icon-color, #111115);
+          position: absolute;
+          left: 6px;
+          top: -6px;
+        }
+        .tooltip-text {
+          font-size: var(--verify-tooltip-text-font-size, 14px);
+          background: var(--verify-tooltip-text-background, #111115);
+          color: var(--verify-tooltip-text-color, #fff);
+          padding: var(--verify-tooltip-text-padding, 5px 8px);
+          border-radius: var(--verify-tooltip-text-border-radius, 6px);
+          position: relative;
+          z-index: 100;
+          white-space: nowrap;
+          width: auto;
+        }
+      }
+      &:hover {
+        .tooltip {
+          display: block;
+        }
+      }
+    }
+    .icon-verified:before {
+      color: var(--profile-account-status-icon-verified-color, #4F9961);
+    }
+
+    .icon-pending:before {
+      color: var(--profile-account-status-icon-pending-color, #FFD439);
+    }
+
+    .icon-rejected:before {
+      color: var(--profile-account-status-icon-rejected-color, #5EA8FF);
+    }
+    .checkbox-field {
+      display: var(--settings-field-checkbox-display, flex);
+      justify-content: var(--settings-field-checkbox-justify-content, flex-start);
+      align-items: center;
+      background: var(--settings-field-checkbox-container-background, unset);
+      box-shadow: var(--settings-field-checkbox-container-box-shadow, none);
+      border-radius: var(--settings-field-checkbox-container-border-radius, 0px);
+      padding: var(--settings-field-checkbox-container-padding, 0px);
+      height: var(--settings-field-height, 40px);
+      margin: var(--settings-form-fields-margin, 10px 0 24px 0);
+      span {
+        color: var(--settings-field-checkbox-span-color, #fff);
+      }
+    }
+    label {
+      color: var(--settings-input-label-color, #fff);
+      position: absolute;
+      top: var(--settings-input-label-top, 20px);
+      left: var(--settings-input-label-left, 8px);
+      height: var(--settings-input-label-height, 25px);
+      transform-origin: 0 50%;
+      transition: transform 200ms, color 200ms;
+      pointer-events: none;
+    }
+    input:focus ~ label {
+      width: var(--settings-input-field-label-width, inherit);
+      height: var(--settings-input-label-focused-height, 11px);
+      background: var(--settings-background-color, #FFFFFF);
+      color: var(--settings-field-focus-label, #fff);
+      top: var(--settings-label-top, 20px);
+      font-size: var(--settings-background-color-font-size, 16px);
+    }
+    input:focus ~ .cut,
+    input:not(:placeholder-shown) ~ .cut {
+      transform: translateY(8px);
+      display: block;
+    }
+    input:focus ~ .cut {
+      display: block;
+    }
+    input:focus::placeholder {
+      opacity: 1;
+    }
+    input::placeholder {
+      opacity: 0;
+    }
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
+      transform: var(--settings-label-transform, translateY(-27px) translateX(10px) scale(0.75));
+      background-color: var(--settings-background-color, unset);
+      height: var(--settings-label-focused-height, 22px);
+      font-size: var(--settings-font-size-label, 16px);
+      color: var(--settings-focus-label-focused, #fff);
+      text-align: var(--settings-focus-label-focused-text-align, left);
+      width: var(--settings-focus-label-focused-width, auto);
+      padding-left: var(--settings-padding-left-focus-label-focused, 5px);
+      padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+    }
+    select:focus~label,
+    select:not([value=""]):valid~label {
+      transform:var(--register-select-label-transform, translateY(-27px) translateX(10px) scale(0.75));
+      top: var(--register-focused-select-label-top, 20px);
+      font-size: var(register-focused-label-font-size, 16px);
+      color: var(--settings-focus-label-focused, #fff);
+      background-color: var(--settings-background-color-focus-label-focused, unset);
+      padding-left: var(--settings-padding-left-focus-label-focused, 5px);
+      padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+    }
+    input, select {
+      &:not(.choose_input) {
+        //border: 1px solid $border-color;
+        color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+        font-size: var(--settings-field-font-size, 16px);
+        text-indent: 0;
+        padding-left: 16px;
+        border: var(--settings-field-border, none);
+        background: var(--account-content-item-bg-color);
+        border-radius: var(--settings-field-border-radius, 6px);
+        height: var(--settings-field-height, 40px);
+        appearance: var(--open-ticket-appearance, auto);
+      }
+      border: 1px solid rgba(219, 237, 255, 0.8);
+    }
+    input[type=checkbox] {
+      height: var(--settings-field-checkbox-height, 18px);
+      width: var(--settings-field-checkbox-height, 70px);
+      margin: var(--settings-field-checkbox-margin, 0);
+      padding-left: var(--settings-field-checkbox-padding-left, 0);
+      vertical-align: middle;
+      appearance: auto;
+      cursor: pointer;
+    }
+    //::placeholder {
+    //  color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+    //}
+    input, .mobile_verify, >select {
+      margin: var(--settings-form-fields-margin, 10px 0 24px 0);
+    }
+  }
+  .required-field
+  {
+    &:after
+    {
+      content: "*";
+      position: absolute;
+      top:-5px;
+      right: -6px;
+    }
+  }
+}
+.success_message1 {
+  bottom: var(--success-message-settings-success-bottom, 0px);
+  p {
+    margin-right: var(--success-message-settings-success-margin-right, auto);
+  }
+}

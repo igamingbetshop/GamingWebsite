@@ -1,0 +1,43 @@
+<div class="modal-content modal-content__{{className}}">
+    <div class="modal-body">
+
+        <p class="title" [innerHTML]="'User.' + this.info[this.step-1] | translate | sanitizer: 'html'"></p>
+
+        <div class="description" [innerHTML]="'User.' + this.info[this.step-1] + '-description' | translate | sanitizer: 'html'"></div>
+
+        <div *ngFor="let item of info; let i = index">
+            <app-global-change-password *ngIf="item === 'resetPassword' && (step ==  i + 1)"
+                                        [className]="'first-login'"
+                                        [showPlaceHolder]="true"
+                                        [showTogglePassTypeCheckbox]="true"
+                                        [showIcons]="true"
+                                        (changePasswordRequestMessage)="changePasswordMessage($event)"
+                                        class="show-item__{{i + 1}}"></app-global-change-password>
+
+            <app-global-change-login-username *ngIf="item === 'resetNickName' && (step ==  i + 1)"
+                                              [className]="'first-login'"
+                                              [showIcons]="true"
+                                              class="show-item__{{i + 1}}"></app-global-change-login-username>
+
+        </div>
+
+        <div class="toggle-info-block" (click)="openInfoBlock()">
+            <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
+            <span class="toggle-info-block__label">{{'User.' + this.info[this.step - 1] + '_rules' | translate}} </span>
+        </div>
+
+        <div *ngIf="showInfoBlock" class="info-section">
+            <div class="info-section__header">
+                <div>
+                    <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
+                    <span>{{'User.' + this.info[this.step - 1] + '_rules' | translate}} </span>
+                </div>
+                <div (click)="showInfoBlock = false">
+                    <fa-icon [icon]="['fas', 'times']"></fa-icon>
+                </div>
+            </div>
+            <div class="info-section__body"
+                 [innerHTML]="'User.' + this.info[this.step-1] + '_rules-info' | translate | sanitizer: 'html'"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<ul class="mobile-faq-section" [ngStyle]="layoutService.layoutStyle">
+  <li
+    *ngFor="let language of languageKeys"
+    [innerHTML]="'Faq.' + language | translate"
+    class="{{language}}"
+  ></li>
+</ul>
+<div class="to_top" *ngIf="showScroll">
+  <fa-icon [icon]="['fas', 'arrow-alt-circle-up']" [size]="'2x'" (click)="scrollToTop()"></fa-icon>
+</div>

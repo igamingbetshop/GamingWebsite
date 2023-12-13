@@ -1,0 +1,190 @@
+.tickets-section {
+  border-radius: 4px;
+  padding: var(--ticekts-section-padding, 14px 18px 25px 27px);
+  .user-right-panel_title {
+    height: auto;
+    padding-bottom: 10px;
+  }
+  .ticket-section-part {
+    background: #fff;
+    padding: 16px 13px 22px 15px;
+    border-radius: 4px;
+  }
+  .block-head {
+    font-size: 15px;
+    .item-id-title {
+      text-align: center;
+      width: 120px;
+    }
+    .item-status-title {
+      width: 120px;
+      text-align: left;
+    }
+
+    .item-date-title {
+      text-align: left;
+      width: 120px;
+    }
+  }
+}
+.messages-block_top_row {
+  font-size: 15px;
+  //padding-right: 22px;
+  padding-right: 45px;
+  cursor: pointer;
+  text-align: left;
+  .item-id {
+    text-align: center;
+  }
+  .icon-arrow {
+    transform: rotate(90deg);
+    position: absolute;
+    right: 12px;
+  }
+  .icon-arrow-image {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 12px;
+  }
+}
+.open-message-block {
+  background: #001F3E;
+  width: 54%;
+  //height: 300px;
+  position: fixed;
+  bottom: 55px;
+  right: 73px;
+  border-radius: 20px;
+  z-index: 1;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  .message-header-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    width: 100%;
+    padding: 0px 11px 11px;
+    font-size: 22px;
+    .icon-close {
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .icon-log-out {
+      font-size: 20px;
+      transform: rotate(-90deg);
+      cursor: pointer;
+      color: transparent;
+    }
+    .message-title-text {
+      font-weight: 600;
+    }
+  }
+  .message-block-part {
+    overflow-y: auto;
+    //height: 160px;
+    height: var(--tickets-messages-block-part-height, 260px);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .message-block-part::-webkit-scrollbar {
+    display: none;
+  }
+  .messages-block_item {
+    position: relative;
+    .send-message-part {
+      textarea {
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+      }
+      textarea::placeholder {
+        font-size: 20px;
+      }
+    }
+    .craft_btn {
+      font-size: 31px;
+      width: 63px;
+      padding: 0;
+      color: #fff;
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 7px;
+      position: absolute;
+      right: 5px;
+    }
+    .craft_btn:hover {
+      background: #f6a201;
+    }
+  }
+}
+.open-message-block::-webkit-scrollbar {
+  display: none;
+}
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid transparent;
+  border-left: 30px solid #001F3E;
+  position: fixed;
+  bottom: 82px;
+  right: 43px;
+}
+.tickets-section {
+  section {
+    .section-content {
+      background: var(--tickets-box-section-background, #D9D9D9);
+      border-radius: 10px;
+    }
+  }
+  .messages-block .message-header {
+    width: 120px;
+    padding: 10px 5px;
+    position: relative;
+    .unread-messages {
+      position: absolute;
+      right: 28px;
+      top: 6px;
+    }
+  }
+  .message-block-head div {
+    overflow: visible;
+    padding: 0 9px 0 5px;
+    width: auto;
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 1376px)
+{
+  .open-message-block {
+    bottom: 0;
+  }
+  .triangle {
+    bottom: 30px;
+    right: 48px;
+  }
+  .messages-block_top_row {
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 1377px) and (max-width: 1599px)
+{
+  .open-message-block {
+    bottom: 0;
+  }
+  .triangle {
+    bottom: 30px;
+    right: 48px;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .tickets-section {
+    .user-right-panel_title {
+      font-size: 22px;
+    }
+    .ticket-section-part {
+      .add-tickets button {
+        padding: 0 40px;
+      }
+    }
+  }
+}

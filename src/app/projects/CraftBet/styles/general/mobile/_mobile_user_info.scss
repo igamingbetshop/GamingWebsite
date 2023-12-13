@@ -1,0 +1,148 @@
+@import "../../../styles/helpers/variables";
+
+.mobile-modal-content {
+  margin: var(--m-info-modal-content-margin, 68px auto 0);
+  border-radius: var(--m-info-modal-content-border-radius, 20px);
+  background: $account-deposit-section-bg;
+  padding: 16px 0;
+
+  &.mobile-info-modal-content {
+   /* height: 430px;*/
+    height: 70vh;
+    width: 90%;
+  }
+
+  .modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+  }
+
+  .mobile-user-history-content {
+
+    & > div {
+      margin: auto;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      color: rgba(51, 51, 51, 0.8);
+      line-height: 30px;
+    }
+
+    &__label {
+      font-weight: 600;
+      color: #232323;
+    }
+
+.history-table
+{
+  width: 100%;
+  height:auto;
+  border: solid 1px rgba(32, 91, 152, 0.36);
+  background-color: rgba(103, 102, 102, 0.15);
+  border-radius: 4px;
+  padding: 16px 10px;
+  margin-bottom: 8px;
+  .table-list {
+    width: 100%;
+
+    &__row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      line-height: 30px;
+
+      .header-item {
+        font-size: 14px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        text-align: left;
+        color: #000000;
+        letter-spacing: -0.18px;
+        align-self: flex-start;
+
+
+        /* white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         line-height: 1.31;
+         width: 15%;*/
+      }
+      .body-item
+      {
+        width: 50%;
+        text-align: right;
+        color: rgba(71, 71, 71, 0.69);
+        &.status-Lost
+        {
+          color: itemColor(m-user-info-status-lost, rgba(71, 71, 71, 0.69));
+        }
+        &.status-Won
+        {
+          color: itemColor(m-user-info-status-won, rgba(71, 71, 71, 0.69));
+        }
+        &.status-New
+        {
+          color: itemColor(m-user-info-status-new, rgba(71, 71, 71, 0.69));
+        }
+      }
+    }
+    .border-line
+    {
+      width: 94%;
+      margin: 16px auto;
+      height: 1px;
+      background-color: #ffffff;
+    }
+
+  }
+}
+
+
+  }
+
+  max-width: 1000px;
+
+  .modal_content {
+    padding: 16px 8px;
+    height: calc(100% - 16px);
+    overflow-y: auto;
+  }
+  ::-webkit-scrollbar-track { border-radius: 15px; background-color: backgroundColor(bet-info-scrollbar-track, #000)!important; }
+  ::-webkit-scrollbar-thumb {  border-radius: 15px;  background-color:backgroundColor(bet-info-scrollbar-thumb, #999999) !important;  }
+
+  h3 {
+    text-align: center;
+    color: $label-color;
+    margin: 16px 0 20px 0;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.31;
+    letter-spacing: normal;
+  }
+
+  h1 {
+    font-size: 16px;
+    font-weight: 600;
+    float: left;
+    color: $label-color;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.31;
+    letter-spacing: normal;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+

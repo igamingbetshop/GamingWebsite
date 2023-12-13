@@ -1,0 +1,12 @@
+<div class="user_tickets" (click)="openTiketsPage($event)">
+  <div class="message-area"></div>
+  <ng-container *ngIf="menuItem?.Src; else menuItemIcon">
+    <img [src]="menuItem?.Src" alt="">
+  </ng-container>
+  <ng-template #menuItemIcon>
+    <i class="icon icon-{{menuItem?.Icon}}" title="Ticket"></i>
+    <i *ngIf="!menuItem?.Icon" class="icon icon-message ticket-icon" title="Ticket"></i>
+  </ng-template>
+<!--  <i class="icon icon-message" title="Ticket"></i>-->
+  <span *ngIf="unreadMessagesCount > 0" class="user-info_item_unreadMessagesCount">{{unreadMessagesCount}}</span>
+</div>

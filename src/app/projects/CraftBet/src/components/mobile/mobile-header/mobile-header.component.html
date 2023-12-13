@@ -1,0 +1,171 @@
+<div class="mobile-header-section"
+     [ngClass]="{'double-line-header': headerPanel2.length > 0, 'single-line-header': !headerPanel2.length }">
+    <div class="time-section">
+        <ng-template #timeRef></ng-template>
+    </div>
+    <div class="mobile-header-section_topPanel flex_between" *ngIf="generalMenuItems.length > 0"
+         [ngClass]="{'mobile-header-section_topPanel_isLogedIn': isLogin}">
+        <ul class="general-menu" [ngClass]="{'betweenFlex': generalMenuItems.length <= 3}">
+            <li *ngFor="let menuItem of generalMenuItems" (click)="clickInRoute(menuItem);"
+                class="{{menuItem?.className}}"
+                [ngClass]="{'full-right': menuItem?.Orientation, 'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated, 'onlyMenuItem' : menuItem.className == 'header-menu-item-style1'}">
+
+                <div *ngIf="menuItem.contentType == 'usernameBalanceTxt'">
+                    <div class="info-block">
+                        <span class="info-block_label">{{'User.Balance' | translate}}</span>
+                        <span class="info-block_value"> {{userInfoData?.CurrencyId}} {{balance | toNumber | number: '.2'}}</span>
+                    </div>
+                </div>
+
+                <div *ngIf="menuItem.contentType == 'creditBalanceTxt'">
+                    <div class="info-block">
+                        <span class="info-block_userData">
+                            {{ userData?.UserName }}
+                        </span>
+                    </div>
+
+                    <div class="info-block">
+                        <span class="value-label">{{'User.Credit' | translate}}</span>
+                        <span class="value-credit"> {{userInfoData?.CurrencyId}}
+                            <span>{{accountData?.AvailableCredit | toNumber | number: '.2'}}</span>
+                        </span>
+                    </div>
+
+                </div>
+
+                <div *ngIf="menuItem.contentType == 'balanceTxt' && balance || balance === '0'">
+                    <div class="info-block">
+                        <span>
+                        <span class="header-first-name">{{userData.FirstName}}</span>
+                        <span class="header-last-name">{{userData.LastName}}</span>
+                        <span class="header-user-name">{{userData?.UserName}}</span>
+                        </span>
+                    </div>
+                    <div class="info-block" [attr.href]="menuItem?.Href ? menuItem?.Href : null" dropdown (click)="navigateByHref(menuItem)">
+                        <span *ngIf="(bonus && bonus != '0.00') || unusedBalance">{{'User.Balance' | translate}}</span>
+                        <span> {{currencySymbol}} {{balance | toNumber | number: '.2'}}</span>
+                        <app-mobile-account-page-type2-balance class="balance-popup" *ngIf="isLogin" [templateType]="2"></app-mobile-account-page-type2-balance>
+                    </div>
+                    <div *ngIf="balanceTypes.bonus && bonus && bonus != '0.00'" class="info-block">
+                        <span>{{'User.Bouns' | translate}} </span>
+                        <span> {{currencySymbol}} {{bonus | toNumber | number: '.2'}}</span>
+                    </div>
+                    <div *ngIf="balanceTypes.unused && unusedBalance" class="info-block">
+                        <span>{{'User.UnusedBalance' | translate}} </span>
+                        <span> {{currencySymbol}} {{unusedBalance | toNumber | number: '.2'}}</span>
+                    </div>
+                </div>
+
+                <div *ngIf="(menuItem.contentType === 'commonBtn')" class="default_width">
+                    <functional-btn [menuItem]="menuItem" class="{{menuItem.className}}-type" itemClassname="{{menuItem.className}}"
+                    ></functional-btn>
+                </div>
+
+                <div *ngIf="menuItem.contentType == 'logoImg'">
+                    <div>
+                        <img (click)="clickInRoute('/' + menuItem.Href);"
+                             [ngClass]="{'logo-isLogedIn': isLogin}"
+                             [routerLink]="['/' + menuItem.Href]"
+                             [src]="logoUrl" (error)="errorHandler($event)"/>
+                    </div>
+                </div>
+
+                <div *ngIf="menuItem.contentType == 'languageDpd'">
+                    <ng-template #languages></ng-template>
+                </div>
+
+                <div *ngIf="menuItem.contentType === 'loginBtn'" (click)="$event.stopPropagation()">
+                    <ng-template #loginButton></ng-template>
+                </div>
+                <div *ngIf="(menuItem.contentType === 'commonBtn') && !isLogin" class="default_width">
+                    <a class="general-menu_item_link"
+                       *ngIf="menuItem?.OpenInRouting">
+                        {{'Header.' + menuItem?.Title | translate}}
+                    </a>
+                </div>
+                <div *ngIf="menuItem.contentType == 'depositBtn'">
+                    <img [src]="'../../../../../../../assets/images/' + menuItem.Icon"/>
+                </div>
+                <div *ngIf="menuItem.contentType == 'loginBtn'">
+                    <ng-template #loginButton></ng-template>
+                </div>
+
+                <div *ngIf="menuItem.contentType == 'leftMenu'" (click)="$event.stopPropagation()">
+                    <div class="mobile-header-section_bars">
+                        <fa-icon [icon]="faBars" [size]="'2x'" (click)="onLeftSidebarOpen()"></fa-icon>
+                    </div>
+                </div>
+
+                <div *ngIf="menuItem.contentType == 'rightMenu' && isLogin" (click)="$event.stopPropagation()">
+                    <div class="mobile-header-section_topPanel_right">
+                        <fa-icon *ngIf="!menuItem.Icon" [icon]="faUser" [size]="'2x'" (click)="onRightSidebarOpen()"></fa-icon>
+                        <img *ngIf="menuItem.Icon" class="custom-user-icon" [src]="'../../../../../../../assets/images/'+ menuItem.Icon" (click)="onRightSidebarOpen()">
+                    </div>
+                </div>
+
+                <div *ngIf="menuItem.contentType == 'rightMenu' && !isLogin" (click)="$event.stopPropagation()">
+                    <div class="mobile-header-section_topPanel_right">
+                        <fa-icon *ngIf="menuItem.icon; else joinUsRef" [icon]="faUser" [size]="'2x'" (click)="onRightSidebarOpen()"></fa-icon>
+                        <ng-template #joinUsRef>
+                            <button class="join-us" (click)="saveData.getMobileLoginPreviousState()" [routerLink]="['/login']">{{'Login.join-us' | translate}}</button>
+                            <fa-icon class="join-us-icon" [icon]="faUser" [size]="'2x'" [routerLink]="['/login']"></fa-icon>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <div class="sign-up" *ngIf="menuItem.contentType === 'signupBtn'">
+                    <button type="button"  class="signup_btn"  [routerLink]="['/signup']">{{ 'Login.Sign Up' | translate }}</button>
+                </div>
+
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="mobile-header-section_topPanel2 flex_between" *ngIf="headerPanel2.length > 0">
+
+        <ul class="general-menu" [ngClass]="{'betweenFlex': headerPanel2.length <= 3}">
+            <li *ngFor="let menuItem of headerPanel2" (click)="clickInRoute(menuItem);"
+                class="{{menuItem?.className}}"
+                [ngClass]="{'full-right': menuItem?.Orientation, 'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated, 'onlyMenuItem' : menuItem.className == 'header-menu-item-style1'}">
+
+
+                <div *ngIf="menuItem.contentType == 'creditBalanceTxt'">
+                    <div class="info-block">
+                        <span class="info-block_userData">
+                            {{ userData?.UserName }}
+                        </span>
+                    </div>
+
+                    <div class="info-block">
+                        <span class="value-label">{{'User.Credit' | translate}}</span>
+                        <span class="value-credit"> {{userInfoData?.CurrencyId}}
+                            <span>{{accountData?.AvailableCredit | toNumber | number: '.2'}}</span></span>
+                    </div>
+
+                </div>
+
+                <div *ngIf="menuItem.contentType == 'usernameBalanceTxt'">
+                    <div class="info-block">
+                        <span class="info-block_label">{{'User.Balance' | translate}}</span>
+                        <span class="info-block_value"> {{userInfoData?.CurrencyId}} {{balance | toNumber | number: '.2'}}</span>
+                    </div>
+                </div>
+
+                <div *ngIf="menuItem.contentType == 'cashBalanceTxt'">
+                    <div class="info-block">
+                        <span class="info-block_label">{{'User.Balance' | translate}} </span>
+                        <span class="info-block_value"> {{userInfoData?.CurrencyId}} {{accountData?.CashBalance | toNumber | number: '.2'}}</span>
+                    </div>
+                </div>
+
+                <div class="time-section">
+                    <ng-template #timeRef></ng-template>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <ng-template #mobileNavbarRef></ng-template>
+</div>
+

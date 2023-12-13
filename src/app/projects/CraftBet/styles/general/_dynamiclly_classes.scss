@@ -1,0 +1,31 @@
+$headerPanel: var(--header-panel1-height);
+$headerPane2: var(--header-panel2-height);
+
+.calculateContentSection {
+  height: calc(100vh - #{$headerPanel} - #{$headerPane2});
+}
+
+/**
+**Header
+**/
+
+
+/**
+**Content Section
+**/
+
+.content_without_footer {
+
+}
+
+.content_without_footer_one_line_header {
+  height: calc(100vh - #{$headerPanel});
+}
+
+.content_without_footer_two_line_header {
+  height: calc(100vh - #{$headerPanel} - #{$headerPane2});
+}
+
+/**
+**Footer
+**/

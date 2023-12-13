@@ -1,0 +1,1701 @@
+.scrallablePart {
+  /*max-height: 450px;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;*/
+
+
+  &.shortHeight {
+    max-height: 370px;
+  }
+
+  &_content {
+    margin-top: 15px;
+
+    &_block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      height: 607px;
+      margin-top: 12px;
+      overflow-y: auto;
+      padding-right: 20px;
+
+
+      .form-column {
+        width: 304px;
+      }
+
+
+      .payment-list-column {
+        /*  width: calc(100% - 304px);*/
+        padding-right: 4px;
+
+        .payment_list {
+          width: 100%;
+
+          &_item {
+            width: 100%;
+            min-height: var(--account-content-item-min-height, 188px);
+            background: $account-content-item-bg-color;
+            border-radius: 4px;
+            padding: var(--account-content-item-padding, 24px);
+            display: flex;
+            cursor: pointer;
+
+            img {
+              background: backgroundColor(payment-list-img, #fff);
+
+            }
+
+            &__info {
+              font-weight: normal;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: 19px;
+              letter-spacing: normal;
+              text-align: left;
+              position: relative;
+              /* width: calc(100% - 280px);*/
+              clear: both;
+
+              .info_text {
+                /* overflow: hidden;*/
+                text-overflow: ellipsis;
+                /* display: -webkit-box;*/
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+                padding-right: 0;
+
+
+              }
+
+            }
+
+            &.selected {
+              box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.16);
+              background: $account-content-item-selected-bg-color;
+              &:hover
+              {
+                background: $account-content-item-selected-hover-bg-color;
+              }
+            }
+
+            &:hover {
+              box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.16);
+              background: var(--account-content-item-hover-bg-color, #384F75);
+            }
+
+          }
+
+        }
+
+        .balance_info {
+          color: var(--account-payment-amount-color, rgba(232, 217, 12, 0.85));
+          margin-bottom: 5px;
+          white-space: nowrap;
+          font-size: var(--account-payment-amount-font-size, 14px);
+          display: flex;
+          div{margin-right: 10px}
+        }
+      }
+
+      .content_row {
+        position: relative;
+        width: 100%;
+        clear: both;
+
+        .payment_field {
+          padding: 0;
+          text-indent: 10px;
+        }
+
+
+        .payment-confirm {
+          border-top: 2px solid color(settings-table-border-color);
+          width: 90%;
+          position: absolute;
+          bottom: 0;
+          left: 15px;
+          height: 100px;
+        }
+
+        input[type=text] {
+          border: 1px solid #717171;
+        }
+
+        .craft_btn {
+          padding: 0 32px;
+          text-transform: uppercase;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .betshops-list {
+    margin-top: 25px;
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0 0 0 35px;
+
+
+    ul {
+      li {
+        font-size: 14px;
+        padding: 0 14px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .user-account-item {
+    width: 100%;
+    margin-top: 12px;
+    padding: 5px 7px;
+
+    span {
+      font-weight: 500;
+      font-size: 14px;
+      display: inline-block;
+      margin: 0 13px;
+    }
+  }
+
+  .activate-bonus-header {
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: left;
+  }
+
+  .activate-bonus-btn {
+    width: 50%;
+    margin-top: 8px;
+    padding: 0 32px;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 4px;
+    /*  background-color: backgroundColor(activate-bonus-btn, #02887e);*/
+    background-image: linear-gradient(to bottom, backgroundColor(activate-bonus-btn-top, #9cbc3f), backgroundColor(activate-bonus-btn-bottom, #7fa309));
+    font-weight: 600;
+    height: 40px;
+    line-height: 40px;
+    opacity: 0.9;
+    border: none;
+    cursor: pointer;
+  }
+
+  .activate-bonus-type-box {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      outline: none;
+      flex: 1;
+      margin-top: 10px;
+      padding: 0 32px;
+      text-transform: uppercase;
+      font-size: 16px;
+      background: -webkit-linear-gradient(90deg, var(--payment-button-background-gradient-first-color) 0, var(--payment-button-background-gradient-second-color) 100%);
+      font-weight: 600;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      opacity: .8;
+
+      &:first-of-type {
+        margin-right: 5px
+      }
+
+      &:last-of-type {
+        margin-left: 5px
+      }
+
+      &.selected {
+        opacity: 1
+      }
+    }
+  }
+
+  .betshop_section {
+    height: auto;
+    overflow-y: unset;
+    overflow-x: unset;
+    padding: 0;
+    margin-right: 18px;
+    width: 100%;
+    margin-bottom: 25px;
+    position: relative;
+
+    &__item {
+      line-height: 38px;
+      font-family: 'Akrobat-SemiBold';
+      font-size: 19px;
+    }
+
+    .subItem {
+      height: 38px;
+      line-height: 38px;
+      font-family: 'Akrobat-SemiBold';
+      font-size: 19px;
+      padding-left: 20px;
+      width: 95%;
+      margin: 5px 0;
+      border-radius: 20px;
+
+      &.selected {
+        background: rgba(135, 143, 162, .79);
+      }
+
+
+      &:hover {
+        background: rgba(135, 143, 162, .45);
+      }
+
+    }
+
+    .payment-list {
+      .current-item {
+        min-height: 40px;
+
+        span {
+          margin-left: 0
+        }
+      }
+
+      .dropdown-list {
+        top: 50px
+      }
+    }
+  }
+}
+
+.BankAccountNumber-item {
+  z-index: 99999;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 10px;
+  font-size: 13px;
+  background: #717171;
+  position: inherit;
+  border-bottom: 1px solid #f6f5f5;
+  cursor: pointer;
+}
+
+.mobile_info {
+  color: $account-content-item-color;
+  margin-left: 12px;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.36;
+  letter-spacing: normal;
+  position: relative;
+
+  .info_text {
+    word-break: break-all;
+  }
+
+  .balance_info {
+    color: var(--account-payment-amount-color, rgba(232, 217, 12, 0.85));
+    width: 100%;
+    margin-top: 10px;
+    font-size: var(--account-payment-amount-font-size, 14px);
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+
+    span {
+      &:first-child {
+        margin-right: 12px;
+      }
+    }
+  }
+
+}
+
+
+.payment-list {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  padding: 4px 16px;
+  background: #f2f2f2;
+  border-radius: 8px;
+  margin-bottom: 16px;
+
+  .current-item {
+    font-size: 20px;
+
+    img {
+      height: 50px;
+    }
+
+    span {
+      margin-left: 60px;
+      margin-right: 6px;
+      white-space: nowrap;
+    }
+
+  }
+}
+
+.payment-section {
+  font-size: var(--account-content-item-font-size);
+  color: $account-content-item-color;
+
+  .account_title {
+    padding: 0 10px;
+  }
+
+  .scrallablePart {
+    max-height: 705px;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: var(--account-withdraw-content-padding-right, 0px);
+
+    &.amount-error-space {
+      padding-bottom: 21px;
+
+      & + .payment-form-field {
+        margin-top: -10px !important;
+      }
+    }
+
+    &.shortHeight {
+      max-height: 370px;
+    }
+
+  }
+
+  &_content {
+    .payment_header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      font-style: normal;
+      font-weight: 500;
+      font-size: var(--account-content-header-font-size, 16px);
+      line-height: var(--account-content-header-line-height, 18px);
+      color: color(account-content-header);
+    }
+
+    .underline {
+      height: 1px;
+      background: var(--account-content-header-underline-bg, linear-gradient(180deg, #48628E 0%, #111723 100%));
+      box-shadow: var(--account-content-header-underline-shadow, 0 4px 8px rgba(0, 0, 0, 0.94));
+      border-radius: 6px;
+      margin-top: var(--account-content-header-underline-margin-top, 10px);
+      margin-bottom: var(--account-content-header-underline-margin-bottom, 24px);
+    }
+
+
+    &_block {
+      width: 100%;
+      display: flex;
+      gap: $account-small-gap;
+      height: var(--payment-section-content-block-width, 755px);
+
+      .payment-list-column {
+        /*width: calc(100% - var(--enter-payment-info-width));*/
+        flex: 2;
+        overflow-y: hidden;
+
+        .payment_list {
+          display: flex;
+          flex-direction: column;
+          gap: $account-big-gap;
+          /*width: var(--payment-width, 868px);*/
+          width: 100%;
+          padding-right: 8px;
+          overflow-y: auto;
+          height: calc(100% - 55px);
+
+          &_item {
+            width: 100%;
+            min-height: var(--account-content-item-min-height, 188px);
+            background: $account-content-item-bg-color;
+            border-radius: 4px;
+            padding: var(--account-content-item-padding, 24px);
+            display: flex;
+            cursor: pointer;
+
+            img {
+              background: backgroundColor(payment-list-img, #fff);
+
+            }
+
+            &_img {
+              /* width: 260px;*/
+              width: width(payment-list-item-img, 30%);
+              /*height: 140px;*/
+              height: 100%;
+              background-size: 100% 100%;
+            }
+
+            &__info {
+              margin-left: var(--account-payment-system-margin, 20px);
+              font-weight: normal;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: 19px;
+              letter-spacing: normal;
+              text-align: left;
+              position: relative;
+              /* width: calc(100% - 260px - var(--account-payment-system-margin));*/
+              width: calc(70% - var(--account-payment-system-margin));
+
+              .info_text {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+                padding-right: 0;
+                color: color(payment-list-info-text);
+                font-size: fontSize(payment-list-info-text, 16px);
+                line-height: var(--payment-list-info-text-line-height, 19px);
+              }
+
+              .balance_info {
+                color: var(--account-payment-amount-color, rgba(232, 217, 12, 0.85));
+                width: 100%;
+                position: absolute;
+                margin-top: 6px;
+                font-size: var(--account-payment-amount-font-size, 14px);
+                font-weight: var(--account-payment-amount-font-weight, 600);
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.33;
+                letter-spacing: normal;
+                bottom: 13px;
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                text-align: var(--account-payment-amount-text-align, left);
+                flex-direction: var(--account-payment-amount-flex-direction, row);
+
+                //&:last-of-type {
+                //  bottom: 0
+                //}
+
+                span {
+                  &:first-child {
+                    margin-right: 12px;
+                  }
+                }
+              }
+              .balance_info_commission {
+                bottom: var(--account-payment-commission-bottom, -4px);
+              }
+              .balance_info_fixed {
+                bottom: var(--account-payment-commission-fixed-bottom, -18px);
+              }
+
+            }
+
+            &.selected {
+              box-shadow: var(--account-payment-amount-selected-box-shadow, 0 4px 4px 0 rgba(0, 0, 0, 0.16));
+              background: $account-content-item-selected-bg-color;
+              border: var(--account-payment-amount-selected-border, none);
+              &:hover
+              {
+                background: $account-content-item-selected-hover-bg-color;
+              }
+            }
+
+            &:hover {
+              box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.16);
+              background: $account-content-item-bg-color;
+            }
+
+          }
+
+        }
+
+      }
+
+      .content_row {
+        box-shadow: var(--amount-withdraw-box-shadow, none);
+
+        &.right-part {
+          /*width: var(--enter-payment-info-width, 550px);*/
+          flex: 1;
+          height: 100%;
+          overflow: var(--amount-withdraw-overflow, auto);
+          display: flex;
+          flex-direction: column;
+
+          .form-column {
+            margin-top: var(--amount-withdraw-margin-top, 45px);
+            padding: 0;
+            box-shadow: var(--amount-withdraw-margin-top, none);
+          }
+
+          .deposit_payment_section {
+          /*  height: 100%;*/
+            width: 100%;
+
+            &__form {
+              height: 100%;
+
+              form {
+                display: var(--amount-withdraw-display, flex);
+                flex-direction: var(--amount-withdraw-flex-direction, column);
+                justify-content: var(--amount-withdraw-justify-content, space-between);
+                gap: var(--amount-withdraw-gap, 0px);
+                height: var(--amount-withdraw-height, 100%);
+                width: 100%;
+
+                .form-content {
+                  height: 87%;
+                  overflow-y: auto;
+                  width: var(--amount-withdraw-form-width, 100%);
+                }
+              }
+
+              &_top {
+                height: 100%;
+                overflow-y: var(--amount-withdraw-scrollable-overflow, hidden);
+                padding: var(--amount-withdraw-scrollable-padding, 0);
+              }
+            }
+          }
+          .info_text
+          {
+            display: display(deposit-text-info, none);
+          }
+        }
+
+        overflow-x: hidden;
+        height: 100%;
+        position: relative;
+        border-radius: 6px;
+        padding: var(--account-content-row-paddding, 20px);
+        color: $account-content-item-color;
+        background-color: backgroundColor(acount-content-parts, #213454);
+
+        .payment_field {
+          padding: 0;
+          text-indent: 10px;
+        }
+
+        .info-item {
+          .left-part {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            input[type="radio"]:checked,
+            input[type="radio"]:not(:checked) {
+              position: absolute;
+            }
+
+            input[type="radio"]:checked,
+            input[type="radio"]:not(:checked) {
+              position: relative;
+              padding-left: 28px;
+              cursor: pointer;
+              line-height: 18px;
+              display: inline-block;
+              color: var(--user-radio-unchecked-color, #131A2C);
+            }
+
+            input[type="radio"]:checked:before,
+            input[type="radio"]:not(:checked):before {
+              content: '';
+              position: absolute;
+              left: -2px;
+              top: -3px;
+              width: 18px;
+              height: 18px;
+              border: none;
+              border-radius: 100%;
+              background: var(--user-radio-unchecked-color, #131A2C);
+            }
+
+            input[type="radio"]:checked:after,
+            input[type="radio"]:not(:checked):after {
+              content: '';
+              width: 8px;
+              height: 8px;
+              background: var(--user-radio-checked-color, linear-gradient(180deg, #DBEDFF 0%, #7A9EC2 49.48%, #6295C8 100%));
+              position: absolute;
+              top: 2px;
+              left: 3px;
+              border-radius: 100%;
+              transition: all 0.1s ease;
+            }
+
+            input[type="radio"]:not(:checked):after {
+              opacity: 0;
+              -webkit-transform: scale(0);
+              transform: scale(0);
+            }
+
+            input[type="radio"]:checked:after {
+              opacity: 1;
+              -webkit-transform: scale(1);
+              transform: scale(1);
+            }
+
+            .bonus-name {
+              color: $account-content-item-color;
+              font-size: var(--bonus-name-font-size, $font-size-3);
+              max-width: var(--bonus-name-max-width, 450px);
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+          }
+
+          .right-part {
+            .info-icon {
+              font-size: $font-size-2;
+              font-weight: normal;
+              border: 1px solid var(--deposit-info-border-color, #DBEDFF);
+              box-sizing: border-box;
+              border-radius: 4px;
+              padding: 4px 8px;
+              cursor: pointer;
+              position: relative;
+
+              .selected {
+                color: var(--account-content-item-color, #fff);
+                width: 0;
+                height: 0;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-bottom: 5px solid var(--bonus-info-bg, #3B5175);
+                position: absolute;
+                bottom: -6px;
+                left: 37%;
+              }
+            }
+
+            .bonus-info {
+              position: absolute;
+              z-index: 999;
+              width: 300px;
+              right: var(--account-content-row-paddding);
+              border-radius: 4px;
+              background-color: var(--bonus-info-bg, #3B5175);
+              padding: 10px;
+              margin-top: 3px;
+              font-size: $font-size-2;
+              display: flex;
+              justify-content: space-between;
+              gap: 6px;
+
+              &__text {
+                line-height: 16px;
+                color: $account-content-item-color;
+                opacity: 0.85;
+              }
+
+              &__close {
+                font-size: 8px;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        .bonus-label {
+          color: $account-content-item-color;
+          font-size: $font-size-4;
+          font-weight: normal;
+        }
+
+
+        .payment-confirm {
+          border-top: 2px solid color(settings-table-border-color);
+          width: 90%;
+          position: absolute;
+          bottom: 0;
+          left: 15px;
+          height: 100px;
+        }
+
+        input[type=text] {
+          border: var(--settings-table-border-input, none);
+        }
+
+        .craft_btn {
+          padding: 0 32px;
+          text-transform: uppercase;
+          font-size: 16px;
+        }
+
+        ::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          border-radius: 6px;
+          background-color: var(--user-scrollbar-thumb-color, #DBEDFF);
+        }
+
+        ::-webkit-scrollbar-track {
+          border-radius: 6px;
+          background-color: $account-content-item-bg-color;
+        }
+      }
+    }
+  }
+
+  .betshops-list {
+    margin-top: 25px;
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0 0 0 35px;
+
+
+    ul {
+      li {
+        font-size: 14px;
+        padding: 0 14px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .user-account-item {
+    width: 100%;
+    margin-top: 12px;
+    padding: 5px 7px;
+
+    span {
+      font-weight: 500;
+      font-size: 14px;
+      display: inline-block;
+      margin: 0 13px;
+    }
+  }
+
+  .activate-bonus-header {
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: left;
+  }
+
+  .activate-bonus-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 0 32px;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: backgroundColor(activate-bonus-btn, #02887e);
+    font-weight: 600;
+    height: 40px;
+    line-height: 40px;
+    opacity: 0.9;
+    border: none;
+    cursor: pointer;
+  }
+
+  .activate-bonus-type-box {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      outline: none;
+      flex: 1;
+      margin-top: 10px;
+      padding: 0 32px;
+      text-transform: uppercase;
+      font-size: 16px;
+      background: -webkit-linear-gradient(90deg, var(--payment-button-background-gradient-first-color) 0, var(--payment-button-background-gradient-second-color) 100%);
+      font-weight: 600;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      opacity: .8;
+
+      &:first-of-type {
+        margin-right: 5px
+      }
+
+      &:last-of-type {
+        margin-left: 5px
+      }
+
+      &.selected {
+        opacity: 1
+      }
+    }
+  }
+}
+
+.betshop_section {
+  color: $account-content-item-color;
+  height: 250px;
+  overflow-x: hidden;
+  padding: 0 0 0 35px;
+  margin-right: 18px;
+  overflow-y: auto;
+  width: 100%;
+  margin-bottom: 25px;
+  position: relative;
+
+  &__mobile {
+    margin-right: 0;
+    padding: 0;
+    height: 100px;
+  }
+
+  &__item {
+    line-height: 38px;
+    font-family: 'Akrobat-SemiBold';
+    font-size: 19px;
+  }
+
+  .subItem {
+    height: 38px;
+    line-height: 38px;
+    font-family: 'Akrobat-SemiBold';
+    font-size: 19px;
+    padding-left: 20px;
+    width: 95%;
+    margin: 5px 0;
+    border-radius: 20px;
+
+    &.selected {
+      background: rgba(135, 143, 162, .79);
+    }
+
+
+    &:hover {
+      background: rgba(135, 143, 162, .45);
+    }
+
+  }
+}
+.checkbox
+{
+  position: absolute;
+  right: 23px;
+  font-size: 12px;
+  display: var(--withdraw-save-paymemnt-details, none);
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.right-part {
+  height: 100%;
+
+  app-withdraw-type2 {
+    height: calc(100% - 50px)
+  }
+  .bonus-refused {
+    display: var(--bonus-refused-display, flex);
+    align-items: center;
+    gap: 14px;
+    justify-content: flex-start;
+    position: relative;
+    padding-left: var(--bonus-refused-padding-left, 49px);
+    cursor: pointer;
+    line-height: 18px;
+    color: var(--account-content-item-color, #fff);
+    margin-top: var(--bonus-refused-margin-top, 16px);
+  }
+  .bonus-refused input[type="checkbox"] {
+    position: absolute;
+    left: var(--bonus-refused-input-left, 11.5px);
+    top: -3px;
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 100%;
+    background: var(--user-radio-unchecked-color, #131A2C);
+    cursor: pointer;
+  }
+  .bonus-refused input[type="checkbox"]:checked::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--user-radio-checked-color, linear-gradient(180deg, #DBEDFF 0%, #7A9EC2 49.48%, #6295C8 100%));
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    border-radius: 100%;
+    transition: all 0.1s ease;
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  .bonus-refused input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+  }
+
+  .bonus-refused input[type="checkbox"]::after {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  app-common-bonuses {
+    width: 95%;
+    margin: 0 auto;
+
+    .bonus-label {
+      padding: 0;
+    }
+
+    .default-scroll {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      //height: -webkit-fill-available;
+      height: var(--withdraw-default-scroll, auto);
+      gap: $account-big-gap;
+
+      .info-item {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.payment-section2 {
+  font-size: var(--account-content-item-font-size);
+  color: $account-content-item-color;
+
+  .payment-section_content {
+    .payment-section_content_block {
+      width: 100%;
+      display: flex;
+      gap: $account-small-gap;
+      height: auto;
+      align-items: start;
+      margin-top: var(--withdraw-payment-section-margin-top, 0px);
+
+      .payment-list-column {
+        /*width: calc(100% - var(--enter-payment-info-width));*/
+        flex: 2;
+        overflow-y: hidden;
+        padding: 0;
+        border-radius: unset;
+
+        .payment_list {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          width: 100%;
+          overflow-y: auto;
+          height: auto;
+
+          &_item {
+            width: 100%;
+            display: block;
+            padding-left: paddingLeft(account-payment-row, 0);
+            padding-right: paddingRight(account-payment-row, 0);
+            padding-top: 0;
+            padding-bottom: 0;
+            box-shadow: none;
+            min-height: unset;
+            background: var(--acount-content-parts-background-color, #213454);
+            cursor: pointer;
+
+
+            .payment_list_item_content {
+              padding-left: paddingLeft(account-payment-list, 40px);
+              padding-right: paddingRight(account-payment-list, 40px);
+
+              .payment-row {
+                height: 100%;
+                width: 100%;
+                border-top: 1px solid rgba(255, 255, 255, .1);
+                display: flex;
+                justify-content: space-between;
+                padding-top: paddingTop(account-payment-row, 17px);
+                padding-bottom: paddingBottom(account-payment-row, 17px);
+
+                fa-icon {
+                  justify-self: center;
+                  align-self: center;
+                  margin-right: 16px;
+                }
+
+                .payment-row-item {
+                  .payment-img {
+                    background: #fff;
+                    width: width(payment-list-item-img, 30%);
+                    height: height(payment-list-item-img, 60px);
+                    background-size: 100% 100%;
+                    border-bottom-left-radius: borderBottomLeftRadius(payment-list-item-img, 4px);
+                    border-bottom-right-radius: borderBottomRightRadius(payment-list-item-img, 4px);
+                    border-top-left-radius: borderTopLeftRadius(payment-list-item-img, 4px);
+                    border-top-right-radius: borderTopRightRadius(payment-list-item-img, 4px);
+                  }
+                }
+
+                &__info {
+
+                  margin-left: 0;
+
+                  .info_text {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 5;
+                    -webkit-box-orient: vertical;
+                    padding-right: 0;
+                    color: var(--account-payment-amount-color, #bbc6e9);
+                    font-size: var(--account-payment-amount-font-size, 14px);
+                    font-weight: 600;
+                    line-height: 20px;
+                  }
+
+                  .balance_info {
+                    color: var(--account-payment-amount-color, #bbc6e9);
+                    font-size: var(--account-payment-amount-font-size, 14px);
+                    font-weight: 600;
+                    line-height: 20px;
+                  }
+
+                  .transaction-fee {
+                    color: var(--account-payment-amount-color, #bbc6e9);
+                    font-size: var(--account-payment-amount-font-size, 14px);
+                    font-weight: 600;
+                    line-height: 20px;
+                  }
+                }
+
+                .payment-row-item {
+                  width: 23%;
+                  height: 100%;
+
+                  .payment-row-header {
+                    color: itemColor(payment-row-header, rgba(151, 161, 194, .5));
+                    font-size: fontSize(payment-row-header, 14px);
+                    font-weight: 400;
+                    margin-bottom: marginBottom(payment-row-header, 6px);
+                  }
+                }
+              }
+            }
+
+            .content_row {
+              overflow-x: hidden;
+              height: fit-content;
+              position: relative;
+              border-radius: unset;
+              padding: var(--account-content-row-paddding, 20px);
+              color: $account-content-item-color;
+              background-color: var(--product-background-color, #FFFFFF);
+              .bonus-refused {
+                display: var(--bonus-refused-display, flex);
+                align-items: center;
+                gap: 14px;
+                justify-content: flex-start;
+                position: relative;
+                padding-left: var(--bonus-refused-padding-left, 43px);
+                cursor: pointer;
+                line-height: 18px;
+                color: var(--account-content-item-color, #fff);
+                margin-top: var(--bonus-refused-margin-top, 16px);
+              }
+              .bonus-refused input[type="checkbox"] {
+                position: absolute;
+                left: var(--bonus-refused-input-left, 11.5px);
+                top: -3px;
+                width: 18px;
+                height: 18px;
+                border: none;
+                border-radius: 100%;
+                background: var(--user-radio-unchecked-color, #131A2C);
+                cursor: pointer;
+              }
+              .bonus-refused input[type="checkbox"]:checked::after {
+                content: '';
+                width: 8px;
+                height: 8px;
+                background: var(--user-radio-checked-color, linear-gradient(180deg, #DBEDFF 0%, #7A9EC2 49.48%, #6295C8 100%));
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                border-radius: 100%;
+                transition: all 0.1s ease;
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+              }
+              .bonus-refused input[type="checkbox"] {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                outline: none;
+              }
+
+              .bonus-refused input[type="checkbox"]::after {
+                content: '';
+                width: 0;
+                height: 0;
+                position: absolute;
+                opacity: 0;
+                -webkit-transform: scale(0);
+                transform: scale(0);
+              }
+
+              &.withdraw {
+                display: none;
+              }
+
+              .payment_field {
+                padding: 0;
+                text-indent: 10px;
+              }
+
+              .info-item {
+                .left-part {
+                  display: flex;
+                  align-items: center;
+                  gap: 14px;
+
+                  input[type="radio"]:checked,
+                  input[type="radio"]:not(:checked) {
+                    position: absolute;
+                  }
+
+                  input[type="radio"]:checked,
+                  input[type="radio"]:not(:checked) {
+                    position: relative;
+                    padding-left: 28px;
+                    cursor: pointer;
+                    line-height: 18px;
+                    display: inline-block;
+                    color: var(--user-radio-unchecked-color, #131A2C);
+                  }
+
+                  input[type="radio"]:checked:before,
+                  input[type="radio"]:not(:checked):before {
+                    content: '';
+                    position: absolute;
+                    left: -2px;
+                    top: -3px;
+                    width: 18px;
+                    height: 18px;
+                    border: none;
+                    border-radius: 100%;
+                    background: var(--user-radio-unchecked-color, #131A2C);
+                  }
+
+                  input[type="radio"]:checked:after,
+                  input[type="radio"]:not(:checked):after {
+                    content: '';
+                    width: 8px;
+                    height: 8px;
+                    background: var(--user-radio-checked-color, linear-gradient(180deg, #DBEDFF 0%, #7A9EC2 49.48%, #6295C8 100%));
+                    position: absolute;
+                    top: 2px;
+                    left: 3px;
+                    border-radius: 100%;
+                    transition: all 0.1s ease;
+                  }
+
+                  input[type="radio"]:not(:checked):after {
+                    opacity: 0;
+                    -webkit-transform: scale(0);
+                    transform: scale(0);
+                  }
+
+                  input[type="radio"]:checked:after {
+                    opacity: 1;
+                    -webkit-transform: scale(1);
+                    transform: scale(1);
+                  }
+
+                  .bonus-name {
+                    color: $account-content-item-color;
+                    font-size: $font-size-3;
+                    max-width: var(--bonus-name-max-width, 450px);
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                  }
+                }
+
+                .right-part {
+                  .info-icon {
+                    font-size: $font-size-2;
+                    font-weight: normal;
+                    border: 1px solid var(--deposit-info-border-color, #DBEDFF);
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    padding: 4px 8px;
+                    cursor: pointer;
+                    position: relative;
+
+                    .selected {
+                      color: var(--account-content-item-color, #fff);
+                      width: 0;
+                      height: 0;
+                      border-left: 5px solid transparent;
+                      border-right: 5px solid transparent;
+                      border-bottom: 5px solid var(--bonus-info-bg, #3B5175);
+                      position: absolute;
+                      bottom: -6px;
+                      left: 37%;
+                    }
+                  }
+
+                  .bonus-info {
+                    position: absolute;
+                    z-index: 999;
+                    width: 300px;
+                    right: var(--account-content-row-paddding);
+                    border-radius: 4px;
+                    background-color: var(--bonus-info-bg, #3B5175);
+                    padding: 10px;
+                    margin-top: 3px;
+                    font-size: $font-size-2;
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 6px;
+
+                    &__text {
+                      line-height: 16px;
+                      color: $account-content-item-color;
+                      opacity: 0.85;
+                    }
+
+                    &__close {
+                      font-size: var(--bonus-info-font-size, 8px);
+                      cursor: pointer;
+                    }
+                  }
+                }
+              }
+
+              .bonus-label {
+                color: $account-content-item-color;
+                font-size: $font-size-4;
+                font-weight: normal;
+              }
+
+
+              .payment-confirm {
+                border-top: 2px solid color(settings-table-border-color);
+                width: 90%;
+                position: absolute;
+                bottom: 0;
+                left: 15px;
+                height: 100px;
+              }
+
+              input[type=text] {
+                border: none;
+              }
+
+              .craft_btn {
+                padding: 0 32px;
+                text-transform: uppercase;
+                font-size: 16px;
+              }
+
+              ::-webkit-scrollbar {
+                width: 4px;
+              }
+
+              ::-webkit-scrollbar-thumb {
+                border-radius: 6px;
+                background-color: var(--user-scrollbar-thumb-color, #DBEDFF);
+              }
+
+              ::-webkit-scrollbar-track {
+                border-radius: 6px;
+                background-color: $account-content-item-bg-color;
+              }
+            }
+
+            &.opened {
+              .payment_list_item_content {
+                .payment-row {
+                  fa-icon {
+                    transform: rotate(-180deg);
+                    transition: all 0.1s;
+                  }
+                }
+              }
+
+              .content_row {
+                display: block
+              }
+            }
+
+            &:hover {
+              box-shadow: none
+            }
+          }
+
+
+        }
+
+      }
+    }
+  }
+
+  .account_title {
+    padding: 0 10px;
+  }
+
+  .scrallablePart {
+    max-height: 705px;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &.amount-error-space {
+      padding-bottom: 21px;
+
+      & + .payment-form-field {
+        margin-top: -10px !important;
+      }
+    }
+
+    &.shortHeight {
+      max-height: 370px;
+    }
+
+  }
+
+  .betshops-list {
+    margin-top: 25px;
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0 0 0 35px;
+
+
+    ul {
+      li {
+        font-size: 14px;
+        padding: 0 14px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .user-account-item {
+    width: 100%;
+    margin-top: 12px;
+    padding: 5px 7px;
+
+    span {
+      font-weight: 500;
+      font-size: 14px;
+      display: inline-block;
+      margin: 0 13px;
+    }
+  }
+
+  .activate-bonus-header {
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.36;
+    letter-spacing: normal;
+    text-align: left;
+  }
+
+  .activate-bonus-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 0 32px;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: backgroundColor(activate-bonus-btn, #02887e);
+    font-weight: 600;
+    height: 40px;
+    line-height: 40px;
+    opacity: 0.9;
+    border: none;
+    cursor: pointer;
+  }
+
+  .activate-bonus-type-box {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      outline: none;
+      flex: 1;
+      margin-top: 10px;
+      padding: 0 32px;
+      text-transform: uppercase;
+      font-size: 16px;
+      background: -webkit-linear-gradient(90deg, var(--payment-button-background-gradient-first-color) 0, var(--payment-button-background-gradient-second-color) 100%);
+      font-weight: 600;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      opacity: .8;
+
+      &:first-of-type {
+        margin-right: 5px
+      }
+
+      &:last-of-type {
+        margin-left: 5px
+      }
+
+      &.selected {
+        opacity: 1
+      }
+    }
+  }
+}
+
+.withdraw_payment_section2 {
+  height: 100%;
+  width: 100%;
+
+  &__form {
+    height: 100%;
+
+    form {
+      display: flex;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+
+      .scrallablePart {
+        width: 50%;
+
+        .payment-system-block {
+          margin-bottom: 0;
+        }
+      }
+
+      .payment-form {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        gap:var(--payment-form-gap, 0);
+
+        .payment-form-field {
+          display: flex;
+          gap: 38px;
+
+          &.iban {
+            position: relative;
+            align-items: center;
+
+            .iban-error {
+              position: absolute;
+              color: red;
+              bottom: -16px;
+              right: 0;
+            }
+
+            fa-icon {
+              height: fit-content
+            }
+
+            button {
+              background: #ff172d;
+              padding: 8px 16px;
+              color: white;
+              cursor: pointer;
+            }
+          }
+
+          label {
+            font-size: var(--payment-form-floating-label-font-size, 14px);
+            pointer-events: none;
+            color: rgba(255, 255, 255, 0.4);
+            white-space: nowrap;
+          }
+
+          .payment-form-field__column {
+            width: 100%;
+            height: auto;
+            line-height: 40px;
+            min-height: 40px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(154, 168, 196, 0.3803921569);
+            margin-bottom: var(--payment-form-field-margin-bottom, 24px);
+
+            input, select {
+
+              &.search-input {
+                padding: 0 0 0 45px;
+              }
+
+              border: none;
+              outline: none;
+              background: none;
+              padding: 0;
+              text-indent: 10px;
+              height: 100%;
+              min-height: 40px;
+              width: 84%;
+              color: white;
+            }
+
+            select {
+              width: 100%;
+              border: none;
+              outline: none;
+              color: white;
+              padding-right: 10px;
+              background-color: transparent !important;
+
+              option {
+                color: black !important;
+              }
+            }
+
+            input:focus ~ .floating-label, select:focus ~ .floating-label {
+              top: -25px;
+              font-size: fontSize(payment-form-floating-label-focused, 13px)
+            }
+
+            input:valid ~ .floating-label, select:valid ~ .floating-label {
+              top: -25px;
+              font-size: fontSize(payment-form-floating-label-focused, 13px)
+            }
+
+            input:not(:focus):valid ~ .floating-label, select:not(:focus):valid ~ .floating-label {
+              top: -25px;
+              font-size: fontSize(payment-form-floating-label-focused, 13px);
+            }
+
+
+            .floating-label {
+              position: absolute;
+              left: 0;
+              top: 0;
+              font-size: fontSize(payment-form-floating-label, 14px);
+              pointer-events: none;
+              color: rgba(255, 255, 255, .4);
+              -webkit-transition: all .2s ease-in-out;
+              transition: all .2s ease-in-out;
+            }
+
+            .error_message {
+              position: absolute;
+              top: 38px;
+              left: 0;
+              overflow: unset;
+            }
+
+            &.search-field {
+              img {
+                height: 20px;
+                width: 20px;
+              }
+
+              .search-input {
+                width: 95%;
+                padding: 0;
+              }
+
+              .search-label {
+                left: 36px;
+              }
+            }
+          }
+
+          .payment-btn {
+            border-radius: 4px;
+            width: 100%;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.31;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+            height: var(--payment-form-button-height, 48px);
+            background: #ff172d;
+          }
+
+          &.payment-form-select {
+            display: block
+          }
+        }
+
+        .payment-form-field__column_btn {
+          cursor: default;
+          margin-top: auto;
+
+          button {
+            border-radius: 4px;
+            width: 100%;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.31;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+            height: var(--payment-form-button-height, 48px);
+            background: #ff172d;
+
+            &:not([disabled]) {
+              cursor: pointer
+            }
+          ;
+          }
+
+          .success_message {
+            bottom: itemBottom(withdraw-success-message, 0);
+            left: itemLeft(withdraw-success-message, auto);
+          }
+        }
+      }
+    }
+
+    &_top {
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--withdraw-scrollbar-thumb-color, #FFFFFF) !important;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--withdraw-scrollbar-track-color, #FFFFFF) !important;
+}

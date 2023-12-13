@@ -1,0 +1,17 @@
+<div class="modal-content">
+  <div class="modal-body">
+    <h2 *ngIf="showMessage">{{'Ticket.Delete your message' | translate}}</h2>
+    <h2 *ngIf="!showMessage">{{'Ticket.Close your message' | translate}}</h2>
+    <fa-icon [icon]="['fas', 'times']" (click)="close()"></fa-icon>
+  </div>
+
+  <div class="modal_content">
+    <div *ngIf="showMessage" class="modal_content__message">{{'Error.Are You Sure You Want To Delete The Ticket' | translate}}</div>
+    <div *ngIf="!showMessage" class="modal_content__message">{{'Error.Are You Sure You Want To Close The Ticket' | translate}}</div>
+  </div>
+
+  <div class="modal_footer">
+    <button type="submit" class="craft_btn bg_payment" (click)="close()">{{'Ticket.No' | translate}}</button>
+    <button type="submit" class="craft_btn bg_recovery" (click)="saveChange()">{{'Ticket.Yes' | translate}}</button>
+  </div>
+</div>

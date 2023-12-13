@@ -1,0 +1,23 @@
+.contact-us-section {
+  background: backgroundColor(contact-us, transparent);
+  padding-top: paddingTop(contact-us, 50px);
+  &_content {
+    margin: 0 auto 0 auto;
+    background:backgroundColor(footer-section-content,$color-white);
+    height: 100%;
+    padding: 15px;
+    h2
+    {
+      font-size: fontSize(contact-us_title, 24px);
+      font-weight: fontWeight(contact-us_title, 700);
+      color: itemColor(contact-us_title, #000);
+    }
+    .contact_paragraph
+    {
+      font-size: fontSize(contact-us_content, 16px);
+      font-weight: fontWeight(contact-us_content, normal);
+      color: itemColor(contact-us_content, #000);
+    }
+  }
+
+}

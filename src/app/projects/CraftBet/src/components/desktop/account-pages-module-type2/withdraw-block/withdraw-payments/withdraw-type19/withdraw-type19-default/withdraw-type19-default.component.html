@@ -1,0 +1,118 @@
+<div class="withdraw_payment_section2 deposit-cash">
+
+    <div class="withdraw_payment_section2__form">
+        <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit(paymentForm)">
+            <div class="scrallablePart">
+                <app-common-accounts [templateType]="2"></app-common-accounts>
+            </div>
+            <div class="payment-form">
+                <div class="payment-form-field iban">
+                    <div class="payment-form-field__column">
+                        <input (click)="$event.stopPropagation()" type="text" class="payment-input" required
+                               formControlName="BankIBAN"/>
+                        <span class="floating-label">{{'Withdraw.IbanNumber' | translate}}*</span>
+                    </div>
+                    <button type="button" [disabled]="!paymentForm.get('BankIBAN').value" (click)="checkIban($event)">{{'Withdraw.CheckIban' | translate}}</button>
+                    <span class="iban-error" *ngIf="ibanState === 0">{{'Withdraw.IbanError' | translate}}</span>
+                    <fa-icon [icon]="['fas', 'check']" class="ng-fa-icon mobile_verify" *ngIf="ibanState === 1"></fa-icon>
+
+                </div>
+                <div class="payment-form-field payment-form-select">
+                    <div class="payment-form-field__column">
+                        <select *ngIf="banks.length; else bankNameRef" formControlName="BankName" class="payment-select"
+                                (click)="$event.stopPropagation()" (ngModelChange)="selectBank($event)">
+                            <option *ngFor="let bank of banks"
+                                    [value]="bank?.key">{{bank?.key}}</option>
+                        </select>
+                        <ng-template #bankNameRef>
+                            <input (click)="$event.stopPropagation()" type="text" class="payment-input"
+                                   formControlName="BankName" required/>
+                            <span class="floating-label">{{'Withdraw.BankName' | translate}}*</span>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <div class="payment-form-field payment-form-select" (click)="$event.stopPropagation()">
+                    <label class="floating-label">{{'Withdraw.NameSurname' | translate}}*</label>
+                    <div class="payment-form-field__column">
+                        <input type="text" class="payment-input" placeholder="{{'Withdraw.NameSurname-placeholder' | translate}}"
+                               disabled ngModel="{{NameSurname}}" [ngModelOptions]="{standalone:true}"
+                        />
+
+                    </div>
+                </div>
+
+
+                <div class="payment-form-field">
+                    <div class="payment-form-field__column">
+                        <input (click)="$event.stopPropagation()" type="text" class="payment-input"
+                               formControlName="SwiftCode" required/>
+                        <span class="floating-label">{{'Withdraw.IbanSwiftCode' | translate}}*</span>
+                    </div>
+                </div>
+                <div class="payment-form-field">
+                    <div class="payment-form-field__column">
+                        <select (click)="$event.stopPropagation()" required formControlName="BankCountry" class="payment-select">
+                            <option *ngFor="let country of countries"
+                                    [value]="country?.Id">{{country?.Name}}</option>
+                        </select>
+                        <span class="floating-label">{{'Withdraw.BankCountry' | translate}}*</span>
+                    </div>
+                </div>
+                <div class="payment-form-field">
+                    <div class="payment-form-field__column">
+                        <input (click)="$event.stopPropagation()" type="text" class="payment-input"
+                               formControlName="BankCity" required/>
+                        <span class="floating-label">{{'Withdraw.BankCity' | translate}}*</span>
+                    </div>
+                </div>
+                <div class="payment-form-field">
+                    <div class="payment-form-field__column">
+                        <input (click)="$event.stopPropagation()" type="text" class="payment-input"
+                               formControlName="BankAddress" required/>
+                        <span class="floating-label">{{'Withdraw.BankAddress' | translate}}*</span>
+                    </div>
+                </div>
+
+                <div class="payment-form-field"
+                     [ngClass]="{'nominals-fields-3': ((nominals !== null) && (nominals && nominals.length <= 9)), 'nominals-fields-4': ((nominals !== null) && (nominals && nominals.length > 9))}">
+                    <div class="payment-form-field__column">
+                        <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input"
+                               (click)="$event.stopPropagation()"
+                               [(ngModel)] = "amount"
+                               formControlName="Amount" required numbersOnly/>
+                        <span class="floating-label">{{'Withdraw.Amount' | translate}}*</span>
+                        <div class="error_message" *ngIf="hasMinMaxError">
+                            <span class="text" *ngIf = "amount < maxMinAmount?.MinAmount">{{'Deposit.AmountLessThen' | translate : { amount: maxMinAmount?.MinAmount, currency: currencyId} }}</span>
+                            <span class="text" *ngIf = "this.amount > this.maxMinAmount?.MaxAmount">{{'Deposit.AmountMoreThen' | translate : { amount: maxMinAmount?.MaxAmount, currency: currencyId} }}</span>
+                        </div>
+                        <ng-template #nominalsRef>
+                            <app-common-payment-nominals [nominals]="nominals"
+                                                         (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+                        </ng-template>
+                    </div>
+                </div>
+
+
+
+                <div class="payment-form-field__column_btn">
+                    <button  class="default_btn default_btn_red payment-btn" type="submit" (click)="$event.stopPropagation()" [disabled]="ibanState === -1 || ibanState === 0  || submitted || paymentForm.invalid || this.hasMinMaxError" >
+                        <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
+                    </button>
+
+                    <div class="error_message longTag">
+                        {{errorMessage}}
+                    </div>
+                    <div class="success_message" *ngIf="successMessage">
+                        {{'Withdraw.' + successMessage | translate}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+

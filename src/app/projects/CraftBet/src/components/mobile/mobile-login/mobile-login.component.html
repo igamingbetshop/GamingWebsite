@@ -1,0 +1,104 @@
+<!--<img class="login-bg"   [src]="bgUrl"  (error)="errorHandlerBg($event)"/>-->
+<div class="mobile-login-section {{className}}"
+     [ngClass]="{'showPaddingTop': this.configService.defaultOptions.ShowMobileNavPanel == '1' }">
+    <div class="mobile-login-top-part">
+        <span class="top-login-text-part">{{'Login.Sign In' | translate}}</span>
+        <span class="icon-close-modal close-icon" (click)="goBack()"></span>
+    </div>
+    <img class="login-logo"   [src]="logoUrl"  (error)=" errorHandlerLogo($event)"/>
+
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()" class="mobile-login-section_form">
+        <div class="login_password">
+            <div class="mobile-login-section_field form_field" [ngClass]="{'valid-input': loginForm.get('ClientIdentifier').valid,
+    'invalid-filed': (loginForm.get('ClientIdentifier').hasError('required') && loginForm.get('ClientIdentifier').dirty) }">
+                <div class="mobile-login-section_field_top flex_between common-field">
+                    <input type="text" name="username" formControlName="ClientIdentifier" class="input_field"
+                           [ngClass]="{'valid-input': loginForm.get('Password').valid,
+                            'invalid-filed': ((loginForm.get('ClientIdentifier').hasError('required') && submitted) || (loginForm.get('ClientIdentifier').touched && loginForm.get('ClientIdentifier').hasError('required'))) }"
+                           placeholder="{{'Login.Login' | translate}}" required/>
+                    <span class="floating-label">{{'Login.Login' | translate}}</span>
+                </div>
+            </div>
+            <div class="mobile-login-section_field form_field" [ngClass]="{'valid-input': loginForm.get('Password').valid,
+    'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) ||
+    (loginForm.get('Password').touched && loginForm.get('Password').hasError('required'))) }">
+                <div class="mobile-login-section_field_top flex_between common-field">
+                    <input class="input_field password" type="{{changePasswordType ? 'text' : 'password'}}"
+                           placeholder="{{'Login.Password' | translate}}"
+                           [ngClass]="{'valid-input': loginForm.get('Password').valid,
+    'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) ||
+    (loginForm.get('Password').touched && loginForm.get('Password').hasError('required'))) }"
+                           formControlName="Password"
+                           required/>
+                    <span class="floating-label">{{'Login.Password' | translate}}</span>
+                    <div (click)="changePassType()" class="change-password-field-type">
+                        <span [ngClass]="changePasswordType ? 'icon-close-password-type' : 'icon-open-password-type'"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="forgot_container" *ngIf="isSignUpButton?.Type == 'signupBtn_button'">
+                <div class="mobile-form_field_checked remember-me">
+                    <input id="remeberMe" type="checkbox" class="reg-checkbox distans-right" [(ngModel)]="rememberMe"
+                           [ngModelOptions]="{standalone:true}"/>
+                    <label for="remeberMe" class="reg-conditions">{{'Login.Remember me' | translate}}</label>
+                </div>
+
+                <a class="forgot_password" [routerLink]="['/forgot-password']">
+                    {{'Login.ForgotPassword' | translate}}
+                </a>
+
+            </div>
+        </div>
+        <div class="form_field">
+            <button
+                    type="submit"
+                    class="craft_btn login_btn"
+                    [disabled]="submitted || (configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid)"
+                    [ngClass]="{'signin_abled': configService.defaultOptions['FormValidationType'] === 'submit' || loginForm.valid}">
+                {{'Login.Sign In' | translate}}
+            </button>
+        </div>
+        <div class="line">
+            <span class="left-line"></span>
+            <span class="text">OR</span>
+            <span class="right-line"></span>
+        </div>
+        <div class="form_field btn-after">
+                <button type="button"  class="craft_btn signUp_btn"  [routerLink]="['/signup']">{{ 'Login.Sign Up' | translate }}</button>
+        </div>
+        <div class="line line2">
+            <span class="left-line"></span>
+            <span class="text">OR</span>
+            <span class="right-line"></span>
+        </div>
+        <div class="error-message" *ngIf="errorMessage">
+            <span class="icon-error-message"></span>
+            <span class="error-message-text">{{errorMessage}}</span>
+            <!--        <span class="icon-close-modal"></span>-->
+        </div>
+        <div class="error-message"
+             *ngIf="(loginForm.get('ClientIdentifier').hasError('required') && loginForm.get('ClientIdentifier').touched) || (loginForm.get('Password').hasError('required') && loginForm.get('Password').touched)">
+            <span class="icon-error-message"></span>
+            <span class="error-message-text">{{'Login.Required-field' | translate}}</span>
+            <span class="icon-close-modal"></span>
+        </div>
+        <ng-container *ngIf="configService?.defaultOptions?.SocialNetworkProviders.length">
+
+            <div class="social-login-text">{{'Login.You Can Join With' |translate}}</div>
+            <ul>
+                <li *ngFor="let provider of configService?.defaultOptions?.SocialNetworkProviders"
+                    (click)="redirectToSocialProviderLoginPage(provider)"
+                    [ngStyle]="{'background': 'url(../../../../../../../assets/images/register/' + provider?.Title +
+                    '.png'+')' + 'no-repeat 50% 50% / cover'}">
+                </li>
+            </ul>
+            <p class="divider-line"></p>
+        </ng-container>
+        <div class="login-bottom-text">
+            <span class="icon-safety"></span>
+            <span>{{ 'Login.Safe and Secure' | translate }}</span>
+        </div>
+    </form>
+
+</div>

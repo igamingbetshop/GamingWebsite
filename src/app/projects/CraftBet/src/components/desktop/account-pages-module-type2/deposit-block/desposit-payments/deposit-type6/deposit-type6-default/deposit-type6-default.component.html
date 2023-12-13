@@ -1,0 +1,67 @@
+<div class="deposit_payment_section2">
+
+  <div class="deposit_payment_section2__form">
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()" (click)="$event.stopPropagation()">
+      <div class="payment-form-field"
+           [ngClass]="{'nominals-fields-3': ((nominals !== null) && (nominals && nominals.length <= 9)), 'nominals-fields-4': ((nominals !== null) && (nominals && nominals.length > 9))}">
+        <div class="flex_between">
+          <div class="bonus-and-amount">
+            <div class="payment-form-field__column">
+              <input *ngIf="!nominals; else nominalsRef" type="number" class="payment-input" (ngModelChange)="bonusService.calculateBonusAmount($event)"
+                     formControlName="Amount"/>
+              <span class="floating-label">{{'Deposit.Amount' | translate}}</span>
+              <span class="currency">{{currencyId}}</span>
+              <div class="error_message" *ngIf="hasMinMaxError">
+                <span class="text" *ngIf = "amount < maxMinAmount?.MinAmount">{{'Deposit.AmountLessThen' | translate : { amount: maxMinAmount?.MinAmount, currency: currencyId} }}</span>
+                <span class="text" *ngIf = "this.amount > this.maxMinAmount?.MaxAmount">{{'Deposit.AmountMoreThen' | translate : { amount: maxMinAmount?.MaxAmount, currency: currencyId} }}</span>
+              </div>
+              <ng-template #nominalsRef>
+                <app-common-payment-nominals [nominals]="nominals" (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="bonus-and-amount" *ngIf="bonusService.isBonusActivated">
+            <div class="payment-form-field__column">
+              <input type="text" class="payment-input" readonly [ngModel]="bonusService.calculatedBonusAmount"
+                     [ngModelOptions]="{standalone: true}"/>
+              <span class="floating-label">{{'Deposit.Bonus' | translate}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="payment-form-field">
+        <div class="payment-form-field__column">
+          <input type="text" class="payment-input"
+                 formControlName="CardNumber"/>
+          <span class="floating-label">{{'Deposit.CardNumber' | translate}}</span>
+        </div>
+      </div>
+
+      <div class="payment-form-field" *ngIf="promoData.length > 0">
+        <div class="payment-form-field__column">
+          <input type="text" class="payment-input"
+                 formControlName="PromoCode"/>
+          <span class="floating-label">{{'Deposit.PromoCode' | translate}}</span>
+        </div>
+      </div>
+
+      <div class="payment-form-field">
+        <div class="payment-form-field__column_btn">
+          <button type="submit"  [disabled]="submitted || paymentForm.invalid || this.hasMinMaxError"  class="default_btn default_btn_red payment-btn">
+            <span class="payment-btn__span"> {{'Deposit.Confirm' | translate}} </span>
+          </button>
+
+          <div class="error_message">
+            {{errorMessage}}
+          </div>
+          <div class="success_message" *ngIf="successMessage && successMessage.length != 0">{{'Deposit.' + successMessage | translate}}</div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+

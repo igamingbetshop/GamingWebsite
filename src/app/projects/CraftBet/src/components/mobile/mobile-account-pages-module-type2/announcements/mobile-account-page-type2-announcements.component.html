@@ -1,0 +1,61 @@
+<div class="announcements-content mobile-section">
+  <div class="announcements-content__caption">
+    <div class="mainTitle" title="{{'Announcements.Message_History' | translate}}"><span
+      class="icon-message"></span>{{'Announcements.Message_History' | translate}}</div>
+  </div>
+
+  <ul class="announcements-content__tabNav">
+    <li class="announcements-content__tabNav_li" (click)="changeTab('1')" [ngClass]="{'active': activeTabItem == '1'}">
+      {{'Announcements.Normal Announcements' | translate}}
+    </li>
+    <li class="announcements-content__tabNav_li" (click)="changeTab('2')" [ngClass]="{'active': activeTabItem == '2'}">
+      {{'Announcements.Special Announcements' | translate}}
+    </li>
+    <li class="announcements-content__tabNav_li" (click)="changeTab('3')" [ngClass]="{'active': activeTabItem == '3'}">
+      {{'Announcements.Personal Announcements' | translate}}
+    </li>
+  </ul>
+
+  <div class="announcements-content__filterBlock">
+    <div class="announcements-content__filterBlock_top">
+      <input type="datetime-local" [(ngModel)]="date" (ngModelChange)="onDateSelect()"/>
+    </div>
+
+    <div class="announcements-content__filterBlock_top">
+      <input type="datetime-local" [(ngModel)]="todate" (ngModelChange)="onDateSelect()"/>
+    </div>
+
+  </div>
+
+
+  <div class="announcements-content__messageContainer">
+    <div class="announcements-content__messageContainer_noInfo" *ngIf="announcementsList.length == 0">
+      No information is available
+    </div>
+    <div class="announcements-content__table" *ngIf="announcementsList.length > 0">
+      <div class="tableHead">
+        <div class="points-small">ID</div>
+        <div class="date">Date</div>
+        <div class="text-auto">Message</div>
+      </div>
+
+      <div class="tableBody">
+        <div class="tableRow"
+             *ngFor="let item of announcementsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: announcementsItemsCount }; let i = index">
+          <div class="points-small">{{item?.Id}}</div>
+          <div class="date">{{item?.CreationDate | date : 'd MMMM y HH:mm'}}</div>
+          <div class="text-auto" [ngClass]="{'redFontColor': activeTabItem != '1'}">{{item?.Message}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination_section announcements-pagination" *ngIf="announcementsList.length > 0">
+    <div class="">{{announcementsList.length}} of {{announcementsItemsCount}}
+    </div>
+    <pagination-controls
+      autoHide="true"
+      (pageChange)="getAnnouncementsData($event)"></pagination-controls>
+  </div>
+
+</div>

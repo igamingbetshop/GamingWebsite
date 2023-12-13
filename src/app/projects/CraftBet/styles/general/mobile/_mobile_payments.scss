@@ -1,0 +1,198 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-payments-section {
+
+  margin-top: var(--m-user-views-margin-top, 62px);
+  min-height: calc(100vh - 62px);
+  background: color(m-user-views-background);
+  padding: 15px 0;
+
+  &_title {
+    text-align: center;
+    color: color(m-user-views-title);
+    font-size: 24px;
+    font-weight: normal;
+    margin-top: var(--m-user-views-title-payments-margin-top, 20px);
+  }
+
+  .history-tools-panel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 20px 20px;
+
+    .history-tools {
+      margin-bottom: 10px;
+
+      &:not(&:last-child) {
+        display: flex;
+        flex-direction: column;
+        width: 48%;
+      }
+
+      &:last-child {
+        width: 100%;
+        text-align: center;
+      }
+
+      select, input {
+        height: height(history-time-filter, 40px);
+        padding: 0 8px;
+        border-radius: var(--history-time-filter-border-radius, 5px);
+        border: 1px solid itemColor(history-time-filter-border, #dadada);
+        outline: none;
+        background: color(history-time-filter-background);
+        color: itemColor(history-time-filter, #fff);
+ 		color-scheme: var(--history-time-filter-icon-scheme, dark);
+        font-size: var(--history-time-filter-font-size, 14px);
+        option {
+          background-color: backgroundColor(accoutPage-Dpd, transparentize);
+          color: itemColor(accoutPage-Dpd, #000);
+
+          &:hover, &:checked {
+            background-color: backgroundColor(accoutPage-Dpd-checked, blue);
+            color: itemColor(accoutPage-Dpd-checked, #fff);
+          }
+
+        }
+      }
+
+      label {
+        color: itemColor(account-dropdown-label, #dadbe0);
+      }
+
+      ::ng-deep .wc-date-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+        padding: 0 8px;
+        border-radius: var(--history-time-filter-border-radius, 5px);
+        border: 1px solid #dadada;
+        outline: none;
+        background: $header-top-bg;
+
+        * {
+          color: $font-color;
+        }
+      }
+
+      .show-btn {
+        padding: 0 20px;
+        margin-top: 8px;
+        background: backgroundColor(show-btn, #36b550);
+        color: itemColor(show-btn, #fff);
+        width: var(--show-btn-width, 175px);
+        border-radius: var(--show-btn-border-radius, 4px);
+
+        &.craft_btn-mobile {
+          background: backgroundColor(mobile-btn, #36b550);
+          color: itemColor(mobile-btn, #fff);
+        }
+
+        &:hover {
+          //background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(151, 0, 24, 1)), color-stop(100%, rgba(201, 0, 32, 1)));
+          background: backgroundColor(show-btn-hover, #36b550);
+        }
+      }
+    }
+  }
+
+}
+
+
+.paymet-item {
+  margin: 0 20px 25px;
+
+  &.payments-section-active-withdraw {
+    color: itemColor(active-withdraw, #000);
+
+    .paymet-item_bodyInfoMessage {
+      height: 35px;
+      button {
+        float: right;
+      }
+    }
+  }
+
+  &_body {
+    background-color: backgroundColor(payment-infoSection, #fff);
+    color: itemColor(payment-infoSection, #000);
+  }
+
+  &_header {
+    background: backgroundColor(payment-item-header, $header-top-bg);
+    color: itemColor(payment-item-header, $font-color);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+
+    &.Payments-Active {
+      background: backgroundColor(payments-active, #ffffff);
+    }
+
+    &.Payments-Cancelled {
+      background: backgroundColor(payments-cancelled, #FF3730);
+    }
+
+    &.Payments-In_Process {
+      background: backgroundColor(payments-in-process, #9c9c9c);
+    }
+
+    &.Payments-Declined {
+      background: backgroundColor(payments-declined, #FF3730);
+    }
+
+    &.Payments-Approved {
+      background: backgroundColor(payment-approved, #2E8027);
+    }
+
+    .Payments-Deleted {
+      background: backgroundColor(payment-deleted, #ff0000);
+    }
+  }
+
+  &_bodyInfo {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    height: 30px;
+    align-items: center;
+
+  }
+
+
+  .title {
+    font-weight: var(--payment-infoSection-title-font-weight, 700);
+  }
+
+  &_bodyInfoMessage {
+    padding: 0 15px;
+  }
+}
+.empty-payments {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--m-history-empty-block-section-bg, #16233a);
+  justify-content: center;
+  align-items: center;
+  height: var(--m-history-empty-block-section-height, 200px);
+  margin-top: var(--m-history-empty-block-section-margin-top, 10px);
+  border-radius: var(--m-history-empty-block-section-border-radius, 6px);
+  gap: var(--account-extra-big-gap, 16px);
+  .icon {
+    font-size: var(--history-info-pagination-section-icon-font-size, 90px);
+    color: var(--history-info-pagination-section-icon-color, #fff);
+  }
+  .empty-block-text {
+    font-size: var(--history-info-pagination-section-text-font-size, 16px);
+    color: var(--history-info-pagination-section-text-color, #fff);
+
+  }
+}

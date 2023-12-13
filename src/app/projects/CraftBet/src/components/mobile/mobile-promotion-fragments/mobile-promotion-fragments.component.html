@@ -1,0 +1,36 @@
+
+<div class="mobile-promotions-section" [ngStyle]="{'display' : selectedFragment ? 'block' : 'none'}">
+    <div class="mobile-promotions-section_top" [ngStyle]="layoutService.layoutStyle">
+        <div class="promotion-item"
+             >
+            <div class="back">
+                <i class="icon-arrow-down" [routerLink]="['/promotions']"></i>
+                <span class="promotion-item-title" [innerHtml]="promotion.Title | sanitizer: 'html'"></span>
+            </div>
+
+            <div class="promotion-item_image">
+                <img  src="../../../../../../../assets/images/promotions/{{promotion.ImageName}}">
+            </div>
+
+            <div class="promotion-content">
+                <div class="content-title">
+                  <span>
+                      <i class="icon-specials"></i>
+                      <span class="title" [innerHtml]="promotion.Description | sanitizer: 'html'"></span>
+                  </span>
+
+                    <button class="get-bonuses selected"
+                            [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + 'bonuses'"
+                    >{{'Promotions.Get Bonuses' | translate}}</button>
+                </div>
+
+                <div class="text-content" >
+                    <p [innerHtml]="promotion.Content | sanitizer: 'html'"></p>
+                </div>
+                <p class="publish-date">{{'Promotion.PublishedDate' | translate}} {{promotion.Date}}</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<mobile-promotion-fragment *ngFor="let fragment of promotionFragments" [promotionFragment]="fragment" [ngStyle]="{'display' : selectedFragment ? 'none' : 'block'}"></mobile-promotion-fragment>

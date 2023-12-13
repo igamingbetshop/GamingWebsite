@@ -1,0 +1,381 @@
+.history-section {
+  background: $account-main-bg-color;
+  border-radius: 6px;
+  color: $account-content-item-color;
+  padding: var(--account-content-row-paddding);
+  height: var(--payment-section-content-width, auto);
+  .success_message {
+    bottom: itemBottom(success-message-settings-verification, 50px);
+    left: itemLeft(success-message-settings-verification, 0px);
+  }
+  &_title {
+    margin: 0 0 32px 0;
+    font-size: 18px;
+    font-weight: 500;
+    display: display(payment-section-content-title, none);
+  }
+  .ticket-body {
+    padding: var(--add-bank-details-title-padding, 0);
+    h2 {
+      font-size: fontSize(add-bank-account-title, 24px);
+      font-weight: fontWeight(add-bank-account-title, 700);
+    }
+    .icon-close-modal {
+      cursor: pointer;
+    }
+  }
+  .bonuses-block-head {
+    gap: var(--bonuses-block-head-gap, 10px);
+    font-size: var(--bonuses-block-head-font-size, 16px) !important;
+  }
+  .block-head, .bets-history-block-head {
+    border-radius: 8px;
+    background-image: var(--history-block-head-bg, linear-gradient(to bottom, #16233a, #151a23));
+    padding-left: var(--history-block-head-pdleft, 16px);
+    padding-right: var(--history-block-head-pdright, 16px);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--history-block-head-mrgbottom, 8px);
+    color: var(--history-block-head-color, #fff);
+    font-size: var(--history-block-head-font-size, 16px);
+    .hide-form-row {
+      display: var(--bank-account-hide-field-display, block);
+    }
+    div {
+      padding-top: 11px;
+      padding-bottom: 11px;
+      width: calc(100% / 6);
+      text-align: var(--payments-section-block-head-text-align, center);
+      &.info-btn-head {
+        width: var(--info-btn-head-width, 50px);
+      }
+    }
+  }
+  section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $account-extra-big-gap;
+    border-radius: 6px;
+    background-color: var(--history-block-section-bg, #16233a);
+    padding: 15px 14px 32px 14px;
+    height: var(--history-block-section-height, auto);
+    overflow-y: auto;
+    overflow-x: hidden;
+    .bonuses-block {
+      gap: var(--bonuses-block-gap, 10px);
+      font-size: var(--bonuses-block-font-size, 16px) !important;
+    }
+    .block, .bets-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: var(--history-block-section-font-size, 16px);
+      padding: var(--history-block-section-bets-padding, 0);
+      border-bottom: var(--history-block-section-bets-border-bottom, none);
+      .hide-form-row {
+        display: var(--bank-account-hide-field-display, block);
+      }
+      .form-row-icons {
+        display: var(--bank-account-hide-icons-display, block);
+        cursor: pointer;
+        span:last-child {
+          margin-left: var(--bank-account-icons-margin-left, 30px);
+        }
+        span {
+          color: var(--bank-account-icons-color, #fff);
+          &:hover {
+            color: var(--bank-account-icons-hover-color, #fff);
+          }
+        }
+      }
+      .red1 {
+        border: var(--history-info-account-status-border-red, none);
+        .icon-rejected:before {
+          .icon-pending:before {
+            color: var(--history-info-account-status-icon-rejected-color, #c2394b);
+          }
+        }
+      }
+      .yellow1 {
+        border: var(--history-info-account-status-border-yellow, none);
+        .icon-pending:before {
+          color: var(--history-info-account-status-icon-pending-color, #ceb700);
+        }
+      }
+      .green1 {
+        border: var(--history-info-account-status-border-green, none);
+        .icon-verified:before {
+          color: var(--history-info-account-status-icon-verified-color, #599f61);
+        }
+      }
+      .black1 {
+        border: var(--history-info-account-status-border-black, none);
+      }
+      .account-status {
+        display: flex;
+        align-items: center;
+        justify-content: var(--history-info-account-status-justify-content, unset);
+        border-radius: var(--history-info-account-status-border-radius, 0);
+        padding: var(--history-info-account-status-padding, 0);
+        .item-status{
+          margin: var(--history-info-account-status-margin, 0 0 0 10px);
+        }
+        .red {
+          color: var(--history-info-account-status-text-rejected-color, #c2394b);
+        }
+        .yellow {
+          color: var(--history-info-account-status-text-pending-color, #ceb700);
+        }
+        .green {
+          color: var(--history-info-account-status-text-verified-color, #599f61);
+        }
+      }
+      &_item {
+        width: calc(100% / 6);
+        .eye-class {
+          cursor: pointer;
+          color: var(--history-info-account-view-button-color, #fff);
+        }
+        .eye-class:hover {
+          color: var(--history-info-account-view-button-hover-color, #fff);
+        }
+        .info-btn {
+          height: var(--history-info-btn-height, 25px);
+          background: linear-gradient(
+                          180deg, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
+          border: none;
+          color: var(--history-info-btn-color, #fff);
+          display: var(--history-info-btn-display, block);
+          font-size: $font-size-3;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        &.item-transl {
+          display: inline-block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 11%;
+          white-space: nowrap;
+        }
+        &.info {
+          width: 50px;
+        }
+      }
+      .delete-icon{width: fit-content; margin-left: 8px; cursor: pointer}
+      .displayed
+      {
+        display:flex; flex-flow:row wrap;
+        p:first-child {
+          text-align: left;
+          margin-top: 0;
+          margin-bottom: 0;
+          margin-right: 10px;
+        }
+        p:last-child {
+          text-align: right;
+          margin-top: 0;
+          margin-bottom: 0;
+          width: 38%;
+        }
+      }
+    }
+    .pagination_section {
+      position: var(--history-info-pagination-section-position, relative);
+      bottom: var(--history-info-pagination-section, 0);
+      width: 100%;
+      text-align: center;
+      display: display(history-info-pagination-section, flex);
+      justify-content: center;
+      //align-items: center;
+      .ngx-pagination {
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+    .down-icons {
+      margin-bottom: var(--history-info-pagination-section-icons-margin-bottom, 0px);
+      margin-right: var(--history-info-pagination-section-icons-margin-right, 0px);
+      font-size: var(--history-info-pagination-section-icons-font-size, 23px);
+      cursor: pointer;
+      display: flex;
+      color: var(--history-info-account-view-button-color, #fff);
+      span:first-child {
+        margin-right: 17px;
+        display: var(--history-info-pagination-section-print-icon-display, block);
+      }
+      span:last-child {
+        display: var(--history-info-pagination-section-download-icon-display, block);
+      }
+      span:hover {
+        color: var(--history-info-account-view-button-hover-color, #fff);
+      }
+    }
+    &.empty-block {
+      align-items: center;
+      justify-content: center;
+      .icon {
+        font-size: var(--history-info-pagination-section-icon-font-size, 90px);
+      }
+      .empty-block-text {
+
+      }
+      .empty-history-text {
+        color: var(--history-search-empty-text-color, #fff);
+        font-size: var(--history-search-empty-text-font-size, 16px);
+      }
+    }
+  }
+
+  .history-tools-panel {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--history-tools-margin-bottom, 28px);
+    form {
+      position: relative;
+    }
+
+    .history-tools {
+      display: grid;
+      margin-right: var(--history-tools-distance, 8px);
+      position: relative;
+      label {
+        margin-bottom: marginBottom(history-tools-label, 10px);
+        color: itemColor(history-tools-label, #000);
+        position: position(history-tools-label, absolute);
+        height: height(history-tools-label, 19px);
+      }
+      input:focus ~ label,input:not(:placeholder-shown) ~ label {
+        transform: var(--history-input-label-transform, translateY(-15px) translateX(10px) scale(0.75));
+        background-color: var(--history-focused-background-color, unset);
+        height: height(history-label-focused, 25px);
+        font-size: var(--history-color-font-size-label, 18px);
+        color: var(--history-field-focus-label-focused, #fff);
+        top: itemTop(history-focused-input-label, 4px);
+        padding: var(--history-focused-padding, 0 5px);
+      }
+      select:focus~label,
+      select:not([value=""]):valid~label {
+        transform:var(--history-select-label-transform, translateY(-37px) translateX(10px) scale(0.75));
+        top: itemTop(history-focused-select-label, 25px);
+        left: itemLeft(history-focused-select-label, 0);
+        font-size: fontSize(history-focused-label, 18px);
+        color: var(--history-field-focus-label-focused, #fff);
+        background-color: var(--history-focused-background-color, unset);
+        height: height(history-label-focused, 25px);
+        padding: var(--history-focused-padding, 0 5px);
+        white-space: nowrap;
+      }
+
+      select {
+        min-width: var(--history-select-width, 234px);
+        @include account-custom-select;
+      }
+
+      input {
+        width: var(--history-input-width, 200px);
+        @include account-custom-select;
+        background-image: none;
+        color-scheme: var(--history-select-color-scheme, dark);
+      }
+      ::-webkit-calendar-picker-indicator {
+        filter: var(--history-time-filter-icon-filter, invert(0));
+      }
+
+      .show-btn {
+        background: linear-gradient(180deg, color(settings-button-gradient-first) 0%, color(settings-button-gradient-second) 100%);
+        color: color(settings-button-text);
+        font-weight: fontWeight(tickets-list-title, bold);
+        padding: var(--edit-button-padding, 0 32px);
+        height: height(edit-button, 40px);
+        border-radius: var(--edit-button-border-radius, 3px);
+        cursor: pointer;
+      }
+      &:last-child {
+        //position: absolute;
+        //right: 0;
+        //bottom: 0;
+        //margin: 0;
+        margin-left: auto;
+      }
+      .winkel-calendar {
+        .wc-date-container {
+          border-radius: 6px;
+          border: none;
+          height: 44px;
+          line-height: unset;
+          padding: 11px;
+          float: none;
+          margin: unset;
+          font-size: 18px;
+          background: var(--account-calendar-bg, rgba(13, 18, 32, 0.4));
+          span {
+            color: $account-content-item-color;
+            opacity: 0.78;
+          }
+        }
+        .wc-date-popover {
+          top: 48px;
+        }
+      }
+
+    }
+    .history-tools-field {
+      position: relative;
+    }
+    .history-tools-field:after {
+      content: '<>';
+      font: 17px "Consolas", monospace;
+      color: #202020;
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      right: 10px;
+      top: 14px;
+      padding: 0 0 2px;
+      position: absolute;
+      pointer-events: none;
+      visibility: var(--account-verify-select-icon-arrow-visibility, hidden);
+    }
+  }
+  form {
+    width: 100%;
+    display: flex;
+    gap: var(--history-tools-panel-gap, 0px);
+  }
+  .pagination_section {
+    margin-top: 15px;
+  }
+}
+@media screen and (min-width: 1376px) and (max-width: 1630px) {
+  .history-section {
+    .history-tools-panel {
+      select {
+        min-width: calc(var(--history-select-width, 234px) * 0.7) !important;
+        font-size: calc(var(--history-select-font-size, 16px) * 0.9) !important;
+      }
+      input {
+        width: calc(var(--history-input-width, 200px) * 0.7) !important;
+        font-size: calc(var(--history-select-font-size, 16px) * 0.8) !important;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1376px)
+{
+  .history-section {
+    .history-tools-panel {
+      select {
+        min-width: calc(var(--history-select-width, 234px) * 0.6) !important;
+        font-size: calc(var(--history-select-font-size, 16px) * 0.8) !important;
+      }
+
+      input {
+        width: calc(var(--history-input-width, 200px) * 0.6) !important;
+        font-size: calc(var(--history-select-font-size, 16px) * 0.7) !important;
+      }
+    }
+  }
+}

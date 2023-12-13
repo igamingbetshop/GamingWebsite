@@ -1,0 +1,86 @@
+<!--<div class="user-right-panel_title">{{'User.Document-Verification-top-title' | translate}}</div>-->
+<div class="document-verification-tab">
+    <div class="container-part">
+<!--        <div class="titles">-->
+<!--            <span class="document-verification-tab-text">{{'Account.DocumentIdentificationMessage' | translate}}</span>-->
+<!--        </div>-->
+        <div class="document-verification-table">
+            <p class="document-text">{{ 'Account.DocumentIdentificationMessage' | translate }}</p>
+            <form class="document-form" [formGroup]="uploadDocumentForm" (ngSubmit)="uploadDocument()">
+                <div class="document-form-options">
+                    <div class="custom_dropdown_reg" dropdown>
+                        <div class="flex_between current_item">
+                            <div *ngIf="!selectedFileValue" class="selected-item">{{'Account.Document' | translate}}</div>
+                            <div *ngIf="selectedFileValue" class="selected-item">{{selectedFileValue}}</div>
+                            <div class="change-icon">
+                                <span class="icon-arrow-right"></span>
+                            </div>
+                        </div>
+                        <ul class="custom_dropdown_list right-top">
+                            <li class="custom_dropdown_list_items" *ngFor="let item of getSettingsInfoService.documentTypesList"
+                                (click)="selectedDocumentValue(item)">{{item?.Name}}</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <p class="document-text2">{{ 'Account.DocumentFormatMessage' | translate }}</p>
+                <div class="document-form-items">
+                    <div class="document-form-row">
+                        <div class="document-form-choose-data">
+                            <input #documentFile type="file" (change)="handleInputChange($event)"
+                                   class="choose_input"
+                                   name="file" id="file">
+                            <label for="file" class="document-label" >
+                                {{'Account.SelectFile' | translate}}
+                            </label>
+                            <label for="file" class="document-selected-label" *ngIf="!fileData?.Name">
+                                {{'Account.NoFilesSelected' | translate}}
+                            </label>
+                            <label for="file" class="document-selected-label" *ngIf="fileData?.Name">
+                                {{fileData?.Name}}
+                            </label>
+                        </div>
+<!--                        <div class="selected-file-name">-->
+<!--                            <span class="file-box" *ngIf="!fileData?.Name">{{'Account.NoFile' | translate}}</span>-->
+<!--                            <span id="file-name" class="file-box" *ngIf="fileData?.Name">{{fileData?.Name}}</span>-->
+<!--                        </div>-->
+                    </div>
+                    <button type="submit" class="document-form-row-btn"
+                    [ngClass]="{'disable_item' : isSending || !getSettingsInfoService.checkDocumentSize || !selectedFileValue}">
+                        <span class="document-form-row-btn-text">{{'User.Upload' | translate}}</span>
+                        <div class="change-icon-document-btn">
+                            <span class="icon-arrow-right"></span>
+                        </div>
+                    </button>
+                </div>
+            </form>
+            <div class="error_message docError">{{selectedDocumentErrorMessage}}</div>
+            <div class="success_message"
+                 *ngIf="documentUploadResponseMessageType === 'Success'">{{documentUploadResponseMessage}}</div>
+            <div class="error_message docError"
+                 *ngIf="documentUploadResponseMessageType === 'Error'">{{documentUploadResponseMessage}}</div>
+
+            <div class="document-verification-table-head">
+                <div class="document-verification-table-head-items">{{'User.Document type' | translate}}</div>
+                <div class="document-verification-table-head-items">{{'User.Creation Date' | translate}}</div>
+                <div class="document-verification-table-head-items">{{'User.Status' | translate}}</div>
+            </div>
+            <ng-container *ngIf="getSettingsInfoService?.identityModelsList.length > 0; else emptyDocuments">
+                <section>
+                    <div class="document-verification-table-body"
+                         *ngFor="let item of getSettingsInfoService?.identityModelsList">
+                        <div class="document-verification-type">{{item?.DocumentTypeName}}</div>
+                        <div class="document-verification-date">{{item?.CreationTime | date: 'dd.MM.yyyy'}}</div>
+                        <div class="document-verification-status status-{{item?.Status}}">{{item?.StatusName}}</div>
+                    </div>
+                </section>
+            </ng-container>
+            <ng-template #emptyDocuments>
+                <section class="empty-documents empty-block">
+                    <span class="icon-documents icon"></span>
+                    <span class="empty-block-text">{{'User.Documents-empty' | translate}}</span>
+                </section>
+            </ng-template>
+        </div>
+    </div>
+</div>

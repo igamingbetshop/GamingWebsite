@@ -1,0 +1,25 @@
+.sports-section {
+  width: var(--full-screen-product-width, 100%);
+  min-height: var(--full-screen-product-min-height, 560px);
+  max-width: var(--full-screen-product-max-width, none);
+  margin: 0 auto;
+  clear: both;
+  height: var(--full-screen-product-height, calc(100vh - 110px));
+  background: color(product-background);
+  /*position: relative;
+  left:var(--header-panel2-width, 0);
+  top:var(--header-top-height, 0);
+  width: calc(100% - var(--header-panel2-width, 0px));*/
+  .game-content
+  {
+    height: 100%;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+}

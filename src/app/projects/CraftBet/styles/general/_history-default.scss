@@ -1,0 +1,19 @@
+.user-history-section
+{
+  //padding: 15px 10px;
+  .nav-tabs
+  {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 0 16px;
+    display: flex;
+    li
+    {
+      margin-right: 50px;
+      cursor: pointer;
+      outline: none;
+      &.active-tab{text-decoration: underline}
+    }
+
+  }
+}

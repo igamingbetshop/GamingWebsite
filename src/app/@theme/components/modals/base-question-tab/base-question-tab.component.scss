@@ -1,0 +1,58 @@
+.modal-body {
+  width: 100%;
+  text-align: right;
+  padding: var(--modal-content-ticket-color-padding, 10px);
+  color: var(--modal-content-ticket-color, #dadbe0);
+  font-size: var(--modal-content-ticket-font-size, 27px);
+}
+.modal-content
+{
+  background-color: var(--questions-modal-content-background-color, #fff);
+  border-radius: 4px;
+  margin: 16px auto;
+  max-width: 755px;
+  position: relative;
+  margin-top: var(--all-modal-content-margin-top, 145.35px)!important;
+  will-change: opacity;
+  display: inline-block;
+  text-align: left;
+  width: 96%;
+}
+.modal_content
+{
+  height: 120px;
+  margin: 0 auto;
+  .modal_content__message
+  {
+    color: var(--modal-content-body-ticket-color, #000000);
+    font-weight: var(--modal-content-body-ticket-font-weight, 500);
+    font-size: var(--modal-content-body-ticket-font-size, 25px);
+    text-align: var(--modal-content-body-ticket-text-align, center);
+    margin-top: var(--modal-content-body-ticket-margin-top, 35px);
+  }
+}
+.modal_footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  .craft_btn
+  {
+    color: var(--modal-content-footer-ticket-color, #fff);
+    width: var(--modal-content-footer-ticket-width, 70px);
+    font-size: var(--modal-content-footer-ticket-font-size, 16px);
+    font-weight: var(--modal-content-footer-ticket-font-weight, 600);
+    height: var(--modal-content-footer-ticket-font-weight, 44px);
+    &.save-btn
+    {
+      background: var(--modal-content-footer-ticket-save-background-color, #1c344a)
+    }
+    &.cancel-btn
+    {
+      background: var(--modal-content-footer-ticket-cancel-background-color, #00aaeb);
+    }
+  }
+}
+
+.remove-bonuse {
+
+}

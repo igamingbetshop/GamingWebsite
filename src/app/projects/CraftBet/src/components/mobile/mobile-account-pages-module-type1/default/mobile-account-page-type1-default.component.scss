@@ -1,0 +1,35 @@
+.mobile-user-default {
+  display: flex;
+  width: auto;
+  background: var(--m-user-views-background-color, #FFFFFF);
+  .user-default-list {
+    display: flex;
+    gap: var(--m-user-panel-gap, 6px);
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--m-user-panel-menu-margin, 0);
+    padding: var(--m-user-panel-menu-padding, 15px);
+    background: var(--m-user-panel-menu-background, transparent);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    .user-default-list-item {
+      background: var(--m-user-panel-menu-item-background, white);
+      border-radius: var(--m-user-panel-menu-item-border-radius, 6px);
+      padding: var(--m-user-panel-menu-item-padding,7px 14px);
+      .user-default-list-item-link {
+        color: var(--m-user-panel-menu-item-color, #000);
+      }
+    }
+    .active {
+      background: var(--m-user-panel-menu-item-active-background, #e15341);
+      .user-default-list-item-link {
+        color: var(--m-user-panel-menu-item-active-color, #fff);
+      }
+    }
+  }
+  .user-default-list::-webkit-scrollbar {
+    height: 0;
+  }
+}

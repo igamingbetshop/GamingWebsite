@@ -1,0 +1,213 @@
+.modal-content {
+  max-width: var(--user-modal-section-max-width, 1000px) !important;
+  &.register_PSection
+  {
+    max-width: var(--register-modal-section-max-width, 53%) !important;
+    max-height: var(--register-modal-section-max-height, 100%);
+  }
+
+  &.user-info-content {
+    display: inline-grid;
+  }
+
+  h3 {
+    font-weight: 500;
+    color: $label-color;
+    font-size: 20px;
+    padding: 10px 0;
+    margin: 15px 0;
+  }
+
+  h1 {
+    font-size: var(--user-info-text-font-size, 24px);
+    line-height: var(--user-info-text-line-height, 30px);
+    float: left;
+    color: $label-color;
+    font-weight: var(--user-info-text-font-weight, bold);
+    text-align: var(--user-info-text-text-align, left);
+    text-transform: var(--user-info-text-text-transform, uppercase);
+  }
+  .ng-fa-icon {
+    //font-size: 22px;
+    //color: var(--user-info-icon-color, #dadbe0);
+  }
+
+  &__first-login {
+    max-width: 400px !important;
+
+    .modal-body {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.user-info-content .user-history-content table tr {
+  td {
+    &:nth-of-type(6) {
+      width: 192px;
+      word-break: break-all;
+    }
+  }
+}
+
+.user-info-content {
+  margin-top: 100px !important;
+  padding: var(--ticket-info-padding, 32px);
+  width: var(--ticket-info-width, 1220px)!important;
+  max-width: unset!important;
+  .user_info_modal_content {
+    margin: 0;
+  }
+  .ticket-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    p {
+      margin: 0;
+      font-size: $font-size-4;
+      color: var(--ticket-info-header-color, #3A3333);
+      font-weight: 700;
+    }
+    fa-icon {
+      border-radius: 100%;
+      background: #20232C;
+      height: 20px;
+      width: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  .user-history-content {
+    max-height: 445px;
+    overflow-y: auto;
+    span {
+      font-weight: 700;
+      font-size: 16px;
+      color: #000;
+    }
+    h3 {
+      font-size: $font-size-4;
+      font-weight: 700;
+    }
+    .bet-selections {
+      .short-column{
+        width: var(--ticket-short-column-width, 130px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &:hover {
+          text-overflow: unset;
+          overflow-wrap: anywhere;
+        }
+      }
+      &_header {
+        display: flex;
+        margin-bottom: 4px;
+        background: #D8D8D8;
+        justify-content: space-between;
+        padding: 7px 24px;
+        border-radius: 4px;
+        gap: 5px;
+        font-weight: 700;
+        div {
+          width: calc(100% - 850px);
+        }
+      }
+      &_content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px;
+        background: #EBEBEB;
+        border-radius: 4px;
+        .content-row {
+          display: flex;
+          justify-content: space-between;
+          gap: 5px;
+          .short-column {
+            width: var(--ticket-short-column-width, 130px);
+          }
+          div {
+            width: calc(100% - 850px);
+          }
+        }
+      }
+    }
+
+    table {
+      border-spacing: 0;
+      table-layout: fixed;
+      width: 100%;
+
+      tr {
+        &.won {
+          background: color(history-item-won-background);
+        }
+
+        &.lost {
+          background: color(history-item-lost-background);
+        }
+
+        &:nth-child(1) {
+          background: $account-deposit-section-bg;
+
+          td {
+            padding: 5px;
+          }
+        }
+
+        background: $table-header-bg;
+
+        td {
+          padding: 10px;
+          border: 0;
+
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .modal-content {
+    &__first-login {
+      max-width: 85%!important;
+    }
+  }
+}
+@media screen and (min-width: 1377px) and (max-width: 1800px) {
+  .modal-content {
+    &.register_PSection {
+      max-width: var(--modal-content-register-section-small-max-width, 53%) !important;
+    }
+  }
+}
+@media screen and (min-width: 1600px) and (max-width: 1800px) {
+  .modal-content {
+    &.register_PSection {
+      max-height: var(--register-modal-section-large-max-height, 100%);
+    }
+  }
+}
+
+@media screen and (min-width: 1377px) and (max-width: 1599px) {
+  .modal-content {
+    &.register_PSection {
+      max-height: var(--register-modal-section-medium-max-height, 100%);
+    }
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 1376px) {
+  .modal-content {
+    &.register_PSection {
+      max-height: var(--register-modal-section-small-max-height, 100%);
+    }
+  }
+}

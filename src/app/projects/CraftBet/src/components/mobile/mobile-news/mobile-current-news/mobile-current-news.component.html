@@ -1,0 +1,30 @@
+<div class="mobile-news-section">
+  <div class="mobile-news-section_top max-width">
+
+    <div>
+
+      <h1 class="news-title" [innerHtml]="currentNews.Title"></h1>
+
+      <img src="../../../../../../../assets/images/news/{{currentNews.Image}}">
+
+      <div class="news-content">
+        <h2 [innerHtml]="currentNews.Description"></h2>
+        <p [innerHtml]="currentNews.Content"></p>
+        <p class="publish-date">{{'Promotion.PublishedDate' | translate}} {{currentNews.Date}}</p>
+      </div>
+
+<!--      <div class="mobile-products-list_item" *ngFor="let item of promotions" [routerLink]="['/promotions', item.id]">-->
+<!--        <div class="news_item">-->
+<!--          <img src="../../../../../../../assets/images/news/small/{{item.image}}"/>-->
+<!--          <div class="news_title" [innerHtml]="item.title"></div>-->
+<!--        </div>-->
+
+<!--        <div class="news_text">-->
+<!--          <p [innerHtml]="item.description"></p>-->
+<!--          <a>{{'Promotions.Keep Reading' | translate}}</a>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+
+  </div>
+</div>

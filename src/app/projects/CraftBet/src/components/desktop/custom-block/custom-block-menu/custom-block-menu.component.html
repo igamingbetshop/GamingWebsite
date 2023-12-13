@@ -1,0 +1,13 @@
+<div class="custom-menu_block">
+  <div class="logo">
+    <img class="logo_img" src="../../../../../../../../assets/images/logo.png"/>
+  </div>
+
+  <ul class="custom-menu">
+    <li *ngFor="let item of menuList" routerLinkActive="active">
+      <a class="general-menu_item_link" [routerLink]="'/custom/' + item.routeName"><span
+        class="{{item?.icon}} icon"></span> {{ 'CustomPage.' + item?.pageName | translate}}</a>
+    </li>
+  </ul>
+
+</div>

@@ -1,0 +1,15 @@
+/*
+styles which will be used for all projects
+*/
+
+// Sass utilities
+@import 'helpers/variables';
+@import 'helpers/mixins';
+
+
+// Base stuff
+@import 'base/config';
+
+@import 'components/components';
+@import 'general/general_dir';
+

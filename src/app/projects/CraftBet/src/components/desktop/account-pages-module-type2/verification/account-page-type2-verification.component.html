@@ -1,0 +1,97 @@
+<div class="tab-content account-verification history-section" [ngClass]="{ 'active-tab': showActiveTab == 'AccountVerification' || showActiveTab == 'AccountVerification\t'}">
+    <div class="verification-message">
+        <p>{{'Account.DocumentIdentificationMessage' | translate}}:</p>
+        <ul>
+            <li>{{'Account.DocumentFormatMessage' | translate}}</li>
+            <li>{{'Account.DocumentValidityPeriod' | translate}}</li>
+            <li>{{'Account.DocumentValidityColor' | translate}}</li>
+            <li>{{'Account.DocumentValidityOriginal' | translate}}</li>
+            <li>{{'Account.DocumentValiditySignature' | translate}}</li>
+            <li>{{'Account.DocumentValidityPresent' | translate}}</li>
+        </ul>
+    </div>
+    <form [formGroup]="uploadDocumentForm" (ngSubmit)="uploadDocument()">
+        <label>{{'Account.Choose document' | translate}}</label>
+        <div class="form_row2">
+            <div class="form_field distans-right verify_field">
+                <select formControlName="documentItem" (change)="addedDocument($event)">
+                    <option value='' disabled *ngIf="!isSending" hidden>{{'Account.Document' | translate}}</option>
+                    <option *ngFor="let item of getSettingsInfoService.documentTypesList"
+                            [value]="item.Id">{{item?.Name}}</option>
+                </select>
+<!--                <fa-icon [icon]="faCaretDown" class="select-select"></fa-icon>-->
+            </div>
+            <div class="form_field verify_field_col2">
+                <div class="form_field__top distans-right form_field-col2">
+                    <input #documentFile type="file" (change)="handleInputChange($event)"
+                           class="distans-right choose_input"
+                           name="file" [style.pointer-events]="selectedFile ? 'auto' : 'none'">
+                    <input class="change_name" type="text" placeholder="{{fileData?.Name ? ('Account.ChangeFile' | translate) : ('Account.SelectFile' | translate)}}"
+                           [ngClass]="{'change_name_active': selectedFile}" disabled style="opacity: 1">
+                </div>
+                <div class="file-box">
+                    {{fileData?.Name}}
+                </div>
+
+            </div>
+            <button type="submit" class="common-button verify_btn"
+                    [ngClass]="{'disable_item' : !getSettingsInfoService.checkDocumentSize || !uploadDocumentForm.get('documentItem').value}">{{'User.Verify' | translate}}</button>
+        </div>
+    </form>
+    <div class="error_message docError">{{selectedDocumentErrorMessage}}</div>
+    <div class="success_message">{{documentUploadResponseMessage}}</div>
+
+    <!--        <div>-->
+    <!--            <table class="bet-selections-info">-->
+    <!--                <thead>-->
+    <!--                <tr class="bet-selections-info__tr">-->
+    <!--                    <td class="bet-selections-info__td">{{'User.Id' | translate}}</td>-->
+    <!--                    <td class="bet-selections-info__td">{{'User.Document type' | translate}}</td>-->
+    <!--                    <td class="bet-selections-info__td">{{'User.Creation Date' | translate}}</td>-->
+    <!--                    <td class="bet-selections-info__td">{{'User.Status' | translate}}</td>-->
+    <!--                </tr>-->
+    <!--                </thead>-->
+    <!--                <tbody class="bet-selections-info__tbody">-->
+
+    <!--                <tr class="bet-selections-info__tr"-->
+    <!--                    *ngFor="let item of getSettingsInfoService?.identityModelsList">-->
+    <!--                    <td class="bet-selections-info__td">-->
+    <!--                        {{item?.Id}}-->
+    <!--                    </td>-->
+    <!--                    <td class="bet-selections-info__td">-->
+    <!--                        {{item?.DocumentTypeName }}-->
+    <!--                    </td>-->
+    <!--                    <td class="bet-selections-info__td">-->
+    <!--                        {{item?.CreationTime | date: 'd MMM y h:mm'}}-->
+    <!--                    </td>-->
+    <!--                    <td class="bet-selections-info__td">-->
+    <!--                        {{item?.StatusName}}-->
+    <!--                    </td>-->
+    <!--                </tr>-->
+    <!--                </tbody>-->
+    <!--            </table>-->
+    <!--        </div>-->
+    <div class="account-verif-head block-head">
+        <div>{{'User.Id' | translate}}</div>
+        <div>{{'User.Document type' | translate}}</div>
+        <div>{{'User.Creation Date' | translate}}</div>
+        <div>{{'User.Status' | translate}}</div>
+    </div>
+    <ng-container *ngIf="getSettingsInfoService?.identityModelsList.length > 0; else emptyDocuments">
+        <section>
+            <div class="account-verif-block block"
+                 *ngFor="let item of getSettingsInfoService?.identityModelsList">
+                <div class="document-block_item block_item">{{item?.Id}}</div>
+                <div class="document-block_item block_item">{{item?.DocumentTypeName }}</div>
+                <div class="document-block_item block_item">{{item?.CreationTime | date: 'd MMM y h:mm'}}</div>
+                <div class="document-block_item block_item">{{item?.StatusName}}</div>
+            </div>
+        </section>
+    </ng-container>
+    <ng-template #emptyDocuments>
+        <section class="empty-documents empty-block">
+            <span class="icon-acount-verification icon"></span>
+            <span class="empty-block-text">{{'User.Documents-empty' | translate}}</span>
+        </section>
+    </ng-template>
+</div>

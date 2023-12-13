@@ -1,0 +1,61 @@
+<div [ngSwitch]="fragmentConfig.Config.type">
+    <div *ngSwitchCase="'filter'"  [ngStyle]="fragmentConfig?.Config.style" class="filter-category-box">
+        <ul id="m-product-grid" class="product_list">
+            <li id="m-casino_game_item" class="product_list_item"
+                *ngFor="let game of games; let i = index">
+                <app-mobile-casino-game
+                        [selectedProductId]="selectedProductId"
+                        [game]="game"
+                        (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)"
+                        (selectProductId)="selectedProductId = $event">
+                </app-mobile-casino-game>
+            </li>
+            <button *ngIf="leftGamesCount" class="more-button" (click)="casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+        </ul>
+    </div>
+    <div *ngSwitchCase="'horizontal'" class="category" [class.center]="fragmentConfig?.Config?.label == 'center'"
+         [ngStyle]="fragmentConfig.Config.style">
+        <div class="category-action">
+            <header class="header">{{ 'Game.' + fragmentConfig.Title | translate }}</header>
+            <div *ngIf="fragmentConfig.Config.showAll" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]" class="show-all">{{ 'Category.ShowAll' | translate }}</div>
+        </div>
+
+        <main>
+            <div class="games" horizontal-scroll [style.gap.px]="fragmentConfig.Config.gap || 8">
+                <app-mobile-casino-game
+                        *ngFor="let game of games" [game]="game"
+                        [fragmentConfig]="fragmentConfig.Config"
+                        [selectedProductId]="selectedProductId"
+                        (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)"
+                        (selectProductId)="selectedProductId = $event">
+                </app-mobile-casino-game>
+            </div>
+        </main>
+    </div>
+    <div *ngSwitchCase="'search'"
+         [ngStyle]="fragmentConfig.Config.style"
+         class="filter-category-box">
+        <div class="title-field">
+            <div></div>
+            <div class="back-section" (click)="backFromSearch()">
+                <i class="icon-back"></i>
+                <p>back</p>
+            </div>
+            <div class="filter-title" *ngIf="categoryName">{{ 'Category.' + categoryName | translate }}</div>
+        </div>
+        <ul id="product-grid" class="product_list">
+            <li id="casino_game_item" class="product_list_item"
+                *ngFor="let game of games;let i = index">
+                <app-mobile-casino-game
+                        [game]="game"
+                        [selectedProductId]="selectedProductId"
+                        (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)"
+                        (selectProductId)="selectedProductId = $event">
+                </app-mobile-casino-game>
+            </li>
+            <button *ngIf="leftGamesCount" class="more-button" (click)="casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+        </ul>
+    </div>
+</div>
+
+

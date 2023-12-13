@@ -1,0 +1,84 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#mobile-craft-bet {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-image: var(--m-main-background-image, unset);
+  background-size: var(--m-main-background-image-size, unset);
+  background-repeat: var(--m-main-background-image-repeat, no-repeat);
+  .rotate-cover
+  {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999;
+    background-size: 220px;
+    display: block;
+    background: var(--device-portrait-color, #CCCCCC) url("~assets/images/home/device.png") no-repeat center;
+    div
+    {
+      bottom: 25px;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .mobile-popup-section {
+    width: 100%;
+    position: fixed;
+    z-index: 11111;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+
+    .close-popup {
+      position: absolute;
+      top: -2px;
+      right: 0;
+    }
+
+    &_content {
+      display: flex;
+      box-sizing: border-box;
+      padding: 15px;
+      width: 90%;
+      left: 5%;
+      background: $recovery-info-bg;
+      position: absolute;
+
+      &.ios {
+        bottom: 80px;
+      }
+
+      &.android {
+        bottom: 20px;
+      }
+    }
+
+    .popup-icon {
+      width: 80px;
+      height: 80px;
+    }
+
+    .popup-content {
+      padding: 0 15px;
+    }
+
+    .share-button {
+      width: 13px;
+      height: 18px;
+    }
+
+    .text-bold {
+      font-weight: bold;
+    }
+  }
+}

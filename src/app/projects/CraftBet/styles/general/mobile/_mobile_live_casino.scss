@@ -1,0 +1,29 @@
+@import "../../../styles/helpers/variables";
+
+.mobile-live-casino-section {
+  margin-top: height(m-header-panel1, 62px);
+  background: color(m-product-background);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+
+  .grouped-products-content {
+    padding-top: calc(100px + var(--mobile-nav-bar-height));
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: space-evenly;
+
+    &_item {
+      width: var(--m-grouped-products-content-item-width, 140px);
+      height: 170px;
+      margin-bottom: 15px;
+      background-size: var(--m-grouped-products-content-item-background-size, contain);
+      cursor: pointer;
+      background-repeat: no-repeat;
+    }
+
+  }
+}

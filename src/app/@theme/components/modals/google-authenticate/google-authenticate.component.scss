@@ -1,0 +1,46 @@
+.authentication-title {
+  font-size: var(--google-authentication-text-font-size, 18px);
+  line-height: var(--google-authentication-text-line-height, 16px);
+  float: left;
+  color: var(--google-authentication-text-color, #000);
+  font-weight: var(--google-authentication-text-font-weight, bold);
+  text-align: var(--google-authentication-text-align, left);
+  text-transform: var(--google-authentication-text-transform, revert);
+}
+
+.authentication-title-icon {
+  font-size: var(--google-authentication-icon-font-size, 24px);
+  color: var(--google-authentication-icon-color, #000);
+}
+
+.authenticate-modal-input {
+  background: var(--google-authentication-input-background, transparent);
+  color: var(--google-authentication-input-color, #000);
+  border: var(--google-authentication-input-border, 1px solid #dbedff);
+  border-radius: var(--google-authentication-input-border-radius,6px);
+  height: var(--google-authentication-input-height,44px);
+  margin-bottom: var(--google-authentication-input-margin-bottom, 14px) !important;
+}
+
+.authenticate-modal-submit {
+  background: var(--google-authentication-submit-background, rgb(239, 239, 239)) !important;
+  color: var(--google-authentication-submit-color, #000) !important;
+  width: var(--google-authentication-submit-width, 100%);
+  margin: var(--google-authentication-submit-margin, 0px auto);
+  border-radius: var(--google-authentication-submit-border-radius, 6px);
+  font-size: var(--google-authentication-submit-font-size, 16px);
+  height: var(--google-authentication-submit-height, 44px);
+}
+
+.authentication-body {
+  background: var(--google-authentication-body-background, #fff);
+  padding: var(--google-authentication-body-padding, 24px) !important;
+  border-radius: var(--google-authentication-body-border-radius, 4px);
+  line-height: var(--google-authentication-body-line-height, 30px);
+}
+@media screen and (min-width: 1200px) {
+  .authentication-body {
+    max-width: var(--google-authentication-body-max-width, 500px) !important;
+    height: var(--google-authentication-body-height, auto) !important;
+  }
+}

@@ -1,0 +1,160 @@
+.security-questions
+{
+  display: flex;
+  gap: 11px;
+  flex-direction: column;
+  .form_field {
+    .custom_dropdown_reg {
+      height: var(--question-text-height, 60px);
+      background-color: var(--question-select-background-color, #f2f2f4);
+      margin-left: -7px;
+    }
+
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      text-indent: 1px;
+      text-overflow: '<>';
+    }
+    .security-questions-label {
+      padding: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+    label {
+      width: width(register-form-field-label, inherit);
+      color: itemColor(register-label-text-color, #ffffff);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      z-index: 1;
+      position: relative;
+      height: 25px;
+      padding: padding(signup-input-label, 0 8px);
+      background: var(--register-background-color, #FFFFFF);
+      pointer-events: auto;
+      top: 0;
+    }
+    label:after {
+      content: '<>';
+      font: 20px "Consolas", monospace;
+      color: #202020;
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      right: 19px;
+      top: -4px;
+      padding: 0 0 2px;
+      position: absolute;
+      pointer-events: none;
+    }
+  }
+  .answers
+  {
+    li
+    {
+      display: flex;
+      align-items: center;
+      >div
+      {
+        &:first-of-type{width: 30px;
+          color: var(--number-question-color, #84868D);
+          font-weight: var(--number-question-wight,700);
+          font-size: var(--number-question-size,25px);
+        }
+        &:last-of-type{
+          width: 30px;
+          cursor: pointer;
+          color: var(--icon-delete-question-color, #797979);
+        }
+        &:nth-of-type(2)
+        {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+
+          .question-text {
+            padding-bottom: var(--question-text-padding-bottom, 5px);
+            padding-top: var(--question-text-padding-top, 10px);
+            color: var(--question-text-color, #96989A);
+            font-weight: var(--question-text-font-weight, 600);
+            font-size: var(--question-text-font-size, 16px);
+            line-height: 30px;
+          }
+
+          .answer-text {
+            padding-bottom: var(--answer-text-padding-bottom, 5px);
+            padding-top: var(--answer-text-padding-top, 0px);
+            color: var(--answer-text-color, #6C7CBF);
+            font-weight: var(--answer-text-font-weight, 600);
+            font-size: var(--answer-text-font-size, 16px);
+            line-height: 30px;
+          }
+        }
+        .icon-delete-ticket {
+          font-size: 23px;
+        }
+      }
+      border-bottom: 1px solid var(--answer-text-border-color, #CCCCCC);
+    }
+  }
+  .answer-action
+  {
+    display: flex;
+    gap: 16px;
+    .form_field{
+      flex:1;
+      height: var(--answeer-text-height, 60px);
+      background-color: var(--answer-select-background-color, #f2f2f4);
+    }
+    .craft_btn
+    {
+      height: var(--answeer-add-button-height, 60px);
+      line-height: 39px;
+      color: var(--answer-action, #fff);
+      background-color: var(--answeer-add-button-background-color, #546AF9);
+      width: var(--answeer-text-width, 30%);
+    }
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 1610px)
+{
+  .security-questions .form_field {
+    input, select, .custom_dropdown_reg {
+      height: 40px;
+      font-size: 10.5px;
+    }
+    label:after {
+      top: 0;
+    }
+    .security-questions-label {
+      top: 0 !important;
+    }
+  }
+
+  .security-questions {
+    .answer-action {
+      .form_field, .craft_btn {
+        height: 40px;
+      }
+    }
+    .answers li{
+      font-size: 10px;
+      >div {
+        &:first-of-type{
+          font-size: 18px;
+        }
+        &:nth-of-type(2) {
+          .question-text {
+            font-size: 12px;
+            line-height: 15px;
+          }
+          .answer-text {
+            font-size: 12px;
+            line-height: 15px;
+          }
+        }
+      }
+    }
+  }
+}

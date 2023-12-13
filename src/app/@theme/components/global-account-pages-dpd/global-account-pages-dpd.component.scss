@@ -1,0 +1,48 @@
+.user-id-info
+{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  color: white;
+  font-family: "Rubik", sans-serif;
+  >div
+  {
+    &:first-child{font-size: 12px}
+    &:last-child
+    {
+      position: relative;
+      fa-icon
+      {
+        &:last-of-type
+        {
+          position: absolute;
+          top: -5px;
+          right: -7px;
+          font-size: 12px;
+          z-index: 1;
+          color: #FECB00;
+        }
+      }
+    }
+  }
+}
+.user-id-info, .user_panel_title
+{
+  .header-first-name
+  {
+    display:  var(--header-first-name-display, none);
+  }
+  .header-last-name
+  {
+    display:  var(--header-last-name-display, none);
+  }
+  .header-user-name
+  {
+    display:  var(--header-user-name-display, none);
+  }
+}
+.item-icon-img {
+  width: var(--account-page-item-width, auto);
+  height: var(--account-page-item-height, auto);
+  margin-right: var(--account-page-item-margin-right, 0);
+}

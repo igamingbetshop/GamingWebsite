@@ -1,0 +1,9 @@
+<div class="payment-system-block mobile-payment-balance-section">
+    <div class="payment-systems__userAccount" *ngFor="let account of Accounts">
+        <div class="payment-systems__userAccount__name">
+            <span *ngIf="account.Id === 0">{{ "Account." + account?.AccountTypeName | translate }}</span>
+            <span *ngIf="account.Id !== 0">{{ account?.AccountTypeName }}</span>
+            <span>{{ CurrencyId }} {{ account?.Balance | number }}</span>
+        </div>
+    </div>
+</div>

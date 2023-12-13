@@ -1,0 +1,32 @@
+@import "../helpers/variables";
+
+.craft_btn {
+  font-size: 16px;
+  font-weight: 600;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background: backgroundColor(button, rgb(239, 239, 239));
+
+  &.change-password_btn {
+    background-color: backgroundColor(change-pass, rgb(239, 239, 239));
+    color: itemColor(change-pass, #000);
+  }
+
+}
+
+
+.bg_payment {
+  background-image: -webkit-linear-gradient(90deg, color(payment-button-background-gradient-first) 0%, color(payment-button-background-gradient-second) 100%);
+  //background-image: -ms-linear-gradient(90deg, rgb(16, 171, 138) 0%, rgb(2, 136, 126) 100%);
+  //background-image: -moz-linear-gradient(90deg, rgb(16, 171, 138) 0%, rgb(2, 136, 126) 100%);
+}
+
+
+.bg_recovery {
+  background-image: -webkit-linear-gradient(90deg, color(recovery-button-background-gradient-first) 0%, color(recovery-button-background-gradient-second) 100%);
+  //background-image: -moz-linear-gradient(90deg, rgb(251, 79, 123) 0%, rgb(229, 68, 109) 100%);
+  //background-image: -ms-linear-gradient(90deg, rgb(251, 79, 123) 0%, rgb(229, 68, 109) 100%);
+}

@@ -1,0 +1,20 @@
+.global_register-btn {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.icon-eighteen {
+  display: var(--header-reg-btn-icon-display, none);
+  font-size: var(--header-reg-btn-icon-font-size, 16px);
+  font-weight: var(--header-reg-btn-icon-font-weight, 700);
+  border: var(--header-reg-btn-icon-border, none);
+  border-radius: var(--header-reg-btn-icon-border-radius, 0px);
+  padding: var(--header-reg-btn-icon-padding, 0px);
+  color: var(--header-reg-btn-icon-color, #fff);
+  margin-left: var(--header-reg-btn-icon-margin-left, 14px);
+  margin-top: var(--header-reg-btn-icon-margin-top, 0px);
+  position: var(--header-reg-btn-icon-position, relative);
+  top: var(--header-reg-btn-icon-top, 3px);
+}

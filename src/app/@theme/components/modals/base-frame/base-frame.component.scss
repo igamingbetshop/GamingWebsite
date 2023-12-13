@@ -1,0 +1,35 @@
+.modal-content
+{
+  position: relative;
+  padding: 0;
+  height: var(--modal-payment-frame-height, 500px);
+  max-height: var(--modal-payment-frame-max-height, 500px);
+  margin: unset!important;
+  top:50%;
+  transform: translateY(-50%)!important;
+
+  .icon-close-modal
+  {
+    position: absolute;
+    top:8px;
+    right: 20px;
+    color: var(--modal-frame-close-icon-color, white);
+    cursor: pointer;
+  }
+  &.big-size {
+    width: var(--modal-payment-frame-width, 620px);
+    max-width: unset!important;
+  }
+
+  &.small-size {
+    width: 100%;
+  }
+  iframe
+  {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+

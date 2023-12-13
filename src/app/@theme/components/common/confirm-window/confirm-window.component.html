@@ -1,0 +1,19 @@
+<div class="modal-content triggers">
+  <div class="modal-body">
+    <h1>{{'User.SelfExclusionConfirmMessage' | translate}} {{'User.' + title | translate}}</h1>
+    <fa-icon [icon]="['fas', 'times']" (click)="close()"></fa-icon>
+  </div>
+  <div class="modal_content">
+    <h1 class="triggers-section">{{'User.'+ title +'-section' | translate}}</h1>
+    <div class="actions">
+      <div class="form_field">
+        <button type="button" class="craft_btn setting_btn cancel_btn" (click)="cancel()">
+          {{'User.Cancel' | translate}}</button>
+      </div>
+      <div class="form_field">
+        <button type="button" class="craft_btn setting_btn confirm_btn" (click)="confirm()">
+          {{'User.Self-exclude' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

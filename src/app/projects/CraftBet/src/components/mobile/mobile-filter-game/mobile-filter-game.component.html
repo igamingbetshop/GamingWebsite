@@ -1,0 +1,36 @@
+<div class="mobile-filter-game-section min-height full-width">
+  <div class="mobile-filter-game-section_banners">
+    <common-banner  *ngIf="slideKey != -1" [slideKey]="slideKey" [slideConfig]="slideConfig"></common-banner>
+  </div>
+
+  <div class="mobile-filter-game-section_items">
+    <ul class="product_list" id="product-grid">
+      <li
+        class="product_list_item"
+        id="casino_game_item"
+        *ngFor="let item of filterGamesList"
+        (click)="chooseGame(item)"
+        [ngClass]="{'active-item': selectedProductId == item.productId }"
+      >
+        <div class="game-img" [ngStyle]="{'background-image': 'url(' + item?.gameImage + ')'}">
+          <div class="game-open">
+            <a class="game-btn game-btn_real"
+               (click)="openGame(item?.productId, 'real', routeName)">
+              {{'Game.Real' | translate}}
+            </a>
+          </div>
+          <div class="game-open game-open-demo" *ngIf="item.hasDemo">
+            <a class="game-btn game-btn_demo"
+               (click)="openGame(item?.productId, 'demo', routeName)">
+              {{'Game.Demo' | translate}}
+            </a>
+          </div>
+          <div class="game-title">
+            {{item.providerName}}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <button *ngIf="LeftGamesCount" class="more-button" (click)="onScrollDown($event)">{{'Game.See More' | translate}} <span>({{LeftGamesCount}})</span></button>
+</div>

@@ -1,0 +1,139 @@
+.payments-section {
+  padding: 14px 27px 10px;
+  .user-right-panel_title {
+    height: auto;
+    padding-bottom: 10px;
+    cursor: default;
+  }
+  .container-part {
+    margin-bottom: 10px;
+    .history-options {
+      width: 100%;
+      height: 51px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      .custom_dropdown_reg {
+        background: #fff;
+        color: #000;
+        border-radius: 4px;
+
+        .current_item {
+          height: 100%;
+          border-radius: 0;
+          border: none;
+          justify-content: center;
+          font-size: 20px;
+        }
+
+        .current_item:hover {
+          color: #000;
+        }
+
+        .change-icon {
+          transform: rotate(90deg);
+          font-size: 10px;
+          margin-left: auto;
+          color: #d9d9d9;
+        }
+        .custom_dropdown_list {
+          background: #fff;
+          border-color: #D0CECE;
+          height: 142px;
+          margin-top: 20px;
+
+          .custom_dropdown_list_items {
+            font-size: 15px;
+            //padding: 7px 0;
+            height: 35px;
+            border-bottom: 1px solid #D0CECE;
+            line-height: 35px;
+          }
+
+          .custom_dropdown_list_items:hover {
+            background: #fff;
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+  .payments-block-head {
+    cursor: default;
+  }
+  .payments-section-list {
+    gap: 16px;
+    min-height: var(--payments-section-list-min-height, 470px);
+    cursor: default;
+  }
+}
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+  .payments-section {
+    .user-right-panel_title {
+      font-size: 20px;
+    }
+    .container-part {
+      .history-options{
+        height: 40px;
+        .selected-item {
+          font-size: 14px;
+        }
+      }
+      .custom_dropdown_reg{
+        .custom_dropdown_list {
+          .custom_dropdown_list_items {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .payments-block-head {
+      font-size: 12px;
+      padding: 0;
+    }
+    .payments-section-list .payments-block {
+      font-size: 12px;
+    }
+  }
+
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .payments-section {
+    .user-right-panel_title {
+      font-size: 18px;
+    }
+    .container-part {
+      .history-options{
+        height: 40px;
+        .selected-item {
+          font-size: 12px;
+        }
+        .custom_dropdown_reg{
+          .custom_dropdown_list {
+            .custom_dropdown_list_items {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+    .payments-block-head {
+      font-size: 10px;
+      padding: 0;
+    }
+    .payments-section-list .payments-block {
+      font-size: 10px;
+    }
+  }
+}
+@media screen and (min-width: 1700px) and (max-width: 1900px) {
+  .payments-section {
+    .payments-block-head {
+      font-size: 13px;
+    }
+    .payments-section-list .payments-block {
+      font-size: 13px;
+    }
+  }
+}

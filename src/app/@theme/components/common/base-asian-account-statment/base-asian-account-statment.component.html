@@ -1,0 +1,54 @@
+<div class="asian-statment {{className}}">
+    <div class="asian-statment_title">
+        {{'User.Account_info' | translate}}
+    </div>
+
+    <div class="asian-statment_content">
+        <ul class="asian-statment_table">
+            <li class="asian-statment_item">
+                <span class="label">{{'Asian-Statment.Username'}}</span>
+                <span>{{userData?.UserName}}</span>
+            </li>
+            <li class="asian-statment_item">
+                <span class="label">{{'Asian-Statment.Nickname'}}</span>
+                <span>{{userData?.FirstName}} {{userData?.LastName}}</span>
+            </li>
+            <li class="asian-statment_item">
+                <span class="label">{{'Asian-Statment.Currency'}}</span>
+                <span>{{userData?.CurrencyId}}</span>
+            </li>
+
+            <li class="asian-statment_item">
+                <span class="label">{{'Asian-Statment.Cash Balance'}}</span>
+                <span>{{accountData?.CashBalance}}</span>
+            </li>
+
+            <li class="asian-statment_item">
+                <span class="label">{{'Asian-Statment.Outstanding'}}</span>
+                <span>{{accountData?.OutstandingBalance}}</span>
+            </li>
+
+            <li class="asian-statment_item">
+                <span class="label">{{'Asian-Statment.Bet-Creedit' | translate}}</span>
+                <span>{{accountData?.AvailableCredit}}</span>
+            </li>
+
+            <li class="asian-statment_item">
+                <span class="label">{{'Asian-Statment.Given-Creedit' | translate}}</span>
+                <span>{{accountData?.GivenCredit}}</span>
+            </li>
+
+            <li class="asian-statment_item">
+                <span class="label">{{'Asian-Statment.Password-Expiry-Date' | translate}}</span>
+                <span>{{accountData?.PasswordExpiryDate | date: 'MMMM d y h:mm'}}</span>
+            </li>
+
+            <li class="asian-statment_item">
+                <span class="label">{{'Asian-Statment.Last-Login-Info' | translate}}</span>
+                <span>{{accountData?.LastLoginDate | date: 'MMMM d y h:mm'}}</span>
+            </li>
+
+        </ul>
+    </div>
+
+</div>

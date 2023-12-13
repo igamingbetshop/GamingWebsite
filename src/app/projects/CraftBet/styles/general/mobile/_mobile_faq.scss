@@ -1,0 +1,35 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-faq-section {
+  text-align: justify;
+  margin-top: 62px;
+  min-height: calc(100vh - 62px);
+  background: color(m-user-views-background);
+  color:itemColor(m-user-views-text,$font-color);
+  padding: 15px 10px;
+
+  li {
+    margin-bottom: 7px;
+  }
+
+  .Name {
+    text-align: center;
+    font-size: 24px;
+    color: color(m-user-views-title);
+    font-weight: bold;
+  }
+
+  .Football,.Basketball,.Baseball,.Table_tennis,.Beach_volleyball {
+    //color: $register-active-menu;
+    font-weight: bold;
+  }
+
+  .to_top {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+  }
+
+}
+

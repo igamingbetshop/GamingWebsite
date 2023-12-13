@@ -1,0 +1,887 @@
+.settings-section {
+  height: var(--payment-section-content-height, 725px);
+  display: flex;
+  gap: $account-small-gap;
+  label {
+    color: itemColor(settings-input-label, #fff);
+    position: position(settings-input-label, absolute);
+    top: itemTop(settings-input-label, 20px);
+    left: itemLeft(settings-input-label, 8px);
+    height: height(settings-input-label, 25px);
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    pointer-events: none;
+  }
+  input:focus ~ label {
+    width: width(settings-input-field-label, inherit);
+    height: height(settings-input-label-focused, 11px);
+    background: var(--settings-background-color, #FFFFFF);
+    color: var(--settings-field-focus-label, #fff);
+    top: itemTop(settings-label, 20px);
+    font-size: var(--settings-background-color-font-size, 16px);
+  }
+  input:focus ~ .cut,
+  input:not(:placeholder-shown) ~ .cut {
+    transform: translateY(8px);
+    display: block;
+  }
+  input:focus ~ .cut {
+    display: block;
+  }
+  input:focus::placeholder {
+    opacity: 1;
+  }
+  input::placeholder {
+    opacity: 0;
+  }
+  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    transform: var(--settings-label-transform, translateY(-27px) translateX(10px) scale(0.75));
+    background-color: var(--settings-background-color, unset);
+    height: height(settings-label-focused, 22px);
+    font-size: var(--settings-font-size-label, 16px);
+    color: var(--settings-focus-label-focused, #fff);
+    text-align: var(--settings-focus-label-focused-text-align, left);
+    width: var(--settings-focus-label-focused-width, auto);
+    padding-left: var(--settings-padding-left-focus-label-focused, 5px);
+    padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+  }
+  select:focus~label,
+  select:not([value=""]):valid~label {
+    transform:var(--register-select-label-transform, translateY(-27px) translateX(10px) scale(0.75));
+    top: itemTop(register-focused-select-label, 20px);
+    font-size: fontSize(register-focused-label, 16px);
+    color: var(--settings-focus-label-focused, #fff);
+    background-color: var(--settings-background-color-focus-label-focused, unset);
+    padding-left: var(--settings-padding-left-focus-label-focused, 5px);
+    padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+    white-space: nowrap;
+  }
+  .settings-section_title
+  {
+    color: itemColor(settings-title, #180000);
+  }
+  .client-statuses {
+    display: flex;
+    flex-wrap: wrap;
+
+    .cs-item {
+      display: flex;
+      align-items: center;
+      width: 50%;
+      padding: 5px 10px 5px 0;
+      justify-content: space-between;
+    }
+  }
+
+  .self-limitation {
+    table {
+      td {
+        padding: 5px;
+      }
+    }
+
+    input {
+      &.active_item {
+        border: 1px solid rgba(219, 237, 255, 0.8);
+      }
+
+      height: 30px;
+      padding: 10px;
+      text-align: right;
+    }
+
+    .session-limit {
+      margin-left: 7px;
+      display: flex;
+      align-items: center;
+
+      input {
+        margin-left: 10px
+      }
+
+      margin-bottom: 10px;
+
+      span {
+        display: inline-block;
+        margin-left: 10px
+      }
+
+      .error-message {
+        margin-left: 10px
+      }
+    }
+  }
+
+  .self-exclusion-box {
+    .se-row {
+      display: flex;
+      align-items: center;
+
+      > * {
+        margin-right: 10px
+      }
+    }
+  }
+
+  h3 {
+    color: $account-right-block-title;
+    font-size: 20px;
+    font-weight: normal;
+    padding: 10px 0;
+  }
+
+  .submit-details {
+    display: flex;
+    gap: 20px;
+    /*position: absolute;
+    bottom: 55px;*/
+    width: width(settings-submit-details, auto);
+    .setting_btn {
+      font-size: var(--settings-submit-details-font-size, 16px);
+      font-weight: var(--settings-submit-details-font-weight, 500);
+      //width: 50%;
+      padding: var(--settings-submit-details-padding, 0px 10px);
+      height: height(settings-submit-details, 44px);
+      width: var(--settings-submit-details-btn-width, auto);
+      .icon-close-modal {
+        margin-right: 13px;
+        font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
+      }
+      .fas-save {
+        margin-right: 13px;
+        font-size: calc(var(--settings-submit-details-font-size, 16px) + 2px);
+      }
+      &.cancel_btn {
+        background: var(--settings-cancel-btn-bg, rgba(13, 18, 32, 0.5));
+        color: var(--settings-cancel-btn-color, #fff);
+      }
+    }
+  }
+
+  .setting_btn {
+    @include common-button;
+    font-weight: 500;
+    font-size: $font-size-5;
+  }
+
+  .change-password_form {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - var(--account-content-header-underline-margin-top) - var(--account-content-header-underline-margin-bottom));
+    justify-content: space-between;
+    align-items: unset;
+    padding-bottom: 20px;
+    padding-top: 0;
+    .change-password-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: auto;
+    }
+    .form_row {
+      line-height: unset;
+      margin: 0;
+      input {
+        margin: 10px 0 8px 0;
+        height: 40px;
+      }
+    }
+    .change-btn {
+      width: 100%;
+    }
+
+  }
+
+  .change_details {
+    display: flex;
+    width: 100%;
+    .success_message1 {
+      bottom: itemBottom(success-message-settings-success, 0px);
+      p {
+        margin-right: marginRight(success-message-settings-success, auto);
+      }
+    }
+    &_form {
+      .success_message1 {
+        bottom: itemBottom(success-message-settings-success, 0px);
+        p {
+          margin-right: marginRight(success-message-settings-success, auto);
+        }
+      }
+      .error_message2 {
+        top: itemTop(error-message-settings-success, -12px);
+      }
+      .error_message {
+        top: itemTop(error-message-settings-success, -12px);
+      }
+      .form_row, .form_row2, form_row3 {
+        float: none;
+        margin: 0;
+        position: relative;
+        .form_field {
+          .active_item {
+            border: 1px solid itemColor(settings-active-field-border,rgba(219, 237, 255, 0.8));
+          }
+          button.active_item {
+            border: none;
+          }
+        }
+        .settings-select-field:after {
+          content: '<>';
+          font: 17px "Consolas", monospace;
+          color: #202020;
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+          right: 10px;
+          top: 24px;
+          padding: 0 0 2px;
+          position: absolute;
+          pointer-events: none;
+          visibility: var(--account-verify-select-icon-arrow-visibility, hidden);
+        }
+      }
+      .form_row2 {
+        .birth_date {
+          width: 50%;
+          margin-right: 20px;
+          .birth_date_select {
+            display: flex;
+          }
+        }
+        &.verify_row {
+          gap: 20px;
+          .form_field {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            input {
+              width: 100%!important;
+            }
+            label {
+              top: var(--email-input-label-section-top, 10px) !important;
+              height: auto;
+            }
+            .verify-btn {
+              display: var(--mobile-number-verify-btn-display, block);
+            }
+            button {
+              margin-right: 0;
+              width: width(email-input-label-section,104px);
+              height: auto;
+              line-height: unset;
+              white-space: nowrap;
+              padding: 0;
+              &.verify_btn {
+                font-size: $font-size-3;
+                padding: 0 12px;
+                margin: 10px 0 24px 0;
+              }
+            }
+          }
+        }
+      }
+      .form_row {
+        &.currency {
+          margin-bottom: 53px;
+        }
+        .success_message {
+          bottom: var(--settings-success-message-verify-link-bottom, 3px);
+          line-height: var(--settings-success-message-verify-link-line-height, 13px);
+          font-size: var(--settings-success-message-verify-link-font-size, 19px);
+        }
+      }
+    }
+  }
+
+  .comment {
+    font-size: 12px;
+    color: var(--change-password-validation-error-message-color, #DBEDFF);
+    line-height: 16px;
+    padding-top: 6px;
+  }
+
+  input, select {
+    &:not(.choose_input) {
+      //border: 1px solid $border-color;
+      color: itemColor(settings-field, $account-right-block-title);
+      font-size: $font-size-7;
+      text-indent: 0;
+      padding-left: 16px;
+      border: var(--settings-field-border, none);
+      background: var(--account-content-item-bg-color);
+      border-radius: var(--settings-field-border-radius, 6px);
+      height: height(settings-field, 40px);
+      appearance: var(--open-ticket-appearance, auto);
+    }
+    border: 1px solid rgba(219, 237, 255, 0.8);
+  }
+  ::placeholder {
+    color: itemColor(settings-field, $account-right-block-title)!important;
+  }
+
+  &_nav-tabs {
+    border-bottom: none;
+    color: itemColor(settings-nav-teb, #180000);
+
+    li {
+      width: 33.3%;
+      padding: 10px;
+      text-transform: capitalize;
+      text-align: left;
+      white-space: nowrap;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+
+      a {
+        display: block;
+        text-align: left;
+        position: relative;
+        cursor: pointer;
+      }
+
+      &:hover {
+        /* color: color(settings-tab-item-active);*/
+      }
+
+      &.active {
+        text-decoration: underline;
+        /* border-color: color(settings-tab-item-active);
+         color: color(settings-tab-item-active);*/
+
+        a {
+
+          /* &:before {
+             content: '';
+             width: 8px;
+             height: 8px;
+             background: color(settings-tab-item-active);
+             border-radius: 5px;
+             display: inline-block;
+             vertical-align: middle;
+             margin: 0 10px 0 10px;
+             position: relative;
+             top: -1px;
+           }*/
+        }
+      }
+    }
+
+  }
+  .tab-content {
+    padding: var(--account-content-row-paddding);
+    background: var(--account-main-bg-color);
+    border-radius: 6px;
+    height: auto;
+    margin: 0;
+    &.left-part {
+      width: calc(100% - var(--enter-payment-info-width));
+      .change_details_form {
+        position: relative;
+        height: 100%;
+        .form_row2 {
+          .form_field {
+
+          }
+        }
+      }
+    }
+    &.right-part {
+      width: var(--enter-payment-info-width);
+      display: var(--enter-payment-info-right-tab-display, block);
+    }
+    .settings_header {
+      @include flex-distance-between;
+      height: var(--change-password-second-tab-heirght, 32px);
+      .settings_edit {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        justify-content: justifyContent(edit-button, unset);
+        width: width(edit-button, 53px);
+        height: height(edit-button, 40px);
+        background-color: backgroundColor(edit-button, none);
+        border-radius: var(--edit-button-border-radius, 0px);
+        cursor: pointer;
+        &_text {
+          background: none!important;
+          border: none;
+          padding: 0!important;
+          color: var(--edit-button-color, #4AA4FF);
+          text-decoration: var(--edit-button-text-decoration, underline);
+          font-size: fontSize(edit-button-text, 13px);
+          cursor: pointer;
+          white-space: nowrap;
+        }
+        .icon-edit{color: color(edit-icon)}
+        &.selected
+        {
+         button{ color: color(edit-button-selected)}
+          .icon-edit{color: color(edit-icon-selected)}
+        }
+      }
+    }
+    .underline {
+      height: 1px;
+      background: var(--account-content-header-underline-bg, linear-gradient(180deg, #48628E 0%, #111723 100%));
+      box-shadow: var(--account-content-header-underline-shadow, 0 4px 8px rgba(0, 0, 0, 0.94));
+      border-radius: 6px;
+      margin-top: var(--account-content-header-underline-margin-top, 10px);
+      margin-bottom: var(--account-content-header-underline-margin-bottom, 24px);
+    }
+  }
+  .form_field__top .change_name {
+    background-color: backgroundColor(setting-btn, #7ba011);
+    text-indent: 0;
+    border: 1px solid var(--select-file-border-color, #999)!important;
+    color: itemColor(select-file, #303030) !important;
+  }
+}
+
+.choose_input {
+  border: none;
+  padding: 0;
+  //overflow: hidden !important;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  -webkit-appearance: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+.form_field__top {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  box-sizing: border-box;
+
+  .change_name {
+    height: 40px;
+    vertical-align: middle;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 3px;
+    background-color: white;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+    pointer-events: none;
+  }
+
+  ::placeholder {
+    text-align: center;
+    color: white;
+  }
+}
+
+
+.form_field__top
+{
+  ::placeholder{ color: itemColor(select-file, #303030) !important;}
+}
+
+.tab-content {
+  display: none;
+  margin-top: 20px;
+}
+
+.active-tab {
+  display: block;
+}
+
+.active_item {
+  pointer-events: unset;
+}
+
+.disable_item {
+  pointer-events: none;
+  opacity: .8;
+  border-color: #cecece !important;
+}
+.disable_input {
+  pointer-events: none !important;
+  opacity: .8;
+  border-color: #cecece !important;
+}
+
+.form_field {
+  label {
+    font-size: var(--settings-background-color-font-size, 16px);
+    top: var(--settings-input-label-top, 20px);
+  }
+  input {
+    padding: 0;
+    text-indent: var(--login-input-text-indent, 16px);
+  }
+}
+
+.form_field select option {
+  color: itemColor(form-select, #ffffff);
+}
+.form_field select option:checked { background: backgroundColor(form-select-checked, #1E90FF);}
+  .mobile-verify-info {
+  @include flex-distance-between;
+  position: relative;
+  width: 100%;
+  .not_receiveCode {
+    cursor: pointer;
+    text-decoration: underline;
+    display: var(--settings-not-receive-code-display, inline-block);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 15px;
+    position: absolute;
+    right: 0;
+    top: var(--settings-not-receive-code-top, -18px);
+  }
+  .success_message, .error_message {
+    position: absolute;
+    overflow: hidden;
+    max-width: 310px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: var(--success-message-font-size, 15px);
+    bottom: var(--settings-success-message-margin-bottom, 0px);
+  }
+    .success_message {
+      bottom: var(--success-message-settings-bottom, 0px);
+    }
+
+}
+
+.form_field {
+  .part_width {
+    width: 50%;
+  }
+}
+
+.form_row2 {
+  margin: 0;
+  .form_field {
+    .part_width {
+      width: 50%;
+      float: left;
+      border: none;
+    }
+    input, .mobile_verify, >select {
+      margin: var(--settings-inputs-margin, 10px 0 24px 0);
+    }
+  }
+}
+
+.verification-message, .se-message {
+  padding-left: 10px;
+  .self-exclusion-section {
+    font-weight: fontWeight(self-limit-description, 500);
+    color: var(--self-limit-description-color, #ffffff);
+  }
+  ul {
+    list-style: circle;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.se-message-title {
+  margin: var(--m-self-exculsion-title, 32px 0);
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.bet-selections-info {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+
+  &__tr {
+    width: 100%;
+    display: table;
+    padding-right: 15px;
+    padding-left: 15px;
+
+    &:nth-child(1) {
+      //background: var(--settings-table-header-background-color);
+    }
+
+    //background: var(--settings-table-row-background-color);
+    font-size: 14px;
+    height: 48px;
+    //color: var(--settings-table-tr-color);
+  }
+
+  &__td1 {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 7px;
+    width: width(table-document-choose, auto);
+    font-size: fontSize(table-document-choose, 12px);
+    white-space: nowrap;
+    &:last-child {
+      padding-left: 40px;
+    }
+    &:first-child {
+      padding-right: 10px;
+    }
+  }
+  &__td {
+    padding-right: 15px;
+    padding-left: 14px;
+    padding-top: 7px;
+    width: width(table-document-choose, auto);
+    font-size: fontSize(table-document-choose, 12px);
+  }
+  &__td:first-child {
+    width: 20%;
+  }
+  &__td:nth-child(3) {
+    padding-left: 0;
+  }
+
+  &__tbody {
+    max-height: var(--m-settings-table-tbody-max-height, 240px);
+    height: auto;
+    overflow-y: auto;
+    display: block;
+    width: 100%;
+    background: var(--settings-table-row-background-color, #16233A);
+    border-radius: 6px;
+    color: var(--settings-table-row-color, #fff);
+    margin: var(--m-settings-table-tbody-margin, 0);
+    text-align: var(--m-settings-table-tbody-text-align, center);
+  }
+}
+
+.form_row2 .verify_field {
+  width: 30%;
+}
+
+.form_row2 .verify_field_col2 {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+
+.mobile_verify {
+  color: #0fa989;
+  font-size: 28px;
+  font-weight: bold;
+}
+@media screen and (min-width: 0px) and (max-width: 1360px) {
+  .settings-section
+  {
+    .setting_btn{font-size: calc(var(--font-size-5, 20px) * 0.7)!important;}
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 1650px) {
+  .settings-section .change_details_form .form_row2.verify_row .form_field {
+    flex-direction: var(--settings-form-field-responsive-flex-direction, column);
+
+  }
+
+}
+.change {
+  background: var(--change-password-content-background-color, unset);
+  .change-password_page {
+    //padding: var(--change-password-page-padding, 0);
+    padding: var(--account-content-row-paddding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .change-password_page-text{
+      display: display(change-password-page, none);
+    }
+    .submit-password-details {
+      display: flex;
+      gap: 20px;
+      width: var(--settings-submit-details-width, auto);
+      white-space: nowrap;
+      .setting_btn {
+        font-size: var(--settings-submit-details-font-size, 16px);
+        font-weight: var(--settings-submit-details-font-weight, 500);
+        padding: var(--settings-security-questions-submit-details-padding, 0px 10px);
+        border-radius: var(--settings-security-questions-submit-details-border-radius, 6px);
+        height: var(--settings-submit-details-height, 44px);
+        background: linear-gradient(to bottom, var(--settings-button-gradient-first-color) 0%, var(--settings-button-gradient-second-color) 100%);
+        color: var(--settings-button-text-color);
+        .icon-close-modal {
+          margin-right: 13px;
+          font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
+        }
+
+        .fas-save {
+          margin-right: 13px;
+          font-size: calc(var(--settings-submit-details-font-size, 16px) + 2px);
+        }
+        &.cancel_btn {
+          background: var(--settings-cancel-btn-bg, rgba(13, 18, 32, 0.5));
+          color: var(--settings-cancel-btn-color, #fff);
+          border: 1px solid var(--settings-cancel-btn-color, #fff);
+          .icon-close-modal:before {
+            color: var(--settings-cancel-btn-color, #fff);;
+          }
+        }
+      }
+    }
+  }
+}
+.underline {
+  height: 1px;
+  background: var(--account-content-header-underline-bg, linear-gradient(180deg, #48628E 0%, #111723 100%));
+  box-shadow: var(--account-content-header-underline-shadow, 0 4px 8px rgba(0, 0, 0, 0.94));
+  border-radius: 6px;
+  //margin-top: var(--account-content-header-underline-margin-top, 10px);
+  margin-bottom: var(--account-content-header-underline-margin-bottom, 24px);
+}
+.change-password_form {
+  display: flex;
+  flex-direction: column;
+  height: var(--change-password-form-height, 100%);
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--change-password-inputs-padding-bottom, 20px);
+  padding-top: var(--change-password-inputs-padding-top, 0);
+  width: 100%;
+  background: var(--change-password-form-background, unset);
+  border-radius: 6px;
+  .change-password-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--change-password-inputs-gap, 24px);
+    width: width(change-password-inputs, 100%);
+  }
+  .form_row {
+    line-height: unset;
+    margin: 0;
+    .change-password-field-type2 {
+      top: var(--change-password-page-field-type-top, 22px);
+      font-size: var(--change-password-page-field-type-font-size, 18px);
+    }
+    input {
+      margin: 10px 0 8px 0;
+      height: height(change-password-inputs, 40px);
+      color: var(--change-password-inputs-color, #000);
+      text-indent: var(--change-password-inputs-text-indent, 16px);
+    }
+    .error_message {
+      font-size: var(--change-password-inputs-error-message-font-size, 13px);
+    }
+    .error_message1 {
+      font-size: var(--change-password-inputs-error-message-font-size, 13px);
+      top: itemTop(change-password-error-message, -6px);
+    }
+    label {
+      color: itemColor(change-password-input-label, #fff);
+      position: var(--change-password-input-label-position, absolute);
+      top: itemTop(change-password-input-label, 22px);
+      left: itemLeft(change-password-input-label, 8px);
+      height: height(change-password-input-label, 25px);
+      transform-origin: 0 50%;
+      transition: transform 200ms, color 200ms;
+      pointer-events: none;
+    }
+
+    input:focus ~ label {
+      width: width(change-password-input-field-label, auto);
+      height: height(change-password-input-label-focused, 11px);
+      background: var(--change-password-background-color, #FFFFFF);
+      color: var(--change-password-field-focus-label, #fff);
+      top: itemTop(change-password-label, 29px);
+      font-size: var(--change-password-background-color-font-size, 16px);
+    }
+    input:focus ~ .cut,
+    input:not(:placeholder-shown) ~ .cut {
+      transform: translateY(8px);
+      display: block;
+    }
+    input:focus ~ .cut {
+      display: block;
+    }
+    input:focus::placeholder {
+      opacity: 1;
+    }
+      input::placeholder {
+        opacity: 0;
+      }
+      input:focus ~ label,
+      input:not(:placeholder-shown) ~ label {
+        transform: var(--change-password-label-transform, translateY(-29px) translateX(10px) scale(0.75));
+        background-color: var(--change-password-background-color-focus-label-focused, unset);
+        height: var(--change-password-label-focused-height, 20px);
+        font-size: var(--change-password-font-size-label, 20px);
+        color: var(--change-password-focus-label-focused, #fff);
+        text-align: var(--change-password-focus-label-focused-text-align, left);
+        width: width(change-password-input-field-label, auto);
+      }
+    }
+    .change-btn {
+      width: width(change-password-btn, 100%);
+      background-color: backgroundColor(change-password-btn, rgb(239, 239, 239));
+      border-radius: var(--change-password-btn-border-radius, 4px);
+      color: itemColor(change-password-btn, #fff);
+      margin: 0 auto;
+      display: display(change-password-btn, flex);
+      justify-content: center;
+      align-items: center;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1630px) {
+  .settings-section {
+    .tab-content {
+      &.left-part {
+        width: 100%;
+      }
+      &.right-part {
+        width: calc(var(--enter-payment-info-width) * .9);
+      }
+
+    }
+    input:not(.choose_input), select:not(.choose_input), .change_details_form .form_row2.verify_row .form_field button.verify_btn {
+      font-size: calc(var(--font-size-3, 16px) - 3px);
+    }
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 1700px) {
+  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    font-size: 12px;
+    width: var(--settings-focus-label-focused-small-width, auto);
+  }
+  select:focus~label,
+  select:not([value=""]):valid~label {
+    font-size: 12px;
+    width: var(--settings-focus-label-focused-small-width, auto);
+  }
+}
+//@media screen and (min-width: 1377px) and (max-width: 1599px) {
+//  .form_row2 .form_field label {
+//    top: itemTop(settings-input-label, 20px);
+//  }
+//}

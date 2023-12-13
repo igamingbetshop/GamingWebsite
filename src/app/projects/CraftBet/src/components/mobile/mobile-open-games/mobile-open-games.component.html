@@ -1,0 +1,6 @@
+<div class="mobile-live-casino-section min-height">
+    <iframe *ngIf="iframeUrl"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+            allowtransparency="yes" id="mobile-main-game-iframe" [src]="iframeUrl | sanitizer:'resourceUrl'"></iframe>
+</div>

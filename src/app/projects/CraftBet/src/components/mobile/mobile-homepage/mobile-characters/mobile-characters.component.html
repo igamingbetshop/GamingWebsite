@@ -1,0 +1,60 @@
+<div [id]="Id" class="container" [ngStyle]="{'display' : selectedCharacter? 'none' : 'block'}">
+    <div class="container-header">
+        <div class="grid-icon" *ngIf="!isShowCharactersList" (click)="showCharactersList()">
+            <img src="../assets/images/block.svg" >
+            <span>{{characters.length}}</span>
+        </div>
+        <img class="grid-icon"  src="../assets/images/slider.svg" *ngIf="isShowCharactersList" (click)="showCharactersList()">
+        <h2>Choose your hero</h2>
+        <div class="icon">
+            <img  src="../assets/images/info.svg">
+        </div>
+        <p class="full-info">Please note that The Character you choose can not be changed and if you decided
+            to select one the system will do it for you</p>
+        <div class="modal-body">
+            <span class="icon-close-modal" (click)="close()"></span>
+        </div>
+    </div>
+    <ul class="carousel" [ngStyle]="{'display' : isShowCharactersList ? 'none' : 'block'}">
+        <li class="carousel__item" *ngFor="let character of characters, let i = index"
+            (click)="selectCharacter(character.Id)">
+            <img [src]="character.ImageData">
+            <div class="carousel__item-wrapper">{{character.Title | translate}}</div>
+            <!--<div class="info">We cannot change the cards we are dealt, just how we play the hand.’</div>-->
+            <div class="info">{{character.Description | translate}}</div>
+        </li>
+        <button class="choose-button" (click)="setCharacterById(selectedCharacterId)">{{'User.Choose' | translate}}</button>
+
+       <!--  <li class="carousel__item" *ngFor="let el of elements, let i = index">
+            <img src="../assets/images/home/{{el}}.png">
+            <div class="carousel__item-wrapper">{{el}}</div>
+        </li>-->
+    </ul>
+
+    <div class="characters-list" [ngStyle]="{'display' : isShowCharactersList ? 'flex' : 'none'}">
+        <div class="characters-list-content">
+            <div class="characters-list-item" *ngFor="let character of characters, let i = index"
+                 (click)="selectCharacter(character.Id)"
+                 [ngClass]="{'highlight': selectedCharacterId  == character.Id}">
+                <img [src]="character.ImageData">
+                <div class="carousel__item-wrapper">{{character.Title | translate}}</div>
+                <div class="info">{{character.Description | translate}}</div>
+            </div>
+        </div>
+        <button class="choose-button" (click)="setCharacterById(selectedCharacterId)">{{'User.Choose' | translate}}</button>
+    </div>
+
+</div>
+
+
+<div class="selected-character-popup" [ngStyle]="{'display' : selectedCharacter? 'block' : 'none'}">
+    <div class="header">{{'User.Congratulations' | translate}}!</div>
+    <div class="info">Your Avatar is </div>
+    <img [src]="selectedCharacter?.ImageData">
+    <div class="title">{{selectedCharacter?.Title | translate}}</div>
+    <div class="description">{{selectedCharacter?.Description | translate}}</div>
+    <div class="buttons">
+        <button (click)="close()">{{'User.Close' | translate}}</button>
+        <button (click)="confirm();">{{'User.Find out more' | translate}}</button>
+    </div>
+</div>

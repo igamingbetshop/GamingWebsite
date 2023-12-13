@@ -1,0 +1,42 @@
+.verify_email_box {
+  width: 100%;
+  height: 100%;
+
+  .verify_email_complete {
+    text-align: center;
+    i {
+      font-size: 158px;
+      color: #59C10F;
+      line-height: 200px;
+      margin-top: 45px;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 400;
+      background: linear-gradient(45deg, #c99b3a, #eee089);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}
+
+.error {
+  color: red;
+  font-size: 25px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+@media only screen and (min-width: 1200px)
+{
+  .verify_email_box
+  {
+    min-height: 60vh;
+
+    .verify_email_complete {
+      margin: 82px auto 0 auto;
+      transform: translateY(95px);
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.info_us_section_content
+{
+  min-height: calc(100vh - 62px);
+  background: color(m-info-background);
+  color: itemColor(m-info-content,$font-color);
+  padding: var(--m-info-padding, 15px 10px);
+  margin-top: 62px;
+  h2{color: itemColor(m-info-title,$font-color); text-align: center}
+  .content
+  {
+    table{width: 100% !important}
+    p{padding: 0 10px}
+  }
+}

@@ -1,0 +1,46 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-privacy-section {
+
+  min-height: calc(100vh - 62px);
+  background: color(m-user-views-background);
+  color: itemColor(m-user-views-content,$font-color);
+  padding-top: paddingTop(m-privacy-policy, 15px);
+  padding-bottom: paddingBottom(m-privacy-policy, 15px);
+  padding-left: paddingLeft(m-privacy-policy, 10px);
+  padding-right: paddingRight(m-privacy-policy, 10px);
+  margin-top: 62px;
+
+  h2 {
+    color: color(m-user-views-title);
+    text-align: center;
+    margin-bottom:0.8rem;
+  }
+
+  a {
+    text-decoration: underline !important;
+    color: $register-active-menu;
+  }
+
+  .privacy_container {
+    text-align: justify;
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    [class*='Title'] {
+      font-weight: bold;
+    }
+
+  }
+
+  .to_top {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+  }
+
+}
+

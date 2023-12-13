@@ -1,0 +1,147 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-history-section {
+  margin-top: var(--m-user-views-margin-top, 62px);
+  min-height: calc(100vh - 62px);
+  background: color(m-user-views-background);
+  padding: 15px 0;
+  .pagination_section {
+    font-size: var(--m-transactions-pagination-font-size, 16px);
+  }
+  &_title {
+    text-align: center;
+    color: color(m-user-views-title);
+    font-size: 24px;
+    font-weight: normal;
+    margin-top: marginTop(m-user-views-title, unset);
+  }
+
+  .history-tools-panel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 20px 20px;
+
+    .history-tools {
+
+      &:not(&:last-child) {
+        display: flex;
+        flex-direction: column;
+        width: 48%;
+      }
+
+      &:last-child {
+        width: 100%;
+        text-align: center;
+      }
+
+      select, input {
+        height: height(history-time-filter, 40px);
+        padding: 0 8px;
+        border-radius: var(--history-time-filter-border-radius, 5px);
+        border: 1px solid itemColor(history-time-filter-border, #dadada);
+        outline: none;
+        background: color(history-time-filter-background);
+        color: itemColor(history-time-filter-col, #fff);
+        color-scheme: var(--history-time-filter-icon-scheme, dark);
+        font-size: fontSize(history-time-filter, 14px);
+        option {
+          background-color: backgroundColor(accoutPage-Dpd, transparentize);
+          color: itemColor(accoutPage-Dpd, #000);
+
+          &:hover, &:checked {
+            background-color: backgroundColor(accoutPage-Dpd-checked, blue);
+            color: itemColor(accoutPage-Dpd-checked, #fff);
+          }
+
+        }
+      }
+
+      ::ng-deep .wc-date-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+        padding: 0 8px;
+        border-radius: var(--history-time-filter-border-radius, 5px);
+        border: 1px solid #dadada;
+        outline: none;
+        background: $header-top-bg;
+
+        * {
+          color: $font-color;
+        }
+      }
+
+      //.show-btn {
+      //  background: $register-active-menu;
+      //  padding: 0 20px;
+      //  color: $color-white;
+      //  margin-top: 8px;
+      //
+      //  &:hover {
+      //    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(151,0,24,1)), color-stop(100%, rgba(201,0,32,1)));
+      //  }
+      //}
+    }
+  }
+
+  .mobile-history-table {
+    overflow-x: var(--mobile-history-table-overflow, auto);
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+	  margin: 0 auto;
+	  
+      tr {
+        font-size: 12px;
+        height: 36px;
+      }
+
+      tbody {
+        tr {
+          background: color(history-table-header-background);
+          color: color(m-history-table-title);
+
+          td {
+            text-align: center;
+            outline-offset: 10px;
+			width: 52px;
+            font-size: fontSize(transactions-table, 12px);
+            height: height(transactions-table, 50px);
+          }
+          .form-row-icons {
+            cursor: pointer;
+            span {
+              color: var(--bank-account-icons-color, #fff);
+              &:last-child {
+                margin-left: var(--m-bank-account-icons-margin-left, 10px);
+              }
+            }
+          }
+        }
+      }
+
+      .bet-history-tbody {
+        tr {
+          background: backgroundColor(bet-history-table-header, #000);
+          color: itemColor(bet-history-table-header, #fff);
+        }
+      }
+    }
+  }
+  .ngx-pagination {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .empty-history-text {
+    color: var(--history-search-empty-text-color, #fff);
+    font-size: var(--m-history-search-empty-text-font-size, 13px);
+  }
+}
+
+::-webkit-scrollbar-thumb {
+}

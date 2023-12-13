@@ -1,0 +1,376 @@
+.user-right-panel_title {
+  //padding: 10px 0 30px 0px;
+  //height: 80px;
+  padding: 14px 27px 0 26px;
+  cursor: default;
+}
+.document-verification-tab {
+  //padding: 4px 27px 21px;
+  .container-part {
+    //margin-bottom: 18px;
+    //margin-bottom: 50px;
+
+    .titles {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      width: 100%;
+      color: #000;
+      margin: 0 auto;
+      border-radius: 4px;
+      font-size: 25px;
+      padding: 20px 18px;
+
+      .document-verification-tab-text {
+        font-size: 25px;
+        font-weight: 500;
+      }
+    }
+
+    .document-text {
+      text-align: var(--document-verification-text-align, left);
+      font-size: var(--document-verification-text-font-size, 15px);
+      margin: var(--document-verification-text-margin, 0 0 6px);
+      cursor: default;
+    }
+    .document-text2 {
+      text-align: var(--document-verification-text-info-align, left);
+      font-size: var(--document-verification-text-info-font-size, 15px);
+      margin: var(--document-verification-text-info-margin, 0 0 6px);
+      cursor: default;
+    }
+
+    .document-verification-table {
+      padding: 16px 16px 16px;
+      background: #fff;
+      width: 100%;
+      color: #000;
+      margin: 0 auto;
+      border-radius: 4px;
+      font-size: var(--document-verification-table-font-size, 16px);
+      .success_message {
+        top: -17px;
+      }
+
+      .document-verification-table-head {
+        background: #d9d9d9;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12.5px 0;
+        margin-bottom: var(--document-verification-table-head-margin-bottom, 0px);
+        margin-top: var(--document-verification-table-head-margin-top, 0px);
+        .document-verification-table-head-items {
+          width: 100%;
+        }
+      }
+
+      section {
+        overflow-y: auto;
+        //height: 150px;
+        display: flex;
+        flex-direction: column-reverse;
+        height: 100%;
+      }
+      .empty-block-text {
+        cursor: default;
+      }
+      .document-verification-table-head {
+        background: #EDEDED;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12.5px 0;
+        cursor: default;
+        //margin-bottom: 20px;
+      }
+      .document-verification-table-body {
+        background: #fff;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12.5px 0;
+        cursor: default;
+        border: var(--document-verification-table-body-border, none);
+        margin: var(--document-verification-table-body-margin, 0);
+        //margin-bottom: 20px;
+
+        .document-verification-type {
+          width: 120px;
+          text-align: left;
+        }
+        .document-verification-date {
+          width: 120px;
+          text-align: center;
+        }
+        .document-verification-status {
+          width: 90px;
+          text-align: var(--document-verification-status-text-align, right);
+          border-radius: var(--document-verification-status-border-radius, 0);
+          padding: var(--document-verification-status-padding, 0);
+          font-weight: var(--document-verification-status-font-weight, 600);
+        }
+
+        .status-1 {
+          color: var(--document-verification-status-1-color, #00934A);
+          background: var(--document-verification-status-1-background, transparent);
+        }
+
+        .status-2 {
+          color: var(--document-verification-status-2-color, #F66901);
+          background: var(--document-verification-status-2-background, transparent);
+        }
+
+        .status-3 {
+          color: var(--document-verification-status-3-color, #F6A201);
+          background: var(--document-verification-status-3-background, transparent);
+        }
+      }
+
+      .document-form {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        //margin-bottom: 32px;
+        flex-direction: column;
+        gap: 11px;
+
+        .document-form-options {
+          width: var(--choose-document-form-width, 100%);
+          height: var(--choose-document-form-height, 42px);
+
+          .custom_dropdown_reg {
+            background: var(--choose-document-form-background, #F6A200);
+            color: var(--choose-document-form-color, #000);
+
+            .current_item {
+              height: 100%;
+              border-radius: 0;
+              border: none;
+              justify-content: center;
+              font-size: var(--choose-document-form-font-size, 18px);
+              font-weight: var(--choose-document-form-font-weight, 400);
+              background: var(--choose-document-form-background, #F6A200);
+              color: var(--choose-document-form-color, #000);
+            }
+
+            .current_item:hover {
+              color: var(--choose-document-form-hover-color, #000);
+            }
+            .change-icon {
+              transform: rotate(90deg);
+              font-size: 15px;
+              margin-left: auto;
+              color: var(--document-icon-color, #F6A200);
+            }
+            .selected-item {
+              margin-left: auto;
+            }
+
+            .custom_dropdown_list {
+              //background: var(--choose-document-form-list-background, #F6A200);
+              border-color: var(--choose-document-form-list-border-color, #fce1ae);
+              height: auto;
+              //height: 175px;
+
+              .custom_dropdown_list_items {
+                font-size: var(--choose-document-form-items-list-font-size, 18px);
+                padding: var(--choose-document-form-items-list-padding, 10px 0);
+                height: var(--choose-document-form-items-list-height, 42px);
+                border-bottom: var(--choose-document-form-items-list-border, 1px solid #fce1ae);
+                line-height: var(--choose-document-form-items-list-line-height, 25px);
+                background: var(--choose-document-form-list-background, #F6A200);
+                color: var(--choose-document-form-list-color, #fff);
+              }
+
+              .custom_dropdown_list_items:hover {
+                background: var(--choose-document-form-items-list-hover-background, #F6A200);
+                color: var(--choose-document-form-items-list-hover-color, #000);
+              }
+            }
+          }
+        }
+
+        .document-form-items {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          flex-direction: var(--document-form-items-flex-direction, row);
+          gap: var(--document-form-items-gap, 0px);
+
+          .document-form-row {
+            //width: 59%;
+            display: flex;
+            align-items: center;
+            //justify-content: space-between;
+            //height: 63px;
+            margin-right: 16px;
+            width: var(--document-form-select-file-width, auto);
+
+            .document-form-choose-data {
+              border: var(--document-form-select-file-border, 1px solid #707070);
+              position: var(--document-form-select-file-position, relative);
+              border-radius: var(--document-form-select-file-border-radius, 6px);
+              max-width: var(--document-form-select-file-max-width, 205px);
+              cursor: pointer;
+              height: var(--document-form-select-file-height, 42px);
+
+              .choose_input {
+                border: none;
+                position: relative;
+                width: 100%;
+              }
+
+              .document-label {
+                position: var(--document-form-select-file-label-position, absolute);
+                //left: 50px;
+                top: var(--document-form-select-file-label-top, 11px);
+                left: var(--document-form-select-file-label-left, 24px);
+                white-space: nowrap;
+                width: var(--document-form-select-file-label-width, 125px);
+                font-size: var(--document-form-select-file-label-font-size, 16px);
+                overflow: hidden;
+              }
+              .document-selected-label {
+                position: var(--document-form-select-file-label-position, absolute);
+                top: var(--document-form-select-file-label-top, 11px);
+                left: var(--document-form-selected-file-label-left, 24px);
+                white-space: nowrap;
+                width: var(--document-form-select-file-label-width, 125px);
+                font-size: var(--document-form-select-file-label-font-size, 16px);
+                overflow: hidden;
+              }
+            }
+
+            .selected-file-name {
+              background: #EDEDED;
+              padding: 12px 0;
+              width: 100%;
+              border-radius: 6px;
+            }
+          }
+
+          .document-form-row-btn {
+            width: var(--account-verification-btn-width, 89%);
+            height: var(--account-verification-btn-height, 42px);
+            margin: var(--account-verification-btn-margin, 0);
+            border-radius: var(--account-verification-btn-border-radius, 6px);
+            background: var(--account-verification-btn-background-color, #F6A200);
+            font-weight: var(--account-verification-btn-font-weight, 400);
+            font-size: var(--account-verification-btn-font-size, 20px);
+            border: var(--account-verification-btn-border, none);
+            outline: none;
+            color: var(--account-verification-btn-color, #fff);
+            display: var(--account-verification-btn-display, block);
+            justify-content: var(--account-verification-btn-justify-content, center);
+            align-items: center;
+            cursor: pointer;
+            .document-form-row-btn-text {
+              margin: var(--account-verification-btn-text-margin, 0);
+            }
+            .change-icon-document-btn {
+              transform: rotate(90deg);
+              font-size: 15px;
+              margin-left: auto;
+              color: var(--document-icon-color, #F6A200);
+            }
+          }
+        }
+      }
+      .error_message {
+        text-align: left;
+        font-size: 16px;
+        height: 20px;
+        top: 0px;
+      }
+
+    }
+  }
+}
+
+
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+  .document-label {
+    font-size: 12px;
+    top: 5px !important;
+  }
+  .document-verification-table-body {
+    padding: 5.5px 0 !important;
+    font-size: 13px !important;
+  }
+  .user-right-panel_title {
+    font-size: 20px;
+    padding: 0 26px;
+    height: 35px;
+  }
+  .document-verification-table-head {
+    font-size: 14px !important;
+    padding: 5.5px 0 !important;
+  }
+  .document-text, .document-text2 {
+    font-size: 12px !important;
+  }
+  .document-verification-table {
+    padding: 8px 16px 0 !important;
+  }
+  .document-form-choose-data {
+    height: 25px !important;
+  }
+  .document-form-row-btn {
+    height: 25px !important;
+    font-size: 12px !important;
+  }
+  .document-form-options {
+    height: 25px !important;
+  }
+  .current_item {
+    font-size: 13px !important;
+    min-height: 25px !important;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .user-right-panel_title {
+    font-size: 18px;
+    padding: 0 26px;
+    height: 35px;
+  }
+  .document-label {
+    font-size: 10px;
+    width: 100px !important;
+    top: 7px !important;
+  }
+  .document-text, .document-text2 {
+    font-size: 12px !important;
+  }
+  .document-verification-table {
+    padding: 8px 16px 0 !important;
+  }
+  .document-form-choose-data {
+    height: 25px !important;
+  }
+  .document-form-row-btn {
+    height: 25px !important;
+    font-size: 12px !important;
+  }
+  .document-form-options {
+    height: 25px !important;
+  }
+  .current_item {
+    font-size: 12px !important;
+    min-height: 25px !important;
+  }
+  .document-verification-table-head {
+    font-size: 13px;
+    padding: 5.5px 0 !important;
+  }
+  .document-verification-table-body {
+    font-size: 12px !important;
+    padding: 5.5px 0px !important;
+  }
+  .document-verification-date {
+    text-align: right !important;
+    width: auto !important;
+  }
+}

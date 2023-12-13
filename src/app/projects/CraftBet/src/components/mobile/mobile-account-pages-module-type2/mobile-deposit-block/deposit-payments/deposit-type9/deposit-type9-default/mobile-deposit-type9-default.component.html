@@ -1,0 +1,114 @@
+<div class="deposit_payment_section deposit-cash mobile-device" (click)="$event.stopPropagation()">
+
+  <div class="deposit_payment_section__form">
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()">
+      <div class="mobile-deposit_payment_section__form_top">
+        <div class="payment-form-field">
+
+
+          <div class="bonus-and-amount">
+            <div class="payment-form-field__column">
+              <select formControlName="BankName" class="payment-select" (ngModelChange)="selectBankAccount($event)">
+                <option *ngFor="let bankItem of getPaymentsService.banksList"
+                        [value]="bankItem.Id">{{bankItem?.BankName}}</option>
+              </select>
+              <label class="payment-form-field__label">{{'Deposit.BankName' | translate}}</label>
+            </div>
+          </div>
+
+          <div class="bonus-and-amount">
+            <div class="payment-form-field__column">
+              <select formControlName="BankAccountNumber" class="payment-select">
+                <option *ngFor="let account of selectedBank?.Accounts"
+                        [value]="account">{{account?.BankAccountNumber}} - {{account?.OwnerName}}</option>
+              </select>
+              <label class="payment-form-field__label">{{'Deposit.TransactionNumber' | translate}}</label>
+              <div class="error_message"
+                   *ngIf="paymentForm.get('BankAccountNumber').hasError('required') && paymentForm.get('BankAccountNumber').touched">
+                <span>{{ 'Error.Required-field' | translate }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bonus-and-amount">
+
+            <div class="payment-form-field__column">
+              <input type="text" class="payment-input" disabled ngModel="{{NameSurname}}" [ngModelOptions]="{standalone:true}" placeholder="{{'Deposit.NameSurname-placeholder' | translate}}"
+                     />
+              <label class="payment-form-field__label">{{'Deposit.NameSurname' | translate}}</label>
+            </div>
+          </div>
+
+<!--          <div class="bonus-and-amount">-->
+<!--            <div class="payment-form-field__column">-->
+<!--              <input type="datetime-local" class="payment-select" [(ngModel)]="date" formControlName="TransactionDate"/>-->
+<!--              <label class="payment-form-field__label">{{'Deposit.TransactionDate' | translate}}</label>-->
+<!--            </div>-->
+<!--          </div>-->
+
+          <div class="bonus-and-amount">
+            <div class="payment-form-field__column">
+              <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input" placeholder="{{'Deposit.Amount-placeholder' | translate}}"
+                     [(ngModel)] = "amount"
+                     [ngClass]="{'invalid-filed': ((paymentForm.get('Amount').hasError('required')  || paymentForm.get('Amount').hasError('minlength') || paymentForm.get('Amount').hasError('maxlength')) && paymentForm.get('Amount').touched)}"
+                     formControlName="Amount" numbersOnly/><!-- numbersOnly-->
+              <span class="payment-form-field__label floating-label">{{'Deposit.Amount' | translate}}</span>
+              <div class="error_message" *ngIf="hasMinMaxError">
+                <span class="text" *ngIf = "amount < maxMinAmount?.MinAmount">{{'Deposit.AmountLessThen' | translate : { amount: maxMinAmount?.MinAmount, currency: currencyId} }}</span>
+                <span class="text" *ngIf = "this.amount > this.maxMinAmount?.MaxAmount">{{'Deposit.AmountMoreThen' | translate : { amount: maxMinAmount?.MaxAmount, currency: currencyId} }}</span>
+              </div>
+              <ng-template #nominalsRef>
+                <app-common-payment-nominals [nominals]="nominals" (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+              </ng-template>
+              <div class="error_message" *ngIf="submitted && paymentForm.get('Amount').hasError('required')">
+                <span>{{ 'Error.Required-field' | translate }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bonus-and-amount">
+            <div class="payment-form-field__column">
+              <input #documentFile type="file" (change)="handleInputChange($event)" name="file">
+              <label class="payment-form-field__label">{{'Deposit.SelectFile' | translate}}</label>
+            </div>
+
+            <div class="error_message" *ngIf="submitted && paymentForm.get('PaymentForm').hasError('required')">
+              <span>{{ 'Error.Required-field' | translate }}</span>
+            </div>
+          </div>
+
+          <div class="error_message">
+            {{selectedDocumentErrorMessage}}
+          </div>
+
+        </div>
+
+        <div class="payment-form-field" *ngIf="promoData.length > 0">
+          <div class="payment-form-field__column">
+            <input type="text" class="payment-input" placeholder="{{'Deposit.PromoCode-placeholder' | translate}}"
+                   formControlName="PromoCode"/>
+            <label class="payment-form-field__label">{{'Deposit.PromoCode' | translate}}</label>
+          </div>
+        </div>
+
+
+        <div class="payment-form-field">
+          <div class="mobile-payment-form-field__column_btn">
+            <button type="submit" [disabled]="submitted || paymentForm.invalid || this.hasMinMaxError" class="default_btn default_btn_red payment-btn">
+              <span class="payment-btn__span"> {{'Deposit.Confirm' | translate}} </span>
+            </button>
+            <loader></loader>
+            <div class="error_message" *ngIf="errorMessage !== ''">
+              {{errorMessage}}
+            </div>
+
+            <div class="success_message"
+                 *ngIf="successMessage && successMessage.length != 0">{{'Deposit.' + successMessage | translate}}</div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+</div>

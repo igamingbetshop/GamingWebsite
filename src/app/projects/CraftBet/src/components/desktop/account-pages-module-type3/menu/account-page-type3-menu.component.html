@@ -1,0 +1,14 @@
+<ul class="user-left-panel_topList">
+    <li *ngFor="let item of menuList" class="user-left-panel_header">
+        <div class="title_menu" (click)="savedDateService.getItem(item)"
+             [ngClass]="(savedDateService.selectedItem == item) || (item.SubMenu.includes(savedDateService.currentSubItem)) ? 'active' : ''"
+             [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + item.SubMenu[0]?.Href">
+            <div>
+                <div class="title_menu_icon"
+                     [ngStyle]="{'background-image':'url(../../../../../../../assets/images/account-tabs-list/' + item?.Icon + ')'}"></div>
+                <span>{{'User.' + item?.Title | translate}}</span>
+            </div>
+            <span class="icon-arrow-right"></span>
+        </div>
+    </li>
+</ul>

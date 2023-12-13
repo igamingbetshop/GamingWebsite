@@ -1,0 +1,42 @@
+<div class="payment-system-block" (click)="$event.stopPropagation()">
+  <div class="payment-systems__totalItem">
+    <span class="payment-systems__totalItem__name">
+       <span>{{'Balance.Total Available' | translate}}</span>
+    </span>
+    <span class="payment-systems__totalItem_balance">
+      <i class="payment-systems__totalItem_balance_item">{{CurrencyId}} {{TotalAvailableBalance | toNumber | number: '.2'}}</i>
+    </span>
+  </div>
+<!--  <div class="payment-systems__userAccount" *ngFor="let item of Accounts; let i = index">-->
+<!--    <div class="payment-systems__userAccount__name">-->
+<!--      <span>{{item?.AccountTypeName}}</span>-->
+<!--      <span>{{CurrencyId}} {{item?.Balance | toNumber | number: '.2'}}</span>-->
+<!--    </div>-->
+
+
+<!--    <div class="payment-systems__userAccount__name">-->
+<!--      <span>{{item?.AccountTypeName}}</span>-->
+<!--      <span>{{CurrencyId}} {{item?.Balance | toNumber | number: '.2'}}</span>-->
+<!--    </div>-->
+
+
+<!--      <div class="payment-systems__userAccount_balance">-->
+<!--          <i class="payment-systems__userAccount__name_item" *ngIf="!hideUnusedAvailableBalance">{{'Balance.Available' | translate}}</i>-->
+<!--            <i *ngIf="!hideUnusedAvailableBalance" class="payment-systems__userAccount_balance_item">{{CurrencyId}} {{item?.AvailableBalance | toNumber | number: '.2'}}</i>-->
+<!--      </div>-->
+<!--      <span *ngIf="(i === 0) && !hideUnusedAvailableBalance" class="payment-systems__infoText">-->
+<!--          <i>{{'Balance.Unused' | translate}}</i>-->
+<!--      </span>-->
+
+
+<!--  </div>-->
+
+  <div class="payment-systems__userAccount">
+    <div class="payment-systems__userAccount__name">
+      <span>{{'Balance.Pending to Withdraw' | translate}}</span>
+      <span>{{CurrencyId}} {{mappedAccounts?.Balance ? (mappedAccounts?.Balance | toNumber | number: '.2') : (0 | number: '.2')}}</span>
+    </div>
+  </div>
+
+
+</div>

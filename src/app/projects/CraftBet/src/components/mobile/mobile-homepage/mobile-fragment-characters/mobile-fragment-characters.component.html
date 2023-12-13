@@ -1,0 +1,13 @@
+<div class="mobile-characters-fragment"  [ngStyle]="fragmentConfig?.Config.style">
+    <div class="wrapper">
+        <img src="../assets/images/characters/polygon.png">
+    </div>
+        <div class="block-header">Choose your hero</div>
+        <mobile-characters  [Id]="'mobileHomeCharacters'" [scaleMultiplier]="1" [radius]="200"></mobile-characters>
+        <p>‘We cannot change the cards we are dealt, just how we play the hand.’</p>
+        <div class="buttons">
+            <button (click)="saveData.getMobileLoginPreviousState()" [routerLink]="['/signup']">{{'User.Get Started' | translate}}</button>
+            <button (click)="saveData.getMobileLoginPreviousState()" [routerLink]="['/login']">{{'User.Log In' | translate}}</button>
+        </div>
+
+</div>

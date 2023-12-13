@@ -1,0 +1,25 @@
+<div class="open-game-section" [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}">
+  <div class="game-info">
+    <h2 class="gameName">{{name}}</h2>
+
+    <div class="rating">
+      <div>
+      <span class="icon-star-box">
+        <span class="icon-star-box-selected" [style.width.%]="ratingPercent"></span>
+      </span>
+        <span class="rating-value">{{rating | number:'1.1-2'}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="open-game-content" id="full-game-container">
+    <a class="tm-cancel-screen" (click)="closeFullScreen()" *ngIf="fullScreenActive"><fa-icon [icon]="faArrowsAlt" [size]="'2x'"></fa-icon></a>
+
+
+    <iframe *ngIf="fullScreenIframeUrl && !showErrorTag" [src]="fullScreenIframeUrl | sanitizer:'resourceUrl'" ></iframe>
+    <div class="game-buttons">
+      <a class="flex_center" (click)="goBack()"><span class="icon-close"></span></a>
+      <a class="flex_center" (click)="openGameInFullScreen()" *ngIf="!fullScreenActive"><span class="icon-full-screen"></span></a>
+    </div>
+  </div>
+</div>

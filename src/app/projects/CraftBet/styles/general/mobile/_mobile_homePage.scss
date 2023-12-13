@@ -1,0 +1,101 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-homepage-section {
+
+  display: flex;
+  flex-direction: column;
+  .banner_image {
+    width: 100%;
+    height: height(m-banner-image, 200px);
+    position: relative;
+    background-image: var(--m-banner-image-background-image, linear-gradient(to right, #131a2c 1%, rgba(83, 83, 83, 0.02) 36%, rgba(84, 84, 84, 0) 45%));
+    background-repeat: no-repeat !important;
+    img {
+      width: width(m-banner-image, 100%);
+      border-radius: var(--m-banner-image-border-radius, 0px);
+    }
+
+    .banner-wrapper {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-image: linear-gradient(to left, itemColor(m-casino-banner-wrapper-bg-first, transparent), itemColor(m-casino-banner-wrapper-bg-second, transparent) 64%, itemColor(m-casino-banner-wrapper-bg-last, transparent) 55%);
+      border-width: width(m-casino-banner-wrapper-bg-first-border, 0);
+      border-color: itemColor(m-casino-banner-wrapper-bg-first, none);
+      border-style: solid;
+      border-radius: 15px;
+    }
+
+    .banner-wrapper2 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-image: linear-gradient(to right, itemColor(m-casino-banner-wrapper2-bg-first, transparent) 1%, itemColor(m-casino-banner-wrapper2-bg-second, transparent) 45%, itemColor(m-casino-banner-wrapper2-bg-last, transparent) 55%);
+    }
+
+    .banner-content {
+      position: relative;
+      .banner-description {
+        position: absolute;
+        white-space: nowrap;
+        text-transform: uppercase;
+        font-size: fontSize(m-home-banner-description, 12px);
+        font-weight: fontWeight(m-home-banner-description, 600);
+        line-height: var(--m-home-banner-description-line-height, 1.45);
+        color: color(banner-description);
+
+        top: itemTop(m-home-banner-description, auto);
+        left: itemLeft(m-home-banner-description, 0);
+        right: itemRight(m-home-banner-description, 0);
+        bottom: itemBottom(m-home-banner-description, 70px);
+        text-align: textAlign(m-home-banner-description, center);
+      }
+
+      .banner-content-description {
+        position: absolute;
+        color: itemColor(m-home-banner-content-description, #b0a6a6);
+        line-height: var(--m-home-banner-content-description-line-height, 1.5);
+        font-weight: fontWeight(m-home-banner-content-description, 600);
+        font-size: fontSize(m-home-banner-content-description, 10px);
+
+        top: itemTop(m-home-banner-content-description, auto);
+        left: itemLeft(m-home-banner-content-description, 0);
+        right: itemRight(m-home-banner-content-description, 0);
+        bottom: itemBottom(m-home-banner-content-description, 30px);
+        text-align: textAlign(m-home-banner-content-description, center);
+      }
+
+      .banner-action {
+        position: absolute;
+        padding-left: paddingLeft(m-home-banner-action-text, 12px);
+        padding-right: paddingRight(m-home-banner-action-text, 12px);
+        padding-top: paddingTop(m-home-banner-action-text, 12px);
+        padding-bottom: paddingBottom(m-home-banner-action-text, 12px);
+        color: color(m-home-banner-action-text);
+        font-size: fontSize(m-home-banner-action-text, 10px);
+        text-transform: uppercase;
+        height: height(m-home-banner-action-text, auto);
+        width: width(m-home-banner-action-text, 100px);
+        margin-top: marginTop(m-home-banner-action-text, 0px);
+        margin-bottom: marginBottom(m-home-banner-action-text, 0px);
+        margin-left: marginLeft(m-home-banner-action-text, auto);
+        margin-right: marginRight(m-home-banner-action-text, auto);
+        border-radius: 3px;
+        display: inline-block;
+        background-image: linear-gradient(to top, var(--m-home-banner-action-gradient-color-2, #000), var(--m-home-banner-action-gradient-color-1, #000));
+
+        top: itemTop(m-home-banner-action-text, auto);
+        left: itemLeft(m-home-banner-action-text, 0);
+        right: itemRight(m-home-banner-action-text, 0);
+        bottom: itemBottom(m-home-banner-action-text, 30px);
+        text-align: textAlign(m-home-banner-action-text, center);
+
+      }
+    }
+  }
+}

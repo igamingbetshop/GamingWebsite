@@ -1,0 +1,21 @@
+<div class="modal-content">
+    <div class="modal-body">
+        <h2>{{'User.Limit Info' | translate}}</h2>
+    </div>
+
+    <div class="modal_content">
+<!--        <div class="modal_content__message">{{'User.Limit Info details' | translate}}</div>-->
+<!--        <div class="modal_content__message">{{data.updatedData}}</div>-->
+        <div class="modal_content__message" *ngIf="data.updatedData.DailyDepositLimitPercent >= 80">Please note that you have reached {{data.updatedData.DailyDepositLimitPercent}} % of Daily Deposit Limit Percent allowed wagering amount.</div>
+        <div class="modal_content__message" *ngIf="data.updatedData.WeeklyDepositLimitPercent >= 80">Please note that you have reached {{data.updatedData.WeeklyDepositLimitPercent}} % of Weekly Deposit Limit Percent allowed wagering amount.</div>
+        <div class="modal_content__message" *ngIf="data.updatedData.MonthlyDepositLimitPercent >= 80">Please note that you have reached {{data.updatedData.MonthlyDepositLimitPercent}} % of Monthly Deposit Limit Percent allowed wagering amount.</div>
+        <div class="modal_content__message" *ngIf="data.updatedData.DailyBetLimitPercent >= 80">Please note that you have reached {{data.updatedData.DailyBetLimitPercent}} % of Daily Bet Limit Percent allowed wagering amount.</div>
+        <div class="modal_content__message" *ngIf="data.updatedData.WeeklyBetLimitPercent >= 80">Please note that you have reached {{data.updatedData.WeeklyBetLimitPercent}} % of Weekly Bet Limit Percent allowed wagering amount.</div>
+        <div class="modal_content__message" *ngIf="data.updatedData.MonthlyBetLimitPercent >= 80">Please note that you have reached {{data.updatedData.MonthlyBetLimitPercent}} % of Monthly Bet Limit Percent allowed wagering amount.</div>
+    </div>
+
+    <div class="modal_footer">
+        <button type="submit" class="craft_btn bg_recovery" (click)="close()">{{'User.Close' | translate}}</button>
+    </div>
+</div>
+

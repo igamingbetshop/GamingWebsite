@@ -1,0 +1,101 @@
+<div class="friends-section history-section">
+
+  <!--  <h2 class="friends-section_title">{{'Account.MyFriends' | translate}}</h2>-->
+
+
+  <div class="history-tools-panel">
+    <div class="history-tools">
+      <label>
+        {{'Account.Period' | translate}}
+      </label>
+      <select class="uk-select" [(ngModel)]="selectedTimeFilter" (ngModelChange)="onTimeFilterChange($event)">
+        <option *ngFor="let timeFilter of friendsTimeFilter"
+                [ngValue]="timeFilter">{{timeFilter.Name | translate}}</option>
+      </select>
+    </div>
+    <div class="send-email">
+      <label>
+        {{'Account.Email' | translate}}
+      </label>
+      <div class="send-email_top">
+        <input id="name" class="send-email_input" name="name" #name="ngModel"
+               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$" [(ngModel)]="email"
+               placeholder="{{'Account.Email' | translate}}">
+        <button class="send-email_btn" (click)="inviteFriend()" [ngClass]="{'uk-disabled' : name.invalid || !email}">
+          <span>{{'Friends.SendLetter' | translate}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="referralLink">{{referralLink}}</div>
+
+
+  <div class="friends-block-head block-head">
+    <div>{{'Friends.ID' | translate}}</div>
+    <div>{{'Friends.FirstName' | translate}}</div>
+    <div>{{'Friends.LastName' | translate}}</div>
+    <div>{{'Friends.Amount' | translate}}</div>
+    <div>{{'Friends.Status' | translate}}</div>
+    <div>{{'Friends.Register' | translate}}</div>
+  </div>
+  <ng-container *ngIf="friends.length > 0; else emptyFriends">
+    <section>
+      <div class="friends-block"
+           *ngFor="let friend of friends">
+        <div class="friends-block_item block_item">{{friend.Id}}</div>
+        <div class="friends-block_item block_item">{{friend.FirstName}}</div>
+        <div class="friends-block_item block_item">{{friend.LastName}}</div>
+        <div class="friends-block_item block_item">{{friend.BonusAmount}}</div>
+        <div class="friends-block_item block_item"><span *ngIf="friend.BonusAmount > 0">{{'Friends.Active' | translate}}</span><span
+                *ngIf="!(friend.BonusAmount == 0)">{{'Friends.InActive' | translate}}</span></div>
+        <div class="friends-block_item">{{friend.CreationTime | date:'HH:mm dd/MM/yyyy'}}</div>
+      </div>
+    </section>
+  </ng-container>
+  <ng-template #emptyFriends>
+    <section class="empty-friends empty-block">
+      <span class="icon-friends icon"></span>
+      <span class="empty-block-text">{{'User.Friends-empty' | translate}}</span>
+    </section>
+  </ng-template>
+
+
+  <!--  <table>-->
+  <!--    <thead>-->
+  <!--&lt;!&ndash;    <tr class="tm-table-separator">&ndash;&gt;-->
+  <!--&lt;!&ndash;      <td colspan="6">&ndash;&gt;-->
+  <!--&lt;!&ndash;        <div></div>&ndash;&gt;-->
+  <!--&lt;!&ndash;      </td>&ndash;&gt;-->
+  <!--&lt;!&ndash;    </tr>&ndash;&gt;-->
+  <!--    <tr>-->
+  <!--      <th>ID:</th>-->
+  <!--      <th>{{'Friends.FirstName' | translate}}:</th>-->
+  <!--      <th>{{'Friends.LastName' | translate}}:</th>-->
+  <!--      <th>{{'Friends.Amount' | translate}}:</th>-->
+  <!--      <th>{{'Friends.Status' | translate}}:</th>-->
+  <!--      <th>{{'Friends.Register' | translate}}:</th>-->
+  <!--    </tr>-->
+  <!--    </thead>-->
+  <!--    <tbody>-->
+  <!--    <tr *ngFor="let friend of friends">-->
+  <!--      <td>{{friend.Id}}</td>-->
+  <!--      <td>{{friend.FirstName}}</td>-->
+  <!--      <td>{{friend.LastName}}</td>-->
+  <!--      <td>{{friend.BonusAmount}}</td>-->
+  <!--      <td><span *ngIf="friend.BonusAmount > 0">{{'Friends.Active' | translate}}</span><span-->
+  <!--        *ngIf="!(friend.BonusAmount == 0)">{{'Friends.InActive' | translate}}</span></td>-->
+  <!--      <td>{{friend.CreationTime | date:'HH:mm dd/MM/yyyy'}}</td>-->
+  <!--    </tr>-->
+  <!--    </tbody>-->
+  <!--  </table>-->
+
+  <div [ngClass]="{'error_message' : showError == 2, 'success-message' : showError == 1}" *ngIf="!!showError">
+    {{inviteMessage}}
+  </div>
+
+  <div class="error_message" *ngIf="name.invalid && (name.dirty && name.touched)">
+    {{'Auth.EmailMustValid' | translate}}
+  </div>
+
+</div>
+

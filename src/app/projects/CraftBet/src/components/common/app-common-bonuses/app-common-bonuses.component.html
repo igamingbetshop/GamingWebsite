@@ -1,0 +1,22 @@
+<div class="bonus-label">{{'Info.PleaseChoseBonuce' | translate}}</div>
+
+<ul class="default-scroll">
+    <li *ngFor='let item of bonusesList;let i = index' class="info-item">
+        <div class="left-part" (click)="$event.stopPropagation()">
+            <input type="radio" [checked]="item.selected" [value]="item.Id" (change)='radioChecked(item.Id,i)'  (click)="$event.stopPropagation()">
+            <div class="bonus-name" (click)="radioChecked(item.Id,i)">{{item?.Name}}</div>
+        </div>
+
+
+        <div class="right-part">
+<!--            <fa-icon [icon]="['fas', 'info-circle']" [title]="item?.Name"></fa-icon>-->
+            <div class="info-icon" (click)="openPopup(item); $event.stopPropagation()">{{'Info.Info' | translate}}
+                <div class="selected" *ngIf="item == currentItem && opened"></div>
+            </div>
+            <div class="bonus-info" *ngIf="item == currentItem && opened">
+                <span class="bonus-info__text" [innerHTML]="'Deposit.' + 'BONUS_INFO' + currentItem?.Id | translate | sanitizer: 'html'"></span>
+                <span class="icon-bonus-close  bonus-info__close" (click)="closePopup(); $event.stopPropagation()"></span>
+            </div>
+        </div>
+    </li>
+</ul>

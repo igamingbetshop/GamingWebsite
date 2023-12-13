@@ -1,0 +1,119 @@
+<div class="history-section">
+  <!--  <h2 class="history-section_title">{{'User.Bank_Accounts' | translate}}</h2>-->
+  <div *ngIf="!addBankAccount">
+    <div class="add-account">
+      <button type="button" class="craft_btn" (click)="addAccount()">{{'User.Add_Account' | translate}}</button>
+    </div>
+    <!--  <table>-->
+    <!--    <tbody>-->
+    <!--    <tr>-->
+    <!--      <td>{{'User.Id' | translate}}</td>-->
+    <!--      <td>{{'User.NickName' | translate}}</td>-->
+    <!--      <td>{{'User.BankName' | translate}}</td>-->
+    <!--      <td>{{'User.Iban' | translate}}</td>-->
+    <!--      <td>{{'User.BankAccountNumber' | translate}}</td>-->
+    <!--    </tr>-->
+    <!--    <tr *ngFor="let account of paymentService.bankAccounts">-->
+    <!--      <td>{{account.Id}}</td>-->
+    <!--      <td>{{account.NickName}}</td>-->
+    <!--      <td>{{account.BankName}}</td>-->
+    <!--      <td>{{account.Iban}}</td>-->
+    <!--      <td>{{account.BankAccountNumber}}</td>-->
+    <!--    </tr>-->
+    <!--    </tbody>-->
+    <!--  </table>-->
+
+    <div class="banks-history-block-head block-head">
+<!--      <div>{{'User.NickName' | translate}}</div>-->
+      <div>{{'User.BankName' | translate}}</div>
+      <div>{{'User.BranchName' | translate}}</div>
+        <div>{{'User.AccountType' | translate}}</div>
+      <div class="hide-form-row">{{'User.Iban' | translate}}</div>
+      <div>{{'User.BankAccountNumber' | translate}}</div>
+      <div></div>
+    </div>
+    <ng-container *ngIf="paymentService.bankAccounts.length > 0; else emptyBanks">
+      <section class="banks-block-section">
+        <div class="banks-block block" *ngFor="let account of paymentService.bankAccounts">
+<!--          <div class="banks-block_item block_item">{{account.NickName}}</div>-->
+          <div class="banks-block_item block_item">{{account.BankName}}</div>
+          <div class="banks-block_item block_item">{{account.BranchName}}</div>
+          <div class="banks-block_item block_item">{{account.BankAccountTypeName}}</div>
+          <div class="banks-block_item block_item hide-form-row">{{account.Iban}}</div>
+          <div class="banks-block_item block_item">{{account.BankAccountNumber}}</div>
+          <div class="banks-block_item block_item form-row-icons">
+            <span class="icon-edit" (click)="editBank(account)"></span>
+            <span class="icon-delete-ticket" (click)="deleteBank(account.Id)"></span>
+          </div>
+        </div>
+      </section>
+    </ng-container>
+    <ng-template #emptyBanks>
+      <section class="empty-banks empty-block">
+        <span class="icon-transaction icon"></span>
+        <span class="empty-block-text">{{'User.Banks-empty' | translate}}</span>
+      </section>
+    </ng-template>
+  </div>
+  <div *ngIf="addBankAccount">
+
+    <div class="ticket-body flex_between" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
+      <h2 *ngIf="selectedBankAccount === undefined">{{'User.Add_Account' | translate}}</h2>
+      <h2 *ngIf="selectedBankAccount !== undefined">{{'User.Edit_Account' | translate}}</h2>
+      <span class="icon-close-modal close-icon" (click)="closeAddPage()"></span>
+    </div>
+    <div class="underline"></div>
+
+    <add-bank-account [isEditMode]="isEditMode" [selectedBankAccount]="selectedBankAccount" [addBankAccount]="addBankAccount"></add-bank-account>
+    <!--      <div class="modal_content">-->
+    <!--        <form [formGroup]="addBankAccountForm" novalidate (ngSubmit)="submit()">-->
+    <!--          <div class="form_row">-->
+    <!--            <label>{{'User.BankAccountNumber' | translate}}</label>-->
+    <!--            <div class="form_field">-->
+    <!--              <input type="text" class="ticket_input" name="BankAccountNumber" placeholder="{{maskType}}" mask="{{maskType}}" formControlName="BankAccountNumber" numbersOnly/>-->
+    <!--            </div>-->
+    <!--          </div>-->
+
+    <!--          <div class="form_row">-->
+    <!--            <label>{{'User.BankName' | translate}}</label>-->
+    <!--            <div class="form_field">-->
+    <!--              &lt;!&ndash;<input type="text" class="ticket_input" name="BankName" formControlName="BankName"/>&ndash;&gt;-->
+    <!--              <select formControlName="BankName" class="payment-select">-->
+    <!--                <option *ngFor="let clientBank of paymentService.clientBanksList | orderBy:'BankName'"-->
+    <!--                        [value]="clientBank.BankName">{{clientBank.BankName}}</option>-->
+    <!--              </select>-->
+    <!--            </div>-->
+    <!--          </div>-->
+
+    <!--          <div class="form_row">-->
+    <!--            <label>{{'User.Iban' | translate}}</label>-->
+    <!--            <div class="form_field">-->
+    <!--              <input type="text" class="ticket_input" name="Iban" formControlName="Iban"/>-->
+    <!--            </div>-->
+    <!--          </div>-->
+
+    <!--          <div class="form_row">-->
+    <!--            <label>{{'Deposit.NameSurname' | translate}}</label>-->
+    <!--            <div class="form_field">-->
+    <!--              <input type="text" class="ticket_input" name="NickName" formControlName="NickName"/>-->
+    <!--            </div>-->
+    <!--          </div>-->
+
+    <!--          &lt;!&ndash;      <div class="form_row">&ndash;&gt;-->
+    <!--          &lt;!&ndash;        <label>{{'User.Code' | translate}}</label>&ndash;&gt;-->
+    <!--          &lt;!&ndash;        <div class="form_field flex_center">&ndash;&gt;-->
+    <!--          &lt;!&ndash;          <input type="text" style="flex:1; width:unset; margin-right: 10px" class="ticket_input" name="Code" formControlName="Code"/>&ndash;&gt;-->
+    <!--          &lt;!&ndash;          <button type="button" class="setting_btn" [ngClass]="{'disabled' : isCodeSend}" (click)="sendVerificationCode()">{{'User.Send_Code' | translate}}</button>&ndash;&gt;-->
+    <!--          &lt;!&ndash;        </div>&ndash;&gt;-->
+    <!--          &lt;!&ndash;      </div>&ndash;&gt;-->
+
+    <!--          <div *ngIf="statusMessage" class="show-message">{{statusMessage}}</div>-->
+    <!--          <div class="form_row">-->
+    <!--            <div class="form_field">-->
+    <!--              <button type="submit" [ngClass]="{'disabled' : !addBankAccountForm.valid}" class="setting_btn">{{'User.Add_Account' | translate}}</button>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </form>-->
+    <!--      </div>-->
+  </div>
+</div>

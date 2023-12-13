@@ -1,0 +1,12 @@
+<span class="icon-clock"></span>
+<span>{{currentDate}}</span>
+<div class="timezones-box" *ngIf="isDropDown">
+    <input (click)="$event.stopPropagation()" [(ngModel)]="searchPattern">
+    <ul class="timezones">
+        <li *ngFor="let timeZone of timezones | timezoneFilter : searchPattern" (click)="setTimeZone(timeZone)">
+            <div>{{timeZone.value}}</div>
+            <div>{{timeZone.utcText}}</div>
+        </li>
+    </ul>
+</div>
+

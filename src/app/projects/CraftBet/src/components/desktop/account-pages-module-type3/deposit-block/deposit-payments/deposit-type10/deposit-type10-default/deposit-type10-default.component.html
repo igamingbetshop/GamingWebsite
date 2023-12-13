@@ -1,0 +1,54 @@
+<div class="deposit_payment_section">
+
+  <div class="deposit_payment_section__form">
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()">
+
+      <div class="payment-form-field">
+
+        <div class="payment-form-field__column">
+          <input type="text" class="payment-input" placeholder="{{'Deposit.VoucherNumber-placeholder' | translate}}" mask="0000000000"
+                 formControlName="VoucherNumber"/>
+          <label class="payment-form-field__label">{{'Deposit.VoucherNumber' | translate}}</label>
+        </div>
+      </div>
+
+      <div class="payment-form-field">
+
+        <div class="payment-form-field__column">
+          <input type="text" class="payment-input" placeholder="{{'Deposit.ActivationCode-placeholder' | translate}}" mask="0000000000000000"
+                 formControlName="ActivationCode"/>
+          <label class="payment-form-field__label">{{'Deposit.ActivationCode' | translate}}</label>
+        </div>
+      </div>
+
+      <div class="payment-form-field" *ngIf="promoData.length > 0">
+
+        <div class="payment-form-field__column">
+          <input type="text" class="payment-input" placeholder="{{'Deposit.PromoCode-placeholder' | translate}}"
+                 formControlName="PromoCode"/>
+          <label class="payment-form-field__label">{{'Deposit.PromoCode' | translate}}</label>
+        </div>
+      </div>
+
+      <div class="payment-form-field">
+        <div class="payment-form-field__column_btn">
+          <button type="submit" [disabled]="submitted || paymentForm.invalid" class="default_btn default_btn_red payment-btn">
+            <span class="payment-btn__span"> {{'Deposit.Confirm' | translate}} </span>
+          </button>
+
+          <loader></loader>
+
+          <div class="error_message">
+            {{errorMessage}}
+          </div>
+          <div class="success_message" *ngIf="successMessage && successMessage.length != 0">{{'Deposit.' + successMessage | translate}}</div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+
+

@@ -1,0 +1,29 @@
+<div class="mobile-homepage-section">
+
+    <app-mobile-home-banners *ngFor="let fragment of banners"
+                      [fragmentConfig]="fragment"
+                      [style.order]="fragment.Order"
+                      [style.margin-top.px]="fragment.Config.marginTop">
+    </app-mobile-home-banners>
+    <app-mobile-image-bar *ngFor="let fragment of imageBars"
+               [fragmentConfig]="fragment"
+               [style.order]="fragment.Order"
+               [style.margin-top.px]="fragment.Config.marginTop">
+    </app-mobile-image-bar>
+    <div  *ngFor="let fragment of iframes" [style.order]="fragment.Order" class="frame-fragment">
+        <div class="title" *ngIf="'HomeMenu.' + fragment.Config.titleVisibility" [innerHTML]="fragment.Title | translate | sanitizer: 'html'"></div>
+        <iframe [ngStyle]="fragment.Config.style" [src]="fragment.Href | sanitizer: 'resourceUrl'"></iframe>
+    </div>
+
+    <ng-container *ngIf="!userLogined.isAuthenticated">
+        <mobile-fragment-characters *ngFor="let fragment of characters"
+                             [fragmentConfig]="fragment"
+                             [style.order]="fragment.Order"
+                             [style.margin-bottom.px]="fragment.Config.marginBottom"
+                             [style.width]="fragment.Config.width"
+                             [style.height.px]="fragment.Config.height"
+                             [style.margin-top.px]="fragment.Config.marginTop"
+        ></mobile-fragment-characters>
+    </ng-container>
+
+</div>

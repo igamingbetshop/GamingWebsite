@@ -1,0 +1,28 @@
+.privaci-policy-section {
+
+  background: $account-default-bg;
+
+  .section_content {
+    margin: 0 auto;
+    background:backgroundColor(footer-section-content,$color-white);
+    height: 100%;
+
+    .section_list {
+      padding: 15px;
+      font-size: fontSize(privacy-policy-text, unset);
+      color: itemColor(privacy-policy-text, #000);
+
+      .Title1 {
+        font-weight: bold;
+        font-size: 25px;
+        line-height: 35px;
+        margin-bottom: 25px;
+      }
+    }
+  }
+
+}
+
+.navigate {
+  color: #36b54f;
+}

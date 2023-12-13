@@ -1,0 +1,317 @@
+//.modal-content_tickets {
+//  height: 540px;
+//  .setting_btn {
+//    background: linear-gradient(to bottom, color(settings-button-gradient-first) 0%, color(settings-button-gradient-second) 100%);
+//    color: color(settings-button-text);
+//    font-weight: 700;
+//    padding: 0 32px;
+//    height: 40px;
+//    border-radius: 3px;
+//    cursor: pointer;
+//    outline: none;
+//    &:hover {
+//      background: linear-gradient(to bottom, color(settings-button-gradient-active-first) 0%, color(settings-button-gradient-active-second) 100%);
+//    }
+//  }
+//
+//  .ticket-body {
+//    display: flex;
+//    width: 100%;
+//
+//    h2 {
+//      color: $color-black;
+//    }
+//  }
+//
+//  h2 {
+//    font-size: 24px;
+//    line-height: 30px;
+//  }
+//
+//  .modal_content {
+//    padding: 0 16px 16px 16px;
+//
+//    label {
+//      font-size: 14px;
+//      font-weight: normal;
+//    }
+//
+//    .ticket_input {
+//      //border: 1px solid $border-color;
+//      background-color: #16233a;
+//      border: none;
+//    }
+//
+//    .form_textarea {
+//      width: 100%;
+//      height: 436px;
+//
+//      textarea {
+//        width: 100%;
+//        height: 100%;
+//        //border: 1px solid $border-color;
+//        border-radius: 6px;
+//        background-color: #16233a;
+//        border: none;
+//      }
+//
+//    }
+//  }
+//}
+//
+//.modal-content.modal-content_tickets {
+//  display: inline-table;
+//  &.add-account
+//  {
+//    margin-top: 75px;
+//    padding: 22px;
+//    width: 500px;
+//    .form_row{margin: 5px 0;}
+//  }
+//}
+.add-bank-success-message {
+  color: itemColor(regForm-success-message, #c41818);
+  position: position(regForm-success-message, absolute);
+  bottom: itemBottom(reg-success-message, 21px);
+  display: display(reg-success-message, flex);
+  justify-content: justifyContent(reg-success-message, center);
+  align-items: center;
+  flex-direction: column;
+  top: itemTop(reg-success-message, 0);
+  left: itemLeft(reg-success-messasge, unset);
+  width: width(reg-success-messasge, auto);
+  font-size: fontSize(reg-success-messasge, 16px);
+  .check-circle-icon {
+    display: display(reg-success-messasge-icon, block);
+    font-size: fontSize(reg-success-messasge-icon, 72px);
+  }
+  .successfully-registered {
+    display: display(reg-success-message-registered, none);
+    color: itemColor(regForm-success-message-registered, #fff);
+    margin: var(--regForm-success-message-registered-margin, 0);
+    font-size: fontSize(regForm-success-message-registered, 16px);
+  }
+}
+.bank-required-fields {
+  margin: var(--bank-required-fields-margin, 0);
+  color: var(--bank-required-fields-color, #fff)
+}
+.new_ticket {
+  .hide-form-row {
+    display: var(--bank-account-hide-field-display, block);
+  }
+  .hide-account-types {
+    display: var(--bank-account-hide-account-types-display, block);
+  }
+  .payment-select-field:after {
+    content: '<>';
+    font: 17px "Consolas", monospace;
+    color: #202020;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: 10px;
+    top: 14px;
+    padding: 0 0 2px;
+    position: absolute;
+    pointer-events: none;
+    visibility: var(--account-verify-select-icon-arrow-visibility, hidden);
+  }
+  .cut {
+    background: var(--register-background-color, #FFFFFF);
+    border-radius: 10px;
+    height: 20px;
+    left: 20px;
+    position: absolute;
+    top: -9px;
+    transform: translateY(0);
+    transition: transform 200ms;
+    width: 75px;
+    display: none;
+  }
+  .form_row {
+    margin: var(--open-tickets-form-row-margin, 15px 0);
+  }
+  .form_row .form_field label {
+    width: width(register-form-field-label, inherit);
+    color: itemColor(bank-accounts-label-text, #ffffff);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    z-index: 1;
+    position: position(bank-accounts-input-label, absolute);
+    top: itemTop(bank-accounts-input-label, 0px) !important;
+    left: itemLeft(signup-input-label, 8px);
+    height: height(signup-input-label, 25px);
+    padding: padding(signup-input-label, 0 8px);
+    pointer-events: none;
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    background: none;
+  }
+  .form_row .form_textarea label {
+    width: width(register-form-field-label, inherit);
+    color: itemColor(bank-accounts-label-text, #ffffff);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    z-index: 1;
+    position: var(--bank-accounts-input-label-position, absolute);
+    top: itemTop(bank-accounts-input-label, 0px) !important;
+    left: itemLeft(signup-input-label, 8px);
+    height: height(signup-input-label, 25px);
+    padding: padding(signup-input-label, 0 8px);
+    pointer-events: none;
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    background: none;
+  }
+
+  input:focus ~ label, textarea:focus ~ label {
+    width: width(register-form-field-label, inherit);
+    height: height(signup-input-label-focused, 11px);
+    background: var(--register-background-color, none);
+    color: var(--login-field-focus-label, #fff);
+    top: itemTop(bank-accounts-input-label, -2px);
+    font-size: var(--register-background-color-font-size, 16px);
+  }
+
+  input:focus ~ .cut,
+  input:not(:placeholder-shown) ~ .cut {
+    transform: translateY(8px);
+    display: block;
+  }
+
+  input:focus ~ .cut {
+    display: block;
+  }
+
+  input:focus::placeholder, textarea:focus::placeholder {
+    opacity: 1;
+    color: var(--tickets-open-input-placeholder-color, rgb(135, 143, 162));
+  }
+
+  input::placeholder, textarea::placeholder {
+    opacity: var(--tickets-open-input-placeholder-opacity, 0);
+  }
+
+  .form_row .form_field input:focus ~ label, .form_row .form_field input:not(:placeholder-shown) ~ label, .form_row .form_textarea textarea:focus ~ label, textarea:not(:placeholder-shown) ~ label {
+    transform: var(--bank-accounts-input-label-transform, translateY(-15px) translateX(10px) scale(0.75));
+    background-color: var(--bank-accounts-focused-background-color, none);
+    height: height(bank-accounts-label-focused, 25px);
+    font-size: var(--register-background-color-font-size-label, 20px);
+    color: var(--login-field-focus-label-focused, #fff);
+  }
+
+  input:disabled ~ label {
+    top: itemTop(bank-accounts-input-label-disabled, -4px);
+  }
+
+  select:focus ~ label,
+  select:not([value=""]):valid ~ label {
+    transform: var(--bank-accounts-select-label-transform, translateY(-37px) translateX(10px) scale(0.75));
+    top: itemTop(register-focused-select-label, 18px) !important;
+    font-size: fontSize(register-focused-label, 20px);
+    color: var(--login-field-focus-label-focused, #fff);
+    background-color: var(--bank-accounts-focused-background-color, unset);
+    height: height(bank-accounts-label-focused, 25px);
+  }
+  .ticket_input {
+    text-indent: 16px;
+  }
+  input, textarea {
+    border: var(--open-ticket-input-select-border, none);
+    background: backgroundColor(open-ticket-input-select, #16233a);
+    color: itemColor(open-ticket-input-select, #ffffff);
+    width: 100%;
+    font-size: fontSize(open-ticket-input-select, 16px);
+    height: height(open-ticket-input-select, 40px);
+    border: 1px solid var(--open-ticket-select-border-color, #dbedff);
+
+    &:focus {
+      border: 2px solid itemColor(login-field-focus, #fff);
+    }
+  }
+
+  select {
+    height: height(open-ticket-input-select, 40px);
+    border: 1px solid itemColor(open-ticket-select-border, #dbedff);
+    appearance: var(--open-ticket-appearance, auto);
+
+    &:focus {
+      border: 2px solid itemColor(login-field-focus, #fff);
+    }
+  }
+  .error-form {
+    color: itemColor(new-ticket-error, #ff0000);
+    font-size: fontSize(new-ticket-error, 16px);
+  }
+
+  textarea {
+    border-radius: 6px;
+    height: 436px;
+    padding: 16px;
+    border: var(--open-ticket-input-select-border, none);
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    resize: none;
+    font-family: unset;
+
+    &:focus-visible {
+      border: var(--open-ticket-input-select-border, none);
+    }
+  }
+
+  .form_row {
+    float: none;
+    position: relative;
+  }
+  .success-message {
+    color: itemColor(success-message-tickets, #fff);
+  }
+  &.new-bank-account {
+    button {
+      border-radius: var(--open-ticket-btn-border-radius, 3px);
+      background: linear-gradient(to bottom, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
+      color: var(--settings-button-text-color, #FFFFFF);
+      box-shadow: none;
+      font-weight: fontWeight(open-ticket-btn, 700);
+      font-size: fontSize(open-ticket-btn, 16px);
+      padding: 0 32px;
+      position: absolute;
+      bottom: itemBottom(open-ticket-btn, -42px);
+      top: itemTop(open-ticket-btn, auto);
+      right: itemRight(open-ticket-btn, auto);
+      left: itemLeft(open-ticket-btn, auto);
+      width: width(open-ticket-btn, 250px);
+      height: height(open-ticket-btn, 44px);
+      text-transform: var(--open-ticket-btn-text-transform, none);
+      display: var(--open-ticket-btn-display, block);
+      justify-content: center;
+      align-items: center;
+
+      .to-right {
+        color: itemColor(continue-btn, #fff);
+        transform: rotate(180deg);
+        padding-right: paddingRight(continue-btn, 24px);
+        display: display(show-register-btn-icon, none);
+      }
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 10px;
+    }
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1630px) {
+  .new_ticket.new-bank-account button {
+    right: calc(var(--open-ticket-btn-right, auto) * 0.6);
+  }
+
+}

@@ -1,0 +1,54 @@
+<div class="m-lucky-game-container">
+    <div class="modal-body">
+        <span class="icon-close-modal" (click)="close()"></span>
+    </div>
+    <div class="header" *ngIf="!selectedGame">{{'PICK YOUR LUCKY GAME' | translate}}</div>
+    <div class="lucky-game-content" [class.hide-machine]="selectedGame">
+        <div class="animation-container">
+            <div class="animation-frame" (click)="resetAnimation()">
+                <img [src]="src" alt="Frame">
+            </div>
+            <div class="animated-games-box">
+                <div class="animated-block">
+                    <div class="animated-games">
+                         <div class="game-image" *ngFor="let game of games;let i = index">
+                             <img  alt="" [src]="game?.gameImage">
+                         </div>
+                    </div>
+                </div>
+
+                <div class="animated-block">
+                    <div class="animated-games">
+                         <div class="game-image" *ngFor="let game of games;let i = index">
+                             <img  alt="" [src]="game?.gameImage">
+                         </div>
+                    </div>
+                </div>
+
+                <div class="animated-block">
+                    <div class="animated-games">
+                         <div class="game-image" *ngFor="let game of games;let i = index">
+                             <img  alt="" [src]="game?.gameImage">
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-buttons">
+           <button id="spinner" class="spin-button" (click)="resetAnimation()">{{'Spin' | translate}}</button>
+        </div>
+    </div>
+    <div class="selected-game-content"  [ngStyle]="{'display' : selectedGame? 'block' : 'none'}">
+        <p class="game-name" *ngIf="selectedGame != null">{{gameName}}</p>
+        <div class="selected-game-box">
+            <img *ngIf="selectedGame" alt="" [src]="selectedGame">
+        </div>
+        <div class="m-buttons">
+            <button id="" class="spin-button" (click)="resetAnimation()">{{'Spin' | translate}}</button>
+            <button class="play-button"
+                    (click)="close()"
+                    [routerLink]="['/product/'+ winnerGameId + '/real/' + openMode  + {queryParams: {redirect: true}}]"
+                    [ngClass]="selectedGame? 'active' : ''">{{'Play' | translate}}</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,361 @@
+// project specific styles
+@import 'general/general_dir';
+@import 'helpers/fonts';
+@import '../../../../../node_modules/ngx-simple-modal/styles/simple-modal';
+::-webkit-scrollbar-track { border-radius: 15px; background-color: color(scrollbar-track); }
+::-webkit-scrollbar {  width: 2px;  background-color: color(scrollbar-track);  }
+::-webkit-scrollbar-thumb:hover { background: color(scrollbar-thumb-hover); }
+::-webkit-scrollbar-thumb {  border-radius: 15px;  background-color: color(scrollbar-thumb);  }
+/*
+  A copy of our modal styles you can use.. its implementers choice what styles they want based on their lib of choice. If you make bootstrap modals, use their styles. Simples.
+*/
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: backgroundColor(m-common,  #FFFFFF);
+
+  overflow-y: auto;
+  .sportsbook-content router-outlet+*
+  {
+    height: auto!important;
+    padding-bottom: 50px;
+  }
+}
+.grab{
+  cursor: grabbing;
+  *{cursor: grabbing!important;}
+}
+.modal{
+  background-color:rgba(0,0,0,.4);
+  bottom:0;
+  height:100%;
+  left:0;
+  overflow: var(--modal-overflow, hidden);
+  padding: 0 16px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  text-align: center;
+  z-index: 100; /* Adjust according to your needs */
+}
+
+.modal.fade-anim {
+  will-change: opacity;
+  opacity: 0;
+}
+
+.modal.fade-anim.in {
+  opacity: 1;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.modal-content {
+  background-color:#ffffff;
+  border-radius: 4px;
+  margin: 16px auto;
+  max-width: 755px;
+  min-width: var(--all-modal-content-min-width, 504px);
+  position: relative;
+  margin-top: marginTop(all-modal-content, 145.35px) !important;
+  //width: 370px;
+
+  &.User-Info {
+    width: width(user-info-modal-content, auto);
+  }
+
+  will-change: opacity;
+  display: inline-block;
+  text-align: left;
+
+  &.rightToLeft
+  {
+    direction: rtl;
+    text-align: right;
+    .modal-body
+    {
+      text-align: left;
+      float: left;
+      h1{float: right}
+    }
+    form
+    {
+      .allFormItems
+      {
+        .form-row-item
+        {
+          float:right;
+          .reg-conditions
+          {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+.change_btn{
+  width: 210px!important;
+  background-color: #0d5694!important;
+}
+
+.modal-content-size-m {
+  max-width: 992px;
+}
+
+.modal-content-size-l {
+  max-width: 1200px;
+}
+
+.modal-footer,
+.modal-header {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 56px;
+  padding: 0 16px;
+}
+
+.modal-header {
+  border-bottom:1px solid #cecece;
+}
+
+.modal-body {
+  padding: 16px;
+}
+
+.modal-footer {
+  border-top:1px solid #cecece;
+}
+.rightToLeft
+{
+  .mobile-registration-section
+  {
+    form
+    {
+      .form-row-item
+      {
+        div
+        {
+          .form_field
+          {
+            input{text-align: right}
+          }
+        }
+      }
+    }
+  }
+ /* .promotion-content{text-align: right;}*/
+  .promotions-section_top{max-width: 1100px;}
+  .promotions-section_slider{direction: ltr}
+  .form_row{float: none}
+  .content_row:last-child {
+    padding-left: 0;
+    padding-right: 8px;
+  }
+  .payment-systems__userAccount
+
+  {
+    padding-left: 10px;
+  }
+  .payment-systems__totalItem
+  {
+    padding-left: 10px;
+
+
+
+  }
+  .payment-form-field
+  {
+    padding-left: 10px;
+  }
+  .header_row__number
+  {
+    margin-left: 8px;
+  }
+  .payment-systems__userAccount__name
+  {
+    float: right;
+  }
+  .payment-systems__userAccount_balance
+  {
+    float: left;
+  }
+  .payment-systems__infoText
+  {
+    text-align: left;
+  }
+  .payment-systems__totalItem_item{float: left}
+  .payment_list_item__info
+  {
+    margin-right: 12px;
+    margin-left: 0;
+    text-align: right!important;
+  }
+  .new-logo-item
+  {
+    left: -5px;
+    right: auto;
+  }
+  .add-tickets,.add-account
+  {
+    text-align: left;
+  }
+  .social-icons
+  {
+    a:first-child{margin-left: 16px}
+  }
+  .ticket-small
+  {
+    .user-info_item_unreadMessagesCount
+    {
+      right: auto;
+      left: 0;
+    }
+  }
+  .casino-layouts
+  {
+    left:-40px;
+    right: auto!important;
+  }
+  .distans-right
+  {
+    margin-left: 15px;
+    margin-right: 0;
+  }
+  .websitePagesContent__content_title{text-align: right}
+}
+
+
+app-mobile-main
+{
+  .rightToLeft
+  {
+    app-mobile-left-sidebar {
+      .mobile-left-sidebar-section {
+        app-custom-sidebar {
+          .ti_navbar {
+            .ti_navbar_container {
+              direction: rtl;
+
+              .lang_container {
+                .default_language_container {
+                  .open_language {
+                    text-align: left
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    app-mobile-right-sidebar
+    {
+      direction: rtl;
+      .fa-angle-right{transform: rotate(180deg)}
+    }
+    app-mobile-header
+    {
+      .mobile-header-section
+      {
+        .mobile-header-section_topPanel
+        {
+          .mobile-header-section-content
+          {
+            .mobile-header-section_topPanel_left
+            {
+              right: 40px;
+              left:auto;
+            }
+            .user-info
+            {
+              left:30px;
+              right: auto;
+              div{direction: ltr}
+            }
+          }
+        }
+      }
+    }
+
+
+
+
+    app-mobile-user-default
+    {
+      direction: rtl;
+      .distans-right
+      {
+        margin-left: 15px;
+        margin-right: 0;
+      }
+      .distans-half-right
+      {
+        margin-left: 8px;
+        margin-right: 0;
+      }
+    }
+    app-mobile-tickets,app-mobile-contact-us,app-mobile-faq,app-mobile-privacy,app-mobile-terms,app-mobile-login,app-mobile-signup,app-mobile-header,app-mobile-casino{direction: rtl}
+    .fa-angle-right{transform: rotate(180deg)}
+    .form-row-item{float: right}
+    .mobile-websitePagesContent__content_title{text-align: right}
+    .mobile-about-us-section
+    {
+      .content
+      {
+        text-align: justify;
+        p{text-align: right}
+      }
+    }
+    .mobile-privacy-section
+    {
+      ul
+      {
+        li
+        {
+          h1, p
+          {
+            text-align: right
+          }
+        }
+      }
+    }
+    app-mobile-promotion
+    {
+      .promotion-content{text-align: right;}
+    }
+    app-mobile-information
+    {
+      .content{text-align: right}
+    }
+
+    .mobile_info{text-align: right}
+    .bonus-and-amount{direction: rtl}
+    .payment-form-field{direction: rtl; padding-left: 0;}
+    .history-tools-panel{direction: rtl}
+    .mobile-settings-section{direction: rtl};
+    .form_row3{direction: ltr}
+    .friends-section{direction: rtl}
+    .send-email_top{margin-right: 0; margin-left: 20px}
+    .mobile_number_verify__item{direction: ltr; margin-right: 15px; margin-left: unset}
+  }
+
+}
+
+app-global-bottom-side-bar {
+  z-index: var(--global-bottom-side-bar-zindex, 111);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+.grecaptcha-badge {
+  bottom: 67px !important;
+}

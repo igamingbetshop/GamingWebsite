@@ -1,0 +1,25 @@
+<div>
+    <ngx-slick-carousel class="carousel"
+                        (beforeChange)="currentSlide = $event.currentSlide"
+                        [config]="fragmentConfig.Config">
+        <div ngxSlickItem *ngFor="let banner of banners" class="banner" (click)="navigateByBanner(banner.Link, $event)">
+            <div class="banner_image" [class.has-href]="banner.Link">
+                <picture>
+                    <source *ngFor="let source of banner.sources" [media]="banner.media" [srcset]="banner.srcset">
+                    <img [src]="bannerService.bannersPath + banner?.Image">
+                </picture>
+                <div class="banner-wrapper"></div>
+                <div class="banner-wrapper2"></div>
+                <div class="banner-content">
+                    <div class="banner-description">{{banner.Head}}</div>
+                    <div class="banner-content-description">{{banner.Body}}</div>
+                    <div *ngIf="banner.ShowRegistration" class="banner-action distans-right"
+                         (click)="onRegisterOpen(); $event.stopPropagation()">{{'Login.Sign Up' | translate}}</div>
+
+                    <div *ngIf="banner.ShowLogin" class="banner-action"
+                         (click)="onLoginOpen(); $event.stopPropagation()">{{'Login.Sign In' | translate}}</div>
+                </div>
+            </div>
+        </div>
+    </ngx-slick-carousel>
+</div>

@@ -1,0 +1,9 @@
+<div class="form_field settings-select-field">
+    <select  #selectRef [ngClass]="{'disable_item':!(profileService.editState$ | async).value,
+     'active_item':  (profileService.editState$ | async).value}"
+             (change)="selectLanguage()">
+        <option value="">{{'Choose language' | translate}}</option>
+        <option *ngFor="let language of languages"
+                [value]="language.key">{{language.value}}</option>
+    </select>
+</div>

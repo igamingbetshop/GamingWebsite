@@ -1,0 +1,10 @@
+.chat-opener
+{
+  cursor: pointer;
+  background: none;
+}
+.chat-opener-img {
+  cursor: pointer;
+  width: var(--chat-opener-img-width, auto);
+  height: var(--chat-opener-img-height, auto);
+}

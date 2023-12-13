@@ -1,0 +1,91 @@
+@import "../../../../../styles/helpers/variables";
+@import "../../../../../../../../styles/helpers/variables";
+
+::ng-deep app-mobile-home-banners {
+  display: block;
+  position: relative;
+  direction: ltr;
+  .title
+  {
+    color: white;
+    text-align: center;
+  }
+  @media  only screen and (max-width: 1200px)
+  {
+    .slick-next
+    {
+      right: 12px!important;
+      z-index: 1;
+    }
+    .slick-prev {
+      z-index: 1;
+    }
+  }
+  .slick-prev:before {
+    content: "←"!important;
+    opacity: 1;
+  }
+  .slick-next:before {
+    content: "→"!important;
+  }
+
+  .slick-next, .slick-prev {
+    display: none
+  }
+  .custom-arrow {
+    width: var(--home-fragment-banner-icon-width, 20px);
+    height: var(--home-fragment-banner-icon-height, 40px);
+    position: absolute;
+    z-index: 1;
+    top: var(--home-fragment-banner-icon-top, 46%);
+    cursor: pointer;
+  }
+  .custom-slick-next {
+    right: 2%;
+  }
+  .custom-slick-prev {
+    left: 2%;
+  }
+
+  .actions {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    button {
+      background: none;
+      border: none;
+      outline: none;
+      transform: scale(0.6);
+      cursor: pointer;
+    }
+
+    span {
+      outline: none;
+      transform: scale(0.6);
+      cursor: pointer;
+      color: color(banner-arrow);
+      font-size: 54px;
+      position: absolute;
+
+      &:first-child {
+        left: 10px;
+      }
+
+      &:nth-child(2) {
+        right: 10px;
+      }
+    }
+  }
+
+  .slick-list {
+    .slick-track {
+      :focus {
+        outline: none
+      }
+
+    }
+  }
+}
+

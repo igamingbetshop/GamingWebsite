@@ -1,0 +1,29 @@
+<div class="payment-section_content_block">
+    <div class="payment_header">{{ 'User.Deposit-Limit' | translate }}</div>
+    <div class="payment_header">{{ 'User.Deposit-Min-Max' | translate }}</div>
+    <ul class="payment_list">
+        <li *ngFor="let item of paymentSystemList; let i = index"
+            (click)="selectPayment(item)"
+            [ngClass]="{'selected':item?.PaymentSystemId == currentPayment?.PaymentSystemId}"
+            class="payment_list_item">
+            <input class="payment_list_item_radio_button" type="radio" [(ngModel)]="currentPayment" [value]="item" id="paymentSystem{{i}}" [hidden]="true">
+            <div class="payment_list_item_img"
+            [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/withdraw/' +  item.PaymentSystemId + '.svg)'}"></div>
+            <div class="payment_list_item_min_amount">
+                {{'Deposit.Min-Amount' | translate}} {{item.MinAmount}}
+                <span *ngIf="item.CurrencyId === currencyId">{{currencySymbol}}</span>
+                <span *ngIf="item.CurrencyId !== currencyId">{{item.CurrencyId}}</span>
+            </div>
+        </li>
+    </ul>
+    <div class="content_row form-column right-part">
+<!--        <label class="checkbox"><input type="checkbox"-->
+<!--                                       [(ngModel)]="paymentControllerService.savePaymentDetails"> {{'User.SavePaymentDetails' | translate}}-->
+<!--        </label>-->
+        <div class="content_row form-column">
+<!--            <app-common-accounts></app-common-accounts>-->
+            <template #loadComponent></template>
+            <div class="deposit-self-limitation-popup">{{ 'User.Deposit-Choose-Note' | translate }}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,2491 @@
+/*.casino-section {
+
+  background: color(product-background);
+
+  .banner_image {
+    width: 100%;
+    height: 360px;
+    position: relative;
+
+    .banner-wrapper {
+      position: absolute;
+      left: 0;
+      top: 30%;
+      right: 0;
+      bottom: 0;
+      !*background: backgroundColor(banner-gradient, -webkit-linear-gradient(rgba(0,0,0,0), #151515));*!
+    }
+
+    .banner-content {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 10%;
+
+      .banner-description {
+        width: 300px;
+        font-family: roboto-regular;
+        text-transform: uppercase;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.45;
+        color: color(banner-description);
+      }
+
+      .banner-content-description {
+        font-family: roboto-regular;
+        color: color(banner-description);
+        line-height: 2.5;
+        font-weight: 600;
+      }
+
+      .banner-action {
+        padding: 0 20px;
+        color: color(banner--action-text);
+        font-size: 12px;
+        text-transform: uppercase;
+        height: 31px;
+        line-height: 31px;
+        margin-top: 5px;
+        border-radius: 3px;
+        display: inline-block;
+        background-image: linear-gradient(to top, var(--banner-action-gradient-color-2, #10ab8a), var(--banner-action-gradient-color-1, #02887e));
+      }
+    }
+  }
+
+  .pagination_section {
+    height: 50px;
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  .casino-game-section_banners {
+    height: 360px;
+  }
+
+  .casino-menu-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+
+    .casino-games-menu {
+      width: 1600px;
+      position: relative;
+      margin: 10px auto;
+      display: grid;
+      justify-content: space-evenly;
+      grid-column-gap: 27px;
+      grid-template-columns: 240px 240px 240px 240px 240px 240px;
+
+      .nav-tabs {
+        height: 47px;
+        border-bottom: none;
+        grid-column: 1 / span 4;
+        display: flex;
+
+        li {
+          display: inline-block;
+          position: relative;
+          z-index: 2;
+          outline: none;
+
+          &:hover {
+            a {
+              color: itemColor(product-navigation-tab-hover, #ccc);
+            }
+          }
+
+          &.active {
+            border-bottom: 2px solid color(header-menu-item-active-border);
+            transform: translateY(1px);
+
+            &:hover {
+              color: itemColor(product-navigation-tab-active-item-hover, #ccc);
+            }
+          }
+
+          a {
+            text-decoration: none;
+            color: color(product-navigation-tab);
+            cursor: pointer;
+            height: 100%;
+            padding: 0 15px;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .filter_field {
+        min-height: 40px;
+        position: relative;
+        font-size: 14px;
+        color: #ffffff;
+
+        .selected-provider {
+          width: 100%;
+          position: absolute;
+          border-radius: 10px;
+          height: 40px;
+          border: solid 2px color(common-box-border);
+          padding: 0 16px;
+          .selected-provider-label
+          {
+            color: color(selected-provider-label);
+          }
+          fa-icon {
+            transition: all .3s ease;
+            color: color(selected-provider-label);
+          }
+        }
+
+        &.opened {
+          .selected-provider {
+            fa-icon {
+              transition: all .3s ease;
+              transform: rotate(180deg);
+            }
+          }
+
+          .custom_dropdown_list {
+            display: block
+          }
+        }
+
+        .custom_dropdown_list {
+          height: 300px;
+          border-radius: 2px;
+          position: absolute;
+          top: 50px;
+          width: 100%;
+          border: solid 1px color(common-box-border);
+          background-color: rgba(16, 24, 36, 0.9);
+          overflow-y: scroll;
+          display: none;
+          z-index: 1;
+          line-height: 25px;
+
+          li {
+            transition: all .3s ease;
+
+            &:hover {
+              font-size: 16px;
+              transition: all .3s ease;
+            }
+          }
+        }
+      }
+
+      .search_field {
+        border-radius: 10px;
+        height: 40px;
+        border: solid 2px color(common-box-border);
+        color: #ffffff;
+        padding: 0 16px;
+
+        fa {
+          font-size: 16px;
+          cursor: pointer
+        }
+
+        input {
+          height: 100%;
+          border: none;
+          outline: none;
+          color: #ffffff;
+          flex: 1;
+          padding: 0 0 0 5px;
+          background: none;
+        }
+      }
+
+      .casino-layouts {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        right: -40px;
+        align-items: center;
+        top: 4px;
+        font-size: 20px;
+
+        .layout-item {
+          cursor: pointer;
+          color: white;
+          margin-bottom: 6px;
+
+          &:hover, &.selected {
+            color: color(casino-layout-icon-hover)
+          }
+        }
+      }
+    }
+  }
+
+
+  .filter-game-section_items {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .search-results{
+      width: 100%;
+    }
+
+    !*.product_list {
+
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      padding-bottom: 25px;
+
+      &_item {
+        width: 240px;
+        height: 180px;
+        border: 1px solid $games-product-item-border;
+        border-radius: 8px;
+        display: inline-block;
+        box-sizing: border-box;
+        margin: 11px;
+
+        &:hover {
+          .game-open {
+            visibility: visible;
+          }
+        }
+        .game-img {
+          width: 100%;
+          height: 100%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          border-radius: 8px;
+          position: relative;
+          transition: all 0.3s;
+          .game-img-wrapper
+          {
+            transition: opacity .3s;
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-radius: 8px;
+            background: rgba(39,51,70,.5);
+          }
+          &:hover
+          {
+            transform: scale(1.07);
+            .game-img-wrapper{opacity: 1}
+          }
+        }
+
+        .game-open {
+          height: 60%;
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          left: 0;
+          top: 0;
+          visibility: hidden;
+
+          &.game-open-demo {
+            top: 60%;
+          }
+        }
+
+        .game-btn {
+          display: inline-block;
+          left: 25%;
+          width: 106px;
+          line-height: 32px;
+          cursor: pointer;
+          border-radius: 8px;
+          color: $color-white;
+          position: absolute;
+
+          &_real {
+            top: 42%;
+            background: #000;
+            opacity: 0.6;
+          }
+
+          &_demo {
+            top: -15%;
+            background: #273346;
+          }
+        }
+
+        .game-title {
+          width: 100%;
+          line-height: 88px;
+          color: $games-title;
+          text-indent: 5px;
+          white-space: nowrap;
+          height: 60px;
+          text-overflow: ellipsis;
+          border-bottom-right-radius: 8px;
+          border-bottom-left-radius: 8px;
+          position: absolute;
+          bottom: 0;
+          background: linear-gradient(to top,rgba(3,3,3,1),rgba(3,3,3,0));
+
+          &__heart {
+            color: $color-white;
+            font-size: 14px;
+            margin-right: 3px;
+          }
+        }
+      }
+    }*!
+    .product_list {
+
+      display: grid;
+      grid-template-columns: 240px 240px 240px 240px 240px 240px;
+      padding-bottom: 25px;
+      grid-row-gap: 27px;
+      grid-column-gap: 27px;
+      justify-content: space-evenly;
+
+      .widget {
+        border: solid 2px color(common-box-border);
+        font-family: Arial;
+        border-radius: 10px;
+        grid-column: 6;
+        grid-row: 1 / span 2;
+        min-height: 360px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 10px;
+        overflow: hidden;
+
+        .carousel {
+          .slick-list {
+            height: 350px !important;
+          }
+        }
+
+        .vertical-slider {
+          > div {
+            line-height: 11px;
+          }
+        }
+
+        h3 {
+          font-size: 16px;
+          color: color(slide-item);
+        }
+
+        p {
+          color: #c3c9c8;
+          font-size: 14px;
+
+          span {
+            color: #0fa989;
+          }
+        }
+
+      }
+
+      &_item {
+        width: 240px;
+        height: 180px;
+        border-radius: 10px;
+        display: inline-block;
+        box-sizing: border-box;
+
+        &:hover {
+          .game-open {
+            visibility: visible;
+          }
+        }
+
+        .game-img {
+          width: 100%;
+          height: 100%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          border-radius: 10px;
+          position: relative;
+          transition: all 0.3s;
+
+          .game-img-wrapper {
+            transition: opacity .3s;
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-radius: 10px;
+            background: rgba(39, 51, 70, .5);
+          }
+
+          &:hover {
+            transform: scale(1.07);
+
+            .game-img-wrapper {
+              opacity: 1
+            }
+          }
+        }
+
+        .game-open {
+          height: 60%;
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          left: 0;
+          top: 0;
+          visibility: hidden;
+
+          &.game-open-center {
+            height: 100%;
+          }
+
+          &.game-open-demo {
+            top: 60%;
+          }
+        }
+
+        .game-btn {
+          display: inline-block;
+          left: 25%;
+          width: 106px;
+          line-height: 32px;
+          padding: 0 5px;
+          cursor: pointer;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          border-radius: 16px;
+          color: $color-white;
+          position: absolute;
+
+          &_real {
+            top: 42%;
+            background: color(product-real-button-background);
+          }
+
+          &_demo {
+            top: -15%;
+            background: color(product-demo-button-background);
+          }
+        }
+
+        .game-title {
+          width: 100%;
+          line-height: 88px;
+          color: color(casino-game-title);
+          text-indent: 5px;
+          white-space: nowrap;
+          height: 60px;
+          text-overflow: ellipsis;
+          border-bottom-right-radius: 10px;
+          border-bottom-left-radius: 10px;
+          position: absolute;
+          bottom: 0;
+          background: linear-gradient(to top, var(--casino-game-title-gradient-color-2, rgba(3, 3, 3, 1)), var(--casino-game-title-gradient-color-1, rgba(3, 3, 3, 0)));
+
+          &__heart {
+            color: $color-white;
+            font-size: 14px;
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+
+    .product_list_template-2 {
+      width: 100%;
+
+      &_item {
+        width: 100%;
+        margin-bottom: 15px;
+        position: relative;
+        background: color(product-item-template2-background);
+        height: 180px;
+        border-radius: 10px;
+        display: flex;
+        box-sizing: border-box;
+
+        .game-img {
+          width: 240px;
+          height: calc(100% - 30px);
+          margin: 15px;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          border-radius: 10px;
+          position: relative;
+          transition: all 0.3s;
+
+          .game-img-wrapper {
+            transition: opacity .3s;
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-radius: 10px;
+            background: rgba(39, 51, 70, .5);
+          }
+
+          &:hover {
+            transform: scale(1.07);
+
+            .game-img-wrapper {
+              opacity: 1
+            }
+          }
+        }
+
+        .game-rating {
+          position: absolute;
+          color: color(product-rating);
+          bottom: 12px;
+          left: 275px;
+
+          i {
+            font-size: 20px
+          }
+        }
+
+        .game-open {
+          left: unset;
+          width: 200px;
+          top: 30px;
+          right: 20px;
+          height: 32px;
+          position: absolute;
+          text-align: center;
+
+          &.game-open-demo {
+            top: 90px;
+          }
+        }
+
+        .game-btn {
+          display: inline-block;
+          left: 25%;
+          width: 106px;
+          line-height: 32px;
+          cursor: pointer;
+          border-radius: 16px;
+          color: $color-white;
+          position: absolute;
+
+          &_real {
+            top: 42%;
+            background: color(product-real-button-background);
+
+          }
+
+          &_demo {
+            top: -15%;
+            background: color(product-demo-button-background);
+          }
+        }
+
+        .game-title {
+          margin: 12px 12px 12px -6px;
+          color: $games-title;
+          text-indent: 5px;
+
+          &:hover {
+            color: color(product-title-hover);
+          }
+
+          &__heart {
+            color: color(product-heart-icon);
+            font-size: 14px;
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+
+    .product_list_template-3 {
+      width: 100%;
+
+      &_item {
+        width: 100%;
+        margin-bottom: 15px;
+        height: 80px;
+        position: relative;
+        background: color(product-item-template2-background);
+        border-radius: 10px;
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
+        padding: 0 15px;
+
+        .game-rating {
+          position: absolute;
+          color: color(product-rating);
+          bottom: 7px;
+          left: 17px;
+
+          i {
+            font-size: 20px
+          }
+        }
+
+        .game-open {
+          width: 109px;
+          position: static;
+          top: 30px;
+          height: 32px;
+          text-align: center;
+
+          &.real {
+            margin-left: auto
+          }
+        }
+
+        .game-btn {
+          display: inline-block;
+          width: 106px;
+          line-height: 32px;
+          cursor: pointer;
+          border-radius: 16px;
+          color: $color-white;
+
+          &_real {
+            background: color(product-real-button-background);
+          }
+
+          &_demo {
+            background: color(product-demo-button-background);
+          }
+        }
+
+        .game-title {
+          margin: 12px 12px 12px -6px;
+          color: $games-title;
+          text-indent: 5px;
+
+          &:hover {
+            color: color(product-title-hover);
+          }
+
+          &__heart {
+            color: color(product-heart-icon);
+            font-size: 14px;
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1610px) {
+    .filter-game-section_items {
+      width: 1308px;
+
+      .product_list {
+
+        grid-template-columns: 240px 240px 240px 240px 240px;
+        grid-row-gap: 27px;
+
+        .widget {
+          grid-column: 5;
+          grid-row: 1 / span 2;
+        }
+      }
+    }
+    .casino-menu-container {
+      .casino-games-menu {
+        width: 1308px;
+        grid-template-columns: 240px 240px 240px 240px 240px;
+
+        .nav-tabs {
+          grid-column: 1 / span 3;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1365px) {
+    .filter-game-section_items {
+      width: 1041px;
+
+      .product_list {
+
+        grid-template-columns: 240px 240px 240px 240px;
+        grid-row-gap: 27px;
+
+        .widget {
+          grid-column: 4;
+          grid-row: 1 / span 2;
+        }
+      }
+    }
+    .casino-menu-container {
+      .casino-games-menu {
+        width: 1041px;
+        grid-template-columns: 240px 240px 240px 240px;
+
+        .nav-tabs {
+          grid-column: 1 / span 2;
+
+          li {
+            a {
+              padding: 0 9px;
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  .default_scroll {
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px $border-color;
+      border-radius: 10px;
+      background-color: $border-color;
+    }
+
+    &::-webkit-scrollbar {
+      width: 7px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px $header-menu-active-border;
+      background-color: $header-menu-active-border;
+    }
+  }
+
+  .game-rating {
+    float: right;
+    margin-right: 5px;
+    color: color(product-rating);
+
+    &__star {
+      font-size: 14px;
+      color: #FAC917;
+      margin-right: 3px;
+    }
+  }
+}
+
+.filter_field {
+  cursor: pointer;
+}*/
+
+
+.casino-section {
+
+  background: color(product-background);
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat!important;
+
+  .banner_image {
+    width: 100%;
+    height: var(--banner-image-height, 360px);
+    position: relative;
+    background-image: linear-gradient(to right, #131a2c 1%, rgba(83, 83, 83, 0.02) 36%, rgba(84, 84, 84, 0) 45%);
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat!important;
+ /* url("../../assets/images/b/jackpot_banner.png"),*/
+    img {
+      width: 100%;
+    }
+
+  .banner-wrapper {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      /*background: backgroundColor(banner-gradient, -webkit-linear-gradient(rgba(0,0,0,0), #151515));*/
+      background-image: linear-gradient(to left, itemColor(casino-banner-wrapper-bg-first,#131a2c), itemColor(casino-banner-wrapper-bg-second,rgba(83, 83, 83, 0.02)) 64%, itemColor(casino-banner-wrapper-bg-last,rgba(84, 84, 84, 0)) 55%);
+      border-width: width(casino-banner-wrapper-bg-first-border, 0);
+      border-color: itemColor(casino-banner-wrapper-bg-first, none);
+      border-style: solid;
+  }
+
+    .banner-wrapper2 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      /*background: backgroundColor(banner-gradient, -webkit-linear-gradient(rgba(0,0,0,0), #151515));*/
+      background-image: linear-gradient(to right, itemColor(casino-banner-wrapper2-bg-first,#131a2c) 1%, itemColor(casino-banner-wrapper2-bg-second,rgba(83, 83, 83, 0.02)) 45%, itemColor(casino-banner-wrapper2-bg-last,rgba(84, 84, 84, 0)) 55%);
+    }
+
+    .banner-content {
+      position: absolute;
+      top: itemTop(casino-banner-content, 50%);
+      transform: translateY(-50%);
+      left: itemLeft(casino-banner-content, 10%);
+
+      .banner-description {
+        width: width(banner-description, 500px);
+        font-family: var(--banner-description-font-family, Roboto);
+        text-transform: uppercase;
+        font-size: fontSize(banner-description,24px);
+        font-weight: fontWeight(banner-description, 600);
+        line-height: var(--banner-description-line-height, 1.45);
+        color: color(banner-description);
+      }
+
+      .banner-content-description {
+        font-family: var(--banner-content-description-font-family, Roboto);
+        color: itemColor(banner-content-description, #fff);
+        line-height: var(--banner-content-description-line-height, 2.5);
+        font-weight: fontWeight(banner-content-description, 600);
+        font-size: fontSize(banner-content-description, 16px);
+      }
+
+      .banner-action {
+        position: absolute;
+        padding-left: paddingLeft(banner-action-text, 20px);
+        padding-right: paddingRight(banner-action-text, 20px);
+        padding-top: paddingTop(banner-action-text, 0px);
+        padding-bottom: paddingBottom(banner-action-text, 0px);
+        color: color(banner--action-text);
+        font-size: fontSize(banner-action-text, 12px);
+        font-family: var(--banner-action-text-font-family, Roboto);
+        text-transform: uppercase;
+        height: height(banner-action-text, 31px);
+        width: width(banner-action-text, auto);
+        text-align: textAlign(banner-action-text, center);
+        line-height: 31px;
+        margin-top: marginTop(banner-action-text, 5px);
+        left: marginLeft(banner-action-text, 0px);
+        right: marginRight(banner-action-text, 0px);
+        border-radius: 3px;
+        display: inline-block;
+        background-image: linear-gradient(to top, var(--banner-action-gradient-color-2, #10ab8a), var(--banner-action-gradient-color-1, #02887e));
+        cursor: pointer;
+        &:hover {
+          background-image: linear-gradient(to top, var(--banner-action-gradient-color-4, #fff), var(--banner-action-gradient-color-3, #fff));
+          color: itemColor(banner-action-text, #000000);
+          transform: var(--banner-action-text-transform, scale(1));
+        }
+      }
+    }
+  }
+
+  .pagination_section {
+    height: 50px;
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  .casino-game-section_banners {
+   /* height: 360px;*/
+    position: relative;
+    background-size: cover !important;
+    background-repeat: no-repeat!important;
+
+    .widget {
+      border-radius: 10px;
+      width: 360px;
+      height: height(widget,360px);
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: 10px;
+      position: absolute;
+      top: var(--widget-top, 55px);
+      left: var(--widget-left, 10px);
+      right: var(--widget-right, auto);
+      .widget-header
+      {
+        display: flex;
+        align-items: center;
+        height: 14px;
+        font-size: fontSize(widget-header, 18px);
+        font-weight: 500;
+        margin-bottom: 16px;
+        background-color: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        .icon-balance
+        {
+          color: #dbedff;
+          margin-left: auto;
+          margin-right: 4px;
+        }
+      }
+      .widget-content
+      {
+        width: 100%;
+        height: calc(100% - 30px);
+        overflow-y: auto;
+        padding-right: 4px;
+
+        .widget-row
+        {
+          width: 100%;
+          height: height(widget-row, 76px);
+          position: relative;
+          margin-bottom: 5px;
+          .widget-row-wrapper
+          {
+            width: 100%;
+            height: 100%;
+            /*filter: blur(30px) grayscale(.3) brightness(15);*/
+            background: var(--casino-banner-bets-bg, rgba(46, 91, 124, 0.2));
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            opacity: 1;
+          }
+
+          .widget-row-content
+          {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 13px 16px;
+            border-radius: 4px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            font-weight: 500;
+            p
+            {
+              white-space: nowrap;
+              width: 190px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              margin: 0;
+              font-size: fontSize(widget-row, 18px);
+            }
+            .price, .bet-id
+            {
+              white-space: nowrap;
+              font-size: fontSize(bet-id,16px);
+            }
+            .bet-id{color: itemColor(bet-id, #1376f8)}
+            .game-img
+            {
+              width: 32px;
+              height: 24px;
+              margin-top: 4px;
+              border-radius: 2px;
+              background-repeat: no-repeat;
+              background-size: 100% 100%;
+            }
+          }
+
+        }
+      }
+    }
+
+    .icon-next-arrow
+    {
+      position: fixed;
+      bottom: itemBottom(casino-to-top-item, 48px);
+      right: itemRight(casino-to-top-item, 24px);
+      display: var(--casino-to-top-item-display ,inline-block);
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      font-size: 14px;
+      border-radius: 50%;
+      box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+      background-image: var(--casino-to-top-bgImage, linear-gradient(to bottom, #1376f8, #194074));
+      background-color: backgroundColor(casino-to-top, unset);
+      transform: rotate(-90deg);
+      cursor: pointer;
+      outline: none;
+    }
+  }
+
+
+  .casino-game-section-content {
+    margin: 0 auto 0 auto;
+    padding: 46px 24px 0 24px;
+    display: flex;
+    justify-content: center;
+  /*  flex-direction: column;*/
+
+
+.left-section
+{
+  position: sticky;
+  top: 6px;
+  z-index: 1;
+  height: 964px;
+  width: 360px;
+  margin-right: 24px;
+  .search_field {
+  /*  grid-column: 1;
+    grid-row: 1 / span 1;*/
+    /*border: solid 2px color(common-box-border);*/
+
+    border-top-left-radius: borderTopLeftRadius(search-field, 6px);
+    border-bottom-right-radius: borderBottomRightRadius(search-field, 6px);
+    border-top-right-radius: borderTopRightRadius(search-field, 6px);
+    border-bottom-left-radius: borderBottomLeftRadius(search-field, 6px);
+
+    border-top: borderTopWidth(search-field-border-top, 1px) solid itemColor(search-field-border-top, transparent);
+    border-bottom: borderBottomWidth(search-field-border-top, 1px) solid itemColor(search-field-border-bottom, transparent);
+    border-left: borderLeftWidth(search-field-border-top, 1px) solid itemColor(search-field-border-left, transparent);
+    border-right: borderRightWidth(search-field-border-top, 1px) solid itemColor(search-field-border-right, transparent);
+    height: height(search-field, 36px);
+    color: color(search-field);
+    padding-left: paddingLeft(search-field, 16px);
+    padding-right: paddingRight(search-field, 0);
+    background-color: backgroundColor(search-field,#1d2e4a);
+    margin-bottom: marginBottom(search-field, 26px);
+
+    .search-icon
+    {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+      background-image: linear-gradient(to bottom, itemColor(search-icon-gradient-first,#1376f8), itemColor(search-icon-gradient-second,#194074));
+      cursor: pointer;
+      font-size: 16px;
+      color: itemColor(search-games-icon, #ffffff);
+    }
+
+
+    input {
+      height: 100%;
+      border: none;
+      outline: none;
+      flex: 1;
+      padding: 0 0 0 5px;
+      background: none;
+      color: itemColor(search-input,rgba(255, 255, 255, 0.6));
+      font-size: 16px;
+    }
+    ::placeholder{font-size: 16px; color: itemColor(search-input-placeholder,rgba(255, 255, 255, 0.6))}
+  }
+  .nav-bar
+  {
+    /*grid-column: 1;
+    grid-row: 2 / span 1;*/
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border-radius: 6px;
+    border: solid 1px itemColor(provider-item-border, #1d2e4a);
+    height: 323px;
+    margin-bottom: 16px;
+    background-color: backgroundColor(all-games,transparent);
+    .title
+    {
+      font-size: 18px;
+      font-weight: 500;
+      color:color(casino-nav-bar-title);
+      border-bottom: 1px solid itemColor(nav-bar-title-border-bottom,transparent);
+      padding-bottom: paddingBottom(nav-bar-title, 0);
+      margin-bottom: marginBottom(nav-bar-title,31px);
+    }
+    img {
+      width: var(--category-item-image-width,16px);
+      height: var(--category-item-image-height,16px);
+      margin-right: var(--product-nav-tab-icon-margin, 8px);
+    }
+    /*.nav-tab {
+      width: 113px;
+      height: 76px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background-color: #1d2e4a;
+      transition: transform .3s;
+      -webkit-font-smoothing: antialiased;
+      backface-visibility: hidden;
+      &:not(:last-child){margin-right: 11px}
+
+      &:hover {
+        transform:perspective(1px) scale(1.07);
+        transition: transform .3s;
+        a, i {
+          color: itemColor(product-navigation-tab-hover, #ccc);
+        }
+      }
+
+      &.active {
+        a, i
+        {
+          color: itemColor(product-navigation-tab-active, #209cff);
+        }
+      }
+      a, i {
+        text-decoration: none;
+        color: color(product-navigation-tab);
+        cursor: pointer;
+        font-size: 16px;
+        white-space: nowrap;
+        margin-top: 8px;
+      }
+      a
+      {
+        width: 88px;
+        text-align: center;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      i{margin-top: 0}
+    }*/
+    .nav-tabs
+    {
+      display: grid;
+      grid-template-columns: repeat(3, 104px);
+      grid-auto-rows: minmax(min-content, max-content);
+      grid-gap: 8px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 4px;
+      height: calc(100% - 40px);
+
+      li {
+        height: 76px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        background-color: itemColor(provider-item-background, #1d2e4a);
+        transition: transform .3s;
+        -webkit-font-smoothing: antialiased;
+        backface-visibility: hidden;
+
+        &:hover {
+          transform:perspective(1px) scale(1.07);
+          transition: transform .3s;
+          a, i {
+            color: itemColor(product-navigation-tab-hover, #ccc);
+          }
+        }
+
+        &.active
+        {
+          a, i
+          {
+            color: itemColor(product-navigation-tab-active, #209cff);
+          }
+          background-color: itemColor(provider-item-active-background, #1d2e4a);
+        }
+        a, i {
+          text-decoration: none;
+          color: color(product-navigation-tab);
+          cursor: pointer;
+          font-size: 16px;
+          white-space: var(--product-navigation-tab-white-space, nowrap);
+          margin-top: 8px;
+        }
+        a
+        {
+          width: 88px;
+          text-align: center;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        i{margin-top: 0}
+        img {
+          width: var(--category-item-image-width,16px);
+          height: var(--category-item-image-height,16px);
+          margin-right: var(--product-nav-tab-icon-margin, 8px);
+        }
+      }
+    }
+    .slick-arrows
+    {
+      margin-top: auto;
+      span
+      {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        color: #ffffff;
+        border-radius: 4px;
+        background-color: #1d2e4a;
+        margin-right: 3px;
+        cursor: pointer;
+        outline: none;
+      }
+    }
+
+  }
+  .filter_field {
+    border-radius: 6px;
+    background-image: linear-gradient(181deg, itemColor(providers-gradient-first,#1d2e4a) 100%, itemColor(providers-gradient-second,#364970) 0%);
+    /*grid-column: 1;
+    grid-row: 3 / span 2;*/
+    padding: 16px 10px 24px 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    max-height: 558px;
+    height: var(--casino-providers-height, 558px);
+
+    .selected-provider {
+      width: 100%;
+      font-size: 18px;
+      color: color(selected-provider);
+      border-bottom: 1px solid itemColor(selected-provider-border-bottom,transparent);
+      padding-bottom: paddingBottom(selected-provider, 0);
+      margin-bottom: marginBottom(selected-provider,32px);
+      .selected-provider-label
+      {
+        color: color(selected-provider-label);
+      }
+    }
+    .search-providers {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: solid 1px itemColor(search-providers-border-bottom, #131a2c);
+      border-top: solid 1px itemColor(search-providers-border-top, transparent);
+      border-left: solid 1px itemColor(search-providers-border-left, transparent);
+      border-right: solid 1px itemColor(search-providers-border-right, transparent);
+
+      border-top-right-radius: borderTopRightRadius(search-providers,0);
+      border-bottom-left-radius: borderBottomLeftRadius(search-providers,0);
+      border-bottom-right-radius: borderBottomRightRadius(search-providers,0);
+      border-top-left-radius: borderTopLeftRadius(search-providers,0);
+
+      height: height(search-providers, auto);
+
+      padding-left: paddingLeft(search-providers,0);
+      padding-right: paddingRight(search-providers,0);
+      margin-bottom: 24px;
+
+      input {
+        height: 100%;
+        border: none;
+        outline: none;
+        color: color(search-providers);
+        padding: 0 0 8px 0;
+        background: none;
+      }
+
+      .search-icon
+      {
+        display: display(search-icon, none);
+      }
+      ::placeholder
+      {
+        color: itemColor(search-providers-placeholder, rgba(255, 255, 255, 0.6));
+      }
+    }
+    .provider-list {
+      display: grid;
+      grid-template-columns: repeat(3, 104px);
+      grid-gap: 8px;
+      height: calc(100% - 125px);
+      grid-auto-rows: minmax(min-content, max-content);
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 7px;
+      li {
+        height: 72px;
+        line-height: 72px;
+        text-align: center;
+        border-radius: var(--provider-list-item-border-radius, 6px);
+        font-size: var(--provider-list-item-font-size, 14px);
+        background-color: backgroundColor(provider-list-item,#192438);
+        background-image: linear-gradient(to bottom, rgba(25, 36, 56, 0.3), rgba(22, 53, 99, 0.3) 119%, rgba(21, 59, 115, 0.2) 139%, rgba(12, 107, 232, 0.1) 222%);
+        border: none;
+        transition: all .3s ease;
+        filter: var(--filter-data, grayscale(1));
+        white-space: nowrap;
+        span {
+          color: itemColor(provider-list-item,#ffffff);
+        }
+        &:hover {
+          font-size: var(--provider-list-item-hover-font-size, 16px);
+          transition: all .3s ease;
+          transform: scale(1.07);
+          filter: var(--filter-data-hover, grayscale(0));
+       /*   background-color: var(--providers-list-selected-bg, #182740);*/
+        }
+
+        &.selected
+        {
+          border: solid var(--provider-active-border-width, 1px) var(--provider-active-border, #0c6be8);
+          filter: grayscale(0);
+       /*   background-color: var(--providers-list-selected-bg, #182740);*/
+        }
+
+      }
+    }
+  }
+}
+
+    .search-results{
+
+    .nav
+    {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: backgroundColor(nav-bar, transparent);
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: paddingBottom(nav-bar,31px);
+      padding-top: paddingTop(nav-bar, 0px);
+
+      .nav-tabs {
+        /*width: 100%;*/
+        height: 36px;
+        line-height: 36px;
+        border-bottom: none;
+       /* grid-column: 1 / span 4;*/
+        display: flex;
+        align-items: center;
+        color: color(product-navigation-tab-active);
+        padding-left: 23px;
+        .tab-item
+        {
+          width: auto;
+          height: 100%;
+          border-bottom: 2px solid color(product-navigation-tab-active);
+        }
+
+        &:hover {
+          a {
+            color: itemColor(product-navigation-tab-hover, #ccc);
+          }
+        }
+
+        &.active {
+          border-bottom: 2px solid color(header-menu-item-active-border);
+          transform: translateY(1px);
+
+          &:hover {
+            color: itemColor(product-navigation-tab-active-item-hover, #ccc);
+          }
+        }
+
+        a, i {
+          text-decoration: none;
+          cursor: pointer;
+          font-size: 16px;
+        }
+        a{margin-left: 16px}
+
+      }
+      .nav-bar
+      {
+        &.top-menu, &.central-menu
+        {
+          padding: 0 16px;
+          white-space: nowrap;
+          align-items: center;
+          color: color(product-navigation-tab);
+          display: flex;
+          font-size: var(--product-navigation-tab-font-size, 16px);
+          justify-content: var(--product-navigation-item-center, left);
+          width: calc(100% - 90px);
+          li
+          {
+            height: height(product-nav-tab, 38px);
+            line-height: height(product-nav-tab-line, 38px);
+            width: width(product-nav-tab-width, auto);
+            margin-right: marginRight(product-nav-tab, 16px);
+            padding-left: paddingLeft(product-nav-tab, 8px);
+            padding-right: paddingRight(product-nav-tab, 8px);
+            padding-top: paddingTop(product-nav-tab, 0);
+            padding-bottom: paddingBottom(product-nav-tab, 0);
+            border-top-right-radius: borderTopRightRadius(product-nav-tab, 0);
+            border-top-left-radius: borderTopLeftRadius(product-nav-tab, 0);
+            border-bottom-right-radius: borderBottomRightRadius(product-nav-tab, 0);
+            border-bottom-left-radius: borderBottomLeftRadius(product-nav-tab, 0);
+            background-color: backgroundColor(product-nav-tab-background, rgba(42, 44, 56, 1));
+            border-radius: var(--m-product-nav-tab-border-radius);
+            cursor: pointer;
+            display: flex;
+            flex-direction: var(--product-nav-tab-direction, row);
+            align-items: center;
+            transition: transform 1s;
+            -webkit-font-smoothing: antialiased;
+            backface-visibility: hidden;
+            i
+            {
+              font-size: var(--product-nav-tab-icon-font-size, 16px);
+              color: color(product-nav-tab-icon);
+              margin-right: var(--product-nav-tab-icon-margin, 8px);
+            }
+            img {
+              width: var(--category-item-image-width,16px);
+              height: var(--category-item-image-height,16px);
+              margin-right: var(--product-nav-tab-icon-margin, 8px);
+            }
+            a {
+              margin-left: marginLeft(product-nav-tab-margin-left, 0px);
+            }
+            &.active
+            {
+              background-color: backgroundColor(product-nav-tab, #1c3e3b);
+              color: color(product-navigation-tab-active);
+            }
+            &:hover
+            {
+              background-color: backgroundColor(product-nav-tab-hover, transparent);
+              color: color(product-navigation-tab-hover);
+              transform:perspective(1px) scale(1.05);
+              transition: transform 1s;
+            }
+          }
+
+        }
+        &.central-menu
+        {
+          background-color: backgroundColor(top-menu, transparent);
+          li
+          {
+            img {
+              width: var(--category-item-image-width,16px);
+              height: var(--category-item-image-height,16px);
+              margin-right: var(--product-nav-tab-icon-margin, 8px);
+            }
+            &.active
+            {
+              text-shadow: itemColor(product-text-shadow, 0px 0px 6px rgba(255,255,255,0.7));
+              i{ color: color(product-navigation-tab-active);}
+            }
+          }
+        }
+      }
+    }
+    /*.product_list {
+      display: grid;
+      grid-template-columns: repeat(4, 360px);
+      grid-auto-rows: minmax(min-content, max-content);
+      grid-template-rows: auto;
+      grid-gap: 16px;
+      justify-content: space-evenly;
+     !* height: 924px;
+      overflow-y: auto;*!
+      &_item {
+        width: 100%;
+        border-radius: 6px;
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+        &.product-list-item-smalled {
+          height: calc(272px - 52px);
+        }
+        &.product-list-item-large {
+          height: 272px;
+        }
+        .casino-game {
+          width: 100%;
+          height: 100%;
+          .icon-user-info {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            color: white;
+            z-index: 1;
+            font-size: 20px;
+            cursor: pointer;
+            visibility: hidden;
+          }
+          .icon-star-info {
+            position: absolute;
+            top: 8px;
+            color: white;
+            z-index: 1;
+            right: 10px;
+            font-size: 20px;
+            visibility: hidden;
+          }
+          .show-hovered-game-names {
+            position: absolute;
+            height: auto;
+            width: 100%;
+            top: 86%;
+            color: #ffffff;
+            padding: 0 16px;
+            font-weight: 400;
+            font-size: var(--hovered-game-names-title, 18px);
+            line-height: 21px;
+            text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            visibility: hidden;
+            .title {
+              display: inline-block;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              width: 65%;
+              white-space: nowrap;
+            }
+            .icon-star-info2 {
+              display: none;
+            }
+          }
+          .icon-layer {
+            display: none;
+          }
+          .game-img {
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            img
+            {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: 10px;
+              outline: none;
+              border: none;
+            }
+            .game-img-wrapper {
+              transition: opacity .3s;
+              opacity: 0;
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              border-radius: 10px;
+            }
+          }
+          &.has-game-name {
+            .icon-user-info
+            {
+              right: 10px;
+            }
+            .icon-star-info {
+            display: none;
+            }
+            .icon-layer
+            {
+              position: absolute;
+              top: 22px;
+              font-size: 64px;
+              color: itemColor(icon-layer,#e8d838);
+              text-align: center;
+              width: 100%;
+              display: block;
+              visibility: hidden;
+            }
+            .game-img {
+              height: calc(100% - 52px);
+            }
+            .show-hovered-game-names {
+              visibility: visible;
+              padding: 13px;
+              border-radius: 6px;
+              background-color: var(--casino-game-title-background-color, #1d2e4a);
+              display: flex;
+              justify-content: space-between;
+              margin-top: -9px;
+              .icon-star-info2 {
+                display: block;
+                font-size: 18px;
+                color: var(--game-rating-star-color, #FAC917);
+              }
+            }
+          }
+          &:hover {
+            .game-img
+            {
+              .game-img-wrapper
+              {
+                background: rgba(46,91,124,.2);
+                backdrop-filter: blur(10px);
+                opacity: 1;
+              }
+            }
+            .game-open, .game-btn, .icon-layer {
+              visibility: visible;
+            }
+            .game-open, .game-btn, .show-hovered-game-names {
+              visibility: visible;
+            }
+            .icon-user-info{visibility: visible}
+            .icon-star-info{visibility: visible}
+          }
+        }
+        .game-open {
+          position: absolute;
+          height: auto;
+          width: 100%;
+          text-align: center;
+          left: 0;
+          top: 28%;
+          visibility: hidden;
+
+          &.game-open-center {
+            !* height: 100%;*!
+          }
+
+          &.game-open-demo {
+             top: 60%;
+          }
+        }
+
+        .game-btn {
+          display: inline-block;
+          width: 106px;
+          line-height: 32px;
+          padding: 0 5px;
+          cursor: pointer;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          border-radius: 16px;
+          color: $color-white;
+          font-size: 18px;
+
+          &_real {
+            width: 160px;
+            height: 44px;
+            line-height: 44px;
+            margin: 16px 0 0;
+            border-radius: 6px;
+            box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+            background-image: linear-gradient(to bottom, itemColor(product-real-button-down, #1376f8), itemColor(product-real-button-up, #194074));
+            background-color: color(product-real-button-background);
+          }
+
+          &_demo {
+            text-decoration: underline;
+           !* background: color(product-demo-button-background);*!
+          }
+        }
+
+      }
+
+
+      .product_list_template-2_item {
+        grid-column: 1 / span 4;
+        width: 100%;
+        position: relative;
+        background: color(product-item-template2-background);
+        height: 180px;
+        border-radius: 10px;
+        display: flex;
+        box-sizing: border-box;
+
+        .game-img {
+          width: 240px;
+          height: calc(100% - 30px);
+          margin: 15px;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          border-radius: 10px;
+          position: relative;
+          transition: all 0.3s;
+
+          .game-img-wrapper {
+            transition: opacity .3s;
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-radius: 10px;
+            background: rgba(39, 51, 70, .5);
+          }
+
+          &:hover {
+            transform: scale(1.07);
+
+            .game-img-wrapper {
+              opacity: 1
+            }
+          }
+        }
+
+        .game-rating {
+          position: absolute;
+          color: color(product-rating);
+          bottom: 12px;
+          left: 275px;
+
+          i {
+            font-size: 20px
+          }
+        }
+
+        .game-open {
+          left: unset;
+          width: 200px;
+          top: 30px;
+          right: 20px;
+          height: 32px;
+          position: absolute;
+          text-align: center;
+
+          &.game-open-demo {
+            top: 90px;
+          }
+        }
+
+        .game-btn {
+          display: inline-block;
+          left: 25%;
+          width: 106px;
+          line-height: 32px;
+          cursor: pointer;
+          border-radius: 16px;
+          color: $color-white;
+          position: absolute;
+
+          &_real {
+            top: 42%;
+            background: color(product-real-button-background);
+
+          }
+
+          &_demo {
+            top: -15%;
+            background: color(product-demo-button-background);
+          }
+        }
+
+        .game-title {
+          margin: 12px 12px 12px -6px;
+          color: $games-title;
+          text-indent: 5px;
+
+          &:hover {
+            color: color(product-title-hover);
+          }
+
+          &__heart {
+            color: color(product-heart-icon);
+            font-size: 20px;
+            margin-right: 3px;
+          }
+        }
+      }
+
+      .product_list_template-3_item {
+        grid-column: 1 / span 4;
+        width: 100%;
+        height: 80px;
+        position: relative;
+        background: color(product-item-template2-background);
+        border-radius: 10px;
+        display: flex;
+        box-sizing: border-box;
+        align-items: center;
+        padding: 0 15px;
+
+        .game-rating {
+          position: absolute;
+          color: color(product-rating);
+          bottom: 7px;
+          left: 17px;
+
+          i {
+            font-size: 20px
+          }
+        }
+
+        .game-open {
+          width: 109px;
+          position: static;
+          top: 30px;
+          height: 32px;
+          text-align: center;
+
+          &.real {
+            margin-left: auto
+          }
+        }
+
+        .game-btn {
+          display: inline-block;
+          width: 106px;
+          line-height: 32px;
+          cursor: pointer;
+          border-radius: 16px;
+          color: $color-white;
+
+          &_real {
+            background: color(product-real-button-background);
+          }
+
+          &_demo {
+            background: color(product-demo-button-background);
+          }
+        }
+
+        .game-title {
+          margin: 12px 12px 12px -6px;
+          color: $games-title;
+          text-indent: 5px;
+
+          &:hover {
+            color: color(product-title-hover);
+          }
+
+          &__heart {
+            color: color(product-heart-icon);
+            font-size: 14px;
+            margin-right: 3px;
+          }
+        }
+      }
+
+      &.content
+      {
+        padding-right: 10px;
+        .nav-bar{ grid-row: 2 / span 2; height: unset}
+        .filter_field{ grid-row: 4 / span 3; height: 570px}
+      }
+
+      &.list
+      {
+        padding-right: 10px;
+        .nav-bar{ grid-row: 2 / span 4; height: unset}
+        .filter_field{ grid-row: 6 / span 6; height: 570px}
+      }
+      &.product_list__5
+      {
+        grid-template-columns: repeat(5, 284px);
+      }
+      &.product_list__3
+      {
+        grid-template-columns: repeat(3, 360px);
+      }
+      &.product_list__8
+      {
+        grid-template-columns: repeat(8, 170px);
+      }
+      &.product_list__7
+      {
+        grid-template-columns: repeat(7, 200px);
+      }
+      &.product_list__6
+      {
+        grid-template-columns: repeat(6, 236px);
+      }
+    }*/
+    }
+    .more-button
+    {
+      display: inherit;
+      min-width: 126px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      font-size: 16px;
+      color: #ffffff;
+      outline: none;
+      cursor: pointer;
+      border-radius: 6px;
+      margin: 44px 0 48px 0;
+      padding: 0 10px;
+      border: solid 1px color(casino-more-button-border);
+      background-color: transparent;
+      background-image: linear-gradient(to bottom, itemColor(casino-more-button-gradient1,rgba(25, 36, 56, 0.3)),
+              itemColor(casino-more-button-gradient2,rgba(22, 53, 99, 0.3)) 119%,
+              itemColor(casino-more-button-gradient3,rgba(21, 59, 115, 0.2)) 139%,
+              itemColor(casino-more-button-gradient4,rgba(12, 107, 232, 0.1)) 222%);
+      span{color:itemColor(casino-more-btn, #007AFF); margin-left: 6px}
+    }
+    &.central
+    {
+      display: block;
+      padding-top: paddingTop(casino-section, 46px);
+      padding-bottom: paddingBottom(casino-section, 46px);
+      padding-left: paddingLeft(casino-section, 24px);
+      padding-right: paddingRight(casino-section, 24px);
+
+      .search-results
+      {
+        display: flex;
+        flex-direction: column;
+        .product_list
+        {
+          &.product_list__8
+          {
+            grid-template-columns: repeat(8, 218px);
+          }
+          &.product_list__6
+          {
+            grid-template-columns: repeat(6, 298px);
+          }
+          .product_list_template-3_item{ grid-column: 1 / span 8;}
+          .product_list_template-2_item{ grid-column: 1 / span 8;}
+        }
+        .top-section
+        {
+          /*position: sticky;
+          top: 6px;
+          z-index: 1;*/
+          width: 100%;
+          margin-right: 24px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          order: var(--top-section-order, 1);
+          .search-box
+          {
+            display: flex;
+            width: 100%;
+            justify-content: var(--m-casino-search-box-section, center);
+            gap: 16px;
+            order: var(--search-block-order, 1);
+            .search_field {
+              border-top-left-radius: borderTopLeftRadius(search-field, 6px);
+              border-bottom-right-radius: borderBottomRightRadius(search-field, 6px);
+              border-top-right-radius: borderTopRightRadius(search-field, 6px);
+              border-bottom-left-radius: borderBottomLeftRadius(search-field, 6px);
+
+              border-top: 1px solid itemColor(search-field-border-top, transparent);
+              border-bottom: 1px solid itemColor(search-field-border-bottom, transparent);
+              border-left: 1px solid itemColor(search-field-border-left, transparent);
+              border-right: 1px solid itemColor(search-field-border-right, transparent);
+              height: height(search-field, 36px);
+              color: color(search-field);
+              padding-left: paddingLeft(search-field, 16px);
+              padding-right: paddingRight(search-field, 0);
+              background-color: backgroundColor(search-field,#1d2e4a);
+              margin-bottom: marginBottom(search-field, 26px);
+
+              .search-icon
+              {
+                width: 36px;
+                height: 36px;
+                line-height: 36px;
+                text-align: center;
+                border-radius: 5px;
+                box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+                background-image: linear-gradient(to bottom, itemColor(search-icon-gradient-first,#1376f8), itemColor(search-icon-gradient-second,#194074));
+                cursor: pointer;
+                font-size: 16px;
+              }
+
+
+              input {
+                height: 100%;
+                border: none;
+                outline: none;
+                color: #ffffff;
+                flex: 1;
+                padding: 0 0 0 5px;
+                background: none;
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 16px;
+              }
+              ::placeholder{font-size: 16px; color: rgba(255, 255, 255, 0.6)}
+            }
+          }
+
+          .selected-provider {
+            width: 100%;
+            font-size: 18px;
+            color: color(selected-provider);
+            order: var(--show-provider-order, 2);
+
+
+            .selected-provider-label
+            {
+              color: color(selected-provider-label);
+            }
+            .provider-space {
+              margin-left: auto;
+              margin-right: 5px;
+            }
+
+            .casino-layouts {
+              display: flex;
+              align-items: center;
+              font-size: 20px;
+
+              .layout-item {
+                cursor: pointer;
+                color: color(casino-layout-icon);
+                margin-bottom: 6px;
+                margin-left: 8px;
+
+                &:hover {
+                  color: color(casino-layout-icon-hover)
+                }
+                &.selected{
+                  color: itemColor(casino-layout-icon-selected,#209cff)
+                }
+              }
+            }
+
+            label {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              font-size: 14px;
+              color: color(show-provider-label);
+              white-space: nowrap;
+              cursor: pointer;
+              margin-bottom: 9px;
+
+              .empty{margin-right: 8px}
+              input {
+                display: none;
+              }
+
+              .switch-btn {
+                width: width(switch-btn,40px);
+                height: height(switch-btn,20px);
+                border-radius: 16px;
+                background-color: backgroundColor(switch-btn,#082b4f);
+                position: relative;
+                cursor: pointer;
+                display: flex;
+
+                &:before {
+                  content: '';
+                  position: absolute;
+                  width: width(switch-btn-checked,16px);
+                  height: height(switch-btn-checked,16px);
+                  background-image: linear-gradient(to bottom, itemColor(switch-btn-checked-first,#2c5983), itemColor(switch-btn-checked-second, #4677a5) 50%, itemColor(switch-btn-checked-last,#082541));
+                  left: itemLeft(switch-btn,2px);
+                  top: 2px;
+                  border-radius: 50%;
+                  transition: all 150ms ease-out;
+                }
+              }
+
+              input:checked + .switch-btn {
+                &:before {
+                  left: itemLeft(switch-btn-checked,21px);
+                  content: '';
+                  box-shadow: 0 0 6px 0 #54c3fd;
+                  background-color: #66d3fa;
+                  background-image: none;
+                }
+              }
+            }
+          }
+          .filter_field {
+            border-radius: 6px;
+            background-image: linear-gradient(181deg, itemColor(providers-gradient-first,#1d2e4a) 100%, itemColor(providers-gradient-second,#364970) 0%);
+            padding-top: paddingTop(provider-block, 16px);
+            padding-bottom: paddingBottom(provider-block, 24px);
+            padding-left: paddingLeft(provider-block, 8px);
+            padding-right: paddingRight(provider-block, 10px);
+            margin-bottom: marginBottom(provider-block, 0);
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            height: fit-content;
+            width: 100%;
+            order: var(--provider-block-order, 3);
+
+
+            .provider-list {
+              display: grid;
+              grid-template-columns: var(--grid-template,repeat(25, 1fr));
+              grid-auto-rows: minmax(min-content, max-content);
+              grid-gap: 8px;
+              overflow-y: auto;
+              overflow-x: hidden;
+              padding: 7px;
+              li {
+                height: height(provider-list-item, 72px);
+                line-height: height(provider-list-item, 72px);
+               /* width: width(provider-list-item, 104px);*/
+                text-align: center;
+                border-radius: 6px;
+                background-color: backgroundColor(provider-list-item,#192438);
+                background-image: linear-gradient(to bottom, rgba(25, 36, 56, 0.3), rgba(22, 53, 99, 0.3) 119%, rgba(21, 59, 115, 0.2) 139%, rgba(12, 107, 232, 0.1) 222%);
+                border: none;
+                transition: all .3s ease;
+                filter: var(--filter-data, grayscale(1));
+                background-size: 100% 100%;
+                font-size: fontSize(provider, 11px);
+                span {
+                  color: itemColor(provider-list-item,#ffffff);
+                }
+                &:hover {
+                  font-size: 16px;
+                  transition: all .3s ease;
+                  transform: scale(1.07);
+                  filter: grayscale(0);
+                  /*   background-color: var(--providers-list-selected-bg, #182740);*/
+                }
+
+                &.selected
+                {
+                  border: solid 1px var(--provider-active-border, #0c6be8);
+                  filter: grayscale(0);
+                  /*   background-color: var(--providers-list-selected-bg, #182740);*/
+                }
+
+              }
+              .initial-list {
+                display: var(--provider-list-initial-items-display, block);
+              }
+            }
+
+          }
+        }
+        .nav
+        {
+          order: var(--nav-bar-order, 2);
+        }
+        .product_list
+        {
+          order: var(--product-list, 3);
+        }
+        .more-button
+        {
+          order: var(--more-button, 4);
+          width: fit-content;
+        }
+      }
+
+    }
+
+  }
+
+  @media screen and (max-width: 1889px) {
+    .casino-game-section-content {
+      .search-results
+      {
+        .product_list {
+          grid-template-columns: repeat(3, 360px);
+          &.product_list__5
+          {
+            grid-template-columns: repeat(4, 284px);
+          }
+          &.product_list__8
+          {
+            grid-template-columns: repeat(7, 170px);
+          }
+          &.product_list__7
+          {
+            grid-template-columns: repeat(6, 200px);
+          }
+          &.product_list__6
+          {
+            grid-template-columns: repeat(5, 236px);
+          }
+        }
+      }
+      &.central
+      {
+        .search-results
+        {
+          .product_list {
+            &.product_list__8
+            {
+              grid-template-columns: repeat(7, 220px);
+            }
+            &.product_list__6
+            {
+              grid-template-columns: repeat(5, 298px);
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width:  1580px)
+  {
+    .top-menu
+    {
+      padding: 0 12px!important;
+      font-size: calc(var(--product-navigation-tab-font-size, 16px) * 0.9) !important;
+      li
+      {
+        height: height(product-nav-tab, 38px);
+        line-height: height(product-nav-tab, 38px);
+        margin-right: calc(var(--product-nav-tab-margin-right, 16px) * 0.7) !important;
+        padding-left: calc(var(--product-nav-tab-padding-left, 8px) * 0.7) !important;
+        padding-right: calc(var(--product-nav-tab-padding-right, 8px) * 0.7) !important;
+        padding-top: paddingTop(product-nav-tab, 0);
+        padding-bottom: paddingBottom(product-nav-tab, 0);
+
+        i
+        {
+          font-size: calc(var(--product-nav-tab-icon-font-size, 16px) * 0.7) !important;
+          margin-right: calc(var(--product-nav-tab-icon-margin, 8px) * 0.7) !important;
+        }
+      }
+
+    }
+    .casino-game-section-content {
+     .search-results
+     {
+       .product_list {
+         grid-template-columns: repeat(2, 320px);
+         &.product_list__5
+         {
+           grid-template-columns: repeat(3, 264px);
+         }
+         &.product_list__8
+         {
+           grid-template-columns: repeat(6, 170px);
+         }
+         &.product_list__7
+         {
+           grid-template-columns: repeat(5, 200px);
+         }
+         &.product_list__6
+         {
+           grid-template-columns: repeat(4, 236px);
+         }
+       }
+     }
+
+    }
+  }
+
+  @media screen and (max-width:  1665px)
+  {
+    .casino-game-section-content {
+      .search-results
+      {
+        .product_list {
+          &.product_list__3
+          {
+            grid-template-columns: repeat(2, 360px);
+          }
+          &.product_list__8
+          {
+            grid-template-columns: repeat(6, 170px);
+          }
+          &.product_list__7
+          {
+            grid-template-columns: repeat(5, 200px);
+          }
+          &.product_list__6
+          {
+            grid-template-columns: repeat(4, 236px);
+          }
+        }
+      }
+      &.central
+      {
+        .search-results
+        {
+          .product_list {
+            &.product_list__8
+            {
+              grid-template-columns: repeat(6, 220px);
+            }
+            &.product_list__6
+            {
+              grid-template-columns: repeat(4, 298px);
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width:  1590px)
+  {
+    .casino-game-section-content {
+      .search-results
+      {
+        .top-section
+        {
+          .filter_field
+          {
+            .provider-list
+            {
+              grid-template-columns: var(--grid-min-template,repeat(12, 1fr))!important;
+              li
+              {
+                &:first-child
+                {
+                  span{font-size: 12px!important; padding: 0 4px!important;}
+                }
+              }
+
+            }
+          }
+        }
+        .product_list {
+          &.product_list__8
+          {
+            grid-template-columns: repeat(5, 170px);
+          }
+          &.product_list__7
+          {
+            grid-template-columns: repeat(4, 200px);
+          }
+          &.product_list__6
+          {
+            grid-template-columns: repeat(4, 236px);
+          }
+        }
+      }
+      &.central
+      {
+        .search-results
+        {
+          .product_list
+          {
+            &.product_list__8
+            {
+              grid-template-columns: repeat(5, 220px);
+            }
+          }
+        }
+        }
+    }
+  }
+
+  @media screen and (max-width: 1380px){
+    .left-section
+    {
+      &.isTopMenu{
+        width: 300px!important;
+        margin-right: 16px!important;
+        .filter_field {
+          .provider-list {
+            grid-template-columns: repeat(3, 83px) !important;
+            li {
+              background-size: 100% 100% !important;
+
+            }
+          }
+        }
+      }
+    }
+    .top-menu
+    {
+      padding: 0 12px!important;
+      font-size: calc(var(--product-navigation-tab-font-size, 16px) * 0.7) !important;
+      li
+      {
+        height: height(product-nav-tab, 38px);
+        line-height: height(product-nav-tab, 38px);
+        margin-right: calc(var(--product-nav-tab-margin-right, 16px) * 0.7) !important;
+        padding-left: calc(var(--product-nav-tab-padding-left, 8px) * 0.7) !important;
+        padding-right: calc(var(--product-nav-tab-padding-right, 8px) * 0.7) !important;
+        padding-top: paddingTop(product-nav-tab, 0);
+        padding-bottom: paddingBottom(product-nav-tab, 0);
+
+        i
+        {
+          font-size: calc(var(--product-nav-tab-icon-font-size, 16px) * 0.7) !important;
+          margin-right: calc(var(--product-nav-tab-icon-margin, 8px) * 0.7) !important;
+        }
+      }
+
+    }
+    .casino-section {
+      .casino-game-section_banners{
+
+
+      }
+
+    }
+    .casino-game-section-content
+    {
+      .search-results
+      {
+        .product_list {
+          &.product_list__8
+          {
+            grid-template-columns: repeat(4, 170px);
+          }
+          &.product_list__7
+          {
+            grid-template-columns: repeat(3, 200px);
+          }
+          &.product_list__6
+          {
+            grid-template-columns: repeat(3, 236px);
+          }
+        }
+        .nav
+        {
+          .nav-bar
+          {
+            .casino-layouts{font-size: 16px!important;}
+          }
+        }
+      }
+      &.central
+      {
+        .search-results
+        {
+          .product_list
+
+          {
+            &.product_list__6
+            {
+              grid-template-columns: repeat(3, 298px);
+            }
+            .product_list_template-3_item{ grid-column: 1 / span 6!important;}
+            .product_list_template-2_item{ grid-column: 1 / span 6!important;}
+          }
+        }
+
+      }
+    }
+  }
+
+
+  .default_scroll {
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(19, 26, 44, 0.94);
+      border-radius: 10px;
+      background-color: rgba(19, 26, 44, 0.94);
+    }
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px #1376f8;
+      background-color:#1376f8;
+      max-height: 12px;
+    }
+  }
+
+  .game-rating {
+    float: right;
+    margin-right: 5px;
+    color: color(product-rating);
+
+    &__star {
+      font-size: 18px;
+      color: itemColor(game-rating-star,#FAC917);
+      margin-right: 3px;
+    }
+    span
+    {
+      margin-left: 5px;
+      color: color(game-rating);
+    }
+  }
+}
+
+.filter_field {
+  cursor: pointer;
+}

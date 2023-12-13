@@ -1,0 +1,120 @@
+.credit-tab {
+  //padding: 14px 27px 10px;
+  .container-part {
+    margin-bottom: 18px;
+    .titles {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      width: 100%;
+      color: #000;
+      margin: 0 auto;
+      padding: 12px 10px;
+      font-weight: 600;
+      cursor: pointer;
+
+      .change-icon {
+        color: #a9a9a9;
+        font-size: 14px;
+        transform: rotate(90deg);
+      }
+    }
+    .opened-deposit-tab, .opened-withdraw-tab {
+      display: none;
+    }
+    .opened {
+      & + .opened-deposit-tab, & + .opened-withdraw-tab {
+        display: block;
+      }
+
+      .change-icon {
+        transform: rotate(-90deg);
+      }
+    }
+    .credits {
+      background: #fff;
+      color: #666666;
+      margin-top: 18px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      //gap: 8px;
+      border-radius: 0px;
+      .credit-tab-text {
+        font-size: 18px;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px 0;
+        color: #000;
+      }
+      .selected-wallet {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0 0 0;
+      }
+      .payment-systems__userAccount {
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .payment-systems__userAccount__name, .payment-systems__totalItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 5px 8px;
+        gap: 10px;
+        .credit-account {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+        }
+        .credit-account-type-name {
+          margin-right: var(--credit-account-type-name-margin-right, auto);
+          margin-left: var(--credit-account-type-name-margin-left, 20px);
+        }
+        .credit-account-image {
+          display: var(--credit-account-image-display, block);
+        }
+        .balance_item_change {
+          font-weight: 400;
+        }
+      }
+      .payment-systems__userAccount__name:hover {
+        background: var(--account-statement-item-hover-background, transparent);
+      }
+      .selected {
+        background: var(--account-statement-item-selected-background, transparent);
+      }
+
+    }
+
+  }
+  .user-right-panel_title {
+    //padding: 10px 0 30px 0px;
+    //height: 80px;
+    height: auto;
+    padding-bottom: 10px;
+    cursor: default;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .credit-tab {
+    .user-right-panel_title {
+      font-size: 18px;
+    }
+  }
+}
+@media screen and (min-width: 1500px) and (max-width: 1700px) {
+  .credit-tab {
+    .user-right-panel_title {
+      font-size: 20px;
+    }
+  }
+}

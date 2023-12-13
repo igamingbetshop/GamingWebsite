@@ -1,0 +1,249 @@
+//.user-right-panel_title {
+//  padding: 10px 0 30px 0px;
+//  height: 80px;
+//}
+.history-tab {
+  //padding: 10px 20px 10px 11px;
+  .container-part {
+    //margin-bottom: 50px;
+    margin-bottom: 10px;
+    .history-options {
+      width: 100%;
+      height: 51px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 46px;
+      .custom_dropdown_reg {
+        background: #fff;
+        color: #000;
+        border-radius: var(--history-select-border-radius, 4px);
+
+        .current_item {
+          height: 100%;
+          border-radius: var(--history-select-current-item-border-radius, 0px);
+          border: none;
+          justify-content: center;
+          font-size: var(--history-select-font-size, 20px);
+          background: var(--history-select-background-color, #fff);
+        }
+
+        .current_item:hover {
+          color: var(--history-select-color, #000);
+          background: var(--history-select-background-color, #fff);
+        }
+
+        .change-icon {
+          display: var(--history-select-icon-display, block);
+          transform: rotate(90deg);
+          font-size: 10px;
+          margin-left: auto;
+          color: #d9d9d9;
+        }
+        .custom_dropdown_list {
+          background: var(--history-select-dropdown-background, #fff);
+          border-color: var(--history-select-dropdown-border-color, #D0CECE);
+          height: var(--history-select-dropdown-height, 142px);
+          margin-top: var(--history-select-dropdown-margin-top, 10px);
+
+          .custom_dropdown_list_items {
+            font-size: var(--history-select-dropdown-list-font-size, 15px);
+            height: var(--history-select-dropdown-list-height, 35px);
+            border-bottom: var(--history-select-dropdown-list-border-bottom, 1px solid #D0CECE);
+            line-height: var(--history-select-dropdown-list-line-height, 35px);
+            background: var(--history-select-dropdown-list-background, #999);
+          }
+
+          .custom_dropdown_list_items:hover {
+            background: var(--history-select-dropdown-list-hover-background, #fff);
+            color: var(--history-select-dropdown-list-hover-color, #000);
+          }
+        }
+      }
+    }
+    .titles {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      width: 100%;
+      color: #000;
+      margin: 0 auto;
+      border-radius: 4px;
+      font-size: 25px;
+      padding: 20px 18px;
+
+      .history-tab-text {
+        font-size: 25px;
+        font-weight: 500;
+      }
+    }
+    .history-list {
+      background: var(--bets-history-list-background, #fff);
+      width: var(--bets-history-list-width, 100%);
+      color: var(--bets-history-list-color, #000);
+      margin: var(--bets-history-list-margin, 0 auto 20px);
+      border-radius: var(--bets-history-list-border-radius, 4px);
+      font-size: var(--bets-history-list-font-size, 18px);
+      line-height: var(--bets-history-list-line-height, 22px);
+      //padding: 16px 18px;
+      padding: var(--bets-history-list-padding, 3px 15px 8px 17px);
+      .history-part {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: var(--bets-history-part-padding, 0);
+        .history-left-part {
+          text-align: left;
+          .bold {
+            font-weight: 600;
+          }
+          .history-date {
+            color: var(--bets-history-list-date-color, #BCBCBC);
+          }
+          .amount-part {
+            background: var(--bets-history-list-possible-win-color, #BCBCBC);
+            margin-left: 14px;
+            padding: 0px 13px;
+            font-size: var(--bets-history-list-possible-win-font-size, 15px);
+            font-weight: var(--bets-history-list-possible-win-font-weight, 400);
+            border-radius: 50px;
+            color: #fff;
+          }
+        }
+        .history-right-part{
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          font-size: var(--bets-history-list-status-font-size, 25px);
+          font-weight: var(--bets-history-list-status-font-weight, 600);
+          .possible-win-state {
+            color: #000;
+            font-weight: 400;
+            margin: 0;
+            font-size: 13px;
+          }
+          .possible-win-state-direction {
+            margin-top: 13px;
+          }
+          .status-1 {
+            color: var(--bets-history-status-new-color, #F6A201);
+          }
+          .status-2 {
+            color: var(--bets-history-status-won-color, #00934A);
+          }
+          .status-3 {
+            color: var(--bets-history-status-lost-color, #F66901);
+          }
+          .status-4 {
+            color: var(--bets-history-status-deleted-color, #000);
+          }
+          .status-6 {
+            color: var(--bets-history-status-returned-color, #F66901);
+          }
+          .status-7 {
+            color: var(--bets-history-status-cashouted-color, #F66901);
+          }
+          .change-icon {
+            transform: rotate(90deg);
+            font-size: 15px;
+            color: var(--bets-history-list-icon-color, #d9d9d9);
+          }
+        }
+      }
+      .bets-selections-list-details {
+        background: white;
+        color: black;
+        display: none;
+
+        .bets-selections-details-list {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: var(--bets-history-details-list-border, 2px solid #BCBCBC);
+          padding: var(--bets-history-details-list-padding, 20.5px 0 60.5px);
+          .history-left-part {
+            text-align: left;
+            .info-unit-name {
+              //max-width: 200px;
+              max-width: var(--bets-history-details-list-unit-name-max-width, 100px);
+              font-weight: var(--bets-history-details-list-unit-name-font-weight, 600);
+            }
+            .info-market-name {
+              font-weight: var(--bets-history-details-list-market-name-font-weight, 600);
+            }
+            .info-bet-score {
+              //font-size: 22px;
+              font-size: var(--bets-history-details-list-score-font-size, 18px);
+            }
+          }
+          .history-right-part{
+            position: relative;
+            .history-image-part {
+              display: var(--bets-history-image-display, block);
+              position: absolute;
+              right: 65px;
+              bottom: -6px;
+            }
+          }
+        }
+
+      }
+      .bets-selections-list-details .bets-selections-details-list:first-child {
+        border-top: var(--bets-history-details-list-border, 2px solid #BCBCBC);
+      }
+      .user-history-content {
+        padding: var(--bets-history-details-list-content-padding, 46px 0 60px);
+        .user-history-details {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0;
+          .bold {
+            font-weight: 600;
+          }
+        }
+        .user-history-details-btn {
+          width: 100%;
+          justify-content: center;
+          .user-history-details-restore-btn {
+            width: 100%;
+            color: #000;
+            background: #f6a201;
+            border: none;
+            border-radius: 2px;
+            padding: 13px 0;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .bonus-bet-text {
+      margin-bottom: 10px;
+      margin-top: 20px;
+      text-align: left;
+      font-size: 15px;
+    }
+    .opened {
+      & + .bets-selections-list-details {
+        display: block;
+      }
+
+      .history-right-part .change-icon {
+        transform: rotate(-90deg) !important;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1500px) {
+  .history-tab {
+    .container-part {
+      .history-options {
+        height: 35px;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "background_color": "#19212c",
+  "description": "CitoBet",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "assets/images/a2hs.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "CitoBet",
+  "short_name": "CitoBet",
+  "start_url": "index.html"
+}

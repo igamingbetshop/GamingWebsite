@@ -1,0 +1,30 @@
+.terms-section {
+
+  background: backgroundColor(terms-section, transparent);
+
+  h2 {
+    font-size: fontSize(terms_title, 25px);
+    font-weight: fontWeight(terms_title, bold);
+    color: itemColor(terms_title, #000);
+    line-height: 35px;
+    margin-left: 15px;
+    margin-top: 0;
+  }
+
+  &_content {
+    margin: 0 auto;
+    background:backgroundColor(footer-section-content,$color-white);
+    height: 100%;
+  }
+
+  &_list {
+    padding: 15px;
+    .Content
+    {
+      font-size: fontSize(footer-sections_content, 16px);
+      font-weight: fontWeight(footer-sections_content, normal);
+      color: itemColor(footer-sections_content-text, #000);
+    }
+  }
+
+}

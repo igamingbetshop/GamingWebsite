@@ -1,0 +1,4 @@
+<ng-container [ngSwitch]="openMode">
+  <app-default-sport *ngSwitchCase="1"></app-default-sport>
+  <app-app-open-games *ngSwitchCase="2"></app-app-open-games>
+</ng-container>

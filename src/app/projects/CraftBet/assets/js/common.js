@@ -1,0 +1,1 @@
+if((window !== window.parent)) {   parent.postMessage({from:'closed-game'}, "*"); } else {   var metaGoogle = document.createElement("meta");   metaGoogle.setAttribute("name", 'google-site-verification');   metaGoogle.setAttribute("content", 'google8cfecdda29d8ca1c.html');   document.head.appendChild(metaGoogle); } document.title = "CraftBet | Sports Betting & Casino";

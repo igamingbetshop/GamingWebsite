@@ -1,0 +1,104 @@
+<div class="mobile-left-sidebar-section">
+    <app-custom-sidebar
+            [position]="position"
+            [overlay]="true"
+            [closeOnOutsideClick]="true"
+            [closeOnSidebarClick]="true"
+            (isOpenChange)="isOpenChange($event)"
+            [styles]="{ width: screenWidth ? screenWidth : 300}"
+            [(isOpen)]="sidebarOpenState"
+    >
+        <div class="flex_container">
+            <div class="close_sidebar left-close-sidebar">
+                <div class="sidebar_heading"> {{'Header.Menu' | translate}}</div>
+                <span class="icon-close-modal sidebar_heading_icon"></span>
+                <span class="icon-right-arrow sidebar_heading_icon"></span>
+            </div>
+            <div [style.height]="menuHeight" class="flex_child" [hidden]="showLanguageDropdown">
+                <div class="left-sidebar-menu-top-img-part" [innerHTML]="'Header.Menu-top-img' | translate | sanitizer: 'html'">
+                </div>
+                <ul class="general-menu" #menuContainerRef>
+                    <li class="general-menu_heading" *ngFor="let menuHeading of generalMenuItems"
+                        routerLinkActive="active"
+                        [ngClass]="{ 'autoHeight': menuHeading.Title == 'AsianAccountStatement', 'default-heading' : menuHeading.Title != 'AsianAccountStatement' }">
+                        <div class="general-menu_nested_item" *ngIf="generalMenuItems.length > 1">
+
+                            <span *ngIf="!(!menuHeading.Href && menuHeading.SubMenu.length == 0)"
+                                  (click)="openMenuTitle(menuHeading)">{{'Header.' + menuHeading?.Title | translate}}</span>
+
+
+                            <span *ngIf="!(!menuHeading.Href && menuHeading.SubMenu.length == 0)"
+                                  class="general-menu_nested_item__arrow icon-banner-arrow-right"></span>
+
+                            <div *ngIf="(menuHeading.Title == 'AsianAccountStatement') && isLogin">
+                                <ng-template #asianAccountStatement></ng-template>
+                            </div>
+                        </div>
+
+                        <ul class="general-menu" [class.no-header]="generalMenuItems.length == 1">
+                            <li class="general-menu_item" *ngFor="let menuItem of menuHeading.SubMenu"
+                                (click)="clickInRoute(menuItem)">
+                                <a class="general-menu_item_link" *ngIf="menuItem?.OpenInRouting"
+                                   routerLinkActive="active-item">
+       								<ng-container *ngIf="menuItem?.Src; else menuItemIcon">
+                                        <img [src]="menuItem?.Src" alt="">
+                                    </ng-container>
+                                    <ng-template #menuItemIcon>
+                                        <i class="icon-{{menuItem?.Icon}}"></i>
+                                    </ng-template>
+                                    <span class="page-name"> {{'Header.' + menuItem?.Title | translate}}</span>
+                                </a>
+                                <a class="general-menu_item_link" *ngIf="!menuItem?.OpenInRouting" target="_blank"
+                                   href="{{menuItem.Href}}">
+                                    {{'Header.' + menuItem?.Title | translate}}
+                                </a>
+                                <fa-icon [icon]="faAngleRight" class="left-menu-arrow"></fa-icon>
+                            </li>
+                        </ul>
+                    </li>
+                    <div class="left-sidebar-menu-bottom-img-part" [innerHTML]="'Header.Menu-bottom-img' | translate | sanitizer: 'html'">
+                    </div>
+                </ul>
+            </div>
+            <div class="lang_container" (click)="openLanguageMenu($event)" [class.hide] = "hideLanguageDropdown">
+                <ul class="lang_list" #langContainerRef [hidden]="!showLanguageDropdown">
+                    <li *ngFor="let lang of languages" (click)="changeLanguage(lang.key)" class="list_item"
+                        [ngClass]="{'selected-language': currentLang.key === lang?.key}">
+                        <div class="lang_item" *ngIf="currentLang.key !== lang?.key">
+                            <div
+                                    [ngStyle]="{
+                'background-image':
+                  'url(../../../../../../../assets/images/languages/' +
+                  lang?.key +
+                  '.png)'
+              }" class="nation_flag"></div>
+                           <!-- <span class="">{{ lang.value }}</span>-->
+                            <ng-container [ngSwitch]="languageMenuItem.itemTitle">
+                                <span *ngSwitchCase="'1'">{{lang.value }}</span>
+                                <span *ngSwitchCase="'2'" class="uppercase">{{lang.key }}</span>
+                            </ng-container>
+                        </div>
+                    </li>
+                </ul>
+                <div class="default_language_container safari_only"
+                     [ngClass]="{ 'menu_opened_panel': showLanguageDropdown }">
+                    <div
+                            [ngStyle]="{
+                'background-image':
+                  'url(../../../../../../../assets/images/languages/' +
+                  currentLang?.key +
+                  '.png)'
+              }" class="nation_flag"></div>
+                    <ng-container [ngSwitch]="languageMenuItem.itemTitle">
+                        <div *ngSwitchCase="'1'" class="default_language">{{ currentLang?.value}}</div>
+                        <div *ngSwitchCase="'2'" class="default_language uppercase">{{ currentLang?.key}}</div>
+                    </ng-container>
+                  <!--  <div class="default_language">{{ currentLang?.value}}</div>-->
+                    <div class="open_language">
+                        <fa-icon [hidden]="isSingleLang" [icon]="showLanguageDropdown ? faAngleDown : faAngleUp"></fa-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-custom-sidebar>
+</div>

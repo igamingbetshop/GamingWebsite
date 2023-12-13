@@ -1,0 +1,12 @@
+<div class="m-more-container">
+    <section>
+        <div class="more-items">
+            <div class="more-item" *ngFor="let item of moreMenuItems" (click)="onMenu(item)" [ngStyle]="item.Config">
+                <span class="icon icon-{{item?.Icon}}" *ngIf="!item?.Icon.includes('.')"></span>
+                <img class="more-menu-img" *ngIf="item?.Icon.includes('.')" src="../../../../../../../assets/images/mobile-bottom-menu/{{item?.Icon}}">
+                <span>{{'more.' + item?.Title | translate}}</span>
+            </div>
+        </div>
+    </section>
+
+</div>

@@ -1,0 +1,184 @@
+.m-lucky-game-container
+{
+  background: #FFFFFF;
+  width: 90%;
+  position: relative;
+  box-shadow: -2px -2px 6px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+  margin: 100px auto;
+  padding: 44px 0;
+  .modal-body
+  {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    span{}
+  }
+  .header
+  {
+    color: var(--black-b-100, #272727);
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 26px;
+    text-transform: uppercase;
+    margin-bottom: 15px
+  }
+  .lucky-game-content
+  {
+    width: fit-content;
+    margin: 0 auto;
+    .animation-container
+    {
+      position: relative;
+      width: 212px;
+      height: 288px;
+      margin-bottom: 15px;
+      .animation-frame
+      {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        max-width: 100%;
+        cursor: pointer;
+        img
+        {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .animated-games-box
+      {
+        position: absolute;
+        top: 48%;
+        left: 16%;
+        display: flex;
+        gap: 2px;
+        width: 119px;
+        height: 49px;
+        .animated-block {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          flex: 1;
+          .animated-games {
+            /* transform: translateY(0); */
+            transition: transform 1s ease-in-out;
+            width: 100%;
+            height: 100%;
+
+            .game-image
+            {
+              width: 37px;
+              height: 50px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 25px;
+              img{
+                width: 36px;
+                height: 36px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .m-buttons
+    {
+      .spin-button{
+        margin-left: -26px;
+      }
+    }
+    &.hide-machine
+    {
+      position: absolute;
+      visibility: hidden;
+    }
+  }
+  .selected-game-content
+  {
+    width: fit-content;
+    margin: 0 auto;
+    .game-name
+    {
+      color: #272727;
+      font-size: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+      width: 100%;
+      text-align: center;
+      line-height: 48px;
+      padding: 0;
+      margin: 0;
+    }
+    .selected-game-box
+    {
+      width: 244px;
+      height: 200px;
+      border-radius: 7px;
+      background: #E7E7E7;
+      box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 0 auto 38px auto;
+
+      img
+      {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: 7px;
+      }
+    }
+
+  }
+  .m-buttons
+  {
+    button
+    {
+      width: 186px;
+      height: 42px;
+      line-height: 42px;
+      border-radius: 22px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      &.spin-button
+      {
+        margin-bottom: 12px;
+        color: #272727;
+        background: var(--yellow-button, #FFD246);
+        &.disabled
+        {
+          color: #FFFFFF;
+          background: #BFBFBF;
+          pointer-events: none;
+        }
+      }
+      &.play-button
+      {
+        color: #FFFFFF;
+        background: #BFBFBF;
+        pointer-events: none;
+        &.active
+        {
+          background-color: rgba(225, 83, 65, 1);
+          pointer-events: auto;
+        }
+      }
+    }
+  }
+}
+

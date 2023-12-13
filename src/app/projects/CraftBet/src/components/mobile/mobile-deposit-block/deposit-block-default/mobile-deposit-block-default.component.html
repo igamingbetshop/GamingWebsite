@@ -1,0 +1,60 @@
+<!--<div class="mobile-payment-section" [ngStyle]="layoutService.layoutStyle">-->
+<div class="mobile-payment-section">
+    <h2 class="account_title">
+        {{'User.Deposit' | translate}}
+    </h2>
+
+    <div class="mobile-payment-section_content">
+
+        <div class="mobile-payment-section_content_block">
+            <div class="content_col">
+                <ul class="payment_list">
+                    <li
+                            *ngFor="let item of paymentSystemList; let i = index"
+                            (click)="selectPayment(item)"
+                            [ngClass]="{'selected': item?.PaymentSystemId == currentPayment?.PaymentSystemId}"
+                    >
+                        <img src="../../../../../../../assets/images/deposit/{{item.PaymentSystemId}}.png"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="content_col mobile_info">
+                <div class="info_text" style="-webkit-box-orient: vertical"
+                     [innerHTML]="'Deposit.' + 'PAYMENT_MESSAGE' + currentPayment?.PaymentSystemId | translate | sanitizer: 'html'"></div>
+
+                <div class="balance_info">
+                    <div>{{"Payments.Minimum" | translate}} - {{currentPayment?.MinAmount | number}} ({{ CurrencyId}})
+                    </div>
+                    <div>{{"Payments.Maximum" | translate}} - {{currentPayment?.MaxAmount | number}} ({{ CurrencyId}})
+                    </div>
+                    <div *ngIf="currentPayment?.CommissionPercent !== 0">
+                        {{"Payments.CommissionPercent" | translate}} - {{currentPayment?.CommissionPercent | number}} %
+                    </div>
+                    <div *ngIf="currentPayment?.FixedFee !== 0">
+                        {{"Payments.CommissionFixedFee" | translate}} - {{currentPayment?.FixedFee | number}} ({{CurrencyId}})
+                    </div>
+                    <div *ngIf="currentPayment?.CommissionPercent === 0 && currentPayment?.FixedFee === 0">
+                        {{"Payments.Commission" | translate}} - {{ 0 | number}}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="right-part">
+                <app-common-bonuses *ngIf="this.bonusData.length"
+                                    [bonusesList]="this.bonusData"></app-common-bonuses>
+                <label class="bonus-refused" (change)="bonusCheckboxChanged()" (click)="$event.stopPropagation();preventUncheck()">
+                    <input type="checkbox" [(ngModel)]="paymentControllerService.bonusRefused">
+                    {{'User.BonusRefused' | translate}}
+                </label>
+
+                <div class="content_col">
+                    <template #loadComponent></template>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

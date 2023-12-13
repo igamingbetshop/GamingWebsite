@@ -1,0 +1,14 @@
+<div class="terms-section {{pageTitle}}-section min-height">
+
+  <div class="section_content max-width">
+    <h2>{{'User.Terms_conditions' | translate}}</h2>
+    <ul class="section_list">
+      <li
+        *ngFor="let language of languageKeys"
+        [innerHTML]="pageTitle + '.' + language  | translate | sanitizer : 'html'"
+        class="{{language}}"
+      ></li>
+    </ul>
+  </div>
+</div>
+

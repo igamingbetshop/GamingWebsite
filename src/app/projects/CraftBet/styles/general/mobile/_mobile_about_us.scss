@@ -1,0 +1,20 @@
+@import "../../../styles/helpers/variables";
+@import "../../../../../../styles/helpers/variables";
+
+.mobile-about-us-section {
+  min-height: calc(100vh - 62px);
+  margin-top: 62px;
+  background-color: backgroundColor(mobile-info-section, #2a303d);
+  padding: var(--mobile-info-section-padding, 15px 10px);
+
+  h2 {
+    color: itemColor(mobile-info-section-title, #36b550);
+    text-align: center;
+    padding-top: 0.5rem;
+  }
+
+  .content {
+    text-align: justify;
+    color: itemColor(mobile-info-section-text, #dadbe0);
+  }
+}

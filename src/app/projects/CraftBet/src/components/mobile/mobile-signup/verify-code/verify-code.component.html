@@ -1,0 +1,23 @@
+<div class="allFormItems">
+    <div class="form_field">
+        <input [(ngModel)]="model1" (input)="moveToNext($event, 1)" (keydown.backspace)="moveToNext($event, 1)" (ngModelChange)="setValue()" (paste)="onPaste($event)" type="text" maxlength="1">
+        <input [(ngModel)]="model2" (input)="moveToNext($event, 2)" (keydown.backspace)="moveToNext($event, 2)" (ngModelChange)="setValue()" (paste)="onPaste($event)" type="text" maxlength="1">
+        <input [(ngModel)]="model3" (input)="moveToNext($event, 3)" (keydown.backspace)="moveToNext($event, 3)" (ngModelChange)="setValue()" (paste)="onPaste($event)" type="text" maxlength="1">
+        <input [(ngModel)]="model4" (input)="moveToNext($event, 4)" (keydown.backspace)="moveToNext($event, 4)" (ngModelChange)="setValue()" (paste)="onPaste($event)" type="text" maxlength="1">
+        <input [(ngModel)]="model5" (input)="moveToNext($event, 5)" (keydown.backspace)="moveToNext($event, 5)" (ngModelChange)="setValue()" (paste)="onPaste($event)" type="text" maxlength="1">
+        <input [(ngModel)]="model6" (input)="moveToNext($event, 6)" (keydown.backspace)="moveToNext($event, 6)" (ngModelChange)="setValue()" (paste)="onPaste($event)" type="text" maxlength="1">
+    </div>
+    <ng-container *ngIf="!isResendActive; else isResendActiveMode">
+        <div class="otp-expire">
+            <span>{{'Register.OTPExpire' | translate}}</span>
+            <span class="timer-text">{{timerText}}</span>
+        </div>
+    </ng-container>
+    <ng-template #isResendActiveMode>
+        <div class="otp-expire">
+            <span>{{'Register.OTPExpired' | translate}}</span>
+        </div>
+    </ng-template>
+    <div class="otp-expire-resend" (click)="resendCode()" [attr.disabled]="!isResendActive"
+         [ngClass]="{'active': isResendActive}">{{'Register.OTP.Resend' | translate}}</div>
+</div>

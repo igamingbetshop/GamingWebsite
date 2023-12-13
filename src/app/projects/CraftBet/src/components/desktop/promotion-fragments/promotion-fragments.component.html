@@ -1,0 +1,54 @@
+
+<div class="promotion-item-header" *ngIf="selectedPromotionId">
+    <span class="promotion-item-title"  [innerHtml]="promotion.Title | sanitizer: 'html'"></span>
+    <button class="get-bonuses selected" (click)="getBonuses()"
+    >{{'Promotions.Get Bonuses' | translate}}</button>
+</div>
+<div class="promotion-item"  [ngStyle]="{'display' : selectedFragment ? 'flex' : 'none'}">
+    <div class="promotions-slider">
+        <ngx-slick-carousel class="slider"
+                            #sliderComponent="slick-carousel"
+                            [config]="slideConfig">
+
+            <div ngxSlickItem class="products-list_item" *ngFor="let item of selectedFragment?.Promotions"
+                 [queryParams]="{id:item.Id}"
+                 [routerLink]="['/promotions']">
+                <div class="promotions_item">
+                    <img src="../../../../../../../assets/images/promotions/medium/{{item.ImageName}}"/>
+                    <div class="see-more-btn">
+                        <i class="icon-specials"></i>
+                        <button>{{'Promotion.See More' | translate}}</button>
+                    </div>
+
+                </div>
+
+                <div class="promotions_text">
+                    <div class="promotions_title" [innerHtml]="item.Title"></div>
+                    <p [innerHtml]="item.Description"></p>
+                </div>
+            </div>
+
+        </ngx-slick-carousel>
+        <div class="actions" *ngIf="slideConfig.arrows">
+            <span (click)="sliderComponent.slickPrev()"  *ngIf="selectedFragment?.Promotions.length > 4" class="icon-banner-arrow-left"></span>
+            <span (click)="sliderComponent.slickNext()" *ngIf="selectedFragment?.Promotions.length >= 4" class="icon-banner-arrow-right"></span>
+        </div>
+    </div>
+    <div class="promotion-item-content">
+        <div class="promotion-item-image">
+            <img  src="../../../../../../../assets/images/promotions/{{promotion.ImageName}}">
+        </div>
+        <div class="promotion-description">
+            <h2 [innerHtml]="promotion.Description | sanitizer: 'html'"></h2>
+
+            <div class="text-content" [innerHtml]="promotion.Content | sanitizer: 'html'"></div>
+
+            <p class="publish-date">{{'Promotion.PublishedDate' | translate}} {{promotion.Date}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="promotion-fragments" *ngFor="let fragment of promotionFragments" [ngStyle]="{'display' : selectedFragment ? 'none' : 'grid'}">
+    <div class="fragment-title">{{fragment.Title}}</div>
+    <promotion-fragment  [promotionFragment]="fragment" ></promotion-fragment>
+</div>

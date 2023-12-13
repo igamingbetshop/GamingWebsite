@@ -1,0 +1,77 @@
+<div class="security-questions-section">
+    <ng-container [ngSwitch]="step">
+        <ng-container *ngSwitchCase="1">
+            <div class="security-questions_header">
+                <span>{{ 'User.Security Questions' | translate }}</span>
+            </div>
+            <div class="underline"></div>
+            <div class="security-questions_container">
+                <div class="security-questions-verification-code">
+                    <p>{{ 'Settings.Security Questions Container Text' | translate }}</p>
+                    <button class="craft_btn setting_btn" (click)="sendVerificationCode()">
+                        <span>{{ 'Settings.Send Verification Code' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+            <div class="security-questions_header">
+                <span>{{ 'User.Security Questions' | translate }}</span>
+                <div class="submit-details">
+                    <button class="craft_btn setting_btn cancel_btn" type="button" [disabled]="!disableButtons" (click)="cancel()">
+                        <span class="icon-close-modal"></span>
+                        <span>{{ 'Settings.Cancel-changes' | translate }}</span>
+                    </button>
+<!--                    <button class="craft_btn setting_btn" type="submit" (click)="updateData()" [disabled]="disableButtons">-->
+                    <button class="craft_btn setting_btn" type="submit" (click)="updateData()" [disabled]="!disableButtons">
+                        <fa-icon [icon]="['fas', 'save']" class="fas-save"></fa-icon>
+                        <span>{{ 'Settings.Save-Changes' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+            <div class="underline"></div>
+            <div class="security-questions_container">
+                <div class="change-security-questions">
+                    <p>{{ 'Register.Text7' | translate }}</p>
+                    <div *ngFor="let question of securityQuestions; let i = index" class="answers">
+                        <div>{{i+1}}</div>
+                        <div>
+                            <span class="question-text">{{ question.QuestionText }}</span>
+                        </div>
+                        <div (click)="removeQuestion(question.Id)"><i class="icon-delete-ticket"></i></div>
+                    </div>
+                    <div *ngFor="let answer of answers; let i = index" class="answers">
+                        <div>{{i+1}}</div>
+                        <div>
+                            <span class="question-text">{{ answer.QuestionText }}</span>
+                        </div>
+                        <div (click)="removeAnswer(answer.Id)"><i class="icon-delete-ticket"></i></div>
+                    </div>
+                    <ng-container *ngIf="securityQuestions.length + answers.length <= 2">
+                        <div class="form_field">
+                            <label class="security-questions-label">
+                                <select #questionsRef class="custom_dropdown_reg"
+                                        (change)="selectQuestion($event)">
+                                    <option *ngFor="let question of questions" [attr.hidden]="question.hidden" [value]="question.Id">{{ question.QuestionText }}</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="answer-action">
+                            <div class="form_field">
+                                <input class="form_field" #answer placeholder="{{'Register.Answer' | translate}}">
+                            </div>
+                            <button class="craft_btn" (click)="addAnswer(answer)" [disabled]="answer.value === ''">{{ 'Register.Add' | translate }}</button>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+    <div class="error_message">
+        {{errorMessage}}
+    </div>
+    <div class="success_message" *ngIf="successMessage">
+        {{'Settings.SecurityQuestionsUpdateMessage' | translate}}
+    </div>
+</div>

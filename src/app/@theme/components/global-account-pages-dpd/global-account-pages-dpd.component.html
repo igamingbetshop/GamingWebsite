@@ -1,0 +1,53 @@
+<div id="custom_dropdown_style1" class="custom_dropdown_style1 custom_dropdown {{itemClassname}}-type-Dpd" dropdown>
+    <div id="current_item" class="flex_between current_item">
+        <ng-container *ngIf="showUserId; else hideUserId">
+            <div class="user-id-info" (click)="headNavigate()">
+                <div>
+                   <!-- <div>{{ getSettingsInfoService.clientDetail.FirstName ? getSettingsInfoService.clientDetail.FirstName
+                        : (getSettingsInfoService.clientDetail.LastName ? getSettingsInfoService.clientDetail.LastName : userData?.UserName)}}</div>-->
+                    <span class="header-first-name">{{getSettingsInfoService.clientDetail.FirstName}}</span>
+                    <span  class="header-last-name">{{getSettingsInfoService.clientDetail.LastName}}</span>
+                    <span  class="header-user-name">{{userData?.UserName}}</span>
+                    <div>{{'User.Id' | translate}} {{ userData?.Id}}</div>
+                </div>
+
+                <div>
+                    <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                    <fa-icon [icon]="['fas', 'envelope']" [hidden]="!unreadMessagesCount"></fa-icon>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #hideUserId>
+            <fa-icon [icon]="['fas', 'user']" class="dropdown-header-left-icon" (click)="headNavigate()" *ngIf="!menuItem?.Icon.includes('.')"></fa-icon>
+            <img src="../../../../../../../assets/images/{{menuItem?.Icon}}" *ngIf="menuItem?.Icon.includes('.')">
+            <span id="user_panel_title" class="user_panel_title dropdown-header-title" (click)="headNavigate()">
+                <span class="header-first-name">{{userData?.FirstName}}</span>
+                <span  class="header-last-name">{{userData?.LastName}}</span>
+                <span  class="header-user-name">{{userData?.UserName}}</span>
+            </span>
+        </ng-template>
+        <i class="drop_down_icon fa fa-angle-down"></i>
+    </div>
+
+    <ul id="custom_dropdown_list" class="custom_dropdown_list right-top {{itemClassname}}-custom-ul">
+        <div class="tail"></div>
+
+        <div class="lang_grid">
+            <li [attr.value]="i" class="custom_dropdown_list_item" *ngFor="let item of accoutList; let i = index">
+                <div  [attr.data-id]="'account-dpd' + item.Title"
+                      class="list-section">
+                    <a (click)="savedDateService.getCurrentSubItem(item); changePage(item.Href)" *ngIf="item.Type == 1">
+                        <span class="icon-{{item.Icon}} icon" *ngIf="item.Icon"></span>
+                        <img [src]="item.Src" class="item-icon-img">
+                        <span>{{'Header.' + item?.Title | translate}}</span>
+                    </a>
+                    <a *ngIf="item.Type == 4">
+                        <img [src]="item.Src" class="item-icon-img">
+                        <app-global-logout itemClassname="button-style2" itemIconName="{{item.Icon}}"></app-global-logout>
+                    </a>
+                </div>
+            </li>
+        </div>
+
+    </ul>
+</div>

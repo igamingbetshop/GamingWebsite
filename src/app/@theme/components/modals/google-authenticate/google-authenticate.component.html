@@ -1,0 +1,19 @@
+<div class="modal-content triggers authentication-body">
+    <div class="modal-body">
+        <h1 class="authentication-title">{{'User.' + prefixTitle | translate}}</h1>
+        <fa-icon [icon]="['fas', 'times']" (click)="close()" class="authentication-title-icon"></fa-icon>
+    </div>
+    <div class="modal_content">
+        <div class="action">
+            <div class="form_field">
+                <input type="text" maxlength="6" class="authenticate-modal-input" [(ngModel)]="twoFactorCode" (ngModelChange)="validateTwoFactorCode()"
+                       (input)="onInput($event)" (keydown)="preventKeys($event)">
+                <button type="button" class="craft_btn setting_btn confirm_btn authenticate-modal-submit" (click)="confirm()"
+                        [ngClass]="{ 'disabled': !isCodeValid }"
+                        [disabled]="isMaxReached()">
+                    {{'User.Yes' | translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="error_message error_message1" style="top: 6px">{{errorMessage}}</div>
+</div>

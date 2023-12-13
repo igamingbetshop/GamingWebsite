@@ -1,0 +1,45 @@
+<div class="betting_statment">
+  <div class="betting_statment__caption">
+    <div class="mainTitle" title="{{'Betting-Statement.Statement' | translate}}"><span
+      class="icon-cabinet
+"></span>{{'Betting-Statement.Statement' | translate}}</div>
+
+    <div class="right-icons">
+      <span class="icon-refresh"></span>
+    </div>
+
+  </div>
+
+
+  <div class="betting_statment__messageContainer">
+    <div class="betting_statment__messageContainer_noInfo">
+      {{'Betting-Statement.No information is available' | translate}}
+    </div>
+    <div class="betting_statment__table">
+      <div class="tableHead">
+        <div class="date-smaller">
+          Date
+        </div>
+        <div class="remark">Remark</div>
+        <div class="turnover">Turnover</div>
+        <div class="credit">Credit / Debit</div>
+        <div class="commission">Commission</div>
+        <div class="balance">Balance</div>
+        <div class="other"></div>
+      </div>
+
+      <div class="tableBody">
+        <div class="tableRow">
+          <div class="date-smaller">date-smaller</div>
+          <div class="remark">remark</div>
+          <div class="turnover">turnover</div>
+          <div class="credit">credit</div>
+          <div class="commission">commission</div>
+          <div class="balance">balance</div>
+          <!--          item.id-->
+          <div class="other" [routerLink]="['item/', '1']"> <span class="icon-arrow-right td-right-arrow"></span> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

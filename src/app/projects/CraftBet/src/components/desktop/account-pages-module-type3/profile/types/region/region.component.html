@@ -1,0 +1,8 @@
+<ng-container>
+    <div class="items-part">
+        <div class="left-part">{{'User.' + formControlName | translate}}:</div>
+        <div class="right-part">
+            <input type="text" [(ngModel)]="profileService[formControlName + 'Pattern']">
+        </div>
+    </div>
+</ng-container>

@@ -1,0 +1,61 @@
+@import "../../../../../styles/helpers/variables";
+@import "../../../../../../../../styles/helpers/variables";
+
+.search-box {
+  display: flex;
+  width: 100%;
+  justify-content: var(--m-casino-search-box-section, center);
+  gap: 16px;
+  order: var(--search-block-order, 1);
+  background: backgroundColor(m-casino-search-box-section, #1C1F2A);
+
+  .search_field {
+    border-top-left-radius: borderTopLeftRadius(m-search-field, 6px);
+    border-bottom-right-radius: borderBottomRightRadius(m-search-field, 6px);
+    border-top-right-radius: borderTopRightRadius(m-search-field, 6px);
+    border-bottom-left-radius: borderBottomLeftRadius(m-search-field, 6px);
+
+    border-top: 1px solid itemColor(m-search-field-border-top, transparent);
+    border-bottom: 1px solid itemColor(m-search-field-border-bottom, transparent);
+    border-left: 1px solid itemColor(m-search-field-border-left, transparent);
+    border-right: 1px solid itemColor(m-search-field-border-right, transparent);
+    height: height(m-search-field, 36px);
+    color: color(m-search-field);
+    padding-left: paddingLeft(m-search-field, 16px);
+    padding-right: paddingRight(m-search-field, 0);
+    background-color: backgroundColor(m-search-field, #1d2e4a);
+    margin-top: marginTop(m-search-field, 12px);
+    margin-left: marginLeft(m-search-field, 9px);
+    margin-right: marginRight(m-search-field, 9px);
+    margin-bottom: marginBottom(m-search-field, 12px);
+    width: width(m-search-field, 100%);
+
+    .search-icon {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: var(--m-search-icon-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
+      background-image: linear-gradient(to bottom, itemColor(m-search-icon-gradient-first, #1376f8), itemColor(m-search-icon-gradient-second, #194074));
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    input {
+      height: 100%;
+      border: none;
+      outline: none;
+      flex: 1;
+      padding: 0 0 0 5px;
+      background: none;
+      color: var(--m-search-providers-input-color, rgba(255, 255, 255, 0.6));
+      font-size: 16px;
+    }
+
+    ::placeholder {
+      font-size: 16px;
+      color: var(--m-search-providers-input-placeholder-color, rgba(255, 255, 255, 0.6));
+    }
+  }
+}
