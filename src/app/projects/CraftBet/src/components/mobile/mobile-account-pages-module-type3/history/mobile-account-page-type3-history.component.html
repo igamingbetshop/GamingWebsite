@@ -1,0 +1,149 @@
+<div class="mobile-history-tab">
+    <div class="container-part">
+        <form class="history-options">
+            <div class="custom_dropdown_reg" dropdown>
+                <div class="flex_between current_item">
+<!--                    <div *ngIf="!selectedStatus" class="selected-item">{{ 'User.Status' | translate }}</div>-->
+                    <div *ngIf="!selectedStatus" class="selected-item">{{ getBetsHistoryService.betStatuses[0]?.Name | translate }}</div>
+                    <div *ngIf="selectedStatus" class="selected-item">{{ selectedStatus | translate }}</div>
+                    <div class="change-icon">
+                        <span class="icon-arrow-right"></span>
+                    </div>
+                </div>
+                <ul class="custom_dropdown_list right-top status-dropdown">
+                    <li class="custom_dropdown_list_items" *ngFor="let item of getBetsHistoryService.betStatuses"
+                        (click)="selectedStatusValue(item)">{{ item?.Name | translate }}</li>
+                </ul>
+            </div>
+            <div class="custom_dropdown_reg" dropdown>
+                <div class="flex_between current_item">
+<!--                    <div *ngIf="!selectedDate" class="selected-item">{{ 'User.Period-of-time' | translate }}</div>-->
+                    <div *ngIf="!selectedDate" class="selected-item">{{ historyTimeFilter[0]?.Name | translate }}</div>
+                    <div *ngIf="selectedDate" class="selected-item">{{ selectedDate | translate }}</div>
+                    <div class="change-icon">
+                        <span class="icon-arrow-right"></span>
+                    </div>
+                </div>
+                <ul class="custom_dropdown_list right-top period-dropdown">
+                    <li class="custom_dropdown_list_items" *ngFor="let item of historyTimeFilter; let i = index"
+                        (click)="selectedDateValue(i, item)">{{ item?.Name | translate }}</li>
+                </ul>
+            </div>
+        </form>
+        <ng-container *ngIf="getBetsHistoryService.betsHistoryList.length > 0; else emptyBets">
+            <section>
+                <div class="history-list" *ngFor="let item of getBetsHistoryService.betsHistoryList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getBetsHistoryService.betsHistoryListCount }, let i = index"
+                     [ngClass]="{'won': item.State == 2, 'lost': item.State == 3}">
+                    <div class="history-part" [class.opened]="isItemOpened(i)" collapse (click)="openBetInfo(item, i)">
+                        <div class="history-left-part">
+                            <div class="history-date">{{ item?.BetDate | date: 'dd/MM/yyyy H:mm:ss' }}</div>
+                            <div class="bold">{{ 'Bet.' + item?.statusTypeName | translate }}</div>
+                            <div>{{'Bet.TotalBet' | translate}} <span
+                                    class="bold amount-part">{{ item?.BetAmount | number:'1.2-2' }} {{ currencySymbol }}</span></div>
+<!--                            <div *ngIf="item.State == 1">{{'User.Poss-Win' | translate}}<span-->
+                            <div>{{'User.Poss-Win' | translate}}<span
+                                    class="amount-part2 bold">{{ item?.PossibleWin | number:'1.2-2' }} {{ currencySymbol }}</span>
+                            </div>
+                        </div>
+                        <div class="history-right-part">
+                            <div class="bets-block_item block_item status-{{item?.State}}">
+<!--                                 [ngClass]="{'possible-win-state-direction': item?.State === 2 || item?.State === 7}"-->
+                            {{ 'Bet.' + item?.betStatusName | translate }}
+<!--                                <p class="possible-win-state" *ngIf="item?.State === 2 || item?.State === 7">{{ item?.WinAmount | number:'1.2-2' }}{{ currencySymbol }}</p>-->
+                            </div>
+                            <div class="change-icon">
+                                <span class="icon-arrow-right"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="isLoaded && userInfoList">
+                        <div class="bets-selections-list-details">
+                            <div class="bets-selections-details-list" *ngFor="let userInfo of userInfoList['BetSelections'];let i = index">
+                                <div class="history-left-part">
+                                    <div class="info-unit-name history-logo">
+                                        <div class="logo-b" *ngIf="userInfo?.ForcedChosen">B</div>
+                                        <div class="unit-name-style">{{userInfo?.UnitName}}</div>
+                                    </div>
+                                    <div>{{userInfo?.MarketName}}-{{ 'Bet.SelectionName' | translate }} <span>{{ userInfo?.SelectionName }}</span></div>
+
+<!--                                    <div class="info-bet-score" *ngIf="userInfo?.State !== ''">{{ 'Bet.Score' | translate }}: <span>{{ userInfo?.State }}</span>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="history-right-part">
+                                    <div class="history-date">{{ userInfo?.EventDate | date: 'dd.MM' }}</div>
+                                    <div class="history-date">{{ userInfo?.EventDate | date: 'H:mm' }}</div>
+                                    <div class="info-unit-name">{{ userInfo?.Coefficient }}</div>
+                                    <div class="history-image-part" *ngIf="userInfo?.Status === 2 || userInfo?.Status === 3">
+                                        <img src="../../../../../../../assets/images/icons/{{userInfo?.StatusName}}.svg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-history-content">
+                                <div class="user-history-details">
+                                    <div class="bold">{{userInfoList['ForcedChosenName']}} {{userInfoList['Multiway']}} <span *ngIf="userInfoList['Type'] === 3 || userInfoList['Multiway']">{{userInfoList['StatusTypeName']}}</span> {{userInfoList['SystemName']}}</div>
+                                </div>
+                                <div class="user-history-details">
+                                    <div>{{'User.Transaction_Id' | translate}}:</div>
+                                    <div>{{userInfoList['TransactionId']}}</div>
+                                </div>
+                                <div class="user-history-details">
+                                    <div>{{'User.Amount' | translate}}:</div>
+                                    <div>{{userInfoList['BetAmount'] | number: '.2'}} {{currencySymbol}}</div>
+                                </div>
+                                <div class="user-history-details">
+                                    <div>{{'User.BetsAmount' | translate}}:</div>
+                                    <div>{{(userInfoList['BetAmount'] - userInfoList['CommissionFee']) | number: '.2'}} {{currencySymbol}}</div>
+                                </div>
+                                <div class="user-history-details">
+                                    <div>{{'User.CommissionFee' | translate}}:</div>
+                                    <div>{{userInfoList['CommissionFee'] | number: '.2'}} {{currencySymbol}}</div>
+                                </div>
+                                <div class="user-history-details">
+                                    <div>{{'User.AmountPerBet' | translate}}:</div>
+                                    <div>{{userInfoList['AmountPerBet'] | number: '.2'}} {{currencySymbol}}</div>
+                                </div>
+                                <div class="user-history-details">
+                                    <div>{{'Bet.NumberOfBets' | translate}}:</div>
+                                    <div>{{userInfoList['NumberOfBets']}}</div>
+                                </div>
+                                <div class="user-history-details">
+                                    <div>{{'User.Coefficient' | translate}}:</div>
+                                    <div>{{userInfoList['Coefficient']}}</div>
+                                </div>
+                                <div class="user-history-details" *ngIf="userInfoList['Status'] === 1">
+                                    <div>{{'User.Min-Possible-Winning' | translate}}:</div>
+                                    <div>{{userInfoList['MinPossibleWin'] | number: '1.2-2'}} {{currencySymbol}}</div>
+                                </div>
+                                <div class="user-history-details" *ngIf="userInfoList['Status'] === 1">
+                                    <div>{{'User.Poss-Win' | translate}}:</div>
+                                    <div>{{userInfoList['PossibleWin'] | number: '1.2-2'}} {{currencySymbol}}</div>
+                                </div>
+                                <div class="user-history-details" *ngIf="userInfoList['Status'] !== 1">
+                                    <div>{{'User.WinAmount' | translate}}:</div>
+                                    <div>{{userInfoList['WinAmount'] | number: '.2'}} {{currencySymbol}}</div>
+                                </div>
+                                <div class="user-history-details">
+                                    <div>{{'User.Bet-status' | translate}}:</div>
+                                    <div>{{userInfoList['StatusName']}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="pagination_section">
+                    <pagination-controls autoHide="true" previousLabel="{{'User.Previous' | translate}}" nextLabel="{{'User.Next' | translate}}"
+                                         (pageChange)="getBetsHistory($event)" class="ngx-pagination"></pagination-controls>
+                </div>
+            </section>
+        </ng-container>
+        <ng-template #emptyBets>
+            <section class="empty-bets empty-block history-list">
+                <img src="../../../../../../../assets/images/empty-bets.png" class="empty-bets-image">
+                <span class="empty-block-text">{{ 'User.Bets-empty' | translate }}</span>
+                <span class="empty-history-text">{{ noHistory }}</span>
+            </section>
+        </ng-template>
+
+
+    </div>
+</div>

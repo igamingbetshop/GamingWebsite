@@ -23,7 +23,7 @@
 
         <li class="item_list" *ngIf="loginData['LastLogout'] !== null">
           <div class="title">{{'User.LastLogout' | translate}}</div>
-          <div class="value">{{loginData['LastLogout']}}</div>
+          <div class="value">{{loginData['LastLogout'] | date: 'dd/MM/yyyy HH:mm'}}</div>
         </li>
 
         <li class="item_list" *ngIf="loginData['SportWins'] !== undefined">

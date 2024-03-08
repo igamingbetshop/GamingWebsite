@@ -29,11 +29,11 @@ export class JWTInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler)
     {
         this.requests.push(req);
-        if(req.body?.Loading !== false)
+        if(req.body?.Loader !== false)
         {
             this.loaderService.show();
         }
-        delete req.body?.Loading;
+        delete req.body?.Loader;
 
         return next.handle(req)
             .pipe(
@@ -44,17 +44,14 @@ export class JWTInterceptor implements HttpInterceptor {
                         {
                             if (event.body.ResponseCode === 28 || event.body.ResponseCode === 29)
                             {
-                                if (event.body.ResponseCode === 28 || event.body.ResponseCode === 29)
+                                const userData = this.localStorageService.get('user');
+                                if (userData)
                                 {
-                                    const userData = this.localStorageService.get('user');
-                                    if (userData)
-                                    {
-                                        this.logoutHelper.logout(event.body.ResponseObject ? event.body.ResponseObject : '');
-                                    }
+                                    this.logoutHelper.logout(event.body.ResponseObject ? event.body.ResponseObject : '');
                                 }
-                                else if (event.body.ResponseCode === 138) {
-                                    this.router.navigate(['/403-error'], {queryParams: {error: 1}});
-                                }
+                            }
+                            else if (event.body.ResponseCode === 138) {
+                                this.router.navigate(['/403-error'], {queryParams: {error: 1}});
                             }
                         }
                     },

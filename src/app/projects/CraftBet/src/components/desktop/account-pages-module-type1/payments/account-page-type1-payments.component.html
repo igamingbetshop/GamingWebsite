@@ -91,24 +91,27 @@
   </div>
   <ng-container *ngIf="getPaymentsService.paymentHistoryItemsList.length > 0; else emptyPayments">
     <section>
-      <div class="payments-block block" *ngFor="let item of getPaymentsService.paymentHistoryItemsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getPaymentsService.paymentHistoryItemsCount }, let i = index">
-        <!--      class="Payments-{{item?.StatusName}}"-->
-        <div class="payments-block_item block_item">{{item?.CreationTime | date: 'dd/MM/yyyy HH:mm'}}</div>
-        <div class="payments-block_item block_item">{{item?.Id}}</div>
-        <div class="payments-block_item block_item">{{item?.StatusTypeName}}</div>
-        <div class="payments-block_item block_item ">{{ CurrencyId }} {{item?.Amount | number:'1.2-2'}}</div>
-        <div class="payments-block_item block_item item-transl">{{item?.PaymentSystemName}}</div>
-        <div class="payments-block_item block_item">{{item?.StatusName}}</div>
-        <div class="payments-block_item block_item payments-block-btns">
-          <button class="info-btn" type="submit" (click)="canselPayment(item.Id)"
-                  *ngIf="(item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1 && allowCancelConfirmedWithdraw)">
-            {{'User.Cancel' | translate}}
-          </button>
-          <!--        <fa-icon [icon]="['fas', 'info-circle']" class="payment-info-icon" (click)="openInfoBlock(item.Comment)" *ngIf="(item.Status == 6) && item.Type == 1" title="{{'User.PaymentInfo' | translate}}"></fa-icon>-->
-          <button type="button" class="info-btn" (click)="openInfoBlock(item.Comment)" *ngIf="item.Comment !== null && item.Comment !== ''"
-                  title="{{'User.PaymentInfo' | translate}}">{{'User.Info' | translate}}</button>
+      <div class="bets-content" *ngFor="let item of getPaymentsService.paymentHistoryItemsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getPaymentsService.paymentHistoryItemsCount }, let i = index">
+        <div class="payments-block block">
+          <!--      class="Payments-{{item?.StatusName}}"-->
+          <div class="payments-block_item block_item">{{item?.CreationTime | date: 'dd/MM/yyyy HH:mm'}}</div>
+          <div class="payments-block_item block_item">{{item?.Id}}</div>
+          <div class="payments-block_item block_item">{{item?.StatusTypeName}}</div>
+          <div class="payments-block_item block_item ">{{ CurrencyId }} {{item?.Amount | number:'1.2-2'}}</div>
+          <div class="payments-block_item block_item item-transl">{{item?.PaymentSystemName}}</div>
+          <div class="payments-block_item block_item"><span class="status status-{{item?.StatusName}}">{{item?.StatusName}}</span></div>
+          <div class="payments-block_item block_item payments-block-btns">
+            <button class="info-btn" type="submit" (click)="canselPayment(item.Id)"
+                    *ngIf="(item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1 && allowCancelConfirmedWithdraw)">
+              {{'User.Cancel' | translate}}
+            </button>
+            <!--        <fa-icon [icon]="['fas', 'info-circle']" class="payment-info-icon" (click)="openInfoBlock(item.Comment)" *ngIf="(item.Status == 6) && item.Type == 1" title="{{'User.PaymentInfo' | translate}}"></fa-icon>-->
+            <button type="button" class="info-btn" (click)="openInfoBlock(item.Comment)" *ngIf="item.Comment !== null && item.Comment !== ''"
+                    title="{{'User.PaymentInfo' | translate}}">{{'User.Info' | translate}}</button>
+          </div>
         </div>
       </div>
+
       <div class="pagination_section" *ngIf="getPaymentsService.paymentHistoryItemsList.length > 0">
 <!--        <div class="">{{getPaymentsService.paymentHistoryItemsList.length}}-->
 <!--          of {{getPaymentsService.paymentHistoryItemsCount}}</div>-->

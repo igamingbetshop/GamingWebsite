@@ -1,9 +1,11 @@
 <div class="payment-system-block mobile-payment-balance-section">
-    <div class="payment-systems__userAccount" *ngFor="let account of Accounts">
-        <div class="payment-systems__userAccount__name">
-            <span *ngIf="account.Id === 0">{{ "Account." + account?.AccountTypeName | translate }}</span>
-            <span *ngIf="account.Id !== 0">{{ account?.AccountTypeName }}</span>
-            <span>{{ CurrencyId }} {{ account?.Balance | number }}</span>
+    <div class="payment-systems__userAccount" *ngFor="let account of Accounts; let i = index">
+        <div class="payment-systems__userAccount__name" [ngClass]="{'selected': isSelectedAccount(account)}" (click)="selectedAccountBalance($event, account)">
+            <input type="radio" [checked]="selectedAccount && selectedAccount.Id === account?.Id" id="radio{{i}}" class="radio-input"/>
+            <label for="radio{{i}}" class="radio-label" (click)="selectedAccountBalance($event, account)"></label>
+            <span class="item-cell-account-name" *ngIf="account.Id === 0">{{ "Account." + account?.AccountTypeName | translate }}</span>
+            <span class="item-cell-account-name" *ngIf="account.Id !== 0">{{ account?.AccountTypeName }}</span>
+            <span><span class="mobile-balance-name-currency-id">{{ CurrencyId }}</span> {{ account?.Balance | number }} <span class="mobile-balance-name-currency-symbol">{{currencySymbol}}</span></span>
         </div>
     </div>
 </div>

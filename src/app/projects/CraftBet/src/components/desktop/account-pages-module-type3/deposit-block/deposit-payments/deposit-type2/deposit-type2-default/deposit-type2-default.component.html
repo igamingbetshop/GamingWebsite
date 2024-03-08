@@ -48,17 +48,12 @@
                 </div>
             </div>
 
-            <div class="payment-form-field" *ngIf="promoData.length > 0">
-                <div class="payment-form-field__column">
-                    <input type="text" class="payment-input"
-                           placeholder="{{'Deposit.PromoCode-placeholder' | translate}}" formControlName="PromoCode"/>
-                    <label class="payment-form-field__label">{{ 'Deposit.PromoCode' | translate }}</label>
-                </div>
-            </div>
-<!--            <div class="deposit-self-limitation-part">-->
-<!--                <div>{{ 'User.Deposit-Choose-Note' | translate }}</div>-->
-<!--                <div class="message-key">{{ messageKey }}</div>-->
-<!--                <div class="route-self" (click)="redirectToSelfLimitation()">{{ 'User.Change-Deposit-Limit' | translate }}</div>-->
+<!--            <div class="payment-form-field" *ngIf="promoData.length > 0">-->
+<!--                <div class="payment-amount-label">{{ 'Deposit.PromoCode' | translate }}</div>-->
+<!--                <div class="payment-form-field__column">-->
+<!--                    <input type="text" class="payment-input"-->
+<!--                           placeholder="{{'Deposit.PromoCode-placeholder' | translate}}" formControlName="PromoCode"/>-->
+<!--                </div>-->
 <!--            </div>-->
             <div class="payment-form-field">
                 <div class="payment-form-field__column_btn">

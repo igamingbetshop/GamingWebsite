@@ -1,9 +1,5 @@
 .live-casino-section {
   background: color(product-background);
- /* position: relative;
-  left:var(--header-panel2-width, 0);
-  top:var(--header-top-height, 0);
-  width: calc(100% - var(--header-panel2-width, 0px));*/
   .live-casino-flex_center {
     display: var(--grouped-products-content-display, flex);
     grid-template-columns: var(--grouped-products-content-grid-template-columns, none);

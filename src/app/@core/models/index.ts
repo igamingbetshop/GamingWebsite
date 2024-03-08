@@ -231,6 +231,7 @@ export class CharacterHierarchy
     CreationTime:string;
     CompPoints:number;
     Selected:boolean;
+    BackgroundImageData:string;
 }
 export class CharacterHierarchySource {
     Parent:CharacterHierarchy;
@@ -258,13 +259,30 @@ export class CharacterStateSourse {
     Current: number
 }
 
+export class NewsFragment
+{
+    Id:number;
+    Title:string;
+    ImageName:string;
+    Order:string;
+    StyleType:string;
+    Description: string;
+    Date: string;
+    Style:any;
+    News:News[];
+}
+
 export class News {
     Id: number;
     Title: string;
     Content: string;
     Description: string;
-    Date: string;
-    Image: string;
+    StartDate: string;
+    ImageName: string;
+    Type:string;
+    StyleType:string;
+    Style:any;
+    DeltaTime;
 }
 
 export class BankAccount {

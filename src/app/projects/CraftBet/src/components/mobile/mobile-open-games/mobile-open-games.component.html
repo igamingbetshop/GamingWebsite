@@ -1,5 +1,5 @@
 <div class="mobile-live-casino-section min-height">
-    <iframe *ngIf="iframeUrl"
+        <iframe *ngIf="iframeUrl" [style.height]="(onMobileOpenGameSize$ | async)?.productHeight"
             allow="autoplay; fullscreen"
             allowfullscreen
             allowtransparency="yes" id="mobile-main-game-iframe" [src]="iframeUrl | sanitizer:'resourceUrl'"></iframe>

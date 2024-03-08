@@ -2,9 +2,8 @@
     <ngx-slick-carousel class="carousel"
                         [config]="fragmentConfig.Config"
                         [class.vertical]="fragmentConfig.Config.vertical"
-                        (click)="navigateByBanner(banners[currentSlide].Link, $event)"
                         (beforeChange)="currentSlide = $event.currentSlide">
-        <div ngxSlickItem *ngFor="let banner of banners; let i = index" class="banner">
+        <div ngxSlickItem *ngFor="let banner of banners; let i = index" class="banner"   (click)="navigateByBanner(banner.Link, $event)">
             <div class="banner_image">
                 <picture>
                     <source *ngFor="let source of banner.sources" [media]="source.media" [srcset]="source.srcset">

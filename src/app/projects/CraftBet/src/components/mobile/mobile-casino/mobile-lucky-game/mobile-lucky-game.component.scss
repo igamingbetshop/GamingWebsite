@@ -1,18 +1,27 @@
 .m-lucky-game-container
 {
-  background: #FFFFFF;
+  background: var(--m-lucky-game-container-background, #FFFFFF);
+  background-image: var(--m-lucky-game-container-background-image, unset);
+  background-size: var(--m-lucky-game-container-background-image-size, unset);
+  background-repeat: var(--m-lucky-game-container-background-image-repeat, no-repeat);
+  background-attachment: var(--m-lucky-game-container-background-image-attachment, unset);
+  background-position: var(--m-lucky-game-container-background-image-position, unset);
   width: 90%;
   position: relative;
-  box-shadow: -2px -2px 6px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--m-lucky-game-container-box-shadow, -2px -2px 6px 0px rgba(0, 0, 0, 0.12));
   border-radius: 16px;
   margin: 100px auto;
-  padding: 44px 0;
+  padding: var(--m-lucky-game-container-padding, 44px 0);
   .modal-body
   {
     position: absolute;
     top: 0;
     right: 0;
     cursor: pointer;
+    .icon-close-modal {
+      color: var(--m-lucky-game-container-close-icon-color, #000);
+      font-size: var(--m-lucky-game-container-close-icon-font-size, 16px);
+    }
     span{}
   }
   .header

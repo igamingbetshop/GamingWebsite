@@ -2,13 +2,17 @@ $footerBottomSize: var(--footer--height);
 
 .footer-section {
   background-color: color(footer-background);
-  background-image: linear-gradient(itemColor(footer-gradient-first, transparent) 70%, itemColor(footer-gradient-last, transparent));
+  background-image: var(--footer-background-image, linear-gradient(itemColor(footer-gradient-first, transparent) 70%, itemColor(footer-gradient-last, transparent)));
   height: height(footer, 450px);
   width: 100%;
   padding: paddingTop(homa-page-content,0) paddingRight(homa-page-content, 10px) paddingBottom(homa-page-content,0) paddingLeft(homa-page-content, 10px);
   top: auto;
   clear: both;
   z-index: 2;
+  background-repeat: var(--footer-background-image-repeat, no-repeat);
+  background-size: var(--footer-background-image-size, unset);
+  background-position: var(--footer-background-image-position, center);
+  background-attachment: var(--footer-background-image-attachment, unset);
 
   .footer-open-button {
     margin-left: auto;
@@ -72,6 +76,12 @@ $footerBottomSize: var(--footer--height);
     bottom: 0;
     overflow-y: var(--footer-opened-overflow, hidden);
     height: var(--footer-opened-height, auto);
+    background: var(--footer-opened-background-color, var(--footer-background-color));
+    background-image: var(--footer-opened-background-image, unset);
+    background-repeat: var(--footer-background-image-repeat, no-repeat);
+    background-size: var(--footer-background-image-size, unset);
+    background-position: var(--footer-background-image-position, center);
+    background-attachment: var(--footer-background-image-attachment, unset);
   }
 
   &_boxMenu {
@@ -126,6 +136,9 @@ $footerBottomSize: var(--footer--height);
           font-size: fontSize(footer-column-item, 14px);
           line-height: var(--footer-column-item-line-height,16px);
           background-repeat: no-repeat;
+          .footer-menu-item-img-part {
+            margin: var(--footer-column-item-img-margin, 0);
+          }
           &:hover
           {
             color: color(footer-column-item-hover);
@@ -211,6 +224,77 @@ $footerBottomSize: var(--footer--height);
         line-height: var(--footer-info-text-line-height, 20px);
         background-color: backgroundColor(ft-text-style2, none);
       }
+      .info-text-see-more
+      {
+        margin-top: marginTop(footer-info-text-see-more, 15px);
+        margin-bottom: marginBottom(footer-info-text-see-more, 15px);
+        margin-left: marginLeft(footer-info-text-see-more, auto);
+        margin-right: marginRight(footer-info-text-see-more, auto);
+        width: width(footer-info-text-see-more, 100%);
+        text-align: textAlign(footer-info-text-see-more, left);
+        line-height: var(--footer-info-text-see-more-line-height, 20px);
+        background-color: backgroundColor(footer-info-text-see-more, none);
+        position: var(--footer-info-text-see-more-position, relative);
+        input {
+          opacity: 0;
+          position: absolute;
+          pointer-events: none;
+        }
+
+        p
+        {
+          overflow: hidden;
+          display: var(--info-text-p-display, -webkit-box);
+          -webkit-line-clamp: var(--info-text-p-line-clamp, 4);
+          -webkit-box-orient: var(--info-text-p-box-orient, vertical);
+          font-size: fontSize(ft-text-style2, 16px);
+        }
+
+        label
+        {
+          position: absolute;
+          right: itemRight(info-text-label, 0px);
+          bottom: itemBottom(info-text-label, -6px);
+          background: backgroundColor(info-text-label, transparent);
+          color: color(ft-text-style2-button);
+          text-decoration: var(--info-text-label-text-decoration, underline);
+          text-transform: var(--info-text-label-text-transform, capitalize);
+          text-align: textAlign(info-text-label, center);
+          width: width(info-text-label, auto);
+          height: height(info-text-label, auto);
+          opacity: var(--info-text-label-opacity, 1);
+          border: none;
+          outline: none;
+          padding: var(--info-text-label-padding, 0 6px);
+          border-radius: var(--info-text-label-border-radius, 0);
+          font-size: var(--info-text-label-font-size, 16px);
+          font-weight: var(--info-text-label-font-weight, 400);
+        }
+        .see-less {
+          display: none;
+        }
+        .see-more {
+          display: block;
+          cursor: pointer;
+        }
+        input:checked + p {
+          -webkit-line-clamp: unset;
+        }
+
+        input:checked ~ .see-more{
+          display: none;
+        }
+
+        input:checked ~ .see-less{
+          display: block;
+          cursor: pointer;
+          bottom: itemBottom(info-text-label-checked, -6px);
+          height: height(info-text-label-checked, auto);
+          background: backgroundColor(info-text-label-checked, transparent);
+          color: color(ft-text-style2-button-checked);
+          opacity: var(--ft-text-style2-button-checked-opacity, 1);
+        }
+      }
     }
   }
   .ft-images-back {
@@ -225,6 +309,8 @@ $footerBottomSize: var(--footer--height);
     background-color: backgroundColor(ft-image-background, none);
     border-bottom: 2px solid itemColor(ft-border-bottom-color, none);
     gap: var(--ft-image-background-gap, 0px);
+    width: var(--ft-image-background-width, auto);
+    margin: var(--ft-image-background-margin, 0);
     &.ft-images-style1
     {
       .ft-images-type1
@@ -263,6 +349,10 @@ $footerBottomSize: var(--footer--height);
     }
     &.ft-images-style2
     {
+      .ft-images-type1:first-child {
+        margin-right: var(--ft-image-style2-type1-first-item-margin-right, 0);
+        margin-left: var(--ft-image-style2-type1-first-item-margin-left, 0);
+      }
       .ft-images-type3
       {
         display: flex;

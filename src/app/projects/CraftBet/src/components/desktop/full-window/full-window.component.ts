@@ -7,6 +7,7 @@ import {FavoritesService} from "../../../../../../@core/services/api/favorites.s
 import {Controllers, Methods} from "../../../../../../@core/enums";
 import {BaseApiService} from "../../../../../../@core/services/api/base-api.service";
 import {StateService} from "../../../../../../@core/services/app/state.service";
+import {SaveData} from "@core/services";
 
 @Component({
     selector: 'app-full-window',
@@ -26,7 +27,8 @@ export class FullWindowComponent extends BaseFullWindowComponent implements Afte
         private simpleModalService: SimpleModalService,
         private favoriteService: FavoritesService,
         private baseApiService: BaseApiService,
-        private stateService:StateService
+        private stateService:StateService,
+        private savedData:SaveData
     ) {
         super(injector);
     }
@@ -61,6 +63,7 @@ export class FullWindowComponent extends BaseFullWindowComponent implements Afte
 
     goBack()
     {
+        this.savedData.updateScrollPositionData(true, undefined, undefined);
         this.router.navigateByUrl(this.stateService.getProductBackUrl);
     }
 

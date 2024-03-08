@@ -8,9 +8,10 @@ import {BaseApiService} from "@core/services/api/base-api.service";
 import {VerificationService} from "@core/services/api/verification.service";
 import {SimpleModalService} from "ngx-simple-modal";
 import {PasswordValidation} from "@core/services/password-validation";
-import {ConfigService} from "@core/services";
+import {ConfigService, LocalStorageService} from "@core/services";
 import {UtilityService} from "@core/services/app/utility.service";
 import {TranslateService} from "@ngx-translate/core";
+import {LogoutHelper} from "@core/services/helpers/logout.helper";
 
 @Directive()
 export class BaseChangePassword implements OnInit, OnDestroy
@@ -31,6 +32,9 @@ export class BaseChangePassword implements OnInit, OnDestroy
     public configService: ConfigService;
     private utilityService: UtilityService;
     public translate: TranslateService;
+    public logoutHelper: LogoutHelper;
+    public localStorageService: LocalStorageService;
+
     constructor(protected injector:Injector)
     {
         this.fb = injector.get(FormBuilder);
@@ -41,6 +45,8 @@ export class BaseChangePassword implements OnInit, OnDestroy
         this.configService = injector.get(ConfigService);
         this.utilityService = injector.get(UtilityService);
         this.translate = injector.get(TranslateService);
+        this.logoutHelper = injector.get(LogoutHelper);
+        this.localStorageService = injector.get(LocalStorageService);
     }
     ngOnInit()
     {
@@ -107,6 +113,9 @@ export class BaseChangePassword implements OnInit, OnDestroy
                             this.changePasswordMessage.message = res;
                             this.utilityService.showError('', this, 'changePasswordMessage');
                         });
+                        this.logoutHelper.logout();
+                        this.localStorageService.remove('identifier');
+                        this.localStorageService.remove('login');
                     }
                 });
                 this.formGroup.reset();

@@ -4,7 +4,7 @@
         <form class="history-options">
             <div class="custom_dropdown_reg" dropdown>
                 <div class="flex_between current_item">
-                    <div *ngIf="!selectedStatus" class="selected-item">{{ 'User.Status' | translate }}</div>
+                    <div *ngIf="!selectedStatus" class="selected-item">{{ getBetsHistoryService.betStatuses[0]?.Name | translate }}</div>
                     <div *ngIf="selectedStatus" class="selected-item">{{ selectedStatus | translate }}</div>
                     <div class="change-icon">
                         <span class="icon-arrow-right"></span>
@@ -17,7 +17,7 @@
             </div>
             <div class="custom_dropdown_reg" dropdown>
                 <div class="flex_between current_item">
-                    <div *ngIf="!selectedDate" class="selected-item">{{ 'User.Period-of-time' | translate }}</div>
+                    <div *ngIf="!selectedDate" class="selected-item">{{ historyTimeFilter[0]?.Name | translate }}</div>
                     <div *ngIf="selectedDate" class="selected-item">{{ selectedDate | translate }}</div>
                     <div class="change-icon">
                         <span class="icon-arrow-right"></span>
@@ -40,11 +40,11 @@
                             <div class="history-date">{{ item?.BetDate | date: 'dd/MM/yyyy H:mm:ss' }}</div>
                             <div class="bold">{{ 'Bet.' + item?.statusTypeName | translate }}</div>
                             <div>{{'Bet.TotalBet' | translate}}<span
-                                    class="amount-part">{{ currencySymbol }}{{ item?.BetAmount | number:'1.2-2' }}</span>
+                                    class="amount-part">{{ item?.BetAmount | number:'1.2-2' }} {{currencySymbol}}</span>
                             </div>
 <!--                            <div *ngIf="item.State == 1">{{'User.Poss-Win' | translate}} -->
                             <div>{{'User.Poss-Win' | translate}}
-                                <span class="bold">{{ currencySymbol }}{{ item?.PossibleWin | number:'1.2-2' }}</span>
+                                <span class="bold">{{ item?.PossibleWin | number:'1.2-2' }} {{currencySymbol}}</span>
                             </div>
                         </div>
                         <div class="history-right-part">
@@ -68,13 +68,13 @@
                                         <div class="logo-b" *ngIf="userInfo?.ForcedChosen">B</div>
                                         <div>{{userInfo?.UnitName}}</div>
                                     </div>
-                                    <div class="info-market-name">{{userInfo?.MarketName}}</div>
-                                    <div>{{ 'Bet.SelectionName' | translate }}
-                                        <span>{{ userInfo?.SelectionName }}</span></div>
-                                    <div class="info-bet-score"
-                                         *ngIf="userInfo?.State !== ''">{{ 'Bet.Score' | translate }}
-                                        <span>{{ userInfo?.SelectionName }}</span>
-                                    </div>
+                                    <div>{{userInfo?.MarketName}}-{{ 'Bet.SelectionName' | translate }} <span>{{ userInfo?.SelectionName }}</span></div>
+<!--                                    <div>{{ 'Bet.SelectionName' | translate }}-->
+<!--                                        <span>{{ userInfo?.SelectionName }}</span></div>-->
+<!--                                    <div class="info-bet-score"-->
+<!--                                         *ngIf="userInfo?.State !== ''">{{ 'Bet.Score' | translate }}-->
+<!--                                        <span>{{ userInfo?.SelectionName }}</span>-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="history-right-part">
                                     <div class="history-date">{{ userInfo?.EventDate | date: 'dd.MM' }}</div>
@@ -92,44 +92,44 @@
                                     </div>
                                 </div>
                                 <div class="user-history-details">
-                                    <div>{{'User.Transaction_Id' | translate}}</div>
+                                    <div>{{'User.Transaction_Id' | translate}}:</div>
                                     <div>{{userInfoList['TransactionId']}}</div>
                                 </div>
                                 <div class="user-history-details">
-                                    <div>{{'User.Amount' | translate}}</div>
-                                    <div>{{currencySymbol}}{{userInfoList['BetAmount'] | number: '.2'}}</div>
+                                    <div>{{'User.Amount' | translate}}:</div>
+                                    <div>{{userInfoList['BetAmount'] | number: '.2'}} {{currencySymbol}}</div>
                                 </div>
                                 <div class="user-history-details">
-                                    <div>{{'User.BetsAmount' | translate}}</div>
-                                    <div>{{currencySymbol}}{{(userInfoList['BetAmount'] - userInfoList['CommissionFee']) | number: '.2'}}</div>
+                                    <div>{{'User.BetsAmount' | translate}}:</div>
+                                    <div>{{(userInfoList['BetAmount'] - userInfoList['CommissionFee']) | number: '.2'}} {{currencySymbol}}</div>
                                 </div>
                                 <div class="user-history-details">
-                                    <div>{{'User.CommissionFee' | translate}}</div>
-                                    <div>{{currencySymbol}}{{userInfoList['CommissionFee'] | number: '.2'}}</div>
+                                    <div>{{'User.CommissionFee' | translate}}:</div>
+                                    <div>{{userInfoList['CommissionFee'] | number: '.2'}} {{currencySymbol}}</div>
                                 </div>
                                 <div class="user-history-details">
-                                    <div>{{'User.AmountPerBet' | translate}}</div>
-                                    <div>{{currencySymbol}}{{userInfoList['AmountPerBet'] | number: '.2'}}</div>
+                                    <div>{{'User.AmountPerBet' | translate}}:</div>
+                                    <div>{{userInfoList['AmountPerBet'] | number: '.2'}} {{currencySymbol}}</div>
                                 </div>
                                 <div class="user-history-details">
-                                    <div>{{'Bet.NumberOfBets' | translate}}</div>
+                                    <div>{{'Bet.NumberOfBets' | translate}}:</div>
                                     <div>{{userInfoList['NumberOfBets']}}</div>
                                 </div>
                                 <div class="user-history-details">
-                                    <div>{{'User.Coefficient' | translate}}</div>
+                                    <div>{{'User.Coefficient' | translate}}:</div>
                                     <div>{{userInfoList['Coefficient']}}</div>
                                 </div>
                                 <div class="user-history-details" *ngIf="userInfoList['Status'] === 1">
-                                    <div>{{'User.Min-Possible-Winning' | translate}}</div>
-                                    <div>{{currencySymbol}}{{userInfoList['MinPossibleWin'] | number: '1.2-2'}}</div>
+                                    <div>{{'User.Min-Possible-Winning' | translate}}:</div>
+                                    <div>{{userInfoList['MinPossibleWin'] | number: '1.2-2'}} {{currencySymbol}}</div>
                                 </div>
                                 <div class="user-history-details" *ngIf="userInfoList['Status'] === 1">
-                                    <div>{{'User.Poss-Win' | translate}}</div>
-                                    <div>{{currencySymbol}}{{userInfoList['PossibleWin'] | number: '1.2-2'}}</div>
+                                    <div>{{'User.Poss-Win' | translate}}:</div>
+                                    <div>{{userInfoList['PossibleWin'] | number: '1.2-2'}} {{currencySymbol}}</div>
                                 </div>
                                 <div class="user-history-details" *ngIf="userInfoList['Status'] !== 1">
-                                    <div>{{'User.WinAmount' | translate}}</div>
-                                    <div>{{currencySymbol}}{{userInfoList['WinAmount'] | number: '.2'}}</div>
+                                    <div>{{'User.WinAmount' | translate}}:</div>
+                                    <div>{{userInfoList['WinAmount'] | number: '.2'}} {{currencySymbol}}</div>
                                 </div>
                                 <!--                                <div class="user-history-details">-->
                                 <!--                                    <div>{{'User.Bet-status' | translate}}</div>-->

@@ -1,0 +1,238 @@
+.mobile-credit-tab {
+  padding: 19px 8px;
+
+  .mobile-credit-section {
+    border: 1px solid #BCBCBC;
+    padding: 7px 11px;
+    background: #fff;
+
+    .titles {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #bcbcbc;
+      padding-bottom: 7px;
+      font-weight: 600;
+      font-size: 12px;
+
+      .credit-tab-text {
+        font-size: 16px;
+      }
+    }
+
+    .container-part {
+      .mobile-document-text {
+        font-size: 13px;
+        margin-bottom: 4px;
+        text-align: center;
+      }
+      .document-text {
+        text-align: center;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+      .document-verification-table {
+        .document-form {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-direction: column;
+          gap: 15px;
+
+          .document-form-items {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 15px;
+            .document-form-row {
+              display: flex;
+              align-items: center;
+              width: 95%;
+              background: rgba(242, 242, 242, 1);
+              margin: 0 auto 0 0;
+              .document-form-choose-data {
+                border: 1px solid #BCBCBC;
+                border-radius: 2px;
+                position: relative;
+                width: 85px;
+                cursor: pointer;
+                height: 20px;
+                text-align: center;
+                .choose_input {
+                  border: none;
+                  position: relative;
+                  width: 100%;
+                }
+                .document-label {
+                  position: absolute;
+                  top: 2px;
+                  left: 0;
+                  white-space: nowrap;
+                  //width: 122px;
+                  overflow: hidden;
+                  width: 100%;
+                }
+                .document-selected-label {
+                  white-space: nowrap;
+                  position: absolute;
+                  top: 2px;
+                  left: 100px;
+                }
+              }
+            }
+            .document-form-row-btn {
+              margin: 0;
+              background: #ed1c24;
+              font-weight: 700;
+              font-size: 15px;
+              border: none;
+              outline: none;
+              color: #fff;
+              cursor: pointer;
+              width: 100%;
+              height: 40px;
+              display: flex;
+              align-items: center;
+              .document-form-row-btn-text {
+                margin: var(--account-verification-btn-text-margin, 0);
+              }
+              .change-icon-document-btn {
+                transform: rotate(90deg);
+                font-size: 15px;
+                margin-left: auto;
+                margin-right: 15px;
+                color: var(--document-icon-color, #F6A200);
+              }
+            }
+          }
+          .document-form-options {
+            width: 100%;
+            height: 40px;
+            .custom_dropdown_reg {
+              background: var(--choose-document-form-background, #F6A200);
+              color: var(--choose-document-form-color, #000);
+              border-radius: 2px;
+              .current_item {
+                height: 100%;
+                border-radius: 0;
+                border: none;
+                justify-content: center;
+                font-size: 16px;
+                font-weight: 700;
+                background: var(--choose-document-form-background, #F6A200);
+                color: var(--choose-document-form-color, #000);
+                .selected-item {
+                  margin-left: auto;
+                }
+                .change-icon {
+                  transform: rotate(90deg);
+                  font-size: 15px;
+                  margin-left: auto;
+                  margin-right: 5px;
+                  color: #fff;
+                }
+              }
+              .current_item:hover {
+                color: var(--choose-document-form-color, #000);
+              }
+              .custom_dropdown_list {
+                background: var(--choose-document-form-background, #F6A200);
+                border-color: #fce1ae;
+                height: auto;
+                overflow: hidden;
+
+                .custom_dropdown_list_items {
+                  height: 30px;
+                  line-height: 30px;
+                  font-size: 15px;
+                  background: var(--choose-document-form-list-items-background, #00934a);
+                  color: var(--choose-document-form-list-items-color, #000);
+                  padding: 0 10px;
+                }
+              }
+            }
+          }
+        }
+        .success_message, .error_message {
+          bottom: 0;
+          padding: 0;
+          top: 3px;
+          font-size: 12px;
+        }
+        .bet-selections-info {
+          margin: 25px 0;
+          font-size: 12px;
+          .bet-selections-info__tbody {
+            border-radius: 0;
+            background: transparent;
+            width: 100%;
+            display: table;
+            .bet-selections-info_thead__tr {
+              background: #ededed;
+              color: #000;
+              display: grid;
+              align-items: center;
+              padding: 0;
+              grid-template-columns: 1fr 1fr 1fr;
+            }
+            .bet-selections-info__tr {
+              font-size: 12px;
+              background: #fff;
+              color: #000;
+              border: var(--document-verification-table-body-border, none);
+              margin: 5px auto;
+              display: grid;
+              align-items: center;
+              padding: 0;
+              grid-template-columns: 1fr 1fr 1fr;
+              .bet-selections-info__td {
+                padding: 5px;
+              }
+              .bet-selections-info__td:first-child {
+                padding: 5px !important;
+                width: auto;
+                text-align: center;
+              }
+              .document-verification-status {
+                width: 100%;
+                margin: 0 10px 0 auto;
+                padding: 5px 6px;
+                border-radius: 30px;
+                font-weight: 600;
+              }
+              .status-1 {
+                color: var(--document-verification-status-1-color, #00934A);
+                background: var(--document-verification-status-1-background, transparent);
+              }
+
+              .status-2 {
+                color: var(--document-verification-status-2-color, #F66901);
+                background: var(--document-verification-status-2-background, transparent);
+              }
+
+              .status-3 {
+                color: var(--document-verification-status-3-color, #F6A201);
+                background: var(--document-verification-status-3-background, transparent);
+              }
+              .status-4 {
+                color: var(--document-verification-status-4-color, #fff);
+                background: var(--document-verification-status-4-background, red);
+              }
+            }
+            .bet-selections-info_thead__tr {
+              .bet-selections-info__td {
+                padding: 10px 5px;
+                text-align: center;
+              }
+              .bet-selections-info__td:first-child {
+                width: auto;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

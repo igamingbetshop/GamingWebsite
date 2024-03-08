@@ -19,7 +19,7 @@
     white-space: nowrap;
     align-items: center;
     color: color(m-product-navigation-tab);
-    display: flex;
+    display: var(--m-product-navigation-tab-display, flex);
     font-size: var(--m-product-navigation-tab-font-size, 14px);
     justify-content: var(--m-product-navigation-item-center, left);
 

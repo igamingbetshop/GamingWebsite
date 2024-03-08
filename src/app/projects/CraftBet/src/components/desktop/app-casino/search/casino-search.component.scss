@@ -11,7 +11,10 @@
     justify-content: var(--search-providers-justify-content, space-between);
     align-items: center;
     width: 100%;
-    padding: 0 10px;
+    padding:var(--search-providers-padding, 0 10px);
+    .search_field {
+      width: var(--search-providers-field-width, auto);
+    }
 
     input {
       width: width(search-providers-input, 250px);

@@ -89,24 +89,26 @@
   </div>
   <ng-container *ngIf="getBetsHistoryService.betsHistoryList.length > 0; else emptyBets">
     <section>
-      <div class="bets-block block" *ngFor="let item of getBetsHistoryService.betsHistoryList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getBetsHistoryService.betsHistoryListCount }, let i = index"
-           [ngClass]="{'won': item.State == 2, 'lost': item.State == 3}">
-        <div class="bets-block_item block_item">{{item?.BetDocumentId}}</div>
-        <div class="bets-block_item block_item">{{item?.BetDate | date: 'dd/MM/yyyy HH:mm'}}</div>
-        <div class="bets-block_item block_item displayed">
-          <p>{{ CurrencyId }}</p>
-          <p>{{item?.BetAmount | number:'1.2-2'}}</p>
-        </div>
-        <div class="bets-block_item block_item">{{item?.ProductName}}</div>
-        <div class="bets-block_item block_item">{{'Bet.' + item?.statusTypeName | translate}}</div>
-        <div class="bets-block_item block_item status-{{item?.State}}">{{item?.betStatusName}}</div>
-        <div class="bets-block_item block_item displayed">
-          <p>{{ CurrencyId }}</p>
-          <p>{{item?.WinAmount | number:'1.2-2'}}</p>
-        </div>
-        <div class="bets-block_item block_item info">
-          <button type="button" class="info-btn" (click)="openInfo(item)"
-                  *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1">{{'User.Info' | translate}}</button>
+      <div class="bets-content" *ngFor="let item of getBetsHistoryService.betsHistoryList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getBetsHistoryService.betsHistoryListCount }, let i = index;">
+        <div class="bets-block block"
+             [ngClass]="{'won': item.State == 2, 'lost': item.State == 3}">
+          <div class="bets-block_item block_item">{{item?.BetDocumentId}}</div>
+          <div class="bets-block_item block_item">{{item?.BetDate | date: 'dd/MM/yyyy HH:mm'}}</div>
+          <div class="bets-block_item block_item displayed">
+            <p>{{ CurrencyId }}</p>
+            <p>{{item?.BetAmount | number:'1.2-2'}}</p>
+          </div>
+          <div class="bets-block_item block_item">{{item?.ProductName}}</div>
+          <div class="bets-block_item block_item">{{'Bet.' + item?.statusTypeName | translate}}</div>
+          <div class="bets-block_item block_item status-{{item?.State}}">{{item?.betStatusName}}</div>
+          <div class="bets-block_item block_item displayed">
+            <p>{{ CurrencyId }}</p>
+            <p>{{item?.WinAmount | number:'1.2-2'}}</p>
+          </div>
+          <div class="bets-block_item block_item info">
+            <button type="button" class="info-btn" (click)="openInfo(item)"
+                    *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1">{{'User.Info' | translate}}</button>
+          </div>
         </div>
       </div>
       <div class="pagination_section">

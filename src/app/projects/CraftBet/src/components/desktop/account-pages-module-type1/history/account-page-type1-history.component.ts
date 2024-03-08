@@ -7,8 +7,19 @@ import {AppCommonBetsHistoryComponent} from "../../../common/app-common-bets-his
 })
 export class AccountPageType1HistoryComponent extends AppCommonBetsHistoryComponent {
 
+  public showInfoBox:boolean;
+  public closeInfo:boolean;
+  public selectedBet:any;
+
   constructor(public injector: Injector) {
     super(injector);
   }
-
+  openInfoBox(item, index){
+    this.showInfoBox = index;
+    this.selectedBet = item;
+    this.closeInfo = true;
+  }
+  closeInfoBox(){
+    this.closeInfo = false;
+  }
 }

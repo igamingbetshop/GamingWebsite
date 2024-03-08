@@ -41,7 +41,6 @@ export class AccountPageType2StatementComponent extends UserAccountStatmentCompo
     }
     responseData.ResponseObject.Accounts.unshift(realBalance);   
     this.accountData = responseData.ResponseObject.Accounts;
-    console.log('this.accountData', this.accountData);
   }
 
 }

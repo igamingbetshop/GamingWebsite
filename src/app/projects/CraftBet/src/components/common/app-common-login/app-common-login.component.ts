@@ -24,6 +24,7 @@ export class AppCommonLoginComponent extends BaseComponent {
     private localStorageService: LocalStorageService;
     public rememberMe: boolean;
     public submitted = false;
+    public openedLogin = false;
     // public isUserIconHidden;
     // public isPasswordIconHidden;
     protected location:Location;
@@ -57,6 +58,10 @@ export class AppCommonLoginComponent extends BaseComponent {
             this.utilsService.showMessageWithDelay(this, [{'errorMessage': data.message}]);
             this.submitted = false;
         }));
+        this.openedLogin = true;
+        const savedPassword = this.localStorageService.get('identifier');
+        if(savedPassword)
+            this.loginForm.get("Password").setValue(atob(savedPassword));
     }
 
     public changePassType() {
@@ -83,6 +88,21 @@ export class AppCommonLoginComponent extends BaseComponent {
         if(provider.ProviderId)
         {
             window.location.href = provider.ProviderId;
+        }
+    }
+    openModal(type, event) {
+        event.stopPropagation();
+        if (type === 'Register') {
+            this.saveData.clickForgotPassword.next('1');
+            this.saveData.openPopup.next(2);
+            this.openedLogin = true;
+            if (this.loginForm.valid) {
+                event.preventDefault();
+            }
+        } else {
+            if (this.loginForm.valid) {
+                event.preventDefault();
+            }
         }
     }
 

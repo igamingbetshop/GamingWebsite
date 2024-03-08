@@ -51,8 +51,13 @@
       .selected-wallet {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 10px 0 0 0;
+        padding: 10px 0 10px 0;
+        .selected-wallet-image {
+          margin: 0 5px;
+        }
+        .selected-wallet-balance {
+          margin-left: auto;
+        }
       }
       .payment-systems__userAccount {
         border: 1px solid #e6e6e6;

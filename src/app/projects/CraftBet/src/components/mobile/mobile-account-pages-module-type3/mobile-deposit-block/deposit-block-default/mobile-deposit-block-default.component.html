@@ -1,0 +1,74 @@
+<div class="mobile-payment-section">
+    <div class="mobile-payment-section_content">
+
+        <div class="mobile-payment-section_content_block">
+            <div class="payment_header">{{ 'User.Deposit-Limit' | translate }}</div>
+            <div class="payment_header">{{ 'User.Deposit-Min-Max' | translate }}</div>
+            <div class="content_col">
+                <ul class="payment_list">
+<!--                    <li-->
+<!--                            *ngFor="let item of paymentSystemList; let i = index"-->
+<!--                            (click)="selectPayment(item)"-->
+<!--                            [ngClass]="{'selected': item?.PaymentSystemId == currentPayment?.PaymentSystemId}"-->
+<!--                    >-->
+<!--                        <img src="../../../../../../../assets/images/deposit/{{item.PaymentSystemId}}.png"/>-->
+<!--                    </li>-->
+                    <li *ngFor="let item of paymentSystemList; let i = index"
+                        (click)="selectPayment(item)"
+                        [ngClass]="{'selected':item?.PaymentSystemId == currentPayment?.PaymentSystemId}"
+                        class="payment_list_item">
+                        <input class="payment_list_item_radio_button" type="radio" [(ngModel)]="currentPayment" [value]="item" id="paymentSystem{{i}}" >
+                        <div class="payment_list_item_img"
+                        [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/deposit/' +  item.PaymentSystemId + '.svg)'}"></div>
+                        <div class="payment_list_item_min_amount">
+                            {{'Deposit.Min-Amount' | translate}} {{item.MinAmount}}
+                            <span *ngIf="item.CurrencyId === CurrencyId">{{CurrencySymbol}}</span>
+                            <span *ngIf="item.CurrencyId !== CurrencyId">{{item.CurrencyId}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+<!--            <div class="content_col mobile_info">-->
+<!--                <div class="info_text" style="-webkit-box-orient: vertical"-->
+<!--                     [innerHTML]="'Deposit.' + 'PAYMENT_MESSAGE' + currentPayment?.PaymentSystemId | translate | sanitizer: 'html'"></div>-->
+
+<!--                <div class="balance_info">-->
+<!--                    <div>{{"Payments.Minimum" | translate}} - {{currentPayment?.MinAmount | number}} ({{ CurrencyId}})-->
+<!--                    </div>-->
+<!--                    <div>{{"Payments.Maximum" | translate}} - {{currentPayment?.MaxAmount | number}} ({{ CurrencyId}})-->
+<!--                    </div>-->
+<!--                    <div *ngIf="currentPayment?.CommissionPercent !== 0">-->
+<!--                        {{"Payments.CommissionPercent" | translate}} - {{currentPayment?.CommissionPercent | number}} %-->
+<!--                    </div>-->
+<!--                    <div *ngIf="currentPayment?.FixedFee !== 0">-->
+<!--                        {{"Payments.CommissionFixedFee" | translate}} - {{currentPayment?.FixedFee | number}} ({{CurrencyId}})-->
+<!--                    </div>-->
+<!--                    <div *ngIf="currentPayment?.CommissionPercent === 0 && currentPayment?.FixedFee === 0">-->
+<!--                        {{"Payments.Commission" | translate}} - {{ 0 | number}}-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+
+            <div class="right-part">
+                <app-common-bonuses *ngIf="this.bonusData.length"
+                                    [bonusesList]="this.bonusData"></app-common-bonuses>
+                <label class="bonus-refused" (change)="bonusCheckboxChanged()" (click)="$event.stopPropagation();preventUncheck()" *ngIf="this.bonusData.length">
+                    <input type="checkbox" [(ngModel)]="paymentControllerService.bonusRefused">
+                    {{'User.BonusRefused' | translate}}
+                </label>
+                <div class="deposit-self-limitation-part">
+                    <div>{{ messageKey }}</div>
+                    <div class="route-self" (click)="redirectToSelfLimitation()">{{ 'User.Change-Deposit-Limit' | translate }}</div>
+                </div>
+                <div class="content_col">
+                    <template #loadComponent></template>
+                </div>
+                <div class="deposit-self-limitation-popup">{{ 'User.Deposit-Choose-Note' | translate }}</div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,23 @@
+<div class="mobile-credit-tab">
+    <div class="mobile-credit-section" *ngIf="!clickedVerificationUrl">
+<!--        <div class="titles">-->
+<!--            <span class="credit-tab-text">{{ 'User.Verification-top-title' | translate }}</span>-->
+<!--        </div>-->
+        <div class="text-part" [innerHTML]="message | translate | sanitizer: 'html'">
+        </div>
+        <div class="history-options">
+            <div class="custom_dropdown_reg">
+                <div class="flex_between current_item" (click)="getVerificationPageUrl()">
+                    <div class="selected-item">{{ 'User.ID-Recognition' | translate }}</div>
+                    <div class="change-icon">
+                        <span class="icon-open-selection"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="error_message">{{ statusMessage }}</div>
+    <div class="verification-iframe">
+        <iframe #verificationIframe frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+</div>

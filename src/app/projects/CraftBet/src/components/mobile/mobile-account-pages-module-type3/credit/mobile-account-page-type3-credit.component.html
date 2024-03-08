@@ -1,0 +1,93 @@
+<div class="mobile-credit-tab">
+    <div class="container-part">
+        <div class="credits">
+            <div class="credit-tab-text">{{ 'Settings.Settings' | translate }}</div>
+            <div class="selected-wallet">
+                <span>{{ 'Balance.Selected Wallet' | translate }} </span>
+                <img class="selected-wallet-image" src="../../../../../../../assets/images/accounts/{{selected?.TypeId}}_{{selected.PaymentSystemId}}_{{selected.hasBetShop}}.svg">
+                <span>{{selected?.AccountTypeName}}</span>
+                <span class="selected-wallet-balance">{{selected?.Balance | toNumber | number: '.2'}} {{currencySymbol}}</span>
+            </div>
+            <div class="payment-systems-account" *ngFor="let item of Accounts; let i = index">
+                <div class="m-payment-systems-name" (click)="selectedAccountBalance($event, item)">
+                    <div class="credit-account-type">
+                        <img class="credit-account-type-img"
+                             src="../../../../../../../assets/images/accounts/{{item?.TypeId}}_{{item.PaymentSystemId}}_{{item.hasBetShop}}.svg">
+                        <span class="credit-account-type-name"
+                              *ngIf="item.BetShopId !== null">{{ item?.AccountTypeName }}</span>
+                        <span class="credit-account-type-name"
+                              *ngIf="item.BetShopId === null">{{ 'Balance.' + item?.AccountTypeName | translate }}</span>
+                        <input type="radio" [checked]="selected.Id === item.Id" id="radio{{i}}"/>
+                        <label for="radio{{i}}" class="radio-label"></label>
+                    </div>
+                    <div class="credit-account-addition">
+                        <div class="credit-account-addition-items">
+                            <div>{{'Settings.Balance' | translate}}</div>
+                            <div>{{ item.Balance | toNumber | number: '.2' }} <span
+                                    *ngIf="item.CurrencyId">{{ currencySymbol }}</span>
+                                <span *ngIf="!currencySymbol">{{ CurrencyId }}</span></div>
+                        </div>
+                        <div class="credit-account-addition-items">
+                            <div>{{ 'Settings.CreatedDate' | translate }}</div>
+                            <div>{{ item?.CreationTime | date: 'dd.MM.YY HH:mm'}}</div>
+                        </div>
+                        <div class="credit-account-addition-items credit-account-withdrawable-balances">
+                            <div>{{'Balance.Withdrawable' | translate}}</div>
+                            <div>{{ item.withdrawable | number: '.2' }} {{ currencySymbol }}</div>
+                        </div>
+                        <div class="credit-account-addition-items credit-account-withdrawable-balances">
+                            <div>{{'Balance.NotWithdrawable' | translate}}</div>
+                            <div>{{ item.notWithdrawable | number: '.2' }} {{ currencySymbol }}</div>
+                        </div>
+                        <div class="credit-account-addition-items credit-account-withdrawable-balances">
+                            <div>{{'Balance.BonusAccount' | translate}}</div>
+                            <div>{{ item.bonus | number: '.2' }} {{ currencySymbol }}</div>
+                        </div>
+                        <div class="credit-account-addition-items credit-account-withdrawable-balances" *ngIf="item.BetShopId === null">
+                            <div>{{'Balance.WithdrawalRequest' | translate}}</div>
+                            <div>{{ item.withdrawalRequest | number: '.2' }} {{ currencySymbol }}</div>
+                        </div>
+                        <div class="credit-account-addition-items credit-account-withdrawable-balances" *ngIf="item?.bonusWinName">
+                            <div>{{ item.bonusWinName }}</div>
+                            <div>{{ item.bonusWin | number: '.2' }} {{ currencySymbol }}</div>
+                        </div>
+                        <div class="credit-account-addition-items credit-account-withdrawable-balances" *ngIf="item?.compBalanceName">
+                            <div>{{ item.compBalanceName }}</div>
+                            <div>{{ item.compBalance | number: '.2' }}</div>
+                        </div>
+                        <div class="credit-account-addition-items credit-account-withdrawable-balances" *ngIf="item?.coinBalanceName">
+                            <div>{{ item.coinBalanceName }}</div>
+                            <div>{{ item.coinBalance | number: '.2' }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="deposit-tab">
+        <div class="container-part">
+            <div class="titles" collapse>
+                <span class="change-password-tab-text">{{'Settings.Deposit' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <div class="opened-deposit-tab">
+                <app-mobile-deposit-block-default></app-mobile-deposit-block-default>
+            </div>
+        </div>
+    </div>
+    <div class="deposit-tab">
+        <div class="container-part">
+            <div class="titles" collapse>
+                <span class="change-password-tab-text">{{'Settings.Withdraw' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <div class="opened-withdraw-tab">
+                <app-mobile-withdraw-block-default></app-mobile-withdraw-block-default>
+            </div>
+        </div>
+    </div>
+</div>

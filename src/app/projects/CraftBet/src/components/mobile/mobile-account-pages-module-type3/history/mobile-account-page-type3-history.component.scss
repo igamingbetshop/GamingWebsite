@@ -1,0 +1,254 @@
+.mobile-history-tab {
+  padding: 19px 8px;
+  background: #ededed;
+
+  .container-part {
+    margin-bottom: 30px;
+    .pagination_section {
+      font-size: 13px;
+    }
+    .history-options {
+      width: 100%;
+      display: flex;
+      flex-direction: var(--m-history-options-container-flex-direction, column);
+      gap: var(--m-history-options-container-gap, 10px);
+
+      .custom_dropdown_reg {
+        background: #fff;
+        color: #000;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+
+        .current_item {
+          border: var(--m-history-options-container-border, 1px solid #bcbcbc);
+          justify-content: var(--m-history-options-container-justify-content, space-between);
+          border-radius: var(--m-history-options-container-border-radius, 50px);
+          height: var(--m-history-options-container-height, 100%);
+        }
+
+        .current_item:hover {
+          color: var(--m-history-options-selected-item-hover-color, #000);
+        }
+
+        .selected-item {
+          margin-left: var(--m-history-options-selected-item-margin-left, auto);
+          font-size: var(--m-history-options-selected-item-font-size, 14px);
+        }
+
+        .change-icon {
+          margin-left: auto;
+          transform: rotate(90deg);
+          color: #808080;
+          margin-right: 10px;
+          display: var(--m-history-options-right-icon-display, block);
+        }
+        .period-dropdown {
+          height: auto;
+        }
+        .status-dropdown {
+          height: auto;
+        }
+        .custom_dropdown_list {
+          background: #fff;
+          border-color: #D0CECE;
+          margin-top: 2px;
+
+          .custom_dropdown_list_items {
+            height: 30px;
+            line-height: 30px;
+            font-size: 15px;
+            background: #fff;
+            padding-left: 7px;
+          }
+          .custom_dropdown_list_items:hover {
+            color: #fff;
+            background: #767676;
+          }
+          .custom_dropdown_list_items:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+
+    .history-list {
+      background: #fff;
+      width: 100%;
+      color: #000;
+      margin: 16px auto;
+      font-size: 12px;
+      padding: 6px 10px 4px;
+      .empty-bets-image {
+        width: 90px;
+      }
+
+      .user-history-content {
+        padding: 12px 0;
+
+        .user-history-details {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
+      .history-part {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding-bottom: 10px;
+
+        .history-left-part {
+          text-align: left;
+          line-height: 21px;
+
+          .bold {
+            font-weight: 700;
+          }
+
+          .history-date {
+            color: #BCBCBC;
+          }
+
+          .amount-part {
+            background: #999999;
+            margin-left: 8px;
+            padding: 1px 13px;
+            border-radius: 10px;
+            color: #fff;
+          }
+          .amount-part2 {
+            margin-left: 8px;
+          }
+        }
+
+        .history-right-part {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          font-size: 18px;
+          font-weight: 600;
+          .possible-win-state {
+            color: #000;
+            font-weight: 400;
+            margin: 0;
+            font-size: 13px;
+            text-align: right;
+          }
+          .possible-win-state-direction {
+            margin-top: 13px;
+          }
+          .status-1 {
+            color: #FBAF03;
+          }
+
+          .status-2 {
+            color: #19B600;
+          }
+
+          .status-3 {
+            color: #E70202;
+          }
+          .status-4 {
+            color: #000;
+          }
+          .status-6 {
+            color: #E70202;
+          }
+          .status-7 {
+            color: #19B600;
+          }
+
+          .change-icon {
+            transform: rotate(90deg);
+            font-size: 13px;
+            color: #A9A9A9;
+          }
+        }
+
+      }
+
+      .bets-selections-list-details {
+        background: white;
+        color: black;
+        display: none;
+
+        .bets-selections-details-list {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid #BCBCBC;
+          padding: 10px 0;
+          border-top: 1px solid #bcbcbc;
+
+          .history-left-part {
+            text-align: left;
+
+            .info-unit-name {
+              font-weight: 600;
+            }
+
+            .history-logo {
+              display: flex;
+              align-items: center;
+              .logo-b {
+                width: 30px;
+                height: 30px;
+                color: #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                border-radius: 3px;
+                margin-right: 5px;
+                background: #EDEDED;
+                cursor: pointer;
+              }
+              .unit-name-style {
+                width: var(--m-history-bet-selection-uni-name-width, 150px);
+              }
+            }
+
+            .info-bet-score {
+              //font-size: 22px;
+              //font-size: 16px;
+            }
+          }
+
+          .history-right-part {
+            position: relative;
+            color: #5B5B5B;
+
+            .info-unit-name {
+              //font-weight: 600;
+            }
+
+            .history-image-part {
+              display: var(--bets-history-image-display, block);
+              position: absolute;
+              right: 45px;
+              bottom: -2px;
+
+              img {
+                width: 12px;
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+    .opened {
+      & + .bets-selections-list-details {
+        display: block;
+      }
+
+      .history-right-part .change-icon {
+        transform: rotate(-90deg) !important;
+      }
+    }
+  }
+}

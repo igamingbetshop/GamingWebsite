@@ -8,8 +8,10 @@ import {LoaderService, SharedService} from "@core/services";
 
 import {ContentClasses} from "../../../../services/enums/dynamicllyClasses";
 import {ActivatedRoute} from "@angular/router";
-import {fromEvent} from "rxjs";
+import {fromEvent, take} from "rxjs";
 import {debounceTime} from "rxjs/operators";
+import {Controllers, Methods} from "@core/enums";
+import {CharactersComponent} from "../fragments/characters/characters.component";
 
 @Component({
     selector: 'app-app-main',
@@ -70,10 +72,34 @@ export class AppMainComponent extends CommonMainComponent implements AfterViewIn
 
     override async loadComponent():Promise<any>
     {
-        const { CharactersModule } = await import('../fragments/characters/characters.module');
-        const moduleRef = createNgModuleRef(CharactersModule, this.injector);
-        const component = moduleRef.instance.getComponent();
-        return component;
+        const data = await this.getCharacters();
+        const characters = data['ResponseObject'];
+        window["characters"] = characters;
+        if(characters.length > 1)
+        {
+            const { CharactersModule } = await import('../fragments/characters/characters.module');
+            const moduleRef = createNgModuleRef(CharactersModule, this.injector);
+            const component = moduleRef.instance.getComponent();
+            return component;
+        }
+        else
+        {
+            if(characters.length === 1)
+            {
+                this.baseApiService.apiPost("",{Controller:Controllers.CLIENT, Method:Methods.ADD_CHARACTER_TO_CLIENT, RequestData: characters[0].Id},null).pipe(take(1)).subscribe(data => {
+                    let user = this.localStorageService.get("user");
+                    user.CharacterId = data['ResponseObject'];
+                    this.localStorageService.add("user", user);
+                    this.loginService.notifyUpdateCharacter();
+                });
+            }
+            return null;
+        }
+    }
+
+    async getCharacters()
+    {
+        return this.baseApiService.apiPost("",{Controller:Controllers.MAIN}, Methods.GET_CHARACTERS, false).toPromise();
     }
 
     checkVisibilityFooter() {

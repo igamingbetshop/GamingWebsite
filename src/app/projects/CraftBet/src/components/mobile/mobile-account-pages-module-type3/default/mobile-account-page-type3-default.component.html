@@ -1,0 +1,25 @@
+<div class="mobile-user-default-section" [ngStyle]="layoutService.layoutStyle">
+
+    <div class="mobile-user-default-section_top tab-{{tabType}}">
+        <div class="mobile-user-default-section-top-title">
+            <div class="title">{{ 'User.PersonalDetails' | translate }} - <b>{{ userData?.UserName }}</b></div>
+            <div class="icon-close mobile-icon-close" [routerLink]="['/' + configService.defaultOptions['HomePageType']]"></div>
+        </div>
+        <div class="mobile-user-left-panel">
+            <ul class="mobile-user-left-panel-list" horizontal-scroll #horizontalScrollContainer>
+                <li *ngFor="let item of menuList" class="mobile-user-left-panel-header">
+                    <div class="mobile-title-menu" (click)="savedDateService.getItem(item)"
+                         [ngClass]="(savedDateService.selectedItem == item) || (item.SubMenu.includes(savedDateService.currentSubItem)) ? 'active' : ''"
+                         [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + item.SubMenu[0]?.Href">
+                        <div>
+                            <span>{{ 'User.' + item?.Title | translate }}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile-user-right-panel">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+.items-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: #606060;
+  margin: 0 auto;
+  font-size: 15px;
+  padding: 8px 0;
+  .left-part {
+    color: #000;
+  }
+  .right-part {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    input {
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      text-align: right;
+      color: #606060;
+      opacity: 1;
+      background: transparent;
+    }
+    .icon-edit {
+      font-size: 13px;
+      color: #A3A3A3;
+      cursor: pointer;
+    }
+  }
+  .active_item {
+    text-decoration: underline;
+  }
+}

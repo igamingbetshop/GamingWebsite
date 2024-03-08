@@ -1,0 +1,99 @@
+<div class="mobile-history-tab">
+    <div class="container-part">
+        <form class="history-options">
+            <div class="custom_dropdown_reg" dropdown>
+                <div class="flex_between current_item">
+                    <div *ngIf="!selectedStatus" class="selected-item">{{ 'User.Status' | translate }}</div>
+                    <div *ngIf="selectedStatus" class="selected-item">{{ selectedStatus | translate }}</div>
+                    <div class="change-icon">
+                        <span class="icon-arrow-right"></span>
+                    </div>
+                </div>
+                <ul class="custom_dropdown_list right-top">
+                    <li class="custom_dropdown_list_items" *ngFor="let item of paymentsFilter"
+                        (click)="selectedStatusValue(item)">{{ item?.Name | translate }}</li>
+                </ul>
+            </div>
+            <div class="custom_dropdown_reg" dropdown>
+                <div class="flex_between current_item">
+                    <div *ngIf="!selectedDate" class="selected-item">{{ 'User.Period-of-time' | translate }}</div>
+                    <div *ngIf="selectedDate" class="selected-item">{{ selectedDate | translate }}</div>
+                    <div class="change-icon">
+                        <span class="icon-arrow-right"></span>
+                    </div>
+                </div>
+                <ul class="custom_dropdown_list right-top">
+                    <li class="custom_dropdown_list_items" *ngFor="let item of historyTimeFilter; let i = index"
+                        (click)="selectedDateValue(i, item)">{{ item?.Name | translate }}</li>
+                </ul>
+            </div>
+            <div class="custom_dropdown_reg" dropdown>
+                <div class="flex_between current_item">
+                    <div *ngIf="!selectedType" class="selected-item">{{ 'User.Payment-Type' | translate }}</div>
+                    <div *ngIf="selectedType" class="selected-item">{{ selectedType }}</div>
+                    <div class="change-icon">
+                        <span class="icon-arrow-right"></span>
+                    </div>
+                </div>
+                <ul class="custom_dropdown_list right-top">
+                    <li class="custom_dropdown_list_items"
+                        *ngFor="let typeFilter of getPaymentsService.paymentTypesList"
+                        (click)="selectedTypeStatusValue(typeFilter)">{{ typeFilter?.Name }}</li>
+                </ul>
+            </div>
+        </form>
+        <ng-container *ngIf="getPaymentsService.paymentHistoryItemsList.length > 0; else emptyPayments">
+            <section>
+                <div class="history-list"
+                     *ngFor="let item of getPaymentsService.paymentHistoryItemsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getPaymentsService.paymentHistoryItemsCount }, let i = index">
+                    <div class="history-partition">
+                        <div class="history-part">
+                            <div class="history-date">{{item?.CreationTime | date: 'dd.MM.yyyy HH:mm'}}</div>
+                            <div>{{item?.StatusTypeName}}</div>
+                        </div>
+                        <div class="history-part">
+                            <div>{{ 'User.Id' | translate }}</div>
+                            <div>{{item?.Id}}</div>
+                        </div>
+                        <div class="history-part">
+                            <div>{{ 'User.Amount' | translate }}</div>
+                            <div>{{item?.Amount | number:'1.2-2'}} {{ CurrencyId }}</div>
+                        </div>
+                        <div class="history-part">
+                            <div>{{ 'User.PaymentSystem' | translate }}</div>
+                            <div>{{item?.PaymentSystemName}}</div>
+                        </div>
+                        <div class="history-part">
+                            <div>{{ 'User.Status' | translate }}</div>
+                            <div>{{item?.StatusName}}</div>
+                        </div>
+                        <div class="history-part"
+                             [style.justify-content]="((item.Comment !== null && item.Comment !== '') && ((item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1))) ? 'space-between' : 'center'">
+                            <button class="info-btn" type="submit" (click)="canselPayment(item.Id)"
+                                    *ngIf="(item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1 && allowCancelConfirmedWithdraw)">
+                                {{'User.Cancel' | translate}}
+                            </button>
+                            <button type="button" class="info-btn" (click)="openInfoBlock(item.Comment)"
+                                    *ngIf="item.Comment !== null && item.Comment !== ''"
+                                    title="{{'User.PaymentInfo' | translate}}">{{ 'User.Info' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="error_message">{{ errorMessage }}</div>
+                <div class="pagination_section" *ngIf="getPaymentsService.paymentHistoryItemsList.length > 0">
+                    <pagination-controls previousLabel="{{'User.Previous' | translate}}"
+                                         nextLabel="{{'User.Next' | translate}}"
+                                         autoHide="true"
+                                         (pageChange)="getPaymentData($event)"></pagination-controls>
+                </div>
+            </section>
+        </ng-container>
+        <ng-template #emptyPayments>
+            <section class="empty-payments empty-block">
+                <span class="icon-transaction icon"></span>
+                <span class="empty-block-text" style="cursor: default;">{{ 'User.Payments-empty' | translate }}</span>
+                <span class="empty-history-text">{{ noHistory }}</span>
+            </section>
+        </ng-template>
+    </div>
+</div>

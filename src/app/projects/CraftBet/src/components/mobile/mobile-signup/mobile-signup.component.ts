@@ -7,7 +7,8 @@ import {SaveData} from "@core/services";
 
 @Component({
   selector: 'app-mobile-signup',
-  templateUrl: './mobile-signup.component.html'
+  templateUrl: './mobile-signup.component.html',
+  styleUrls: ['./mobile-signup.component.scss']
 })
 export class MobileSignupComponent extends BaseRegisterDynamicFieldsComponent {
 
@@ -40,6 +41,7 @@ export class MobileSignupComponent extends BaseRegisterDynamicFieldsComponent {
 
   ngOnInit() {
     super.ngOnInit();
+    document.querySelectorAll("")
   }
 
   ngOnDestroy() {

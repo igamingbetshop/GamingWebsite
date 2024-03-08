@@ -1,8 +1,9 @@
 import {Directive, Input} from "@angular/core";
-import {ConfigService} from "../../../@core/services";
+import {ConfigService, LocalStorageService} from "../../../@core/services";
 import * as moment from "moment/moment";
 import {TimeZone} from "../../../@core/interfaces";
 import {Subject, Subscription, takeUntil, timer} from "rxjs";
+import {TranslateService} from "@ngx-translate/core";
 
 @Directive()
 
@@ -13,9 +14,15 @@ export class BaseTime {
     subscription:Subscription;
     searchPattern:string;
     isDropDown:boolean = false;
+    public userData: any;
+    public lastLogin;
     @Input() menuItem:any;
     private readonly _stop = new Subject<void>();
-    constructor(private config:ConfigService) { }
+    constructor(private config:ConfigService,private translate: TranslateService,
+    private localStorageService: LocalStorageService) {
+        this.userData = this.localStorageService.get('user');
+        this.lastLogin = this.translate.instant('User.LastLogin');
+    }
 
     ngOnInit()
     {

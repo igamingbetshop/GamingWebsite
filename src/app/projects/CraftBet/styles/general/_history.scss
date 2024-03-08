@@ -47,7 +47,7 @@
       width: calc(100% / 6);
       text-align: var(--payments-section-block-head-text-align, center);
       &.info-btn-head {
-        width: var(--info-btn-head-width, 50px);
+        width: 56px;
       }
     }
   }
@@ -67,120 +67,168 @@
       gap: var(--bonuses-block-gap, 10px);
       font-size: var(--bonuses-block-font-size, 16px) !important;
     }
-    .block, .bets-block {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: var(--history-block-section-font-size, 16px);
-      padding: var(--history-block-section-bets-padding, 0);
-      border-bottom: var(--history-block-section-bets-border-bottom, none);
-      .hide-form-row {
-        display: var(--bank-account-hide-field-display, block);
-      }
-      .form-row-icons {
-        display: var(--bank-account-hide-icons-display, block);
-        cursor: pointer;
-        span:last-child {
-          margin-left: var(--bank-account-icons-margin-left, 30px);
-        }
-        span {
-          color: var(--bank-account-icons-color, #fff);
-          &:hover {
-            color: var(--bank-account-icons-hover-color, #fff);
-          }
-        }
-      }
-      .red1 {
-        border: var(--history-info-account-status-border-red, none);
-        .icon-rejected:before {
-          .icon-pending:before {
-            color: var(--history-info-account-status-icon-rejected-color, #c2394b);
-          }
-        }
-      }
-      .yellow1 {
-        border: var(--history-info-account-status-border-yellow, none);
-        .icon-pending:before {
-          color: var(--history-info-account-status-icon-pending-color, #ceb700);
-        }
-      }
-      .green1 {
-        border: var(--history-info-account-status-border-green, none);
-        .icon-verified:before {
-          color: var(--history-info-account-status-icon-verified-color, #599f61);
-        }
-      }
-      .black1 {
-        border: var(--history-info-account-status-border-black, none);
-      }
-      .account-status {
+    .bets-content
+    {
+      .block, .bets-block {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        justify-content: var(--history-info-account-status-justify-content, unset);
-        border-radius: var(--history-info-account-status-border-radius, 0);
-        padding: var(--history-info-account-status-padding, 0);
-        .item-status{
-          margin: var(--history-info-account-status-margin, 0 0 0 10px);
+        font-size: var(--history-block-section-font-size, 16px);
+        padding: var(--history-block-section-bets-padding, 0);
+        border-bottom: var(--history-block-section-bets-border-bottom, none);
+        .hide-form-row {
+          display: var(--bank-account-hide-field-display, block);
         }
-        .red {
-          color: var(--history-info-account-status-text-rejected-color, #c2394b);
-        }
-        .yellow {
-          color: var(--history-info-account-status-text-pending-color, #ceb700);
-        }
-        .green {
-          color: var(--history-info-account-status-text-verified-color, #599f61);
-        }
-      }
-      &_item {
-        width: calc(100% / 6);
-        .eye-class {
+        .form-row-icons {
+          display: var(--bank-account-hide-icons-display, block);
           cursor: pointer;
-          color: var(--history-info-account-view-button-color, #fff);
+          span:last-child {
+            margin-left: var(--bank-account-icons-margin-left, 30px);
+          }
+          span {
+            color: var(--bank-account-icons-color, #fff);
+            &:hover {
+              color: var(--bank-account-icons-hover-color, #fff);
+            }
+          }
         }
-        .eye-class:hover {
-          color: var(--history-info-account-view-button-hover-color, #fff);
+        .red1 {
+          border: var(--history-info-account-status-border-red, none);
+          .icon-rejected:before {
+            .icon-pending:before {
+              color: var(--history-info-account-status-icon-rejected-color, #c2394b);
+            }
+          }
         }
-        .info-btn {
-          height: var(--history-info-btn-height, 25px);
-          background: linear-gradient(
-                          180deg, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
-          border: none;
-          color: var(--history-info-btn-color, #fff);
-          display: var(--history-info-btn-display, block);
-          font-size: $font-size-3;
-          border-radius: 4px;
-          cursor: pointer;
+        .yellow1 {
+          border: var(--history-info-account-status-border-yellow, none);
+          .icon-pending:before {
+            color: var(--history-info-account-status-icon-pending-color, #ceb700);
+          }
         }
-        &.item-transl {
+        .green1 {
+          border: var(--history-info-account-status-border-green, none);
+          .icon-verified:before {
+            color: var(--history-info-account-status-icon-verified-color, #599f61);
+          }
+        }
+        .black1 {
+          border: var(--history-info-account-status-border-black, none);
+        }
+        .account-status {
+          display: flex;
+          align-items: center;
+          justify-content: var(--history-info-account-status-justify-content, unset);
+          border-radius: var(--history-info-account-status-border-radius, 0);
+          padding: var(--history-info-account-status-padding, 0);
+          .item-status{
+            margin: var(--history-info-account-status-margin, 0 0 0 10px);
+          }
+          .red {
+            color: var(--history-info-account-status-text-rejected-color, #c2394b);
+          }
+          .yellow {
+            color: var(--history-info-account-status-text-pending-color, #ceb700);
+          }
+          .green {
+            color: var(--history-info-account-status-text-verified-color, #599f61);
+          }
+        }
+        &_item {
+          width: calc(100% / 7);
+          .eye-class {
+            cursor: pointer;
+            color: var(--history-info-account-view-button-color, #fff);
+          }
+          .eye-class:hover {
+            color: var(--history-info-account-view-button-hover-color, #fff);
+          }
+          .info-btn {
+            height: var(--history-info-btn-height, 25px);
+            background: linear-gradient(
+                            180deg, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
+            border: none;
+            color: var(--history-info-btn-color, #fff);
+            display: var(--history-info-btn-display, block);
+            font-size: $font-size-3;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          &.item-transl {
+            display: inline-block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 11%;
+            white-space: nowrap;
+          }
+          &.info {
+            width: 50px;
+          }
+        }
+        .delete-icon{width: fit-content; margin-left: 8px; cursor: pointer}
+        .displayed
+        {
+          display:flex; flex-flow:row wrap;
+          p:first-child {
+            text-align: left;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-right: 10px;
+          }
+          p:last-child {
+            text-align: var(--history-amount-currency-item-text-align, right);
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 38%;
+          }
+        }
+
+        .status{
           display: inline-block;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          width: 11%;
-          white-space: nowrap;
+          height: 27px;
+          line-height: 27px;
+          padding: 0 14px;
+          border-radius: 4px;
+          color: rgba(12, 106, 230, 1);
+          background: rgba(20, 46, 84, 1);
+          font-weight: 500;
+
+          &.status-Pending
+          {
+            color: #f5a711;
+            background: rgba(56, 60, 65, 1);
+          }
+          &.status-Won
+          {
+            color: rgba(34, 207, 180, 1);
+            background-color: rgba(23, 52, 70, 1);
+          }
+          &.status-Lost
+          {
+            background: rgba(57, 42, 62, 1);
+            color: rgba(216, 0, 39, 1);
+          }
+          &.status-Deleted{
+            background: rgba(57, 47, 66, 1);
+            color:rgba(253, 114, 114, 1);
+          }
+          &.status-Cashouted{
+            background: rgba(38, 43, 83, 1);
+            color: rgba(128, 84, 223, 1);
+          }
+          &.status-Waiting{
+            color: rgba(248, 203, 107, 1);
+            background: rgba(56, 60, 65, 1);
+          }
+          &.status-Returned{
+            background: rgba(31, 57, 81, 1);
+            color:rgba(84, 183, 211, 1);
+          }
         }
-        &.info {
-          width: 50px;
-        }
-      }
-      .delete-icon{width: fit-content; margin-left: 8px; cursor: pointer}
-      .displayed
-      {
-        display:flex; flex-flow:row wrap;
-        p:first-child {
-          text-align: left;
-          margin-top: 0;
-          margin-bottom: 0;
-          margin-right: 10px;
-        }
-        p:last-child {
-          text-align: right;
-          margin-top: 0;
-          margin-bottom: 0;
-          width: 38%;
-        }
+
       }
     }
+
     .pagination_section {
       position: var(--history-info-pagination-section-position, relative);
       bottom: var(--history-info-pagination-section, 0);

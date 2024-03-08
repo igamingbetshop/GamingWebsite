@@ -7,6 +7,7 @@ export interface ConfirmModel {
   title: string;
   url:string;
   cancelUrl?:string;
+  closable?:boolean;
 }
 
 @Component({
@@ -18,6 +19,7 @@ export class BaseFrameComponent extends SimpleModalComponent<ConfirmModel, boole
 
   public title: string;
   public url:string;
+  public closable:boolean = true;
   public cancelUrl?:string;
   public deviceSize: any;
 
@@ -56,19 +58,25 @@ export class BaseFrameComponent extends SimpleModalComponent<ConfirmModel, boole
         {
           window.location.href = data.data.data.redirectUrl;
         }
-        else if(data.data.data.cancelFromParent)
-        {
-          this.onClose();
-        }
-        else if(data.data.data.navigateByUrl)
-        {
-          window.location.href = data.data.data.navigateByUrl;
-        }
+
       }
-      else if(data.data.from === 'close-game')
+      else if(data.data.from === 'registerForm')
       {
-        this.close();
+        if(data.data.data.height || data.data.data.width)
+        {
+          const frame = document.getElementById('frame') as HTMLIFrameElement;
+          if(frame)
+          {
+            if(data.data.data.height)
+              frame.style.height = data.data.data.height + 'px';
+            if(data.data.data.width)
+              frame.style.width = data.data.data.width + 'px';
+            document.getElementById('paymentFrame').style.height = 'auto';
+            frame.focus();
+          }
+        }
       }
+
     }
   }
 
@@ -82,12 +90,17 @@ export class BaseFrameComponent extends SimpleModalComponent<ConfirmModel, boole
     const p = setTimeout(() => {
       this.close();
     }, 500);*/
-    this.close();
     if(this.cancelUrl)
     {
       this.baseApiService.apiGet(this.cancelUrl, null, '').pipe(take(1)).subscribe(data => {
+        this.close();
       }, error => {
+        this.close();
       });
+    }
+    else
+    {
+      this.close();
     }
   }
 

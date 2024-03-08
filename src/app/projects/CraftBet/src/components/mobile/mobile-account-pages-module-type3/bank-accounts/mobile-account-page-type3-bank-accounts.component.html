@@ -1,0 +1,43 @@
+<div class="mobile-tickets-section">
+    <div class="container-part">
+        <h2 class="mobile-tickets-section_title">{{'User.Bank_Accounts' | translate}}</h2>
+
+        <div class="add-tickets">
+            <button type="button" class="craft_btn" (click)="addAccount()">{{'User.Add_Account' | translate}}</button>
+        </div>
+        <ng-container *ngIf="paymentService.bankAccounts.length > 0; else emptyBanks">
+            <div class="history-list" *ngFor="let account of paymentService.bankAccounts">
+                <div class="history-partition">
+                    <div class="history-part">
+                        <div>{{'User.BankName' | translate}}</div>
+                        <div>{{account.BankName}}</div>
+                    </div>
+                    <div class="history-part">
+                        <div>{{'User.BranchName' | translate}}</div>
+                        <div>{{account.BranchName}}</div>
+                    </div>
+                    <div class="history-part">
+                        <div>{{'User.AccountType' | translate}}</div>
+                        <div>{{account.BankAccountTypeName}}</div>
+                    </div>
+                    <div class="history-part">
+                        <div>{{'User.Iban' | translate}}</div>
+                        <div>{{account.Iban}}</div>
+                    </div>
+                    <div class="history-part">
+                        <div>{{'User.BankAccountNumber' | translate}}</div>
+                        <div>{{account.BankAccountNumber}}</div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #emptyBanks>
+            <section class="empty-banks empty-block">
+                <span class="icon-transaction icon"></span>
+                <span class="empty-block-text">{{'User.Banks-empty' | translate}}</span>
+            </section>
+        </ng-template>
+    </div>
+
+
+</div>

@@ -1,0 +1,25 @@
+<div class="casino-search-fragment">
+    <div class="search-box auto-complete">
+        <fa-icon class="icon-search" [icon]="['fas', 'search']"></fa-icon>
+        <input type="text"
+               placeholder="{{'Game.Search_game' | translate}}..."
+               [(ngModel)]="pattern"
+               (focus)="openAutoComplete()"
+               (ngModelChange)="patternSbj.next($event)"
+               (clickOutside)="closeAutoComplete()">
+        <dl *ngIf="showAutocomplete" class="dropdown-container">
+            <dt *ngIf="providers.length" class="header">{{'Game.Providers' | translate}}</dt>
+            <dd *ngFor="let provider of providers" class="item" (click)="openProvider(provider)">
+                {{provider.Name}}
+            </dd>
+            <dt *ngIf="categories.length" class="header">{{'Game.Categories' | translate}}</dt>
+            <dd *ngFor="let category of categories" class="item" (click)="openCategory(category)">
+                {{category.Name}}
+            </dd>
+            <dt class="header">{{'Game.Games' | translate}}</dt>
+            <dd *ngFor="let game of items" class="item" (click)="openGame(game)">
+                {{game.N}}
+            </dd>
+        </dl>
+    </div>
+</div>

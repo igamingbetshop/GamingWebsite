@@ -49,6 +49,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 8px;
+    margin-bottom: 30px;
     cursor: pointer;
     color: var(--verify-timer-resend-text-color, rgba(185, 187, 194, 1));
     &.active {

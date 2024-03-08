@@ -1,0 +1,128 @@
+.mobile-transactions-tab {
+  padding: 19px 24px;
+  background: #ededed;
+  .container-part {
+    margin-bottom: 30px;
+    .pagination_section {
+      font-size: 13px;
+    }
+    .history-options {
+      width: 100%;
+      display: flex;
+      flex-direction: var(--m-history-options-container-flex-direction, column);
+      gap: var(--m-history-options-container-gap, 10px);
+      .custom_dropdown_reg {
+        background: #fff;
+        color: #000;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+
+        .current_item {
+          border: var(--m-history-options-container-border, 1px solid #bcbcbc);
+          justify-content: var(--m-history-options-container-justify-content, space-between);
+          border-radius: var(--m-history-options-container-border-radius, 50px);
+          height: var(--m-history-options-container-height, 100%);
+        }
+
+        .current_item:hover {
+          color: var(--m-history-options-selected-item-hover-color, #000);
+        }
+
+        .selected-item {
+          margin-left: var(--m-history-options-selected-item-margin-left, auto);
+          font-size: var(--m-history-options-selected-item-font-size, 14px);
+        }
+
+        .change-icon {
+          margin-left: auto;
+          transform: rotate(90deg);
+          color: #808080;
+          margin-right: 10px;
+          display: var(--m-history-options-right-icon-display, block);
+        }
+        .period-dropdown {
+          height: auto;
+        }
+        .status-dropdown {
+          height: auto;
+        }
+        .types {
+          height: 300px;
+          //overflow-x: hidden;
+        }
+        .custom_dropdown_list {
+          background: #fff;
+          border-color: #D0CECE;
+          margin-top: 2px;
+
+          .custom_dropdown_list_items {
+            height: 30px;
+            line-height: 30px;
+            font-size: 15px;
+            background: #fff;
+            padding-left: 7px;
+          }
+          .custom_dropdown_list_items:hover {
+            color: #fff;
+            background: #767676;
+          }
+          .custom_dropdown_list_items:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+    .pagination_section {
+      font-size: 13px;
+      margin-top: 15px;
+    }
+    .transactions-list-items-title {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      .item-title {
+        text-align: center;
+        font-size: 12px;
+      }
+    }
+    .empty-block {
+      margin: 15px auto !important;
+    }
+    .transactions-list-items {
+      background: #fff;
+      width: 100%;
+      color: #000;
+      margin: 5px auto;
+      font-size: 12px;
+      padding: 9px 10px 9px;
+      .history-date {
+        color: #BCBCBC;
+      }
+      .transactions-part {
+        cursor: pointer;
+        line-height: 20px;
+        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        .transactions-left-part {
+          .bold {
+            font-weight: 600;
+            font-size: 16px;
+          }
+        }
+        .transactions-right-part {
+          .bets-selections-list-details {
+            text-decoration: underline;
+          }
+          .mobile-transactions-amount {
+            font-size: 16px;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}

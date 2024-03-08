@@ -2,7 +2,6 @@ import {Component, Injector} from "@angular/core";
 import {BaseComponent} from "../../../../../../@theme/components/base/base.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserLogined} from "../../../../../../@core/services/app/userLogined.service";
-import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
 import {SimpleModalService} from "ngx-simple-modal";
 
 @Component({

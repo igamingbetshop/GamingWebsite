@@ -1,0 +1,62 @@
+<div class="deposit_payment_section deposit-cash mobile-device">
+
+  <div class="deposit_payment_section__form">
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit()">
+      <div class="payment-form-field">
+        <div class="flex_between">
+          <div class="bonus-and-amount">
+            <div class="payment-amount-label">{{ 'Deposit.Amount' | translate }}</div>
+            <div class="payment-form-field__column">
+              <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input" (ngModelChange)="bonusService.calculateBonusAmount($event)" placeholder="{{'Deposit.Amount-placeholder' | translate}}"
+                     formControlName="Amount" numbersOnly/>  <!--numbersOnly-->
+              <label class="payment-form-field__label">{{ currencySymbol }}</label>
+              <ng-template #nominalsRef>
+                <app-common-payment-nominals [nominals]="nominals" (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="bonus-and-amount" *ngIf="bonusService.isBonusActivated">
+            <div class="payment-form-field__column">
+              <input type="text" class="payment-input" readonly [ngModel]="bonusService.calculatedBonusAmount" placeholder="{{'Deposit.Bonus' | translate}}"
+                     [ngModelOptions]="{standalone: true}"/>
+              <label class="payment-form-field__label">{{'Deposit.Bonus' | translate}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+<!--      <div class="payment-form-field" *ngIf="promoData.length > 0">-->
+<!--        <div class="payment-amount-label">{{ 'Deposit.PromoCode' | translate }}</div>-->
+<!--        <div class="payment-form-field__column">-->
+<!--          <input type="text" class="payment-input" placeholder="{{'Deposit.PromoCode-placeholder' | translate}}"-->
+<!--                 formControlName="PromoCode"/>-->
+<!--        </div>-->
+<!--      </div>-->
+
+      <div class="payment-form-field">
+        <div class="payment-deposit-btn-field">
+          <button type="submit" [disabled]="submitted" class="payment-deposit-btn">
+            <span class="payment-btn__span"> {{'Deposit.Confirm' | translate}} </span>
+          </button>
+
+          <div class="error_message">
+            {{errorMessage}}
+          </div>
+          <div class="error_message" *ngIf="!!hasProfileError">
+            {{'Deposit.ProfileErrorMessage' | translate}}
+            <a routerLinkActive="active" class="link"
+               (click)="routeToSettings()"
+               [routerLink]="'/user/' + (configService.defaultOptions.AccountTemplateType == undefined ? '1' : configService.defaultOptions.AccountTemplateType) + '/profile-details'">
+              {{'Deposit.ProfileErrorLink' | translate}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+

@@ -1,0 +1,589 @@
+.mobile-credit-tab {
+  min-height: 583px;
+  padding: 19px 8px;
+
+  .mobile-credit-section {
+    .open-more-limits {
+      text-align: left;
+      margin-bottom: 15px;
+      margin-top: 20px;
+      margin-left: 4px;
+      font-size: 14px;
+      width: 95%;
+      .click-here {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #bcbcbc;
+      padding-bottom: 7px;
+      font-weight: 600;
+      font-size: 16px;
+      width: 95%;
+      margin: 0 auto;
+    }
+    .container-part2 {
+      border: 1px solid #bcbcbc!important;
+    }
+    .container-part {
+      margin-bottom: 10px;
+      border: 1px solid #c9c9c9;
+      .titles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        width: 100%;
+        color: #000;
+        margin: 0 auto;
+        padding: 14px 15px;
+        cursor: pointer;
+        .change-icon {
+          color: #AFADAD;
+          transform: rotate(90deg);
+          font-size: 15px;
+        }
+        .self-limitation-tab-text {
+          font-size: 18px;
+          font-weight: 700;
+        }
+      }
+      .opened {
+        & + .tabs {
+          display: block
+        }
+
+        .change-icon {
+          transform: rotate(-90deg)
+        }
+      }
+      .tabs-opened {
+        display: block !important;
+      }
+      .tabs {
+        background: #fff;
+        color: #000;
+        padding-bottom: 16px;
+        //padding-top: 13px;
+        display: none;
+        .self-limit-title {
+          text-align: left;
+          margin: 0 auto 20px;
+          padding: 0 20px;
+          font-size: 15px;
+          font-weight: 400;
+        }
+        .self-limit-title2 {
+          margin: 20px auto 20px;
+        }
+        .self-exclusion-section {
+          width: 90%;
+          text-align: left;
+          margin: 0 40px;
+          list-style-type: disc;
+          font-weight: 600;
+        }
+
+        .periods {
+          .period-label {
+            margin: 16px auto 3px;
+            text-align: left;
+            padding: 0 20px;
+            font-size: 15px;
+            font-weight: 600;
+          }
+          .custom_dropdown_reg {
+            background: #fff;
+            border: 1px solid #DADADA;
+            margin: 0 20px;
+            width: 90%;
+            //height: 40px;
+            .current_item {
+              height: 40px;
+              border-radius:0px;
+              border: none;
+              font-size: 14px;
+              color:#000;
+              background: #f2f2f2;
+              padding: 0 10px;
+              justify-content: center;
+              .selected-item {
+                display: inline-block;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                word-break: break-word;
+                text-align: left;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+            }
+
+            .current_item:hover {
+              color: #000;
+            }
+
+            .change-icon2 {
+              transform: rotate(90deg);
+              font-size: 14px;
+              color: #000;
+              margin-left: 10px;
+              //margin-right: 23px;
+            }
+            .custom_dropdown_list {
+              background: #fff;
+              border-color: #A0A0A0;
+              height: auto;
+              //margin-top: 10px;
+
+              .custom_dropdown_list_items {
+                font-size: 14px;
+                height: 35px;
+                text-align: left;
+                line-height: 35px;
+                background: #f2f2f2;
+                justify-content: center;
+              }
+              .selected-reason {
+                background: #dadada;
+              }
+              .selected-reason:hover {
+                background: #dadada !important;
+              }
+
+              .custom_dropdown_list_items:hover {
+                background: #f2f2f2;
+                color: #000;
+              }
+            }
+          }
+        }
+        .self-exclusion-row-date-password {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          margin-top: var(--self-exclusion-row-margin-top, 15px);
+          width: 95.5%;
+          padding: 0 0 0 20px;
+          .date-input {
+            text-align: left;
+            color: white;
+          }
+          .self-exclusion-row-date-input {
+            display: block;
+            text-indent: 16px;
+            font-size: 15px;
+            height: 40px;
+            border: 1px solid #dadada;
+            border-radius: 0px;
+            background: #f2f2f2;
+          }
+          .self-limitation-password-field-type {
+            position: absolute;
+            right: 12px;
+            top: 28px;
+            cursor: pointer;
+            font-size: 19px;
+          }
+        }
+        .self-exclusion-row-date {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          margin-top: var(--self-exclusion-row-margin-top, 20px);
+          padding: 0 20px;
+          .date-input {
+            text-align: left;
+          }
+          .self-exclusion-row-date-input {
+            width: 47%;
+            display: block;
+            text-indent: 16px;
+            font-size: 15px;
+            text-align: center;
+            height: 50px;
+            border: 1px solid #A0A0A0;
+            border-radius: 2px;
+            background: #fff;
+          }
+        }
+        .save-button {
+          cursor: pointer;
+          margin: 25px 20px 0;
+          width: 90%;
+          border: none;
+          background: #ed1c24;
+          color: #fff;
+          font-size: 18px;
+          font-weight: 500;
+          text-align: center;
+          height: 40px;
+          border-radius: 2px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .error-message-self-limitation-lock {
+          top: 16px;
+        }
+        .accountClosure-tab {
+          .accountClosure-tab-text {
+            text-align: left;
+            margin: 0 auto;
+            padding: 0 16px;
+            font-size: 15px;
+            font-weight: 400;
+          }
+          .lost-tab-text {
+            text-align: left;
+            margin: 0 auto;
+            padding: 0 20px 10px;
+            font-size: 15px;
+            font-weight: 400;
+          }
+          .limit-type-form2 {
+            margin-top: 15px;
+          }
+          .limit-type-form {
+            .limit-type {
+              .show-percentage-info {
+                text-align: left;
+                padding: 5px 20px 0;
+                color: var(--deposit-limit-error-color, #FF0000);
+                font-weight: 600;
+              }
+              .limit-type_row-flex {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+              }
+              .limit-type_row {
+                position: relative;
+                .items-list {
+                  display: flex;
+                  align-items: center;
+                  padding: 0 20px;
+                  gap: 10px;
+                  margin-bottom: 15px;
+                  .item-list {
+                    border-radius: 50px;
+                    padding: 8px 25px;
+                    font-size: 16px;
+                    background: #fff;
+                    border: 1px solid #bcbcbc;
+                    cursor: pointer;
+                  }
+                  .selected {
+                    background: #ED1C24;
+                    color: #fff;
+                    font-weight: 600;
+                    border: none;
+                  }
+                }
+                .last-change-date {
+                  text-align: left;
+                  //margin: 5px 0 0 0;
+                  margin: 0px 0 12px 0;
+                  padding: 0 20px;
+                  font-size: 12px;
+                  .last-change-date-span {
+                    font-weight: 600;
+                  }
+                }
+                .limit-type-text {
+                  text-align: left;
+                  margin: 0 auto;
+                  padding: 0 20px;
+                  font-size: 15px;
+                  font-weight: 400;
+                }
+                .limit-type-text-deposit-monthly-label {
+                  font-weight: 400;
+                  text-align: left;
+                  margin: 0 auto;
+                  padding: 0 0px 5px;
+                  font-size: 15px;
+                  width: 100%;
+                  display: block;
+                }
+                .limit-type-text-deposit-monthly {
+                  //text-align: left;
+                  margin: 0 auto;
+                  padding: 0 0px 5px;
+                  font-size: 15px;
+                  //font-weight: 700;
+                  width: 100%;
+                  display: block;
+                  text-align: right;
+                  .limit-type-text-deposit-monthly-padding {
+                    padding: 0 20px;
+                  }
+                }
+                .limit-type-text-monthly {
+                  text-align: left;
+                  margin: 0 auto;
+                  padding: 0 20px 5px;
+                  font-size: 15px;
+                  font-weight: 400;
+                  width: 100%;
+                  display: block;
+                }
+                .limit-type-span {
+                  text-align: left;
+                  padding: 8px 20px 5px;
+                  font-size: 15px;
+                  font-weight: 400;
+                  color: #BCBCBC;
+                  width: 100%;
+                  display: block;
+                }
+                .limit-type-input {
+                  height: 34px;
+                  border: 1px solid #BCBCBC;
+                  border-radius: 5px;
+                  width: 47%;
+                  display: block;
+                  margin: 0 20px;
+                  background: #fff;
+                  text-indent: 16px;
+                  font-size: 15px;
+                  text-align: center;
+                }
+                .limit-type-input-deposit {
+                  height: 50px;
+                  border: 1px solid #BCBCBC;
+                  border-radius: 2px;
+                  width: 47%;
+                  display: block;
+                  margin: 0 20px;
+                  background: #fff;
+                  text-indent: 16px;
+                  font-size: 18px;
+                  font-weight: 700;
+                  text-align: left;
+                }
+                .limit-type-input-deposit::placeholder {
+                  font-weight: 400;
+                  font-size: 16px;
+                  color: #A0A0A0;
+                }
+                .limit-type-currency {
+                  //position: absolute;
+                  width: auto;
+                  //bottom: 11px;
+                  font-size: 22px;
+                  //right: 0;
+                  //left: 0;
+                  //right: -40px;
+                  position: relative;
+                  left: 93%;
+                  bottom: 33px;
+                }
+                .limit-amount-label {
+                  color: #a0a0a0;
+                  left: 0px;
+                  position: relative;
+                  width: auto;
+                  transform-origin: 0 50%;
+                  transition: transform 200ms, color 200ms;
+                  pointer-events: none;
+                  top: -3px;
+                  font-size: 14px;
+                }
+                .limit-amount-label.active {
+                  transform: translateY(-16px) translateX(0px) scale(0.75);
+                  font-size: 18px;
+                }
+                input:focus ~ .limit-amount-label {
+                  top: 53px;
+                  font-size: 18px;
+                }
+                input:focus ~ .limit-amount-label,
+                input:not(:placeholder-shown) ~ .limit-amount-label {
+                  transform: translateY(-16px) translateX(0px) scale(0.75);
+                  font-size: 18px;
+                }
+                .limit-type-field-submit {
+                  height: 37px;
+                  border-radius: 5px;
+                  width: 47%;
+                  display: block;
+                  margin: 20px 20px 0 20px;
+                  font-size: 15px;
+                  background: #F6A201;
+                  color: #fff;
+                  border: none;
+                  cursor: pointer;
+                }
+                .limit-buttons {
+                  display: flex;
+                  width: 92%;
+                  //margin: 5px 20px 5px 20px;
+                  margin: 0 auto;
+                  align-items: center;
+                  gap: 12px;
+                  height: 40px;
+                  .limit-type-field-opened-submit {
+                    height: 100%;
+                    border-radius: 2px;
+                    width: 50%;
+                    display: block;
+                    font-size: 18px;
+                    font-weight: 500;
+                    background: linear-gradient(180deg, #009640 0%, #008237 100%);
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                  }
+                  .limit-type-field-opened-cancel {
+                    height: 100%;
+                    border-radius: 2px;
+                    width: 50%;
+                    display: block;
+                    font-size: 18px;
+                    font-weight: 500;
+                    background: linear-gradient(180deg, #E30613 0%, #C10000 100%);
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                  }
+                }
+                .change-limit-type-field-submit {
+                  height: 40px;
+                  border-radius: 2px;
+                  width: 92%;
+                  display: block;
+                  //margin: 5px 20px 10px 20px;
+                  margin: 0 auto 10px auto;
+                  font-size: 18px;
+                  background: linear-gradient(#009640, #008237);
+                  color: #fff;
+                  border: none;
+                  cursor: pointer;
+                }
+                .validation-error {
+                  position: absolute;
+                  bottom: -33px;
+                  left: 20px;
+                  font-size: 12px;
+                  color: red;
+                }
+                .validation-input-error {
+                  border: 1px solid red;
+                }
+              }
+              .limit-type_row-input {
+                position: relative;
+                width: 92%;
+                margin: 0 auto;
+                .limit-type-input-deposit {
+                  height: 40px;
+                  border: none;
+                  border-radius: 2px;
+                  width: 100%;
+                  display: block;
+                  margin: 0px;
+                  background: #f2f2f2;
+                  text-indent: 10px;
+                  font-size: 18px;
+                  font-weight: 400;
+                  text-align: left;
+                }
+              }
+              .limit-type-opened-row {
+                padding-top: 17px;
+              }
+            }
+          }
+          .success-message-self-limitation {
+            text-align: left;
+            padding: 3px 10px;
+            color: green;
+          }
+          .error-message-self-limitation {
+           position: relative;
+            top: 2px;
+            border: none;
+            background: transparent;
+            height: 14px;
+            .error-message-self-limitation2 {
+              //position: absolute;
+              //top: 2px;
+              //left: 20px;
+              //border-left: none;
+              //background: transparent;
+              //height: 14px;
+              //font-weight: 600;
+              //padding-left: 0;
+              position: absolute;
+              top: -27px;
+              left: 20px;
+              border-left: none;
+              background: transparent;
+              height: 14px;
+              font-weight: 600;
+              padding-left: 0;
+            }
+          }
+          .accountClosure-tab-form {
+            display: flex;
+            flex-direction: column;
+            gap: 23px;
+            padding: 18px 20px 0px 20px;
+            width: 100%;
+            .form_field {
+              position: relative;
+              .put-password-input {
+                height: 40px;
+                border: 1px solid #DADADA;
+                border-radius: 2px;
+                font-size: 15px;
+                background: #f2f2f2;
+              }
+              .self-limitation-account-password-field-type {
+                position: absolute;
+                right: 12px;
+                top: 11px;
+                cursor: pointer;
+                font-size: 18px;
+              }
+              .put-password-input:focus::placeholder {
+                opacity: 0;
+              }
+              .submit-password-input {
+                background: #ed1c24;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 500;
+                text-align: center;
+                height: 40px;
+                border-radius: 2px;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+.shop-wallet-part {
+  .shop-wallet-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    height: 200px;
+    .shop-wallet-text {
+      color: #aeaeae;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+}

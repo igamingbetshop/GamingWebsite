@@ -8,6 +8,8 @@ import { ToNumberPipeModule } from '../../../../../../../@theme/pipes/to-number/
 import { PaymentControllerService } from '../../../../../../../@core/services/app/paymentController.services';
 import { BonusesService } from '../../../../../../../@core/services/api/bonuses.service';
 import { GetBetsHistoryService } from '../../../../../../../@core/services/app/getBetsHistory.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {CollapseDirectiveModule} from "../../../../../../../@theme/directives/collapse/collapse-directive.module";
 
 @NgModule({
     declarations: [AccountPageType3BonusesComponent],
@@ -18,6 +20,8 @@ import { GetBetsHistoryService } from '../../../../../../../@core/services/app/g
         ReactiveFormsModule,
         SanitizerModule,
         ToNumberPipeModule,
+        FontAwesomeModule,
+        CollapseDirectiveModule,
     ],
     providers: [
         PaymentControllerService,

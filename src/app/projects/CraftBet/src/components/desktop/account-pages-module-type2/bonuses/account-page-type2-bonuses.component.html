@@ -45,51 +45,24 @@
     <div class="bonus-tab-content">
 
         <div class="sport-bonus-box">
-            <div class="sport-bonus-column">
-                <div class="bonuses-block-head block-head" *ngIf="bonusesData?.headers.length !== 0">
-                    <div *ngFor="let head of bonusesData?.headers">{{'User.' + head | translate}}</div>
-                    <div class="info-btn-head"></div>
-                </div>
+            <div class="sport-bonus-column" [ngStyle]="{'grid-template-columns' : 'repeat(' + (bonusesData?.headers.length + 1) +' , minmax(20px, auto))'}">
+                <ng-container *ngIf="bonusesData?.headers.length !== 0">
+                    <div class="bonus-header-name" *ngFor="let head of bonusesData?.headers">{{'User.' + head | translate}}</div>
+                    <div class="bonus-header-name"></div>
+                </ng-container>
                 <ng-container *ngIf="bonusesData?.body.length > 0; else emptyBonuses">
-                    <section>
-                        <div class="bonuses-block block" *ngFor="let bonus of bonusesData?.body">
-                            <div class="bonuses-block_item block_item" *ngFor="let head of bonusesData?.headers">{{bonus[head]}}</div>
-                            <div class="bonuses-block_item block_item info" style="display: flex; align-items: center; gap: 4px">
-                                <div *ngIf="bonus.IsCampaign">
-                                    <button type="button" class="info-btn"
-                                            (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
-                                </div>
+                    <ng-container *ngFor="let bonus of bonusesData?.body">
+                        <div class="bonus-body-name" *ngFor="let head of bonusesData?.headers">{{bonus[head]}}</div>
+                        <div class="bonus-body-name" style="display: flex; align-items: center; gap: 8px">
+                            <div *ngIf="bonus.IsCampaign">
+                                <button type="button" class="info-btn"
+                                        (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
                             </div>
-                            <div class="bonuses-block_item block_item delete-icon">
-                                <fa-icon [icon]="['fas', 'trash-alt']" (click)="deleteBonus(bonus, $event)" [ngStyle]="{'visibility' : (bonus?.StatusId === 1 && bonus?.TypeIdActive) ? 'visible' : 'hidden'}">
-                                </fa-icon>
+                            <div class="delete-icon">
+                                <fa-icon [icon]="['fas', 'trash-alt']" (click)="deleteBonus(bonus, $event)" [ngStyle]="{'visibility' : (bonus?.StatusId === 1 && bonus?.TypeIdActive) ? 'visible' : 'hidden'}"></fa-icon>
                             </div>
-                            <!--<div class="bonuses-block_item block_item">{{bonus?.Id}}</div>
-                            <div class="bonuses-block_item block_item">{{bonus?.Name}}</div>
-                            <div class="bonuses-block_item block_item">{{bonus?.TypeName}}</div>
-                            <div class="bonuses-block_item block_item displayed">
-                                <p>{{ userInfo.CurrencyId }}</p>
-                                <p>{{bonus?.Amount | number:'1.2-2'}}</p>
-                            </div>
-                            <div class="bonuses-block_item block_item">{{bonus?.AwardingTime | date: 'dd/MM/yyyy HH:mm'}}</div>
-                            <div class="bonuses-block_item block_item displayed">
-                                <p>{{ userInfo.CurrencyId }}</p>
-                                <p>{{bonus?.FinalAmount | number:'1.2-2'}}</p>
-                            </div>
-                            <div class="bonuses-block_item block_item">{{bonus?.StateName}}</div>
-                            <div class="bonuses-block_item block_item">{{bonus?.CalculationTime | date: 'dd/MM/yyyy HH:mm'}}</div>
-                            <div class="bonuses-block_item block_item info" style="display: flex; align-items: center; gap: 4px">
-                                <div *ngIf="bonus.IsCampaign">
-                                    <button type="button" class="info-btn"
-                                            (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
-                                </div>
-                            </div>
-                            <div class="bonuses-block_item block_item delete-icon">
-                                <fa-icon [icon]="['fas', 'trash-alt']" (click)="deleteBonus(bonus, $event)" [ngStyle]="{'visibility' : (bonus?.State == 1 && bonus?.TypeIdActive) ? 'visible' : 'hidden'}">
-                                </fa-icon>
-                            </div>-->
                         </div>
-                    </section>
+                    </ng-container>
                 </ng-container>
                 <ng-template #emptyBonuses>
                     <section class="empty-bonuses empty-block">

@@ -199,9 +199,10 @@
             </div>
             <div class="self-exclusion-row" *ngIf="selectedExclusionType == 'Temporary'">
                 <label class="date-input">{{'User.Until Date' | translate}}</label>
-                <input class="" type="date" [(ngModel)]="exclusionDate"
-                       min="{{exclusionMinDate}}">
-                <span class="changed-date">{{exclusionDate ? (exclusionDate | date: 'dd/M/yyyy') : 'dd/mm/yyyy'}}</span>
+                <select class="self-tab-bar_item" (change)="getCreatedFrom($event.target.selectedIndex)">
+                    <option *ngFor="let date of dates; let i = index" [ngValue]="i" [hidden]="i === 0"
+                    >{{ date.Name | translate}}</option>
+                </select>
             </div>
             <div class="self-exclusion-row-btn">
                 <div class="error-message" *ngIf="errorMessage">{{errorMessage}}</div>

@@ -18,6 +18,10 @@ export class MobileRightSidebarComponent extends AppCommonHeaderComponent implem
     public isSignUpButton: any;
     public position: string = "right";
     public faUser = faUser;
+    public selectedAccount;
+    public selectedAccountBalance;
+    public accountBalances;
+    public useAccountType;
     @Input() fullScreen: boolean = false;
     @ViewChild('ticketsRef', { read: ViewContainerRef }) ticketsRef;
     public savedDateService: SaveData;
@@ -67,7 +71,17 @@ export class MobileRightSidebarComponent extends AppCommonHeaderComponent implem
                 }
             }
         });
+        this.useAccountType = this.baseControllerService.GetMenuByType(MenuType.MOBILE_RIGHT_SIDEBAR)?.useAccountType;
+        if (this.useAccountType != undefined) {
+            this.useAccountType = this.useAccountType === '1' ? true : false;
+        }
         this.sharedService.rightToLeftOrientation.subscribe((state: boolean) => this.position = state ? "left" : "right");
+        this.balanceService.notifyUpdateBalance.subscribe(data => {
+            this.accountBalances = this.groupBalances(data?.Balances);
+            this.balance = Number(data.AvailableBalance).toFixed(2);
+            this.unusedBalance = Number(data.UnusedBalance).toFixed(2);
+            this.bonus = Number(data.BonusBalance) > 0 ? Number(data.BonusBalance).toFixed(2) : "0.00";
+        });
     }
 
     changePage(item, submenu) {
@@ -97,6 +111,68 @@ export class MobileRightSidebarComponent extends AppCommonHeaderComponent implem
         ticketsComponent.instance.output.subscribe((results) => {
             this.sidebarOpenState = results;
         });
+    }
+
+    onSelectedAccountChange(event)
+    {
+        this.selectedAccount = event.Ids;
+        for (let i = 0; i < this.accountBalances.length; i++)
+        {
+            if(this.accountBalances[i].Ids.find(b => this.selectedAccount.includes(b)))
+            {
+                this.selectedAccountBalance = this.accountBalances[i].Balance;
+            }
+        }
+    }
+
+    private groupBalances(balances):any[]
+    {
+        let groupedBalances = [];
+
+        for(let i = 0; i < balances?.length; i++)
+        {
+            let balance = {...balances[i]};
+
+            if(!Array.isArray(balance.Ids))
+                balance.Ids = [];
+
+            if(balance.TypeId !== 3)
+            {
+                if(balance.BetShopId === null && balance.PaymentSystemId === null)
+                {
+                    if (balance.TypeId === 1 || balance.TypeId === 2)
+                    {
+                        let b = groupedBalances.find(b => !b.BlockForGroup && (b.TypeId === 1 || b.TypeId === 2));
+                        if(b)
+                        {
+                            b.Balance += balance.Balance;
+                            b.Ids.push(balance.Id);
+                        }
+                        else
+                        {
+                            balance.Ids.push(balance.Id);
+                            groupedBalances.push(balance);
+                        }
+                    }
+                    else
+                    {
+                        balance.Ids.push(balance.Id);
+                        groupedBalances.push(balance);
+                    }
+                } else
+                {
+                    balance.BlockForGroup = true;
+                    balance.Ids.push(balance.Id);
+                    groupedBalances.push(balance);
+                }
+            }
+        }
+        return groupedBalances;
+    }
+
+    toggleMenu(item, event) {
+        event.stopPropagation();
+        item.isOpen = !item.isOpen;
     }
 
 }

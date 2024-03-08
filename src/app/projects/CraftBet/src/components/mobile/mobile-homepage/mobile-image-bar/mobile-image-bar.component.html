@@ -1,9 +1,32 @@
 <div class="title" [innerHTML]="'HomeMenu.' + fragmentConfig.Title | translate | sanitizer: 'html'"></div>
-<div class="image-bar {{fragmentConfig?.Config.type}}"
-     [ngStyle]="fragmentConfig?.Config.style">
-    <div *ngFor="let item of fragmentConfig.Items" [ngStyle]="item.Config?.style">
-        <img (click)="navigateByBanner(item.Href)" [src]="item?.Src">
-        <div class="image-bar-title" [innerHTML]="item.Title | translate | sanitizer: 'html'"></div>
-        <div class="content-html" [innerHTML]="item.Title + '_Content' | translate | sanitizer: 'html'"></div>
-    </div>
-</div>
+<ng-container [ngSwitch]="fragmentConfig.Config.type">
+    <ng-container *ngSwitchCase="'horizontal'">
+        <div class="image-bar horizontal"
+             [style.gap.px]="fragmentConfig.Config.gap || 16"
+             [style.margin]="fragmentConfig.Config.margin || 0">
+            <img (click)="navigateByBanner(item.Href)" [src]="item?.Src" *ngFor="let item of fragmentConfig.Items" [ngStyle]="item.Config?.style">
+        </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'grid'">
+        <div class="image-bar grid"
+             [ngStyle]="fragmentConfig?.Config.style">
+            <div *ngFor="let item of fragmentConfig.Items" [ngStyle]="item.Config?.style">
+                <img (click)="navigateByBanner(item.Href)" [src]="item?.Src">
+                <div class="image-bar-title" [innerHTML]="item.Title | translate | sanitizer: 'html'"></div>
+                <div class="content-html" [innerHTML]="item.Title + '_Content' | translate | sanitizer: 'html'"></div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+        <div class="image-bar {{fragmentConfig?.Config.type}}"
+             [ngStyle]="fragmentConfig?.Config.style">
+            <div *ngFor="let item of fragmentConfig.Items" [ngStyle]="item.Config?.style">
+                <img (click)="navigateByBanner(item.Href)" [src]="item?.Src">
+                <div class="image-bar-title" [innerHTML]="item.Title | translate | sanitizer: 'html'"></div>
+                <div class="content-html" [innerHTML]="item.Title + '_Content' | translate | sanitizer: 'html'"></div>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>

@@ -6,6 +6,21 @@
   section {
     height: var(--account-verify-section-height, 300px)!important;
     overflow-y: auto;
+    .account-verif-block {
+      display: var(--account-verify-section-block-display, flex);
+      justify-content: var(--account-verify-section-block-justify-content, space-between);
+      align-items: var(--account-verify-section-block-align-items, center);
+      width: var(--account-verify-section-block-width, 100%);
+      height: var(--account-verify-section-block-height, 30px);
+      .document-block_item {
+        width: var(--account-verify-section-item-width, calc(100% / 6));
+      }
+      .account-status {
+        display: var(--account-verify-section-status-display, flex);
+        align-items: var(--account-verify-section-status-align-items, center);
+        gap: var(--account-verify-section-status-gap, 10px);
+      }
+    }
   }
   .verification-message {
     p {

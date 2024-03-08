@@ -37,6 +37,7 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
     public paymentForm: FormGroup;
     public submitted: boolean;
     public promoData: Array<any> = [];
+    public bonusData: Array<any> = [];
 
     public paymentControllerService: PaymentControllerService;
     public simpleModalService: SimpleModalService;
@@ -105,6 +106,9 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
                     // this.paymentForm.addControl('PromoCode', new FormControl(''));
                     this.paymentForm.get('PromoCode').setValue('');
                 }
+            }
+            if (data && data.length > 0) {
+                this.bonusData = data.filter((item: any) => !item.HasPromo);
             }
         });
 
@@ -246,6 +250,9 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
     createPayment(request) {
         this.subscribePaymentResponse();
         this.submitted = true;
+        if (this.bonusData.length === 0) {
+            this.paymentControllerService.bonusRefused = false;
+        }
         this.paymentControllerService.createPayment(request);
     }
 

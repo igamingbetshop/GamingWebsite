@@ -1,8 +1,8 @@
 <div class="modal-content user-info-content {{title}}" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
-  <div class="modal-body ticket-info-header">
-    <p>{{'User.Ticket_details' | translate}}</p>
+  <!--<div class="modal-body ticket-info-header">
+
     <fa-icon [icon]="faTimes" (click)="close()"></fa-icon>
-  </div>
+  </div>-->
   <div class="modal_content user_info_modal_content">
     <ng-container *ngIf="isLoaded">
       <ng-container *ngIf="userInfoList['Url']; else historyInfoRef">
@@ -10,41 +10,57 @@
       </ng-container>
       <ng-template #historyInfoRef>
         <div class="user-history-content">
-          <div>{{'User.Transaction_Id' | translate}}:  <span>{{userInfoList['TransactionId']}}</span></div>
-          <div>{{'User.Amount' | translate}}: <span>{{userInfoList['BetAmount'] | number: '1.2-2'}} {{CurrencySymbol}}</span></div>
-          <div *ngIf="showBonus">{{'User.BonusAmount' | translate}}: <span>{{userInfoList['BonusAmount']}}</span></div>
-          <div>{{'User.Bet_Date' | translate}}: <span>{{userInfoList['BetDate'] | date: 'dd/MM/yyyy HH:mm'}}</span></div>
-          <div *ngIf="userInfoList['Status'] === 1">{{'User.Poss-Win' | translate}}: <span>{{userInfoList['PossibleWin'] | number: '1.2-2'}}</span></div>
-          <div *ngIf="userInfoList['Status'] !== 1">{{'User.Win-Amount' | translate}}: <span>{{userInfoList['WinAmount'] | number: '1.2-2'}}</span></div>
-          <div *ngIf="userInfoList['Coefficient'] !== 0">{{'User.Coefficient' | translate}}: <span>{{userInfoList['Coefficient']}}</span></div>
-          <div>{{'User.Bet-status' | translate}}: <span>{{userInfoList['StatusName']}}</span></div>
+          <div class="content-details">
+            <p>{{'User.Ticket_details' | translate}}</p>
+            <div>{{'User.Transaction_Id' | translate}}:  <span>{{userInfoList['TransactionId']}}</span></div>
+            <div>{{'User.Amount' | translate}}: <span>{{userInfoList['BetAmount'] | number: '1.2-2'}} {{CurrencySymbol}}</span></div>
+            <div *ngIf="showBonus">{{'User.BonusAmount' | translate}}: <span>{{userInfoList['BonusAmount']}}</span></div>
+            <div *ngIf="userInfoList['Status'] === 1">{{'User.Poss-Win' | translate}}: <span>{{userInfoList['PossibleWin'] | number: '1.2-2'}}</span></div>
+            <div *ngIf="userInfoList['Status'] !== 1">{{'User.Win-Amount' | translate}}: <span>{{userInfoList['WinAmount'] | number: '1.2-2'}}</span></div>
+            <div *ngIf="userInfoList['Coefficient'] !== 0">{{'User.Coefficient' | translate}}: <span>{{userInfoList['Coefficient']}}</span></div>
+            <div>{{'User.Bet_Date' | translate}}: <span>{{userInfoList['BetDate'] | date: 'dd/MM/yyyy HH:mm'}}</span></div>
+            <div>{{'User.Bet-status' | translate}}: <span class="status-name status-{{userInfoList['StatusName']}}">{{userInfoList['StatusName']}}</span></div>
+            <div *ngIf="userInfoList['BetSelections'] !== null || userInfoList['BetSelections'].length !== 0">{{'User.Bet_selections' | translate}}: <span>{{userInfoList['BetSelections'].length}}</span></div>
 
-          <h3 *ngIf="userInfoList['BetSelections'] !== null || userInfoList['BetSelections'].length !== 0">{{'User.Bet_selections' | translate}}</h3>
-          <div class="bet-selections" *ngIf="userInfoList['BetSelections'] !== null || userInfoList['BetSelections'].length !== 0">
-            <div class="bet-selections_header">
-              <div class="short-column">{{'User.Round_Id' | translate}}</div>
-              <div class="short-column">{{'User.Unit_Name' | translate}}</div>
-              <div class="short-column">{{'User.Market_Name' | translate}}</div>
-              <div class="short-column">{{'User.Selection_Name' | translate}}</div>
-              <div class="short-column">{{'User.Coefficient' | translate}}</div>
-              <div>{{'User.Result' | translate}}</div>
-              <!--          <div>{{'User.Selection-status' | translate}}</div>-->
-              <div class="short-column">{{'Status' | translate}}</div>
-              <div class="short-column">{{'User.Event_Date' | translate}}</div>
-            </div>
-            <div class="bet-selections_content">
-              <div class="content-row"  *ngFor="let item of userInfoList['BetSelections']" [ngClass]="{'won': item.Status == 2, 'lost': item.Status == 3}">
-                <div class="short-column">{{item?.RoundId}}</div>
-                <div class="short-column">{{item?.UnitName}}</div>
-                <div class="short-column">{{item?.MarketName}}</div>
-                <div class="short-column">{{item?.SelectionName}}</div>
-                <div class="short-column">{{item?.Coefficient}}</div>
-                <div>{{item?.State}}</div>
-                <div class="short-column">{{item?.StatusName}}</div>
-                <div class="short-column">{{item?.EventDate | date: 'dd/MM/yyyy h:mm'}}</div>
-              </div>
+          </div>
+
+          <div class="bet-content">
+            <div class="bet-selections" *ngIf="userInfoList['BetSelections'] !== null || userInfoList['BetSelections'].length !== 0">
+                <div class="bet-selections_header">
+                <div class="content-row">
+                  <div class="short-column"><span class="column-text">{{'User.Round_Id' | translate}}</span></div>
+                  <div class="short-column"><span class="column-text">{{'User.Unit_Name' | translate}}</span></div>
+                  <div class="short-column"><span class="column-text">{{'User.Market_Name' | translate}}</span></div>
+                  <div class="short-column"><span class="column-text">{{'User.Selection_Name' | translate}}</span></div>
+                  <div class="short-column"><span class="column-text">{{'User.Coefficient' | translate}}</span></div>
+                  <div class="short-column"><span class="column-text">{{'User.Result' | translate}}</span></div>
+                  <div class="short-column"><span class="column-text">{{'Status' | translate}}</span></div>
+                  <div class="short-column"><span class="column-text">{{'User.Event_Date' | translate}}</span></div>
+                </div>
+
+                </div>
+                <div class="bet-selections_content">
+                <div class="content-row"  *ngFor="let item of userInfoList['BetSelections']" [ngClass]="{'won': item.Status == 2, 'lost': item.Status == 3}">
+                  <div class="short-column">{{item?.RoundId}}</div>
+                  <div class="short-column">
+                    <span class="column-text">{{item?.UnitName}}</span>
+                      <span class="tooltip">{{item?.UnitName}}</span>
+                  </div>
+                  <div class="short-column"><span class="column-text">{{item?.MarketName}}</span></div>
+                  <div class="short-column">
+                    <span class="column-text">{{item?.SelectionName}}</span>
+                    <span class="tooltip">{{item?.SelectionName}}</span>
+                  </div>
+                  <div class="short-column"><span class="column-text">{{item?.Coefficient}}</span></div>
+                  <div class="short-column"><span class="column-text" *ngIf="item?.State != null">{{item?.State}}</span><span *ngIf="item?.State == null" class="empty-result">-</span></div>
+                  <div class="short-column"><span class="column-text">{{item?.StatusName}}</span></div>
+                  <div class="short-column"><span class="column-text">{{item?.EventDate | date: 'dd/MM/yyyy h:mm'}}</span></div>
+                </div>
+                </div>
+
             </div>
           </div>
+
         </div>
       </ng-template>
     </ng-container>

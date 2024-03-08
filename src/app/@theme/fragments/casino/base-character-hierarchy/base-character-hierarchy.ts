@@ -5,6 +5,7 @@ import {ConfigService, LocalStorageService} from "../../../../@core/services";
 import {UserLogined} from "../../../../@core/services/app/userLogined.service";
 import {CharacterHierarchySource, FragmentData} from "../../../../@core/models";
 import {Controllers, Methods} from "../../../../@core/enums";
+import {DeviceDetectorService} from "ngx-device-detector";
 
 @Directive()
 export class BaseCharacterHierarchy implements OnInit, OnDestroy
@@ -17,15 +18,19 @@ export class BaseCharacterHierarchy implements OnInit, OnDestroy
     protected configService:ConfigService;
     public baseApiService:BaseApiService;
     private localStorageService:LocalStorageService;
+    public deviceDetectorService: DeviceDetectorService;
     public lastItem:any;
+    public currentItem:any;
     public currentCompPoint:number;
+    public page: number = 1;
 
     constructor(protected injector:Injector)
     {
         this.configService = injector.get(ConfigService);
         this.userLogined = injector.get(UserLogined);
         this.baseApiService = injector.get(BaseApiService);
-        this.localStorageService = injector.get(LocalStorageService)
+        this.localStorageService = injector.get(LocalStorageService);
+        this.deviceDetectorService = injector.get(DeviceDetectorService);
     }
 
     ngOnInit()
@@ -40,7 +45,10 @@ export class BaseCharacterHierarchy implements OnInit, OnDestroy
     {
         if(this.userLogined.user?.CharacterId)
         {
-            this.baseApiService.apiPost("",{Controller:Controllers.MAIN}, Methods.GET_CHARACTERS_HIERARCHY, false).pipe(take(1)).subscribe(data => {
+            const input = {
+                'IsForMobile': (this.deviceDetectorService.isMobile() || this.deviceDetectorService.isTablet()),
+            };
+            this.baseApiService.apiRequest("",Controllers.MAIN, Methods.GET_CHARACTERS_HIERARCHY, false, input).pipe(take(1)).subscribe(data => {
                 this.characterHierarchy = data['ResponseObject'];
 
                 parentLoop:
@@ -51,7 +59,8 @@ export class BaseCharacterHierarchy implements OnInit, OnDestroy
                             if(this.characterHierarchy[i].Children[k].Id === this.userLogined.user.CharacterId)
                             {
                                 this.characterHierarchy[i].Children[k].Selected = true;
-                                this.currentCompPoint = this.characterHierarchy[i].Children[k].CompPoints
+                                this.currentCompPoint = this.characterHierarchy[i].Children[k].CompPoints;
+                                this.currentItem = this.characterHierarchy[i].Children[k];
                                 this.selfHierarchy = [...this.characterHierarchy[i].Children];
                                 break parentLoop;
                             }

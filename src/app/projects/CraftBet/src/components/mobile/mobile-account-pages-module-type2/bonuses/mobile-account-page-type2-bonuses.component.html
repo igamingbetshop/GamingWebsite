@@ -1,7 +1,7 @@
 <div class="mobile-bonuses-section" [ngStyle]="layoutService.layoutStyle">
 
   <h2 class="mobile-bonuses-section_title">{{'Settings.Bonuses' | translate}}</h2>
-  <div class="send-promo-code-box">
+  <div class="send-promo-code-box mobile-send-promo-code-box">
     <input  id="name" name="name" #name="ngModel"  [(ngModel)]="promoCode" placeholder="{{'Account.PromoCode' | translate}}">
     <button class="craft_btn verify_btn setting_btn" (click)="activatePromoCode()" [ngClass]="{'disabled' : !promoCode}">
       <span>
@@ -21,7 +21,7 @@
     <form class="send-promo-code-box__form" [formGroup]="form" (ngSubmit)="submit()">
 <!--      <div class="history-tools">-->
         <select formControlName="status">
-          <option value="">Select Status</option>
+          <option value="">{{'User.Select Status' | translate}}</option>
           <option *ngFor="let item of statusList, let i = index"
                   [ngValue]="item?.Id">{{item?.Name | translate}}</option>
         </select>

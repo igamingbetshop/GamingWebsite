@@ -89,6 +89,8 @@ import {ProgressBarModule} from "./app-casino/progress-bar/progress-bar.module";
 import {TimeComponent} from "./time/time.component";
 import {CharacterHierarchyComponent} from "./app-casino/character-hierarchy/character-hierarchy.component";
 import { BalanceComponent } from './balance/balance.component';
+import {RegisterPageComponent} from "./register-page/register-page.component";
+import { PaymentErrorComponent } from './payment-error/payment-error.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: true,
@@ -147,7 +149,7 @@ const maskConfig: Partial<IConfig> = {
         CharacterHierarchyComponent
     ],
 
-    exports: [PaymentsListComponent, AddBankAccountComponent],
+    exports: [PaymentsListComponent, AddBankAccountComponent, UserInfoComponent],
     providers: [PaymentControllerService, BonusesService, GetPaymentsService, BetsService],
     declarations: [
         AppMainComponent,
@@ -184,7 +186,9 @@ const maskConfig: Partial<IConfig> = {
         ProductsListComponent,
         AffiliateComponent,
         ChatOpenerComponent,
-        BalanceComponent
+        BalanceComponent,
+        RegisterPageComponent,
+        PaymentErrorComponent
     ]
 })
 export class DesktopModule

@@ -15,8 +15,8 @@ export class CasinoFilterService {
   private readonly _notifyProviderPatternChangeSbj:Subject<string> = new Subject<string>();
   private readonly _notifyFilterChangeSbj:BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  private pageIndex:number = this.DEFAULT_PAGE_INDEX;
-  private pageSize:number = this.DEFAULT_PAGE_SIZE;
+  pageIndex:number = this.DEFAULT_PAGE_INDEX;
+  pageSize:number = this.DEFAULT_PAGE_SIZE;
 
   onProviderPatternChange$ = this._notifyProviderPatternChangeSbj.asObservable();
   onGamePatternChange$ = this._notifyGamePatternChangeSbj.asObservable();
@@ -121,6 +121,20 @@ export class CasinoFilterService {
     }
     this._notifyFilterChangeSbj.next(filter);
   }
+
+  getFilter()
+  {
+      return {
+      providers:this.providers,
+      categories:this.categories,
+      gamePattern:this.gamePattern,
+      pageIndex:this.pageIndex,
+      pageSize:this.pageSize,
+      categoryId:this.selectedCategory ? this.selectedCategory.Id : null
+    }
+  }
+
+
 
 
   changeCategoryFromUrl(type)

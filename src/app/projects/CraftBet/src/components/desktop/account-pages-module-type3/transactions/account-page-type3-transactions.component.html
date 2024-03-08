@@ -5,7 +5,8 @@
             <!--        <form [formGroup]="form" (ngSubmit)="submit(1)" class="history-options">-->
             <div class="custom_dropdown_reg" dropdown>
                 <div class="flex_between current_item">
-                    <div *ngIf="!selectedType" class="selected-item">{{ 'User.Type' | translate }}</div>
+<!--                    <div *ngIf="!selectedType" class="selected-item">{{ 'User.Type' | translate }}</div>-->
+                    <div *ngIf="!selectedType" class="selected-item">{{ getTransactionsService.operationTypes[0]?.Name | translate }}</div>
                     <div *ngIf="selectedType" class="selected-item">{{ selectedType}}</div>
                     <div class="change-icon">
                         <span class="icon-arrow-right"></span>
@@ -18,7 +19,8 @@
             </div>
             <div class="custom_dropdown_reg" dropdown>
                 <div class="flex_between current_item">
-                    <div *ngIf="!selectedDate" class="selected-item">{{ 'User.Period-of-time' | translate }}</div>
+<!--                    <div *ngIf="!selectedDate" class="selected-item">{{ 'User.Period-of-time' | translate }}</div>-->
+                    <div *ngIf="!selectedDate" class="selected-item">{{ historyTimeFilter[0]?.Name | translate }}</div>
                     <div *ngIf="selectedDate" class="selected-item">{{ selectedDate | translate }}</div>
                     <div class="change-icon">
                         <span class="icon-arrow-right"></span>

@@ -11,21 +11,23 @@ import {CasinoSearchModule} from "../search/casino-search.module";
 import {
   HorizontalScrollDirectiveModule
 } from "../../../../../../../@theme/directives/horizontal-scroll/horizontal-scroll.directive.module";
+import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 
 @NgModule({
   declarations:[CasinoCategoryComponent],
   exports:[CasinoCategoryComponent],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    CasinoGameModule,
-    SimpleModalModule,
-    CasinoProvidersModule,
-    RouterModule,
-    CasinoMenuModule,
-    CasinoSearchModule,
-    HorizontalScrollDirectiveModule
-  ]
+    imports: [
+        CommonModule,
+        TranslateModule,
+        CasinoGameModule,
+        SimpleModalModule,
+        CasinoProvidersModule,
+        RouterModule,
+        CasinoMenuModule,
+        CasinoSearchModule,
+        HorizontalScrollDirectiveModule,
+        SanitizerModule
+    ]
 })
 
 export class CasinoCategoryModule

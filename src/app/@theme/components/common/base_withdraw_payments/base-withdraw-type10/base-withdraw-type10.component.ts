@@ -34,11 +34,10 @@ export class BaseWithdrawType10Component extends BaseWithdrawPaymentComponent {
         this.paymentForm.addControl('BankId', new FormControl('', [Validators.required]));
         this.paymentForm.addControl('BankAccountNumber', new FormControl('', [Validators.required]));
         this.paymentForm.addControl('CardNumber', new FormControl('', [Validators.required]));
-        this.paymentForm.addControl('BankAccountHolder', new FormControl({
-            value: this.userData.FirstName || this.userData.LastName || '',
-            disabled: true
-        }));
-
+        this.paymentForm.addControl('BankAccountHolder', new FormControl(this.NameSurname, [Validators.required]));
+        if (this.paymentForm.get('BankAccountHolder').value === ' ') {
+            this.paymentForm.get('BankAccountHolder').reset();
+        }
         this.getPaymentsService._notifyGetBanksList.subscribe((data) => {
             if (this.paymentForm.get('BankId')) {
                 this.paymentForm.get('BankId').patchValue(data[0].Id);
@@ -63,6 +62,10 @@ export class BaseWithdrawType10Component extends BaseWithdrawPaymentComponent {
 
     reSearch(el?) {
         this.showList = true;
+    }
+
+    addBankNumber() {
+        this.paymentForm.get('BankAccountNumber').patchValue(this.bankNumberFilter.BankAccountNumber);
     }
 
     selectBank(bankId) {

@@ -1,12 +1,15 @@
-<div class="mobile-promotions-section" [ngStyle]="layoutService.layoutStyle">
+
+<div class="mobile-promotions-section">
     <div class="mobile-promotions-section_top">
-        <div class="products-list">
 
-            <h1 class="promotion-title"> <i class="icon-specials"></i> {{'Promotions.Promotions' | translate}}</h1>
+        <div class="mobile-fragment-title">{{promotionFragment.Title}}</div>
+        <div class="products-list">    <!--[ngStyle]="promotionFragment.Style"-->
 
-            <div class="products-list_item" *ngFor="let promotion of promotionFragment.Promotions"
+            <div class="products-list_item"
+                 *ngFor="let promotion of promotionFragment.Promotions"
                  [queryParams]="{id:promotion.Id}"
-                 [routerLink]="['/promotions']">
+                 [routerLink]="['/promotions']"
+                >    <!--[ngStyle]="promotion.Style"-->
                 <div class="promotions_item" >
                     <img src="../../../../../../../assets/images/promotions/medium/{{promotion?.ImageName}}"/>
                     <div class="see-more-btn">

@@ -1,5 +1,5 @@
 <div id="paymentFrame" class="modal-content" [ngClass]="deviceSize > 900 ? 'big-size' : 'small-size'">
-  <span class="icon-close-modal" (click)="onClose()"></span>
+  <span class="icon-close-modal" (click)="onClose()" *ngIf="closable"></span>
   <iframe id="frame" [src]="url | sanitizer:'resourceUrl'"
           frameborder="0"
           allowfullscreen

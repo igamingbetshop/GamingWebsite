@@ -1,4 +1,4 @@
-import {Component, OnInit, Injector} from '@angular/core';
+import {Component, OnInit, Injector, Input} from '@angular/core';
 import {SimpleModalComponent} from 'ngx-simple-modal';
 import {GetBetsHistoryService} from '../../../../../../@core/services/app/getBetsHistory.service';
 import {Products} from "@core/enums";
@@ -14,10 +14,10 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons";
 })
 
 export class UserInfoComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
+  @Input() data:any;
   public rightToLeftOrientation: boolean = false;
   public title: string;
   public message: boolean;
-  public data: any;
   public userInfoList: any = {};
   public faTimes = faTimes;
   public isLoaded:boolean;

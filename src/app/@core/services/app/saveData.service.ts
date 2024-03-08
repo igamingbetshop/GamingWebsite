@@ -46,6 +46,26 @@ export class SaveData
     public menuList: Array<any> = [];
     public selectedProvider:any;
     public openPopupByLab = new Subject();
+    private clickCount = 0;
+    private lastSelectedItem: any = null;
+
+    private casinoGames:any = {count:0, games:[]};
+
+    setCasinoGames(games:any)
+    {
+        this.casinoGames = {...games};
+    }
+
+    getCasinoGames():any
+    {
+        return this.casinoGames;
+    }
+
+    deleteCasinoGames()
+    {
+        this.casinoGames = {count:0, games:[]};
+    }
+
     public updateScrollPositionData(shouldUpdate:boolean = false, pageIndex:number, pageSize:number)
     {
         let currentValue = this.currentScrollPosition$.getValue();
@@ -60,7 +80,7 @@ export class SaveData
             if(currentValue)
             {
                 currentValue.pageIndex = 0;
-                currentValue.pageSize = (pageIndex || 1) * pageSize;
+                currentValue.pageSize = ++pageIndex * pageSize;
                 currentValue.scrollY = scrollPosition;
             }
             else
@@ -68,7 +88,7 @@ export class SaveData
                 currentValue =
                 {
                     pageIndex : 0,
-                    pageSize : (pageIndex || 1) * pageSize,
+                    pageSize : ++pageIndex * pageSize,
                     scrollY : scrollPosition
                 }
             }
@@ -90,7 +110,15 @@ export class SaveData
         this.mobileLoginPreviousState = this.router.url;
     }
     getCurrentSubItem(item) {
+        this.clickCount++;
+        if (item === this.lastSelectedItem && this.clickCount > 1) {
+            return;
+        }
+        this.lastSelectedItem = item;
         this.currentSubItem = item;
+        if (this.selectedItem?.Title.includes('Profile') && this.router.url.trim().endsWith(this.selectedItem?.Href.trim())) {
+            return;
+        }
         this.selectedItem = item;
         this.baseControllerService.GetMenu(MenuType.ACCOUNT_TAB_LIST, 'en').then((data: any) => {
             this.menuList = data.filter((item) => item.Type !== 'submenu');
@@ -98,7 +126,7 @@ export class SaveData
                 if(el.SubMenu.includes(this.currentSubItem)) {
                     this.selectedItem = el;
                 }
-            })
+            });
         });
     }
     getItem(item) {

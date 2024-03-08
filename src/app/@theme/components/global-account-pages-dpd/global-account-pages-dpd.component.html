@@ -26,7 +26,7 @@
                 <span  class="header-user-name">{{userData?.UserName}}</span>
             </span>
         </ng-template>
-        <i class="drop_down_icon fa fa-angle-down"></i>
+        <fa-icon class="dpd-icon" [icon]="faCaretDown"></fa-icon>
     </div>
 
     <ul id="custom_dropdown_list" class="custom_dropdown_list right-top {{itemClassname}}-custom-ul">
@@ -36,7 +36,8 @@
             <li [attr.value]="i" class="custom_dropdown_list_item" *ngFor="let item of accoutList; let i = index">
                 <div  [attr.data-id]="'account-dpd' + item.Title"
                       class="list-section">
-                    <a (click)="savedDateService.getCurrentSubItem(item); changePage(item.Href)" *ngIf="item.Type == 1">
+                    <a (click)="savedDateService.getCurrentSubItem(item); changePage(item.Href, $event, i)" *ngIf="item.Type == 1"
+                       [class.selected]="selectedItem == i">
                         <span class="icon-{{item.Icon}} icon" *ngIf="item.Icon"></span>
                         <img [src]="item.Src" class="item-icon-img">
                         <span>{{'Header.' + item?.Title | translate}}</span>

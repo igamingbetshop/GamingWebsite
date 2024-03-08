@@ -5,9 +5,14 @@
         <span class="top-login-text-part">{{'Login.Sign In' | translate}}</span>
         <span class="icon-close-modal close-icon" (click)="goBack()"></span>
     </div>
-    <img class="login-logo"   [src]="logoUrl"  (error)=" errorHandlerLogo($event)"/>
+    <img class="login-logo" [src]="logoUrl" (error)=" errorHandlerLogo($event)"/>
+    <img class="mobile-login-logo-svg" src="../../../../../../../assets/images/logo.svg"/>
 
     <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()" class="mobile-login-section_form">
+        <div class="authentication-buttons">
+            <button class="authentication-button" (click)="openModal('Login', $event)" [ngClass]="{'active': openedLogin}">{{'Login.Sign In' | translate}}</button>
+            <button class="authentication-button" (click)="openModal('Register', $event)">{{'Register.Registration' | translate}}</button>
+        </div>
         <div class="login_password">
             <div class="mobile-login-section_field form_field" [ngClass]="{'valid-input': loginForm.get('ClientIdentifier').valid,
     'invalid-filed': (loginForm.get('ClientIdentifier').hasError('required') && loginForm.get('ClientIdentifier').dirty) }">
@@ -49,20 +54,27 @@
                 </a>
 
             </div>
+            <div class="form-accept-terms" [innerHTML]="'Login.AcceptTerms' | translate | sanitizer: 'html'">
+            </div>
         </div>
         <div class="form_field">
-            <button
-                    type="submit"
-                    class="craft_btn login_btn"
-                    [disabled]="submitted || (configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid)"
-                    [ngClass]="{'signin_abled': configService.defaultOptions['FormValidationType'] === 'submit' || loginForm.valid}">
-                {{'Login.Sign In' | translate}}
-            </button>
+           <div class="login-submit-btn">
+               <button
+                       type="submit"
+                       class="craft_btn login_btn"
+                       [disabled]="submitted || (configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid)"
+                       [ngClass]="{'signin_abled': configService.defaultOptions['FormValidationType'] === 'submit' || loginForm.valid}">
+                   {{'Login.Sign In' | translate}}
+               </button>
+           </div>
         </div>
         <div class="line">
             <span class="left-line"></span>
             <span class="text">OR</span>
             <span class="right-line"></span>
+        </div>
+        <div class="form_field btn-after">
+            <button type="button"  class="craft_btn forgotPassword_btn"  [routerLink]="['/forgot-password']">{{'Login.ForgotPassword' | translate}}</button>
         </div>
         <div class="form_field btn-after">
                 <button type="button"  class="craft_btn signUp_btn"  [routerLink]="['/signup']">{{ 'Login.Sign Up' | translate }}</button>
@@ -76,6 +88,12 @@
             <span class="icon-error-message"></span>
             <span class="error-message-text">{{errorMessage}}</span>
             <!--        <span class="icon-close-modal"></span>-->
+        </div>
+        <div class="dont-have-account">
+            <div>
+                {{'Login.Dont_have_an_account' | translate}} <a class="dont-have-account-register"
+                    (click)="router.navigate(['/signup'])">{{'Login.Sign Up' | translate}}</a>
+            </div>
         </div>
         <div class="error-message"
              *ngIf="(loginForm.get('ClientIdentifier').hasError('required') && loginForm.get('ClientIdentifier').touched) || (loginForm.get('Password').hasError('required') && loginForm.get('Password').touched)">
@@ -98,6 +116,9 @@
         <div class="login-bottom-text">
             <span class="icon-safety"></span>
             <span>{{ 'Login.Safe and Secure' | translate }}</span>
+        </div>
+        <div class="login-language-bar">
+            <app-global-language></app-global-language>
         </div>
     </form>
 

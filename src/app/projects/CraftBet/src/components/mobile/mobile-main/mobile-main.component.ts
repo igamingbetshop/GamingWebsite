@@ -11,8 +11,9 @@ import {
 } from '@angular/core';
 import {CommonMainComponent} from '../../common/common-main/common-main.component';
 import {SharedService} from "@core/services";
-import {fromEvent} from "rxjs";
+import {fromEvent, take} from "rxjs";
 import {debounceTime} from "rxjs/operators";
+import {Controllers, Methods} from "@core/enums";
 
 @Component({
   selector: 'app-mobile-main',
@@ -72,10 +73,34 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
 
   override async loadComponent():Promise<any>
   {
-    const { MobileCharactersModule } = await import('../mobile-homepage/mobile-characters/mobile-characters.module');
-    const moduleRef = createNgModuleRef(MobileCharactersModule, this.injector);
-    const component = moduleRef.instance.getComponent();
-    return component;
+    const data = await this.getCharacters();
+    const characters = data['ResponseObject'];
+    window['characters'] = characters;
+    if(characters.length > 1)
+    {
+      const { MobileCharactersModule  } = await import('../mobile-homepage/mobile-characters/mobile-characters.module');
+      const moduleRef = createNgModuleRef(MobileCharactersModule, this.injector);
+      const component = moduleRef.instance.getComponent();
+      return component;
+    }
+    else
+    {
+      if(characters.length === 1)
+      {
+        this.baseApiService.apiPost("",{Controller:Controllers.CLIENT, Method:Methods.ADD_CHARACTER_TO_CLIENT, RequestData: characters[0].Id},null).pipe(take(1)).subscribe(data => {
+          let user = this.localStorageService.get("user");
+          user.CharacterId = data['ResponseObject'];
+          this.localStorageService.add("user", user);
+          this.loginService.notifyUpdateCharacter();
+        });
+      }
+      return null;
+    }
+  }
+
+  async getCharacters()
+  {
+    return this.baseApiService.apiPost("",{Controller:Controllers.MAIN}, Methods.GET_CHARACTERS, false).toPromise();
   }
 
   closePopup() {
@@ -117,7 +142,8 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
     }
     if(!this.router.url.includes('/prematch')
      && !this.router.url.includes('/live')
-      && !this.router.url.includes('/esport') || this.router.url.includes('/livecasino'))
+      && !this.router.url.includes('/esport') && !this.router.url.includes('/login') && !this.router.url.includes('/signup')
+        || this.router.url.includes('/livecasino'))
     {
       if(this.footerRef)
       {

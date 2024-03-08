@@ -1,0 +1,64 @@
+.mobile-tickets-section {
+  padding: 19px 8px;
+  background: #ededed;
+  .mobile-tickets-section_title {
+    margin-bottom: 10px;
+  }
+  .container-part {
+    margin-bottom: 30px;
+    .empty-banks {
+      margin-top: 40px;
+    }
+    .history-list {
+      background: #fff;
+      width: 100%;
+      color: #000;
+      margin: 16px auto;
+      font-size: 12px;
+      padding: 6px 10px 7px;
+      border: 1px solid #BCBCBC;
+
+      .empty-bets-image {
+        width: 90px;
+      }
+
+      .user-history-content {
+        padding: 12px 0;
+
+        .user-history-details {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
+      .history-partition {
+        .history-part {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          padding-bottom: 7px;
+          font-size: 14px;
+
+          .bold {
+            font-weight: 600;
+          }
+
+          .history-date {
+            color: #BCBCBC;
+          }
+
+          .amount-part {
+            background: #BCBCBC;
+            margin-left: 14px;
+            padding: 0px 13px;
+            border-radius: 50px;
+            color: #fff;
+          }
+
+        }
+      }
+    }
+  }
+}

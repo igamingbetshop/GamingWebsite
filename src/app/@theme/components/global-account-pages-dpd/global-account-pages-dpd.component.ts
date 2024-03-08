@@ -7,6 +7,7 @@ import {SaveData} from "../../../@core/services";
 import {GetSettingsInfoService} from "@core/services/app/getSettingsInfo.service";
 import {SimpleModalService} from "ngx-simple-modal";
 import {StateService} from "@core/services/app/state.service";
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -32,6 +33,8 @@ export class GlobalAccountPagesDpdComponent implements OnInit {
     public savedDateService: SaveData;
     private stateService:StateService;
     public simpleModalService: SimpleModalService;
+    public faCaretDown = faCaretDown;
+    public selectedItem;
 
     constructor(private baseControllerService: BaseControllerService, private router: Router, public localStorageService: LocalStorageService, public configService: ConfigService, public injector: Injector,
                 public getSettingsInfoService: GetSettingsInfoService) {
@@ -87,7 +90,7 @@ export class GlobalAccountPagesDpdComponent implements OnInit {
     }
 
 
-    changePage(pageName)
+    changePage(pageName, event, index)
     {
         let url;
         if (this.ignoreExternalConfig) {
@@ -108,7 +111,8 @@ export class GlobalAccountPagesDpdComponent implements OnInit {
             }
 
         }
-
+        event.stopPropagation();
+        this.selectedItem = index;
         // this.router.navigate([url]);
     }
 

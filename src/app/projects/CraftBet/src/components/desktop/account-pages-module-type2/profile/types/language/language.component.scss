@@ -82,7 +82,7 @@
       text-indent: 0;
       padding-left: 16px;
       border: var(--settings-field-border, none);
-      background: var(--account-content-item-bg-color);
+      background: var(--settings-field-background, var(--account-content-item-bg-color));
       border-radius: var(--settings-field-border-radius, 6px);
       height: var(--settings-field-height, 40px);
       appearance: var(--open-ticket-appearance, auto);

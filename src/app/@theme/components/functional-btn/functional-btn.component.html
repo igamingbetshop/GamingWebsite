@@ -1,5 +1,6 @@
 <button type="submit" class="global_register-btn {{itemClassname}}-type-btn"
         (click)="onClick($event)">
  {{'Header.' + menuItem?.Title | translate}}
+ <div class="{{itemClassname}}-type-btn hover-popup">{{'Header.' + menuItem?.Title + 'Popup' | translate}}</div>
 </button>
 

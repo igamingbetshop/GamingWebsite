@@ -7,19 +7,21 @@ import { OrderByPipeModule } from '../../../../../../../@theme/pipes/order-by/or
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeIcons } from '../../../../../../../@theme/font-awsome/font-awesome-icons';
 import {CompareByKeyPipeModule} from "../../../../../../../@theme/pipes/compare-by-key/compare-by-key-pipe.module";
+import {DropdownDirectiveModule} from "../../../../../../../@theme/directives/dropdown/dropdown-directive.module";
 
 @NgModule({
   declarations: [MobileCasinoProvidersComponent],
   exports: [MobileCasinoProvidersComponent],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    SearchPipeModule,
-    OrderByPipeModule,
-    FontAwesomeIcons,
-    FormsModule,
-    CompareByKeyPipeModule
-  ]
+    imports: [
+        CommonModule,
+        TranslateModule,
+        SearchPipeModule,
+        OrderByPipeModule,
+        FontAwesomeIcons,
+        FormsModule,
+        CompareByKeyPipeModule,
+        DropdownDirectiveModule
+    ]
 })
 
 export class MobileCasinoProvidersModule {

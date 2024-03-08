@@ -1,4 +1,4 @@
-<div id="mobile-craft-bet" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
+<div id="mobile-craft-bet" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation, 'hide-bottom-bar':hideBottomBar}">
     <app-mobile-left-sidebar></app-mobile-left-sidebar>
     <app-mobile-right-sidebar></app-mobile-right-sidebar>
     <app-mobile-header [hidden]="router.url.includes('/login') || router.url.includes('/signup')"></app-mobile-header>
@@ -24,7 +24,7 @@
         </div>
     </div>
     <router-outlet></router-outlet>
-    <div class="scrollTop" [ngClass]="{'show': showScrollTop}" (click)="scrollToTop()"><i class="icon-next-arrow"></i></div>
+    <div class="mobile-scrollTop" [ngClass]="{'show': showScrollTop}" (click)="scrollToTop()"><i class="icon-next-arrow"></i></div>
     <ng-template #bottomSideBarRef></ng-template>
     <ng-template #mobileFooterRef></ng-template>
     <div class="rotate-cover" *ngIf="isShowDeviceLayoutBackground">

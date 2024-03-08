@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Injector, Input, OnInit, Output} from '@angular/core';
 import {BaseApiService} from "../../../../../../../@core/services/api/base-api.service";
-import {ProductIno} from "../../../../../../../@core/models";
+import {FragmentData, ProductIno} from "../../../../../../../@core/models";
 import {Methods} from "../../../../../../../@core/enums";
 import {take} from "rxjs/operators";
 import {ConfigService, LocalStorageService, SaveData} from "../../../../../../../@core/services";
@@ -14,7 +14,7 @@ import {FavoritesService} from "../../../../../../../@core/services/api/favorite
 export class CasinoGameComponent implements OnInit
 {
     @Input() game: any;
-    @Input() fragmentConfig;
+    @Input('fragmentConfig') fragmentConfig:FragmentData;
     @Input() classes = '';
     @Input() loadingType:string = 'lazy';
     showInfobox = false;
@@ -26,6 +26,7 @@ export class CasinoGameComponent implements OnInit
     private user;
 
     constructor(
+        protected injector:Injector,
         private localStorageService: LocalStorageService,
         private saveData:SaveData,
         private baseApiService: BaseApiService,

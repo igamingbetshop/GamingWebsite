@@ -1,0 +1,26 @@
+.error-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: var(--payment-error-page-padding-top, 40px);
+  .error-content-img {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    img {
+      width: var(--payment-error-page-img-width, auto);
+      height: var(--payment-error-page-img-height, auto);
+    }
+    .try-again-message {
+      font-size: var(--payment-error-page-try-again-font-size, 25px);
+      width: var(--payment-error-page-try-again-width, auto);
+      display: var(--payment-error-page-try-again-display, block);
+      text-align: var(--payment-error-page-try-again-text-align, center);
+      text-decoration: var(--payment-error-page-try-again-text-decoration, underline);
+      font-weight: var(--payment-error-page-try-again-font-weight, 700);
+      line-height: var(--payment-error-page-try-again-line-height, 40px);
+      cursor: pointer;
+      color: var(--payment-error-page-try-again-color, #fff);
+    }
+  }
+}

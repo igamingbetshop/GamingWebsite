@@ -4,6 +4,8 @@ import {RouterModule, Routes} from "@angular/router";
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MobileLoginComponent} from "./mobile-login.component";
+import {LanguageModule} from "../../../../../../@theme/components/global-language/language.module";
+import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 
 const routes: Routes = [
     {
@@ -13,12 +15,14 @@ const routes: Routes = [
 ];
 @NgModule({
     declarations:[MobileLoginComponent],
-    imports:[
+    imports: [
         CommonModule,
         TranslateModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        LanguageModule,
+        SanitizerModule
     ]
 })
 

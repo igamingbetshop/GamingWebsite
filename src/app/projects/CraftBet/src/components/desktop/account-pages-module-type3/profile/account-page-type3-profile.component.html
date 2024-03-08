@@ -11,7 +11,7 @@
             </button>
         </div>
     </div>
-    <div class="change-password-tab">
+    <div class="change-password-tab" *ngIf="!automaticPayoutOpened">
         <div class="container-part">
             <div class="titles" collapse="true">
                 <span class="change-password-tab-text">{{'Settings.PersonalInformation' | translate}}</span>
@@ -75,7 +75,7 @@
             </div>
         </div>
     </div>
-    <div class="change-password-tab">
+    <div class="change-password-tab" *ngIf="!automaticPayoutOpened">
         <div class="container-part">
             <div class="titles" collapse>
                 <span class="change-password-tab-text">{{'Settings.Change-password-title' | translate}}</span>
@@ -139,26 +139,100 @@
 <!--            </div>-->
 <!--        </div>-->
     </div>
-<!--    <div class="change-password-tab">-->
-<!--        <div class="container-part">-->
-<!--            <div class="titles" collapse>-->
-<!--                <span class="change-password-tab-text">{{'Settings.Automatic-Payout' | translate}}</span>-->
-<!--                <div class="change-icon">-->
-<!--                    <span class="icon-arrow-right"></span>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="open-change-password">-->
-<!--                <div class="automatic-payout-info">-->
-<!--                    {{'Settings.Automatic-Payout-Info' | translate}}-->
-<!--                </div>-->
-<!--                <form class="automatic-payout-form">-->
-<!--                    <div class="automatic-payout">-->
-<!--                        <input type="number" class="automatic-payout-input">-->
-<!--                        <label class="limit-type-currency">{{ currencySymbol }}</label>-->
-<!--                    </div>-->
-<!--                    <input type="submit" value="{{'Settings.Change-Automatic-Payout' | translate}}" class="automatic-payout-submit">-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div class="change-password-tab" *ngIf="!automaticPayoutOpened">
+        <div class="container-part">
+            <div class="titles" collapse>
+                <span class="change-password-tab-text">{{'Settings.Settings' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <div class="open-change-password">
+                <div class="language-part">
+                    <div class="form_field">
+                        {{'Settings.Language' | translate}}
+                    </div>
+                    <div class="profile-language-bar">
+                        <app-global-language></app-global-language>
+                    </div>
+                </div>
+
+
+                <div class="ideas">
+                    <div class="profile-form-part">
+                        <div class="items-part">
+                            <div class="radios">
+                                <span class="radio-buttons-title">{{'Settings.Automatic-Withdrawal' | translate }}</span>
+                                <div class="show-creation-time"><span
+                                        *ngIf="automaticPayout">{{'Settings.Active-Automatic-Payout' | translate}} {{payoutCreationTime | date: 'dd.MM.yyyy HH:mm'}}
+                                    | </span> <span
+                                        *ngIf="automaticPayout">{{'Settings.Active-Amount' | translate}} {{automaticPayout}} {{currencySymbol}}</span>
+                                </div>
+                            </div>
+                            <div class="radio-buttons-right-part">
+                                <label class="switch">
+                                    <input type="checkbox" [checked]="automaticPayout && automaticPayout !== 0" (change)="toggleAutomaticPayout()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile-section profile-section-complete" *ngIf="automaticPayoutOpened && !showAutomaticPayoutForm">
+        <div class="profile-page-details">
+            <div class="mobile-user-right-panel_title">{{'Settings.Automatic-Withdrawal' | translate }}</div>
+        </div>
+        <div class="automatic-payout-info automatic-payout-info-text" [innerHTML]="'Settings.Automatic-Payout-Text' | translate | sanitizer: 'html'"></div>
+        <div class="limit-buttons">
+            <button class="limit-type-field-opened-cancel"
+                    (click)="returnProfile()">
+                {{ 'User.CancelPayout' | translate }}
+            </button>
+            <input type="submit" class="limit-type-field-opened-submit"
+                   value="{{ 'User.Further' | translate }}"
+                   (click)="changePayoutToText()">
+        </div>
+    </div>
+    <div class="profile-section profile-section-complete" *ngIf="showAutomaticPayoutForm && automaticPayoutOpened" [style.display]="showSuccessPic ? 'none': 'block'">
+        <div class="profile-page-details">
+            <div class="mobile-user-right-panel_title">{{'Settings.Automatic-Withdrawal' | translate }}</div>
+        </div>
+        <div class="automatic-payout-info">
+            {{'Settings.Automatic-Payout-Info' | translate}}
+        </div>
+        <div class="limit-type_row limit-type-opened-row limit-type_row-input">
+            <span class="limit-type-text-deposit-monthly">{{ 'Settings.Betslip-winnings' | translate }}</span>
+            <input numbersOnly type="text" max="999999.9999" class="limit-type-input-deposit"
+                   [(ngModel)]="automaticPayout"
+                   (keypress)="onInput($event)" (keydown)="preventKeys($event)"
+                   (input)="inputChanging($event); validateAutomaticPayout()">
+            <span class="limit-amount-label">{{ 'Settings.Amount' | translate }}</span>
+            <label class="limit-type-cur">{{ currencySymbol }}</label>
+        </div>
+        <div class="show-success-message"
+             *ngIf="showSuccessMessage">{{'Settings.' + showSuccessMessage | translate}}</div>
+        <div class="show-error-message">{{showErrorMessage}}</div>
+        <div class="show-error-message" *ngIf="automaticPayoutErrorMessage !== ''">{{'Error.' + automaticPayoutErrorMessage | translate}} {{ currencySymbol }}</div>
+        <div class="limit-buttons">
+            <button class="limit-type-field-opened-cancel"
+                    (click)="returnPayoutText()">
+                {{ 'User.CancelPayout' | translate }}
+            </button>
+            <input type="submit" class="limit-type-field-opened-submit"
+                   value="{{ 'User.Confirm' | translate }}" [disabled]="automaticPayout <= 0 || isSaving || !hasChanges() || automaticPayoutErrorMessage !== ''"
+                   (click)="submitAutomaticPayout()">
+        </div>
+    </div>
+    <div class="profile-section profile-section-complete" [style.display]="showSuccessPic ? 'block': 'none'">
+        <div class="profile-page-details">
+            <div class="mobile-user-right-panel_title">{{'Settings.Automatic-Withdrawal' | translate }}</div>
+        </div>
+        <div class="payout-success">
+            <img src="../../../../../../../assets/images/success.png" class="payout-success-img">
+            <div class="payout-success-text">{{message}}</div>
+        </div>
+    </div>
 </div>

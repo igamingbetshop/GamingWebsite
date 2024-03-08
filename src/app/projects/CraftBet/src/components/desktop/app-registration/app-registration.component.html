@@ -4,14 +4,15 @@
         <div class="register-background" [ngStyle]="{'background-image':
         'url(../../../../../../../assets/images/register/cover.png'}">
             <img [src]="logoUrl"  (error)="errorHandler($event)"/>
+            <img class="logo-svg" src="../../../../../../../assets/images/logo.svg"/>
             <div class="reg-prompt-text">{{'Register.PromptText' |translate}}</div>
 
             <button class="reg_item" *ngFor="let item of defaultOptions?.RegisterType"
                     (click)="selectRegType(item)"
                     [ngClass]="[(item.Title == registerType?.Title) ? 'disabled' : 'not_active',
-               (currentStep !> 1) ? 'hidden':'']">{{'Register.' +
-            item.Title |
-                translate}}</button>
+               (currentStep !> 1) ? 'hidden':'']">
+                <div class="reg_item_text">{{'Register.' + item.Title | translate}}</div>
+            </button>
 
             <ng-container >
                 <div class="social-register-text">{{'Register.Social sign up text' |translate}}</div>
@@ -35,7 +36,10 @@
         </div>
         <ng-container *ngIf="formReady">
             <div class="register-form_section" *ngIf="(registerType?.Title == registerTypes.FULL && regFormSteps.length > 0) || (registerType === undefined)">
-
+                <div class="authentication-buttons">
+                    <button class="authentication-button" (click)="openModal('Login', $event)">{{'Login.Sign In' | translate}}</button>
+                    <button class="authentication-button" (click)="openModal('Register', $event)" [ngClass]="{'active': openedLogin}">{{'Register.Registration' | translate}}</button>
+                </div>
                 <div class="registration-section_menu">
 
                     <a (click)="prevBtn(currentStep - 1)" class="go_back"
@@ -63,7 +67,9 @@
                             (i <= (currentStep-2))}"></li>
                         </ul>
 
-
+                        <div class="hidden-title">
+                            {{'Register.AccountInformation' | translate}}
+                        </div>
                         <div class="title-error" *ngIf="userRegisterService.errorMessage">
                             {{userRegisterService.errorMessage}}
                         </div>
@@ -623,8 +629,12 @@
                     <div class="reg-form-header" *ngIf="(registerType?.Title == registerTypes.QUICK)">{{'Register.QuickRegister' | translate}}</div>
                 </div>
 
-                <form [formGroup]="quickRegForm" autocomplete="off" novalidate>
+
+                <form [formGroup]="quickRegForm" autocomplete="off" novalidate class="quickForms">
                     <div class="allFormItems allFormItemsDesktop" *ngIf="quickFormTemplate.length > 0">
+                        <div class="hidden-title">
+                            {{'Register.AccountInformation' | translate}}
+                        </div>
                         <div *ngFor="let form_elem of quickFormTemplate; trackBy: trackByMethod"
                              class="form-row-item form-row{{form_elem?.FieldSize}}"
                              [ngClass]="{'form-row-item__autoHeight': form_elem?.Type === 'Region4',

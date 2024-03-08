@@ -1,0 +1,38 @@
+.mobile-tickets-section {
+  margin-top: 0;
+
+  .add-tickets {
+    width: 95%;
+    margin: 0 auto;
+
+    button {
+      border-radius: 0px;
+    }
+  }
+
+  .open-message-block {
+    .send-message {
+      button {
+        font-size: 31px;
+        width: 63px;
+        padding: 0;
+        color: #fff;
+        border-top-right-radius: 7px;
+        border-bottom-right-radius: 7px;
+        position: absolute;
+        right: 30px;
+        height: 63px;
+        margin-top: 0;
+      }
+      .send-message-part {
+        width: 93%;
+        position: relative;
+
+        textarea {
+          border-top-left-radius: 7px;
+          border-bottom-left-radius: 7px;
+        }
+      }
+    }
+  }
+}

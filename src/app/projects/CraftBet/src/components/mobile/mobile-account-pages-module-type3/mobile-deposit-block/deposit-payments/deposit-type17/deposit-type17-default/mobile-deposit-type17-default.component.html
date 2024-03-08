@@ -1,0 +1,28 @@
+<div class="deposit_payment_section">
+
+  <div class="deposit_payment_section__form">
+    <ol>
+      <li>This is a unique web address for your account.</li>
+      <li>Go to your {{'CurrencyLong.' + paymentSystemId | translate}} wallet and input that address in the tab for sending  {{'CurrencyLong.' + paymentSystemId | translate}}.</li>
+      <li>Enter the amount and confirm your transaction.</li>
+      <li>The funds will become available to use within a few minutes.</li>
+    </ol>
+    <div class="qr-payment-desc">We strongly recommend to check the copied address. Please note that we are not responsible for coins mistakenly sent to the wrong address.</div>
+    <div class="qr-payment-box">
+      <qrcode [qrdata]="walletAddress" [width]="145" [errorCorrectionLevel]="'M'"></qrcode>
+      <div class="address-box">
+        <div>Send to {{'CurrencyShort.' + paymentSystemId | translate}}</div>
+        <div>
+          <input [value]="walletAddress" [size]="size" readonly #copyAddressRef>
+          <button (click)="copyAddress(copyAddressRef)">Copy</button>
+        </div>
+        <div *ngIf="destinationTag">{{'DestinationTag' | translate}}: {{destinationTag}}</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+

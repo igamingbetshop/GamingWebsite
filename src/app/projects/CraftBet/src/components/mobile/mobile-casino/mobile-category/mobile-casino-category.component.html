@@ -10,13 +10,13 @@
                         (selectProductId)="selectedProductId = $event">
                 </app-mobile-casino-game>
             </li>
-            <button *ngIf="leftGamesCount" class="more-button" (click)="casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+            <button *ngIf="leftGamesCount" class="more-button" (click)="markForSave = true; casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
         </ul>
     </div>
     <div *ngSwitchCase="'horizontal'" class="category" [class.center]="fragmentConfig?.Config?.label == 'center'"
          [ngStyle]="fragmentConfig.Config.style">
         <div class="category-action">
-            <header class="header">{{ 'Game.' + fragmentConfig.Title | translate }}</header>
+            <header class="header" [innerHTML]="'Game.' + fragmentConfig.Title | translate | sanitizer : 'html'"></header>
             <div *ngIf="fragmentConfig.Config.showAll" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]" class="show-all">{{ 'Category.ShowAll' | translate }}</div>
         </div>
 

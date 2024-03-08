@@ -1,8 +1,8 @@
 <div class="map" *ngIf="userLogined.isAuthenticated">
-    <h2>{{'MR White`s Journey' | translate}}</h2>
+    <h2>{{'Character.' + 'MapTitle' | translate}}</h2>
     <div class="character-hierarchy" >
-        <img class="map-image" src="../assets/images/characters/map.png">
-        <div class="character-hierarchy-content level{{i}}" *ngFor="let item of selfHierarchy; let i = index"
+        <img class="map-image"  [src]="selfHierarchy[(page - 1) * 5]?.BackgroundImageData">
+        <div class="character-hierarchy-content level{{i}}" *ngFor="let item of selfHierarchy | paginate: { itemsPerPage: 5, currentPage: page }; let i = index"
              [class.last]="item.Id === lastItem.Id && selfHierarchy.length > 1">
             <div  class="character-level"
                   [class.active]="item.Selected == true"
@@ -29,6 +29,14 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="character-pagination">
+        <pagination-controls
+                nextLabel="{{'Next' | translate}}"
+                autoHide="true"
+                previousLabel="{{'Prev' | translate}}"
+                (pageChange)="page = $event"></pagination-controls>
     </div>
 </div>
 

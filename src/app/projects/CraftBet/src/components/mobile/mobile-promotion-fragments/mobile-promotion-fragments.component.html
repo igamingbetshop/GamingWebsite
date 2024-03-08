@@ -33,4 +33,11 @@
         </div>
     </div>
 </div>
-<mobile-promotion-fragment *ngFor="let fragment of promotionFragments" [promotionFragment]="fragment" [ngStyle]="{'display' : selectedFragment ? 'none' : 'block'}"></mobile-promotion-fragment>
+
+<div [ngStyle]="{'display' : selectedFragment ? 'none' : 'block'}">
+    <h1 class="promotion-title" [ngStyle]="layoutService.layoutStyle"> <i class="icon-specials"></i> {{'Promotions.Promotions' | translate}}</h1>
+</div>
+
+<div class="mobile-promotion-fragments" *ngFor="let fragment of promotionFragments"  [ngStyle]="{'display' : selectedFragment ? 'none' : 'block'}">
+    <mobile-promotion-fragment  [promotionFragment]="fragment"></mobile-promotion-fragment>
+</div>

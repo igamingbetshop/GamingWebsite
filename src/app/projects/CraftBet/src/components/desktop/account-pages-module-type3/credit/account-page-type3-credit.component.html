@@ -4,13 +4,19 @@
         <div class="credits">
             <div class="credit-tab-text">{{ 'Settings.Settings' | translate }}</div>
             <div class="selected-wallet">
-
+                <span>{{ 'Balance.Selected Wallet' | translate }} </span>
+                <img class="selected-wallet-image" src="../../../../../../../assets/images/accounts/{{selected?.TypeId}}_{{selected.PaymentSystemId}}_{{selected.hasBetShop}}.svg">
+                <span>{{selected?.AccountTypeName}}</span>
+                <span class="selected-wallet-balance">{{selected?.Balance | toNumber | number: '.2'}} {{currencySymbol}}</span>
             </div>
             <div class="payment-systems__userAccount" *ngFor="let item of Accounts; let i = index">
                 <div class="payment-systems__userAccount__name" [ngClass]="{'selected': selected?.Id === item.Id}" (click)="selectedAccountBalance($event, item)">
                     <div class="credit-account">
                         <img class="credit-account-image" src="../../../../../../../assets/images/accounts/{{item?.TypeId}}_{{item.PaymentSystemId}}_{{item.hasBetShop}}.svg">
-                        <span class="credit-account-type-name">{{ item?.AccountTypeName }}</span>
+                        <span class="credit-account-type-name" *ngIf="item.BetShopId !== null">{{ item?.AccountTypeName }}</span>
+                        <span class="credit-account-type-name" *ngIf="item.BetShopId === null">{{ 'Balance.' + item?.AccountTypeName | translate }}</span>
+                        <input type="radio" [checked]="selected.Id === item.Id" id="radio{{i}}"/>
+                        <label for="radio{{i}}" class="radio-label"></label>
                     </div>
                     <div class="credit-account">
                         <div>{{ 'Settings.Balance' | translate }}</div>
@@ -24,6 +30,36 @@
                         <div>{{ 'Settings.CreatedDate' | translate }}</div>
                         <div>{{ item?.CreationTime | date: 'dd.MM.YY HH:mm'}}</div>
                     </div>
+<!--                    <div class="credit-account-addition">-->
+<!--                        <div class="credit-account-addition-items">-->
+<!--                            <div>{{'Balance.Withdrawable' | translate}}</div>-->
+<!--                            <div>{{ item.withdrawable | number: '.2' }} {{ currencySymbol }}</div>-->
+<!--                        </div>-->
+<!--                        <div class="credit-account-addition-items">-->
+<!--                            <div>{{'Balance.NotWithdrawable' | translate}}</div>-->
+<!--                            <div>{{ item.notWithdrawable | number: '.2' }} {{ currencySymbol }}</div>-->
+<!--                        </div>-->
+<!--                        <div class="credit-account-addition-items">-->
+<!--                            <div>{{'Balance.BonusAccount' | translate}}</div>-->
+<!--                            <div>{{ item.bonus | number: '.2' }} {{ currencySymbol }}</div>-->
+<!--                        </div>-->
+<!--                        <div class="credit-account-addition-items" *ngIf="item.BetShopId === null">-->
+<!--                            <div>{{'Balance.WithdrawalRequest' | translate}}</div>-->
+<!--                            <div>{{ item.withdrawalRequest | number: '.2' }} {{ currencySymbol }}</div>-->
+<!--                        </div>-->
+<!--                        <div class="credit-account-addition-items" *ngIf="item?.bonusWinName">-->
+<!--                            <div>{{ item.bonusWinName }}</div>-->
+<!--                            <div>{{ item.bonusWin | number: '.2' }} {{ currencySymbol }}</div>-->
+<!--                        </div>-->
+<!--                        <div class="credit-account-addition-items" *ngIf="item?.compBalanceName">-->
+<!--                            <div>{{ item.compBalanceName }}</div>-->
+<!--                            <div>{{ item.compBalance | number: '.2' }}</div>-->
+<!--                        </div>-->
+<!--                        <div class="credit-account-addition-items" *ngIf="item?.coinBalanceName">-->
+<!--                            <div>{{ item.coinBalanceName }}</div>-->
+<!--                            <div>{{ item.coinBalance | number: '.2' }}</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
 

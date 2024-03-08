@@ -1,88 +1,94 @@
-<img class="login-logo"   [src]="logoUrl"  (error)="errorHandler($event)"/>
-
-<div class="login-section {{mainClass}} {{sectionClass}}">
-    <p class="login-title">{{'Login.Sign In' | translate}}</p>
-    <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
-
-        <div class="login-section_field form_field distans-right email" [ngClass]="{'valid-input': loginForm.get('ClientIdentifier').valid,
-    'invalid-filed': ((loginForm.get('ClientIdentifier').hasError('required') && submitted) || (loginForm.get('ClientIdentifier').touched && loginForm.get('ClientIdentifier').hasError('required')) || errorMessage) }">
-            <!--            <fa-icon *ngIf="contentType != 'loginScn'" class="logo-icon" [icon]="['fas', 'user']"></fa-icon>-->
-            <!--                <label for=""></label>-->
-            <i class="icon-person"></i>
-            <input type="text" name="username" formControlName="ClientIdentifier" (click)="$event.stopPropagation()" class="inputText" maxlength="50"
-                   placeholder="{{'Login.Login' | translate}}" required/>
-            <!--            <span class="floating-label">{{'Login.Login' | translate}}</span>-->
-            <label class="floating-label">{{'Login.Login' | translate}}</label>
-        </div>
-
-
-        <div class="login-section_field2 form_field distans-right">
-            <div class="login-section_field form_field distans-right password" [ngClass]="{'valid-input': loginForm.get('Password').valid,
-    'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) || (loginForm.get('Password').touched && loginForm.get('Password').hasError('required')) || errorMessage) }">
-                <!--            <fa-icon *ngIf="contentType != 'loginScn'" class="logo-icon" [icon]="['fas', 'unlock-alt']"></fa-icon>-->
-                <i class="icon-lock"></i>
-                <input type="{{changePasswordType ? 'text' : 'password'}}" maxlength="50"
-                       (click)="$event.stopPropagation()" class="inputText"
-                       placeholder="{{'Login.Password' | translate}}" formControlName="Password"
-                       required/>
-                <!--            <span class="floating-label">{{'Login.Password' | translate}}</span>-->
-                <label class="floating-label">{{'Login.Password' | translate}}</label>
-
-                <div (click)="changePassType()" class="change-password-field-type">
-                    <span [ngClass]="changePasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
-                </div>
-
-
-
-                <!--      <div class="error_message"-->
-                <!--           *ngIf="loginForm.get('Password').hasError('required') && loginForm.get('Password').touched">-->
-                <!--        {{'Error.Password-required' | translate}}-->
-                <!--      </div>-->
+<div class="login-page">
+    <div class="login-left-side-img" [ngStyle]="{'background-image':'url(../../../../../../../assets/images/login.png)'}"></div>
+    <img class="login-logo" [src]="logoUrl" (error)="errorHandler($event)"/>
+    <img class="login-logo-svg" src="../../../../../../../assets/images/logo.svg"/>
+    <div class="login-section {{mainClass}} {{sectionClass}}">
+        <p class="login-title">{{'Login.Sign In' | translate}}</p>
+        <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
+            <div class="authentication-buttons">
+                <button class="authentication-button" (click)="openModal('Login', $event)" [ngClass]="{'active': openedLogin}">{{'Login.Sign In' | translate}}</button>
+                <button class="authentication-button" (click)="openModal('Register', $event)">{{'Register.Registration' | translate}}</button>
             </div>
-            <div class="form_field_checked">
-                <a class="forget-password-text"
+            <div class="login-section_field form_field distans-right email" [ngClass]="{'valid-input': loginForm.get('ClientIdentifier').valid,
+    'invalid-filed': ((loginForm.get('ClientIdentifier').hasError('required') && submitted) || (loginForm.get('ClientIdentifier').touched && loginForm.get('ClientIdentifier').hasError('required')) || errorMessage) }">
+                <!--            <fa-icon *ngIf="contentType != 'loginScn'" class="logo-icon" [icon]="['fas', 'user']"></fa-icon>-->
+                <!--                <label for=""></label>-->
+                <i class="icon-person"></i>
+                <input type="text" name="username" formControlName="ClientIdentifier" (click)="$event.stopPropagation()" class="inputText" maxlength="50"
+                       placeholder="{{'Login.Login' | translate}}" required/>
+                <label class="floating-label">{{'Login.Login' | translate}}</label>
+            </div>
+
+
+            <div class="login-section_field2 form_field distans-right">
+                <div class="login-section_field form_field distans-right password" [ngClass]="{'valid-input': loginForm.get('Password').valid,
+    'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) || (loginForm.get('Password').touched && loginForm.get('Password').hasError('required')) || errorMessage) }">
+                    <!--            <fa-icon *ngIf="contentType != 'loginScn'" class="logo-icon" [icon]="['fas', 'unlock-alt']"></fa-icon>-->
+                    <i class="icon-lock"></i>
+                    <input type="{{changePasswordType ? 'text' : 'password'}}" maxlength="50"
+                           (click)="$event.stopPropagation()" class="inputText"
+                           placeholder="{{'Login.Password' | translate}}" formControlName="Password"
+                           required/>
+                    <label class="floating-label">{{'Login.Password' | translate}}</label>
+
+                    <div (click)="changePassType()" class="change-password-field-type">
+                        <span [ngClass]="changePasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                    </div>
+
+
+
+                    <!--      <div class="error_message"-->
+                    <!--           *ngIf="loginForm.get('Password').hasError('required') && loginForm.get('Password').touched">-->
+                    <!--        {{'Error.Password-required' | translate}}-->
+                    <!--      </div>-->
+                </div>
+<!--                <div class="form_field_checked">-->
+<!--                    <a class="forget-password-text"-->
+<!--                       (click)="openForgotPage(); navigateToForgot($event)">-->
+<!--                        {{'Login.Forgot' | translate}}-->
+<!--                    </a>-->
+<!--                </div>-->
+            </div>
+
+            <ng-container *ngIf="configService?.defaultOptions?.SocialNetworkProviders.length">
+
+                <div class="social-login-text">{{'Register.Social sign in text' |translate}}</div>
+                <ul>
+                    <li *ngFor="let provider of configService?.defaultOptions?.SocialNetworkProviders"
+                        (click)="redirectToSocialProviderLoginPage(provider)"
+                        [ngStyle]="{'background': 'url(../../../../../../../assets/images/register/' + provider?.Title +
+                        '.png'+')' + 'no-repeat 50% 50% / cover'}">
+                    </li>
+                </ul>
+            </ng-container>
+            <div class="error_message">
+                {{errorMessage}}
+            </div>
+            <label class="form_field_checked remember-me-login remember-me-login-section">
+                <input id="remeberMe" type="checkbox" class="login-checkbox distans-right" [(ngModel)]="rememberMe"
+                       [ngModelOptions]="{standalone:true}"/>
+                <span class="reg-conditions">{{'Login.Remember me' | translate}}</span>
+            </label>
+            <div class="form-accept-terms" [innerHTML]="'Login.AcceptTerms' | translate | sanitizer: 'html'">
+            </div>
+            <div class="form_field">
+                <button type="submit" class="craft_btn login_btn {{sectionClass}}-btn" [ngClass]="{'not_active':
+            configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid}" (click)="$event.stopPropagation()">
+                    {{'Login.Sign In' | translate}}
+                </button>
+            </div>
+            <div class="form_field_checked remember-me">
+                <!--            <input id="remeberMe" type="checkbox" class="reg-checkbox distans-right" [(ngModel)]="rememberMe"-->
+                <!--                   [ngModelOptions]="{standalone:true}"/>-->
+                <!--            <label for="remeberMe" class="reg-conditions">{{'Login.Remember me' | translate}}</label>-->
+
+                <a class="forgot_password login-section-forgot_password"
                    (click)="openForgotPage(); navigateToForgot($event)">
                     {{'Login.Forgot' | translate}}
                 </a>
             </div>
-        </div>
-
-        <ng-container *ngIf="configService?.defaultOptions?.SocialNetworkProviders.length">
-
-            <div class="social-login-text">{{'Register.Social sign in text' |translate}}</div>
-            <ul>
-                <li *ngFor="let provider of configService?.defaultOptions?.SocialNetworkProviders"
-                    (click)="redirectToSocialProviderLoginPage(provider)"
-                    [ngStyle]="{'background': 'url(../../../../../../../assets/images/register/' + provider?.Title +
-                        '.png'+')' + 'no-repeat 50% 50% / cover'}">
-                </li>
-            </ul>
-        </ng-container>
-        <div class="error_message">
-            {{errorMessage}}
-        </div>
-        <label class="form_field_checked remember-me-login remember-me-login-section">
-            <input id="remeberMe" type="checkbox" class="login-checkbox distans-right" [(ngModel)]="rememberMe"
-                   [ngModelOptions]="{standalone:true}"/>
-            <span class="reg-conditions">{{'Login.Remember me' | translate}}</span>
-        </label>
-        <div class="form_field">
-            <button type="submit" class="craft_btn login_btn {{sectionClass}}-btn" [ngClass]="{'not_active':
-            configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid}" (click)="$event.stopPropagation()">
-                {{'Login.Sign In' | translate}}
-            </button>
-        </div>
-        <div class="form_field_checked remember-me">
-            <!--            <input id="remeberMe" type="checkbox" class="reg-checkbox distans-right" [(ngModel)]="rememberMe"-->
-            <!--                   [ngModelOptions]="{standalone:true}"/>-->
-            <!--            <label for="remeberMe" class="reg-conditions">{{'Login.Remember me' | translate}}</label>-->
-
-            <a class="forgot_password login-section-forgot_password"
-               (click)="openForgotPage(); navigateToForgot($event)">
-                {{'Login.Forgot' | translate}}
-            </a>
-        </div>
 
 
-    </form>
+        </form>
+    </div>
 </div>

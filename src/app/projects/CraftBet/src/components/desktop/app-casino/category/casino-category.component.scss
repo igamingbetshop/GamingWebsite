@@ -38,6 +38,7 @@
       padding-bottom: 5px;
       gap: inherit;
       @include horizontal-scroll(6px, 15px, rgba(204, 204, 204, 1));
+      casino-game{flex: 1}
     }
   }
   &[label-position="center"]
@@ -102,7 +103,7 @@
   }
 }
 .category:hover header:first-line {
-  color: #fff;
+  color: var(--catgory-label-center-first-line-hover-color, #fff);
 }
 
 
@@ -211,7 +212,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      align-self: baseline;
+     /* align-self: baseline;*/
+      casino-game{width: 100%}
     }
   }
   .more-button

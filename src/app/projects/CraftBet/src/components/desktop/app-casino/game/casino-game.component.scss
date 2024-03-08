@@ -223,32 +223,49 @@
 
   .detailed-info {
     width: 100%;
-    height: calc(100% - 52px);
-    background: var(--detailed-info-background, #fff);
-    color: var(--detailed-info-color, #002776);
-    padding: 16px 24px 30px 16px;
+   /* height: calc(100% - 52px);*/
+    height: 100%;
+    background: var(--detailed-info-background, #1E1739);
+    color: var(--detailed-info-color, #fff);
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     border-radius: 10px;
     &.detailed-info-height {
       height: 100%;
     }
+    .content {
+      .content-row
+      {
+        height: 30px;
+        line-height: 30px;
+        background-color: #120B2FC0;
+        text-align: left;
+        color: #AAAAAA;
+        font-size: 12px;
+        opacity: 1;
+        padding: 0 10px;
+        .flex_vertical-center
+        {
+          color: white;
+        }
+        &:nth-child(even){background-color: transparent}
+      }
 
-    .line {
-      height: 1px;
-      width: 168px;
-      background-color: #E2E2E2;
-      margin: auto;
+      >div {
+        height: 12px;
+        display: flex;
+        justify-content: space-between;
+
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
     }
-
     >div {
-
-
       .name {
         font-size: 16px;
-        line-height: 19px;
-        margin-bottom: 4px;
+        margin-bottom: 16px;
         text-align: center;
       }
       .text {
@@ -259,53 +276,19 @@
         text-align: center;
       }
 
-      .title {
-        color: #333333;
-        font-size: 12px;
-        text-transform: uppercase;
-        margin-bottom: 12px;
-
-        .icon {
-          font-size: 16px;
-          color: #676B80;
-          margin-right: 8px;
-
-          &:before {
-            color: #676B80;
-          }
-        }
-
-        span:last-child {
-          color: #333333;
-        }
-      }
-      .content {
-        font-size: 10px;
-        text-transform: uppercase;
-
-        >div {
-          height: 12px;
-          display: flex;
-          justify-content: space-between;
-
-          &:first-child {
-            margin-bottom: 10px;
-          }
-        }
-      }
     }
   }
 }
 @media screen and (min-width: 1200px) and (max-width: 1500px) {
   .casino-game {
     .game-open {
-      top: 4%;
+     /* top: 4%;*/
       .game-btn_real {
         height: 20px;
         line-height: 24px;
       }
       &.game-open-demo {
-        top: 30%;
+       /* top: 30%;*/
         .game-btn {
           width: auto;
         }

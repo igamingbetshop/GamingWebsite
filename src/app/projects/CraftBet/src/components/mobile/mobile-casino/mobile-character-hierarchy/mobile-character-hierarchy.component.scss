@@ -1,10 +1,10 @@
 .mobile-map
 {
-  background-color: #FFFFFF;
+  background-color: var(--m-character-hierarchy-bg-color,#FFFFFF);
   padding: 4px 0 55px 0;
   h2
   {
-    color: #000;
+    color: var(--m-map-title-color,#000);
     font-size: 20px;
     font-weight: 700;
     text-transform: uppercase;
@@ -25,9 +25,17 @@
     gap: 26px;
     margin: 0 auto;
     padding: 17px 20px 138px 20px;
-    background-image: url("~assets/images/character-hierarchy/mobile-map.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+
+    .map-image
+    {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      max-width: 100%;
+      max-height: 100%;
+    }
 
     .m-character-hierarchy-content
     {

@@ -53,11 +53,11 @@
   }
 
   .send-promo-code-box {
-    height: 40px;
+    height: var(--promo-code-box-height, 40px);
     position: relative;
-    display: inline-flex;
+    display: var(--promo-code-box-display, inline-flex);
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 21px;
 
     .success-message, .error-message {
       position: absolute;
@@ -125,7 +125,7 @@
     }
 
     &_item {
-      padding: 10px 20px;
+      padding: var(--bonuses-items-btn-padding, 10px 20px);
       cursor: pointer;
       font-weight: bold;
       letter-spacing: 1.48px;
@@ -164,6 +164,8 @@
           font-size: var(--history-block-head-font-size, 16px);
           padding-top: var(--bonus-block-header-padding-top, 11px);
           padding-bottom: var(--bonus-block-header-padding-bottom, 11px);
+          padding-left: var(--bonus-block-header-padding-left, 0px);
+          padding-right: var(--bonus-block-header-padding-right, 0px);
           &:first-child {
             padding-left: var(--bonus-block-header-padding-left, 5px);
           }
@@ -277,6 +279,7 @@
       justify-content: var(--triggers-modal-justify-content, flex-end);
       gap: 32px;
       width: 100%;
+      float: none;
 
       //button:first-of-type {
       //  margin-right: 10px
@@ -387,9 +390,9 @@
       border-radius: var(--promo-code-status-select-border-radius, 6px);
       color: var(--account-content-item-color, #fff);
       padding: var(--history-select-padding, 12px 16px);
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
+      -webkit-appearance: var(--bonuses-history-select-appearance, none);
+      -moz-appearance: var(--bonuses-history-select-appearance, none);
+      appearance: var(--bonuses-history-select-appearance, none);
       background-image: linear-gradient(
                       45deg
               , transparent 50%, var(--account-content-item-color, #fff) 50%), linear-gradient(
@@ -447,6 +450,7 @@
       height: var(--m-triggers-modal-height, 50%);
       margin: var(--m-triggers-modal-margin, 0 auto);
       border-radius: var(--m-triggers-modal-border-radius, 0);
+      overflow: var(--m-triggers-modal-overflow, auto);
       }
     }
 }

@@ -24,6 +24,9 @@ export class StateService
   private readonly _chatState = new BehaviorSubject<string>("hidden");
   readonly onChatStateChange$ = this._chatState.asObservable();
 
+  private readonly _desktopHeaderResize = new BehaviorSubject<string>("calc(100vh - 117px)");
+  public readonly onDesktopHeaderResize$ = this._desktopHeaderResize.asObservable();
+
 
   constructor()
   {
@@ -126,4 +129,13 @@ export class StateService
   }
 
   /*Chat state end*/
+
+  /*Desktop header state*/
+
+  setDesktopHeaderSize(sizes:any)
+  {
+    const productHeight:string = ` calc(100vh - ${sizes.height}px)`;
+    sizes.productHeight = productHeight || "calc(100vh - 117px)";
+    this._desktopHeaderResize.next(sizes);
+  }
 }

@@ -7,6 +7,7 @@ import {take} from "rxjs/operators";
 import {faArrowsAlt} from "@fortawesome/free-solid-svg-icons";
 import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
 import {SimpleModalService} from "ngx-simple-modal";
+import {StateService} from "@core/services/app/state.service";
 
 
 @Component({
@@ -22,7 +23,7 @@ export class AppOpenGamesComponent extends CommonOpenGamesComponent {
   constructor(public injector: Injector,
               private location:Location,
               private logoutHelper:LogoutHelper,
-              private simpleModalService:SimpleModalService)
+              private simpleModalService:SimpleModalService, public stateService: StateService)
   {
     super(injector);
   }

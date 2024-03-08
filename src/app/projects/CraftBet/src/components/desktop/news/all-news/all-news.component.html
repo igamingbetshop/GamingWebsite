@@ -1,27 +1,135 @@
-<div class="news-section recponcive-height">
-  <div class="news-section_top max-width">
-    <h1 class="news-title">{{'News.News' | translate}}</h1>
-    <div class="products-list">
-      <div class="products-list_item" *ngFor="let item of news | paginate: { itemsPerPage: paginationCount, currentPage: page }" [routerLink]="['/news', item.id]">
-        <div class="news_item">
-          <img src="../../../../../../../assets/images/news/medium/{{item.image}}"/>
-          <div class="news_title" [innerHtml]="item.title"></div>
-        </div>
-
-        <div class="news_text">
-          <p [innerHtml]="item.description"></p>
-          <a>{{'Promotions.Keep Reading' | translate}}</a>
-        </div>
-      </div>
-
-      <div class="tm-pagination">
-        <pagination-controls
-          nextLabel=""
-          autoHide="true"
-          previousLabel=""
-          (pageChange)="page = $event"></pagination-controls>
-      </div>
+<div class="current-news-section"  [ngStyle]="{'display' : selectedFragment ? 'block' : 'none'}">
+    <div class="news-title">
+        <span class="section-name">{{currentNews?.Type | translate}}</span>
+        <span class="seperator">|</span>
+        <span class="current-news-name" [innerHtml]="currentNews.Title"></span>
     </div>
 
-  </div>
+    <div class="current-news-section-content">
+        <div class="left-block">
+            <div class="current-news-image">
+                <img src="../../../../../../../assets/images/news/{{currentNews?.ImageName}}">
+            </div>
+
+            <div class="news-info">
+                <h2 [innerHtml]="currentNews.Title"></h2>
+                <div class="description-header" [innerHtml]="currentNews.Description"></div>
+                <p [innerHtml]="currentNews.Content"></p>
+            </div>
+            <!--<div class="video-player">
+              <video controls>
+                <source src="../../../../../../../assets/videos/video.mp4" type="video/mp4">
+              </video>
+            </div>-->
+
+            <p [innerHtml]="currentNews.Content"></p>
+            <p class="publish-date">
+                <i class="icon-timezone"></i>
+                <span>{{currentNews.DeltaTime}} {{'ago' | translate}}</span>
+            </p>
+
+        </div>
+
+        <div class="right-block">
+            <div class="current-fragment-item" *ngFor="let item of selectedFragment?.News, let i = index"
+                 [queryParams]="{id:item.Id}"
+                 [routerLink]="['/news']">
+                <div class="news_item">
+                    <img src="../../../../../../../assets/images/news/medium/{{item.ImageName}}"/>
+                </div>
+
+                <div class="news-info">
+                    <h2 [innerHtml]="item.Title"></h2>
+                    <div class="description-header" [innerHtml]="item.Description"></div>
+                    <p [innerHtml]="item.Content"></p>
+
+                    <p class="publish-date">
+                        <i class="icon-timezone"></i>
+                        <span>{{item.DeltaTime}} {{'ago' | translate}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<div class="section-header" *ngIf="!selectedFragment">
+    <h1 class="news-title">{{'News.News' | translate}}</h1>
+    <div class="slides-dots">
+        <div *ngFor="let fragment of newsFragments, let i = index">
+            <span class="dot"  [class.selected]="currentIndex == i" (click)="currentSlide(i)"></span>
+        </div>
+
+    </div>
+</div>
+
+
+<div [ngStyle]="{'display' : selectedFragment ? 'none' : 'flex'}">
+    <current-news  [newsFragment]="fragment"  *ngFor="let fragment of newsFragments" ></current-news>
+</div>
+
+
+<!--
+<div class="section-header latest" *ngIf="!selectedFragment">
+    <h1 class="news-title">{{'News.The Latest News' | translate}}</h1>
+    <div class="slides-dots">
+        <div *ngFor="let fragment of newsFragments, let i = index">
+            <span class="dot slide-dot"  [class.selected]="selectedIndex == i" (click)="navigateFragment(i)"></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="latest-news-section top-scrollbars" *ngIf="!selectedFragment">
+    <div class="latest-news-block" *ngFor="let fragment of newsFragments, let i =index">
+        <img class="latest-news-bg" src="../../../../../../../assets/images/news/{{latestNews[i].news.ImageName}}">
+        <div class="news-title">
+            <span class="section-name">{{latestNews[i].news.Type | translate}}</span>
+            <span class="seperator">|</span>
+            <span class="current-news-name" [innerHtml]="latestNews[i].news.Title"></span>
+        </div>
+        <div class="current-news-section">
+            <div class="current-news-section-content">
+                <div class="left-block">
+                    <div class="current-news-image"
+                         [queryParams]="{id:latestNews[i].Id}"
+                         [routerLink]="['/news']">
+                        <img src="../../../../../../../assets/images/news/{{latestNews[i].news.ImageName}}">
+                    </div>
+
+
+                    <div class="news-info">
+                        <h2 [innerHtml]="latestNews[i].Title"></h2>
+                        <div class="description-header" [innerHtml]="latestNews[i].news.Description"></div>
+                        <p [innerHtml]="latestNews[i].news.Content"></p>
+
+                        <p class="publish-date">
+                            <i class="icon-timezone"></i>
+                            <span>{{latestNews[i].news.DeltaTime}} {{'ago' | translate}}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="right-block">
+                    <div class="current-fragment-item" *ngFor="let item of fragment.News">
+                        <div class="news_item" (click)="selectNews(i, item)">
+                            <img src="../../../../../../../assets/images/news/medium/{{item.ImageName}}"/>
+                        </div>
+
+                        <div class="news-info">
+                            <h2 [innerHtml]="item.Title"></h2>
+                            <div class="description-header" [innerHtml]="item.Description"></div>
+                            <p [innerHtml]="item.Content"></p>
+
+                            <p class="publish-date">
+                                <i class="icon-timezone"></i>
+                                <span>{{item.DeltaTime}} {{'ago' | translate}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

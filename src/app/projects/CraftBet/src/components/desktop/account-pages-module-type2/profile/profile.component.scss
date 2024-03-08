@@ -225,9 +225,9 @@ form {
     }
     select:focus~label,
     select:not([value=""]):valid~label {
-      transform:var(--register-select-label-transform, translateY(-27px) translateX(0px) scale(0.75));
-      top: var(--register-focused-select-label-top, 20px);
-      font-size: var(register-focused-label-font-size, 16px);
+      transform: var(--settings-label-transform, translateY(-27px) translateX(0px) scale(0.75));
+      top: var(--settings-input-label-top, 20px);
+      font-size: var(--settings-font-size-label, 16px);
       color: var(--settings-focus-label-focused, #fff);
       background-color: var(--settings-background-color-focus-label-focused, unset);
       padding-left: var(--settings-padding-left-focus-label-focused, 10px);
@@ -245,7 +245,7 @@ form {
         text-indent: 0;
         padding-left: 16px;
         border: var(--settings-field-border, none);
-        background: var(--account-content-item-bg-color);
+        background: var(--settings-field-background, var(--account-content-item-bg-color));
         border-radius: var(--settings-field-border-radius, 6px);
         height: var(--settings-field-height, 40px);
         appearance: var(--open-ticket-appearance, auto);

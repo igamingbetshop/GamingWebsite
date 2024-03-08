@@ -3,7 +3,11 @@
   display: flex;
   justify-content: center;
   position: relative;
-  >span{cursor: pointer}
+  flex-direction: var(--show-time-mode-flex-direction, row);
+  .show-last-login {
+    display: var(--header-last-login-display, none);
+  }
+  >span{cursor: pointer;text-align: var(--icon-timezone-text-align, left)}
   .timezones-box
   {
     display: none;

@@ -204,7 +204,7 @@
 
               .active {
                 background: backgroundColor(account-item-title-selected-active, none);
-                //color: itemColor(account-item-title-selected-active, #000);
+                color: var(--account-item-title-selected-active-color, var(--account-content-item-color, #fff))
               }
 
               &:hover {
@@ -258,6 +258,7 @@
         ul {
           display: flex;
           gap: $account-middle-gap;
+          margin-left: var(--user-right-panel-menu-margin-left, 0);
 
           .user-right-panel_list {
             .item_menu {
@@ -272,13 +273,14 @@
               padding-left: paddingLeft(account-content-item, 16px);
               padding-right: paddingRight(account-content-item, 16px);
               background: $account-main-bg-color;
-              border-radius: 6px;
+              border-radius: var(--account-content-item-border-radius, 6px);
               text-decoration: none;
               position: relative;
 
 
               &.active {
                 color: color(account-right-content-item);
+                background: var(--account-right-content-item-active-background, var(--account-main-bg-color, #213454));
 
                 .selected {
                   color: color(account-right-content-item-selected);
@@ -289,6 +291,7 @@
                   border-bottom: 18px solid $account-main-bg-color;
                   position: absolute;
                   top: 34px;
+                  display: var(--account-right-content-item-selected-display, block);
                 }
               }
             }
@@ -519,6 +522,8 @@
                   padding-bottom: paddingBottom(account-submenu-item, 16px);
                   margin-left: marginLeft(account-submenu-item, 20px);
                   margin-right: marginRight(account-submenu-item, 20px);
+                  padding-left: paddingLeft(account-submenu-item, 0px);
+                  padding-right: paddingRight(account-submenu-item, 0px);
                   text-decoration: none;
                   border-bottom: 1px solid itemColor(account-submenu-item-border-bottom, #131A2C);
 
@@ -585,7 +590,7 @@
                 padding-left: paddingLeft(account-content-item, 16px);
                 padding-right: paddingRight(account-content-item, 16px);
                 background: $account-main-bg-color;
-                border-radius: 6px;
+                border-radius: var(--account-content-item-border-radius, 6px);
                 text-decoration: none;
                 position: relative;
                 white-space: nowrap;
@@ -593,6 +598,7 @@
 
                 &.active {
                   color: color(account-right-content-item);
+                  background: var(--account-right-content-item-active-background, var(--account-main-bg-color, #213454));
 
                   .selected {
                     color: color(account-right-content-item-selected);

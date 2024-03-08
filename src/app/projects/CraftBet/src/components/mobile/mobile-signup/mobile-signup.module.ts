@@ -17,6 +17,7 @@ import {FileTypeModule} from "./file/file-type.module";
 import {
   FilterMobileCodePipeModule
 } from "../../../../../../@theme/pipes/filter-by-mobile-code/filter-mobile-code-pipe.module";
+import {OnlyNumberDirectiveModule} from "../../../../../../@theme/directives/only-number/only-number.directive.module";
 
 const routes: Routes = [
   {
@@ -26,23 +27,24 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations:[MobileSignupComponent],
-  imports:[
-    CommonModule,
-    FontAwesomeModule,
-    LoaderModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    SanitizerModule,
-    NgxMaskModule.forRoot(),
-    RouterModule.forChild(routes),
-    DropdownDirectiveModule,
-    SecurityQuestionsModule,
-    VerifyCodeModule,
-    RegExpInputDirectiveModule,
-    FileTypeModule,
-    FilterMobileCodePipeModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        FontAwesomeModule,
+        LoaderModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        SanitizerModule,
+        NgxMaskModule.forRoot(),
+        RouterModule.forChild(routes),
+        DropdownDirectiveModule,
+        SecurityQuestionsModule,
+        VerifyCodeModule,
+        RegExpInputDirectiveModule,
+        FileTypeModule,
+        FilterMobileCodePipeModule,
+        FormsModule,
+        OnlyNumberDirectiveModule
+    ],
 })
 
 export class MobileSignupModule

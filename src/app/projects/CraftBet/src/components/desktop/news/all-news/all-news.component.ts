@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
 import {BaseNewsComponent} from "../../../../../../../@theme/components/common/news/base-news.component";
 
 @Component({
@@ -7,7 +7,15 @@ import {BaseNewsComponent} from "../../../../../../../@theme/components/common/n
 })
 export class AllNewsComponent extends BaseNewsComponent {
 
+
+  @ViewChild('widgetsContent', { read: ElementRef }) public widgetsContent: ElementRef;
+
   constructor(public injector: Injector) {
     super(injector);
   }
+
+  ngOnInit() {
+    super.ngOnInit();
+  }
+
 }

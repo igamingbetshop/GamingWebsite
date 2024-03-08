@@ -43,12 +43,9 @@ export class CharactersComponent extends SimpleModalComponent<ConfirmModel, bool
 
     ngOnInit()
     {
-        this.baseApiService.apiPost("",{Controller:Controllers.MAIN}, Methods.GET_CHARACTERS, false).pipe(take(1)).subscribe(data => {
-           /* this.characters = [...data['ResponseObject']];*/
-            this.characters = data['ResponseObject'];
-            this.cd.detectChanges();
-            this.createSlider();
-        });
+        this.characters =  window["characters"];
+        this.cd.detectChanges();
+        this.createSlider();
     }
 
     setCharacterById(characterId)

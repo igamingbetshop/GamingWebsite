@@ -1,0 +1,87 @@
+<div class="modal-content modal-content_tickets mobile-add-bank-account">
+    <div class="modal-body ticket-body flex_between">
+        <h2>{{'User.Add_Account' | translate}}</h2>
+        <div class="icon-close mobile-icon-close" (click)="close()"></div>
+    </div>
+
+    <div class="modal_content">
+        <form [formGroup]="addBankAccountForm" novalidate (ngSubmit)="submit()">
+            <div class="form_row">
+                <div class="form_field">
+                    <label>{{'User.BankAccountNumber' | translate}} *</label>
+                    <input type="text" class="ticket_input" placeholder="{{maskType}}" mask="{{maskType}}" formControlName="BankAccountNumber" numbersOnly
+                           (keypress)="keyCode($event)"/>
+                </div>
+            </div>
+            <div class="form_row">
+                <div class="form_field">
+                    <label>{{'User.Select_payment' | translate}} *</label>
+                    <select formControlName="PaymentSystemId" class="payment-select">
+                        <option *ngFor="let paymentSystem of paymentSystemList"
+                                [value]="paymentSystem.PaymentSystemId">{{'Withdraw.' + 'PAYMENT_MESSAGE' + paymentSystem.PaymentSystemId | translate}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_field">
+                    <label>{{'User.BankName' | translate}} *</label>
+                    <select formControlName="BankName" class="payment-select" (change)="changedBankName($event.target.value)"
+                            [ngClass]="{'disable_item':paymentSystemId === null, 'active_item': paymentSystemId !== null}">
+                        <option *ngFor="let clientBank of paymentService.clientBanksList | orderBy :'BankName'" [value]="clientBank.BankName">{{clientBank.BankName}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_field">
+                    <label>{{'User.BranchName' | translate}} *</label>
+                    <select formControlName="BranchName" class="payment-select"
+                            [ngClass]="{'disable_item':paymentSystemId === null, 'active_item': paymentSystemId !== null}">
+                        <option *ngFor="let branch of bankBranches | orderBy:'BankName'"
+                                [value]="branch.BranchName">{{branch.BranchName }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_field">
+                    <label>{{'User.AccountType' | translate}} *</label>
+                    <select formControlName="BankAccountType" class="payment-select">
+                        <option *ngFor="let bankAccountType of bankAccountTypes"
+                                [value]="bankAccountType?.Value">{{bankAccountType?.Name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form_row hide-form-row">
+                <div class="form_field">
+                    <label>{{'User.Iban' | translate}}</label>
+                    <input type="text" class="ticket_input" name="Iban" formControlName="Iban"/>
+                </div>
+            </div>
+
+            <div class="form_row">
+
+                <div class="form_field">
+                    <label>{{'Deposit.NameSurname' | translate}} *</label>
+                    <input type="text" class="ticket_input" name="NickName" formControlName="NickName"/>
+                </div>
+            </div>
+            <div class="form_row">
+
+                <div class="form_field">
+                    <label>{{'Deposit.Surname' | translate}} *</label>
+                    <input type="text" class="ticket_input" name="NickName" formControlName="LastName"/>
+                </div>
+            </div>
+            <div *ngIf="statusMessage" class="show-message">{{statusMessage}}</div>
+
+            <div class="form_row">
+                <div class="form_field">
+                    <button type="submit" [ngClass]="{'disabled' : !addBankAccountForm.valid}" class="setting_btn">{{'User.Send' | translate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

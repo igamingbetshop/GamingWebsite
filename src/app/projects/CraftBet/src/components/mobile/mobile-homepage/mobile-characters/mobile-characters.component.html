@@ -49,7 +49,7 @@
 
 <div class="selected-character-popup" [ngStyle]="{'display' : selectedCharacter? 'block' : 'none'}">
     <div class="header">{{'User.Congratulations' | translate}}!</div>
-    <div class="info">Your Avatar is </div>
+    <div class="info">{{'User.YourAvatar' | translate}}</div>
     <img [src]="selectedCharacter?.ImageData">
     <div class="title">{{selectedCharacter?.Title | translate}}</div>
     <div class="description">{{selectedCharacter?.Description | translate}}</div>

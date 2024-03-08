@@ -136,7 +136,7 @@
 .login_PSection_redirect {
   margin: var(--login-redirect-text-margin, 9px auto 0 auto);
   cursor: default;
-  width: 100%;
+  width: width(login-redirect-text, 100%);
   font-size: fontSize(login-redirect-text, 14px);
   color: itemColor(login-redirect-text, #ccc);
   display: flex;
@@ -144,6 +144,10 @@
   padding-left: var(--modal-login-footer-padding-left, 0px);
   padding-right: var(--modal-login-footer-padding-right, 0px);
   padding-top: var(--modal-login-footer-padding-top, 0px);
+  position: var(--modal-login-footer-position, relative);
+  bottom: var(--modal-login-footer-item-bottom, 0);
+  left: var(--modal-login-footer-item-left, 0);
+  right: var(--modal-login-footer-item-right, 0);
 
   a {
     text-decoration: var(--modal-login-footer-text-decoration, underline);
@@ -196,17 +200,19 @@
       max-height:  calc(var(--modal-login-section-height, 400px) * 0.7);
       height: auto;
       min-height:  calc(var(--min-modal-login-section-height, 250px) * 0.7);
-      .modal_content {
-        width: calc(var(--modal-login-content-width, 100%) * 0.7);
-      }
+      //.modal_content {
+      //  width: calc(var(--modal-login-content-width, 100%) * 0.7);
+      //}
     }
   }
 
   .login_PSection_redirect {
-    margin: 9px auto 0 auto;
+    margin: var(--login-redirect-small-text-margin, 9px auto 0 auto);
     font-size: calc(var(--login-redirect-text-font-size, 10px) * 0.7);
     padding: 0;
     line-height: var(--login-redirect-text-small-line-height, 12px);
+    bottom: var(--modal-login-footer-small-item-bottom, 0);
+    left: var(--modal-login-footer-small-item-left, 0);
 
     a {
       margin-left: 10.5px;
@@ -258,7 +264,7 @@
     }
   }
   .login_PSection_redirect {
-    margin: 9px auto 0 auto;
+    margin: var(--login-redirect-medium-text-margin, 9px auto 0 auto);
     font-size: calc(var(--login-redirect-text-font-size, 12px) * 0.9);
 
     a {

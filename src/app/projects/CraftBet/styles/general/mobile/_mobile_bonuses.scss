@@ -11,6 +11,9 @@
     white-space: nowrap;
     width: 100%;
   }
+  .mobile-send-promo-code-box {
+    display: var(--m-promo-code-box-display, flex) !important;
+  }
   .send-promo-code-box {
     height: 40px;
     line-height: 40px;
@@ -33,10 +36,10 @@
     }
 
     .success-message, .error_message {
-      padding: 5px;
+      padding: var(--m-bonuses-error-message-padding, 5px);
       position: absolute;
-      bottom: -12px;
-      font-size: 11px;
+      bottom: var(--m-bonuses-error-message-bottom, -12px);
+      font-size: var(--m-bonuses-error-message-font-size, 11px);
       white-space: nowrap;
     }
 
@@ -78,6 +81,7 @@
       @include m-common-button;
       padding: 0 20px;
       width: width(m-promo-bonus-button, 120px);
+      line-height: height(m-promo-bonus-button-line, 44px);
       border-radius: var(--m-promo-bonus-button-border-radius, 4px);
     }
   }
@@ -92,18 +96,20 @@
   }
 
   .bonus-tab-bar {
-    margin-top: 10px;
+    margin-top: var(--m-bonus-tab-bar-margin-top, 10px);
+    margin-bottom: var(--m-bonus-tab-bar-margin-bottom, 0px);
     display: flex;
 
     &_item {
-      padding: 10px 20px;
+      padding: var(--m-bonus-tab-bar-padding, 10px 20px);
       cursor: pointer;
       background: backgroundColor(m-bonus-tab-bar, $header-top-bg);
-      color: $font-color;
+      color: var(--m-bonus-tab-bar-color, $font-color);
 
       &.active {
         background: backgroundColor(m-bonus-tab-bar-active, $header-menu-active);
-        color: $font-color;
+        color: var(--m-bonus-tab-bar-active-color, $font-color);
+        text-decoration: var(--m-bonus-tab-bar-active-text-decoration, none);
       }
     }
   }
@@ -111,7 +117,7 @@
   .bonus-tab-content {
     min-height: 300px;
     background: backgroundColor(m-bonus-tab-content, $header-menu-active);
-    color: $font-color;
+    color: var(--m-bonus-tab-content-color, $font-color);
 
 
     .sport-bonus-box {

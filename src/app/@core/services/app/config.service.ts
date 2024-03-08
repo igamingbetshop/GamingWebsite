@@ -54,8 +54,11 @@ export class ConfigService {
                 Token: externalToken ? externalToken :  user.Token
             };
             const updatedTokenData = await this.http.post<any>(`${config['WebApiUrl']}/${config['PartnerId']}/api/Main/GetClientByToken`, input).toPromise();
-            localStorage.setItem(`${environment.projectPath}-user`, JSON.stringify(updatedTokenData));
+            const userData = JSON.stringify(updatedTokenData);
+            localStorage.setItem(`${environment.projectPath}-user`, userData);
             localStorage.setItem('token', updatedTokenData.Token);
+            const event = new CustomEvent("onGetClientByToken", {detail:{user:userData}});
+            window.dispatchEvent(event);
         }
 
         this._settings = await this.http.get(window['debugPath'] + '/assets/json/menu.json' + '?=' + window['VERSION']).toPromise();
@@ -86,7 +89,8 @@ export class ConfigService {
         else
         {
             const d = new Date();
-            return -1 * d.getTimezoneOffset() / 60;
+            this._timeZone = -1 * d.getTimezoneOffset() / 60;
+            return this._timeZone;
         }
     }
 

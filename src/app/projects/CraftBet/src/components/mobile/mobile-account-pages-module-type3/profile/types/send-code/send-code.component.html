@@ -1,0 +1,11 @@
+<ng-container>
+    <div class="items-part">
+        <div class="left-part">{{'User.Email' | translate}}:</div>
+        <div class="right-part">
+            <input type="text" [(ngModel)]="dataModel" (ngModelChange)="onModelChange($event)"
+                   [ngClass]="{ 'disable_item': (!(profileService.editState$ | async).value), 'active_item': (profileService.editState$ | async).value }"
+            />
+            <span class="icon-edit" (click)="toggleEdit()"></span>
+        </div>
+    </div>
+</ng-container>

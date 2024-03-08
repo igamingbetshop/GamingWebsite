@@ -79,6 +79,7 @@
     flex-direction: var(--payment-balance-info-items-flex-direction, column);
     gap: var(--payment-balance-info-items-gap, 0px);
     margin: var(--payment-balance-info-items-margin, 0 auto);
+    border-bottom: var(--payment-balance-info-items-border-bottom, none);
     &__name {
       background: var(--payment-balance-info-items-background, unset) !important;
     }

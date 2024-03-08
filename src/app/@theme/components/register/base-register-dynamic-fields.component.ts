@@ -70,6 +70,7 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
 
     translationKeys:any = {MobileNumber:'', Email:''};
     mobileCodePattern:string;
+    public openedLogin = false;
     @ViewChild('showFirstStepBackground') public showFirstStepBackground: ElementRef;
     @ViewChild('notScrollable') public notScrollable: ElementRef;
 
@@ -179,6 +180,7 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
 
         this.quickRegisterType = this.defaultOptions.QuickRegisterType.find(item => item.Order == 1);
         this.selectRegType(this.defaultOptions.RegisterType.find(item => item.Order == 1));
+        this.openedLogin = true;
     }
 
 
@@ -1221,7 +1223,7 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
                 }
             } else {
                 this.currentStep = this.regFormSteps[`${Number(currentStep) - 1}`].valid ? nextType : currentStep;
-                let showFirstStepBackground = this.registerType.Settings.showFirstStepBackground;
+                let showFirstStepBackground = this.registerType?.Settings.showFirstStepBackground;
                 if (showFirstStepBackground === false && this.currentStep !== currentStep) {
                     const showBackground = this.showFirstStepBackground?.nativeElement;
                     showBackground.style.display = 'none';
@@ -1235,7 +1237,7 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
 
     prevBtn(currentStep) {
         this.currentStep = currentStep;
-        let showFirstStepBackground = this.registerType.Settings.showFirstStepBackground;
+        let showFirstStepBackground = this.registerType?.Settings.showFirstStepBackground;
         const showBackground = this.showFirstStepBackground?.nativeElement;
         if (showFirstStepBackground === false && this.currentStep === currentStep) {
             showBackground.style.display = 'block';
@@ -1313,6 +1315,15 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
     focusInput(input:HTMLInputElement)
     {
         input.focus();
+    }
+
+    openModal(type, event) {
+        event.stopPropagation();
+        if (type === 'Login') {
+            this.saveData.clickForgotPassword.next('1');
+            this.saveData.openPopup.next(1);
+            this.openedLogin = true;
+        }
     }
 
 

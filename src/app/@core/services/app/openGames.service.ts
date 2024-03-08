@@ -107,6 +107,7 @@ export class OpenGamesService {
             'IsForMobile': (this.deviceDetectorService.isMobile() || this.deviceDetectorService.isTablet()),
             'ProductId': productId,
             'Position': position ? position : '',
+            'TimeZone': this.configService.timeZone,
             'DeviceType': 1
         };
 

@@ -9,6 +9,7 @@ import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule} from "@angular/forms";
 import {FontAwesomeIcons} from "../../../../../../../@theme/font-awsome/font-awesome-icons";
+import {NgxPaginationModule} from "ngx-pagination";
 
 @Component({
     selector: 'character-hierarchy',
@@ -20,7 +21,8 @@ import {FontAwesomeIcons} from "../../../../../../../@theme/font-awsome/font-awe
             CommonModule,
             TranslateModule,
             FormsModule,
-            FontAwesomeIcons
+            FontAwesomeIcons,
+            NgxPaginationModule
         ]
 })
 export class CharacterHierarchyComponent extends BaseCharacterHierarchy

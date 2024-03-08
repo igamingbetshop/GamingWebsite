@@ -47,7 +47,7 @@ export class BonusesService {
         this.selectedBonusPercentTranslation = {value: this.selectedBonusInfo.Percent};
     }
 
-    GetBonuses(data)
+    GetBonuses(data, status?: string, fromDate?)
     {
         const {WebApiUrl, PartnerId} = this.getSettings();
         let request = new Request();

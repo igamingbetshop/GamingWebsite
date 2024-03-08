@@ -23,9 +23,9 @@
       line-height: 1.36;
       letter-spacing: normal;
       text-align: left;
-      text-decoration: underline;
+      text-decoration: var(--deposit-payments-input-label-text-decoration, underline);
       color: itemColor(withdraw-input-label, #000000);
-      position: absolute;
+      position: position(deposit-payments-input-label, absolute);
       top: itemTop(deposit-payments-input-label, 2px);
       left: itemLeft(deposit-payments-input-label, 8px);
       height: height(deposit-payments-input-label, 25px);
@@ -219,15 +219,15 @@
       }
 
       .default_btn {
-        color: #fff;
-        padding: 0 32px;
-        font-size: 16px;
+        color: var(--activate-bonus-btn-top-color, #fff);
+        padding: var(--activate-bonus-btn-top-padding, 0 32px);
+        font-size: var(--activate-bonus-btn-top-font-size, 16px);
         /* background-color: backgroundColor(activate-bonus-btn, #02887e);*/
-        background-image: linear-gradient(to bottom, backgroundColor(activate-bonus-btn-top, #9cbc3f), backgroundColor(activate-bonus-btn-bottom, #7fa309));
-        font-weight: 600;
-        height: 50px;
-        line-height: 50px;
-        border-radius: 3px;
+        background-image: var(--activate-bonus-btn-content-background-image, linear-gradient(to bottom, backgroundColor(activate-bonus-btn-top, #9cbc3f), backgroundColor(activate-bonus-btn-bottom, #7fa309)));
+        font-weight: var(--activate-bonus-btn-top-font-weight, 600);
+        height: var(--activate-bonus-btn-top-height, 50px);
+        line-height: var(--activate-bonus-btn-top-line-height, 50px);
+        border-radius: var(--activate-bonus-btn-top-border-radius, 3px);
         border: none;
         cursor: pointer;
         text-transform: capitalize;

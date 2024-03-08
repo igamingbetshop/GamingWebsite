@@ -788,6 +788,9 @@ input[type=number] {
       height: height(change-password-inputs, 40px);
       color: var(--change-password-inputs-color, #000);
       text-indent: var(--change-password-inputs-text-indent, 16px);
+      border: var(--change-password-inputs-border, 1px solid #dbedff);
+      border-radius: var(--change-password-inputs-border-radius, 2px);
+      background: var(--change-password-inputs-background, transparent);
     }
     .error_message {
       font-size: var(--change-password-inputs-error-message-font-size, 13px);
@@ -845,7 +848,7 @@ input[type=number] {
       background-color: backgroundColor(change-password-btn, rgb(239, 239, 239));
       border-radius: var(--change-password-btn-border-radius, 4px);
       color: itemColor(change-password-btn, #fff);
-      margin: 0 auto;
+      margin: var(--change-password-btn-margin, 0 auto);
       display: display(change-password-btn, flex);
       justify-content: center;
       align-items: center;

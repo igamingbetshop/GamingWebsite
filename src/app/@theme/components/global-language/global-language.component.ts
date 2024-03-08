@@ -36,7 +36,9 @@ export class GlobalLanguageComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        this.setMenuItemData();
+        if (this.menuItem) {
+            this.setMenuItemData();
+        }
         this.languages = this.config.defaultOptions['Languages'];
         this.isSingleLang = this.languages.length === 1;
         console.log(this.isSingleLang);

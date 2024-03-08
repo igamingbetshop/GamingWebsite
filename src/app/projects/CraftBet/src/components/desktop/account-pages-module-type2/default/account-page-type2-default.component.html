@@ -3,9 +3,19 @@
     <div class="user-default-section_top tab-{{tabType}}">
         <div class="user-left-panel">
             <ul class="user-left-panel_topList">
-<!--                <li *ngFor="let item of menuList" class="user-left-panel_header" collapse-->
-<!--                    [ngClass]="{'opened': (savedDateService.selectedItem == item)}"-->
-<!--                     >-->
+                <div class="profile-info-details">
+                    <div class="user-icon">
+                        <span class="icon-user-info"></span>
+                    </div>
+                    <img src="../../../../../../../assets/images/gender{{(profileService.profileData$ | async)?.Gender}}.png">
+                    <div>{{(profileService.profileData$ | async)?.FirstName + ' ' + (profileService.profileData$ | async)?.LastName}}</div>
+                    <div class="profile-verified-state"
+                         [ngClass]="{'status-1': status === 'not verified',
+                    'status-2': status === 'pending',
+                    'status-3': status === 'verified'}">
+                        <span>{{'User.' + status | translate}}</span>
+                    </div>
+                </div>
                 <li
                         *ngFor="let item of menuList" class="user-left-panel_header" collapse (click)="toggleMenu(item, $event)"
                         [ngClass]="{'opened': (currentOpenMenu == item) || (item.SubMenu.includes(currentOpenSubMenu))}">

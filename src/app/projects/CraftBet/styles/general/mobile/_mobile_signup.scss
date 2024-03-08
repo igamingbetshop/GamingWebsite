@@ -8,7 +8,29 @@
   padding-right: paddingRight(m-register-section, 16px);
   padding-left: paddingLeft(m-register-section, 16px);
   padding-bottom: paddingBottom(m-register-section, 16px);
-
+  .mobile-register-top-part {
+    display: var(--m-register-top-part-display, none);
+    justify-content: var(--m-register-top-part-justify-content, space-between);
+    align-items: center;
+    .reg-icon-close-modal {
+      color: var(--register-tab-text-color, #FFFFFF);
+      position: var(--m-reg-close-icon-position, relative);
+      top: var(--m-reg-close-icon-top, unset);
+      left: var(--m-reg-close-icon-left, 0);
+      right: var(--m-reg-close-icon-right, unset);
+      font-size: var(--m-reg-close-icon-font-size, 16px)
+    }
+  }
+  .mobile-register-logo-svg {
+    display: var(--m-register-logo-svg-display, none);
+    height: height(m-register-logo, 36px);
+    width: width(m-register-logo, 156px);
+    margin-top: var(--m-register-logo-margin-top, 11px);
+    margin-bottom: var(--m-register-logo-margin-bottom, 29px);
+    margin-left: var(--m-register-logo-margin-left, auto);
+    margin-right: var(--m-register-logo-margin-right, auto);
+    background: var(--m-register-logo-background, transparent);
+  }
   .required-field
   {
     .required-field-text {
@@ -25,11 +47,14 @@
 
   .reg-header
   {
-    position: relative;
+    position: var(--reg-header-position, relative);
     top: itemTop(reg-header, unset);
     color: color(reg-header);
     font-size: fontSize(reg-header, 14px);
     display: display(reg-header, none);
+    font-weight: var(--reg-header-font-weight, 400);
+    left: var(--reg-header-item-left, auto);
+    margin-top: var(--reg-header-item-margin-top, 0px);
   }
  div
  {
@@ -81,12 +106,15 @@
     .go_back {
       padding: var(--m-signup-reg-go-back-padding, 0);
       position: var(--m-signup-reg-go-back-position, relative);
+      left: var(--m-signup-reg-go-back-left, auto);
+      top: var(--m-signup-reg-go-back-top, 0);
     }
     .close-icon {
       color: color(register-tab-text);
-      position: relative;
+      position: position(m-reg-close-icon, relative);
       top: itemTop(close-icon,unset);
       left: itemLeft(close-icon,0);
+      display: display(m-reg-close-icon, block);
     }
 
   }
@@ -94,7 +122,8 @@
     display: flex;
     width: 100%;
     justify-content: var(--m-reg-header-menu-center, unset);
-    gap: 14px;
+    background: var(--m-reg-header-menu-background, transparent);
+    gap: var(--m-reg-header-menu-gap, 14px);
 
     .reg_item, .go_back {
 
@@ -106,16 +135,17 @@
         //}
       }
 
-      font-size: 16px;
+      font-size: var(--register-tab-font-size, 16px);
       line-height:var(--register-tab-line-height, 32px);
       color: color(register-tab-text);
-      font-weight: normal;
+      font-weight: var(--register-tab-font-weight, normal);
       text-decoration: none;
       width: width(register-tab, fit-content);
       text-align: textAlign(register-tab, left);
 
       &.active {
         text-decoration: var(--register-tab-text-decoration,underline);
+        border-bottom: var(--register-tab-text-border-bottom, none);
         color: color(register-tab-text-selected);
         background: backgroundColor(register-tab-selected,transparent);
         width: width(register-tab-selected,unset);
@@ -127,6 +157,7 @@
         margin-right: marginRight(register-tab-selected, auto);
         margin-left: marginLeft(register-tab-selected, auto);
         margin-top: marginLeft(register-tab-selected, auto);
+        padding: var(--register-tab-selected-padding, 0)
       }
 
       &.hidden {
@@ -201,10 +232,44 @@
     transform-origin: 0 0;
     position: absolute;
   }
+  .authentication-buttons {
+    display: var(--register-authentication-btns-display, none);
+    margin: var(--m-register-authentication-btns-margin, 0);
+    background: var(--register-authentication-btns-background, transparent);
+    border-radius: var(--register-authentication-btns-border-radius, 20px);
+    height: var(--m-register-authentication-btns-height, 42px);
+    padding: var(--register-authentication-btns-padding, 0 3px);
+    //width: var(--m-register-authentication-btns-padding, 60%);
+    .authentication-button {
+      background: var(--register-authentication-btn-background, transparent);
+      color: var(--register-authentication-btn-color, #fff);
+      border: var(--register-authentication-btn-border, none);
+      height: var(--register-authentication-btn-height, 100%);
+      border-radius: var(--register-authentication-btn-border-radius, 20px);
+      padding: var(--register-authentication-btn-padding, 0 25px);
+      font-size: var(--register-authentication-btn-font-size,  16px);
+      cursor: pointer;
+    }
+    .active {
+      background: var(--register-authentication-btn-active-background, #FFB801);
+      color: var(--register-authentication-btn-active-color, #000);
+    }
+  }
 
   .allFormItems {
     margin-top: marginTop(m-signup-form, 70px);
-    width: 100%;
+    margin-left: marginLeft(m-signup-form, 0);
+    margin-right: marginRight(m-signup-form, 0);
+    margin-bottom: marginBottom(m-signup-form, 0);
+    width: width(m-signup-form, 100%);
+    .hidden-title {
+      text-align: var(--m-signup-hidden-title-text-align, center);
+      display: var(--m-signup-hidden-title-display, none);
+      font-size: var(--m-signup-hidden-title-font-size, 16px);
+      font-weight: var(--m-signup-hidden-title-weight, 600);
+      color: var(--m-signup-hidden-title-color, #fff);
+      margin: var(--m-signup-hidden-title-margin, 0);
+    }
     .form-row-item {
       &_withoutLabel{
         height: height(m-form-row-item-withLabel, auto);
@@ -242,10 +307,11 @@
             width: auto;
             height: height(register-form-field-label, 18px);
             font-size: fontSize(m-signup-input-label, 16px);
-            position: absolute;
+            position: position(m-signup-input-label, absolute);
             top: itemTop(m-signup-input-label, -10px);
             left: itemLeft(m-signup-input-label, unset);
             background-color: backgroundColor(m-signup-input-label, unset);
+            font-weight: fontWeight(m-signup-input-label, 400);
           }
           input:focus ~ label,
           input:not(:placeholder-shown) ~ label {
@@ -263,16 +329,43 @@
               height: height(m-signup-input-checkbox, auto);
             }
           }
+          .custom-register-by {
+            display: var(--m-custom-register-type-display, block);
+          }
+          .custom-register-type-checkboxes {
+            display: var(--m-custom-register-type-checkbox-display, none);
+            margin: var(--m-custom-register-type-checkbox-margin, 0 0 10px 0);
+            gap: var(--m-custom-register-type-checkbox-gap, 15px);
+            align-items: center;
+            .checkbox-content {
+              display: flex;
+              align-items: center;
+              .checkbox-type-label {
+                position: var(--m-custom-register-type-checkbox-label-position, unset);
+                font-size: var(--m-custom-register-type-checkbox-label-font-size, 14px);
+                transform: var(--m-custom-register-type-checkbox-label-transform, none);
+                color: var(--m-custom-register-type-checkbox-label-color, #002776);
+                height: var(--m-custom-register-type-checkbox-label-height, auto);
+                margin: var(--m-custom-register-type-checkbox-label-margin, 0);
+                padding: var(--m-custom-register-type-checkbox-label-padding, 0 0 0 8px);
+              }
+              .checkbox-type-input {
+                width: var(--m-custom-register-type-checkbox-input-width, 18px);
+                height: var(--m-custom-register-type-checkbox-input-height, 18px);
+              }
+            }
+          }
           select {
-            appearance: none;
+            appearance: var(--mobile-select-custom-dropdown-appearance, none);
             background-image:
-                    linear-gradient(45deg, transparent 50%, #fff 50%),
-                    linear-gradient(135deg, #fff 50%, transparent 50%),
+                    linear-gradient(45deg, transparent 50%, var(--mobile-select-custom-dropdown-icon1-background,#fff) 50%),
+                    linear-gradient(135deg, var(--mobile-select-custom-dropdown-icon2-background,#fff) 50%, transparent 50%),
                     linear-gradient(to right, transparent, transparent);
             background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px), 100% 0;
             background-size: var(--mobile-select-custom-dropdown-background-size, 12px 8px, 12px 8px, 2.5em 2.5em);
             background-repeat: no-repeat;
             color: itemColor(mobile-select-custom-dropdown, #fff);
+            text-indent: var(--m-login-input-text-indent, 16px);
             &.currency
             {
               background-color: backgroundColor(currency, transparent);
@@ -379,13 +472,21 @@
   .reg-step-navigate-buttons {
     width: width(m-reg-button, 100%);
     margin-left: marginLeft(m-reg-button, 0);
+    margin-right: marginRight(m-reg-button, 0);
     position: var(--m-register-form-item-position, relative);
     bottom: var(--m-register-form-item-bottom, unset);
+    margin-bottom: var(--m-register-form-item-margin-bottom, 0);
+    margin-top: var(--m-register-form-item-margin-top, 0);
     height: var(--m-register-form-item-height,44px) !important;
 
   }
+  .show-reg-step-navigate-button-login {
+    display: var(--m-login-redirect-btn-display, none);
+    text-align: var(--m-login-redirect-text-align, center);
+  }
   .reg-step-navigate-button-login {
     margin-top: var(--m-reg-btn-margin-top, 16px);
+    display: var(--m-reg-login-btn-display, flex);
     color: var(--reg-btn-color, #fff);
     min-width: var(--next-btn-width, 100px);
     cursor: pointer;
@@ -401,7 +502,11 @@
       color: itemColor(login-btn-color, #fff);
     }
   }
-  form{position: relative}
+  form{
+    position: relative;
+    display: var(--m-signup-form-container-display, flex);
+    flex-direction: column;
+  }
 }
 
 .accept_question {
@@ -539,7 +644,9 @@
 .info-reg-field {
   text-align: var(--m-register-form-label-text-align, center);
   color: itemColor(register-form-label, #fff);
-  font-size: fontSize(register-form-label, 14px);
+  font-size: fontSize(m-register-form-label, 14px);
+  font-weight: fontWeight(m-register-form-label, 400);
+  padding: var(--m-register-form-label-padding, 0);
 }
 
 

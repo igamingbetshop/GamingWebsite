@@ -9,13 +9,13 @@ import { UserLogined } from '@core/services/app/userLogined.service';
 import { Controllers, Methods } from '@core/enums';
 
 @Component({
-  selector: 'app-account-page-type3-pay3000',
+  selector: 'app-account-page-type3-payment',
   templateUrl: './account-page-type3-payment.component.html',
   styleUrls: ['./account-page-type3-payment.component.scss']
 })
 export class AccountPageType3PaymentComponent implements OnInit {
   formGroup: FormGroup;
-  public connected;
+  public connected = false;
   public currencySymbol: any;
   public userData: any;
   public messageBalanceKey;

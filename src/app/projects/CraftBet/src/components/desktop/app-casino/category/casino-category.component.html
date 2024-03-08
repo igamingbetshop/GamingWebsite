@@ -21,15 +21,14 @@
                              (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
                 </casino-game>
             </li>
-            <button *ngIf="leftGamesCount" class="more-button" (click)="casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+            <button *ngIf="leftGamesCount" class="more-button" (click)="markForSave = true; casinoFilterService.nextPage();">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
         </ul>
     </div>
     <div *ngSwitchCase="'horizontal'" class="category"
          [attr.label-position]="fragmentConfig?.Config?.label"
          [attr.show-all-position]="fragmentConfig?.Config?.showAllLabel"
          [ngStyle]="fragmentConfig?.Config.style">
-        <header class="header">
-            {{'Game.' + fragmentConfig.Title | translate}}
+        <header class="header" [innerHTML]="'Game.' + fragmentConfig.Title | translate | sanitizer : 'html'">
             <div class="show-all-label" *ngIf="fragmentConfig?.Config?.showAllLabel">
                 <span class="icon-arrow-to-left" (click)="slider.changeStep(-1)"></span>
                 <span class="show-all-label-text" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]">{{'Category.ShowAll' | translate}}</span>
@@ -38,7 +37,7 @@
         </header>
         <main>
             <div class="games" #slider="slider" horizontal-scroll>
-                <casino-game *ngFor="let game of games" [game]="game" [fragmentConfig]="fragmentConfig.Config"
+                <casino-game *ngFor="let game of games" [game]="game" [fragmentConfig]="fragmentConfig"
                              (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
                 </casino-game>
             </div>
@@ -63,15 +62,14 @@
                              (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
                 </casino-game>
             </li>
-            <button *ngIf="leftGamesCount" class="more-button" (click)="casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+            <button *ngIf="leftGamesCount" class="more-button" (click)="markForSave = true; casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
         </ul>
 
     </div>
     <div *ngSwitchCase="'grid'"
          [ngStyle]="fragmentConfig?.Config.style"
          class="filter-category-box category">
-        <header class="header">
-            {{'Game.' + fragmentConfig.Title | translate}}
+        <header class="header" [innerHTML]="'Game.' + fragmentConfig.Title | translate | sanitizer : 'html'">
         </header>
         <ul class="product_list">
             <li class="product_list_item"

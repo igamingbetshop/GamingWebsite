@@ -1,0 +1,76 @@
+<div class="mobile-tickets-section">
+    <div class="add-tickets">
+        <button type="button" class="craft_btn" (click)="openNewTicket()">{{'Ticket.New Ticket' | translate}}</button>
+    </div>
+    <div class="tickets_history" *ngFor="let ticket of ticketsList | paginate:{ itemsPerPage: 10, currentPage: page, totalItems: ticketsCount }; trackBy: trackByMethod, let i = index">
+        <div class="tickets_history_item"
+             *ngIf="ticket.Status !==2">
+            <div class="tickets_history_item_topPanel">
+                <div>
+                    {{ticket?.Id}}
+                </div>
+                <div>
+                    {{ticket?.CreationTime | date: 'dd.MM.yyyy HH:mm' }}
+                </div>
+            </div>
+            <div class="tickets_history_item_middlePanel">
+                <div
+                        class="info-item">{{ticket?.Status == 1 ? ('Settings.Active' | translate) : ('Settings.Closed' | translate)}}</div>
+                <div class="info-item">{{ticket?.Subject}}</div>
+            </div>
+
+            <div class="open-message-block" #ticketMessagesBox *ngIf="i === expandedIndex && isMessageBlockOpen">
+                <div class="all-message" *ngFor="let item of messageList"
+                     [ngClass]="{'my-message':item.Type == 1, 'your-message': item.Type != 1}">
+          <span class="author_message">{{item.Type == 1 ? ('User.You' | translate) : ('User.Support' | translate)}}
+              | {{item?.CreationTime | date : 'd MMMM y HH:mm'}}</span>
+                    <span [innerHTML]="item?.Message">{{item?.Message}}</span>
+                </div>
+
+                <div class="send-message messages-block_item" *ngIf="ticket.Status == 1">
+                    <form [formGroup]="sendMessageForm" novalidate (ngSubmit)="submit(ticket)">
+                        <div class="send-message-part">
+                            <textarea type="text" formControlName="Message"
+                                      placeholder="{{'Ticket.Write-Message' | translate}}"></textarea>
+                            <label>{{'Ticket.Write-Message' | translate}}</label>
+                        </div>
+                        <button class="craft_btn">
+                            <span class="icon-social-icon4"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tickets_history_item_bottomPanel">
+                <div class="action-items">
+                    <div class="tickets_table_innerColumn tickets_table_innerColumn2" *ngIf="(i !== expandedIndex)">
+                        <span *ngIf="ticket?.UnreadMessagesCount > 0"
+                              class="user-info_item_unreadMessagesCount user-info_item_unreadMessagesCount_ticket">{{ticket?.UnreadMessagesCount}}</span>
+                        <span class="icon-arrow" *ngIf="(i !== expandedIndex)" (click)="openMessage(ticket, i)"
+                              title="{{'Settings.Open_Message' | translate}}"></span>
+                    </div>
+                    <div class="tickets_table_innerColumn tickets_table_innerColumn2 opened"
+                         *ngIf="(i === expandedIndex)">
+                        <span *ngIf="ticket?.UnreadMessagesCount > 0"
+                              class="user-info_item_unreadMessagesCount user-info_item_unreadMessagesCount_ticket">{{ticket?.UnreadMessagesCount}}</span>
+                        <span class="icon-arrow" *ngIf="(i === expandedIndex)" (click)="closeMessage()"
+                              title="{{'Settings.Open_Message' | translate}}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="empty-tickets empty-block" *ngIf="ticketsList.length == 0">
+            <section class="empty-tickets empty-block">
+                <span class="icon-ticket icon"></span>
+                <span class="empty-block-text">{{'User.Tickets-empty' | translate}}</span>
+            </section>
+        </div>
+    </div>
+
+
+    <div class="pagination_section">
+        <pagination-controls previousLabel="{{'User.Previous' | translate}}" nextLabel="{{'User.Next' | translate}}"
+                             autoHide="true"
+                             (pageChange)="getTicketsHistory($event)"></pagination-controls>
+    </div>
+</div>

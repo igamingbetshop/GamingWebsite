@@ -44,7 +44,7 @@ export class BalanceComponent implements OnInit {
   {
     let groupedBalances = [];
 
-    for(let i = 0; i < balances.length; i++)
+    for(let i = 0; i < balances?.length; i++)
     {
       let balance = {...balances[i]};
 

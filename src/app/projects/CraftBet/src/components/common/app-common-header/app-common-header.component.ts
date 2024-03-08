@@ -46,6 +46,7 @@ export class AppCommonHeaderComponent extends BaseHeaderComponent {
     logoExtension = '';
     public updatedData: any;
     public responsive:boolean;
+    public accountBalances = [];
 
     constructor(public injector: Injector) {
         super(injector);
@@ -72,6 +73,7 @@ export class AppCommonHeaderComponent extends BaseHeaderComponent {
         this.currentLang = this.langService.getCurrentLang('');
 
         this.balanceService.notifyUpdateBalance.subscribe(data => {
+            // this.accountBalances = this.groupBalances(data?.Balances);
             this.balance = Number(data.AvailableBalance).toFixed(2);
             this.unusedBalance = Number(data.UnusedBalance).toFixed(2);
             this.bonus = Number(data.BonusBalance) > 0 ? Number(data.BonusBalance).toFixed(2) : "0.00";

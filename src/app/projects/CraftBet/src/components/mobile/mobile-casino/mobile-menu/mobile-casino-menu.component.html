@@ -7,7 +7,7 @@
             <img [src]="menuItem?.IconSrc" alt="" *ngIf="menuItem?.IconSrc; else menuItemIconRef">
             <ng-template #menuItemIconRef><i class="icon-{{menuItem?.Icon}}"></i></ng-template>
             <a>{{ 'Game.' + menuItem?.Title | translate }}</a>
-            <div class="games-count" *ngIf="first && allGamesCount">{{allGamesCount}}</div>
+            <div class="games-count" *ngIf="first && showAllGamesCount && allGamesCount">{{allGamesCount}}</div>
         </li>
     </ul>
 </div>

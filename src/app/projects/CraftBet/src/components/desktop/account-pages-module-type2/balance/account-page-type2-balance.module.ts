@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { SimpleModalModule } from 'ngx-simple-modal';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToNumberPipeModule } from '../../../../../../../@theme/pipes/to-number/to-number-pipe.module';
 import { AccountPageType2BalanceComponent } from './account-page-type2-balance.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
         TranslateModule,
         ToNumberPipeModule,
         RouterModule.forChild(routes),
+        SimpleModalModule
     ],
 })
 

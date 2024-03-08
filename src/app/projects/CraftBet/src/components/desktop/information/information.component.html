@@ -1,6 +1,6 @@
 <div class="about_us_section min-height">
   <div class="about_us_section_content max-width">
     <h2 class="about-us-title">{{'Header.Information' + pageTitle  | translate}}</h2>
-    <div class="content" [innerHTML]="content | sanitizer:'html'"></div>
+    <div class="content" (click)="onTemplateClick($event)" [innerHTML]="content | sanitizer:'html'"></div>
   </div>
 </div>

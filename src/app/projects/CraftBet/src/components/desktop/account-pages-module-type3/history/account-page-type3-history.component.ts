@@ -43,7 +43,7 @@ export class AccountPageType3HistoryComponent extends AppCommonBetsHistoryCompon
     this.currencySymbol = userData ? userData.CurrencySymbol : '';
     // this.form = this.fb.group({
     //   timeFilter: 1,
-    //   operationFilter: 0,
+    //   operationFilter: 3,
     //   productId: null
     // });
   }
@@ -83,13 +83,13 @@ export class AccountPageType3HistoryComponent extends AppCommonBetsHistoryCompon
           d1.setMonth(d1.getMonth() - 6);
           break;
         case 3:
-          if (d1.getMonth() === 0) {
-            d1.setFullYear(d1.getFullYear() - 1);
-            d1.setMonth(11);
-          } else {
+          // if (d1.getMonth() === 0) {
+          //   d1.setFullYear(d1.getFullYear() - 1);
+          //   d1.setMonth(11);
+          // } else {
             // d1.setMonth(d1.getMonth() - 1);
             d1.setTime(d1.getTime() - (100 * 365 * dayms));
-          }
+          // }
           break;
       }
 

@@ -74,6 +74,7 @@
         font-size: 26px;
         color: var(--verification-code-text-color, #ffffff);
         text-indent: var(--verification-code-text-indent, 16px);
+        text-align: var(--verification-code-text-align, left);
         border: var(--verification-code-border, 1px solid #dbedff)
       }
       .error-otp
@@ -241,10 +242,10 @@
 }
 @media (max-width: 1200px) {
   .modal-content2 {
-    width: 90%;
-    margin-left: 20px;
-    height: 60%;
-    margin-top: 60px !important;
+    width: var(--m-forgot-password-confirmation-content-width, 90%);
+    margin-left: var(--m-forgot-password-confirmation-content-margin-left, 20px);
+    height: var(--m-forgot-password-confirmation-content-height, 60%);
+    margin-top: var(--m-forgot-password-confirmation-content-margin-top, 60px) !important;
     overflow: auto;
     .modal_content {
       p {
@@ -262,7 +263,7 @@
     }
     .modal_footer {
       width: 100%;
-      margin-bottom: 10px;
+      margin-bottom: var(--m-security-logo-bottom-margin, 10px);
       button {
         height: calc(var(--forgot-password-button-text-height, 44px) - 10px);
       }

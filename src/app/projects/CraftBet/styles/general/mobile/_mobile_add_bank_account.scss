@@ -134,6 +134,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: relative;
   h2 {
     text-align: var(--m-add-bank-account-title-text-align, center);
     font-size: var(--m-add-bank-account-title-font-size, 30px);
@@ -144,5 +145,8 @@
   .ng-fa-icon {
     font-size: var(--m-add-bank-account-title-icon-font-size, 18px);
     color: var(--m-add-bank-account-title-icon-color, #dadbe0);
+    position: var(--m-add-bank-account-title-icon-position, relative);
+    right: var(--m-add-bank-account-title-icon-right, 0);
+    top: var(--m-add-bank-account-title-icon-top, 0);
   }
 }

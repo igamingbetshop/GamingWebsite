@@ -1,0 +1,50 @@
+.error_message {
+  white-space: normal;
+}
+.credit-check-section {
+  padding: 19px 8px;
+  margin-bottom: 16px;
+
+  .mobile-credit-section {
+    border: 1px solid #BCBCBC;
+    padding: 7px 11px;
+    background: #fff;
+
+    .titles {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #bcbcbc;
+      padding-bottom: 7px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .text-part {
+      font-size: 13px;
+      padding-top: 10px;
+      line-height: 23px;
+      .limitsBlocks {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.verification-iframe {
+  height: var(--m-credit-iframe-container-height, calc(100vh - 311px));
+}
+.shop-wallet-part {
+  .shop-wallet-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    height: 200px;
+    .shop-wallet-text {
+      color: #aeaeae;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+}

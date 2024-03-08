@@ -8,7 +8,7 @@
   }
   .change-password-field-type {
     position: absolute;
-    right: 12px;
+    right: var(--change-password-field-icon-right, 12px);
     cursor: pointer;
     display: display(change-password-field-icon, block);
   }
@@ -32,7 +32,21 @@
     left: var(--popup-close-icon-right, 38px);
   }
 }
-
+.login-page {
+  display: var(--login-page-display, block);
+  gap: var(--login-page-gap, 0);
+  .login-left-side-img {
+    display: var(--login-left-side-img-display, none);
+    width: var(--login-left-side-img-width, auto);
+    height: var(--login-left-side-img-height, auto);
+    margin: var(--login-left-side-img-margin, 0);
+    border-radius: var(--login-left-side-img-border-radius, 0);
+    position: var(--login-left-side-img-position, relative);
+    background-position: var(--login-left-side-img-background-position, unset);
+    background-repeat: var(--login-left-side-img-repeat, no-repeat);
+    background-size: var(--login-left-side-img-background-size, cover);
+  }
+}
 .login-logo{
   display: display(login-logo, block);
   margin: 0 auto;
@@ -42,13 +56,25 @@
   width: width(login-logo, auto);
   height: height(login-logo, auto);
 }
+.login-logo-svg {
+  display: var(--login-logo-svg-display, none);
+  margin-top: marginTop(login-logo, 37px);
+  margin-bottom: marginBottom(login-logo, 24px);
+  margin-left: marginLeft(login-logo, auto);
+  margin-right: marginRight(login-logo, auto);
+  background-color: backgroundColor(login-logo, unset);
+  width: width(login-logo, auto);
+  height: height(login-logo, auto);
+}
 
 .login-section {
   display: var(--login-section-display, block);
   align-items: center;
   flex-direction: var(--login-section-direction, unset);
+  justify-content: var(--login-section-justify-content, unset);
   padding-left: var(--login-section-padding-left, 0px);
   padding-right: var(--login-section-padding-right, 0px);
+  background: var(--login-section-background, transparent);
   .login-title {
     display: var(--show-login-text-display, block);
   }
@@ -77,7 +103,7 @@
   .remember-me {
     display: display(remember-me, unset);
     align-items: center;
-    margin-top: 20px;
+    margin-top: var(--remember-me-check-margin-top, 20px);
 
     input {
       display: display(remember-me-checkbox, unset);
@@ -289,6 +315,9 @@
       display: grid;
       text-align: var(--modal-forget-password-text-align, center);
 
+      .form-accept-terms {
+        display: var(--signin-form-accept-terms-display, none);
+      }
       .form_field {
         margin: 25px auto 0 auto;
         .forget-password-text {
@@ -361,7 +390,7 @@
     font-size: fontSize(forgot-password-text, 14px);
     font-weight: fontWeight(forgot-password-text, 700);
     color: itemColor(forgot-password-text, #000000);
-    text-decoration: underline;
+    text-decoration: var(--forgot-password-text-decoration, underline);
     white-space: nowrap;
     padding-right: paddingRight(modal-content-forget-password, 0);
     width: var(--modal-content-forget-password-width, 106px);
@@ -377,19 +406,46 @@
     .form_field {
       width: var(--login-modal-section-form-field-width, 100%);
       height: var(--login-modal-section-form-field-height, 44px);
+      margin-top: var(--login-modal-section-form-field-margin-top, 0px);
     }
 
     form {
       position: relative;
+      .form-accept-terms {
+        display: var(--signin-form-accept-terms-display, none);
+      }
       .forgot_password {
         margin-right: marginRight(modal-forgot-password-text, 32px);
         margin-bottom: marginBottom(modal-forgot-password-text, 0px);
-        display: display(modal-forgot-password-text, none);
+        display: display(modal-forgot-password-text, flex);
       }
       width: var(--login-modal-section-form-width, 100%);
       margin: var(--login-modal-section-form-margin, 0);
       flex-direction: var(--login-modal-section-form-flex-direction, unset);
       gap: var(--login-modal-section-form-gap, 0px);
+      .authentication-buttons {
+        display: var(--register-authentication-btns-display, none);
+        margin: var(--login-authentication-btns-margin, 0);
+        background: var(--register-authentication-btns-background, transparent);
+        border-radius: var(--register-authentication-btns-border-radius, 20px);
+        height: var(--register-authentication-btns-height, 42px);
+        padding: var(--register-authentication-btns-padding, 0 3px);
+        width: var(--login-authentication-btns-width, auto);
+        .authentication-button {
+          background: var(--register-authentication-btn-background, transparent);
+          color: var(--register-authentication-btn-color, #fff);
+          border: var(--register-authentication-btn-border, none);
+          height: var(--register-authentication-btn-height, 100%);
+          border-radius: var(--register-authentication-btn-border-radius, 20px);
+          padding: var(--register-authentication-btn-padding, 0 25px);
+          font-size: var(--register-authentication-btn-font-size,  16px);
+          cursor: pointer;
+        }
+        .active {
+          background: var(--register-authentication-btn-active-background, #FFB801);
+          color: var(--register-authentication-btn-active-color, #000);
+        }
+      }
     }
 
     button.login_btn {
@@ -398,6 +454,7 @@
       color: color(login-button);
       border-radius: var(--login-button-border-radius, 6px);
       height: height(login-button, 44px);
+      line-height: height(login-button-line, 44px);
       background-image: backgroundImage(login-button, linear-gradient(to bottom, itemColor(login-btn-gradient-first, #1376f8), itemColor(login-btn-gradient-second, #194074)));
       margin-top: marginTop(login-button, 0px);
       margin-left: marginLeft(login-button, 0px);
@@ -439,6 +496,7 @@ app-app-confirm {
     margin: var(--login-section-margin, 0);
     position: var(--login-section-position, absolute);
     top: itemTop(login-section, 9px);
+    left: itemLeft(login-section, auto);
     padding-left: paddingLeft(login-text, 0px);
     padding-right: paddingRight(login-text, 0px);
   }
@@ -454,7 +512,7 @@ app-app-confirm {
     }
   }
   .login_PSection_redirect a{
-    text-decoration: underline;
+    text-decoration: var(--login-redirect-href-text-decoration, underline);
     margin-left: var(--login-redirect-href-text-margin-left, 0px);
     margin-right: var(--login-redirect-href-text-margin-right, 0px);
     cursor: pointer;
@@ -466,6 +524,12 @@ app-app-confirm {
 
 @media screen and (min-width: 0px) and (max-width: 1376px)
 {
+  .login-page {
+    .login-left-side-img {
+      height: calc(var(--login-left-side-img-height, auto) * .7);
+      width: calc(var(--login-left-side-img-width, auto) * .7);
+    }
+  }
   .login-logo{
     margin: 0 auto;
     margin-top: calc(var(--login-logo-margin-top, 37px) * 0.7);
@@ -595,7 +659,7 @@ app-app-confirm {
       }
 
       form {
-        width: 100%;
+        width: var(--login-modal-section-small-form-width, 100%);
         .forgot_password {
           margin-right: var(--modal-forgot-password-text-small-margin-right, 32px);
         }
@@ -604,7 +668,7 @@ app-app-confirm {
       button.login_btn {
         width: 100%;
         margin-top: var(--small-login-btn-margin-top, 0);
-        height: calc(var(--login-button-height, 44px) * 0.6);
+        //height: calc(var(--login-button-height, 44px) * 0.6);
       }
     }
 
@@ -643,6 +707,12 @@ app-app-confirm {
 }
 @media screen and (min-width: 1377px) and (max-width: 1610px)
 {
+  .login-page {
+    .login-left-side-img {
+      height: calc(var(--login-left-side-img-height, auto) * .9);
+      width: calc(var(--login-left-side-img-width, auto) * .9);
+    }
+  }
   .login-logo{
     margin: 0 auto;
     margin-top: calc(var(--login-logo-margin-top, 37px) * 0.9);
@@ -764,7 +834,7 @@ app-app-confirm {
       }
 
       form {
-        width: 100%;
+        width: var(--login-modal-section-medium-form-width, 100%);
         .forgot_password {
           margin-right: var(--modal-forgot-password-text-medium-margin-right, 32px);
         }

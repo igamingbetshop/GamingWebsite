@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Injector, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Inject, Injector, ViewChild} from '@angular/core';
 import {AppCommonHeaderComponent} from '../../common/app-common-header/app-common-header.component';
 import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
 import { ActivatedRoute, NavigationEnd} from "@angular/router";
@@ -16,6 +16,8 @@ import {StateService} from "../../../../../../@core/services/app/state.service";
 import {
     AppCommonBankMessageModalComponent
 } from "../../common/app-common-bank-message-modal/app-common-bank-message-modal.component";
+import {UserLogined} from "../../../../../../@core/services/app/userLogined.service";
+import {DOCUMENT} from "@angular/common";
 
 
 @Component({
@@ -71,14 +73,18 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
     private scrollWidth:number = 0;
     private itemsWidth:number[] = [];
     private moreMenuWidth:number = 0;
-    public isLeftMenu:boolean = false;
-    public isTopMenu:boolean = false;
+    public menuDirection:string;
+    public isExpandedMenu:boolean = false;
+    public userLogined:UserLogined;
+
     public openModal: boolean;
     public marqueeText;
+    public marqueeProperty = false;
+    public marqueePropertyDetails;
 
 
-
-    constructor(public injector: Injector)
+    constructor(public injector: Injector,
+                @Inject(DOCUMENT) private document: Document)
     {
         super(injector);
         this.saveData = injector.get(SaveData);
@@ -86,6 +92,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         this.activatedRoute = injector.get(ActivatedRoute);
         this.popupsService = injector.get(PopupsService);
         this.baseApiService = injector.get(BaseApiService);
+        this.userLogined = injector.get(UserLogined);
 
         this.asianWebRoute = this.router['url'].includes('asianweb');
         this.getActiveRouteName(this.router['url']);
@@ -151,6 +158,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
             }
         });
 
+        this.menuDirection = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.direction || this.menuDirection;
 
         this.baseControllerService.GetMenu('HeaderPanel2Menu',
             'en').then((data: any) =>
@@ -168,13 +176,16 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                     let repeatPathElement = array.find(el => el.Href.split('/')[0] == item.Href);
                     item.preventActive = !!repeatPathElement;
                 }
+                if(item.Icon)
+                {
+                    const icon = item.Icon;
+                    item.Icon = `${window['debugPath']}/assets/images/header-panel-2-menu/${icon}`;
+                    item.IconHover = `${window['debugPath']}/assets/images/header-panel-2-menu/hover/${icon}`;
+                }
 
                 const parsedStyleTypeItem = JSON.parse(JSON.parse(styleTypeItem));
 
                 item.data = parsedStyleTypeItem;
-
-                /*if(!index)
-                    this.isLeftMenu = parsedStyleTypeItem['dir'] == 1;*/
 
                 if (parsedStyleTypeItem['style'] != undefined) {
                     item['className'] = itemClassType + '-' + parsedStyleTypeItem['style'];
@@ -285,9 +296,6 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                     itemClassType = item.Type.substring(item.Type.lastIndexOf("_") + 1);
                 const parsedStyleTypeItem = JSON.parse(JSON.parse(styleTypeItem));
 
-               /* if(!index)
-                    this.isTopMenu = parsedStyleTypeItem['dir'] == 1;*/
-
                 item.data = parsedStyleTypeItem;
 
                 if (parsedStyleTypeItem['isPlay'] != undefined) {
@@ -362,6 +370,20 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                         return item;
                     }
                 }
+                for (const eachItem of this.panel1MenuLeftItems) {
+                    if (eachItem.Type === "marqueeItem_marquee") {
+                        const styleTypeObj = JSON.parse(JSON.parse(eachItem.StyleType));
+                        this.marqueePropertyDetails = {
+                            className: eachItem.className,
+                            contentType: eachItem.contentType,
+                            animationName: eachItem.animationName,
+                            animated: styleTypeObj.animated,
+                            timingFunction: styleTypeObj.timingFunction,
+                            duration: styleTypeObj.duration
+                        };
+                        break;
+                    }
+                }
 
             });
             this.showPanel1 = this.panel1MenuItems.length > 0;
@@ -384,6 +406,11 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
     ngOnInit()
     {
         super.ngOnInit();
+
+        if(this.menuDirection === 'left'){
+            this.document.body.classList.add("isLeftMenu");
+        }
+
 
         this.saveData.openPopup.subscribe((data) => {
             if (data == 1)
@@ -532,7 +559,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         this.panel1StateSbj.pipe(debounceTime(300)).subscribe(data =>
         {
             this.renderPanel1(data);
-            this.setHeaderPosition(this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_1_MENU)?.position);
+            this.checkHeaderSize(this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_1_MENU)?.position);
         });
         this.openModal = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_1_MENU)?.openModal;
         this.openLimitNotifications();
@@ -578,9 +605,6 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         this.signalRService.onDepositLimitInfo$.subscribe(data => {
             this.updatedData = data;
             if (this.isLogin && (data.DailyDepositLimitPercent >= 80 || data.WeeklyDepositLimitPercent >= 80 || data.MonthlyDepositLimitPercent >= 80)) {
-                // this.translate.get('User.Limit Info details').subscribe((res) => {
-                //     this.updatedData = res.replace('number', currentValue);
-                // });
                 this.simpleModalService.addModal(LimitNotificationsComponent, {
                     title: 'Limit Notifications',
                     data: { notLogin: true, updatedData: data },
@@ -591,9 +615,6 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         this.signalRService.onBetLimitInfo$.subscribe(res => {
             this.updatedData = res;
             if (this.isLogin && (res.DailyBetLimitPercent >= 80 || res.WeeklyBetLimitPercent >= 80 || res.MonthlyBetLimitPercent >= 80)) {
-                // this.translate.get('User.Limit Info details').subscribe((res) => {
-                //     this.updatedData = res.replace('number', currentValue);
-                // });
                 this.simpleModalService.addModal(LimitNotificationsComponent, {
                     title: 'Limit Notifications',
                     data: { notLogin: true, updatedData: res },
@@ -727,11 +748,11 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         }
     }
 
-    private setHeaderPosition(position)
+    private checkHeaderSize(position)
     {
+        const header = document.getElementById('header-section');
         if(position == 'fixed')
         {
-            const header = document.getElementById('header-section');
             const mainContent = document.getElementById('main-container');
             header.style.position = 'fixed';
             header.style.width = "100%";
@@ -739,13 +760,20 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
             mainContent.style.position = "relative";
             mainContent.style.top = header.offsetHeight + 'px';
         }
+        this.stateService.setDesktopHeaderSize({height:header.offsetHeight, width:header.offsetWidth});
     }
 
- getTickers() {
+    getTickers() {
+        this.marqueeProperty = true;
         return this.baseApiService.apiPost('', {}, Methods.GET_TICKER, false).pipe(take(1)).subscribe((data) => {
             if(data.ResponseCode === 0)
             {
                 this.marqueeText = data.ResponseObject;
+                if (this.marqueeText.length === 0) {
+                    this.marqueeText = undefined;
+                }
+            } else {
+                this.marqueeText = undefined;
             }
         });
     }
@@ -754,5 +782,16 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
     {
         if(item.Href)
             this.router.navigate(['/' + item.Href]);
+    }
+
+    expandLeftMenu(){
+        this.isExpandedMenu = !this.isExpandedMenu;
+        if(this.isExpandedMenu == true){
+            this.document.body.classList.add("isExpandedLeftMenu");
+            this.document.body.classList.remove("isLeftMenu");
+        } else {
+            this.document.body.classList.add("isLeftMenu");
+            this.document.body.classList.remove("isExpandedLeftMenu");
+        }
     }
 }

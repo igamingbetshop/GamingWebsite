@@ -56,6 +56,7 @@ export class BaseVerifyCode extends SimpleModalComponent<IVerifyCode, boolean> i
     errorMessage:string;
     otp:string;
     numbersOnly:boolean = false;
+    inputType:boolean = false;
     validator:RegExp;
     callBack = (data:any) =>
     {
@@ -63,7 +64,6 @@ export class BaseVerifyCode extends SimpleModalComponent<IVerifyCode, boolean> i
             this.userRegisterService.errorMessage = data.error;
         else this.close();
     }
-    // translationKeys:any = {mobile:'', email:''};
     translationKeys:any = {mobile:'', email:'', MobileOrEmail: ''};
 
     private timerPromise:any;
@@ -101,6 +101,7 @@ export class BaseVerifyCode extends SimpleModalComponent<IVerifyCode, boolean> i
             this.verifyCode();
         }
         this.numbersOnly = this.configService.defaultOptions.VerificationKeyFormat;
+        this.inputType = this.configService.defaultOptions.VerificationKeyFormat;
         this.validator = new RegExp(this.numbersOnly ? '[0-9]' : '[a-zA-Z0-9]');
     }
 
@@ -244,6 +245,8 @@ export class BaseVerifyCode extends SimpleModalComponent<IVerifyCode, boolean> i
 
     public moveToNext(event, index)
     {
+        console.log(event);
+        console.log(typeof(event));
         if(event.key === 'Backspace' && index !== 1)
         {
             const prev = event.target.previousElementSibling;

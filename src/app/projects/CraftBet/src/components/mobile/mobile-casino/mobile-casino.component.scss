@@ -23,7 +23,7 @@ app-mobile-casino-category {
   width: 52px;
   height: 52px;
   border-radius: 12px 0 0 12px;
-  background: #FFC015;
+  background: var(--open-slots-icon-background, #FFC015);
   position: fixed;
   right: 0;
   top: 35%;

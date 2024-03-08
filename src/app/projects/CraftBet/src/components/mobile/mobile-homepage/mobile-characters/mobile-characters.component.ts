@@ -42,12 +42,9 @@ export class MobileCharactersComponent extends SimpleModalComponent<ConfirmModel
 
     ngOnInit()
     {
-        this.baseApiService.apiPost("",{Controller:Controllers.MAIN}, Methods.GET_CHARACTERS, false).pipe(take(1)).subscribe(data => {
-            this.characters = data['ResponseObject'];
-            this.cd.detectChanges();
-            this.createSlider();
-
-        });
+        this.characters = window["characters"];
+        this.cd.detectChanges();
+        this.createSlider();
     }
     setCharacterById(characterId)
     {
@@ -55,7 +52,7 @@ export class MobileCharactersComponent extends SimpleModalComponent<ConfirmModel
         {
             this.baseApiService.apiPost("",{Controller:Controllers.CLIENT, Method:Methods.ADD_CHARACTER_TO_CLIENT, RequestData: characterId},null).pipe(take(1)).subscribe(data => {
                 let user = this.localStorageService.get("user");
-                user.CharacterId = characterId;
+                user.CharacterId = data['ResponseObject'];
                 this.localStorageService.add("user", user);
                 this.loginService.notifyUpdateCharacter();
             });

@@ -23,6 +23,9 @@ export class SignalRService {
     private betLimitInfo: Subject<any> = new Subject<any>();
     public onBetLimitInfo$ = this.betLimitInfo.asObservable();
 
+    private cmsPopupInfo: Subject<any> = new Subject<any>();
+    public onCmsPopupInfo$ = this.cmsPopupInfo.asObservable();
+
     private notifyLogout: Subject<any> = new Subject<any>();
     public onLogout$ = this.notifyLogout.asObservable();
 
@@ -71,6 +74,11 @@ export class SignalRService {
         this.connection.on("onBetLimit", (data) => {
             this.betLimitInfo.next(data);
         });
+
+        this.connection.on("onPopup", (data) => {
+            this.cmsPopupInfo.next(data);
+        });
+
         this.connection.on("onLogout", (data) => {
             this.notifyLogout.next(data);
         });

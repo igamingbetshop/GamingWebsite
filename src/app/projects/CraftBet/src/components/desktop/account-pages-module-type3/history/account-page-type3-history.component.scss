@@ -128,22 +128,22 @@
             margin-top: 13px;
           }
           .status-1 {
-            color: var(--bets-history-status-new-color, #F6A201);
+            color: var(--bets-history-status-new-color, #FBAF03);
           }
           .status-2 {
-            color: var(--bets-history-status-won-color, #00934A);
+            color: var(--bets-history-status-won-color, #19B600);
           }
           .status-3 {
-            color: var(--bets-history-status-lost-color, #F66901);
+            color: var(--bets-history-status-lost-color, #E70202);
           }
           .status-4 {
             color: var(--bets-history-status-deleted-color, #000);
           }
           .status-6 {
-            color: var(--bets-history-status-returned-color, #F66901);
+            color: var(--bets-history-status-returned-color, #E70202);
           }
           .status-7 {
-            color: var(--bets-history-status-cashouted-color, #F66901);
+            color: var(--bets-history-status-cashouted-color, #19B600);
           }
           .change-icon {
             transform: rotate(90deg);

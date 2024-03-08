@@ -3,12 +3,8 @@
   background: var(--promotions-products-list-background, var(--product-background-color, #FFFFFF));
   color: #d0d9e7;
   display: flex;
-  width: 100%;
+  /*width: 100%;*/
   max-width: var(--promotions-max-width, none);
- /* position: relative;
-  left:var(--header-panel2-width, 0);
-  top:var(--header-top-height, 0);
-  width: calc(100% - var(--header-panel2-width, 0px));*/
 
   .promotion_container {
     display: grid;
@@ -118,16 +114,16 @@
         width: 100%;
         height: height(promotions-text,93px);
         font-size: fontSize(promotions-text,14px);
-        box-shadow: 5px 0px 7px 0px rgba(0, 0, 0, 0.4) inset;
+        box-shadow: var(--promotions-text-box-shadow, 5px 0px 7px 0px rgba(0, 0, 0, 0.4) inset);
         background: linear-gradient(0deg, itemColor(promotions-text-gradient1,#142C44), itemColor(promotions-text-gradient2,#142C44));
         border-radius: var(--promotions-text-border-radius, 6px);
-        margin-top: 4px;
-        padding: 14px;
+        margin-top: var(--promotions-text-margin-top, 4px);
+        padding: var(--promotions-text-padding, 14px);
         position: relative;
         .promotions_title
         {
           color: itemColor(promotions-title,rgba(28, 167, 236, 1));
-          font-weight: 500;
+          font-weight: fontWeight(promotions-title, 500);
           font-size: fontSize(promotions-title,16px);
           margin-bottom: 8px;
         }

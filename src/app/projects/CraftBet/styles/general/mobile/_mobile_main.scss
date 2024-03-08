@@ -14,6 +14,8 @@ body {
   background-image: var(--m-main-background-image, unset);
   background-size: var(--m-main-background-image-size, unset);
   background-repeat: var(--m-main-background-image-repeat, no-repeat);
+  background-attachment: var(--m-main-background-image-attachment, unset);
+  background-position: var(--m-main-background-image-position, unset);
   .rotate-cover
   {
     position: fixed;

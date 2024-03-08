@@ -80,32 +80,38 @@
   <div class="bets-history-block-head block-head">
     <div>{{'User.Date' | translate}}</div>
     <div>{{'User.Id' | translate}}</div>
-    <div>{{'User.Product-Name' | translate}}</div>
     <div>{{'User.Amount' | translate}}</div>
-    <div>{{'User.Win-Amount' | translate}}</div>
+    <div>{{'User.Product-Name' | translate}}</div>
     <div>{{'User.Bet-Type' | translate}}</div>
+    <div>{{'User.Win-Amount' | translate}}</div>
     <div>{{'User.Status' | translate}}</div>
     <div class="info-btn-head">{{'User.View' | translate}}</div>
-<!--    <div class="info-btn-head"></div>-->
   </div>
   <ng-container *ngIf="getBetsHistoryService.betsHistoryList.length > 0; else emptyBets">
     <section>
-      <div class="bets-block block" *ngFor="let item of getBetsHistoryService.betsHistoryList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getBetsHistoryService.betsHistoryListCount }, let i = index"
-           [ngClass]="{'won': item.State == 2, 'lost': item.State == 3}">
-        <div class="bets-block_item block_item">{{item?.BetDate | date: 'dd/MM/yyyy H:mm'}}</div>
-        <div class="bets-block_item block_item">{{item?.BetDocumentId}}</div>
-        <div class="bets-block_item block_item">{{item?.ProductName}}</div>
-        <div class="bets-block_item block_item">{{item?.BetAmount | number}}</div>
-        <div class="bets-block_item block_item">{{item?.WinAmount | number}}</div>
-        <div class="bets-block_item block_item">{{'Bet.' + item?.statusTypeName | translate}}</div>
-        <div class="bets-block_item block_item status-{{item?.State}}">{{item?.betStatusName}}</div>
-        <div class="bets-block_item block_item info">
-<!--          <button type="button" class="info-btn" (click)="openInfo(item)"-->
-<!--                  *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80">{{'User.Info' | translate}}</button>-->
-          <span class="icon-eye-password eye-class" *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80"
-                (click)="openInfo(item)"></span>
+      <div class="bets-content" *ngFor="let item of getBetsHistoryService.betsHistoryList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getBetsHistoryService.betsHistoryListCount }, let i = index">
+        <div class="bets-block block"
+             [ngClass]="{'won': item.State == 2, 'lost': item.State == 3}">
+          <div class="bets-block_item block_item">{{item?.BetDate | date: 'dd/MM/yyyy H:mm'}}</div>
+          <div class="bets-block_item block_item">{{item?.BetDocumentId}}</div>
+          <div class="bets-block_item block_item">{{CurrencySymbol}}{{item?.BetAmount | number}}</div>
+          <div class="bets-block_item block_item">{{item?.ProductName}}</div>
+          <div class="bets-block_item block_item">{{'Bet.' + item?.statusTypeName | translate}}</div>
+          <div class="bets-block_item block_item">{{CurrencySymbol}}{{item?.WinAmount | number}}</div>
+          <div class="bets-block_item block_item"><span class="status status-{{item?.betStatusName}}">{{item?.betStatusName}}</span></div>
+          <div class="bets-block_item block_item info" *ngIf="showInfoBox != i || !closeInfo">
+            <span class="icon-eye-password eye-class" *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80"
+                  (click)="openInfoBox(item, i)"></span> <!-- (click)="openInfo(item)"-->
+
+          </div>
+          <div class="bets-block_item block_item info" *ngIf="closeInfo && showInfoBox == i">
+             <span class="icon-eye-password-close eye-class" *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80"
+                (click)="closeInfoBox()"></span>
+          </div>
         </div>
+          <app-user-info [data]="selectedBet" *ngIf="showInfoBox == i && closeInfo"></app-user-info>
       </div>
+
       <div class="pagination_section">
         <div></div>
         <pagination-controls autoHide="true" previousLabel="{{'User.Previous' | translate}}" nextLabel="{{'User.Next' | translate}}"

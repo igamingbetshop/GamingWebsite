@@ -24,6 +24,7 @@ export class BaseHome implements OnInit, OnDestroy
     imageBars:FragmentData[] = [];
     iframes: FragmentData[] = [];
     characters: FragmentData[] = [];
+    casinoSearch: FragmentData[] = [];
 
     private readonly route: ActivatedRoute;
     private readonly router: Router;
@@ -99,6 +100,8 @@ export class BaseHome implements OnInit, OnDestroy
                     break;
                 case 'characters' :
                     this.characters.push(fragmentData);
+                case 'casino-search' :
+                    this.casinoSearch.push(fragmentData);
                     break;
                 case 'iframe':
                     this.iframes.push(fragmentData);

@@ -1,0 +1,13 @@
+.mobile-add-bank-account {
+  .icon-close {
+    color: #000;
+    font-size: 23px;
+  }
+  .modal_content {
+    .form_row {
+      .ticket_input, select {
+        border: none;
+      }
+    }
+  }
+}

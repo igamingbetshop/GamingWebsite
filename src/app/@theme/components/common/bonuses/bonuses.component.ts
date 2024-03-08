@@ -30,7 +30,7 @@ export class BonusesComponent extends BaseComponent {
     public baseApiService: BaseApiService;
     public utilityService: UtilityService;
     public translate: TranslateService;
-    private datePipe:DatePipe;
+    private datePipe: DatePipe;
 
     public bonuses: Array<Bonus> = [];
 

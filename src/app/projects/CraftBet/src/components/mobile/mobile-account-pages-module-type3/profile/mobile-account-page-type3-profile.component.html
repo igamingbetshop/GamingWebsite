@@ -1,0 +1,242 @@
+<div class="mobile-full-page">
+    <div class="profile-section" *ngIf="!automaticPayoutOpened">
+        <div class="profile-page-details">
+            <div class="submit-details" *ngIf="(profileService.editState$ | async).value">
+                <button class="craft_btn setting_btn" type="button" (click)="resetProfileForm()"
+                        [ngClass]="{'cancel_btn': (profileService.editState$ | async).value}">
+                    <span>{{'Settings.Cancel-changes' | translate}}</span>
+                </button>
+                <button class="craft_btn setting_btn" type="submit" (click)="updateProfile()">
+                    <span>{{'Settings.Save-Profile-Changes' | translate}}</span>
+                </button>
+            </div>
+        </div>
+        <div class="no-border container-part">
+            <div class="titles titles2" collapse="true">
+                <span class="change-password-tab-text">{{'Settings.PersonalInformation' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <form [formGroup]="formGroup" *ngIf="formReady" class="profile-form-part">
+                <div *ngFor="let formItem of formItems">
+                    <div [ngSwitch]="formItem.Type">
+                        <div *ngSwitchCase="'text'" class="items-part">
+                            <div class="left-part">{{'User.' + formItem.Title | translate}}:</div>
+                            <div class="right-part">
+                                <input type="text" [formControlName]="formItem.Title">
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'details'" class="items-part">
+                            <div class="left-part">{{'User.' + formItem.Title | translate}}:</div>
+                            <div class="right-part">
+                                <span *ngIf="profileService.getProfile?.Title !== null">{{'User.' + profileService.getProfile?.Title | translate}}</span>
+                                <span *ngIf="profileService.getProfile?.Title === null"></span>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'birth-date'" class="items-part">
+                            <div class="left-part">{{'User.' + formItem.Title | translate}}:</div>
+                            <div class="right-part">
+                                {{profileService.getProfile.BirthDate | date: 'yyyy-MM-dd'}}
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'send-code'">
+                            <ng-container [ngSwitch]="formItem.Title">
+                                <ng-container *ngSwitchCase="'Email'">
+                                    <ng-template #emailRef></ng-template>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                        <div *ngSwitchCase="'region'">
+                            <ng-container [ngSwitch]="formItem.Title">
+                                <ng-container *ngSwitchCase="'CityId'">
+                                    <ng-template #cityRef></ng-template>
+                                </ng-container>
+                                <ng-container *ngSwitchCase="'CountryId'">
+                                    <ng-template #countryRef></ng-template>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                        <div *ngSwitchCase="'language'" class="form_field">
+                            <ng-template #languageRef></ng-template>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="change-password-tab" *ngIf="!automaticPayoutOpened">
+        <div class="container-part">
+            <div class="titles" collapse>
+                <span class="change-password-tab-text">{{'Settings.Change-password-title' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <div class="open-change-password">
+                <app-mobile-account-page-type3-change-password></app-mobile-account-page-type3-change-password>
+            </div>
+        </div>
+    </div>
+    <div class="change-password-tab" *ngIf="!automaticPayoutOpened">
+        <div class="container-part">
+            <div class="titles" collapse [class.opened]="containerOpened[1]" (click)="toggleContainer(1)">
+                <span class="change-password-tab-text">{{'Settings.Settings' | translate}}</span>
+                <div class="change-icon">
+                    <span class="icon-arrow-right"></span>
+                </div>
+            </div>
+            <div class="open-change-password">
+                <div class="language-part">
+                    <div class="form_field">
+                        {{'Settings.Language' | translate}}
+                    </div>
+                    <div class="profile-language-bar">
+                        <app-global-language></app-global-language>
+                    </div>
+                </div>
+                <div class="ideas">
+                    <div class="profile-form-part" style="display: block">
+                        <div class="items-part" style="padding: 8px 0 16px;">
+                            <div class="radios">
+                                <span class="radio-buttons-title">{{'Settings.Automatic-Withdrawal' | translate }}</span>
+                                <div class="show-creation-time"><span
+                                        *ngIf="automaticPayout">{{'Settings.Active-Automatic-Payout' | translate}} {{payoutCreationTime | date: 'dd.MM.yyyy HH:mm'}}
+                                    | </span> <span
+                                        *ngIf="automaticPayout">{{'Settings.Active-Amount' | translate}} {{automaticPayout}} {{ currencySymbol }}</span>
+                                </div>
+                            </div>
+                            <div class="radio-buttons-right-part">
+                                <label class="switch">
+                                    <input type="checkbox" [checked]="automaticPayout && automaticPayout !== 0" (change)="toggleAutomaticPayout()">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile-section profile-section2" *ngIf="automaticPayoutOpened && !showAutomaticPayoutForm">
+        <div class="profile-page-details">
+            <div class="mobile-user-right-panel_title">{{'Settings.Automatic-Withdrawal' | translate }}</div>
+        </div>
+        <div class="automatic-payout-info" [innerHTML]="'Settings.Automatic-Payout-Text' | translate | sanitizer: 'html'"></div>
+        <div class="limit-buttons">
+            <button class="limit-type-field-opened-cancel"
+                    (click)="returnProfile()">
+                {{ 'User.CancelPayout' | translate }}
+            </button>
+            <input type="submit" class="limit-type-field-opened-submit"
+                   value="{{ 'User.Further' | translate }}"
+                   (click)="changePayoutToText()">
+        </div>
+    </div>
+    <div class="profile-section" *ngIf="showAutomaticPayoutForm && automaticPayoutOpened" [style.display]="showSuccessPic ? 'none': 'block'">
+        <div class="profile-page-details">
+            <div class="mobile-user-right-panel_title">{{'Settings.Automatic-Withdrawal' | translate }}</div>
+        </div>
+        <div class="payout-info">
+            {{'Settings.Automatic-Payout-Info' | translate}}
+        </div>
+        <div class="limit-type_row limit-type-opened-row limit-type_row-input">
+            <span class="limit-type-text-deposit-monthly">{{ 'Settings.Betslip-winnings' | translate }}</span>
+            <input numbersOnly type="text" max="999999.9999" class="limit-type-input-deposit"
+                   [(ngModel)]="automaticPayout"
+                   (keypress)="onInput($event)" (keydown)="preventKeys($event)"
+                   (input)="inputChanging($event);validateAutomaticPayout()">
+            <span class="limit-amount-label">{{ 'Settings.Amount' | translate }}</span>
+            <label class="limit-type-currency">{{ currencySymbol }}</label>
+        </div>
+        <div class="show-success-message"
+             *ngIf="showSuccessMessage">{{'Settings.' + showSuccessMessage | translate}}</div>
+        <div class="show-error-message">{{showErrorMessage}}</div>
+        <div class="show-error-message" *ngIf="automaticPayoutErrorMessage !== ''">{{'Error.' + automaticPayoutErrorMessage | translate}} {{ currencySymbol }}</div>
+        <div class="limit-buttons">
+            <button class="limit-type-field-opened-cancel"
+                    (click)="returnPayoutText()">
+                {{ 'User.CancelPayout' | translate }}
+            </button>
+            <input type="submit" class="limit-type-field-opened-submit"
+                   value="{{ 'User.Confirm' | translate }}" [disabled]="automaticPayout <= 0 || isSaving || !hasChanges() || automaticPayoutErrorMessage !== ''"
+                   (click)="submitAutomaticPayout()">
+        </div>
+    </div>
+    <div class="profile-section" [style.display]="showSuccessPic ? 'block': 'none'">
+        <div class="profile-page-details">
+            <div class="mobile-user-right-panel_title">{{'Settings.Automatic-Withdrawal' | translate }}</div>
+        </div>
+        <div class="payout-success">
+            <img src="../../../../../../../assets/images/success.png" class="payout-success-img">
+            <div class="payout-success-text">{{message}}</div>
+        </div>
+    </div>
+
+    <!--    <div class="change-ideas-tab">-->
+    <!--        <div class="container-part">-->
+    <!--            <div class="titles" collapse>-->
+    <!--                <span class="change-password-tab-text">{{'Settings.Ideas-title' | translate}}</span>-->
+    <!--                <div class="change-icon">-->
+    <!--                    <span class="icon-arrow-right"></span>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="ideas">-->
+    <!--                <div class="profile-form-part">-->
+    <!--                    <div class="items-part items-part2">-->
+    <!--                        <div class="radio-buttons-title">{{'User.Mode' | translate }}</div>-->
+    <!--                        <div class="radio-buttons-part">-->
+    <!--                            <ul>-->
+    <!--                                <li>-->
+    <!--                                    <input type="radio" name="Light" id="Light" [checked]="!darkMode"-->
+    <!--                                           (click)="switchMode(false)">-->
+    <!--                                    <label for="Light"><span>{{'User.Light' | translate }}</span></label>-->
+    <!--                                </li>-->
+    <!--                                <li>-->
+    <!--                                    <input type="radio" name="Dark" id="Dark" [checked]="darkMode"-->
+    <!--                                           (click)="switchMode(true)">-->
+    <!--                                    <label for="Dark"><span>{{'User.Dark' | translate }}</span></label>-->
+    <!--                                </li>-->
+    <!--                            </ul>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="change-ideas-tab">-->
+    <!--        <div class="container-part">-->
+    <!--            <div class="titles" collapse>-->
+    <!--                <span class="change-password-tab-text">{{'Settings.Types-title' | translate}}</span>-->
+    <!--                <div class="change-icon">-->
+    <!--                    <span class="icon-arrow-right"></span>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="ideas">-->
+    <!--                <div class="radio-buttons-part">-->
+    <!--                    <ul>-->
+    <!--                        <li>-->
+    <!--                            <input type="radio" name="decimal" id="Decimal" #Decimal-->
+    <!--                                   [checked]="oddsFormat === 'Decimal'"-->
+    <!--                                   (click)="oddsFormatMode(Decimal)">-->
+    <!--                            <label for="Decimal"><span>{{'User.Decimal' | translate }}</span></label>-->
+    <!--                        </li>-->
+    <!--                        <li>-->
+    <!--                            <input type="radio" name="decimal" id="Break" #Break-->
+    <!--                                   [checked]="oddsFormat === 'Break'"-->
+    <!--                                   (click)="oddsFormatMode(Break)">-->
+    <!--                            <label for="Break"><span>{{'User.Break' | translate }}</span></label>-->
+    <!--                        </li>-->
+    <!--                        <li>-->
+    <!--                            <input type="radio" name="decimal" id="American" #American-->
+    <!--                                   [checked]="oddsFormat === 'American'"-->
+    <!--                                   (click)="oddsFormatMode(American)">-->
+    <!--                            <label for="American"><span>{{'User.American' | translate }}</span></label>-->
+    <!--                        </li>-->
+    <!--                    </ul>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+</div>

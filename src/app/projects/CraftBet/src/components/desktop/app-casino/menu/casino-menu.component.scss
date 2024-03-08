@@ -90,7 +90,7 @@
     white-space: nowrap;
     align-items: center;
     color: color(product-navigation-tab);
-    display: flex;
+    display: var(--product-navigation-tab-display, flex);
     font-size: var(--product-navigation-tab-font-size, 16px);
     justify-content: var(--product-navigation-item-center, left);
     gap: inherit;

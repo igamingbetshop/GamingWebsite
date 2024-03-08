@@ -1,11 +1,16 @@
 <div class="payment-system-block payment-balance-section">
-    <div class="payment-systems__userAccount" *ngFor="let account of Accounts">
+    <div class="payment-systems__userAccount" *ngFor="let account of Accounts; let i = index">
         <div class="payment-systems__userAccount__name item-cell-container" [ngClass]="{'selected': isSelectedAccount(account)}"
              (click)="selectedAccountBalance($event, account)">
+            <input type="radio" [checked]="selectedAccount && selectedAccount.Id === account?.Id" id="radio{{i}}" class="radio-input"/>
+            <label for="radio{{i}}" class="radio-label" (click)="selectedAccountBalance($event, account)"></label>
             <img class="item-cell-account-img" src="../../../../../../../assets/images/accounts/{{account?.TypeId}}_{{account.PaymentSystemId}}_{{account.hasBetShop}}.svg">
             <span class="item-cell-account-name" *ngIf="account.Id === 0">{{"Account." + account?.AccountTypeName | translate}}</span>
             <span class="item-cell-account-name" *ngIf="account.Id !== 0">{{account?.AccountTypeName}}</span>
             <span class="item-cell-account-balance"><span *ngIf="account.CurrencyId">{{ currencySymbol }}</span><span *ngIf="!currencySymbol">{{ CurrencyId}}</span> {{account?.Balance | number}}</span>
         </div>
+    </div>
+    <div class="redirect-part" (click)="openBalance()">
+        {{'User.Overview-balance' | translate}}
     </div>
 </div>

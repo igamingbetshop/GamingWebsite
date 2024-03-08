@@ -30,6 +30,8 @@ import {RegisterNavigateComponent} from "./register-navigate/register-navigate.c
 import {ConfigService} from "../../../../../@core/services";
 import {AffiliateComponent} from "./affiliate/affiliate.component";
 import {OpenGameGuard} from "../../../../../@core/services/helpers/open-game-guard";
+import {RegisterPageComponent} from "./register-page/register-page.component";
+import {PaymentErrorComponent} from "./payment-error/payment-error.component";
 
 const routes: Routes = [
     {
@@ -299,12 +301,10 @@ const routes: Routes = [
             {
                 path: 'news',
                 component: AllNewsComponent,
-                resolve: {data: PromotionNewsResolver}
             },
             {
                 path: 'news/:id',
                 component: CurrentNewsComponent,
-                resolve: {data: PromotionNewsResolver}
             },
             {
                 path: 'terms',
@@ -326,6 +326,10 @@ const routes: Routes = [
                 component: ContactUsComponent
             },
             {
+                path: 'payment-error',
+                component: PaymentErrorComponent
+            },
+            {
                 path: 'about-us',
                 component: AboutUsComponent
             },
@@ -344,6 +348,10 @@ const routes: Routes = [
             {
                 path: 'signup',
                 component:RegisterNavigateComponent
+            },
+            {
+                path: 'register',
+                component:RegisterPageComponent
             },
         ]
     },

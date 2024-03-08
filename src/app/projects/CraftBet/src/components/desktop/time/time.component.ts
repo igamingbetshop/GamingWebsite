@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Injector, OnInit, ViewEncapsulation} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BaseTime} from "../../../../../../@theme/components/time/base-time";
 import {FormsModule} from "@angular/forms";
 import {TimezoneFilterPipe} from "../../../../../../@theme/pipes/timezone-filter.pipe";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-time',

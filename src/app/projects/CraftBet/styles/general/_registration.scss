@@ -154,6 +154,8 @@
     text-transform: uppercase;
     font-weight: 400;
     font-size: fontSize(reg-btn, 18px);
+    height: height(reg-btn, auto);
+    line-height: height(reg-btn-line, 44px);
 
     &.active-item {
       //background: color(register-button-background-active);
@@ -226,45 +228,81 @@
     width: width(register-background, 400px);
     border-radius: borderRadius(register-background, 6px, 6px, 6px, 6px);
     position: relative;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: paddingLeft(register-background, 16px);
+    padding-right: paddingRight(register-background, 16px);
     margin-left: marginLeft(register-background, 0);
     margin-right: marginRight(register-background, 0);
     background-position: var(--register-background-image-position, unset);
+    background-size: var(--register-background-image-size, unset);
     background-repeat: var(--register-background-image-repeat, no-repeat);
+    background-color: var(--register-background-image-color, transparent);
     display: var(--register-background-display, block);
 
     .reg_item{
-      font-size: 16px;
-      line-height: 32px;
+      font-size: var(--register-tab-text-font-size, 16px);
+      line-height: var(--register-tab-text-line-height, 32px);
       cursor: pointer;
       color: color(register-tab-text);
       &.not_active{
-        margin: 44px auto 54.9px auto;
+        margin: var(--reg-item-notActive-margin, 44px auto 54.9px auto);
         display: display(reg-item-notActive, block);
-        border: none;
-        border-radius: 6px;
-        padding: 6px 9px 6px 10px;
-        box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+        border: var(--reg-item-notActive-border, none);
+        border-radius: var(--reg-item-notActive-border-radius, 6px);
+        padding: var(--reg-item-notActive-padding, 6px 9px 6px 10px);
+        box-shadow: var(--reg-item-notActive-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
         background-image: backgroundImage(reg-item-notActive, linear-gradient(to bottom, #1376f8, #194074));
         //width: 160px;
-        text-align: center;
+        text-align: var(--reg-item-notActive-text-align, center);
         text-decoration: none;
-        font-weight: 600;
-        //height: 44px;
+        font-weight: var(--reg-item-notActive-font-weight, 600);
+        width: var(--reg-item-notActive-width, auto);
       }
 
       &.disabled{
-        display: none;
+        display: var(--reg-item-active-display, none);
+        border: var(--reg-item-active-border, none);
+        text-align: var(--reg-item-active-text-align, center);
+        margin: var(--reg-item-active-margin, 44px auto 54.9px auto);
+        padding: var(--reg-item-active-padding, 6px 9px 6px 10px);
+        border-radius: var(--reg-item-active-border-radius, 6px);
+        width: var(--reg-item-active-width, auto);
+        text-decoration: none;
+        font-weight: var(--reg-item-active-font-weight, 600);
+        color: var(--reg-item-active-color, #FFBE00);
+        background: var(--reg-item-active-background-color, #001F5E);
+        pointer-events: var(--reg-item-active-pointer-events, none);
+        opacity: var(--reg-item-active-opacity, 0.5);
+        position: var(--reg-item-active-position, relative);
+        .reg_item_text {
+          &:before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            position: absolute;
+            border-left: 8px solid var(--reg-item-active-icon-border-left, #A4B0CB);
+            border-bottom: 8px solid var(--reg-item-active-icon-border-bottom, #fff0);
+            border-right: 0;
+            border-top: 8px solid var(--reg-item-active-icon-border-top, #ffffff00);
+            top: var(--reg-item-active-icon-top, 21px);
+            left: var(--reg-item-active-icon-left, 58px);
+          }
+        }
       }
     }
 
     img {
-      display: block;
       margin: 0 auto;
       max-width: 100%;
       margin-top: marginTop(register-logo, 22px);
       display: var(--register-logo-display, block);
+      height: height(register-logo, auto);
+    }
+    .logo-svg {
+      margin: 0 auto;
+      max-width: 100%;
+      margin-top: marginTop(register-logo, 22px);
+      display: var(--register-logo-svg-display, none);
       height: height(register-logo, auto);
     }
 
@@ -272,11 +310,10 @@
       text-align: center;
       color: itemColor(reg-prompt-text, #ffffff);
       font-size: fontSize(reg-prompt-text, 14px);
-      font-weight: normal;
-      //margin-top: marginTop(reg-prompt-text, 6px);
-      margin: 5px auto 0 auto;
+      font-weight: var(--reg-prompt-text-font-weight, normal);
+      margin: var(--reg-prompt-text-margin, 5px auto 0 auto);
       word-break: break-word;
-      width: 80%;
+      width: var(--reg-prompt-text-width, 80%);
     }
 
     .social-register-text{
@@ -357,8 +394,30 @@
     flex-direction: column;
     align-items: center;
     padding-right: paddingRight(registration-section, 0);
+    .authentication-buttons {
+      display: var(--register-authentication-btns-display, none);
+      margin: var(--register-authentication-btns-margin, 0);
+      background: var(--register-authentication-btns-background, transparent);
+      border-radius: var(--register-authentication-btns-border-radius, 20px);
+      height: var(--register-authentication-btns-height, 42px);
+      padding: var(--register-authentication-btns-padding, 0 3px);
+      .authentication-button {
+        background: var(--register-authentication-btn-background, transparent);
+        color: var(--register-authentication-btn-color, #fff);
+        border: var(--register-authentication-btn-border, none);
+        height: var(--register-authentication-btn-height, 100%);
+        border-radius: var(--register-authentication-btn-border-radius, 20px);
+        padding: var(--register-authentication-btn-padding, 0 25px);
+        font-size: var(--register-authentication-btn-font-size,  16px);
+        cursor: pointer;
+      }
+      .active {
+        background: var(--register-authentication-btn-active-background, #FFB801);
+        color: var(--register-authentication-btn-active-color, #000);
+      }
+    }
     .registration-section_menu {
-      display: flex;
+      display: var(--d-register-tab-header-display, flex);
       justify-content: space-between;
       align-items: center;
       text-align: center;
@@ -428,6 +487,17 @@
         margin-bottom: marginBottom(reg-form-header, 10px);
       }
     }
+    .hidden-title {
+      display: var(--registration-hidden-title-display, none);
+      text-align: var(--registration-hidden-title-text-align, center);
+      font-size: var(--registration-hidden-title-font-size, 16px);
+      font-weight: var(--registration-hidden-title-weight, 400);
+      color: var(--registration-hidden-title-color, #fff);
+      margin: var(--registration-hidden-title-margin, 0);
+    }
+    .quickForms {
+      width: var(--reg-form-quick-section-width, 100%)
+    }
     .required-field
     {
       .required-field-text {
@@ -437,7 +507,7 @@
       {
         content: "*";
         position: absolute;
-        top:-5px;
+        top:-4px;
         right: 0;
       }
     }
@@ -563,11 +633,12 @@
 
   span {
     line-height: normal;
-    font-size: var(--reg-checkbox-items, 11px)
+    font-size: var(--reg-checkbox-items, 11px);
+    color: var(--reg-checkbox-items-color, #000);
   }
 
   .reg-checkbox {
-    width: 20px;
+    width: var(--reg-checkbox-input-width, 20px);
     height: 15px;
     color: $color-white;
     margin-left: 0;
@@ -1061,6 +1132,7 @@ select {
 
     &:not(:last-child) {
       margin-right: marginRight(register-form-mobileData-item, 0);
+      border-radius: var(--register-form-mobileData-item-border-radius, 0);
     }
     .current_item
     {
@@ -1110,6 +1182,9 @@ select {
     .info-reg-field {
       color: itemColor(required-fields-text, #AFC6CD);
       padding-top: paddingTop(required-fields-text, 50px);
+      font-size: fontSize(required-fields-text, 16px);
+      font-weight: var(--required-fields-text-font-weight, 400);
+      text-align: var(--required-fields-text-align, left);
     }
   }
 
@@ -1292,7 +1367,7 @@ select {
       align-items: center;
       margin-bottom: marginBottom(next-btn, 20px);
       height: var(--next-btn-height, 44px);
-      border-radius: 6px;
+      border-radius: var(--next-btn-border-radius, 6px);
       margin-left: var(--next-btn-margin-left, 0px);
       font-size: var(--next-btn-font-size, 16px);
 
@@ -1400,6 +1475,14 @@ select {
       font-weight: fontWeight(registration-title-error, 500);
       display: display(registration-title-error, none);
     }
+    .hidden-title {
+      display: var(--registration-hidden-title-display, none);
+      text-align: var(--registration-hidden-title-text-align, center);
+      font-size: var(--registration-hidden-title-font-size, 16px);
+      font-weight: var(--registration-hidden-title-weight, 400);
+      color: var(--registration-hidden-title-color, #fff);
+      margin: var(--registration-hidden-title-margin, 0);
+    }
   }
   display: inline-block;
   //width: 100%;
@@ -1470,6 +1553,7 @@ select {
       left: itemLeft(signup-input-label, 8px);
       height: height(signup-input-label, 25px);
       padding: padding(signup-input-label, 0 8px);
+      font-weight: fontWeight(signup-input-label, 400);
       pointer-events: none;
       transform-origin: 0 50%;
       transition: transform 200ms, color 200ms;
@@ -1570,9 +1654,10 @@ select {
       margin-top: marginTop(m-regStep, 20px);
       margin-right: marginRight(regStep, 18px);
       background-color: backgroundColor(regStep, #131a2c);
-      border: solid 3px transparent;
+      border: solid var(--m-regStep-border-width, 3px) var(--m-regStep-border-color, transparent);
       &.regStep_active{
-        border: solid 3px var(--reg-step-active-border-color, #dbedff);
+        border: solid var(--reg-step-active-border-width, 3px) var(--reg-step-active-border-color, #dbedff);
+        background: var(--reg-step-active-background, transparent);
       }
       &.regStep_prev{
         background-color: backgroundColor(regStep_prev, #1376f8);
@@ -1634,7 +1719,7 @@ select {
     margin-left: 3px;
   }
   .allFormItems .password_form_field {
-    gap: 17px;
+    gap: var(--register-form-field-big-grid-gap, 17px);
   }
 }
 @media screen and (min-width: 1600px) and (max-width: 1800px) {
@@ -1844,17 +1929,24 @@ select {
       width: calc(var(--register-background-width, 400px) * 0.7);
       border-radius: borderRadius(register-background, 6px, 6px, 6px, 6px);
       position: relative;
-      padding-left: 12px;
-      padding-right: 12px;
+      padding-left: var(--register-background-small-padding-left, 12px);
+      padding-right: var(--register-background-small-padding-right, 12px);
 
       .reg_item{
         font-size: 12px;
         line-height: 22px;
         &.not_active{
-          margin: 44px auto 54.9px auto;
-          border-radius: 6px;
-          padding: 6px 9px 6px 10px;
-          box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+          margin: var(--reg-item-notActive-small-margin, 44px auto 54.9px auto);
+          padding: var(--reg-item-notActive-small-padding, 6px 9px 6px 10px);
+          box-shadow: var(--reg-item-notActive-small-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
+        }
+        &.disabled {
+          .reg_item_text {
+            &:before {
+              top: var(--reg-item-active-icon-small-top, 10px);
+              left: var(--reg-item-active-icon-small-left, 22px);
+            }
+          }
         }
       }
 
@@ -1865,7 +1957,7 @@ select {
 
       .reg-prompt-text{
         font-size: calc(var(--reg-prompt-textfont-size, 14px)* 0.7);
-        margin: 5px auto 0 auto;
+        margin: var(--reg-prompt-text-small-margin, 5px auto 0 auto);
         width: 80%;
       }
 
@@ -1967,9 +2059,9 @@ select {
   }
   .form-row-item {
     .top-row {
-      .info-reg-field {
-        font-size: 11px;
-      }
+      //.info-reg-field {
+      //  font-size: 11px;
+      //}
     }
   }
   .custom_dropdown_reg:after{display: none}
@@ -2210,7 +2302,7 @@ select {
         //width: calc(var(--next-btn-width, 100px) * 0.9);
         width: var(--not-active-btn-width, 100%);
         margin-bottom: marginBottom(register-next-btn-small, 70px);
-        height: calc(var(--next-btn-height, 44px) * 0.7);
+        //height: calc(var(--next-btn-height, 44px) * 0.7);
       }
 
     }
@@ -2332,17 +2424,23 @@ select {
       width: calc(var(--register-background-width, 400px) * 0.9);
       border-radius: borderRadius(register-background, 6px, 6px, 6px, 6px);
       position: relative;
-      padding-left: 14px;
-      padding-right: 14px;
+      padding-left: var(--register-background-medium-padding-left, 14px);
+      padding-right: var(--register-background-medium-padding-right, 14px);
 
       .reg_item{
         font-size: 14px;
         line-height: 28px;
         &.not_active{
-          margin: 44px auto 54.9px auto;
-          border-radius: 6px;
-          padding: 6px 9px 6px 10px;
-          box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+          margin: var(--reg-item-notActive-medium-margin, 44px auto 54.9px auto);
+          padding: var(--reg-item-notActive-medium-padding, 6px 9px 6px 10px);
+          box-shadow: var(--reg-item-notActive-medium-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
+        }
+        &.disabled {
+          .reg_item_text {
+            &:before {
+              top: var(--reg-item-active-icon-medium-top, 12px);
+            }
+          }
         }
       }
 
@@ -2352,7 +2450,6 @@ select {
 
       .reg-prompt-text{
         font-size: calc(var(--reg-prompt-textfont-size, 14px)* 0.9);
-        margin: 5px auto 0 auto;
         width: 80%;
       }
 
@@ -2650,7 +2747,7 @@ select {
 
   }
   .reg-step-navigate-buttons {
-    padding-top: 14px;
+    padding-top: var(--register-form-item-medium-padding-top, 14px);
     height: calc(var(--register-form-item-height, 41px) * 0.9) !important;
     margin-left: calc(var(--register-form-item-margin-left, 1.5%) * 0.9);
     width: var(--register-form-item-medium-width, 82%);

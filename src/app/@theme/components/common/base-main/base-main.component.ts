@@ -8,6 +8,8 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {LogoutHelper} from "@core/services/helpers/logout.helper";
 import {BalanceService} from "@core/services/api/balance.service";
+import {SignalRService} from "@core/services/soket/signal-r.service";
+import {CmsPopupComponent} from "../../modals/cms-popup/cms-popup.component";
 
 @Directive()
 export class BaseMainComponent implements OnInit {
@@ -21,11 +23,14 @@ export class BaseMainComponent implements OnInit {
     public savedData: SaveData;
     public simpleModalService: SimpleModalService;
     public isFullContent:boolean = false;
+    public hideBottomBar:boolean = false;
+    public cmsPopupData: any;
 
     public mobileBottomSideBar: Array<any> = [];
     private logoutHelper:LogoutHelper;
     private balanceService: BalanceService;
     protected saveData: SaveData;
+    protected signalRService: SignalRService;
     bonusPromise:any;
 
     constructor(public injector: Injector)
@@ -41,6 +46,7 @@ export class BaseMainComponent implements OnInit {
         this.logoutHelper = injector.get(LogoutHelper);
         this.balanceService = injector.get(BalanceService);
         this.saveData = injector.get(SaveData);
+        this.signalRService = injector.get(SignalRService);
         this.getBottomMenuList();
 
         this.router.events.subscribe(e => {
@@ -48,6 +54,7 @@ export class BaseMainComponent implements OnInit {
             {
                 this.getBottomMenuList();
                 this.isFullContent = e.url.includes('sport');
+                window.dispatchEvent(new Event('locationchange'));
             }
         });
         this.isFullContent = this.router.url.includes('sport');
@@ -139,7 +146,8 @@ export class BaseMainComponent implements OnInit {
             if (userData.ResetPassword !== null && userData.ResetPassword) {
                 this.showResetPassword();
             }
-            if (showLastLoginInfoPopup === '1')
+            // if (showLastLoginInfoPopup === '1')
+            if (showLastLoginInfoPopup === '1' && userData.IframeUrl === null)
             {
                 let popupShown = this.localStorageService.get("popupShown");
                 if (!popupShown) {
@@ -155,10 +163,17 @@ export class BaseMainComponent implements OnInit {
                     }, userData.ResetPassword, userData.AcceptTermsConditions);
                 }
             }
+            if (userData.IframeUrl) {
+                this.showIframeModal(userData.IframeUrl);
+            }
 
             if (userData['requireMobileVerification'])
             {
                 this.mobileNumberVerified();
+            }
+
+            if (userData.Popups && userData.Popups !== null) {
+                this.openLoginedCmsPopup(userData.Popups);
             }
         }
 
@@ -180,6 +195,7 @@ export class BaseMainComponent implements OnInit {
         }
         this.checkExternalAuthorizationData();
         //this.initialNavigation();
+        this.openOnCmsPopup();
         this.logoutHelper.onLogoutConfirm$.subscribe(data => this.onLogoutConfirm(data));
         this.userLogined.onFirstLogin$.subscribe(data => this.onFirstLogin(data));
     }
@@ -211,6 +227,7 @@ export class BaseMainComponent implements OnInit {
             }
             this.menuReady();
         });
+        this.hideBottomBar = /login|signup/.test( this.router.url);
     }
 
     protected menuReady()
@@ -309,6 +326,34 @@ export class BaseMainComponent implements OnInit {
         });
     }
 
+    async showIframeModal(url) {
+        let showLastLoginInfoPopup = this.configService.defaultOptions?.ShowLastLoginInfoPopup;
+        let userData = this.localStorageService.get("user");
+        const {BaseFrameComponent} = await import('../../modals/base-frame/base-frame.component');
+        this.simpleModalService.addModal(BaseFrameComponent, {
+            title: 'Login_Info',
+            closable: false,
+            url: url
+        },{closeOnClickOutside: false}).subscribe((isConfirmed) => {
+            if (showLastLoginInfoPopup === '1')
+            {
+                let popupShown = this.localStorageService.get("popupShown");
+                if (!popupShown) {
+                    this.showConfirm({
+                        LastLogin: userData.LastLogin,
+                        LastLoginIp: userData.LastLoginIp,
+                        LastLogout: userData.LastLogout,
+                        UserName: userData.UserName,
+                        CurrencySymbol: userData.CurrencySymbol,
+                        SportBets: userData.SportBets,
+                        SportWins: userData.SportWins,
+                        SportProfit: userData.SportProfit
+                    }, userData.ResetPassword, userData.AcceptTermsConditions);
+                }
+            }
+        });
+    }
+
     async showTerms()
     {
         const {BaseTermsConditionsAcceptComponent} = await import('../../modals/base-terms-conditions-accept/base-terms-conditions-accept.component');
@@ -346,6 +391,27 @@ export class BaseMainComponent implements OnInit {
             info: infoArray
         }, {closeOnClickOutside: false}).subscribe((isConfirmed) => {
             window.location.reload();
+        });
+    }
+
+    openOnCmsPopup() {
+        this.signalRService.onCmsPopupInfo$.subscribe(data => {
+            this.cmsPopupData = data;
+            this.simpleModalService.addModal(CmsPopupComponent, {
+                title: 'Cms Popup',
+                data: { cmsPopupData: data },
+                message: true
+            }).subscribe(() => {});
+        });
+    }
+
+    openLoginedCmsPopup(popups) {
+        popups.forEach(popup => {
+            this.simpleModalService.addModal(CmsPopupComponent, {
+                title: 'Cms Popup',
+                data: { loginedCmsPopupData: popup },
+                message: true
+            }).subscribe(() => {});
         });
     }
 }

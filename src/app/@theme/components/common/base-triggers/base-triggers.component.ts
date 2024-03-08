@@ -14,19 +14,27 @@ export class BaseTriggersComponent extends SimpleModalComponent<ConfirmModel, bo
     public data: any;
     triggers: Array<Trigger> = [];
     bonusInfo: any = {};
+    isVisible: boolean = false;
 
     constructor(private bonusesService: BonusesService) {
         super();
     }
 
     ngOnInit() {
-        this.getTriggers(this.data)
+        this.getTriggers(this.data);
     }
 
     getTriggers(bonus:Bonus) {
         this.bonusesService.getTriggers(bonus).pipe(take(1)).subscribe(data => {
-            this.triggers = data.Triggers;
+            // this.triggers = data.Triggers;
+            this.triggers = data.Triggers.map(trigger => {
+                return {
+                    ...trigger,
+                    RoundedMinAmount: Math.ceil(trigger.MinAmount * 10) / 10
+                };
+            });
             this.bonusInfo = data.Bonus;
+            this.isVisible = true;
         });
     }
 }

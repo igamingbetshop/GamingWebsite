@@ -18,6 +18,7 @@ import {MobileAccountPageType2BalanceModule} from "./mobile-account-pages-module
 import {PaymentControllerService} from "../../../../../@core/services/app/paymentController.services";
 import {BonusesService} from "../../../../../@core/services/api/bonuses.service";
 import {FunctionalBtnModule} from "../../../../../@theme/components/functional-btn/functional-btn.module";
+import {LanguageModule} from "../../../../../@theme/components/global-language/language.module";
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import {FunctionalBtnModule} from "../../../../../@theme/components/functional-b
         ReactiveFormsModule,
         FunctionalBtnModule,
         DropdownDirectiveModule,
-        MobileAccountPageType2BalanceModule
+        MobileAccountPageType2BalanceModule,
+        LanguageModule
     ],
 
     providers: [

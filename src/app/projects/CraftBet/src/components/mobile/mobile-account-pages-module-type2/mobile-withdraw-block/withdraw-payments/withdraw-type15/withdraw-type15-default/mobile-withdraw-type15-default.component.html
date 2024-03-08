@@ -1,71 +1,64 @@
-<div class="deposit_payment_section deposit-cash">
+<div class="deposit_payment_section deposit-cash mobile-device">
   <app-common-accounts [templateType]="2" style="position: relative; top:5px"></app-common-accounts>
   <div class="deposit_payment_section__form">
-    <div class="deposit_payment_section__form_top">
-      <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit(paymentForm)">
-
-        <div class="scrallablePart" [ngClass]="{'shortHeight': nominals}">
-          <div class="payment-form-field">
-            <label class="payment-form-field__label">{{'Withdraw.BankName' | translate}}</label>
-            <div class="payment-form-field__column">
-              <select formControlName="BankId" class="payment-select">
-                <option *ngFor="let bank of banks"
-                        [value]="bank?.Id">{{bank?.BankName}}</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="payment-form-field">
-            <label class="payment-form-field__label">{{'Withdraw.BankAccountNumber ' | translate}}</label>
-            <div class="payment-form-field__column">
-              <input type="text" class="payment-input" placeholder="{{'Withdraw.BankAccountNumber-placeholder' | translate}}"
-                     formControlName="BankAccountNumber"/>
-            </div>
-          </div>
-
-          <div class="payment-form-field">
-            <label class="payment-form-field__label">{{'Withdraw.BankAccountHolder ' | translate}}</label>
-            <div class="payment-form-field__column">
-              <input type="text" class="payment-input" placeholder="{{'Withdraw.BankAccountHolder-placeholder' | translate}}"
-                     formControlName="BankAccountHolder"/>
-            </div>
-          </div>
-        </div>
-
-        <div class="payment-form-field"
-             [ngClass]="{'nominals-fields-3': ((nominals !== null) && (nominals && nominals.length <= 9)), 'nominals-fields-4': ((nominals !== null) && (nominals && nominals.length > 9))}">
-
-          <label class="payment-form-field__label">{{'Withdraw.Amount' | translate}} ({{currencyId}})</label>
-          <div class="payment-form-field__column">
-            <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input"
-                   placeholder="{{'Withdraw.Amount-placeholder' | translate}}"
-                   formControlName="Amount" numbersOnly/>
-            <ng-template #nominalsRef>
-              <app-common-payment-nominals [nominals]="nominals"
-                                           (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
-            </ng-template>
-          </div>
-        </div>
-
+    <form [formGroup]="paymentForm" novalidate (ngSubmit)="submit(paymentForm)">
 
         <div class="payment-form-field">
-          <div class="payment-form-field__column_btn">
-            <button type="submit" [disabled]="submitted" class="default_btn default_btn_red payment-btn">
-              <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
-            </button>
-
-            <loader></loader>
-
-            <div class="error_message longTag">
-              {{errorMessage}}
-            </div>
-            <div class="success_message" *ngIf="successMessage">
-              {{'Withdraw.' + successMessage | translate}}
-            </div>
+          <label class="payment-form-field__label">{{'Withdraw.BankName' | translate}}</label>
+          <div class="payment-form-field__column">
+            <select formControlName="BankId" class="payment-select">
+              <option *ngFor="let bank of banks"
+                      [value]="bank?.Id">{{bank?.BankName}}</option>
+            </select>
           </div>
         </div>
 
-      </form>
-    </div>
+        <div class="payment-form-field">
+          <label class="payment-form-field__label">{{'Withdraw.BankAccountNumber ' | translate}}</label>
+          <div class="payment-form-field__column">
+            <input type="text" class="payment-input" placeholder="{{'Withdraw.BankAccountNumber-placeholder' | translate}}"
+                   formControlName="BankAccountNumber"/>
+          </div>
+        </div>
+
+        <div class="payment-form-field">
+          <label class="payment-form-field__label">{{'Withdraw.BankAccountHolder ' | translate}}</label>
+          <div class="payment-form-field__column">
+            <input type="text" class="payment-input" placeholder="{{'Withdraw.BankAccountHolder-placeholder' | translate}}"
+                   formControlName="BankAccountHolder"/>
+          </div>
+        </div>
+      <div class="payment-form-field"
+           [ngClass]="{'nominals-fields-3': ((nominals !== null) && (nominals && nominals.length <= 9)), 'nominals-fields-4': ((nominals !== null) && (nominals && nominals.length > 9))}">
+
+        <label class="payment-form-field__label">{{'Withdraw.Amount' | translate}} ({{currencyId}})</label>
+        <div class="payment-form-field__column">
+          <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input"
+                 placeholder="{{'Withdraw.Amount-placeholder' | translate}}"
+                 formControlName="Amount" numbersOnly/>
+          <ng-template #nominalsRef>
+            <app-common-payment-nominals [nominals]="nominals"
+                                         (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
+          </ng-template>
+        </div>
+      </div>
+
+
+      <div class="payment-form-field">
+        <div class="payment-deposit-btn-field">
+          <button type="submit" [disabled]="submitted" class="payment-deposit-btn">
+            <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
+          </button>
+
+          <div class="error_message longTag">
+            {{errorMessage}}
+          </div>
+          <div class="success_message" *ngIf="successMessage">
+            {{'Withdraw.' + successMessage | translate}}
+          </div>
+        </div>
+      </div>
+
+    </form>
   </div>
 </div>

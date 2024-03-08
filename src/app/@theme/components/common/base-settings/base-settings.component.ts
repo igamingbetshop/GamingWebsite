@@ -119,6 +119,13 @@ export class BaseSettingsComponent extends BaseComponent{
     public changePasswordType: boolean = false;
     public selectedDocumentType: string;
     public limitValues = {};
+    public dates = [
+        { 'Name': 'User.Select Date' },
+        { 'Name': 'Filter_Period.3 month' },
+        { 'Name': 'Filter_Period.1 Year' },
+        { 'Name': 'Filter_Period.3 Years' },
+        { 'Name': 'Filter_Period.5 Years' },
+    ];
 
     @ViewChild('documentFile') documentFileRef: ElementRef;
 
@@ -407,6 +414,36 @@ export class BaseSettingsComponent extends BaseComponent{
             });
         }
 
+
+    }
+
+    public getCreatedFrom(index) {
+        let d1 = new Date();
+
+        switch (index) {
+            case 0:
+                d1 = null;
+                break;
+            case 1:
+                d1.setMonth(d1.getMonth() - 3);
+                break;
+            case 2:
+                d1.setFullYear(d1.getFullYear() - 1);
+                break;
+            case 3:
+                d1.setFullYear(d1.getFullYear() - 3);
+                break;
+            case 4:
+                d1.setFullYear(d1.getFullYear() - 5);
+                break;
+        }
+        if (d1 !== null) {
+            const d = format(d1, 'yyyy-MM-dd');
+            this.exclusionDate = d;
+            return d;
+        } else {
+            this.exclusionDate = null;
+        }
 
     }
 

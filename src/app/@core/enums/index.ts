@@ -59,6 +59,7 @@ export enum Methods
   GET_BONUS_BETS = "GetBonusBets",
   GET_GAMES = "GetGames",
   GET_GAME_PROVIDERS = "GetGameProviders",
+  SEARCH_CONTENT_INFO = "SearchContentInfo",
   GET_CLIENT_BONUS_TRIGGERS = "GetClientBonusTriggers",
   GET_BONUSES = "GetBonuses",
   GET_BONUS_Balance = "GetBonusBalance",
@@ -92,6 +93,7 @@ export enum Methods
   GET_CLIENT_FAVORITE_PRODUCTS = "GetClientFavoriteProducts",
   REMOVE_CLIENT_FAVORITE_PRODUCT = "RemoveClientFavoriteProduct",
   GET_PROMOTIONS = "GetPromotions",
+  GET_NEWS = "GetNews",
   ADD_TO_FAVORITE_LIST = "AddToFavoriteList",
   Get_Create_Payment_Request = "CreatePaymentRequest",
   Get_Create_Deposit_Request = "CreateDepositRequest",
@@ -156,7 +158,9 @@ export enum Methods
   GET_CHARACTERS_HIERARCHY = "GetCharacterHierarchy",
   ADD_CHARACTER_TO_CLIENT = "AddCharacterToClient",
   GET_VERIFICATION_PAGE_URL = "GetVerificationPageUrl",
-  SELECT_SESSION_ACCOUNT = "SelectSessionAccount"
+  SELECT_SESSION_ACCOUNT = "SelectSessionAccount",
+  GET_PAYOUT_LIMIT = "GetPayoutLimit",
+  SAVE_PAYOUT_LIMIT = "SavePayoutLimit"
 }
 
 export enum DateTypes

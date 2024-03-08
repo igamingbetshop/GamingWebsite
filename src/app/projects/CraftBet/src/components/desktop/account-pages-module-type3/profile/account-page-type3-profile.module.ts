@@ -6,6 +6,9 @@ import { AccountPageType3ProfileComponent } from './account-page-type3-profile.c
 import { AccountPageType3ChangePasswordComponent } from '../change-password/account-page-type3-change-password.component';
 import { ProfileService } from '../../../../../../../@theme/components/profile/service/profile.service';
 import { CollapseDirectiveModule } from '../../../../../../../@theme/directives/collapse/collapse-directive.module';
+import {LanguageModule} from "../../../../../../../@theme/components/global-language/language.module";
+import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanitizer.module";
+import {OnlyNumberDirectiveModule} from "../../../../../../../@theme/directives/only-number/only-number.directive.module";
 
 @NgModule({
     declarations: [AccountPageType3ProfileComponent, AccountPageType3ChangePasswordComponent],
@@ -14,7 +17,10 @@ import { CollapseDirectiveModule } from '../../../../../../../@theme/directives/
         TranslateModule,
         ReactiveFormsModule,
         FormsModule,
-        CollapseDirectiveModule
+        CollapseDirectiveModule,
+        LanguageModule,
+        SanitizerModule,
+        OnlyNumberDirectiveModule
     ],
     providers: [
         ProfileService

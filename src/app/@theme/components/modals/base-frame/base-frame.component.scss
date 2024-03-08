@@ -11,8 +11,8 @@
   .icon-close-modal
   {
     position: absolute;
-    top:8px;
-    right: 20px;
+    top: var(--modal-frame-close-icon-top, 8px);
+    right: var(--modal-frame-close-icon-right, 20px);
     color: var(--modal-frame-close-icon-color, white);
     cursor: pointer;
   }

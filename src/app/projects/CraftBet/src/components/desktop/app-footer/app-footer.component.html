@@ -34,7 +34,7 @@
                 <ng-template #openNewTab>
                   <a  [attr.data-id]="'footer-menu-' + menuItem.Title + '-' + item.Title"
                       class="footer-column_item" target="_blank" [attr.href]="item?.Href ? item?.Href : null">
-                    <img *ngIf="item?.Icon" src="../../../../../../../assets/images/footer-menu/{{item?.Icon}}"/>
+                    <img class="footer-menu-item-img-part" *ngIf="item?.Icon" src="../../../../../../../assets/images/footer-menu/{{item?.Icon}}"/>
                     <div [innerHtml]="'Footer.' + item.Title | translate | sanitizer: 'html'"></div>
                   </a>
                 </ng-template>
@@ -89,6 +89,12 @@
             <!--Text-->
             <div *ngSwitchCase="'2'" class="info-text">
                <div [innerHTML]="'Footer.' + item.Title | translate | sanitizer: 'html'"></div>
+            </div>
+            <div *ngSwitchCase="'3'" class="info-text-see-more">
+              <input type="checkbox" id="{{item.Title}}">
+              <p [innerHTML]="'Footer.' + item.Title | translate | sanitizer: 'html'"></p>
+              <label class="see-more" for="{{item.Title}}" role="button">{{'Footer.see more' | translate }}</label>
+              <label class="see-less" for="{{item.Title}}" role="button">{{'Footer.see less' | translate }}</label>
             </div>
           </ng-container>
         </ng-container>

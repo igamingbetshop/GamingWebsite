@@ -1,0 +1,144 @@
+.mobile-credit-tab {
+  padding: 19px 8px;
+
+  .container-part {
+    font-size: 12px;
+    margin-bottom: 18px;
+
+    .titles {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      width: 100%;
+      color: #000;
+      margin: 0 auto;
+      padding: 15px 10px;
+      font-weight: 600;
+      font-size: 15px;
+
+      .credit-tab-text {
+        font-size: 16px;
+      }
+
+      .change-icon {
+        transform: rotate(90deg);
+        color: #a9a9a9;
+      }
+    }
+
+    .opened-deposit-tab, .opened-withdraw-tab {
+      display: none;
+    }
+
+    .opened {
+      & + .opened-deposit-tab, & + .opened-withdraw-tab {
+        display: block;
+      }
+
+      .change-icon {
+        transform: rotate(-90deg);
+      }
+    }
+
+    .credits {
+      padding: 15px 11px 10px;
+      margin-bottom: 10px;
+      background: #fff;
+
+      .credit-tab-text {
+        font-weight: 600;
+        font-size: 15px;
+        padding-bottom: 15px;
+      }
+      .selected-wallet {
+        display: flex;
+        align-items: center;
+        padding: 10px 0 10px 0;
+        .selected-wallet-image {
+          margin: 0 5px;
+        }
+        .selected-wallet-balance {
+          margin-left: auto;
+        }
+      }
+    }
+
+    .m-payment-systems-name {
+      margin: 5px 0 10px;
+      border: 2px solid #f1f1f1;
+      border-radius: 2px;
+      color: #666666;
+
+      .credit-account-type {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px;
+        font-size: 12px;
+        cursor: pointer;
+        position: relative;
+
+        input {
+          display: none;
+        }
+
+        .radio-label {
+          position: relative;
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          border: 1px solid #787878;
+          border-radius: 50%;
+        }
+
+        input:checked + .radio-label::after {
+          content: '';
+          display: block;
+          width: 10px;
+          height: 10px;
+          background-color: #787878;
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        .credit-account-type-name {
+          margin-right: auto;
+          margin-left: 0px;
+          font-weight: 600;
+        }
+
+        .credit-account-type-img {
+          margin-right: 10px;
+          display: var(--credit-account-image-display, block);
+        }
+
+        .balance_item_change {
+          font-weight: 600;
+        }
+      }
+
+      .line {
+        height: 1px;
+        width: 97%;
+        background-color: #BCBCBC;
+        margin: 0 auto;
+      }
+
+      .credit-account-addition {
+        .credit-account-addition-items {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 6px 12px 12px;
+        }
+        .credit-account-withdrawable-balances {
+          display: var(--credit-account-withdrawable-balances-display, none) !important;
+        }
+      }
+    }
+  }
+}

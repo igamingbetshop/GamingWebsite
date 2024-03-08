@@ -1,6 +1,6 @@
 <div class="header-section" id="header-section" [class.responsive]="responsive">
 
-    <div class="header-section__top">
+    <div class="header-section__top"  [ngClass]="menuDirection === 'top' ? 'top' :  ''">
 
         <div class="header-section__group1" *ngIf="group1MenuItems.length > 0">
             <ul class="panel1-menu">
@@ -23,9 +23,14 @@
         </div>
 
         <div class="header-section__group2">
-
-            <div class="header-section_topPanel flex_between" *ngIf="showPanel1"
-                >   <!--[ngClass]="isTopMenu? 'top' :  ''"-->
+            <div *ngIf="marqueeProperty && marqueeText !== undefined" class="marquee-global {{marqueePropertyDetails?.className}}">
+                <ul class="messages-marquee-text {{marqueePropertyDetails?.animationName}}" [marqueeDuration]="marqueePropertyDetails?.duration" [marqueeAnimation]="marqueePropertyDetails?.timingFunction">
+                    <li *ngFor="let marquee of marqueeText; let i = index" style="margin-right: 20px; padding-right: 20px;">
+                        {{marquee}}
+                    </li>
+                </ul>
+            </div>
+            <div class="header-section_topPanel flex_between" [class.top-menu]="isExpandedMenu" *ngIf="showPanel1">
                 <ul #panel1MenuRef class="general-menu">
                     <li  [attr.data-id]="'header-panel1-menu_' + menuItem.Title"
                         class="general-menu_item dynamic-item {{menuItem?.className}}" *ngFor="let menuItem of panel1MenuLeftItems"
@@ -33,6 +38,7 @@
                         [ngClass]="{'full-right': menuItem?.Orientation,
               'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated,
               'onlyMenuItem' : menuItem.className == 'header-menu-item-style1',
+              'hide-marquee': menuItem?.Type === 'marqueeItem_marquee',
                'active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
                || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}">
                         <div class="underline-active-hover" [ngClass]="{'underline-active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
@@ -85,7 +91,7 @@
 
                         <div *ngIf="(menuItem.contentType === 'signupBtn')" class="default_width">
                             <app-global-sign-up-btn class="{{menuItem.className}}-type"
-                                                    itemClassname="{{menuItem.className}}"></app-global-sign-up-btn>
+                                                    itemClassname="{{menuItem.className}}" [menuItem]="menuItem"></app-global-sign-up-btn>
                         </div>
 
                         <div *ngIf="(menuItem.contentType === 'commonBtn')" class="default_width">
@@ -96,15 +102,6 @@
                         <div *ngIf="(menuItem.contentType === 'zoomBtn')" class="default_width">
                             <zoom-btn [menuItem]="menuItem" class="{{menuItem.className}}-type" itemClassname="{{menuItem.className}}"></zoom-btn>
                         </div>
-
-                        <div *ngIf="(menuItem.contentType === 'marqueeItem')">
-                            <ul class="messages-marquee-text {{menuItem?.animationName}}" [marqueeDuration]="menuItem?.duration" [marqueeAnimation]="menuItem?.timingFunction">
-                                <li *ngFor="let marquee of marqueeText; let i = index" style="margin-right: 20px; padding-right: 20px;">
-                                    {{marquee}}
-                                </li>
-                            </ul>
-                        </div>
-
 
                         <div class="user_id" [routerLink]="['/user/account']"
                              *ngIf="menuItem.contentType == 'userIdTxt'">
@@ -271,17 +268,9 @@
 
                             <div *ngIf="(menuItem.contentType === 'signupBtn')" class="default_width">
                                 <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                        [menuItem]="menuItem"
                                                         itemClassname="{{menuItem.className}}"></app-global-sign-up-btn>
                             </div>
-
-                            <div *ngIf="(menuItem.contentType === 'marqueeItem')">
-                                <ul class="messages-marquee-text {{menuItem?.animationName}}" [marqueeDuration]="menuItem?.duration" [marqueeAnimation]="menuItem?.timingFunction">
-                                    <li *ngFor="let marquee of marqueeText; let i = index" style="margin-right: 20px; padding-right: 20px;">
-                                        {{marquee}}
-                                    </li>
-                                </ul>
-                            </div>
-
 
                             <div class="user_id" [routerLink]="['/user/account']"
                                  *ngIf="menuItem.contentType == 'userIdTxt'">
@@ -291,6 +280,11 @@
 
                             <div *ngIf="menuItem.contentType == 'balanceTxt'">
                                 <app-balance [menuItem]="menuItem.config"></app-balance>
+                            </div>
+                            <div class="flex_column_center"
+                                 *ngIf="menuItem.contentType == 'bonusBalanceTxt' && bonus != '0.00'">
+                                <span>{{'User.Bouns' | translate}}</span>
+                                <span>{{bonus}} {{currencySymbol}}</span>
                             </div>
 
                             <div *ngIf="menuItem.contentType == 'chatImg'" class="chat-item">
@@ -345,24 +339,35 @@
 
 
             <div class="header-section_bottomPanel flex_between" *ngIf="generalMenuLeftItems.length > 0"
-              >  <!-- [ngClass]="isLeftMenu? 'left' :  ''"-->
+                 [ngClass]="menuDirection === 'left' ? 'left' :  ''"
+            [class.expanded-menu]="isExpandedMenu">
+
+                <div  class="menu-icon" *ngIf="menuDirection === 'left'" (click)="expandLeftMenu()">
+                    <i class="icon-more"></i>
+                </div>
                 <ul #generalMenu class="general-menu">
+
                     <ng-container>
-                        <li  [attr.data-id]="'header-panel2-menu-' + menuItem.Title"
+                        <li  [attr.data-id]="'header-panel2-menu-' + menuItem.Title" collapse
                              class="general-menu_item dynamic-item {{menuItem?.className}}" *ngFor="let menuItem of generalMenuLeftItems"
                             (click)="onMenuItem(menuItem)"
                             [ngClass]="{'full-right': menuItem?.Orientation,
               'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated,
               'onlyMenuItem' : menuItem.className == 'header-menu-item-style1',
                'active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
-               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.startsWith(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}">
+               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.startsWith(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive),
+               'onlySubMenuLength': menuItem.SubMenu.length}">
                             <div class="underline-active-hover" [ngClass]="{'underline-active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
                || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}"></div>
-                            <i class="icon-{{menuItem?.Icon}}" *ngIf="menuItem?.Icon && !menuItem?.Icon.includes('.')"></i>
-                            <img *ngIf="menuItem?.Icon.includes('.') && (menuItem?.contentType !== 'logoImg')" src="../../../../../../../assets/images/{{menuItem?.Icon}}" alt="">
-                           <!-- <img *ngIf="menuItem?.Icon" src="../../../../../../../assets/images/header/{{menuItem?.Icon}}"/>-->
+                           <!-- <i class="icon-{{menuItem?.Icon}}" *ngIf="menuItem?.Icon && !menuItem?.Icon.includes('.')"></i>
+                            <img *ngIf="menuItem?.Icon.includes('.') && (menuItem?.contentType !== 'logoImg')" src="../../../../../../../assets/images/{{menuItem?.Icon}}" alt="">-->
+                            <div class="icon-box" *ngIf="menuItem?.Icon && menuItem?.contentType !== 'logoImg'">
+                                <img [src]="menuItem?.Icon" alt="">
+                                <img [src]="menuItem?.IconHover" alt="">
+                            </div>
+
                             <a class="general-menu_item_link"
-                               *ngIf="menuItem?.OpenInRouting && (menuItem?.contentType != 'time') && (menuItem?.contentType != 'logout-btn')">
+                               *ngIf="menuItem?.OpenInRouting && (menuItem?.contentType != 'time') && (menuItem?.contentType != 'logout-btn') && (menuItem?.contentType != 'depositBtn')">
                                 {{'Header.' + menuItem?.Title | translate}}
                             </a>
 
@@ -374,6 +379,19 @@
                                href="{{menuItem.Href}}">
                                 {{'Header.' + menuItem?.Title | translate}}
                             </a>
+
+                            <div *ngIf="(menuItem.contentType === 'accountPagesDpd') &&  menuDirection === 'left'">
+                                <app-global-account-pages-dpd class="{{menuItem.className}}-type"
+                                                              [menuItem]="menuItem"
+                                                              itemClassname="{{menuItem.className}}" [openModal]="openModal"></app-global-account-pages-dpd>
+                            </div>
+                            <div *ngIf="menuItem.contentType == 'depositBtn'">
+                                {{'Header.Deposite' | translate}}
+                            </div>
+
+                            <div *ngIf="menuItem.contentType == 'character' && userLogined.user?.CharacterId &&  menuDirection === 'left'" class="character-img">
+                                <img  src="../../../../../../../assets/images/characters/{{userLogined.user?.CharacterId}}.png">
+                            </div>
 
                             <div *ngIf="menuItem.contentType == 'time' && !asianWebRoute" class="timezone">
                                 <app-time [menuItem]="menuItem" dropdown></app-time>
@@ -391,9 +409,13 @@
 	                            <span>{{userData?.Id}}</span>
 	                        </div>
 
-
+                           <!-- <div class="user_id" [routerLink]="['/user/account']"
+                                 *ngIf="menuItem.contentType == 'userIdTxt'">
+                                {{userData?.Id}}
+                            </div>-->
                             <div *ngIf="(menuItem.contentType === 'signupBtn')" class="default_width">
                                 <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                        [menuItem]="menuItem"
                                                         itemClassname="{{menuItem.className}}"></app-global-sign-up-btn>
                             </div>
 
@@ -416,10 +438,7 @@
                                 <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
                             </div>
 
-                            <div class="user_id" [routerLink]="['/user/account']"
-                                 *ngIf="menuItem.contentType == 'userIdTxt'">
-                                {{userData?.Id}}
-                            </div>
+
 
                             <div *ngIf="menuItem.contentType == 'balanceTxt'">
                                 <app-balance [menuItem]="menuItem.config"></app-balance>
@@ -444,7 +463,8 @@
                             </div>
                             <fa-icon [icon]="faCaretDown" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title"></fa-icon>
                         </li>
-                        <li #moreMenu  [attr.data-id]="'header-panel2-menu-more-menu'"
+
+                        <li #moreMenu *ngIf="menuDirection !== 'left'"  [attr.data-id]="'header-panel2-menu-more-menu'"
                             class="general-menu_item header-menu-item-style1 header-menu-more" [hidden]="!generalMenuLeftItems.length">
                             <a class="general-menu_item_link">{{'Header.More' | translate}}</a>
                             <div class="general-menu-sub-menu">
@@ -478,12 +498,17 @@
               'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated,
               'onlyMenuItem' : menuItem.className == 'header-menu-item-style1',
                'active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
-               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}">
+               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive),
+               'onlySubMenuLength': menuItem.SubMenu.length}">
+                            <div class="icon-box" *ngIf="menuItem?.Icon && menuItem?.contentType !== 'logoImg'">
+                                <img [src]="menuItem?.Icon" alt="">
+                                <img [src]="menuItem?.IconHover" alt="">
+                            </div>
+
                             <a class="general-menu_item_link"
                                *ngIf="menuItem?.OpenInRouting && (menuItem?.contentType != 'time') && (menuItem?.contentType != 'logout-btn')">
                                 {{'Header.' + menuItem?.Title | translate}}
                             </a>
-
                             <span class="new-logo-item" *ngIf="menuItem?.new">New</span>
 
                             <a class="general-menu_item_link"
@@ -492,7 +517,6 @@
                                href="{{menuItem.Href}}">
                                 {{'Header.' + menuItem?.Title | translate}}
                             </a>
-
                             <div *ngIf="menuItem.contentType == 'time' && !asianWebRoute" class="timezone">
                                <app-time [menuItem]="menuItem" dropdown></app-time>
                             </div>
@@ -505,6 +529,7 @@
 
                             <div *ngIf="(menuItem.contentType === 'signupBtn')" class="default_width">
                                 <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                        [menuItem]="menuItem"
                                                         itemClassname="{{menuItem.className}}"></app-global-sign-up-btn>
                             </div>
 

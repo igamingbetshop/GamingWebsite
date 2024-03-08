@@ -29,6 +29,7 @@ export class BetsHistoryComponent extends BaseComponent {
     public total: number;
     public filterChanged = false;
     public CurrencyId: any;
+    public CurrencySymbol: any;
     public utilityService: UtilityService;
 
     public historyTimeFilter: Array<any> = [
@@ -95,6 +96,7 @@ export class BetsHistoryComponent extends BaseComponent {
         super.ngOnInit();
         const userData = this.localStorageService.get('user');
         this.CurrencyId = userData ? userData.CurrencyId : '';
+        this.CurrencySymbol = userData ? userData.CurrencySymbol : '';
         this.getCreationDate(this.historyTimeFilter[0]);
 
         this.subscriptions.push(this.getBetsHistoryService.getProducts().subscribe(data => {

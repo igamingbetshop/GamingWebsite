@@ -1,14 +1,15 @@
-import {Injectable, Injector} from '@angular/core';
+import {Directive, Injector} from '@angular/core';
 import {BaseMainComponent} from "../../../../../../@theme/components/common/base-main/base-main.component";
 import {Router, ActivatedRoute} from "@angular/router";
 import {PopupsService} from "@core/services/app/popups.service";
 import {ConfigService} from "@core/services";
-import {CharactersComponent} from "../../desktop/fragments/characters/characters.component";
 import {fromEvent} from "rxjs";
 import {debounceTime} from "rxjs/operators";
+import {BaseApiService} from "@core/services/api/base-api.service";
+import {UserLogined} from "@core/services/app/userLogined.service";
 
 
-@Injectable()
+@Directive()
 export class CommonMainComponent extends BaseMainComponent {
 
     public router: Router;
@@ -21,6 +22,8 @@ export class CommonMainComponent extends BaseMainComponent {
 
     public newWindow;
     public config: ConfigService;
+    protected baseApiService:BaseApiService;
+    protected loginService:UserLogined;
 
     constructor(public injector: Injector) {
         super(injector);
@@ -28,6 +31,8 @@ export class CommonMainComponent extends BaseMainComponent {
         this.activeRouter = injector.get(ActivatedRoute);
         this.popupsService = injector.get(PopupsService);
         this.config = injector.get(ConfigService);
+        this.baseApiService = injector.get(BaseApiService);
+        this.loginService = injector.get(UserLogined);
     }
 
     ngOnInit() {
@@ -105,16 +110,19 @@ export class CommonMainComponent extends BaseMainComponent {
     {
         if(this.userLogined.isAuthenticated && this.config.defaultOptions['CharactersEnabled'] == true && !this.userLogined.user.CharacterId){
             this.loadComponent().then(component => {
-                this.simpleModalService.addModal(component, {
-                    title: 'Characters',
-                    message: true,
-                    data: {},
-                },{closeOnClickOutside: false}).subscribe(
-                    (result) => {
+                if(component)
+                {
+                    this.simpleModalService.addModal(component, {
+                        title: 'Characters',
+                        message: true,
+                        data: {},
+                    },{closeOnClickOutside: false}).subscribe(
+                        (result) => {
 
-                        if(result)
-                            this.router.navigate(['/casino/all-games']);
-                    });
+                            if(result)
+                                this.router.navigate(['/casino/all-games']);
+                        });
+                }
             });
         }
     }

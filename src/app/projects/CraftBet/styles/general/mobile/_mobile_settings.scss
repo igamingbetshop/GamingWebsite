@@ -229,6 +229,10 @@
     gap: 28px;
     position: relative;
     margin-top: 20px;
+    .date-input {
+      width: var(--m-self-tab-bar-label-width, 95%);
+      margin: var(--m-self-tab-bar-label-margin, 0 auto);
+    }
     input {
       width: 100%;
     }

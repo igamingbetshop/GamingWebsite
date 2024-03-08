@@ -19,12 +19,17 @@
 
           <div class="payment-form-field">
             <div class="payment-form-field__column">
+<!--              <input type="text" class="payment-input" placeholder="{{'Withdraw.NameSurname-placeholder' | translate}}"-->
+<!--                     disabled ngModel="{{NameSurname}}" [ngModelOptions]="{standalone:true}" required-->
               <input type="text" class="payment-input" placeholder="{{'Withdraw.NameSurname-placeholder' | translate}}"
-                     disabled ngModel="{{NameSurname}}" [ngModelOptions]="{standalone:true}"
+                     disabled formControlName="BankAccountHolder"
               />
               <label class="payment-form-field__label">{{'Withdraw.NameSurname' | translate}}</label>
             </div>
           </div>
+            <div class="error_message" style="width: 100%" *ngIf="paymentForm.get('BankAccountHolder').hasError('required')">
+                {{'Error.NameSurname-error' | translate}}
+            </div>
 
           <div class="payment-form-field">
 
@@ -34,7 +39,7 @@
 
               <input type="text" [(ngModel)]="bankNumberFilter.BankAccountNumber" [ngModelOptions]="{standalone: true}"
                      class="payment-input"
-                     (ngModelChange)="reSearch($event)"
+                     (ngModelChange)="reSearch($event)" (change)="addBankNumber()"
                      placeholder="{{'Withdraw.Choose_Bank_Account_Number' | translate}}">
               <label class="payment-form-field__label">{{'Withdraw.AccountNumber' | translate}}</label>
               <div *ngIf="showList">

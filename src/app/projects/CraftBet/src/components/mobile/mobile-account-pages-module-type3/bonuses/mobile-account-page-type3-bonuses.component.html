@@ -1,0 +1,132 @@
+<div class="mobile-bonuses-section">
+    <div class="container-part">
+        <div class="history-options">
+            <div class="send-promo-code-box mobile-send-promo-code-box">
+                <label class="promo-code-label">{{'Account.PromoCode' | translate}}</label>
+                <input id="name" name="name" #name="ngModel" [(ngModel)]="promoCode">
+                <button class="craft_btn verify_btn setting_btn active-bonus-btn" (click)="activatePromoCode()"
+                        [ngClass]="{'disabled' : !promoCode}">
+                  <span>
+                    {{'Payments.ActivateBonus' | translate}}
+                  </span>
+                </button>
+                <div class="success-message">
+                    {{promoCodeSuccessMessage}}
+                </div>
+                <div class="error_message">
+                    {{promoCodeErrorMessage}}
+                </div>
+            </div>
+            <form class="send-promo-code-box" [formGroup]="form" (ngSubmit)="submit()">
+                <select formControlName="status">
+                    <option value="">{{'User.Select Status' | translate}}</option>
+                    <option *ngFor="let item of statusList, let i = index"
+                            [ngValue]="item?.Id">{{item?.Name | translate}}</option>
+                </select>
+
+
+                <div class="history-tools">
+                    <button class="craft_btn show-btn bonus-show-btn">{{'User.Show' | translate}}</button>
+                </div>
+
+            </form>
+            <!--            <div class="custom_dropdown_reg" dropdown>-->
+            <!--                <div class="flex_between current_item">-->
+            <!--                    <div *ngIf="!selectedStatus" class="selected-item">{{ 'User.Status' | translate }}</div>-->
+            <!--                    <div *ngIf="selectedStatus" class="selected-item">{{ selectedStatus | translate }}</div>-->
+            <!--                    <div class="change-icon">-->
+            <!--                        <span class="icon-arrow-right"></span>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--                <ul class="custom_dropdown_list right-top">-->
+            <!--                    <li class="custom_dropdown_list_items" *ngFor="let item of statusList, let i = index"-->
+            <!--                        (click)="selectedStatusValue(item)">{{ item?.Name | translate }}</li>-->
+            <!--                </ul>-->
+            <!--            </div>-->
+            <!--            <div class="custom_dropdown_reg" dropdown>-->
+            <!--                <div class="flex_between current_item">-->
+            <!--                    <div *ngIf="!selectedDate" class="selected-item">{{ 'User.Period-of-time' | translate }}</div>-->
+            <!--                    <div *ngIf="selectedDate" class="selected-item">{{ selectedDate | translate }}</div>-->
+            <!--                    <div class="change-icon">-->
+            <!--                        <span class="icon-arrow-right"></span>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--                <ul class="custom_dropdown_list right-top">-->
+            <!--                    <li class="custom_dropdown_list_items" *ngFor="let item of historyTimeFilter; let i = index"-->
+            <!--                        (click)="selectedDateValue(i, item)">{{ item?.Name | translate }}</li>-->
+            <!--                </ul>-->
+            <!--            </div>-->
+        </div>
+        <div class="bonus-tab-bar">
+            <div class="bonus-tab-bar_item" *ngFor="let tab of tabs" (click)="selectTab(tab)"
+                 [ngClass]="{'active':selectedTab.Title == tab.Title}">{{'User.' + tab.Title | translate}}
+            </div>
+        </div>
+        <ng-container *ngIf="bonusesData?.body.length > 0; else emptyBonuses">
+            <section>
+                <div class="history-list" *ngFor="let bonus of bonusesData?.body, let i = index">
+                    <div class="history-part" [class.opened]="isItemOpened(i)" collapse (click)="openBonusInfo(i)">
+                        <div class="history-left-part">
+                            <div class="bold">{{ bonus?.Name }}</div>
+                            <div class="history-status">{{ bonus?.StateName }}</div>
+                        </div>
+                        <div class="history-right-part">
+<!--                            <div class="amount-part status-{{bonus?.StatusId}}">-->
+                            <div class="amount-part">
+                                {{bonus?.Amount ? (bonus?.Amount | slice:3) : 0 | number}} {{ currencySymbol }}
+                            </div>
+                            <div class="change-icon">
+                                <span class="icon-arrow-right"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container>
+                        <div class="bonus-selected">
+                            <div class="bonus-selected-details">
+                                <div class="history-left-part">
+<!--                                    <div class="bonus-left-part">{{'User.Date Accepted' | translate}}</div>-->
+<!--                                    <div class="bonus-left-part">{{'User.Expiration Date' | translate}}</div>-->
+<!--                                    <div class="bonus-left-part">{{'User.Wagering Requirements' | translate}}</div>-->
+<!--                                    <div class="bonus-left-part">{{'User.Amount Wagered' | translate}}</div>-->
+<!--                                    <div class="bonus-left-part">{{'User.Remaining Wagering Requirements' | translate}}</div>-->
+                                    <div class="bonus-left-part">{{'User.BonusType' | translate}}</div>
+                                    <div class="bonus-left-part">{{'User.BonusId' | translate}}</div>
+                                    <div class="bonus-left-part">{{'User.AwardingTime' | translate}}</div>
+                                    <div class="bonus-left-part">{{'User.CalculationTime' | translate}}</div>
+                                    <div class="bonus-body-name" style="display: flex; align-items: center; gap: 8px">
+                                        <div class="delete-icon">
+                                            <fa-icon [icon]="['fas', 'trash-alt']" (click)="deleteBonus(bonus, $event)"
+                                                     [ngStyle]="{'visibility' : (bonus?.StatusId === 1 && bonus?.TypeIdActive) ? 'visible' : 'hidden'}"></fa-icon>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="history-right-part">
+<!--                                    <div class="bonus-right-part">{{ bonus?.AwardingTime }}</div>-->
+<!--                                    <div class="bonus-right-part">{{ bonus?.CalculationTime }}</div>-->
+<!--                                    <div class="bonus-right-part">{{ bonus?.TurnoverCount * bonus?.Amount | number}} {{ currencySymbol }}</div>-->
+<!--                                    <div class="bonus-right-part">{{ (bonus?.TurnoverCount * bonus?.Amount) - (bonus?.TurnoverAmountLeft ? bonus?.TurnoverAmountLeft : 0) | number}} {{ currencySymbol }}</div>-->
+<!--                                    <div class="bonus-right-part">{{ bonus?.TurnoverAmountLeft ? bonus?.TurnoverAmountLeft : 0 | number}} {{ currencySymbol }}</div>-->
+                                    <div class="bonus-right-part">{{ bonus?.TypeName }}</div>
+                                    <div class="bonus-right-part">{{ bonus?.BonusId }}</div>
+                                    <div class="bonus-right-part">{{ bonus?.AwardingTime }}</div>
+                                    <div class="bonus-right-part">{{ bonus?.CalculationTime }}</div>
+                                    <div class="bonus-right-part" *ngIf="bonus.IsCampaign">
+                                        <button type="button" class="info-btn"
+                                                (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </section>
+        </ng-container>
+        <ng-template #emptyBonuses>
+            <section class="empty-bonuses empty-block">
+                <span class="icon-bonus icon"></span>
+                <span class="empty-block-text">{{ 'User.Bonuses-empty' | translate }}</span>
+            </section>
+        </ng-template>
+    </div>
+</div>

@@ -69,15 +69,16 @@
     </div>
     <ng-container *ngIf="getTransactionsService.transactionsList.length > 0; else emptyTransactions">
         <section>
-            <div class="transactions-block block"  *ngFor="let item of getTransactionsService.transactionsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getTransactionsService.transactionsListCount }, let i = index">
-                <div class="transactions-block_item block_item">{{item?.CreationTime | date: 'dd/MM/yyyy HH:mm'}}</div>
-                <div class="transactions-block_item block_item">{{item?.DocumentId}}</div>
-                <div class="transactions-block_item block_item">{{item?.AccountTypeName}}</div>
-                <div class="transactions-block_item block_item">{{item?.OperationTypeName}}</div>
-<!--                <div class="transactions-block_item block_item">{{ CurrencyId }} {{item?.Amount | number:'1.2-2'}}</div>-->
-                <div class="payments-block_item block_item displayed">
-                    <p>{{ CurrencyId }}</p>
-                    <p>{{item?.Amount | number:'1.2-2'}}</p>
+            <div class="bets-content" *ngFor="let item of getTransactionsService.transactionsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getTransactionsService.transactionsListCount }, let i = index">
+                <div class="transactions-block block">
+                    <div class="transactions-block_item block_item">{{item?.CreationTime | date: 'dd/MM/yyyy HH:mm'}}</div>
+                    <div class="transactions-block_item block_item">{{item?.DocumentId}}</div>
+                    <div class="transactions-block_item block_item">{{item?.AccountTypeName}}</div>
+                    <div class="transactions-block_item block_item">{{item?.OperationTypeName}}</div>
+                    <div class="payments-block_item block_item displayed">
+                        <p>{{ CurrencyId }}</p>
+                        <p>{{item?.Amount | number:'1.2-2'}}</p>
+                    </div>
                 </div>
             </div>
             <div class="pagination_section">

@@ -98,6 +98,7 @@
             font-size: var(--settings-submit-details-font-size, 16px);
             font-weight: var(--settings-submit-details-font-weight, 500);
             padding: var(--settings-submit-details-padding, 0px 10px);
+            border-radius: var(--settings-submit-details-border-radius, 4px);
             height: height(settings-submit-details, 44px);
             .icon-close-modal {
               margin-right: 13px;
@@ -236,6 +237,7 @@
           }
           .date-input {
             position: unset;
+            margin-bottom: var(--self-exclusion-row-date-label-margin-bottom, -15px);
           }
           input::-webkit-datetime-edit-fields-wrapper {
             display: none;

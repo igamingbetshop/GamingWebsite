@@ -1,4 +1,4 @@
-<div class="open-game-section" [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}">
+<div class="open-game-section" [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}"  [style.height]="(stateService.onDesktopHeaderResize$ | async)?.productHeight">
   <div class="game-info">
     <h2 class="gameName">{{name}}</h2>
 

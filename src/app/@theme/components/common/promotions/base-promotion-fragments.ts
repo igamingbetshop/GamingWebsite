@@ -1,4 +1,4 @@
-import {OnInit, Injector, Directive, OnDestroy} from '@angular/core';
+import {OnInit, Injector, Directive, OnDestroy, ViewChild} from '@angular/core';
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {Promotion, PromotionFragment} from "../../../../@core/models";
 import {Controllers, Methods} from "../../../../@core/enums";
@@ -14,10 +14,12 @@ import {LayoutService} from "../../../../@core/services/app/layout.service";
 @Directive()
 export class BasePromotionFragments implements OnInit, OnDestroy {
 
+  @ViewChild("sliderComponent") sliderComponent;
   promotionFragments:PromotionFragment[] = [];
   selectedPromotionId:number | string;
   selectedFragment:PromotionFragment;
   promotion:Promotion = new Promotion();
+  slides:any[] = [];
   private baseApiService:BaseApiService;
   public route: ActivatedRoute;
   public router: Router;
@@ -98,6 +100,16 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
         if(this.selectedPromotionId == this.promotionFragments[i].Promotions[j].Id)
         {
           this.selectedFragment = this.promotionFragments[i];
+          if (this.sliderComponent.initialized)
+          {
+            this.sliderComponent.unslick();
+            this.slides = [];
+          }
+          setTimeout(() => {
+            this.slides = [...this.selectedFragment.Promotions];
+            if (!this.sliderComponent.initialized)
+              this.sliderComponent.initSlick();
+          }, 100);
           break parentLoop;
         }
       }

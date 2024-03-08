@@ -1,23 +1,26 @@
 <div class="mobile-map" *ngIf="userLogined.isAuthenticated" [ngStyle]="layoutService.layoutStyle">
-        <h2>{{'MR White`s Journey' | translate}}</h2>
+        <h2>{{'Character.' + 'MapTitle' | translate}}</h2>
         <div class="m-character-hierarchy">
-                <div class="m-character-hierarchy-content level{{item.Order}}" *ngFor="let item of selfHierarchy; let i = index"
+             <!--   <img class="map-image" src="../assets/images/characters/mobile-map.png">-->
+                <img class="map-image"  [src]="selfHierarchy[page - 1]?.BackgroundImageData">
+                <div class="m-character-hierarchy-content level{{item.Order}}" *ngFor="let item of selfHierarchy | paginate: { itemsPerPage: 5, currentPage: page }; let i = index"
                      [class.last]="item.Id === lastItem.Id">
                         <div  class="character-level"
                               [class.active]="item.Selected == true"
                               [class.next-levels]="item?.CompPoints > currentCompPoint"
                         >
-                                <img *ngIf="item.Id === lastItem.Id" class="level-bg"  src="../assets/images/characters/last-level.png">
-                                <img *ngIf="item.Id !== lastItem.Id" class="level-bg" src="../assets/images/characters/level{{item?.Order}}.png">
-                                <img class="level-item"  [src]="item?.ImageData">
-                                <img *ngIf="item?.CompPoints < currentCompPoint || item?.CompPoints == 0" class="opened-lock lock"  src="../assets/images/characters/opened-lock.svg">
-                                <img *ngIf="item?.CompPoints > currentCompPoint" class="closed-lock lock"  src="../assets/images/characters/closed-lock.svg">
-                                <div *ngIf="item.Id !== lastItem.Id" class="wrapper"
-                                     style="-webkit-mask-image: url('../assets/images/characters/level{{item?.Order}}.png');
-                            mask-image: url('../assets/images/characters/level{{item?.Order}}.png')"></div>
-                                <div *ngIf="item.Id === lastItem.Id" class="wrapper"
-                                     style="-webkit-mask-image: url('../assets/images/characters/last-level.png');
-                     mask-image: url('../assets/images/characters/last-level.png')"></div>
+                            <img *ngIf="item.Id === lastItem.Id && selfHierarchy.length > 1" class="level-bg"  src="../assets/images/characters/last-level.png">
+                            <img *ngIf="selfHierarchy.length == 1" class="level-bg"  src="../assets/images/characters/level0.png">
+                            <img *ngIf="item.Id !== lastItem.Id" class="level-bg" src="../assets/images/characters/level{{i}}.png">
+                            <img class="level-item"  [src]="item?.ImageData">
+                            <img *ngIf="item?.CompPoints < currentCompPoint || item?.CompPoints == 0" class="opened-lock lock"  src="../assets/images/characters/opened-lock.svg">
+                            <img *ngIf="item?.CompPoints > currentCompPoint" class="closed-lock lock"  src="../assets/images/characters/closed-lock.svg">
+                            <div *ngIf="item.Id !== lastItem.Id" class="wrapper"
+                                 style="-webkit-mask-image: url('../assets/images/characters/level{{i}}.png');
+                            mask-image: url('../assets/images/characters/level{{i}}.png')"></div>
+                            <div *ngIf="item.Id === lastItem.Id" class="wrapper"
+                                 style="-webkit-mask-image: url('../assets/images/characters/last-level.png');
+                                mask-image: url('../assets/images/characters/last-level.png')"></div>
                         </div>
                         <div class="info">
                                 <div>
@@ -26,5 +29,13 @@
                                 </div>
                         </div>
                 </div>
+        </div>
+
+        <div class="character-pagination">
+                <pagination-controls
+                        nextLabel=""
+                        autoHide="true"
+                        previousLabel=""
+                        (pageChange)="page = $event"></pagination-controls>
         </div>
 </div>

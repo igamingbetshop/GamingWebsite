@@ -10,6 +10,8 @@ export class MobileAccountPageType2BalanceComponent extends BaseAccountsComponen
 
   constructor(public injector: Injector) {
     super(injector);
+    const userData = this.localStorageService.get('user');
+    this.currencySymbol = userData ? userData.CurrencySymbol : '';
   }
 
 }

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes, UrlSegment} from '@angular/router';
 import {BannerTypes} from "../../../../../@core/enums";
-import {PromotionNewsResolver} from "../../../../../@core/services/resolves/promotion-news-resolver";
 import {AccountPagesLoadGuard} from "../../../../../@core/services/helpers/account-pages-load-guard";
 import {NavigationService} from "../../../../../@core/services/app/navigation.service";
 import {MobileBottomSideBarComponent} from './mobile-bottom-side-bar/mobile-bottom-side-bar.component';
@@ -10,6 +9,7 @@ import {ToNumberPipeModule} from '../../../../../@theme/pipes/to-number/to-numbe
 import {LoaderModule} from '../common/loader/loader.module';
 import {FragmentPositions, MenuType} from '../../../../../@core/enums';
 import {OpenGameGuard} from "../../../../../@core/services/helpers/open-game-guard";
+import {MobilePaymentErrorComponent} from "./mobile-payment-error/mobile-payment-error.component";
 
 
 export function liveRouteMatcher(url: UrlSegment[]) {
@@ -234,14 +234,12 @@ const routes: Routes = [
     },*/
     {
         path: 'news',
-        loadChildren: () => import('./mobile-news/mobile-all-news/mobile-all-news.module').then(m => m.MobileAllNewsModule),
-        resolve: {data: PromotionNewsResolver},
+        loadComponent: () => import('./mobile-news/mobile-all-news/mobile-all-news.component').then(c => c.MobileAllNewsComponent),
     },
-    {
+   /* {
         path: 'news/:id',
         loadChildren: () => import('./mobile-news/mobile-current-news/mobile-current-news.module').then(m => m.MobileCurrentNewsModule),
-        resolve: {data: PromotionNewsResolver},
-    },
+    },*/
     {
         path: 'user/1',
         data: {'roles': '1'},
@@ -255,8 +253,18 @@ const routes: Routes = [
         loadChildren: () => import('../mobile/mobile-account-pages-module-type2/mobile-account-pages-module-type2.module').then(m => m.MobileAccountPagesModuleType2Module),
     },
     {
+        path: 'user/3',
+        data: {'roles': '3'},
+        canLoad: [AccountPagesLoadGuard],
+        loadChildren: () => import('../mobile/mobile-account-pages-module-type3/mobile-account-pages-module-type3.module').then(m => m.MobileAccountPagesModuleType3Module),
+    },
+    {
         path: 'character-hierarchy',
         loadComponent: () => import('./mobile-casino/mobile-character-hierarchy/mobile-character-hierarchy.component').then(m => m.MobileCharacterHierarchyComponent),
+    },
+    {
+        path: 'payment-error',
+        loadChildren: () => import('./mobile-payment-error/mobile-payment-error.module').then(m => m.MobilePaymentErrorModule),
     },
     {
         path: 'contactus',

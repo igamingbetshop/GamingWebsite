@@ -327,6 +327,12 @@
                 margin: 5px 0 0 0;
                 padding: 0 20px;
                 cursor: default;
+                .last-change-date-span {
+                  font-weight: 600;
+                }
+              }
+              .last-change-date2 {
+                font-size: 14px;
               }
               .limit-type-text {
                 text-align: left;

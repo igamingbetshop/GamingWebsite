@@ -10,6 +10,13 @@
                [style.order]="fragment.Order"
                [style.margin-top.px]="fragment.Config.marginTop">
     </app-mobile-image-bar>
+    <casino-search-fragment *ngFor="let fragment of casinoSearch"
+                            [fragmentConfig]="fragment"
+                            [style.margin-bottom.px]="fragment.Config.marginBottom"
+                            [style.width]="fragment.Config.width"
+                            [style.margin-top.px]="fragment.Config.marginTop"
+                            [style.order]="fragment.Order">
+    </casino-search-fragment>
     <div  *ngFor="let fragment of iframes" [style.order]="fragment.Order" class="frame-fragment">
         <div class="title" *ngIf="'HomeMenu.' + fragment.Config.titleVisibility" [innerHTML]="fragment.Title | translate | sanitizer: 'html'"></div>
         <iframe [ngStyle]="fragment.Config.style" [src]="fragment.Href | sanitizer: 'resourceUrl'"></iframe>

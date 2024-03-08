@@ -51,7 +51,7 @@
 
                 <app-common-bonuses *ngIf="this.bonusData.length"
                                     [bonusesList]="this.bonusData"></app-common-bonuses>
-                <label class="bonus-refused" (change)="bonusCheckboxChanged()">
+                <label class="bonus-refused" (change)="bonusCheckboxChanged()" *ngIf="this.bonusData.length">
                     <input type="checkbox" [(ngModel)]="paymentControllerService.bonusRefused" (click)="preventUncheck()">
                     {{'User.BonusRefused' | translate}}
                 </label>

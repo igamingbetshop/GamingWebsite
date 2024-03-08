@@ -37,6 +37,7 @@ export class LogoutHelper {
             this.localStorageService.remove('popupShown');
             localStorage.removeItem('defaultRoute');
             localStorage.removeItem('token');
+            localStorage.removeItem('selectedAccountId');
 
             if (this.configService.defaultOptions.ShowLogoutInfoPopup && (this.configService.defaultOptions.ShowLogoutInfoPopup == '1')) {
                 this.showConfirm(type);

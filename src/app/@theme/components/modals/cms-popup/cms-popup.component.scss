@@ -1,0 +1,26 @@
+
+.modal-content {
+  .modal-body {
+    display: flex;
+    float: unset;
+    justify-content: space-between;
+    align-items: center;
+    .cms-popup-icon {
+      color: var(--cms-popup-close-icon-color, #000);
+      font-size: var(--cms-popup-close-icon-font-size, 16px);
+    }
+  }
+  .modal_content {
+    .cms-popup-container {
+      color: var(--cms-popup-container-color, #000);
+      background: var(--cms-popup-container-background, transparent);
+    }
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 1200px) {
+  .modal-content {
+    width: 90%;
+    min-width: 90%;
+  }
+}

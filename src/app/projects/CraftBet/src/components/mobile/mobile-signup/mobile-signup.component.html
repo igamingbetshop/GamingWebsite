@@ -1,7 +1,12 @@
 <!--<img class="login-bg"   [src]="bgUrl"  (error)="errorHandlerBg($event)"/>-->
 <div class="mobile-registration-section"
      [ngClass]="{'showPaddingTop': this.configService.defaultOptions.ShowMobileNavPanel == '1' }">
-    <div class="reg-header">{{'Registration' | translate}}</div>
+<!--    <div class="reg-header">{{'Register.Register' | translate}}</div>-->
+    <div class="mobile-register-top-part">
+        <div class="reg-header">{{'Register.Register' | translate}}</div>
+        <span class="reg-icon-close-modal icon-close-modal" (click)="getMobileLoginPreviousState()"></span>
+    </div>
+    <img class="mobile-register-logo-svg" src="../../../../../../../assets/images/logo.svg"/>
     <div class="mobile-registration-section_header">
         <div class="mobile-registration-section_menu" *ngIf="defaultOptions?.RegisterType.length > 1; else showRegText">
             <a class="reg_item" *ngFor="let item of defaultOptions?.RegisterType" (click)="selectRegType(item)"
@@ -37,8 +42,14 @@
         </div>
 
         <form *ngIf="!showSuccessMessage" [formGroup]="regFormSteps[currentStep - 1]" autocomplete="off" novalidate>
-
+            <div class="authentication-buttons">
+                <button class="authentication-button" (click)="openModal('Login', $event)">{{'Login.Sign In' | translate}}</button>
+                <button class="authentication-button" (click)="openModal('Register', $event)" [ngClass]="{'active': openedLogin}">{{'Register.Registration' | translate}}</button>
+            </div>
             <div class="allFormItems" *ngIf="formTemplates[currentStep - 1].length > 0">
+                <div class="hidden-title">
+                    {{'Register.AccountInformation' | translate}}
+                </div>
                 <div *ngFor="let form_elem of formTemplates[currentStep - 1]"
                      [ngClass]="{'form-row-item__autoHeight': form_elem?.Type === 'Region4',
                       'newHeight': ((this.stepsLength.length > 1) && (form_elem?.Type == 'password')),
@@ -175,12 +186,13 @@
                                 </div>
                                 <div class="custom_dropdown_reg2">
                                 <input type="text" formControlName="MobileNumber"
-                                       [showMaskTyped]="true"
+                                       [showMaskTyped]="false"
                                        placeHolderCharacter="0"
+                                       numbersOnly
                                        [name]="form_elem.Title"
                                        [mask]="currentValueMobileCode.Mask"
                                        placeholder="{{currentValueMobileCode.Mask ? currentValueMobileCode.Mask : 'Register.Mobile-number-placeholder' | translate}}"
-                                       [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('MobileNumber').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('MobileNumber').hasError('required')  || regFormSteps[currentStep - 1].get('MobileNumber').hasError('MobileNumber') || regFormSteps[currentStep - 1].get('MobileNumber').hasError('maxlength')) && regFormSteps[currentStep - 1].get('MobileNumber').touched)}"/>
+                                       [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('MobileNumber').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('MobileNumber').hasError('required')  || regFormSteps[currentStep - 1].get('MobileNumber').hasError('mask') || regFormSteps[currentStep - 1].get('MobileNumber').hasError('maxlength')) && regFormSteps[currentStep - 1].get('MobileNumber').touched)}"/>
                                     <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                                 </div>
                             </div>
@@ -563,10 +575,12 @@
              [ngClass]="{'flex-center': stepsLength.length == 1, 'flex-end': ((currentStep == '1') || (checkBackBtnShowingList[currentStep - 1] == '1')),  'flex-between': ((stepsLength.length != 1) && (currentStep != '1') && (checkBackBtnShowingList[currentStep - 1] != '1'))}">
 
             <button *ngIf="formValidationType === 'blur'" type="submit" (click)="nextBtn(currentStep + 1, currentStep)" class="craft_btn"
-                    [ngClass]="{'reg_btn':stepsLength.length == 1, 'next-btn': (stepsLength.length != 1), 'not_active': (!regFormSteps[currentStep - 1].valid || (stepsLength.length == 1 &&
-                                !regFormSteps[currentStep - 1].get('AcceptTerms').value) || showAllowedAgeError ||
-                                ((stepsLength.length === currentStep) &&
-                                !regFormSteps[currentStep - 1].get('AcceptTerms').value))}">
+                    [ngClass]="{'reg_btn':stepsLength.length == 1, 'next-btn': (stepsLength.length != 1),
+                     'not_active': (!regFormSteps[currentStep - 1].valid || (stepsLength.length == 1 &&
+                                !regFormSteps[currentStep - 1].get('AcceptTerms')?.value) || showAllowedAgeError ||
+                                ((stepsLength.length === currentStep) && regFormSteps[currentStep - 1].get('AcceptTerms') &&
+                                !regFormSteps[currentStep - 1].get('AcceptTerms')?.value)),
+                                 'disable-item': showSuccessView}">
                 <span
                     *ngIf="(stepsLength.length == 1) || (stepsLength.length == currentStep)"> {{'Register.Register' | translate}} </span>
                 <span
@@ -580,11 +594,17 @@
                         *ngIf="(stepsLength.length != 1) && (stepsLength.length != currentStep)"> {{'Register.Next' | translate}} </span>
             </button>
         </div>
+        <div class="reg-step-navigate-buttons reg-step-navigate-button-login show-reg-step-navigate-button-login">{{'Login.Already_have_an_account' | translate}}
+            <a [routerLink]="['/login']">{{'Login.Sign In' | translate}}</a>
+        </div>
     </div>
 
     <div *ngIf="registerType?.Title == registerTypes.QUICK">
         <form [formGroup]="quickRegForm" autocomplete="off" novalidate>
             <div class="allFormItems" *ngIf="quickFormTemplate.length > 0">
+                <div class="hidden-title">
+                    {{'Register.AccountInformation' | translate}}
+                </div>
                 <div *ngFor="let form_elem of quickFormTemplate; trackBy: trackByMethod"
 
                      class="form-row-item form-row {{form_elem?.Type}}-mobile form-row{{form_elem?.FieldSize == '1' ? form_elem?.FieldSize : 0.5*form_elem?.FieldSize}}"
@@ -913,9 +933,14 @@
                         <div *ngSwitchCase="'dropdown'" class="form_field">
 
                             <div class="form_field_top">
-
+                                <div class="custom-register-type-checkboxes">
+                                    <div *ngFor="let item of quickRegTypeList" class="checkbox-content" (change)="changeQuickRegisterType($event.target.value)">
+                                        <input type="radio" name="options" [value]="item?.Type" class="checkbox-type-input">
+                                        <label class="checkbox-type-label">{{ item?.Type }}</label>
+                                    </div>
+                                </div>
                                 <select (change)="changeQuickRegisterType($event.target.value)"
-                                        class="custom_dropdown_reg">
+                                        class="custom_dropdown_reg custom-register-by">
                                     <option *ngFor="let item of quickRegTypeList" [value]="item.Type">
                                         {{item?.Type}}
                                     </option>

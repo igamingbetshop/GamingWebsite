@@ -1,4 +1,4 @@
-<div class="mobile-header-section"
+<div class="mobile-header-section" id="mobile-header-section"
      [ngClass]="{'double-line-header': headerPanel2.length > 0, 'single-line-header': !headerPanel2.length }">
     <div class="time-section">
         <ng-template #timeRef></ng-template>
@@ -44,7 +44,7 @@
                     <div class="info-block" [attr.href]="menuItem?.Href ? menuItem?.Href : null" dropdown (click)="navigateByHref(menuItem)">
                         <span *ngIf="(bonus && bonus != '0.00') || unusedBalance">{{'User.Balance' | translate}}</span>
                         <span> {{currencySymbol}} {{balance | toNumber | number: '.2'}}</span>
-                        <app-mobile-account-page-type2-balance class="balance-popup" *ngIf="isLogin" [templateType]="2"></app-mobile-account-page-type2-balance>
+                        <app-mobile-account-page-type2-balance class="balance-popup" *ngIf="isLogin" [templateType]="2" [balances]="accountBalances"></app-mobile-account-page-type2-balance>
                     </div>
                     <div *ngIf="balanceTypes.bonus && bonus && bonus != '0.00'" class="info-block">
                         <span>{{'User.Bouns' | translate}} </span>

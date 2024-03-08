@@ -6,7 +6,7 @@
                     (change)="onModelChange()">
                 <option *ngFor="let day of days" [value]="day">{{day}}</option>
             </select>
-            <label [class.required-field]="formElement.Config?.mandatory">{{'Settings.Date-of-birth' | translate}}</label>
+            <label [class.required-field]="formElement.Config?.mandatory" *ngIf="formElement.Config?.hasLabel">{{'Settings.Date-of-birth' | translate}}</label>
         </div>
 
         <div class="form_field distans-right settings-select-field">

@@ -21,6 +21,7 @@
                 [class.item-opacity]="item < characterCurrentState.Current">{{item}}</div>
             </div>
             <img [src]="characterCurrentState?.Parent.ImageData" [routerLink]="['/character-hierarchy']">
+            <button class="show-map" type="button" [routerLink]="['/character-hierarchy']">{{'Character.' + 'Show Map' | translate}}</button>
         </div>
         <div class="character-level-box">
             <div class="next-level" *ngIf="characterCurrentState?.Next !== null">
@@ -29,6 +30,7 @@
                     <img class="" [src]="characterCurrentState?.Next.ImageData">
                 </div>
             </div>
+            <div class="character-name">{{characterCurrentState?.Parent.Title}}</div>
             <div class="previous-level">
                 <span>{{'Previous' | translate}}</span>
                 <div class="previous-character">

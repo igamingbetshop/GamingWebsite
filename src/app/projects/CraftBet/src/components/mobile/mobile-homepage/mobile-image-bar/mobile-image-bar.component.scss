@@ -22,6 +22,15 @@
         transform: scale(var(--fragment-image-bar-scale, 1.1));
       }
     }
+    &.horizontal
+    {
+      display: flex;
+      overflow-y: auto;
+    }
+    &.grid {
+      display: grid;
+      margin: 0 auto;
+    }
     &.icon
     {
       img{width: auto}

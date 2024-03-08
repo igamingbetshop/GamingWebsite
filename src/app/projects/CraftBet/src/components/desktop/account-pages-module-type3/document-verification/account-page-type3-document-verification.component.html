@@ -68,7 +68,7 @@
             <ng-container *ngIf="getSettingsInfoService?.identityModelsList.length > 0; else emptyDocuments">
                 <section>
                     <div class="document-verification-table-body"
-                         *ngFor="let item of getSettingsInfoService?.identityModelsList">
+                         *ngFor="let item of getSettingsInfoService?.identityModelsList.slice().reverse()">
                         <div class="document-verification-type">{{item?.DocumentTypeName}}</div>
                         <div class="document-verification-date">{{item?.CreationTime | date: 'dd.MM.yyyy'}}</div>
                         <div class="document-verification-status status-{{item?.Status}}">{{item?.StatusName}}</div>

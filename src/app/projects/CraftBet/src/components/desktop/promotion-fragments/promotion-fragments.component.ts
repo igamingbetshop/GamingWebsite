@@ -48,25 +48,6 @@ export class PromotionFragmentsComponent extends BasePromotionFragments{
     }
   }
 
- /* override selectTab(tab)
-  {
-    super.selectTab(tab);
-
-    if(this.selectedPromotionId)
-    {
-      if (this.sliderComponent.initialized)
-      {
-        this.sliderComponent.unslick();
-        this.slides = [];
-      }
-      setTimeout(() => {
-        this.slides = [...this.promotions];
-        if (!this.sliderComponent.initialized)
-          this.sliderComponent.initSlick();
-      }, 100);
-    }
-  }*/
-
   ngOnDestroy()
   {
     super.ngOnDestroy();

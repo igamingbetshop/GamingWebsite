@@ -1,14 +1,37 @@
 @import "../../../styles/helpers/variables";
 @import "../../../../../../styles/helpers/variables";
 .mobile-payment-balance-section {
-  margin: var(--payment-balance-info-margin, 0);
+  margin: var(--m-payment-balance-info-margin, 0);
   box-shadow: var(--amount-withdraw-box-shadow, none);
   background: var(--payment-balance-info-background, #314566) !important;
   min-height: var(--payment-balance-info-min-height, 100%) !important;
   width: var(--m-payment-balance-info-width, 100%) !important;
+  border: var(--m-payment-balance-info-border, none);
+  padding: var(--m-payment-balance-info-padding, 14px);
   .payment-systems__userAccount {
+    .selected {
+      background: var(--m-payment-balance-info-selected-background, transparent);
+    }
+    .radio-input {
+      margin: var(--m-payment-balance-info-radio-margin, 0);
+    }
     &__name {
       font-size: var(--m-payment-balance-info-items-font-size, 12px);
+      margin-bottom: var(--m-payment-balance-info-items-margin-bottom, 0);
+      border-bottom: var(--m-payment-balance-info-items-border-bottom, none);
+      padding: var(--m-payment-balance-info-items-padding, 0px);
+      .item-cell-account-name {
+        margin-right: var(--m-payment-balance-info-name-margin-right, 0);
+      }
+      .mobile-balance-name-currency-id {
+        display: var(--m-payment-balance-info-currency-id-display, block);
+      }
+      .mobile-balance-name-currency-symbol {
+        display: var(--m-payment-balance-info-currency-symbol-display, none);
+      }
+    }
+    &__name:last-child {
+      border-bottom: none;
     }
     &_balance {
       font-size: var(--m-payment-balance-info-items-font-size, 12px);

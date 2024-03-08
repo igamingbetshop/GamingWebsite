@@ -44,11 +44,11 @@ export class BaseProfile implements OnInit, OnDestroy
         'region',
         'send-code',
         'language'];
-    private baseControllerService:BaseControllerService;
+    public baseControllerService:BaseControllerService;
     private changeDetector:ChangeDetectorRef;
-    private getSettingsInfoService:GetSettingsInfoService;
-    private utilityService:UtilityService;
-    private baseApiService:BaseApiService;
+    public getSettingsInfoService:GetSettingsInfoService;
+    public utilityService:UtilityService;
+    public baseApiService:BaseApiService;
     protected simpleModalService: SimpleModalService;
     protected stateService:StateService;
     profileService:ProfileService;

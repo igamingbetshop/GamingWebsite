@@ -1,5 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {SaveData} from "@core/services";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-global-sign-up-btn',
@@ -12,7 +13,7 @@ export class GlobalSignUpBtnComponent implements OnInit, OnDestroy {
   @Input() hasIcon: boolean = false;
   @Input() menuItem: any;
 
-  constructor(private saveData: SaveData) {
+  constructor(private saveData: SaveData, private router:Router) {
   }
 
   ngOnInit() {
@@ -20,8 +21,13 @@ export class GlobalSignUpBtnComponent implements OnInit, OnDestroy {
 
   showSignUp(data, event: MouseEvent) {
     event.stopPropagation();
-    if (data === 'open') {
-      this.saveData.showSignUpSection.next('signUp');
+    if(this.menuItem.data.openType === "page")
+      this.router.navigate(["/register"]);
+    else
+    {
+      if (data === 'open') {
+        this.saveData.showSignUpSection.next('signUp');
+      }
     }
   }
 

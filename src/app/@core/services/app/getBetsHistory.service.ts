@@ -83,6 +83,7 @@ export class GetBetsHistoryService {
     const filter = {
       'ClientId': this.userData.Id,
       'CurrencyId': this.userData.CurrencyId,
+      'CurrencySymbol': this.userData.CurrencySymbol,
       'PartnerId': this.defaultOption.PartnerId,
       'TimeZone': this.configService.timeZone,
       'CreatedFrom': data.createdFrom,
@@ -127,7 +128,7 @@ export class GetBetsHistoryService {
         }
         this._notifyGetBetsHistoryList.next({ type: 'Success', data: data.ResponseObject['Bets'] });
       } else {
-        this._notifyGetBetsHistoryList.next({ type: 'Error', data: data.ResponseObject['Description'] });
+        this._notifyGetBetsHistoryList.next({ type: 'Error', data: data['Description'] });
       }
     });
 
@@ -171,6 +172,7 @@ export class GetBetsHistoryService {
     const filter = {
       'ClientId': this.userData.Id,
       'CurrencyId': this.userData.CurrencyId,
+      'CurrencySymbol': this.userData.CurrencySymbol,
       'PartnerId': this.defaultOption.PartnerId,
       'TimeZone': this.configService.timeZone,
       'CreatedFrom': data.createdFrom,

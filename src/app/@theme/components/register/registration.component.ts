@@ -188,6 +188,11 @@ export class RegistrationComponent extends BaseComponent {
                 this.quickRegForm.controls['BirthYear'].setValue('', {emitEvent: false})
             } else {
                 this.quickRegForm.controls['BirthYear'].setValue(value, {emitEvent: false});
+                this.Months = this.utilityService.changeYear(value);
+                const selectedMonthId = this.quickRegForm.controls['BirthMonth'].value;
+                if (!this.Months.some(month => month.Id === +selectedMonthId)) {
+                    this.quickRegForm.controls['BirthMonth'].setValue('', { emitEvent: false });
+                }
             }
 
             if (this.quickRegForm.controls['BirthYear'].value == '') {
@@ -205,6 +210,11 @@ export class RegistrationComponent extends BaseComponent {
                 this.regFormSteps[Number(type) - 1].controls['BirthYear'].setValue('', {emitEvent: false})
             } else {
                 this.regFormSteps[Number(type) - 1].controls['BirthYear'].setValue(value, {emitEvent: false});
+                this.Months = this.utilityService.changeYear(value);
+                const selectedMonthId = this.regFormSteps[`${Number(type) - 1}`].controls['BirthMonth'].value;
+                if (!this.Months.some(month => month.Id === +selectedMonthId)) {
+                    this.regFormSteps[`${Number(type) - 1}`].controls['BirthMonth'].setValue('', { emitEvent: false });
+                }
             }
 
             if (this.regFormSteps[`${Number(type) - 1}`].controls['BirthYear'].value == '') {

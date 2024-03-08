@@ -126,6 +126,10 @@
           color: var(--document-verification-status-3-color, #F6A201);
           background: var(--document-verification-status-3-background, transparent);
         }
+        .status-4 {
+          color: var(--document-verification-status-4-color, #fff);
+          background: var(--document-verification-status-4-background, red);
+        }
       }
 
       .document-form {

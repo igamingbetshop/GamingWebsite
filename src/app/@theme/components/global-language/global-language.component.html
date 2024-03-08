@@ -1,4 +1,4 @@
-<div class="{{itemClassname}}-type-Dpd"
+<div class="{{itemClassname}}-type-Dpd" *ngIf="menuItem; else defaultLanguageDropdown"
      [class.single-lang]="isSingleLang"
       dropdown (click)="openedDropDown = !openedDropDown">
 
@@ -39,6 +39,42 @@
     </ul>
 
 </div>
+<ng-template #defaultLanguageDropdown>
+    <div [class.single-lang]="isSingleLang"
+         dropdown (click)="openedDropDown = !openedDropDown" class="custom_language_dropdown">
+        <div
+             [ngStyle]="{
+            'background-image':
+              'url(../../../../../../../assets/images/languages/' +
+              currentLang?.key +
+              '.png)'
+          }"
+             class="custom_dropdown_img"></div>
+        <div class="dropdown-header-title">{{currentLang?.value}}</div>
+
+        <fa-icon [icon]="['fas', 'angle-down']" class="drop_down_icon"></fa-icon>
+        <ul class="custom_dropdown_list right-top language-custom-ul">
+            <div class="lang_grid">
+                <div class="over" (click)="$event.stopPropagation();"></div>
+                <li *ngFor="let lang of languages"
+                    [attr.data-id]="'language-' + lang.key"
+                    (click)="changeLanguage(lang.key)" class="custom_dropdown_list_item" [style.display]="currentLang.key !== lang?.key ? 'block':'none'">
+                    <div class="menu-list-section" *ngIf="currentLang.key !== lang?.key">
+                        <div [ngStyle]="{
+                'background-image':
+                  'url(../../../../../../../assets/images/languages/' +
+                  lang?.key +
+                  '.png)'
+              }" class="lang_list_img"></div>
+                        <ng-container>
+                            <span class="lang_name">{{lang.value }}</span>
+                        </ng-container>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </div>
+</ng-template>
 
 <div class="overlay" [class.active] = "openedDropDown && isMobile" (click)="openedDropDown = false"></div>
 

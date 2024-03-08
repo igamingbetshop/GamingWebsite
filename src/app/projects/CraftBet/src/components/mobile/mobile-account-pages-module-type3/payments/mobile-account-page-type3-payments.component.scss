@@ -1,0 +1,120 @@
+.mobile-history-tab {
+  padding: 19px 8px;
+  background: #ededed;
+
+  .container-part {
+    margin-bottom: 30px;
+    .pagination_section {
+      font-size: 13px;
+    }
+    .history-options {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .custom_dropdown_reg {
+        background: #fff;
+        color: #000;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+
+        .current_item {
+          border: 1px solid #bcbcbc;
+          border-radius: 50px;
+        }
+
+        .current_item:hover {
+          color: #000;
+        }
+
+        .selected-item {
+          margin-left: auto;
+          font-size: 14px;
+        }
+
+        .change-icon {
+          margin-left: auto;
+          transform: rotate(90deg);
+          color: #808080;
+          margin-right: 10px;
+        }
+
+        .period-dropdown {
+          height: 92px;
+        }
+
+        .status-dropdown {
+          height: 150px;
+        }
+
+        .custom_dropdown_list {
+          background: #fff;
+          border-color: #D0CECE;
+          margin-top: 2px;
+          height: auto;
+
+          .custom_dropdown_list_items {
+            justify-content: center;
+            height: 30px;
+            line-height: 30px;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+
+    .history-list {
+      background: #fff;
+      width: 100%;
+      color: #000;
+      margin: 16px auto;
+      font-size: 12px;
+      padding: 6px 10px 7px;
+      border: 1px solid #BCBCBC;
+
+      .empty-bets-image {
+        width: 90px;
+      }
+
+      .user-history-content {
+        padding: 12px 0;
+
+        .user-history-details {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
+      .history-partition {
+        .history-part {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          padding-bottom: 7px;
+          font-size: 14px;
+
+          .bold {
+            font-weight: 600;
+          }
+
+          .history-date {
+            color: #BCBCBC;
+          }
+
+          .amount-part {
+            background: #BCBCBC;
+            margin-left: 14px;
+            padding: 0px 13px;
+            border-radius: 50px;
+            color: #fff;
+          }
+
+        }
+      }
+    }
+  }
+}

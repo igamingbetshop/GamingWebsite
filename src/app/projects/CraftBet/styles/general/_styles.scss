@@ -102,6 +102,7 @@ a {
 ** Form section style(Input, textarea..)
 */
 ::-webkit-scrollbar-track {
+  margin: 3px 0;
   border-radius: 15px;
   background-color: color(scrollbar-track);
 }
@@ -284,7 +285,7 @@ a {
 
     &.password
     {
-      width: 90%;
+      width: var(--login-password-input-width, 90%);
     }
   }
   .icon-open-password-type{font-size: 20px}

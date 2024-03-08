@@ -210,7 +210,11 @@
         </div>
         <div class="mobile-self-exclusion-row" *ngIf="selectedExclusionType == 'Temporary'">
             <label class="date-input">{{'User.Until Date' | translate}}</label>
-            <input class="self-tab-bar_item" type="date" [(ngModel)]="exclusionDate" min="{{exclusionMinDate}}">
+<!--            <input class="self-tab-bar_item" type="date" [(ngModel)]="exclusionDate" min="{{exclusionMinDate}}">-->
+            <select class="self-tab-bar_item" (change)="getCreatedFrom($event.target.selectedIndex)">
+                <option *ngFor="let date of dates; let i = index" [ngValue]="i" [hidden]="i === 0"
+                >{{ date.Name | translate}}</option>
+            </select>
         </div>
         <div class="periods mobile-reasons">
             <h2 class="self-limit-title period-label">{{ 'User.Reason' | translate }}:</h2>

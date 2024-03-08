@@ -11,22 +11,23 @@
                 <p class="lost-tab-text" [innerHTML]="'Settings.SetMonthlyLimit' | translate | sanitizer: 'html'"></p>
                 <div class="limit-type-form">
                     <div class="limit-type">
-                        <div class="limit-type_row limit-type_row-input">
-                            <p class="limit-type-text-deposit-monthly limit-type-text-deposit-monthly2"
-                            *ngIf="limits?.DepositLimitMonthly !== null">{{ 'Settings.' + selfTypes.MonthlyDepositLimit.name | translate }}
-                                </p>
-                            <input type="number" class="limit-type-input-deposit2" *ngIf="limits?.DepositLimitMonthly !== null"
-                                   [value]="limits?.DepositLimitMonthly !== null ? limits.DepositLimitMonthly?.Limit : null"
-                                   readonly>
-                            <label class="limit-type-currency-monthly limit-type-currency">{{ currencySymbol }}</label>
+                        <div class="limit-type_row limit-type_row-input" *ngIf="limits?.DepositLimitMonthly !== null">
+                            <div class="last-change-date last-change-date2">
+                                <span class="last-change-date-span">{{ 'Settings.' + selfTypes.MonthlyDepositLimit.name | translate }}*:</span>
+                                <div>
+                                    <span class="last-change-date-span">{{limits?.DepositLimitMonthly?.Limit}} {{currencySymbol}}</span>
+                                    <span *ngIf="limits?.DepositLimitMonthly?.CreatedDate">{{limits?.DepositLimitMonthly?.CreatedDate | date:'dd.MM.yyyy HH:mm:ss'}}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="limit-type_row">
-                            <p class="last-change-date"
-                               *ngIf="limits?.DepositLimitMonthly?.UpdateLimit !==null">{{'Settings.ChangeValidFrom' | translate}} {{limits?.DepositLimitMonthly?.ChangeDate | date:'dd.MM.yyyy, HH:mm:ss'}}
-                                {{'Settings.ChangeValidTo' | translate}} {{limits?.DepositLimitMonthly?.UpdateLimit}} {{currencySymbol}}
-                            </p>
-                            <p class="last-change-date"
-                               *ngIf="limits?.DepositLimitMonthly?.CreatedDate !==null">{{'Settings.LastChange' | translate}} {{limits?.DepositLimitMonthly?.CreatedDate | date:'dd.MM.yyyy, HH:mm:ss'}}</p>
+                        <div class="limit-type_row limit-type_row-input" *ngIf="limits?.DepositLimitMonthly?.UpdateLimit !==null">
+                            <div class="last-change-date last-change-date2">
+                                <span class="last-change-date-span">{{'Settings.ChangeValid' | translate}}</span>
+                                <div>
+                                    <span class="last-change-date-span">{{limits?.DepositLimitMonthly?.UpdateLimit}} {{currencySymbol}}</span>
+                                    <span *ngIf="limits?.DepositLimitMonthly?.ChangeDate">{{limits?.DepositLimitMonthly?.ChangeDate | date:'dd.MM.yyyy HH:mm:ss'}}</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="limit-type_row">
                             <button class="change-limit-type-field-submit" (click)="changeDepositMonthlyLimit()">
@@ -46,7 +47,8 @@
                             <span class="limit-type-text-deposit-monthly">{{ 'Settings.' + selfTypes.MonthlyDepositLimit.name | translate }}</span>
                             <input type="number" class="limit-type-input-deposit" formControlName="DepositLimitMonthly"
                                    [ngClass]="{'validation-input-error': limitForm.get('DepositLimitMonthly').errors?.max}"
-                                   max="99999999999999.999" placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
+                                   max="99999999999999.999"
+                                   placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
                                    (keypress)="onInput($event)" (keydown)="preventKeys($event)"
                                    (input)="inputChanging($event);depositLimitChange($event);openCreditCheckPart($event)">
                             <span class="limit-amount-label">{{ 'Settings.Amount' | translate }}</span>
@@ -62,7 +64,8 @@
                                 <div class="limit-check-part-text">
                                     {{ 'User.CreditCheckMonthlyDepositLimit' | translate }}
                                     <div class="limit-check-part-btn-part">
-                                        <button class="limit-check-part-btn" (click)="creditCheck()">{{ 'User.CreditCheck' | translate }}</button>
+                                        <button class="limit-check-part-btn"
+                                                (click)="creditCheck()">{{ 'User.CreditCheck' | translate }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -75,11 +78,13 @@
                                 </button>
                                 <input type="submit" class="limit-type-field-opened-submit"
                                        value="{{ 'User.ConfirmLimit' | translate }}"
-                                       (click)="updateSelfLimitationEdited(4)" [disabled]="loading || isMaxReached() || !limitForm.get('DepositLimitMonthly').value">
+                                       (click)="updateSelfLimitationEdited(4)"
+                                       [disabled]="loading || isMaxReached() || !limitForm.get('DepositLimitMonthly').value">
                             </div>
                         </div>
                         <div class="limit-type_row">
-                            <p class="limit-type-text" [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
+                            <p class="limit-type-text"
+                               [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
                         </div>
                     </div>
 
@@ -99,7 +104,8 @@
             </div>
         </div>
         <div class="tabs">
-            <p class="self-limit-title" [innerHTML]="'User.SelfExclusionDescription' | translate | sanitizer: 'html'"></p>
+            <p class="self-limit-title"
+               [innerHTML]="'User.SelfExclusionDescription' | translate | sanitizer: 'html'"></p>
             <p class="self-limit-title self-limit-title3">{{ 'User.SelfExclusionDescription2' | translate }}</p>
             <ul class="self-exclusion-section">
                 <li>{{ 'User.SelfExclusionDescriptionPart1' | translate }}</li>
@@ -139,7 +145,8 @@
                     </div>
                     <ul class="custom_dropdown_list right-top">
                         <li class="custom_dropdown_list_items" *ngFor="let month of months; let i = index"
-                            (click)="selectedTime(month)" [ngClass]="{'selected-reason' : selectedMonth === month.Name}">{{ 'Filter_Period.' + month.Name | translate }}</li>
+                            (click)="selectedTime(month)"
+                            [ngClass]="{'selected-reason' : selectedMonth === month.Name}">{{ 'Filter_Period.' + month.Name | translate }}</li>
                     </ul>
                 </div>
             </div>
@@ -154,7 +161,8 @@
                         </div>
                     </div>
                     <ul class="custom_dropdown_list right-top">
-                        <li class="custom_dropdown_list_items" *ngFor="let reason of reasons; let i = index" [ngClass]="{'selected-reason' : selectedReason === reason.Name}"
+                        <li class="custom_dropdown_list_items" *ngFor="let reason of reasons; let i = index"
+                            [ngClass]="{'selected-reason' : selectedReason === reason.Name}"
                             (click)="selectReason(reason)">{{ reason.Name }}</li>
                     </ul>
                 </div>
@@ -299,7 +307,8 @@
                         <div class="limit-type_row limit-type-opened-row limit-type_row-input">
                             <span class="limit-type-text-deposit-monthly">{{ 'Settings.BetLimit' | translate }}</span>
                             <input type="number" class="limit-type-input-deposit"
-                                   formControlName="TotalBetAmountLimitDaily" placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
+                                   formControlName="TotalBetAmountLimitDaily"
+                                   placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
                                    [ngClass]="{'validation-input-error': limitForm.get('TotalBetAmountLimitDaily').errors?.max}"
                                    max="99999999999999.999"
                                    (keypress)="onInput($event)" (keydown)="preventKeys($event)"
@@ -314,12 +323,14 @@
                             <span class="limit-type-text-deposit-monthly">{{ 'Settings.LossLimit' | translate }}</span>
                             <input type="number" class="limit-type-input-deposit" formControlName="TotalLossLimitDaily"
                                    [ngClass]="{'validation-input-error': limitForm.get('TotalLossLimitDaily').errors?.max}"
-                                   max="99999999999999.999" placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
+                                   max="99999999999999.999"
+                                   placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
                                    (keypress)="onInput($event)" (keydown)="preventKeys($event)"
                                    (input)="inputChanging($event);lossLimitChange($event)">
                             <span class="limit-amount-label" #amountLabel>{{ 'Settings.Amount' | translate }}</span>
                             <label class="limit-type-currency">{{ currencySymbol }}</label>
-                            <div class="validation-error" *ngIf="lossLimitError">{{ 'Error.PercentageError' | translate }}</div>
+                            <div class="validation-error"
+                                 *ngIf="lossLimitError">{{ 'Error.PercentageError' | translate }}</div>
                             <!--                            <div class="validation-error"-->
                             <!--                                 *ngIf="limitForm.get('TotalLossLimitDaily').errors?.max">{{ 'Error.TotalMaxLimitError' | translate }}</div>-->
                         </div>
@@ -331,11 +342,13 @@
                                 </button>
                                 <input type="submit" class="limit-type-field-opened-submit"
                                        value="{{ 'User.ConfirmLimit' | translate }}"
-                                       (click)="updateSelfLimitationEdited(1)" [disabled]="loading || isMaxReached() || lossLimitError">
+                                       (click)="updateSelfLimitationEdited(1)"
+                                       [disabled]="loading || isMaxReached() || lossLimitError">
                             </div>
                         </div>
                         <div class="limit-type_row">
-                            <p class="limit-type-text" [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
+                            <p class="limit-type-text"
+                               [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
                         </div>
                     </div>
                     <div class="limit-type" *ngIf="selectedItem === 'Week'">
@@ -344,7 +357,8 @@
                             <input type="number" class="limit-type-input-deposit"
                                    formControlName="TotalBetAmountLimitWeekly"
                                    [ngClass]="{'validation-input-error': limitForm.get('TotalBetAmountLimitWeekly').errors?.max}"
-                                   max="99999999999999.999" placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
+                                   max="99999999999999.999"
+                                   placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
                                    (keypress)="onInput($event)" (keydown)="preventKeys($event)"
                                    (input)="inputChanging($event);totalLostLimitChange($event);">
                             <span class="limit-amount-label">{{ 'Settings.Amount' | translate }}</span>
@@ -356,12 +370,14 @@
                             <span class="limit-type-text-deposit-monthly">{{ 'Settings.LossLimit' | translate }}</span>
                             <input type="number" class="limit-type-input-deposit" formControlName="TotalLossLimitWeekly"
                                    [ngClass]="{'validation-input-error': limitForm.get('TotalLossLimitWeekly').errors?.max}"
-                                   max="99999999999999.999" placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
+                                   max="99999999999999.999"
+                                   placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
                                    (keypress)="onInput($event)" (keydown)="preventKeys($event)"
                                    (input)="inputChanging($event);lossLimitChange($event)">
                             <span class="limit-amount-label" #amountLabel>{{ 'Settings.Amount' | translate }}</span>
                             <label class="limit-type-currency">{{ currencySymbol }}</label>
-                            <div class="validation-error" *ngIf="lossLimitError">{{ 'Error.PercentageError' | translate }}</div>
+                            <div class="validation-error"
+                                 *ngIf="lossLimitError">{{ 'Error.PercentageError' | translate }}</div>
                             <!--                            <div class="validation-error"-->
                             <!--                                 *ngIf="limitForm.get('TotalLossLimitWeekly').errors?.max">{{ 'Error.TotalMaxLimitError' | translate }}</div>-->
                         </div>
@@ -373,11 +389,13 @@
                                 </button>
                                 <input type="submit" class="limit-type-field-opened-submit"
                                        value="{{ 'User.ConfirmLimit' | translate }}"
-                                       (click)="updateSelfLimitationEdited(1)" [disabled]="loading || isMaxReached() || lossLimitError">
+                                       (click)="updateSelfLimitationEdited(1)"
+                                       [disabled]="loading || isMaxReached() || lossLimitError">
                             </div>
                         </div>
                         <div class="limit-type_row">
-                            <p class="limit-type-text" [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
+                            <p class="limit-type-text"
+                               [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
                         </div>
                     </div>
                     <div class="limit-type" *ngIf="selectedItem === 'Month'">
@@ -386,7 +404,8 @@
                             <input type="number" class="limit-type-input-deposit"
                                    formControlName="TotalBetAmountLimitMonthly"
                                    [ngClass]="{'validation-input-error': limitForm.get('TotalBetAmountLimitMonthly').errors?.max}"
-                                   max="99999999999999.999" placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
+                                   max="99999999999999.999"
+                                   placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
                                    (keypress)="onInput($event)" (keydown)="preventKeys($event)"
                                    (input)="inputChanging($event);totalLostLimitChange($event);">
                             <span class="limit-amount-label">{{ 'Settings.Amount' | translate }}</span>
@@ -399,12 +418,14 @@
                             <input type="number" class="limit-type-input-deposit"
                                    formControlName="TotalLossLimitMonthly"
                                    [ngClass]="{'validation-input-error': limitForm.get('TotalLossLimitMonthly').errors?.max}"
-                                   max="99999999999999.999" placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
+                                   max="99999999999999.999"
+                                   placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
                                    (keypress)="onInput($event)" (keydown)="preventKeys($event)"
                                    (input)="inputChanging($event);lossLimitChange($event)">
                             <span class="limit-amount-label" #amountLabel>{{ 'Settings.Amount' | translate }}</span>
                             <label class="limit-type-currency">{{ currencySymbol }}</label>
-                            <div class="validation-error" *ngIf="lossLimitError">{{ 'Error.PercentageError' | translate }}</div>
+                            <div class="validation-error"
+                                 *ngIf="lossLimitError">{{ 'Error.PercentageError' | translate }}</div>
                             <!--                            <div class="validation-error"-->
                             <!--                                 *ngIf="limitForm.get('TotalLossLimitMonthly').errors?.max">{{ 'Error.TotalMaxLimitError' | translate }}</div>-->
                         </div>
@@ -416,11 +437,13 @@
                                 </button>
                                 <input type="submit" class="limit-type-field-opened-submit"
                                        value="{{ 'User.ConfirmLimit' | translate }}"
-                                       (click)="updateSelfLimitationEdited(1)" [disabled]="loading || isMaxReached() || lossLimitError">
+                                       (click)="updateSelfLimitationEdited(1)"
+                                       [disabled]="loading || isMaxReached() || lossLimitError">
                             </div>
                         </div>
                         <div class="limit-type_row">
-                            <p class="limit-type-text" [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
+                            <p class="limit-type-text"
+                               [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
                         </div>
                     </div>
                 </form>
@@ -495,7 +518,8 @@
                             <span class="limit-type-text-deposit-monthly">{{ 'Settings.DepositLimit' | translate }}</span>
                             <input type="number" class="limit-type-input-deposit" formControlName="DepositLimitDaily"
                                    [ngClass]="{'validation-input-error': limitForm.get('DepositLimitDaily').errors?.max}"
-                                   max="99999999999999.999" placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
+                                   max="99999999999999.999"
+                                   placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
                                    (keypress)="onInput($event)" (keydown)="preventKeys($event)"
                                    (input)="inputChanging($event);">
                             <span class="limit-amount-label">{{ 'Settings.Amount' | translate }}</span>
@@ -515,7 +539,8 @@
                             </div>
                         </div>
                         <div class="limit-type_row">
-                            <p class="limit-type-text" [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
+                            <p class="limit-type-text"
+                               [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
                         </div>
                     </div>
                     <div class="limit-type" *ngIf="selectedItem === 'Week'">
@@ -523,7 +548,8 @@
                             <span class="limit-type-text-deposit-monthly">{{ 'Settings.DepositLimit' | translate }}</span>
                             <input type="number" class="limit-type-input-deposit" formControlName="DepositLimitWeekly"
                                    [ngClass]="{'validation-input-error': limitForm.get('DepositLimitWeekly').errors?.max}"
-                                   max="99999999999999.999" placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
+                                   max="99999999999999.999"
+                                   placeholder="{{ 'Settings.Amount-placeholder' | translate }}"
                                    (keypress)="onInput($event)" (keydown)="preventKeys($event)"
                                    (input)="inputChanging($event);">
                             <span class="limit-amount-label">{{ 'Settings.Amount' | translate }}</span>
@@ -543,7 +569,8 @@
                             </div>
                         </div>
                         <div class="limit-type_row">
-                            <p class="limit-type-text" [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
+                            <p class="limit-type-text"
+                               [innerHTML]="'User.Warning-limit-text' | translate | sanitizer: 'html'"></p>
                         </div>
                     </div>
                 </form>

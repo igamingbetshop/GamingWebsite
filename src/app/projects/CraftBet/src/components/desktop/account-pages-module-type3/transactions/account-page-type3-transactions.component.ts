@@ -64,25 +64,16 @@ export class AccountPageType3TransactionsComponent extends AppCommonTransactions
 
     switch (index) {
       case 0:
-        // d1.setTime(d1.getTime() - (100 * 365 * dayms));
         d1.setMonth(d1.getMonth() - 1);
         break;
       case 1:
-        // d1.setTime(d1.getTime() - dayms);
         d1.setMonth(d1.getMonth() - 3);
         break;
       case 2:
-        // d1.setTime(d1.getTime() - (7 * dayms));
         d1.setMonth(d1.getMonth() - 6);
         break;
       case 3:
-        if (d1.getMonth() === 0) {
-          d1.setFullYear(d1.getFullYear() - 1);
-          d1.setMonth(11);
-        } else {
-          // d1.setMonth(d1.getMonth() - 1);
-          d1.setTime(d1.getTime() - (100 * 365 * dayms));
-        }
+        d1.setTime(d1.getTime() - (100 * 365 * dayms));
         break;
     }
 

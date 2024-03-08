@@ -15,7 +15,7 @@ export class BaseCasinoMenu implements OnInit
     menuItems: any[];
     type:string = 'vertical';
     allGamesCount:number;
-
+    showAllGamesCount: boolean = true;
 
     configService: ConfigService;
     casinoFilterService:CasinoFilterService;
@@ -39,6 +39,7 @@ export class BaseCasinoMenu implements OnInit
     {
         this.prevPath = this.router.url.split('/')[1];
         this.type = this.fragmentConfig.Config.type;
+        this.showAllGamesCount = (this.fragmentConfig && this.fragmentConfig.Config && this.fragmentConfig.Config.showAllGamesCount) ?? true;
         this.menuItems = JSON.parse(JSON.stringify(this.configService.settings.MenuList.find(elem => elem.Type == this.route.snapshot.data['menuType']).Items)).map(menu => {
             if(menu.Icon.includes('.'))
                 menu.IconSrc = window['debugPath'] + '/assets/images/casino-menu/' + menu.Icon;
