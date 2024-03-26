@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TranslateModule} from "@ngx-translate/core";
 
-import {FilterPipeModule} from "ngx-filter-pipe";
 import {MobileWithdrawBlockRoutingModule} from "./withdraw-block-routing.module";
 import {MobileWithdrawBlockDefaultComponent} from "./withdraw-block-default/mobile-withdraw-block-default.component";
 
@@ -45,7 +44,6 @@ import {MobileWithdrawType18DefaultComponent} from "./withdraw-payments/withdraw
 import {MobileWithdrawType18Component} from "./withdraw-payments/withdraw-type18/mobile-withdraw-type18.component";
 import {ThemeModule} from "../../../../../../../@theme/theme.module";
 import {DesktopMobileCommonModule} from "../../../common/common.module";
-import {LoaderModule} from "../../../common/loader/loader.module";
 import {CommonPaymentNominalsModule} from "../../../common/app-common-payment-nominals/common-payment-nominals.module";
 import {CommonAccountsModule} from "../../../common/common-accounts/common-accounts.module";
 import {PaymentsModule} from "../../../../../../../@core/modules/payments.module";
@@ -66,6 +64,7 @@ import {MobileWithdrawType24Component} from "./withdraw-payments/withdraw-type24
 import {
     MobileWithdrawType24DefaultComponent
 } from "./withdraw-payments/withdraw-type24/withdraw-type24-default/mobile-withdraw-type24-default.component";
+import {LoaderComponent} from "../../../common/loader/loader.component";
 
 
 @NgModule({
@@ -122,13 +121,11 @@ import {
         CommonModule,
         MobileWithdrawBlockRoutingModule,
         ReactiveFormsModule,
+        LoaderComponent,
         FormsModule,
-        FilterPipeModule,
-        TranslateModule,
         TranslateModule,
         ThemeModule,
         DesktopMobileCommonModule,
-        LoaderModule,
         CommonPaymentNominalsModule,
         CommonAccountsModule,
         PaymentsModule,

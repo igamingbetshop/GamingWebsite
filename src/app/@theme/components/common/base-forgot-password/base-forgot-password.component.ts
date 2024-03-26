@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Directive,
-  ElementRef,
+  ElementRef, inject,
   Injector,
   ViewChild,
   ViewContainerRef
@@ -15,7 +15,6 @@ import {BaseComponent} from '../../base/base.component';
 import {Router} from "@angular/router";
 import {ReCaptchaV3Service} from "ng-recaptcha";
 import {BaseService} from "@core/services/app/base.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {take} from "rxjs";
 import {BaseApiService} from "@core/services/api/base-api.service";
@@ -23,6 +22,7 @@ import {Controllers, Methods, VerificationCodeTypes} from "@core/enums";
 import {PasswordValidation} from "@core/services/password-validation";
 import {UtilityService} from "@core/services/app/utility.service";
 import {Location} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Directive()
@@ -55,8 +55,7 @@ export class BaseForgotPasswordComponent extends BaseComponent implements AfterV
   public successMessage: string;
   public activePeriodInMinutes: number;
   public urlKey:string;
-
-  public simpleModalService: SimpleModalService;
+  dialog = inject(MatDialog);
   private saveData: SaveData;
   private baseApiService:BaseApiService;
   private recaptchaV3Service: ReCaptchaV3Service;
@@ -79,7 +78,6 @@ export class BaseForgotPasswordComponent extends BaseComponent implements AfterV
     this.userLogined = injector.get(UserLogined);
     this.isLogined = this.userLogined.isAuthenticated;
     this.defaultOption = this.configService.defaultOptions;
-    this.simpleModalService = injector.get(SimpleModalService);
     this.saveData = injector.get(SaveData);
     this.baseApiService = injector.get(BaseApiService);
     this.changeDetectionRef = injector.get(ChangeDetectorRef);
@@ -366,11 +364,10 @@ export class BaseForgotPasswordComponent extends BaseComponent implements AfterV
 
   public openNotLoginNewTicket(event:MouseEvent, component:any = null)
   {
-    this.simpleModalService.addModal(component, {
-      title: 'Open ticket',
-      data: {notLogin: true},
-      message: true
-    }).subscribe(() => {
-    });
+    this.dialog.open(component, {data:{
+        title: 'Open ticket',
+        data: {notLogin: true},
+        message: true
+      }});
   }
 }

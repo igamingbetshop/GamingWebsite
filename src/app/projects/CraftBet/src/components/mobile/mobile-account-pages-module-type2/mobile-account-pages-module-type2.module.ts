@@ -4,11 +4,7 @@ import {MobileAccountPagesModuleType2RoutingModule} from "./mobile-account-pages
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
-import {SimpleModalModule} from "ngx-simple-modal";
 import {HttpClientModule} from "@angular/common/http";
-import {FilterPipeModule} from "ngx-filter-pipe";
-import {NgxMaskModule} from "ngx-mask";
-import {ClickOutsideModule} from "ng-click-outside";
 import {NgxPrintModule} from "ngx-print";
 
 import {MobileAccountPageType2SettingsComponent} from './settings/mobile-account-page-type2-settings.component';
@@ -32,7 +28,6 @@ import {ThemeModule} from "../../../../../../@theme/theme.module";
 import {DesktopMobileCommonModule} from "../../common/common.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {OrderByPipeModule} from "../../../../../../@theme/pipes/order-by/order-by-pipe.module";
-import {MobileUserInfoModule} from "../mobile-user-info/mobile-user-info.module";
 import {ExportDataService} from "../../../../../../@core/services";
 import {GetSettingsService} from "../../../../../../@core/services/app/getSettings.service";
 import {FriendsService} from "../../../../../../@core/services/api/friends.service";
@@ -45,6 +40,9 @@ import {GetPaymentsService} from "../../../../../../@core/services/app/getPaymen
 import {ProfileService} from "../../../../../../@theme/components/profile/service/profile.service";
 import { MobileSelfLimitationComponent } from './self-limitation/mobile-self-limitation.component';
 import {MobileChangePasswordComponent} from "./change-password/mobile-change-password.component";
+import {NgxMaskDirective} from "ngx-mask";
+import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
+
 
 @NgModule({
     declarations: [
@@ -76,16 +74,13 @@ import {MobileChangePasswordComponent} from "./change-password/mobile-change-pas
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
-        ClickOutsideModule,
+        NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
         DesktopMobileCommonModule,
         OrderByPipeModule,
-        MobileUserInfoModule
+        DropdownDirectiveModule
     ],
     providers:[
         ExportDataService,

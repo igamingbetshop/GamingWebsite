@@ -1,18 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {AddBankAccountComponent} from "../../add-bank-account/add-bank-account.component";
 import {BaseBankAccounts} from "../../../../../../../@theme/components/common/base-bank-accounts/base-bank-accounts";
 
 @Component({
   selector: 'app-account-page-type1-bank-accounts',
   templateUrl: './account-page-type1-bank-accounts.component.html'
 })
-// export class AccountPageType1BankAccountsComponent extends AddBankAccountComponent {
-export class AccountPageType1BankAccountsComponent extends BaseBankAccounts implements OnInit {
 
+export class AccountPageType1BankAccountsComponent extends BaseBankAccounts implements OnInit {
 
   addAccount() {
     this.addBankAccount = true;
-    // super.addAccount(AddBankAccountComponent);
     this.router.navigate(
         [],
         { relativeTo: this.route, queryParams: { openBankAccounts: this.addBankAccount } }
@@ -40,5 +37,4 @@ export class AccountPageType1BankAccountsComponent extends BaseBankAccounts impl
       }
     }));
   }
-
 }

@@ -4,7 +4,6 @@ import {TranslateModule} from "@ngx-translate/core";
 import {ThemeModule} from "../../../../../../../@theme/theme.module";
 
 import {DesktopMobileCommonModule} from "../../../common/common.module";
-import {FilterPipeModule} from "ngx-filter-pipe";
 import {MobileWithdrawBlockDefaultComponent} from "./withdraw-block-default/mobile-withdraw-block-default.component";
 
 import {MobileWithdrawType1Component} from "./withdraw-payments/withdraw-type1/mobile-withdraw-type1.component";
@@ -41,7 +40,6 @@ import {MobileWithdrawType16Component} from "./withdraw-payments/withdraw-type16
 import {MobileWithdrawType16DefaultComponent} from "./withdraw-payments/withdraw-type16/withdraw-type16-default/mobile-withdraw-type16-default.component";
 import {MobileWithdrawType17Component} from "./withdraw-payments/withdraw-type17/mobile-withdraw-type17.component";
 import {MobileWithdrawType17DefaultComponent} from "./withdraw-payments/withdraw-type17/withdraw-type17-default/mobile-withdraw-type17-default.component";
-import {LoaderModule} from "../../../common/loader/loader.module";
 import {CommonPaymentNominalsModule} from "../../../common/app-common-payment-nominals/common-payment-nominals.module";
 import {CommonAccountsModule} from "../../../common/common-accounts/common-accounts.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -71,6 +69,7 @@ import {MobileWithdrawType20Component} from "./withdraw-payments/withdraw-type20
 import {
     MobileWithdrawType20DefaultComponent
 } from "./withdraw-payments/withdraw-type20/withdraw-type20-default/mobile-withdraw-type20-default.component";
+import {LoaderComponent} from "../../../common/loader/loader.component";
 
 @NgModule({
     declarations: [
@@ -128,12 +127,11 @@ import {
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        FilterPipeModule,
         TranslateModule,
         TranslateModule,
         ThemeModule,
         DesktopMobileCommonModule,
-        LoaderModule,
+        LoaderComponent,
         CommonPaymentNominalsModule,
         CommonAccountsModule,
         PaymentsModule,

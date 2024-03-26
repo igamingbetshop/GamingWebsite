@@ -1,15 +1,15 @@
-import {OnInit, Injector, HostListener, Directive} from '@angular/core';
+import {OnInit, Injector, HostListener, Directive, inject} from '@angular/core';
 import {AuthService, ConfigService, LocalStorageService, SaveData} from "@core/services";
 import {getParsedUrl, loadExternalScript} from "@core/utils";
 import {NavigationEnd, Router} from "@angular/router";
 import {MenuType} from "@core/enums";
 import {BaseControllerService} from "@core/services/app/baseController.service";
-import {SimpleModalService} from 'ngx-simple-modal';
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {LogoutHelper} from "@core/services/helpers/logout.helper";
 import {BalanceService} from "@core/services/api/balance.service";
 import {SignalRService} from "@core/services/soket/signal-r.service";
 import {CmsPopupComponent} from "../../modals/cms-popup/cms-popup.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BaseMainComponent implements OnInit {
@@ -21,7 +21,6 @@ export class BaseMainComponent implements OnInit {
     public baseControllerService: BaseControllerService;
     public localStorageService: LocalStorageService;
     public savedData: SaveData;
-    public simpleModalService: SimpleModalService;
     public isFullContent:boolean = false;
     public hideBottomBar:boolean = false;
     public cmsPopupData: any;
@@ -31,6 +30,8 @@ export class BaseMainComponent implements OnInit {
     private balanceService: BalanceService;
     protected saveData: SaveData;
     protected signalRService: SignalRService;
+    dialog = inject(MatDialog);
+
     bonusPromise:any;
 
     constructor(public injector: Injector)
@@ -42,7 +43,6 @@ export class BaseMainComponent implements OnInit {
         this.router = injector.get(Router);
         this.savedData = injector.get(SaveData);
         this.authService = injector.get(AuthService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.logoutHelper = injector.get(LogoutHelper);
         this.balanceService = injector.get(BalanceService);
         this.saveData = injector.get(SaveData);
@@ -123,12 +123,7 @@ export class BaseMainComponent implements OnInit {
     }
     async openMessage(info) {
         const {BaseInfoModalComponent} = await import('../../modals/base-info-modal/base-info-modal.component');
-
-        this.simpleModalService.addModal(BaseInfoModalComponent, {
-            title: 'message',
-            type: info['type'],
-            message: info['message']
-        }).subscribe();
+        this.dialog.open(BaseInfoModalComponent, {data:{ title: 'message', type: info['type'], message: info['message']}});
     }
 
     ngOnInit()
@@ -238,10 +233,7 @@ export class BaseMainComponent implements OnInit {
     async mobileNumberVerified()
     {
         const {BaseMobileVerifiedComponent} = await import('../../modals/base-mobile-verified/base-mobile-verified.component');
-
-        this.simpleModalService.addModal(BaseMobileVerifiedComponent,
-            {title: 'Mobile_Verified_Info'}).subscribe((isConfirmed) => {
-        });
+        this.dialog.open(BaseMobileVerifiedComponent, {data:{title: 'Mobile_Verified_Info'}});
     }
 
     private checkExternalAuthorizationData()
@@ -306,19 +298,14 @@ export class BaseMainComponent implements OnInit {
    async showResetPassword()
     {
         const {BaseResetPasswordInfoComponent} = await import('../../modals/base-reset-password-info/base-reset-password-info.component');
-        this.simpleModalService.addModal(BaseResetPasswordInfoComponent, {
-            title: 'Reset_Password_Info'
-        }, {closeOnClickOutside: false}).subscribe(() => {
-        });
+        this.dialog.open(BaseResetPasswordInfoComponent, {data:{title: 'Reset_Password_Info'}, disableClose:true});
     }
 
 
     async showConfirm(loginData, resetPassword = false, checkTermsConditions = false) {
         const {BaseLoginInfoModalComponent} = await import('../../base-login-info-modal/base-login-info-modal.component');
-        this.simpleModalService.addModal(BaseLoginInfoModalComponent, {
-            title: 'Login_Info',
-            loginData: loginData
-        }).subscribe((isConfirmed) => {
+        let dialogRef = this.dialog.open(BaseLoginInfoModalComponent, {data:{title: 'Login_Info',loginData: loginData}});
+        dialogRef.afterClosed().subscribe(result => {
             if (!!checkTermsConditions)
             {
                 this.showTerms();
@@ -330,11 +317,8 @@ export class BaseMainComponent implements OnInit {
         let showLastLoginInfoPopup = this.configService.defaultOptions?.ShowLastLoginInfoPopup;
         let userData = this.localStorageService.get("user");
         const {BaseFrameComponent} = await import('../../modals/base-frame/base-frame.component');
-        this.simpleModalService.addModal(BaseFrameComponent, {
-            title: 'Login_Info',
-            closable: false,
-            url: url
-        },{closeOnClickOutside: false}).subscribe((isConfirmed) => {
+        let dialogRef = this.dialog.open(BaseFrameComponent, {data:{title: 'Login_Info',closable: false,url: url}, disableClose:true});
+        dialogRef.afterClosed().subscribe(result => {
             if (showLastLoginInfoPopup === '1')
             {
                 let popupShown = this.localStorageService.get("popupShown");
@@ -357,10 +341,7 @@ export class BaseMainComponent implements OnInit {
     async showTerms()
     {
         const {BaseTermsConditionsAcceptComponent} = await import('../../modals/base-terms-conditions-accept/base-terms-conditions-accept.component');
-        this.simpleModalService.addModal(BaseTermsConditionsAcceptComponent, {
-            title: 'TermsConditions_Info'
-        }).subscribe(() => {
-        });
+        this.dialog.open(BaseTermsConditionsAcceptComponent, {data:{title: 'TermsConditions_Info'}});
     }
 
     private initialNavigation()
@@ -375,10 +356,8 @@ export class BaseMainComponent implements OnInit {
     async onLogoutConfirm(keyType)
     {
         const {BaseLogoutInfoComponent} = await import('../../modals/base-logout-info/base-logout-info.component');
-        this.simpleModalService.addModal(BaseLogoutInfoComponent, {
-            title: 'LogOut_Info',
-            key: keyType,
-        }).subscribe((isConfirmed) => {
+        let dialogRef = this.dialog.open(BaseLogoutInfoComponent, {data:{title: 'LogOut_Info',key: keyType}});
+        dialogRef.afterClosed().subscribe(result => {
             window.location.reload();
         });
     }
@@ -386,10 +365,9 @@ export class BaseMainComponent implements OnInit {
     async onFirstLogin(infoArray)
     {
         const {BaseFirstLoginTabComponent} = await import('../../modals/base-first-login-tab/base-first-login-tab.component');
-        this.simpleModalService.addModal(BaseFirstLoginTabComponent, {
-            className: 'first-login',
-            info: infoArray
-        }, {closeOnClickOutside: false}).subscribe((isConfirmed) => {
+
+        let dialogRef = this.dialog.open(BaseFirstLoginTabComponent, {data:{className: 'first-login',info: infoArray}, disableClose:true});
+        dialogRef.afterClosed().subscribe(result => {
             window.location.reload();
         });
     }
@@ -397,21 +375,13 @@ export class BaseMainComponent implements OnInit {
     openOnCmsPopup() {
         this.signalRService.onCmsPopupInfo$.subscribe(data => {
             this.cmsPopupData = data;
-            this.simpleModalService.addModal(CmsPopupComponent, {
-                title: 'Cms Popup',
-                data: { cmsPopupData: data },
-                message: true
-            }).subscribe(() => {});
+            this.dialog.open(CmsPopupComponent, {data:{title: 'Cms Popup', cmsPopupData: data, message: true}});
         });
     }
 
     openLoginedCmsPopup(popups) {
         popups.forEach(popup => {
-            this.simpleModalService.addModal(CmsPopupComponent, {
-                title: 'Cms Popup',
-                data: { loginedCmsPopupData: popup },
-                message: true
-            }).subscribe(() => {});
+            this.dialog.open(CmsPopupComponent, {data:{title: 'Cms Popup', loginedCmsPopupData: popup, message: true}});
         });
     }
 }

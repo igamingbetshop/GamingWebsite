@@ -1,7 +1,6 @@
 // project specific styles
 @import 'general/general_dir';
 @import 'helpers/fonts';
-@import '../../../../../node_modules/ngx-simple-modal/styles/simple-modal';
 ::-webkit-scrollbar-track { border-radius: 15px; background-color: color(scrollbar-track); }
 ::-webkit-scrollbar {height: 2px;  width: 2px;  background-color: color(scrollbar-track);  }
 ::-webkit-scrollbar-thumb:hover { background: color(scrollbar-thumb-hover); }

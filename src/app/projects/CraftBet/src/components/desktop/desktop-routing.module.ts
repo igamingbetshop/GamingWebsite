@@ -14,7 +14,6 @@ import {PrivacyPolicyComponent} from './privacy-policy/privacy-policy.component'
 import {ParentCasinoComponent} from './parent-casino/parent-casino.component';
 import {BannerTypes, FragmentPositions, MenuType} from "../../../../../@core/enums";
 import {CharacterHierarchyComponent} from "./app-casino/character-hierarchy/character-hierarchy.component";
-import {PromotionNewsResolver} from "../../../../../@core/services/resolves/promotion-news-resolver";
 import {AllNewsComponent} from "./news/all-news/all-news.component";
 import {CurrentNewsComponent} from "./news/current-news/current-news.component";
 import {EmailVerifyComponent} from "./email-verify/email-verify.component";

@@ -24,29 +24,30 @@
     & > div {
       margin: auto;
       text-align: left;
-      font-size: 16px;
-      font-weight: 600;
+      font-size: var(--m-user-info-history-description-font-size, 16px);
+      font-weight: var(--m-user-info-history-description-font-weight, 600);
       font-stretch: normal;
       font-style: normal;
       letter-spacing: normal;
-      color: rgba(51, 51, 51, 0.8);
-      line-height: 30px;
+      color: var(--m-user-info-history-description-color, rgba(51, 51, 51, 0.8));
+      line-height: var(--m-user-info-history-description-line-height, 30px);
     }
 
     &__label {
-      font-weight: 600;
-      color: #232323;
+      font-weight: var(--m-user-info-history-title-font-weight, 600);
+      font-size: var(--m-user-info-history-title-font-size, 16px);
+      color: var(--m-user-info-history-title-color, #232323);
     }
 
 .history-table
 {
   width: 100%;
   height:auto;
-  border: solid 1px rgba(32, 91, 152, 0.36);
-  background-color: rgba(103, 102, 102, 0.15);
-  border-radius: 4px;
-  padding: 16px 10px;
-  margin-bottom: 8px;
+  border: var(--m-user-info-history-table-border, solid 1px rgba(32, 91, 152, 0.36));
+  background: var(--m-user-info-history-table-background, rgba(103, 102, 102, 0.15));
+  border-radius: var(--m-user-info-history-table-border-radius, 4px);
+  padding: var(--m-user-info-history-table-padding, 16px 10px);
+  margin-bottom: var(--m-user-info-history-table-margin-bottom, 8px);
   .table-list {
     width: 100%;
 
@@ -55,15 +56,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      line-height: 30px;
+      line-height: var(--m-user-info-history-table-line-height, 30px);
 
       .header-item {
-        font-size: 14px;
-        font-weight: 500;
+        font-size: var(--m-user-info-history-table-title-font-size, 14px);
+        font-weight: var(--m-user-info-history-table-title-font-weight, 500);
         font-stretch: normal;
         font-style: normal;
         text-align: left;
-        color: #000000;
+        color: var(--m-user-info-history-table-title-color, #000000);
         letter-spacing: -0.18px;
         align-self: flex-start;
 
@@ -78,7 +79,9 @@
       {
         width: 50%;
         text-align: right;
-        color: rgba(71, 71, 71, 0.69);
+        color: var(--m-user-info-history-table-description-color, rgba(71, 71, 71, 0.69));
+        font-size: var(--m-user-info-history-table-description-font-size, 14px);
+        font-weight: var(--m-user-info-history-table-description-font-weight, 500);
         &.status-Lost
         {
           color: itemColor(m-user-info-status-lost, rgba(71, 71, 71, 0.69));
@@ -95,10 +98,10 @@
     }
     .border-line
     {
-      width: 94%;
-      margin: 16px auto;
-      height: 1px;
-      background-color: #ffffff;
+      width: var(--m-user-info-history-table-border-line-width, 94%);
+      margin: var(--m-user-info-history-table-border-line-margin, 16px auto);
+      height: var(--m-user-info-history-table-border-line-height, 1px);
+      background-color: var(--m-user-info-history-table-border-line-background-color, #ffffff);
     }
 
   }
@@ -118,15 +121,15 @@
   ::-webkit-scrollbar-thumb {  border-radius: 15px;  background-color:backgroundColor(bet-info-scrollbar-thumb, #999999) !important;  }
 
   h3 {
-    text-align: center;
-    color: $label-color;
-    margin: 16px 0 20px 0;
-    text-transform: capitalize;
-    font-size: 16px;
-    font-weight: 600;
+    text-align: var(--m-user-info-history-selections-title-text-align, center);
+    color: var(--m-user-info-history-selections-title-color, $label-color);
+    margin: var(--m-user-info-history-selections-title-margin, 16px 0 20px 0);
+    text-transform: var(--m-user-info-history-selections-title-text-transform, capitalize);
+    font-size: var(--m-user-info-history-selections-title-font-size, 16px);
+    font-weight: var(--m-user-info-history-selections-title-font-weight, 600);
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.31;
+    line-height: var(--m-user-info-history-selections-title-line-height, 1.31);
     letter-spacing: normal;
   }
 

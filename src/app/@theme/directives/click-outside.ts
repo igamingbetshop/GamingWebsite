@@ -11,10 +11,16 @@ export class ClickOutsideDirective {
   public clickOutside = new EventEmitter<any>();
 
   @HostListener('document:click', ['$event.target'])
+  @HostListener('window:blur', ['$event.target'])
   public onClick(targetElement) {
-    const clickedInside = this._elementRef.nativeElement.contains(targetElement);
-    if (!clickedInside) {
-      this.clickOutside.emit(targetElement);
+    if(targetElement === window)
+      this.clickOutside.emit(true);
+    else
+    {
+      const clickedInside = this._elementRef.nativeElement.contains(targetElement);
+      if (!clickedInside) {
+        this.clickOutside.emit(targetElement);
+      }
     }
   }
 

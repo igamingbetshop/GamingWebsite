@@ -1,4 +1,4 @@
-import {OnInit, Injector, Directive, OnDestroy} from '@angular/core';
+import {OnInit, Injector, Directive, OnDestroy, inject} from '@angular/core';
 import {ActivatedRoute, NavigationStart, Router} from "@angular/router";
 import {Fragment} from "../../../../../../@core/models";
 import {ConfigService, SaveData} from "../../../../../../@core/services";
@@ -7,8 +7,8 @@ import {Subscription, take} from "rxjs";
 import {CasinoFilterService} from "../../../../../../@core/services/app/casino-filter.service";
 import {StateService} from "../../../../../../@core/services/app/state.service";
 import {CasinoProvidersService} from "../../desktop/app-casino/providers/casino-providers.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {BaseApiService} from "../../../../../../@core/services/api/base-api.service";
+import {MatDialog} from "@angular/material/dialog";
 import {filter} from "rxjs/operators";
 
 @Directive()
@@ -24,7 +24,7 @@ export class BaseCasino implements OnInit, OnDestroy {
   private casinoFilterService:CasinoFilterService;
   private casinoProvidersService:CasinoProvidersService;
   private stateService:StateService;
-  public simpleModalService: SimpleModalService;
+  dialog = inject(MatDialog);
   public baseApiService:BaseApiService;
   private subscribedForFilter:boolean;
 
@@ -39,7 +39,6 @@ export class BaseCasino implements OnInit, OnDestroy {
     this.casinoFilterService = injector.get(CasinoFilterService);
     this.casinoProvidersService = injector.get(CasinoProvidersService);
     this.stateService = injector.get(StateService);
-    this.simpleModalService = injector.get(SimpleModalService);
     this.baseApiService = injector.get(BaseApiService);
     this.savedData = injector.get(SaveData);
   }

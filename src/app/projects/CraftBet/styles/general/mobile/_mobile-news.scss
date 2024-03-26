@@ -113,11 +113,6 @@
           background: linear-gradient(180deg, rgba(84, 84, 84, 0.00) 23.68%, rgba(19, 26, 44, 0.70) 63.19%);
         }
       }
-      &:first-child
-      {
-        width: 100vw;
-        display: grid;
-      }
     }
   }
 }
@@ -386,4 +381,17 @@
 @keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
+}
+mobile-current-news{
+  &:first-child
+  {
+    .mobile-news-section{
+      .product-content{
+        .product-list{
+          width: 100vw;
+          display: grid;
+        }
+      }
+    }
+  }
 }

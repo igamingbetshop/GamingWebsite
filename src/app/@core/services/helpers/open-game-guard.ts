@@ -1,19 +1,11 @@
 import {Injectable} from "@angular/core";
-import {
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Route,
-  Router,
-  RouterStateSnapshot,
-  UrlTree
-} from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import {ConfigService, LocalStorageService} from "@core/services";
 import {Observable} from "rxjs";
 import {SaveData} from "../app/saveData.service";
 
 @Injectable()
-export class OpenGameGuard implements CanActivate {
+export class OpenGameGuard  {
 
 
 

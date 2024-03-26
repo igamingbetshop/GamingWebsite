@@ -20,6 +20,7 @@ import {BonusesService} from "../../../../../@core/services/api/bonuses.service"
 import {FunctionalBtnModule} from "../../../../../@theme/components/functional-btn/functional-btn.module";
 import {LanguageModule} from "../../../../../@theme/components/global-language/language.module";
 
+
 @NgModule({
     imports: [
         DesktopMobileCommonModule,

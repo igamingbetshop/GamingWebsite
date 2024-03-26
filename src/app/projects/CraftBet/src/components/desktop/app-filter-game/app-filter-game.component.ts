@@ -20,11 +20,9 @@ export class AppFilterGameComponent extends AppCommonFilterProductsComponent {
   public openGame(productId, type, openMode = 2) {
     localStorage.setItem('opened-url', this.router.url);
     if(type == 'real' && !this.isLogined) {
-      this.simpleModalService.addModal(AppConfirmComponent, {
-        title: 'open_login',
-        message: true
-      }).subscribe((isConfirmed) => {
-        if(!isConfirmed)
+      const dialogRef = this.dialog.open(AppConfirmComponent, {data:{title: 'open_login', message: true}});
+      dialogRef.afterClosed().subscribe(result => {
+        if(!result)
           localStorage.removeItem('product-url');
       });
     }else {

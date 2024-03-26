@@ -1,13 +1,12 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, Input, OnInit} from '@angular/core';
 import {CircleCarousel, dragger} from "./characters";
-import {SimpleModalComponent} from "ngx-simple-modal";
-import {ConfirmModel} from "../../../../../../../@core/interfaces";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods} from "@core/enums";
 import {take} from "rxjs";
 import {Character} from "@core/models";
 import {LocalStorageService} from "@core/services";
 import {UserLogined} from "@core/services/app/userLogined.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'characters',
@@ -15,7 +14,7 @@ import {UserLogined} from "@core/services/app/userLogined.service";
     styleUrls: ['./characters.component.scss']
 })
 
-export class CharactersComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit
+export class CharactersComponent implements OnInit
 {
     /*elements:number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13];*/
     @Input() Id: string = 'characters';
@@ -26,9 +25,9 @@ export class CharactersComponent extends SimpleModalComponent<ConfirmModel, bool
     carousel;
     container;
     public selectedCharacterId: number;
-    public title: string;
-    public message: boolean;
-    public data: any;
+
+    data:any = inject(MAT_DIALOG_DATA);
+    dialogRef = inject(MatDialogRef<CharactersComponent>);
     public isShowCharactersList: boolean = false;
     public selectedCharacter:any;
 
@@ -38,7 +37,7 @@ export class CharactersComponent extends SimpleModalComponent<ConfirmModel, bool
                 private loginService:UserLogined,
                 private cd:ChangeDetectorRef)
     {
-        super();
+
     }
 
     ngOnInit()
@@ -62,12 +61,12 @@ export class CharactersComponent extends SimpleModalComponent<ConfirmModel, bool
         this.selectedCharacter = this.characters.find((item) => item.Id === characterId);
     }
 
-    close(): Promise<any> {
+    close()
+    {
         if(!this.selectedCharacter){
             this.setCharacterById(this.characters[0].Id)
         }
-        return super.close();
-
+        this.dialogRef.close();
     }
 
     selectCharacter(characterId)
@@ -114,8 +113,7 @@ export class CharactersComponent extends SimpleModalComponent<ConfirmModel, bool
 
     confirm()
     {
-        this.result = true;
-        this.close();
+        this.dialogRef.close(true);
     }
 }
 

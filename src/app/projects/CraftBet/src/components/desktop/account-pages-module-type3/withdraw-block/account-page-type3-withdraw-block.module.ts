@@ -3,15 +3,10 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { SimpleModalModule } from 'ngx-simple-modal';
 import { HttpClientModule } from '@angular/common/http';
-import { FilterPipeModule } from 'ngx-filter-pipe';
-import { NgxMaskModule } from 'ngx-mask';
-import { ClickOutsideModule } from 'ng-click-outside';
 import { NgxPrintModule } from 'ngx-print';
 import { ThemeModule } from '../../../../../../../@theme/theme.module';
 import { DesktopMobileCommonModule } from '../../../common/common.module';
-import { LoaderModule } from '../../../common/loader/loader.module';
 import { OrderByPipeModule } from '../../../../../../../@theme/pipes/order-by/order-by-pipe.module';
 import { CommonPaymentNominalsModule } from '../../../common/app-common-payment-nominals/common-payment-nominals.module';
 import { CommonAccountsModule } from '../../../common/common-accounts/common-accounts.module';
@@ -71,6 +66,9 @@ import { WithdrawType26Component } from './withdraw-payments/withdraw-type26/wit
 import {
     WithdrawType26DefaultComponent
 } from './withdraw-payments/withdraw-type26/withdraw-type26-default/withdraw-type26-default.component';
+import {NgxMaskDirective} from "ngx-mask";
+import {LoaderComponent} from "../../../common/loader/loader.component";
+
 
 @NgModule({
     declarations: [ 
@@ -130,19 +128,16 @@ import {
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
-        ClickOutsideModule,
+        NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
         DesktopMobileCommonModule,
-        LoaderModule,
         OrderByPipeModule,
         CommonPaymentNominalsModule,
         CommonAccountsModule,
-        DropdownDirectiveModule
+        DropdownDirectiveModule,
+        LoaderComponent
     ],
     providers: [
         // PaymentControllerService,

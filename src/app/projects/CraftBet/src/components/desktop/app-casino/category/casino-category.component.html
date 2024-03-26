@@ -1,86 +1,128 @@
-<div [ngSwitch]="fragmentConfig.Config.type">
-    <div *ngSwitchCase="'filter'"
-         [ngStyle]="fragmentConfig?.Config.style" class="filter-category-box filter">
-        <div class="filter-fragments" *ngIf="hasFilterBox">
-            <casino-search *ngFor="let fragment of fragments?.Search?.Items"
-                           [fragmentConfig]="fragment">
-            </casino-search>
-            <casino-menu *ngFor="let fragment of fragments?.Menus?.Items"
-                         [fragmentConfig]="fragment">
-            </casino-menu>
-            <casino-providers *ngFor="let fragment of fragments?.Providers?.Items"
-                              [fragmentConfig]="fragment">
-            </casino-providers>
-        </div>
-        <ul class="product_list">
-            <li class="product_list_item"
-                *ngFor="let game of games;let i = index">
-                <casino-game [game]="game"
-                             [loadingType]="i > 30 ? 'lazy' : 'eager'"
-                             [fragmentConfig]="fragmentConfig"
-                             (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
-                </casino-game>
-            </li>
-            <button *ngIf="leftGamesCount" class="more-button" (click)="markForSave = true; casinoFilterService.nextPage();">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
-        </ul>
-    </div>
-    <div *ngSwitchCase="'horizontal'" class="category"
-         [attr.label-position]="fragmentConfig?.Config?.label"
-         [attr.show-all-position]="fragmentConfig?.Config?.showAllLabel"
-         [ngStyle]="fragmentConfig?.Config.style">
-        <header class="header" [innerHTML]="'Game.' + fragmentConfig.Title | translate | sanitizer : 'html'">
-            <div class="show-all-label" *ngIf="fragmentConfig?.Config?.showAllLabel">
-                <span class="icon-arrow-to-left" (click)="slider.changeStep(-1)"></span>
-                <span class="show-all-label-text" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]">{{'Category.ShowAll' | translate}}</span>
-                <span class="icon-arrow-right" (click)="slider.changeStep(1)"></span>
+<div>
+    @switch (fragmentConfig.Config.type)
+    {
+        @case ('filter')
+        {
+            <div [ngStyle]="fragmentConfig?.Config.style" class="filter-category-box filter">
+                <div class="filter-fragments" *ngIf="hasFilterBox">
+                    <casino-search *ngFor="let fragment of fragments?.Search?.Items"
+                                   [fragmentConfig]="fragment">
+                    </casino-search>
+                    <casino-menu *ngFor="let fragment of fragments?.Menus?.Items"
+                                 [fragmentConfig]="fragment">
+                    </casino-menu>
+                    <casino-providers *ngFor="let fragment of fragments?.Providers?.Items"
+                                      [fragmentConfig]="fragment">
+                    </casino-providers>
+                </div>
+                <ul class="product_list">
+                    <li class="product_list_item"
+                        *ngFor="let game of games;let i = index">
+                        <casino-game [game]="game"
+                                     [loadingType]="i > 30 ? 'lazy' : 'eager'"
+                                     [fragmentConfig]="fragmentConfig"
+                                     (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
+                        </casino-game>
+                    </li>
+                    <button *ngIf="leftGamesCount" class="more-button" (click)="markForSave = true; casinoFilterService.nextPage();">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+                </ul>
             </div>
-        </header>
-        <main>
-            <div class="games" #slider="slider" horizontal-scroll>
-                <casino-game *ngFor="let game of games" [game]="game" [fragmentConfig]="fragmentConfig"
-                             (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
-                </casino-game>
+        }
+        @case ('search')
+        {
+            <div [ngStyle]="fragmentConfig?.Config.style"
+                class="filter-category-box">
+               <div class="title-field">
+                   <div></div>
+                   <div class="back-section" (click)="backFromSearch()">
+                       <i class="icon-back"></i>
+                       <p>{{'Category.back'| translate}}</p>
+                        </div>
+                        <div class="filter-title" *ngIf="categoryName">{{'Category.' + categoryName | translate}}</div>
+                    </div>
+                    <ul class="product_list">
+                        <li class="product_list_item"
+                            *ngFor="let game of games;let i = index">
+                            <casino-game [game]="game"
+                                         (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
+                            </casino-game>
+                        </li>
+                        <button *ngIf="leftGamesCount" class="more-button" (click)="markForSave = true; casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+                    </ul>
             </div>
-        </main>
-        <div *ngIf="fragmentConfig.Config.showAll" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]" (click)="scrollToTop(471)" class="show-all">{{'Category.ShowAll' | translate}}</div>
-    </div>
-    <div *ngSwitchCase="'search'"
-         [ngStyle]="fragmentConfig?.Config.style"
-         class="filter-category-box">
-        <div class="title-field">
-            <div></div>
-            <div class="back-section" (click)="backFromSearch()">
-                <i class="icon-back"></i>
-                <p>{{'Category.back'| translate}}</p>
+        }
+        @case ('horizontal')
+        {
+            <div class="category"
+                 [attr.label-position]="fragmentConfig?.Config?.label"
+                 [attr.show-all-position]="fragmentConfig?.Config?.showAllLabel"
+                 [ngStyle]="fragmentConfig?.Config.style">
+                <header class="header" [innerHTML]="'Game.' + fragmentConfig.Title | translate | sanitizer : 'html'"></header>
+                <main>
+                    <div class="games" #slider="slider" horizontal-scroll>
+                        <casino-game class="sliderSelector"  *ngFor="let game of games" [game]="game" [fragmentConfig]="fragmentConfig"
+                                     (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
+                        </casino-game>
+                    </div>
+                </main>
+                <div *ngIf="fragmentConfig.Config.showAll" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]" (click)="scrollToTop(471)" class="show-all">{{'Category.ShowAll' | translate}}</div>
             </div>
-            <div class="filter-title" *ngIf="categoryName">{{'Category.' + categoryName | translate}}</div>
-        </div>
-        <ul class="product_list">
-            <li class="product_list_item"
-                *ngFor="let game of games;let i = index">
-                <casino-game [game]="game"
-                             (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
-                </casino-game>
-            </li>
-            <button *ngIf="leftGamesCount" class="more-button" (click)="markForSave = true; casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
-        </ul>
+        }
+        @case ('horizontal-grid')
+        {
+            @switch (fragmentConfig?.Config?.showAllLabel)
+            {
+                @case ('top')
+                {
+                    <div class="horizontal-grid-container" [class]="fragmentConfig?.Config?.showAllLabel">
+                        <div class="header-box" [style.margin]="fragmentConfig?.Config.style.margin">
+                           <header class="header" [innerHTML]="'Game.' + fragmentConfig.Title | translate | sanitizer : 'html'"></header>
+                           <div class="show-all-label" *ngIf="fragmentConfig?.Config?.showAllLabel">
+                               <span class="icon-arrow-to-left" (click)="hGridSlider.changeSlide(-1)"></span>
+                               <span class="show-all-label-text" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]">{{'Category.ShowAll' | translate}}</span>
+                               <span class="icon-arrow-right" (click)="hGridSlider.changeSlide(1)"></span>
+                           </div>
+                        </div>
+                        <div [ngStyle]="fragmentConfig?.Config.style"
+                             class="filter-category-box category">
+                            <div class="horizontal-grid" #hGridSlider="slider" horizontal-scroll>
+                                @for(group of games | groupByRows : fragmentConfig?.Config; track $index)
+                                {
+                                    <ul class="product_list sliderSelector">
+                                        <li class="product_list_item"
+                                            *ngFor="let game of group;">
+                                            <casino-game [game]="game"
+                                                         (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
+                                            </casino-game>
+                                        </li>
+                                        <button (click)="scrollToTop(471)" *ngIf="fragmentConfig.Config.showAll" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]" class="more-button" >{{'Category.ShowAll' | translate}}</button>
+                                    </ul>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+        @case ('grid')
+        {
+            <div [ngStyle]="fragmentConfig?.Config.style"
+                 class="filter-category-box category">
+                <header class="header" [innerHTML]="'Game.' + fragmentConfig.Title | translate | sanitizer : 'html'">
+                </header>
+                <ul class="product_list">
+                    <li class="product_list_item"
+                        *ngFor="let game of games;let i = index">
+                        <casino-game [game]="game"
+                                     (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
+                        </casino-game>
+                    </li>
+                    <button (click)="scrollToTop(471)" *ngIf="fragmentConfig.Config.showAll" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]" class="more-button" >{{'Category.ShowAll' | translate}}</button>
+                </ul>
+            </div>
+        }
+    }
 
-    </div>
-    <div *ngSwitchCase="'grid'"
-         [ngStyle]="fragmentConfig?.Config.style"
-         class="filter-category-box category">
-        <header class="header" [innerHTML]="'Game.' + fragmentConfig.Title | translate | sanitizer : 'html'">
-        </header>
-        <ul class="product_list">
-            <li class="product_list_item"
-                *ngFor="let game of games;let i = index">
-                <casino-game [game]="game"
-                             (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
-                </casino-game>
-            </li>
-            <button (click)="scrollToTop(471)" *ngIf="fragmentConfig.Config.showAll" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]" class="more-button" >{{'Category.ShowAll' | translate}}</button>
-        </ul>
-    </div>
 </div>
 <div class="scrollTop" (click)="scrollToTop()"><i class="icon-next-arrow"></i></div>
 

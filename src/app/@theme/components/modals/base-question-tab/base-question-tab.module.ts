@@ -7,7 +7,6 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 @NgModule({
   declarations:[BaseQuestionTabComponent],
   exports:[BaseQuestionTabComponent],
-  entryComponents:[BaseQuestionTabComponent],
   imports:[
     CommonModule,
     FontAwesomeModule,

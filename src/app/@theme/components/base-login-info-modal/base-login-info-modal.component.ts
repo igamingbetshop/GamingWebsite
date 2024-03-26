@@ -1,13 +1,9 @@
-import {Component, NgModule, OnInit} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
+import {Component, inject, NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {LocalStorageService} from "../../../@core/services";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
-export interface ConfirmModel {
-  title: string;
-  loginData: any;
-}
 
 
 @Component({
@@ -15,19 +11,15 @@ export interface ConfirmModel {
   templateUrl: './base-login-info-modal.component.html',
   styleUrls: ['./base-login-info-modal.component.scss']
 })
-export class BaseLoginInfoModalComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
-  public title: string;
-  public loginData: any;
+export class BaseLoginInfoModalComponent {
 
-  constructor(public localStorageService: LocalStorageService) {
-    super();
-  }
-
-  ngOnInit() {}
+  data:any = inject(MAT_DIALOG_DATA);
+  localStorageService = inject(LocalStorageService);
+  dialogRef = inject(MatDialogRef<BaseLoginInfoModalComponent>)
 
   confirm() {
     this.localStorageService.add("popupShown", true);
-    this.close();
+    this.dialogRef.close(true);
   }
 
 }

@@ -1,4 +1,4 @@
-import {ActivatedRouteSnapshot, Resolve} from "@angular/router";
+import { ActivatedRouteSnapshot } from "@angular/router";
 import {Injectable} from "@angular/core";
 import {Observable, forkJoin} from "rxjs";
 import {HttpClient} from "@angular/common/http";
@@ -8,7 +8,7 @@ import {Controllers, Methods} from "@core/enums";
 import {map} from "rxjs/operators";
 
 @Injectable()
-export class PromotionNewsResolver implements Resolve<Observable<any>>
+export class PromotionNewsResolver 
 {
   constructor(private http: HttpClient,
               private baseApiService:BaseApiService,

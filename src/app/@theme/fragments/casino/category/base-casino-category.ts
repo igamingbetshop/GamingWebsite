@@ -85,7 +85,13 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
                          this.saveData.setCasinoGames({games:this.games, count:this.leftGamesCount});
                      }
                      else
-                         this.saveData.deleteCasinoGames();
+                     {
+                         if(this.fragmentConfig.Config.type === 'filter' || this.fragmentConfig.Config.type === 'search')
+                         {
+                             this.saveData.deleteCasinoGames();
+                         }
+                     }
+
                 }
             });
     }

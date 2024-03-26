@@ -16,10 +16,25 @@
   .mobile-self-limitation_edit {
     width: var(--m-self-limit-edit-btn-width, 93%);
     margin: var(--m-self-limit-edit-btn-margin, 0 auto);
+    display: var(--m-self-limit-edit-btn-display, flex);
+    align-items: center;
+    justify-content: var(--m-self-limit-edit-btn-justify-content, flex-start);
+    .m-self-limit-edit {
+      display: var(--m-self-limit-edit-btn-style-display, flex);
+      align-items: var(--m-self-limit-edit-btn-style-align-items, center);
+      width: var(--m-self-limit-edit-btn-style-width, auto);
+      justify-content: var(--m-self-limit-edit-btn-style-justify-content, space-between);
+      font-size: var(--m-self-limit-edit-btn-style-font-size, 11px);
+      gap: var(--m-self-limit-edit-btn-style-gap, 10px);
+      height: var(--m-self-limit-edit-btn-style-height, 44px);
+      line-height: var(--m-self-limit-edit-btn-style-line-height, 44px);
+      border-radius: var(--m-self-limit-edit-btn-style-border-radius, 4px);
+    }
   }
   .self-limit-title {
     width: var(--m-self-limit-title-width, 93%);
     margin: var(--m-self-limit-title-margin, 0 auto);
+    color: var(--m-self-limit-title-color, var(--m-settings-field-label-color))
   }
   .self-limit-warning {
     display: flex;
@@ -226,9 +241,9 @@
   .self-exclusion-box .mobile-self-exclusion-row {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: var(--m-self-tab-desc-gap, 28px);
     position: relative;
-    margin-top: 20px;
+    margin-top: var(--m-self-tab-desc-margin-top, 20px);
     .date-input {
       width: var(--m-self-tab-bar-label-width, 95%);
       margin: var(--m-self-tab-bar-label-margin, 0 auto);
@@ -272,6 +287,10 @@
     .custom_dropdown_reg {
       .reasons-item {
         height: var(--m-self-limit-reasons-height, 47px);
+        font-size: var(--m-self-limit-reasons-font-size, 14px);
+      }
+      .custom_dropdown_list li {
+        font-size: var(--m-self-limit-reasons-font-size, 14px);
       }
     }
     .period-label {
@@ -316,9 +335,18 @@
   {
     margin: var(--m-self-limitation-table-margin, 100px auto 0);
     width: var(--m-self-limitation-table-width, 93%);
+    .mobile-limit-type {
+      .m-limit-type-title {
+        color: var(--m-limit-type-title-color, var(--m-settings-field-label-color));
+        font-size: var(--m-limit-type-title-font-size, 16px);
+        font-weight: var(--m-limit-type-title-font-weight, 400);
+        margin-top: var(--m-limit-type-title-margin-top, 0);
+        margin-bottom: var(--m-limit-type-title-margin-bottom, 35px);
+      }
+    }
     .mobile-submit-details {
       display: flex;
-      gap: 20px;
+      gap: var(--m-settings-submit-details-gap, 20px);
       width: var(--m-settings-submit-details-width, 93%);
       .setting_btn {
         font-size: var(--m-settings-submit-details-font-size, 16px);
@@ -328,7 +356,10 @@
         width: var(--m-settings-submit-details-width, 50%);
         background: linear-gradient(to bottom, var(--settings-button-gradient-first-color) 0%, var(--settings-button-gradient-second-color) 100%);
         color: var(--settings-button-text-color);
-        padding: 0 25px;
+        padding: var(--m-settings-submit-details-padding, 0 25px);
+        border-radius: var(--m-settings-submit-details-border-radius, 4px);
+        display: var(--m-settings-submit-details-display, flex);
+        align-items: var(--m-settings-submit-details-align-items, center);
         .icon-close-modal {
           margin-right: 13px;
           font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
@@ -384,16 +415,35 @@
         }
       }
     }
+    .limit-type-field {
+      position: var(--m-self-limitation-field-margin, relative);
+      margin: var(--m-self-limitation-field-margin, 35px 0);
+    }
     input
     {
       &.active_item
       {
         border: var(--m-self-limitation-td-active-border, 1px solid #44392c);
       }
-      height: 30px;
-      padding: 10px;
-      text-align: right;
-      width: 100%;
+      height: var(--m-self-limitation-input-height, 30px);
+      padding: var(--m-self-limitation-input-padding, 10px);
+      text-align: var(--m-self-limitation-input-text-align, right);
+      width: var(--m-self-limitation-input-width, 100%);
+      border-color: var(--m-self-limitation-input-border-color, #cecece) !important;
+      border-width: var(--m-self-limitation-input-border-width, 1px);
+      border-style: var(--m-self-limitation-input-border-style, solid);
+      border-radius: var(--m-self-limitation-input-border-radius, 0);
+      margin: var(--m-self-limitation-input-margin, 0);
+      color: var(--m-self-limitation-input-color, #000);
+    }
+    input::placeholder {
+      color: var(--m-self-limitation-input-placeholder-color, rgb(117, 117, 117));
+    }
+    label {
+      position: var(--m-self-limitation-label-position, absolute);
+      left: var(--m-self-limitation-label-left, 0);
+      top: var(--m-self-limitation-label-top, -24px);
+      color: var(--m-self-limitation-label-color, var(--m-settings-field-label-color));
     }
     .session-limit
     {

@@ -110,11 +110,7 @@ export class MobileFooterComponent extends BaseFooterComponent {
      {
        if ((item.Type == 1) && !this.isLogin)
        {
-         /* this.simpleModalService.addModal(AppConfirmComponent, {
-            title: 'login',
-            message: true,
-          }, {animationDuration: 500}).subscribe(() => {
-          });*/
+
        } else {
          sessionStorage.setItem('openWithFooter', JSON.stringify(true));
          this.router.navigate([item.Href]);

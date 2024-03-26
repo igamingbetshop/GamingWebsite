@@ -11,9 +11,6 @@ import {TranslateModule} from "@ngx-translate/core";
     CommonModule,
     FontAwesomeModule,
     TranslateModule
-  ],
-  entryComponents:[
-    AppCommonMessageModalComponent
   ]
 })
 

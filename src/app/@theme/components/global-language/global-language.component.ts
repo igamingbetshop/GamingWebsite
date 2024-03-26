@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {LangService} from '../../../@core/services/app/lang.service';
 import {ConfigService, SharedService} from "@core/services";
 

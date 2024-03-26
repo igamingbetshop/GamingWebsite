@@ -58,9 +58,9 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
                // this.selectedOrder = undefined;
             }
         }));
-        this.menuService.onClose$.subscribe((requestData) => {
+        this.menuService.onClose$.subscribe((requestData:any) => {
             if (typeof requestData === "object") {
-                let filterItem = this.menuList.filter((item: any) => (item.Type === requestData['position']));
+                let filterItem = this.menuList.filter((item: any) => (item.Type === requestData?.position));
                 this.toggleMenu(filterItem[0]);
             } else if (requestData === 'more-menu') {
                 this.selectedMoreItem = false;
@@ -72,12 +72,6 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
         const event = new CustomEvent('betslipChangeFromParent', {detail: {}});
         window.dispatchEvent(event);
         this.selectedOrder = this.menuList?.find(menuItem => this.router.url.slice(1) === menuItem['Href'])?.Order;
-    }
-
-    t()
-    {
-        const event = new CustomEvent('betslipChangeFromParent', {detail: {open:false}});
-        window.dispatchEvent(event);
     }
 
     private onBetslipChange = (data) =>

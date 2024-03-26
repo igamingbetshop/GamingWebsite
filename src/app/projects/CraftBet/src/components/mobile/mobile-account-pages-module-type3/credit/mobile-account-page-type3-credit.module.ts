@@ -31,7 +31,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         CollapseDirectiveModule,
         MobileDepositBlockModule,
-        MobileDepositBlockModule,
         MobileWithdrawBlockModule
     ],
     providers: [

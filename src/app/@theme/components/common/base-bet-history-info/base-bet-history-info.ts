@@ -1,35 +1,25 @@
-import {OnInit, Injector, Injectable} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
+import {OnInit, Injector, inject, Directive} from '@angular/core';
 import {GetBetsHistoryService} from "@core/services/app/getBetsHistory.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
-export interface ConfirmModel {
-  title: string;
-  message: boolean;
-  data: any;
-}
+@Directive()
 
-@Injectable()
+export  class BaseBetHistoryInfo implements OnInit {
 
-export  class BaseBetHistoryInfo extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
-
-  public title: string;
-  public message: boolean;
-  public data: any;
   public userInfoList: any = {};
-
   public getBetsHistoryService: GetBetsHistoryService;
-
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<BaseBetHistoryInfo>);
   constructor(public injector: Injector) {
-    super();
     this.getBetsHistoryService = injector.get(GetBetsHistoryService);
   }
 
   ngOnInit()
   {
-    this.getBetsHistoryService.getBetsInfo(this.data).then((responceData) => {
-      if (responceData['ResponseCode'] === 0)
+    this.getBetsHistoryService.getBetsInfo(this.data).then((responseData:any) => {
+      if (responseData['ResponseCode'] === 0)
       {
-        this.userInfoList = responceData['ResponseObject'];
+        this.userInfoList = responseData['ResponseObject'];
       }
     });
   }

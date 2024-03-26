@@ -6,7 +6,6 @@ import {debounceTime, take} from "rxjs/operators";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule} from "@angular/forms";
-import {ClickOutsideModule} from "ng-click-outside";
 import {CommonModule} from "@angular/common";
 import {Router} from "@angular/router";
 import {FontAwesomeIcons} from "../../../../../../../@theme/font-awsome/font-awesome-icons";
@@ -14,7 +13,7 @@ import {FontAwesomeIcons} from "../../../../../../../@theme/font-awsome/font-awe
 @Component({
     selector: 'casino-search-fragment',
     standalone:true,
-    imports:[CommonModule, TranslateModule, FormsModule, ClickOutsideModule, FontAwesomeIcons],
+    imports:[CommonModule, TranslateModule, FormsModule, FontAwesomeIcons],
     templateUrl: './casino-search-fragment.component.html',
     styleUrls: ['./casino-search-fragment.component.scss'],
 })

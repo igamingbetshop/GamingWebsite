@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SimpleModalService } from 'ngx-simple-modal';
+import {Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
 import { SaveData } from '@core/services';
 import { Controllers, Methods } from '@core/enums';
 import { BaseApiService } from '@core/services/api/base-api.service';
 import { UtilityService } from '@core/services/app/utility.service';
 import { take } from 'rxjs/operators';
 import { GetSettingsInfoService } from '@core/services/app/getSettingsInfo.service';
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-credit-check',
@@ -17,8 +17,9 @@ export class AccountPageType3CreditCheckComponent implements OnInit {
   public statusMessage;
   public limits: any;
   @ViewChild('verificationIframe') verificationIframe: ElementRef;
+  dialog = inject(MatDialog);
 
-  constructor(public simpleModalService: SimpleModalService, public savedDateService: SaveData,
+  constructor(public savedDateService: SaveData,
               private baseApiService: BaseApiService, private utilsService: UtilityService,
               public getSettingsInfoService: GetSettingsInfoService) { }
 
@@ -29,10 +30,8 @@ export class AccountPageType3CreditCheckComponent implements OnInit {
   async openLimitsBlocks() {
     const { AccountPageType3DefaultComponent } = await import('../default/account-page-type3-default.component');
     setTimeout(() => {
-      this.simpleModalService.removeAll().then();
-      this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-          { title: 'self-limitation' }, { closeOnClickOutside: true }).subscribe(() => {
-      });
+      this.dialog.closeAll();
+      this.dialog.open(AccountPageType3DefaultComponent, {data:{title: 'self-limitation'}, hasBackdrop:true});
       this.savedDateService.selectedItem.Href = 'self-limitation';
     }, 100);
   }

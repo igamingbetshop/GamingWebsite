@@ -5,6 +5,7 @@ import {BaseLoaderComponent} from "../../../../../../@theme/components/base/base
   selector: 'loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss'],
+  standalone:true,
   encapsulation:ViewEncapsulation.None
 })
 export class LoaderComponent extends BaseLoaderComponent

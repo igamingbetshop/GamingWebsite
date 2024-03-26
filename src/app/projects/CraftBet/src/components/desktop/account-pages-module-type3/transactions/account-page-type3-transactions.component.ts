@@ -1,8 +1,8 @@
-import {Component, Injector, Input} from '@angular/core';
-import { SimpleModalService } from 'ngx-simple-modal';
+import {Component, inject, Injector, Input} from '@angular/core';
 import { SaveData } from '@core/services';
 import { format } from 'date-fns';
 import { AppCommonTransactionsComponent } from '../../../common/app-common-transactions/app-common-transactions.component';
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-account-page-type3-transactions',
@@ -26,13 +26,12 @@ export class AccountPageType3TransactionsComponent extends AppCommonTransactions
   public transactionId;
   public operationTypeId;
   openedIndex: number = null;
-  public simpleModalService: SimpleModalService;
+  dialog = inject(MatDialog);
   public savedDateService: SaveData;
   public historyInPage: number = 9;
 
   constructor(public injector: Injector) {
     super(injector);
-    this.simpleModalService = injector.get(SimpleModalService);
     this.savedDateService = injector.get(SaveData);
     // this.form = this.fb.group({
     //   timeFilter: 1,
@@ -120,10 +119,8 @@ export class AccountPageType3TransactionsComponent extends AppCommonTransactions
   async redirectToHistory() {
     const { AccountPageType3DefaultComponent } = await import('../default/account-page-type3-default.component');
     setTimeout(() => {
-      this.simpleModalService.removeAll().then();
-      this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-          { title: 'history', data: this.transactionId }, { closeOnClickOutside: true }).subscribe(() => {
-      });
+      this.dialog.closeAll();
+      this.dialog.open(AccountPageType3DefaultComponent, {data:{ title: 'history', transactionId: this.transactionId}, hasBackdrop:true});
       this.savedDateService.selectedItem.Href = 'history';
     }, 100);
   }

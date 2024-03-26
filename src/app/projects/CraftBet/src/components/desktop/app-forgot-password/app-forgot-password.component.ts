@@ -1,6 +1,6 @@
 import {
   Component,
-  createNgModuleRef,
+  createNgModule,
   ElementRef,
   Injector,
   NgModuleRef,
@@ -44,7 +44,7 @@ export class AppForgotPasswordComponent extends BaseForgotPasswordComponent {
         break;
       case 3:
         const { VerifyCodeModule } = await import("../../../../../../@theme/components/modals/verify-code/verify-code.module");
-        const moduleRef = createNgModuleRef(VerifyCodeModule, this.injector);
+        const moduleRef = createNgModule(VerifyCodeModule, this.injector);
         this.createComponentWithInstances(moduleRef, this.verifyOtpRef, this.getRecoveryType(), this.forgotPasswordForm.get("fEmail").value.toString());
         break;
       case 4:

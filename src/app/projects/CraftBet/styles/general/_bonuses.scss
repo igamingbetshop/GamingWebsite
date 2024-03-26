@@ -96,7 +96,7 @@
     button {
       flex: 1;
       margin-left: var(--promo-code-activate-margin-left, 20px);
-      height: 100%;
+      height: var(--promo-code-activate-height, 100%);
       border-radius: var(--promo-code-activate-border-radius, 4px);
       background: linear-gradient(to bottom, color(settings-button-gradient-first) 0%, color(settings-button-gradient-second) 100%);
       color: color(settings-button-text);
@@ -412,7 +412,8 @@
       width: var(--settings-button-text-width, 50px);
       color: var(--settings-button-text-color, #FFFFFF);
       border-radius: var(--promo-code-status-show-border-radius, 4px);
-      font-weight: 700;
+      font-weight: var(--promo-code-status-show-font-weight, 700);
+      font-size: var(--promo-code-status-show-font-size, 16px);
       line-height: unset;
     }
   }
@@ -449,8 +450,10 @@
       min-width: var(--m-triggers-modal-min-width, auto);
       height: var(--m-triggers-modal-height, 50%);
       margin: var(--m-triggers-modal-margin, 0 auto);
+      padding: var(--m-triggers-modal-padding, 24px 32px);
       border-radius: var(--m-triggers-modal-border-radius, 0);
       overflow: var(--m-triggers-modal-overflow, auto);
+      background: var(--m-triggers-modal-background, #fff);
       }
     }
 }

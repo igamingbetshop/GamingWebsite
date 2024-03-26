@@ -1,21 +1,21 @@
 import {
     ChangeDetectorRef,
-    createNgModuleRef,
+    createNgModule,
     Directive,
     ElementRef,
-    EventEmitter,
+    EventEmitter, inject,
     Injector,
     OnDestroy,
     OnInit,
     ViewChild
 } from "@angular/core";
-import {SimpleModalService} from "ngx-simple-modal";
 import {VerificationService} from "../../../../@core/services/api/verification.service";
 import {ProfileService} from "../service/profile.service";
 import {Subscription, take} from "rxjs";
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {Controllers, Methods, VerificationCodeTypes} from "../../../../@core/enums";
 import {UtilityService} from "../../../../@core/services/app/utility.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BaseEditSecurityQuestions implements OnInit, OnDestroy
@@ -39,7 +39,7 @@ export class BaseEditSecurityQuestions implements OnInit, OnDestroy
 
 
     private profileService: ProfileService;
-    private simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     private verificationService: VerificationService;
     private baseApiService:BaseApiService;
     private utilityService: UtilityService;
@@ -48,7 +48,6 @@ export class BaseEditSecurityQuestions implements OnInit, OnDestroy
     constructor(protected injector:Injector)
     {
         this.profileService = injector.get(ProfileService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.verificationService = injector.get(VerificationService);
         this.baseApiService = injector.get(BaseApiService);
         this.utilityService = injector.get(UtilityService);
@@ -231,7 +230,7 @@ export class BaseEditSecurityQuestions implements OnInit, OnDestroy
     async openVerifyCode(type, targetOfSource?)
     {
         const { VerifyCodeModule } = await import('../../modals/verify-code/verify-code.module');
-        const moduleRef = createNgModuleRef(VerifyCodeModule);
+        const moduleRef = createNgModule(VerifyCodeModule);
         const component = moduleRef.instance.getComponent();
         const callback = new EventEmitter();
         callback.subscribe(data => {
@@ -244,9 +243,6 @@ export class BaseEditSecurityQuestions implements OnInit, OnDestroy
                 this.updateData();
             }
         });
-
-        this.simpleModalService.addModal(component, {isModal:true, type:type, targetOfSender:targetOfSource, onVerified:callback, activePeriodInMinutes: this.activePeriodInMinutes, prefixTitle: 'Security', verificationCodeType:VerificationCodeTypes.SecurityQuestionChangeByMobile}).subscribe(data => {
-
-        });
+        this.dialog.open(component, {data:{isModal:true, type:type, targetOfSender:targetOfSource, onVerified:callback, activePeriodInMinutes: this.activePeriodInMinutes, prefixTitle: 'Security', verificationCodeType:VerificationCodeTypes.SecurityQuestionChangeByMobile}});
     }
 }

@@ -18,11 +18,7 @@ import {AccountPageType1AnnouncementsComponent} from './announcements/account-pa
 import {TranslateModule} from "@ngx-translate/core";
 import {AccountPageType1BankAccountsComponent} from './bank-accounts/account-page-type1-bank-accounts.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { SimpleModalModule } from 'ngx-simple-modal';
 import { HttpClientModule } from '@angular/common/http';
-import { FilterPipeModule } from 'ngx-filter-pipe';
-import {NgxMaskModule} from "ngx-mask";
-import {ClickOutsideModule} from "ng-click-outside";
 import {NgxPrintModule} from "ngx-print";
 import {ThemeModule} from "../../../../../../@theme/theme.module";
 import { AccountPageType1OpenTicketsComponent } from './open-tickets/account-page-type1-open-tickets.component';
@@ -32,7 +28,6 @@ import { SelfLimitationComponent } from './self-limitation/self-limitation.compo
 import { AccountPageType1VerificationComponent } from './verification/account-page-type1-verification.component';
 import {DesktopModule} from "../desktop.module";
 import {CommonMessageModalModule} from "../../common/app-common-message-modal/common-message-modal.module";
-import {TriggersModule} from "../../../../../../@theme/components/common/base-triggers/triggers.module";
 import {CollapseDirectiveModule} from "../../../../../../@theme/directives/collapse/collapse-directive.module";
 import {GetSettingsService} from "../../../../../../@core/services/app/getSettings.service";
 import {FriendsService} from "../../../../../../@core/services/api/friends.service";
@@ -46,6 +41,8 @@ import {ProfileService} from "../../../../../../@theme/components/profile/servic
 import {ExportDataService} from "../../../../../../@core/services";
 import {CommonBankMessageModalModule} from "../../common/app-common-bank-message-modal/common-bank-message-modal.module";
 import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
+import {NgxMaskDirective} from "ngx-mask";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -76,16 +73,12 @@ import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropd
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
-        ClickOutsideModule,
+        NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
         DesktopModule,
         CommonMessageModalModule,
-        TriggersModule,
         CollapseDirectiveModule,
         CommonBankMessageModalModule,
         DropdownDirectiveModule,
@@ -101,7 +94,9 @@ import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropd
     GetPaymentsService,
     ProfileService,
     ExportDataService,
-    DatePipe
+    DatePipe,
+      { provide: MatDialogRef, useValue: {} },
+      { provide: MAT_DIALOG_DATA, useValue: {} }
   ]
 
 })

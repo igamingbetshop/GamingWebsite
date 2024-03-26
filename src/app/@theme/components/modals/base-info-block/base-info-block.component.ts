@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {SimpleModalComponent} from "ngx-simple-modal";
-import {ConfirmModel} from "@core/interfaces";
+import {Component, inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 
 
@@ -9,21 +8,20 @@ import {ConfirmModel} from "@core/interfaces";
     templateUrl: './base-info-block.component.html',
     styleUrls: ['./base-info-block.component.scss']
 })
-export class BaseInfoBlockComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
+export class BaseInfoBlockComponent implements OnInit {
 
-    public title: string;
-    public message: string;
-    public className: string;
-    public info: string;
-
-    constructor() {
-        super();
-    }
+    data:any = inject(MAT_DIALOG_DATA);
+    dialogRef = inject(MatDialogRef<BaseInfoBlockComponent>);
 
     ngOnInit() {}
 
-    confirm() {
-        this.close();
+    confirm()
+    {
+        this.dialogRef.close(true);
+    }
+    close()
+    {
+        this.dialogRef.close();
     }
 
 }

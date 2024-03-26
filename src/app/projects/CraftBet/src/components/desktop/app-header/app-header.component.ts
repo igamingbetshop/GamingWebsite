@@ -74,7 +74,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
     private itemsWidth:number[] = [];
     private moreMenuWidth:number = 0;
     public menuDirection:string;
-    public isExpandedMenu:boolean = false;
+    public isExpandedMenu:boolean;
     public userLogined:UserLogined;
 
     public openModal: boolean;
@@ -159,6 +159,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         });
 
         this.menuDirection = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.direction || this.menuDirection;
+        this.isExpandedMenu = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.expanded || this.isExpandedMenu;
 
         this.baseControllerService.GetMenu('HeaderPanel2Menu',
             'en').then((data: any) =>
@@ -410,6 +411,10 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         if(this.menuDirection === 'left'){
             this.document.body.classList.add("isLeftMenu");
         }
+        if(this.isExpandedMenu == true){
+            this.document.body.classList.add("isExpandedLeftMenu");
+            this.document.body.classList.remove("isLeftMenu");
+        }
 
 
         this.saveData.openPopup.subscribe((data) => {
@@ -432,122 +437,28 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
             switch (data.label)
             {
                 case 'deposit':
-                {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
                 case 'withdraw':
-                {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
                 case 'profile':
-                {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
                 case 'history':
-                {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
                 case 'tickets':
+                case 'verification':
+                case 'transactions':
+                case 'self-limitation':
+                case 'payment':
+                case 'credit':
+                case 'document-Verification':
+                case 'bonuses':
+                case 'payments':
+                case 'bank-accounts':
+                case 'credit-check':
                 {
                     const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'verification': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'transactions': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'self-limitation': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'payment': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'credit': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'document-Verification': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'bonuses': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'payments': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'bank-accounts': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
-                    break;
-                }
-                case 'credit-check': {
-                    const { AccountPageType3DefaultComponent } = await import('../account-pages-module-type3/default/account-page-type3-default.component');
-                    this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                        {title: data.label}, {closeOnClickOutside: true}).subscribe(() => {
-                    });
+                    this.dialog.open(AccountPageType3DefaultComponent, {data:{title: data.label}, hasBackdrop:true});
                     break;
                 }
                 case 'deleteBank':
                 {
-                    this.simpleModalService.addModal(AppCommonBankMessageModalComponent, {
-                        title: 'Delete Bank',
-                        message: true,
-                        data: { data:data}
-                    }).subscribe(() => {});
+                    this.dialog.open(AppCommonBankMessageModalComponent,{data:{title: 'Delete Bank', message: true,bank: { data:data}}});
                 }
             }
         });
@@ -577,11 +488,9 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
 
     public showConfirm(titleName = '')
     {
-        this.simpleModalService.addModal(AppConfirmComponent, {
-            title: titleName == '' ? 'Confirm title' : titleName,
-            message: true,
-        }, {closeOnClickOutside: titleName == 'open_login'}).subscribe((isConfirmed) => {
-            this.confirmResult = isConfirmed;
+        const dialogRef = this.dialog.open(AppConfirmComponent,{data:{ title: titleName == '' ? 'Confirm title' : titleName, message: true,}, hasBackdrop: titleName == 'open_login'});
+        dialogRef.afterClosed().subscribe(result => {
+            this.confirmResult = result;
         });
         if (this.showLoginComponent) {
             this.showLoginDropdown = false;
@@ -592,12 +501,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
     public openNotLoginNewTicket(item) {
         if(!item.Href)
         {
-            this.simpleModalService.addModal(AppOpenTicketComponent, {
-                title: 'Open ticket',
-                data: {notLogin: true},
-                message: true
-            }).subscribe(() => {
-            });
+            this.dialog.open(AppOpenTicketComponent,{data:{title: 'Open ticket',notLogin: true, message:true}});
         }
     }
 
@@ -605,21 +509,13 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         this.signalRService.onDepositLimitInfo$.subscribe(data => {
             this.updatedData = data;
             if (this.isLogin && (data.DailyDepositLimitPercent >= 80 || data.WeeklyDepositLimitPercent >= 80 || data.MonthlyDepositLimitPercent >= 80)) {
-                this.simpleModalService.addModal(LimitNotificationsComponent, {
-                    title: 'Limit Notifications',
-                    data: { notLogin: true, updatedData: data },
-                    message: true
-                }).subscribe(() => {});
+                this.dialog.open(LimitNotificationsComponent,{data:{title: 'Limit Notifications',notLogin: true, updatedData: data}});
             }
         });
         this.signalRService.onBetLimitInfo$.subscribe(res => {
             this.updatedData = res;
             if (this.isLogin && (res.DailyBetLimitPercent >= 80 || res.WeeklyBetLimitPercent >= 80 || res.MonthlyBetLimitPercent >= 80)) {
-                this.simpleModalService.addModal(LimitNotificationsComponent, {
-                    title: 'Limit Notifications',
-                    data: { notLogin: true, updatedData: res },
-                    message: true
-                }).subscribe(() => {});
+                this.dialog.open(LimitNotificationsComponent,{data:{title: 'Limit Notifications',notLogin: true, updatedData: res}});
             }
         });
     }

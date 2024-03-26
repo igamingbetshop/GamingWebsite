@@ -1,6 +1,6 @@
 import {
-    ChangeDetectorRef, createNgModuleRef,
-    Directive, EventEmitter,
+    ChangeDetectorRef, createNgModule,
+    Directive, EventEmitter, inject,
     Injector,
     OnDestroy,
     OnInit,
@@ -13,11 +13,11 @@ import {MenuType} from "../../../@core/enums";
 import {GetSettingsInfoService} from "../../../@core/services/app/getSettingsInfo.service";
 import {ProfileService} from "./service/profile.service";
 import {UtilityService} from "../../../@core/services/app/utility.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {BaseApiService} from "../../../@core/services/api/base-api.service";
 import {Subscription} from "rxjs";
 import {ConfigService} from "../../../@core/services";
 import {StateService} from "@core/services/app/state.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BaseProfile implements OnInit, OnDestroy
@@ -49,7 +49,7 @@ export class BaseProfile implements OnInit, OnDestroy
     public getSettingsInfoService:GetSettingsInfoService;
     public utilityService:UtilityService;
     public baseApiService:BaseApiService;
-    protected simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     protected stateService:StateService;
     profileService:ProfileService;
     configService:ConfigService;
@@ -67,7 +67,6 @@ export class BaseProfile implements OnInit, OnDestroy
         this.getSettingsInfoService = injector.get(GetSettingsInfoService);
         this.profileService = injector.get(ProfileService);
         this.utilityService = injector.get(UtilityService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.baseApiService = injector.get(BaseApiService);
         this.configService = injector.get(ConfigService);
         this.stateService = injector.get(StateService)
@@ -201,7 +200,7 @@ export class BaseProfile implements OnInit, OnDestroy
         if(this.profileService.getProfile && this.profileService.getProfile.SecurityQuestions && this.profileService.getProfile.SecurityQuestions.length)
         {
             const { SecurityQuestionsModalModule } = await import("../../components/modals/security-questions-modal/security-questions-modal.module");
-            const moduleRef = createNgModuleRef(SecurityQuestionsModalModule, this.injector);
+            const moduleRef = createNgModule(SecurityQuestionsModalModule, this.injector);
             const component = moduleRef.instance.getComponent();
             const callback = new EventEmitter();
             callback.subscribe(data => {
@@ -216,9 +215,7 @@ export class BaseProfile implements OnInit, OnDestroy
                     else data.callBack({error:resp.Description});
                 });
             });
-            this.simpleModalService.addModal(component, {securityQuestionIds:this.profileService.getProfile.SecurityQuestions, onSecurityConfirmed:callback}).subscribe(data => {
-
-            });
+            this.dialog.open(component, {data:{securityQuestionIds:this.profileService.getProfile.SecurityQuestions, onSecurityConfirmed:callback}})
         }
         else
         {

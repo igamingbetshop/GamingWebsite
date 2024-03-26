@@ -8,7 +8,6 @@ import { GoogleAuthenticateComponent } from './google-authenticate.component';
 @NgModule({
     declarations: [GoogleAuthenticateComponent],
     exports: [GoogleAuthenticateComponent],
-    entryComponents: [GoogleAuthenticateComponent],
     imports: [
         CommonModule,
         TranslateModule,

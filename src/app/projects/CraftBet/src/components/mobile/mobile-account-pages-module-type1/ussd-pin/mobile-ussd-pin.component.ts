@@ -1,9 +1,8 @@
-import { Component, createNgModuleRef, EventEmitter, Injector, OnInit } from '@angular/core';
+import { Component, createNgModule, EventEmitter, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseApiService } from '@core/services/api/base-api.service';
 import { UtilityService } from '@core/services/app/utility.service';
 import { VerificationService } from '@core/services/api/verification.service';
-import { SimpleModalService } from 'ngx-simple-modal';
 import { GetSettingsInfoService } from '@core/services/app/getSettingsInfo.service';
 import { Validator } from '@core/validators/validators';
 import { PasswordValidation } from '@core/services/password-validation';
@@ -11,6 +10,7 @@ import {Methods, VerificationCodeTypes} from '@core/enums';
 import { take } from 'rxjs';
 import { LayoutService } from '@core/services/app/layout.service';
 import {TranslateService} from "@ngx-translate/core";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-ussd-pin',
@@ -25,7 +25,7 @@ export class MobileUssdPinComponent implements OnInit {
     successChangeUssd;
 
     constructor(protected injector: Injector, private baseApiService: BaseApiService, private utilityService: UtilityService, private fb: FormBuilder,
-                private verificationService: VerificationService, private simpleModalService: SimpleModalService,
+                private verificationService: VerificationService, private dialog: MatDialog,
                 private getSettingsInfoService: GetSettingsInfoService, public layoutService: LayoutService, public translate: TranslateService) {
     }
 
@@ -77,7 +77,7 @@ export class MobileUssdPinComponent implements OnInit {
 
     async openVerifyCode(type: string, targetOfSource: string) {
         const { VerifyCodeModule } = await import('../../../../../../../@theme/components/modals/verify-code/verify-code.module');
-        const moduleRef = createNgModuleRef(VerifyCodeModule, this.injector);
+        const moduleRef = createNgModule(VerifyCodeModule, this.injector);
         const component = moduleRef.instance.getComponent();
         const callback = new EventEmitter();
         callback.subscribe(data => {
@@ -85,22 +85,20 @@ export class MobileUssdPinComponent implements OnInit {
             this.openSecurityQuestions(type, data.code, this.profileData.SecurityQuestions);
         });
 
-        this.simpleModalService.addModal(component, {
-            isModal: true,
-            type: type,
-            targetOfSender: targetOfSource,
-            onVerified: callback,
-            activePeriodInMinutes: this.activePeriodInMinutes,
-            prefixTitle: '',
-            verificationCodeType:VerificationCodeTypes.USSDPinChangeByMobile
-        }).subscribe(data => {
-
-        });
+        this.dialog.open(component, {data:{
+                isModal: true,
+                type: type,
+                targetOfSender: targetOfSource,
+                onVerified: callback,
+                activePeriodInMinutes: this.activePeriodInMinutes,
+                prefixTitle: '',
+                verificationCodeType:VerificationCodeTypes.USSDPinChangeByMobile
+            }});
     }
 
     async openSecurityQuestions(type: string, verifiedCode: string, questionIds: number[]) {
         const { SecurityQuestionsModalModule } = await import('../../../../../../../@theme/components/modals/security-questions-modal/security-questions-modal.module');
-        const moduleRef = createNgModuleRef(SecurityQuestionsModalModule, this.injector);
+        const moduleRef = createNgModule(SecurityQuestionsModalModule, this.injector);
         const component = moduleRef.instance.getComponent();
         const callback = new EventEmitter();
         callback.subscribe(data => {
@@ -120,12 +118,11 @@ export class MobileUssdPinComponent implements OnInit {
             });
 
         });
-        this.simpleModalService.addModal(component, {
-            securityQuestionIds: questionIds,
-            onSecurityConfirmed: callback
-        }).subscribe(data => {
 
-        });
+        this.dialog.open(component, {data:{
+                securityQuestionIds: questionIds,
+                onSecurityConfirmed: callback
+            }});
     }
 
     dotKey(event) {

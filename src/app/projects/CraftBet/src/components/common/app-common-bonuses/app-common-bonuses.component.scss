@@ -10,16 +10,16 @@
 }
 
 .bonus-label {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--field-label-text-font-size, 14px);
+  font-weight: var(--field-label-text-font-weight, 600);
   font-stretch: normal;
   font-style: normal;
   line-height: 1.36;
   letter-spacing: normal;
   text-align: left;
   color: var(--field-label-text-color, #FFFFFF);
-  margin-bottom: 15px;
-  padding-left: 8px;
+  margin-bottom: var(--field-label-text-margin-bottom, 15px);
+  padding-left: var(--field-label-text-padding-left, 8px);
 }
 
 .bonus-name {
@@ -33,7 +33,7 @@ ul {
   height: auto;
   max-height: 146px;
   overflow-y: auto;
-  padding: 0 5px;
+  padding: var(--common-bonus-info-list-padding, 0 5px);
   .info-icon {
     font-size: var(--font-size-2, 14px);
     font-weight: normal;

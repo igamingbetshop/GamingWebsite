@@ -1,4 +1,4 @@
-import {Resolve} from "@angular/router";
+
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 
@@ -14,7 +14,7 @@ import {UserLogined} from "@core/services/app/userLogined.service";
 import {format} from "date-fns";
 
 @Injectable()
-export class ActiveWithdrawsResolver implements Resolve<Observable<any>> {
+export class ActiveWithdrawsResolver  {
     public userData: any;
 
     constructor(public paymentControllerService: PaymentControllerService, public paymentsService: PaymentsService,

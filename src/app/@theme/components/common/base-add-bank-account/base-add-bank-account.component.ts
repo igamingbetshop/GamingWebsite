@@ -1,6 +1,5 @@
-import { SimpleModalComponent, SimpleModalService } from 'ngx-simple-modal';
-import {createNgModuleRef, Directive, EventEmitter, Injector, Input, OnDestroy, OnInit} from "@angular/core";
-import { ConfirmModel } from '@core/interfaces';
+import {createNgModule, Directive, EventEmitter, inject, Injector, Input, OnDestroy, OnInit} from "@angular/core";
+
 import { GetPaymentsService } from '@core/services/app/getPayments.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -13,22 +12,21 @@ import { ProfileService } from '../../profile/service/profile.service';
 import { VerificationService } from '@core/services/api/verification.service';
 import {ActivatedRoute, Router} from "@angular/router";
 import {VerificationCodeTypes} from "@core/enums";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+
 
 @Directive()
 
-export class BaseAddBankAccountComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit, OnDestroy {
+export class BaseAddBankAccountComponent implements OnInit, OnDestroy {
   public rightToLeftOrientation = false;
 
-  public title: string;
-  public message: boolean;
-  public data: any;
   private activePeriodInMinutes: number;
   public isCodeSend: boolean;
   public statusMessage: string;
   public showSuccessMessage: boolean = false;
   public addNewTicket: boolean = false;
 
-  public paymentService: GetPaymentsService;
+  public paymentService = inject(GetPaymentsService);
   public paymentsService1: PaymentsService;
   public fb: FormBuilder;
   public addBankAccountForm: FormGroup;
@@ -48,8 +46,8 @@ export class BaseAddBankAccountComponent extends SimpleModalComponent<ConfirmMod
   private localStorageService: LocalStorageService;
   private configService: ConfigService;
   private verificationService: VerificationService;
-  private simpleModalService: SimpleModalService;
-  private profileService: ProfileService;
+  private dialog = inject(MatDialog);
+  private profileService = inject(ProfileService);
   private timeoutPromise: any;
   @Input('isEditMode') isEditMode = false;
   @Input('selectedBankAccount') selectedBankAccount;
@@ -57,10 +55,11 @@ export class BaseAddBankAccountComponent extends SimpleModalComponent<ConfirmMod
   public router: Router;
   public route: ActivatedRoute;
   public clientBanksList = [];
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<BaseAddBankAccountComponent>);
 
   constructor(protected injector: Injector, public sharedService: SharedService) {
-    super();
-    this.paymentService = injector.get(GetPaymentsService);
+
     this.paymentsService1 = injector.get(PaymentsService);
     this.fb = injector.get(FormBuilder);
     this.utilsService = injector.get(UtilityService);
@@ -70,10 +69,10 @@ export class BaseAddBankAccountComponent extends SimpleModalComponent<ConfirmMod
     this.userData = this.localStorageService.get('user');
     this.userLogged = injector.get(UserLogined);
     this.verificationService = injector.get(VerificationService);
-    this.simpleModalService = injector.get(SimpleModalService);
-    this.profileService = injector.get(ProfileService);
     this.router = injector.get(Router);
     this.route = injector.get(ActivatedRoute);
+    this.profileService = injector.get(ProfileService);
+    this.paymentService = injector.get(GetPaymentsService);
   }
 
   ngOnInit() {
@@ -260,7 +259,7 @@ export class BaseAddBankAccountComponent extends SimpleModalComponent<ConfirmMod
         const p = setTimeout(() => {
           clearTimeout(p);
           this.paymentService.addBankAccount(req);
-          this.close();
+          this.dialogRef.close();
         }, 3000);
       }
     }
@@ -269,7 +268,7 @@ export class BaseAddBankAccountComponent extends SimpleModalComponent<ConfirmMod
   async openVerifyCode(type:string, targetOfSource:string)
   {
     const { VerifyCodeModule } = await import('../../modals/verify-code/verify-code.module');
-    const moduleRef = createNgModuleRef(VerifyCodeModule, this.injector);
+    const moduleRef = createNgModule(VerifyCodeModule, this.injector);
     const component = moduleRef.instance.getComponent();
     const callback = new EventEmitter();
     callback.subscribe(data => {
@@ -284,14 +283,15 @@ export class BaseAddBankAccountComponent extends SimpleModalComponent<ConfirmMod
         const p = setTimeout(() => {
           clearTimeout(p);
           this.paymentService.addBankAccount(req);
-          this.close();
+          this.dialogRef.close();
         }, 3000);
       }
     });
 
-    this.simpleModalService.addModal(component, {isModal: true, type: type, targetOfSender: targetOfSource, onVerified: callback, activePeriodInMinutes: this.activePeriodInMinutes, prefixTitle: '', verificationCodeType:VerificationCodeTypes.AddBankAccountByMobile}).subscribe(data => {
-
-    });
+    this.dialog.open(component, {data:
+          {isModal: true, type: type, targetOfSender: targetOfSource,
+            onVerified: callback, activePeriodInMinutes: this.activePeriodInMinutes,
+            prefixTitle: '', verificationCodeType:VerificationCodeTypes.AddBankAccountByMobile}});
   }
 
   ngOnDestroy(): void {
@@ -302,5 +302,9 @@ export class BaseAddBankAccountComponent extends SimpleModalComponent<ConfirmMod
   }
   openMenu() {
     this.sharedService.mobileRightSidebarOpen.next(true);
+  }
+  close()
+  {
+    this.dialogRef.close();
   }
 }

@@ -1,8 +1,8 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, inject, Injector, OnInit} from '@angular/core';
 import {AppCommonTransactionsComponent} from "../../../common/app-common-transactions/app-common-transactions.component";
-import {SimpleModalService} from "ngx-simple-modal";
 import {ConfigService, SaveData} from "../../../../../../../@core/services";
 import {format} from "date-fns";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-mobile-account-page-type3-transactions',
@@ -22,7 +22,7 @@ export class MobileAccountPageType3TransactionsComponent extends AppCommonTransa
   public transactionId;
   public operationTypeId;
   openedIndex: number = null;
-  public simpleModalService: SimpleModalService;
+  dialog = inject(MatDialog);
   public savedDateService: SaveData;
   public configService: ConfigService;
   // public historyInPage: number = 9;
@@ -30,7 +30,6 @@ export class MobileAccountPageType3TransactionsComponent extends AppCommonTransa
 
   constructor(public injector: Injector) {
     super(injector);
-    this.simpleModalService = injector.get(SimpleModalService);
     this.savedDateService = injector.get(SaveData);
     this.configService = injector.get(ConfigService);
     const userData = this.localStorageService.get('user');

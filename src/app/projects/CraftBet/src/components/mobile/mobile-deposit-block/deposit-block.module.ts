@@ -5,7 +5,6 @@ import {ThemeModule} from "../../../../../../@theme/theme.module";
 
 
 import {DesktopMobileCommonModule} from "../../common/common.module";
-import {FilterPipeModule} from "ngx-filter-pipe";
 import {MobileDepositType1Component} from "./deposit-payments/deposit-type1/mobile-deposit-type1.component";
 import {MobileDepositType1DefaultComponent} from "./deposit-payments/deposit-type1/deposit-type1-default/mobile-deposit-type1-default.component";
 import {MobileDepositType2Component} from "./deposit-payments/deposit-type2/mobile-deposit-type2.component";
@@ -34,7 +33,6 @@ import {MobileDepositType13Component} from "./deposit-payments/deposit-type13/mo
 import {MobileDepositType13DefaultComponent} from "./deposit-payments/deposit-type13/deposit-type13-default/mobile-deposit-type13-default.component";
 import {MobileDepositType14Component} from "./deposit-payments/deposit-type14/mobile-deposit-type14.component";
 import {MobileDepositType14DefaultComponent} from "./deposit-payments/deposit-type14/deposit-type14-default/mobile-deposit-type14-default.component";
-import {LoaderModule} from "../../common/loader/loader.module";
 import {CommonBonusesModule} from "../../common/app-common-bonuses/common-bonuses.module";
 import {CommonPaymentNominalsModule} from "../../common/app-common-payment-nominals/common-payment-nominals.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -48,6 +46,7 @@ import {
   MobileDepositType17DefaultComponent
 } from "./deposit-payments/deposit-type17/deposit-type17-default/mobile-deposit-type17-default.component";
 import {QRCodeModule} from "angularx-qrcode";
+import {LoaderComponent} from "../../common/loader/loader.component";
 
 
 
@@ -96,46 +95,13 @@ import {QRCodeModule} from "angularx-qrcode";
         ReactiveFormsModule,
         FormsModule,
         DesktopMobileCommonModule,
-        FilterPipeModule,
         TranslateModule,
-        LoaderModule,
+        LoaderComponent,
         CommonBonusesModule,
         PaymentsModule,
         CommonPaymentNominalsModule,
         QRCodeModule
-    ],
-  entryComponents: [
-    MobileDepositType1Component,
-    MobileDepositType1DefaultComponent,
-    MobileDepositType2Component,
-    MobileDepositType2DefaultComponent,
-    MobileDepositType3Component,
-    MobileDepositType4Component,
-    MobileDepositType5Component,
-    MobileDepositType6Component,
-    MobileDepositType7Component,
-    MobileDepositType8Component,
-    MobileDepositType9Component,
-    MobileDepositType3DefaultComponent,
-    MobileDepositType4DefaultComponent,
-    MobileDepositType5DefaultComponent,
-    MobileDepositType6DefaultComponent,
-    MobileDepositType7DefaultComponent,
-    MobileDepositType8DefaultComponent,
-    MobileDepositType9DefaultComponent,
-    MobileDepositType10DefaultComponent,
-    MobileDepositType10Component,
-    MobileDepositType11Component,
-    MobileDepositType11DefaultComponent,
-    MobileDepositType13Component,
-    MobileDepositType13DefaultComponent,
-    MobileDepositType14Component,
-    MobileDepositType14DefaultComponent,
-    MobileDepositType15Component,
-    MobileDepositType15DefaultComponent,
-    MobileDepositType16Component,
-    MobileDepositType16DefaultComponent
-  ]
+    ]
 })
 export class MobileDepositBlockModule {
 }

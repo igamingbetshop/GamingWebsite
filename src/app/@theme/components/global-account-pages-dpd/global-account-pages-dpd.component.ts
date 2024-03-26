@@ -1,13 +1,13 @@
-import {Component, Injector, Input, OnInit} from '@angular/core';
+import {Component, inject, Injector, Input, OnInit} from '@angular/core';
 import {MenuType} from "@core/enums";
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {Router} from "@angular/router";
 import {ConfigService, LocalStorageService} from '../../../@core/services';
 import {SaveData} from "../../../@core/services";
 import {GetSettingsInfoService} from "@core/services/app/getSettingsInfo.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {StateService} from "@core/services/app/state.service";
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({
@@ -32,7 +32,7 @@ export class GlobalAccountPagesDpdComponent implements OnInit {
     public currentItem;
     public savedDateService: SaveData;
     private stateService:StateService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     public faCaretDown = faCaretDown;
     public selectedItem;
 

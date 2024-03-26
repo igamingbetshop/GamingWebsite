@@ -1,7 +1,6 @@
-import {OnInit, Injector, OnDestroy, Input, Directive} from '@angular/core';
+import {OnInit, Injector, OnDestroy, Input, Directive, inject} from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {PaymentControllerService} from '../../../../../@core/services/app/paymentController.services';
-import {SimpleModalService} from 'ngx-simple-modal';
 import {Subscription} from "rxjs";
 import {BonusesService} from "@core/services/api/bonuses.service";
 import {ConfigService, LocalStorageService, SaveData} from "@core/services";
@@ -13,6 +12,7 @@ import {LimitNotificationsComponent} from "../../../modals/limit-notifications/l
 import {TranslateService} from "@ngx-translate/core";
 import {take} from "rxjs/operators";
 import {StateService} from "@core/services/app/state.service";
+import {MatDialog} from "@angular/material/dialog";
 export enum UserProfileErrors {
     AddressCantBeEmpty = 176,
     FirstNameCantBeEmpty = 177,
@@ -40,7 +40,7 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
     public bonusData: Array<any> = [];
 
     public paymentControllerService: PaymentControllerService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     public localStorageService: LocalStorageService;
     public bonusesService: BonusesService;
     public saveData: SaveData;
@@ -72,7 +72,6 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
         this.fb = injector.get(FormBuilder);
 
         this.paymentControllerService = injector.get(PaymentControllerService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.bonusService = injector.get(BonusesService);
         this.localStorageService = injector.get(LocalStorageService);
         this.bonusesService = injector.get(BonusesService);
@@ -123,46 +122,6 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
         this.subscriptions.push(this.paymentControllerService.notifyGetCreatePaymentError.subscribe((response) => {
             this.handleCreatePaymentError(response);
         }));
-       /* this.subscriptions.push(this.paymentControllerService.notifyGetCreatePaymentData.subscribe((resData) => {
-            console.log('createPayment', resData);
-            this.paymentForm.reset();
-            this.submitted = false;
-            switch (this.contentType) {
-                case 1:
-                    this.popupCenter('', '_self', screen.width, screen.height);
-                    this.openedWindow.location.href = resData['Url'];
-                    break;
-                case 2:
-                    this.popupCenter('', '_blank', screen.width, screen.height, false);
-                    this.openedWindow.location.href = resData['Url'];
-                    break;
-                case 3:
-                    this.successMessage = 'success';
-                    setTimeout(() => this.successMessage = '', 5000);
-                    break;
-                case 4:
-                    this.simpleModalService.addModal(BaseFrameComponent,
-                        {
-                            title: '',
-                            url: resData['Url'],
-                            cancelUrl: resData['CancelUrl']
-                        },
-                        {closeOnClickOutside: false}).subscribe(() => {
-                    });
-                    break;
-                case 5:
-                    this.popupCenter('', '_blank', screen.width * 0.5, screen.height * 0.5);
-                    this.openedWindow.location.href = resData['Url'];
-                    break;
-            }
-            if (resData.LimitInfo.DailyDepositLimitPercent >= 80 || resData.LimitInfo.WeeklyDepositLimitPercent >= 80 || resData.LimitInfo.MonthlyDepositLimitPercent >= 80) {
-                this.simpleModalService.addModal(LimitNotificationsComponent, {
-                    title: 'Limit Notifications',
-                    data: {  updatedData: resData.LimitInfo },
-                    message: true
-                }).subscribe(() => {});
-            }
-        }));*/
 
     }
 
@@ -204,14 +163,7 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
                     }
                     break;
                 case 4:
-                    this.simpleModalService.addModal(BaseFrameComponent,
-                        {
-                            title: '',
-                            url: resData['Url'],
-                            cancelUrl: resData['CancelUrl']
-                        },
-                        {closeOnClickOutside: false}).subscribe(() => {
-                    });
+                    this.dialog.open(BaseFrameComponent, {data:{ title: '',url: resData['Url'],cancelUrl: resData['CancelUrl']}, disableClose:true});
                     break;
                 case 5:
                     this.popupCenter('', '_blank', screen.width * 0.5, screen.height * 0.5);
@@ -219,11 +171,8 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
                     break;
             }
             if (resData.LimitInfo.DailyDepositLimitPercent >= 80 || resData.LimitInfo.WeeklyDepositLimitPercent >= 80 || resData.LimitInfo.MonthlyDepositLimitPercent >= 80) {
-                this.simpleModalService.addModal(LimitNotificationsComponent, {
-                    title: 'Limit Notifications',
-                    data: {  updatedData: resData.LimitInfo },
-                    message: true
-                }).subscribe(() => {});
+
+                this.dialog.open(LimitNotificationsComponent, {data:{title: 'Limit Notifications',updatedData: resData.LimitInfo, message: true}})
             }
         })
     }

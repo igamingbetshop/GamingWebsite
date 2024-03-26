@@ -1,4 +1,4 @@
-import {Directive, Injector, OnDestroy, OnInit} from "@angular/core";
+import {Directive, inject, Injector, OnDestroy, OnInit} from "@angular/core";
 import {ConfigService} from "../../../@core/services";
 import {Fragment, FragmentData} from "../../../@core/models";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -7,14 +7,14 @@ import {BaseControllerService} from "../../../@core/services/app/baseController.
 import {StateService} from "../../../@core/services/app/state.service";
 import {BaseApiService} from "../../../@core/services/api/base-api.service";
 import {Methods} from "../../../@core/enums";
-import {SimpleModalService} from "ngx-simple-modal";
 import {UserLogined} from "../../../@core/services/app/userLogined.service";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Directive()
 export class BaseHome implements OnInit, OnDestroy
 {
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     config: ConfigService;
     fragmentKey: string;
     fragments: {[key: string]: Fragment}
@@ -43,7 +43,6 @@ export class BaseHome implements OnInit, OnDestroy
         this.baseControllerService = injector.get(BaseControllerService);
         this.stateService = injector.get(StateService);
         this.baseApiService  = injector.get(BaseApiService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.userLogined = injector.get(UserLogined);
 
     }

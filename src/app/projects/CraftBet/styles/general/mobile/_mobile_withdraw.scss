@@ -16,7 +16,7 @@
 
   &_content {
     display: flex;
-    margin: 0 15px;
+    margin: var(--m-withdraw-section-content-margin, 0 15px);
 
     .payment_header {
       background: $account-deposit-section-bg;
@@ -44,15 +44,16 @@
         justify-content: flex-start;
         position: relative;
         padding-left: var(--m-bonus-refused-padding-left, 36px);
+        padding-right: var(--m-bonus-refused-padding-right, 0px);
         cursor: pointer;
-        line-height: 18px;
+        line-height: var(--m-bonus-refused-line-height, 18px);
         color: var(--account-content-item-color, #fff);
         margin-top: var(--m-bonus-refused-margin-top, 5px);
       }
       .bonus-refused input[type="checkbox"] {
         position: absolute;
         left: var(--m-bonus-refused-input-left, -1px);
-        top: -3px;
+        top: var(--m-bonus-refused-input-top, -3px);
         width: 18px;
         height: 18px;
         border: none;
@@ -315,17 +316,17 @@
 
 .mobile-payment-section2 {
   margin-top: 62px;
-  min-height: calc(100vh - 62px);
+  min-height: var(--m-account-content-item-min-height, calc(100vh - 62px));
   font-size: var(--m-account-content-item-font-size);
-  color: $account-content-item-color;
+  color: var(--m-account-content-item-color, $account-content-item-color);
   background: var(--m-user-views-background-color, #FFFFFF);
   .account_title {
-    text-align: center;
+    text-align: var(--m-user-views-title-payments-text-align, center);
     color: color(m-user-views-title);
-    font-size: 24px;
-    font-weight: normal;
+    font-size: var(--m-user-views-title-payments-font-size, 24px);
+    font-weight: var(--m-user-views-title-payments-font-weight, normal);
     margin-top: var(--m-user-views-title-payments-margin-top, 20px);
-    padding: 15px 0;
+    padding: var(--m-user-views-title-payments-padding, 15px 0);
   }
   .mobile-payment-section_content
   {
@@ -351,17 +352,17 @@
           overflow-y: auto;
 
           &_item {
-            width: 100%;
+            width: width(m-account-payment-row, 100%);
             display: block;
             padding-left: paddingLeft(m-account-payment-row, 0);
             padding-right: paddingRight(m-account-payment-row, 0);
-            padding-top: 0;
-            padding-bottom: 0;
-            box-shadow: none;
+            padding-top: paddingTop(m-account-payment-row, 0);
+            padding-bottom: paddingBottom(m-account-payment-row, 0);
+            box-shadow: var(--m-account-payment-row-box-shadow, none);
             min-height: unset;
-            background: linear-gradient(to left,rgba(44,44,53,.48),rgba(58,65,85,.48));
+            background: var(--m-account-payment-row-background, linear-gradient(to left,rgba(44,44,53,.48),rgba(58,65,85,.48)));
             cursor: pointer;
-            margin-bottom: 10px;
+            margin-bottom: marginBottom(m-account-payment-row, 10px);
 
 
 
@@ -369,6 +370,8 @@
             {
               padding-left: paddingLeft(m-account-payment-list, 16px);
               padding-right: paddingRight(m-account-payment-list, 0);
+              padding-top: paddingTop(m-account-payment-list, 0);
+              padding-bottom: paddingBottom(m-account-payment-list, 0);
 
               .payment-row
               {
@@ -376,23 +379,23 @@
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
-               align-items: center;
+                align-items: center;
                 gap: 10px;
                 fa-icon
                 {
                   justify-self: center;
                   align-self: center;
-                  width: 15%;
-                  font-size: 5vw;
-                  text-align: center;
-                  line-height: 27vw;
+                  width: var(--m-account-payment-list-row-icon-line-width, 15%);
+                  font-size: var(--m-account-payment-list-row-icon-font-size, 5vw);
+                  text-align: var(--m-account-payment-list-row-icon-text-align, center);
+                  line-height: var(--m-account-payment-list-row-icon-line-height, 27vw);
                   color: var(--m-account-payment-list-row-icon-color, #fff);
                   background-color: var(--m-account-payment-list-row-icon-background-color, #283042);
                 }
                 .payment-row-item
                 {
                   .payment-img{
-                    background: #fff;
+                    background: var(--m-payment-list-item-img-background, #fff);
                     width: width(m-payment-list-item-img,90px);
                     height: height(m-payment-list-item-img, 60px);
                     background-size: 100% 100%;
@@ -406,18 +409,20 @@
                 .payment-row-item
                 {
                   height: 100%;
+                  padding: var(--m-payment-row-item-padding, 0);
                   .payment-row-header
                   {
                     color: itemColor(m-payment-row-header,#fff);
                     font-size: fontSize(m-payment-row-header, 14px);
-                    font-weight: 400;
+                    font-weight: fontWeight(m-payment-row-header, 400);
                     margin-bottom: marginBottom(m-payment-row-header, 6px);
 
                   }
                   .balance_info {
                     color: var(--m-account-payment-amount-color, #bbc6e9);
                     font-size: var(--m-account-payment-amount-font-size, 14px);
-                    line-height: 20px;
+                    font-weight: var(--m-account-payment-amount-font-weight, 400);
+                    line-height: var(--m-account-payment-amount-line-height, 20px);
                     span:nth-child(2)
                     {
                       margin-left: 6px;
@@ -432,7 +437,7 @@
                     padding-right: 0;
                     color: var(--m-account-payment-amount-color, #bbc6e9);
                     font-size: var(--m-account-payment-amount-font-size, 14px);
-                    line-height: 20px;
+                    line-height: var(--m-account-payment-amount-line-height, 20px);
                   }
                 }
               }
@@ -455,7 +460,7 @@
                 position: relative;
                 padding-left: var(--m-bonus-refused-padding-left, 33px);
                 cursor: pointer;
-                line-height: 18px;
+                line-height: var(--m-bonus-refused-line-height, 18px);
                 color: var(--account-content-item-color, #fff);
                 margin-top: var(--m-bonus-refused-margin-top, 5px);
               }
@@ -502,18 +507,18 @@
               }
               &.form-column
               {
-                padding-top: var(--m-account-content-row-paddding-top, 20px);
-                padding-right: 0;
-                padding-left: 0;
-                padding-bottom: 0;
+                padding-top: var(--m-account-content-row-padding-top, 20px);
+                padding-right: var(--m-account-content-row-padding-right, 0);
+                padding-left: var(--m-account-content-row-padding-left, 0);
+                padding-bottom: var(--m-account-content-row-padding-bottom, 0);
                 .content_row_header
                 {
-                  padding-left: 12px;
-                  border-bottom: 1px solid #dee6e8;
-                  font-size: 14px;
-                  height: 46px;
-                  line-height: 46px;
-                  margin-bottom: 24px;
+                  padding-left: var(--m-account-content-row-header-padding-left, 12px);
+                  border-bottom: var(--m-account-content-row-header-border-bottom, 1px solid #dee6e8);
+                  font-size: var(--m-account-content-row-header-font-size, 14px);
+                  height: var(--m-account-content-row-header-height, 46px);
+                  line-height: var(--m-account-content-row-header-line-height, 46px);
+                  margin-bottom: var(--m-account-content-row-header-margin-bottom, 24px);
                 }
               }
               .payment_field {
@@ -585,12 +590,12 @@
                 }
                 .right-part {
                   .info-icon {
-                    font-size: $font-size-2;
-                    font-weight: normal;
-                    border: 1px solid var(--deposit-info-border-color, #DBEDFF);
+                    font-size: var(--m-deposit-info-font-size, $font-size-2);
+                    font-weight: var(--m-deposit-info-font-weight, normal);
+                    border: var(--m-deposit-info-border, 1px solid var(--deposit-info-border-color, #DBEDFF));
                     box-sizing: border-box;
-                    border-radius: 4px;
-                    padding: 4px 8px;
+                    border-radius: var(--m-deposit-info-border-radius, 4px);
+                    padding: var(--m-deposit-info-padding, 4px 8px);
                     cursor: pointer;
                     position: relative;
                     .selected {
@@ -633,7 +638,7 @@
               .bonus-label {
                 color: $account-content-item-color;
                 font-size: $font-size-4;
-                font-weight: normal;
+                font-weight: var(--field-label-text-font-weight, normal);
               }
 
 
@@ -648,13 +653,13 @@
               }
 
               input[type=text] {
-                border: none;
+                border: var(--m-payment-form-input-border, none);
                 background-color: backgroundColor(m-payment-form-field, #fff);
                 color: var(--m-payment-form-input-color, #333);
-                text-indent: 10px;
+                text-indent: var(--m-payment-form-input-text-indent, 10px);
               }
               .payment-select {
-                border: none;
+                border: var(--m-payment-form-input-border, none);
                 background-color: backgroundColor(m-payment-form-field, #fff);
                 color: var(--m-payment-form-input-color, #333);
                 opacity: 1;

@@ -8,6 +8,7 @@
 
   &.user-info-content {
     height: 364px;
+    width: 100%;
     background-color: backgroundColor(user-info-box,rgba(30, 46, 72, 1));
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     margin-top: 26px!important;
@@ -24,8 +25,8 @@
   h1 {
     font-size: var(--user-info-text-font-size, 24px);
     line-height: var(--user-info-text-line-height, 30px);
-    float: left;
-    color: $label-color;
+    float: var(--user-info-text-float, left);
+    color: var(--user-info-text-item-color, $label-color);
     font-weight: var(--user-info-text-font-weight, bold);
     text-align: var(--user-info-text-text-align, left);
     text-transform: var(--user-info-text-text-transform, uppercase);

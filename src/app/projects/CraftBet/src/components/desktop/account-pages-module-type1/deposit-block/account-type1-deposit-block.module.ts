@@ -5,11 +5,7 @@ import {AccountType1DepositBlockRoutingModule} from "./account-type1-deposit-blo
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
-import {SimpleModalModule} from "ngx-simple-modal";
 import {HttpClientModule} from "@angular/common/http";
-import {FilterPipeModule} from "ngx-filter-pipe";
-import {NgxMaskModule} from "ngx-mask";
-import {ClickOutsideModule} from "ng-click-outside";
 import {NgxPrintModule} from "ngx-print";
 import {ThemeModule} from "../../../../../../../@theme/theme.module";
 import {DepositType1Component} from "./desposit-payments/deposit-type1/deposit-type1.component";
@@ -39,7 +35,6 @@ import {DepositType13Component} from "./desposit-payments/deposit-type13/deposit
 import {DepositType13DefaultComponent} from "./desposit-payments/deposit-type13/deposit-type13-default/deposit-type13-default.component";
 import {DepositType14Component} from "./desposit-payments/deposit-type14/deposit-type14.component";
 import {DepositType14DefaultComponent} from "./desposit-payments/deposit-type14/deposit-type14-default/deposit-type14-default.component";
-import {LoaderModule} from "../../../common/loader/loader.module";
 import {OrderByPipeModule} from "../../../../../../../@theme/pipes/order-by/order-by-pipe.module";
 import {CommonBonusesModule} from "../../../common/app-common-bonuses/common-bonuses.module";
 import {CommonPaymentNominalsModule} from "../../../common/app-common-payment-nominals/common-payment-nominals.module";
@@ -52,6 +47,9 @@ import {
     DepositType17DefaultComponent
 } from "./desposit-payments/deposit-type17/deposit-type17-default/deposit-type17-default.component";
 import {QRCodeModule} from "angularx-qrcode";
+import {NgxMaskDirective} from "ngx-mask";
+import {LoaderComponent} from "../../../common/loader/loader.component";
+
 
 
 @NgModule({
@@ -99,54 +97,16 @@ import {QRCodeModule} from "angularx-qrcode";
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
-        ClickOutsideModule,
+        NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
         DesktopMobileCommonModule,
-        LoaderModule,
         OrderByPipeModule,
         CommonBonusesModule,
         CommonPaymentNominalsModule,
-        QRCodeModule
-    ],
-    entryComponents: [
-        DepositType1Component,
-        DepositType2Component,
-        DepositType3Component,
-        DepositType4Component,
-        DepositType5Component,
-        DepositType6Component,
-        DepositType7Component,
-        DepositType8Component,
-        DepositType9Component,
-        DepositType1DefaultComponent,
-        DepositType2DefaultComponent,
-        DepositType3DefaultComponent,
-        DepositType4DefaultComponent,
-        DepositType5DefaultComponent,
-        DepositType6DefaultComponent,
-        DepositType7DefaultComponent,
-        DepositType8DefaultComponent,
-        DepositType9DefaultComponent,
-        DepositType9Component,
-        DepositType10Component,
-        DepositType10DefaultComponent,
-        DepositType11Component,
-        DepositType11DefaultComponent,
-        DepositType13Component,
-        DepositType13DefaultComponent,
-        DepositType14Component,
-        DepositType14DefaultComponent,
-        DepositType15Component,
-        DepositType15DefaultComponent,
-        DepositType16Component,
-        DepositType16DefaultComponent,
-        DepositType17Component,
-        DepositType17DefaultComponent
+        QRCodeModule,
+        LoaderComponent
     ]
 })
 export class AccountType1DepositBlockModule {

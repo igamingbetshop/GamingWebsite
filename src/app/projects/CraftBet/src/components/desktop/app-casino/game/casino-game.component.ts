@@ -20,6 +20,7 @@ export class CasinoGameComponent implements OnInit
     showInfobox = false;
     productInfo:ProductIno;
     currencySymbol:string;
+    tags:string;
 
     @Output('onOpen') onOpen:EventEmitter<any> = new EventEmitter<any>();
 
@@ -70,6 +71,7 @@ export class CasinoGameComponent implements OnInit
                 if(data.ResponseCode === 0)
                 {
                     this.productInfo = data.ResponseObject;
+                    this.tags = data.ResponseObject.Tags.split(",", 2);
                 }
             });
     }

@@ -1,7 +1,7 @@
 import {
     AfterViewInit, Directive,
     ElementRef,
-    HostListener,
+    HostListener, inject,
     Injector,
     SecurityContext,
     ViewChild,
@@ -18,14 +18,13 @@ import {getFakeAmountRangeByCurrency, getRandomInt} from "@core/utils";
 import {SignalRService} from "@core/services/soket/signal-r.service";
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {TranslateService} from "@ngx-translate/core";
-import {SimpleModalService} from 'ngx-simple-modal';
 import {OpenGamesService} from "@core/services/app/openGames.service";
-import {FilterPipe} from "ngx-filter-pipe";
 import {FavoritesService} from "@core/services/api/favorites.service";
 import {debounceTime, take} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {BalanceService} from "@core/services/api/balance.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BaseGamesComponent extends BaseComponent implements AfterViewInit {
@@ -41,11 +40,10 @@ export class BaseGamesComponent extends BaseComponent implements AfterViewInit {
     public configService: ConfigService;
     protected signalRService: SignalRService;
     public userLogined: UserLogined;
-    public simpleModalService: SimpleModalService;
     protected openGamesService: OpenGamesService;
     protected favoriteService: FavoritesService;
     public saveData: SaveData;
-    public filter: FilterPipe;
+    dialog = inject(MatDialog);
 
     private searchGame = new Subject();
 
@@ -135,11 +133,9 @@ export class BaseGamesComponent extends BaseComponent implements AfterViewInit {
         this.userLogined = injector.get(UserLogined);
         this.translate = injector.get(TranslateService);
         this.isLogined = this.userLogined.isAuthenticated;
-        this.simpleModalService = injector.get(SimpleModalService);
         this.openGamesService = injector.get(OpenGamesService);
         this.saveData = injector.get(SaveData);
         this.favoriteService = injector.get(FavoritesService);
-        this.filter = new FilterPipe();
         this.userInfoData = this.userLogined.getUserInfo();
         this.sanitizer = injector.get(DomSanitizer);
         this.balanceService = injector.get(BalanceService);

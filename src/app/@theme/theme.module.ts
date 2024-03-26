@@ -13,12 +13,9 @@ import {SanitizerModule} from "./pipes/sanitizer/sanitizer.module";
 import {BaseInfoBlockModule} from "./components/modals/base-info-block/base-info-block.module";
 import {ConfirmWindowModule} from "./components/common/confirm-window/confirm-window.module";
 import {BaseQuestionTabModule} from "./components/modals/base-question-tab/base-question-tab.module";
-import {RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module} from "ng-recaptcha";
-import {ConfigService} from "../@core/services";
 import {BaseFrameModule} from "./components/modals/base-frame/base-frame.module";
 import {OnlyNumberDirectiveModule} from "./directives/only-number/only-number.directive.module";
 import {LimitNotificationsModule} from "./components/modals/limit-notifications/limit-notifications.module";
-import {getRecaptchaKey} from "@core/utils";
 import {GoogleAuthenticateModule} from "./components/modals/google-authenticate/google-authenticate.module";
 
 
@@ -28,7 +25,6 @@ const BASE_MODULES = [
     FontAwesomeModule,
     FontAwesomeIcons,
     SanitizerModule,
-    RecaptchaV3Module,
     OnlyNumberDirectiveModule
 ];
 
@@ -54,9 +50,7 @@ const LAZY_LOAD_MODAL_MODULES =  [
     ],
 
 
-    providers:[
-        { provide: RECAPTCHA_V3_SITE_KEY, useFactory: getRecaptchaKey, deps: [ConfigService]},
-    ]
+
 })
 export class ThemeModule
 {

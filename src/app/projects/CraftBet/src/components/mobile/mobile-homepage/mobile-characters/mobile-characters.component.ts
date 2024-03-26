@@ -1,13 +1,12 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, Input, OnInit} from '@angular/core';
 import {CircleCarousel, dragger} from "./mobile-characters";
-import {SimpleModalComponent} from "ngx-simple-modal";
-import {ConfirmModel} from "../../../../../../../@core/interfaces";
 import {BaseApiService} from "../../../../../../../@core/services/api/base-api.service";
 import {Controllers, Methods} from "../../../../../../../@core/enums";
 import {take} from "rxjs";
 import {Character} from "../../../../../../../@core/models";
 import {LocalStorageService} from "../../../../../../../@core/services";
 import {UserLogined} from "../../../../../../../@core/services/app/userLogined.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 
 @Component({
@@ -16,7 +15,7 @@ import {UserLogined} from "../../../../../../../@core/services/app/userLogined.s
     styleUrls: ['./mobile-characters.component.scss']
 })
 
-export class MobileCharactersComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit
+export class MobileCharactersComponent implements OnInit
 {
      /*elements:number[] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];*/
     @Input() Id: string = 'characters';
@@ -26,18 +25,16 @@ export class MobileCharactersComponent extends SimpleModalComponent<ConfirmModel
     carousel;
     container;
     public selectedCharacterId: number;
-    public title: string;
-    public message: boolean;
-    public data: any;
     public isShowCharactersList: boolean = false;
     public selectedCharacter:any;
-
+    data:any = inject(MAT_DIALOG_DATA);
+    dialogRef = inject(MatDialogRef<MobileCharactersComponent>);
     constructor(private baseApiService:BaseApiService,
                 private localStorageService:LocalStorageService,
                 private loginService:UserLogined,
                 private cd:ChangeDetectorRef)
     {
-        super();
+
     }
 
     ngOnInit()
@@ -92,18 +89,17 @@ export class MobileCharactersComponent extends SimpleModalComponent<ConfirmModel
         });
     }
 
-    close(): Promise<any> {
+    close()
+    {
         if(!this.selectedCharacter){
             this.setCharacterById(this.characters[0].Id)
         }
-        return super.close();
-
+        this.dialogRef.close();
     }
 
     confirm()
     {
-        this.result = true;
-        this.close();
+        this.dialogRef.close();
     }
 }
 

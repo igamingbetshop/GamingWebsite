@@ -1,17 +1,16 @@
-import { Directive, Injector } from "@angular/core";
+import {Directive, inject, Injector} from "@angular/core";
 import {BaseComponent} from "../../base/base.component";
 import {GetPaymentsService} from "@core/services/app/getPayments.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {SharedService} from "@core/services";
 import {ProfileService} from "../../profile/service/profile.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {StateService} from "@core/services/app/state.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BaseBankAccounts extends BaseComponent {
     public paymentService: GetPaymentsService;
-
-    private simpleModalService: SimpleModalService;
+    private dialog = inject(MatDialog);
     public sharedService: SharedService;
     public addBankAccount = false;
     public isEditMode = false;
@@ -25,7 +24,6 @@ export class BaseBankAccounts extends BaseComponent {
     constructor(public injector: Injector) {
         super(injector);
         this.paymentService = injector.get(GetPaymentsService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.sharedService = injector.get(SharedService);
         this.profileService = injector.get(ProfileService);
         this.router = injector.get(Router);
@@ -35,11 +33,9 @@ export class BaseBankAccounts extends BaseComponent {
 
     public addAccount(addAccountComponent?)
     {
-        this.simpleModalService.addModal(addAccountComponent, {
-            title: 'Open ticket',
-            message: true,
-            data: {selectedBankAccount: this.selectedBankAccount}
-        }, {closeOnClickOutside: true}).subscribe(() => {
+        this.dialog.open(addAccountComponent, {
+            data:{title: 'Open ticket', message: true, selectedBankAccount: this.selectedBankAccount},
+            disableClose:true
         });
     }
 

@@ -22,11 +22,7 @@ import {AccountPagesModuleType2RoutingModule} from "./account-pages-module-type2
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
-import {SimpleModalModule} from "ngx-simple-modal";
 import {HttpClientModule} from "@angular/common/http";
-import {FilterPipeModule} from "ngx-filter-pipe";
-import {NgxMaskModule} from "ngx-mask";
-import {ClickOutsideModule} from "ng-click-outside";
 import {NgxPrintModule} from "ngx-print";
 import {ThemeModule} from "../../../../../../@theme/theme.module";
 import { AccountPageType2PaymentsComponent } from './payments/account-page-type2-payments.component';
@@ -45,6 +41,9 @@ import {AccountPageType2VerificationComponent} from "./verification/account-page
 import {ProfileService} from "../../../../../../@theme/components/profile/service/profile.service";
 import {ExportDataService} from "../../../../../../@core/services";
 import {DesktopModule} from "../desktop.module";
+import {NgxMaskDirective} from "ngx-mask";
+import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
+
 
 @NgModule({
   declarations: [
@@ -77,16 +76,14 @@ import {DesktopModule} from "../desktop.module";
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
-        ClickOutsideModule,
+        NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
         GlobalLogoutModule,
         CollapseDirectiveModule,
-        DesktopModule
+        DesktopModule,
+        DropdownDirectiveModule
     ],
   providers:[
     GetSettingsService,

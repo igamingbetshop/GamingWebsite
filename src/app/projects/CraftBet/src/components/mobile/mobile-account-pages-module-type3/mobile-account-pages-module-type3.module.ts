@@ -4,18 +4,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { SimpleModalModule } from 'ngx-simple-modal';
 import { HttpClientModule } from '@angular/common/http';
-import { FilterPipeModule } from 'ngx-filter-pipe';
-import { NgxMaskModule } from 'ngx-mask';
-import { ClickOutsideModule } from 'ng-click-outside';
 import { NgxPrintModule } from 'ngx-print';
 import { ThemeModule } from '../../../../../../@theme/theme.module';
 import { DesktopMobileCommonModule } from '../../common/common.module';
 import { OrderByPipeModule } from '../../../../../../@theme/pipes/order-by/order-by-pipe.module';
 import { CommonMessageModalModule } from '../../common/app-common-message-modal/common-message-modal.module';
-import { MobileUserInfoModule } from '../mobile-user-info/mobile-user-info.module';
-import { TriggersModule } from '../../../../../../@theme/components/common/base-triggers/triggers.module';
 import { CommonBankMessageModalModule } from '../../common/app-common-bank-message-modal/common-bank-message-modal.module';
 import { ExportDataService, LocalStorageService } from '../../../../../../@core/services';
 import { FriendsService } from '../../../../../../@core/services/api/friends.service';
@@ -34,6 +28,8 @@ import { MobileAccountPageType3DefaultComponent } from './default/mobile-account
 import { HorizontalScrollDirectiveModule } from '../../../../../../@theme/directives/horizontal-scroll/horizontal-scroll.directive.module';
 import { MobileAccountPageType3OpenTicketsComponent } from './open-tickets/mobile-account-page-type3-open-tickets.component';
 import { MobileAccountPageType3AddBankAccountsComponent } from './add-bank-accounts/mobile-account-page-type3-add-bank-accounts.component';
+import {NgxMaskDirective} from "ngx-mask";
+
 
 @NgModule({
     declarations: [
@@ -49,18 +45,13 @@ import { MobileAccountPageType3AddBankAccountsComponent } from './add-bank-accou
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
-        ClickOutsideModule,
+        NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
         DesktopMobileCommonModule,
         OrderByPipeModule,
         CommonMessageModalModule,
-        MobileUserInfoModule,
-        TriggersModule,
         CommonBankMessageModalModule,
         SanitizerModule,
         ToNumberPipeModule,

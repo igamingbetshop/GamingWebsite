@@ -1,7 +1,7 @@
 import {
     AfterViewInit,
     Component,
-    createNgModuleRef, ElementRef,
+    createNgModule, ElementRef, inject,
     Injector,
     NgModule,
     NgModuleRef, OnDestroy,
@@ -12,8 +12,6 @@ import {
 import {Router} from '@angular/router';
 import {ConfigService, ExportDataService, LocalStorageService, SaveData} from '@core/services';
 import {faCaretDown} from '@fortawesome/free-solid-svg-icons';
-import {SimpleModalComponent, SimpleModalModule} from 'ngx-simple-modal';
-import {ConfirmModel} from '@core/interfaces';
 import {GetSettingsService} from '@core/services/app/getSettings.service';
 import {FriendsService} from '@core/services/api/friends.service';
 import {BonusesService} from '@core/services/api/bonuses.service';
@@ -28,17 +26,16 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {HttpClientModule} from '@angular/common/http';
-import {FilterPipeModule} from 'ngx-filter-pipe';
-import {NgxMaskModule} from 'ngx-mask';
 import {ThemeModule} from '../../../../../../../@theme/theme.module';
 import {GlobalLogoutModule} from '../../../../../../../@theme/components/global-logout/global-logout.module';
 import {ProfileService} from '../../../../../../../@theme/components/profile/service/profile.service';
 import {HorizontalScrollDirectiveModule} from '../../../../../../../@theme/directives/horizontal-scroll/horizontal-scroll.directive.module';
 import {HorizontalScrollDirective} from '../../../../../../../@theme/directives/horizontal-scroll/horizontal-scroll.directive';
-import {TriggersModule} from "../../../../../../../@theme/components/common/base-triggers/triggers.module";
-import {BehaviorSubject, Subject, Subscription} from "rxjs";
-import {debounceTime, take} from "rxjs/operators";
+import {BehaviorSubject, Subscription} from "rxjs";
+
 import {BaseService} from "@core/services/app/base.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {NgxMaskDirective} from "ngx-mask";
 
 @Component({
     selector: 'app-account-page-type3-default',
@@ -46,12 +43,12 @@ import {BaseService} from "@core/services/app/base.service";
     styleUrls: ['./account-page-type3-default.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AccountPageType3DefaultComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit, AfterViewInit, OnDestroy {
+export class AccountPageType3DefaultComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild('accountPageRef', {read: ViewContainerRef, static: true}) accountPageRef;
     @ViewChild('horizontalScrollContainer', { static: true }) horizontalScrollContainer: ElementRef;
     @ViewChild(HorizontalScrollDirective, { static: true }) horizontalScrollDirective: HorizontalScrollDirective;
-    public title: string;
-    public data;
+    data:any = inject(MAT_DIALOG_DATA);
+    dialogRef = inject(MatDialogRef<AccountPageType3DefaultComponent>);
     public router: Router;
     public configService: ConfigService;
     public baseControllerService: BaseControllerService;
@@ -71,7 +68,6 @@ export class AccountPageType3DefaultComponent extends SimpleModalComponent<Confi
     private tabChangeNotifier: BehaviorSubject<string> = new BehaviorSubject("");
 
     constructor(public injector: Injector, private el: ElementRef, private baseService: BaseService) {
-        super();
         this.configService = injector.get(ConfigService);
         this.savedDateService = injector.get(SaveData);
         this.router = injector.get(Router);
@@ -99,7 +95,7 @@ export class AccountPageType3DefaultComponent extends SimpleModalComponent<Confi
                 el.SubMenu.forEach(subMenuItem => {
                     if (subMenuItem?.Href !== '') {
                         this.savedDateService.selectedItem = el;
-                        const matchingSubMenuItem = el.SubMenu.find(item => item.Href === this.title);
+                        const matchingSubMenuItem = el.SubMenu.find(item => item.Href === this.data.title);
                         if (matchingSubMenuItem) {
                             this.savedDateService.currentSubItem = matchingSubMenuItem;
                         }
@@ -117,12 +113,12 @@ export class AccountPageType3DefaultComponent extends SimpleModalComponent<Confi
     {
         this.subscription = new Subscription();
         this.subscription.add(this.tabChangeNotifier.subscribe(title => {
-            this.openComponent(title || this.title, this.data);
+            this.openComponent(title || this.data.title, this.data.transactionId);
         }));
     }
 
     ngAfterViewInit() {
-        this.scrollToItem(this.title);
+        this.scrollToItem(this.data.title);
     }
 
     changeStep(direction) {
@@ -161,91 +157,91 @@ export class AccountPageType3DefaultComponent extends SimpleModalComponent<Confi
         switch (item) {
             case 'tickets': {
                 const {AccountPageType3TicketsModule} = await import('../tickets/account-page-type3-tickets.module');
-                moduleRef = createNgModuleRef(AccountPageType3TicketsModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3TicketsModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'verification': {
                 const {AccountPageType3VerificationModule} = await import('../verification/account-page-type3-verification.module');
-                moduleRef = createNgModuleRef(AccountPageType3VerificationModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3VerificationModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'history': {
                 const {AccountPageType3HistoryModule} = await import('../history/account-page-type3-history.module');
-                moduleRef = createNgModuleRef(AccountPageType3HistoryModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3HistoryModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef, data);
                 break;
             }
             case 'transactions': {
                 const {AccountPageType3TransactionsModule} = await import('../transactions/account-page-type3-transactions.module');
-                moduleRef = createNgModuleRef(AccountPageType3TransactionsModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3TransactionsModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'self-limitation': {
                 const {AccountPageType3SelfLimitationModule} = await import('../self-limitation/account-page-type3-self-limitation.module');
-                moduleRef = createNgModuleRef(AccountPageType3SelfLimitationModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3SelfLimitationModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'deposit': {
                 const {AccountPageType3DepositBlockModule} = await import('../deposit-block/account-page-type3-deposit-block.module');
-                moduleRef = createNgModuleRef(AccountPageType3DepositBlockModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3DepositBlockModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'withdraw': {
                 const {AccountPageType3WithdrawBlockModule} = await import('../withdraw-block/account-page-type3-withdraw-block.module');
-                moduleRef = createNgModuleRef(AccountPageType3WithdrawBlockModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3WithdrawBlockModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'profile': {
                 const {AccountPageType3ProfileModule} = await import('../profile/account-page-type3-profile.module');
-                moduleRef = createNgModuleRef(AccountPageType3ProfileModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3ProfileModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'payment': {
                 const {AccountPageType3PaymentModule} = await import('../payment/account-page-type3-payment.module');
-                moduleRef = createNgModuleRef(AccountPageType3PaymentModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3PaymentModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'credit': {
                 const {AccountPageType3CreditModule} = await import('../credit/account-page-type3-credit.module');
-                moduleRef = createNgModuleRef(AccountPageType3CreditModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3CreditModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'document-Verification': {
                 const {AccountPageType3DocumentVerificationModule} = await import('../document-verification/account-page-type3-document-verification.module');
-                moduleRef = createNgModuleRef(AccountPageType3DocumentVerificationModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3DocumentVerificationModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'bonuses': {
                 const {AccountPageType3BonusesModule} = await import('../bonuses/account-page-type3-bonuses.module');
-                moduleRef = createNgModuleRef(AccountPageType3BonusesModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3BonusesModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'payments': {
                 const {AccountPageType3PaymentsModule} = await import('../payments/account-page-type3-payments.module');
-                moduleRef = createNgModuleRef(AccountPageType3PaymentsModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3PaymentsModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'bank-accounts': {
                 const {AccountPageType3BankAccountsModule} = await import('../bank-accounts/account-page-type3-bank-accounts.module');
-                moduleRef = createNgModuleRef(AccountPageType3BankAccountsModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3BankAccountsModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
             case 'credit-check': {
                 const {AccountPageType3CreditModule} = await import('../credit-check/account-page-type3-credit-check.module');
-                moduleRef = createNgModuleRef(AccountPageType3CreditModule, this.injector);
+                moduleRef = createNgModule(AccountPageType3CreditModule, this.injector);
                 this.createCommonComponent(moduleRef, this.accountPageRef);
                 break;
             }
@@ -269,6 +265,8 @@ export class AccountPageType3DefaultComponent extends SimpleModalComponent<Confi
         this.subscription.unsubscribe();
     }
 
+    close(){this.dialogRef.close()}
+
 
 }
 
@@ -281,14 +279,11 @@ export class AccountPageType3DefaultComponent extends SimpleModalComponent<Confi
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
         ThemeModule,
         GlobalLogoutModule,
         HorizontalScrollDirectiveModule,
-        TriggersModule
     ],
     providers: [
         GetSettingsService,

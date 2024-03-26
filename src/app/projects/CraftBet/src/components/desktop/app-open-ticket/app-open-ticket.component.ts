@@ -15,8 +15,8 @@ export class AppOpenTicketComponent extends AppCommonOpenTicketComponent {
   ngOnInit()
   {
     super.ngOnInit();
-    this.sharedService.rightToLeftOrientation.subscribe((recponceData) => {
-      this.rightToLeftOrientation = recponceData;
+    this.sharedService.rightToLeftOrientation.subscribe((responseData:any) => {
+      this.rightToLeftOrientation = responseData;
     });
   }
 }

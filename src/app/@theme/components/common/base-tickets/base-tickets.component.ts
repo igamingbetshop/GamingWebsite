@@ -1,11 +1,11 @@
-import {Directive, ElementRef, Inject, Injector, ViewChild} from '@angular/core';
+import {Directive, ElementRef, inject, Inject, Injector, ViewChild} from '@angular/core';
 import {ConfigService, DefaultService, LocalStorageService, SaveData} from "@core/services";
-import {SimpleModalService} from "ngx-simple-modal";
 import {TicketsService} from "@core/services/api/tickets.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BaseComponent} from '../../base/base.component';
 import {Ticket} from "@core/models";
 import {DOCUMENT} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BaseTicketsComponent extends BaseComponent {
@@ -16,7 +16,7 @@ export class BaseTicketsComponent extends BaseComponent {
     public isShow: boolean = true;
     public defaultService: DefaultService;
     public localStorageService: LocalStorageService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     public saveData: SaveData;
     public configService: ConfigService;
     public ticketsService: TicketsService;
@@ -48,7 +48,6 @@ export class BaseTicketsComponent extends BaseComponent {
 
         this.defaultService = injector.get(DefaultService);
         this.localStorageService = injector.get(LocalStorageService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.saveData = injector.get(SaveData);
         this.configService = injector.get(ConfigService);
         this.ticketsService = injector.get(TicketsService);

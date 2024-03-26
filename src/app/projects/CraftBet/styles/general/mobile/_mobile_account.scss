@@ -50,6 +50,8 @@
     color: color(m-user-views-title);
     text-transform: var(--user-right-panel-title-text-transform, unset);
     margin: var(--m-account-page-title-margin, 0);
+    font-size: var(--m-account-page-title-font-size, 24px);
+    font-weight: var(--m-account-page-title-font-weight, 400);
   }
 
   &_table {
@@ -65,7 +67,8 @@
     &_title {
       display: table-row;
       color: color(m-account-statement-title);
-      font-weight: 500;
+      font-weight: var(--m-account-statement-title-font-weight, 500);
+      font-size: var(--m-account-statement-title-font-size, 16px);
       background: color(m-user-table-header-background);
 
       .item_cell {

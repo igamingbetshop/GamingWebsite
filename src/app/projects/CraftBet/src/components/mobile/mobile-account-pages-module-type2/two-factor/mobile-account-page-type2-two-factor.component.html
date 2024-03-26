@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [ngStyle]="layoutService.layoutStyle">
     <div class="container-section">
         <div class="two-factor-section" *ngIf="IsTwoFactorEnabled === false">
             <h2 class="mobile-factor-section_title">{{ 'Settings.Otp-required' | translate }}</h2>

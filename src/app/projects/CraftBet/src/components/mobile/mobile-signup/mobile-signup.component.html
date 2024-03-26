@@ -1,4 +1,4 @@
-<!--<img class="login-bg"   [src]="bgUrl"  (error)="errorHandlerBg($event)"/>-->
+<img class="login-bg"   [src]="bgUrl"  (error)="errorHandlerBg($event)"/>
 <div class="mobile-registration-section"
      [ngClass]="{'showPaddingTop': this.configService.defaultOptions.ShowMobileNavPanel == '1' }">
 <!--    <div class="reg-header">{{'Register.Register' | translate}}</div>-->
@@ -172,7 +172,7 @@
                                             <span>{{currentValueMobileCode?.Title}}
                                                 ({{currentValueMobileCode?.Type}})</span>
                                         </div>
-<!--                                        <fa-icon [icon]="['fas', 'sort-down']"></fa-icon>-->
+                                        <fa-icon [icon]="['fas', 'sort-down']"></fa-icon>
                                     </div>
 
                                     <ul class="custom_dropdown_list right-top" [ngStyle]="{'height': mobileCodesList.length > 7? '150px': 'fit-content'}">
@@ -321,7 +321,7 @@
 
                         </div>
                         <div *ngSwitchCase="'Region3'" class="form_field form_field__{{form_elem?.Type}}">
-<!--                            <label *ngIf="form_elem?.HasLabel">{{'Register.' + form_elem?.Title | translate}}</label>-->
+                            <label *ngIf="form_elem?.HasLabel">{{'Register.' + form_elem?.Title | translate}}</label>
 
                             <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
 
@@ -355,13 +355,13 @@
                                             [ngValue]="city.Id">{{city?.Name}}</option>
                                 </select>
                                 <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.City' | translate}}</label>
-                               <!-- <select [formControlName]="'Town'" class="custom_dropdown_reg"
+                                <select [formControlName]="'Town'" class="custom_dropdown_reg"
                                         (ngModelChange)="changeTown($event, currentStep)"
                                         [ngClass]="{'disable-item': regFormSteps[currentStep - 1].get('District').value == '' || regFormSteps[currentStep - 1].get('Country').value == '' || regFormSteps[currentStep - 1].get('City').value == '', 'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
                                     <option value="">{{'Register.Town-option' | translate}}</option>
                                     <option *ngFor="let town of townList"
                                             [ngValue]="town.Id">{{town?.Name}}</option>
-                                </select>-->
+                                </select>
                             </div>
 
                         </div>
@@ -537,7 +537,6 @@
                                     <input type="checkbox" class="reg-checkbox distans-right"
                                            [formControlName]="form_elem.Title"
                                            [ngClass]="{'invalid-filed': ((!regFormSteps[currentStep - 1].get(form_elem?.Title).value && submitted) || regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}"/>
-                                    <!--                         *ngIf="submitted && !regFormSteps[currentStep - 1].get(form_elem?.Title).value">-->
 
                                     <span (click)="onTemplateClick($event)" class="reg-conditions" [innerHTML]="'Register.' + form_elem?.Title | translate | sanitizer: 'html'"></span>
                                 </div>
@@ -554,14 +553,14 @@
 
 
 
-<!--                <div *ngIf="showSuccessMessage" class="reg-success-message">-->
-<!--                    {{'Register.Success-Message' | translate}}-->
-<!--                </div>-->
+                <div *ngIf="showSuccessMessage" class="reg-success-message">
+                    {{'Register.Success-Message' | translate}}
+                </div>
 
                 <div class="error-message" *ngIf="errorMessage">
                     <span class="icon-error-message"></span>
                     <span class="error-message-text">{{errorMessage}}</span>
-<!--                    <span class="icon-close-modal"></span>-->
+                    <span class="icon-close-modal"></span>
                 </div>
             </div>
         </form>
@@ -660,10 +659,10 @@
                                    [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}"/>
 
                             <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
-                            <!--              <div class="error_message"-->
-                            <!--                   *ngIf="(quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || quickRegForm.get(form_elem?.Title).hasError('required') && !quickRegForm.get(form_elem?.Title).hasError(form_elem?.Title) && !quickRegForm.get(form_elem?.Title).hasError('maxlength') && quickRegForm.get(form_elem?.Title).touched">-->
-                            <!--                <span>{{ 'Error.Required-field' | translate }}</span>-->
-                            <!--              </div>-->
+                                          <div class="error_message"
+                                               *ngIf="(quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || quickRegForm.get(form_elem?.Title).hasError('required') && !quickRegForm.get(form_elem?.Title).hasError(form_elem?.Title) && !quickRegForm.get(form_elem?.Title).hasError('maxlength') && quickRegForm.get(form_elem?.Title).touched">
+                                            <span>{{ 'Error.Required-field' | translate }}</span>
+                                          </div>
 
                         </div>
 
@@ -679,7 +678,7 @@
                                             <span>{{currentValueMobileCode?.Title}}
                                                 ({{currentValueMobileCode?.Type}})</span>
                                         </div>
-<!--                                        <fa-icon [icon]="['fas', 'sort-down']"></fa-icon>-->
+                                        <fa-icon [icon]="['fas', 'sort-down']"></fa-icon>
                                     </div>
 
                                     <ul class="custom_dropdown_list right-top">
@@ -703,10 +702,10 @@
                                 </div>
                             </div>
                             <span class="error-field-message" *ngIf="((quickRegForm.get('MobileNumber').hasError('required') && submitted) || (quickRegForm.get('MobileNumber').hasError('required')  || quickRegForm.get('MobileNumber').hasError('MobileNumber') || quickRegForm.get('MobileNumber').hasError('maxlength')) && quickRegForm.get('MobileNumber').touched)">{{'Error.MobileNumberFieldNotValid' | translate}}</span>
-                            <!--              <div class="error_message"-->
-                            <!--                   *ngIf="(quickRegForm.get('MobileNumber').hasError('required') && submitted) || quickRegForm.get('MobileNumber').hasError('required') && !quickRegForm.get('MobileNumber').hasError('MobileNumber') && !quickRegForm.get('MobileNumber').hasError('maxlength') && quickRegForm.get('MobileNumber').touched">-->
-                            <!--                <span>{{ 'Error.Required-field' | translate }}</span>-->
-                            <!--              </div>-->
+                                          <div class="error_message"
+                                               *ngIf="(quickRegForm.get('MobileNumber').hasError('required') && submitted) || quickRegForm.get('MobileNumber').hasError('required') && !quickRegForm.get('MobileNumber').hasError('MobileNumber') && !quickRegForm.get('MobileNumber').hasError('maxlength') && quickRegForm.get('MobileNumber').touched">
+                                            <span>{{ 'Error.Required-field' | translate }}</span>
+                                          </div>
                         </div>
 
                         <div *ngSwitchCase="'BirthDate'" class="form_field">
@@ -989,7 +988,7 @@
         <div class="error-message" *ngIf="errorMessage">
             <span class="icon-error-message"></span>
             <span class="error-message-text">{{errorMessage}}</span>
-<!--            <span class="icon-close-modal"></span>-->
+            <span class="icon-close-modal"></span>
         </div>
         <div class="reg-step-navigate-buttons flex-center">
             <button *ngIf="formValidationType === 'blur'"
@@ -1008,9 +1007,6 @@
             <a [routerLink]="['/login']">{{'Login.Sign In' | translate}}</a>
         </div>
     </div>
-
-
-
 
 </div>
 

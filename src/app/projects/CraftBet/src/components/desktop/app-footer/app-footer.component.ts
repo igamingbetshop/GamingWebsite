@@ -3,7 +3,7 @@ import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
 import {BaseFooterComponent} from '../../../../../../@theme/components/common/base-footer/base-footer.component';
 import {MenuType} from "@core/enums";
 import {ConfigService} from "@core/services";
-import {SimpleModalService} from "ngx-simple-modal";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({
@@ -19,7 +19,7 @@ export class AppFooterComponent extends BaseFooterComponent {
     public defaultOptions: any;
 
 
-    constructor(public injector: Injector, private simpleModalService:SimpleModalService)
+    constructor(public injector: Injector, private dialog:MatDialog)
     {
         super(injector);
         this.configService = injector.get(ConfigService);
@@ -131,14 +131,17 @@ export class AppFooterComponent extends BaseFooterComponent {
                 if ((item.Type == 1) && !this.isLogin)
                 {
                     localStorage.setItem('payment-url', item.Href);
-                    this.simpleModalService.addModal(AppConfirmComponent, {
-                        title: 'open_login',
-                        message: true,
-                    }, {animationDuration: 500}).subscribe((isConfirmed) => {
-                        if (!isConfirmed)
+                    const dialogRef = this.dialog.open(AppConfirmComponent, {data:{
+                            title: 'open_login',
+                            message: true,
+                        }, enterAnimationDuration:500});
+                    dialogRef.afterClosed().subscribe(result => {
+                        if (!result)
                             localStorage.removeItem('payment-url');
                     });
-                } else {
+                }
+                else
+                {
                     sessionStorage.setItem('openWithFooter', JSON.stringify(true));
                     this.router.navigate([item.Href]);
                     setTimeout(() => {

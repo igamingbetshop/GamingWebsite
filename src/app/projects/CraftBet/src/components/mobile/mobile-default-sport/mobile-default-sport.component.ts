@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, createNgModuleRef, Injector, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Component, createNgModule, Injector, ViewChild, ViewContainerRef} from '@angular/core';
 import {BaseDefaultSportComponent} from "../../../../../../@theme/components/common/base-default-sport/base-default-sport.component";
 import {ConfigService} from "@core/services";
 import {LayoutService} from "@core/services/app/layout.service";
@@ -38,7 +38,7 @@ export class MobileDefaultSportComponent extends BaseDefaultSportComponent imple
     if(this.isMigrated)
     {
       const { MobileSportModule } = await import("../mobile-sport/mobile-sport.module");
-      const moduleRef = createNgModuleRef(MobileSportModule, this.injector);
+      const moduleRef = createNgModule(MobileSportModule, this.injector);
       const component = moduleRef.instance.getComponent();
       this.sportComponentRef.createComponent(component, {ngModuleRef: moduleRef});
 
@@ -46,7 +46,7 @@ export class MobileDefaultSportComponent extends BaseDefaultSportComponent imple
     else
     {
       const { MobileFullWindowModule } = await import("../mobile-full-window/mobile-full-window.module");
-      const moduleRef = createNgModuleRef(MobileFullWindowModule, this.injector);
+      const moduleRef = createNgModule(MobileFullWindowModule, this.injector);
       const component = moduleRef.instance.getComponent();
       const frameComponent = this.frameComponentRef.createComponent(component, {ngModuleRef: moduleRef});
       frameComponent.instance.routeData = this.route.snapshot.data;

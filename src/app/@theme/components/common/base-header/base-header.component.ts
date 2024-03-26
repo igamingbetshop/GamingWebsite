@@ -1,4 +1,4 @@
-import {Directive, Injector} from '@angular/core';
+import {Directive, inject, Injector} from '@angular/core';
 import {BaseComponent} from '../../base/base.component';
 import {SaveData} from "@core/services";
 
@@ -10,7 +10,6 @@ import {
 
 import {TicketsService} from '../../../../@core/services/api/tickets.service';
 import {TranslateService} from "@ngx-translate/core";
-import {SimpleModalService} from 'ngx-simple-modal';
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {MenuType} from "@core/enums";
 import {Router} from "@angular/router";
@@ -20,6 +19,7 @@ import {UserLogined} from "@core/services/app/userLogined.service";
 import {BalanceService} from "@core/services/api/balance.service";
 import {LangService} from "@core/services/app/lang.service";
 import {StateService} from "@core/services/app/state.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BaseHeaderComponent extends BaseComponent {
@@ -46,7 +46,7 @@ export class BaseHeaderComponent extends BaseComponent {
     public baseControllerService: BaseControllerService;
     public sharedService: SharedService;
     public balanceService: BalanceService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     public configService: ConfigService;
     public localStorageService: LocalStorageService;
     public ticketsService: TicketsService;
@@ -65,7 +65,6 @@ export class BaseHeaderComponent extends BaseComponent {
         this.baseControllerService = injector.get(BaseControllerService);
         this.sharedService = injector.get(SharedService);
         this.balanceService = injector.get(BalanceService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.configService = injector.get(ConfigService);
         this.localStorageService = injector.get(LocalStorageService);
         this.ticketsService = injector.get(TicketsService);

@@ -6,7 +6,6 @@ import {ConfirmWindowComponent} from "./confirm-window.component";
 @NgModule({
   declarations:[ConfirmWindowComponent],
   exports:[ConfirmWindowComponent],
-  entryComponents:[ConfirmWindowComponent],
   imports:[
     FontAwesomeModule,
     TranslateModule,

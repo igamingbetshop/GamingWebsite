@@ -1,27 +1,26 @@
-import {Component} from "@angular/core";
-import {SimpleModalComponent} from "ngx-simple-modal";
+import {Component, inject} from "@angular/core";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'confirm-window',
   templateUrl: 'confirm-window.component.html',
 })
 
-export class ConfirmWindowComponent  extends SimpleModalComponent<any, boolean>
+export class ConfirmWindowComponent
 {
-  public title: string;
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<ConfirmWindowComponent>);
   constructor()
   {
-    super();
+
   }
 
   confirm()
   {
-    this.result = true;
-    this.close();
+    this.dialogRef.close(true);
   }
   cancel()
   {
-    this.result = false;
-    this.close();
+    this.dialogRef.close();
   }
 }

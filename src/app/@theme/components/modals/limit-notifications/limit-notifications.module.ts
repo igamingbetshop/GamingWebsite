@@ -7,7 +7,6 @@ import { LimitNotificationsComponent } from './limit-notifications.component';
 @NgModule({
     declarations:[LimitNotificationsComponent],
     exports:[LimitNotificationsComponent],
-    entryComponents:[LimitNotificationsComponent],
     imports:[
         CommonModule,
         TranslateModule,

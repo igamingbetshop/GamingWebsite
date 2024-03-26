@@ -1,7 +1,7 @@
 import {
   Component,
   ComponentRef,
-  createNgModuleRef,
+  createNgModule,
   Inject,
   Injector, Input,
   NgModuleRef,
@@ -95,7 +95,7 @@ export class AccountPageType3ProfileComponent extends BaseProfile {
         else if(item.Title == 'MobileNumber')
           containerRef = this.mobileNumberRef;
         const { SendCodeModule } = await import('./types/send-code/send-code.module');
-        const moduleRef = createNgModuleRef(SendCodeModule, this.injector);
+        const moduleRef = createNgModule(SendCodeModule, this.injector);
         this.createComponentWithInstances(moduleRef, containerRef, item.Title);
       }
         break;
@@ -112,7 +112,7 @@ export class AccountPageType3ProfileComponent extends BaseProfile {
             break;
         }
         const { RegionModule } = await import('./types/region/region.module');
-        const moduleRef = createNgModuleRef(RegionModule, this.injector);
+        const moduleRef = createNgModule(RegionModule, this.injector);
         const componentRef = this.createComponentWithInstances(moduleRef, containerRef, item.Title);
         componentRef.instance.zIndex = 100 - item.Order;
         componentRef.instance.subItem = item.Config?.subItem;

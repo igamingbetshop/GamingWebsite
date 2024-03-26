@@ -1,6 +1,6 @@
 <div class="footer-section" id="footerSection"
      [ngClass]="{'showFooter':animateFooter, 'fixFooter':!animateFooter, 'opened':openFooter}"
-     (clickOutside)="onClickedOutside($event)" [emitOnBlur]='true'>
+     (clickOutside)="onClickedOutside($event)">
   <div class="footer-open-button not-selectable"
        [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-arrow.png'}"
        (click)="toggleFooter()" *ngIf="animateFooter"

@@ -1,4 +1,4 @@
-import {OnInit, Injector, Directive, OnDestroy, ViewChild} from '@angular/core';
+import {OnInit, Injector, Directive, OnDestroy, inject, ViewChild} from '@angular/core';
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {Promotion, PromotionFragment} from "../../../../@core/models";
 import {Controllers, Methods} from "../../../../@core/enums";
@@ -7,9 +7,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {LangService} from "../../../../@core/services/app/lang.service";
 import {UserLogined} from "../../../../@core/services/app/userLogined.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {ConfigService} from "../../../../@core/services";
 import {LayoutService} from "../../../../@core/services/app/layout.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BasePromotionFragments implements OnInit, OnDestroy {
@@ -27,7 +27,7 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
   private languageService:LangService;
   private subscription:Subscription = new Subscription();
   protected loginService: UserLogined;
-  protected simpleModalService: SimpleModalService;
+  dialog = inject(MatDialog);
   public configService:ConfigService;
   public layoutService:LayoutService;
 
@@ -39,7 +39,6 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
     this.languageService = injector.get(LangService);
     this.router = injector.get(Router);
     this.loginService = injector.get(UserLogined);
-    this.simpleModalService = injector.get(SimpleModalService);
     this.configService = injector.get(ConfigService);
     this.layoutService = injector.get(LayoutService)
   }

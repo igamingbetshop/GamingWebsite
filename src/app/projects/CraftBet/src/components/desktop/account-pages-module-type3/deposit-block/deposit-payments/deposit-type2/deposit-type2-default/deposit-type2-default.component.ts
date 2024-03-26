@@ -66,11 +66,9 @@ export class DepositType2DefaultComponent extends BaseDepositType2Component {
 
     async redirectToSelfLimitation() {
         const { AccountPageType3DefaultComponent } = await import('../../../../default/account-page-type3-default.component');
-        this.simpleModalService.removeAll().then();
+        this.dialog.closeAll();
         setTimeout(() => {
-            this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                {title: 'self-limitation'}, {closeOnClickOutside: true}).subscribe(() => {
-            });
+            this.dialog.open(AccountPageType3DefaultComponent, {data:{title: 'self-limitation'}, hasBackdrop:true});
             this.savedDateService.selectedItem.Href = 'self-limitation';
         }, 100);
     }

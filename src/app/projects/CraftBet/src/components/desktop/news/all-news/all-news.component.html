@@ -1,8 +1,8 @@
 <div class="current-news-section"  [ngStyle]="{'display' : selectedFragment ? 'block' : 'none'}">
     <div class="news-title">
-        <span class="section-name">{{currentNews?.Type | translate}}</span>
+        <span class="section-name">{{newsTypes[currentNews?.Type] | translate}}</span>
         <span class="seperator">|</span>
-        <span class="current-news-name" [innerHtml]="currentNews.Title"></span>
+        <span class="current-news-name" [innerHtml]="currentNews?.Title"></span>
     </div>
 
     <div class="current-news-section-content">
@@ -12,9 +12,9 @@
             </div>
 
             <div class="news-info">
-                <h2 [innerHtml]="currentNews.Title"></h2>
-                <div class="description-header" [innerHtml]="currentNews.Description"></div>
-                <p [innerHtml]="currentNews.Content"></p>
+                <h2 [innerHtml]="currentNews?.Title"></h2>
+                <div class="description-header" [innerHtml]="currentNews?.Description"></div>
+                <p [innerHtml]="currentNews?.Content"></p>
             </div>
             <!--<div class="video-player">
               <video controls>
@@ -22,10 +22,10 @@
               </video>
             </div>-->
 
-            <p [innerHtml]="currentNews.Content"></p>
+            <p [innerHtml]="currentNews?.Content"></p>
             <p class="publish-date">
                 <i class="icon-timezone"></i>
-                <span>{{currentNews.DeltaTime}} {{'ago' | translate}}</span>
+                <span>{{currentNews?.DeltaTime}} {{'ago' | translate}}</span>
             </p>
 
         </div>

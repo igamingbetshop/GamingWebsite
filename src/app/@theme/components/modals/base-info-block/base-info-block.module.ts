@@ -7,7 +7,6 @@ import {CommonModule} from "@angular/common";
 @NgModule({
     declarations:[BaseInfoBlockComponent],
     exports:[BaseInfoBlockComponent],
-    entryComponents:[BaseInfoBlockComponent],
     imports:[
         CommonModule,
         TranslateModule,

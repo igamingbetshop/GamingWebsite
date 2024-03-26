@@ -1,10 +1,9 @@
-import {Component, OnInit, Injector, Input} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
+import {Component, OnInit, Injector, Input, inject} from '@angular/core';
 import {GetBetsHistoryService} from '../../../../../../@core/services/app/getBetsHistory.service';
 import {Products} from "@core/enums";
 import {LocalStorageService, SharedService} from "@core/services";
-import {ConfirmModel} from "@core/interfaces";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 
 @Component({
@@ -13,15 +12,14 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons";
   styleUrls: ['./user-info.component.scss']
 })
 
-export class UserInfoComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
-  @Input() data:any;
+export class UserInfoComponent implements OnInit {
+  @Input() info:any;
   public rightToLeftOrientation: boolean = false;
-  public title: string;
-  public message: boolean;
   public userInfoList: any = {};
   public faTimes = faTimes;
   public isLoaded:boolean;
-
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<UserInfoComponent>);
 
   public showBonus: boolean;
 
@@ -31,7 +29,6 @@ export class UserInfoComponent extends SimpleModalComponent<ConfirmModel, boolea
   public CurrencySymbol: any;
 
   constructor(public injector: Injector, public sharedService: SharedService) {
-    super();
     this.getBetsHistoryService = injector.get(GetBetsHistoryService);
     this.localStorageService = injector.get(LocalStorageService);
     const userData = this.localStorageService.get('user');
@@ -39,8 +36,9 @@ export class UserInfoComponent extends SimpleModalComponent<ConfirmModel, boolea
   }
 
   ngOnInit() {
-    this.showBonus = this.data.ProductId == Products.SPORTSBOOK && this.data.BetTypeId == 2;
-    this.getBetsHistoryService.getBetsInfo(this.data).then((responseData) => {
+    this.info = this.data.info || this.info;
+    this.showBonus = this.info.ProductId == Products.SPORTSBOOK && this.info.BetTypeId == 2;
+    this.getBetsHistoryService.getBetsInfo(this.info).then((responseData) => {
       if (responseData['ResponseCode'] === 0)
       {
         this.userInfoList = responseData['ResponseObject'];

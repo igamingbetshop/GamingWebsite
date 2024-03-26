@@ -1,13 +1,13 @@
-import {Component, EventEmitter, Injector, Input, Output} from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+import {Component, EventEmitter, inject, Injector, Input, OnInit, Output} from '@angular/core';
 import {UtilityService} from "@core/services/app/utility.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-google-authenticate',
   templateUrl: './google-authenticate.component.html',
   styleUrls: ['./google-authenticate.component.scss']
 })
-export class GoogleAuthenticateComponent extends SimpleModalComponent<any, boolean> {
+export class GoogleAuthenticateComponent implements OnInit{
   public twoFactorCode: any;
   public isCodeValid = false;
   public errorMessage:string;
@@ -15,23 +15,31 @@ export class GoogleAuthenticateComponent extends SimpleModalComponent<any, boole
   @Input('prefixTitle') prefixTitle: string;
   private utilsService: UtilityService;
 
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<GoogleAuthenticateComponent>);
+
   callBack = (data:any) =>
   {
     if(data.hasOwnProperty('error'))
       this.utilsService.showMessageWithDelay(this, [{ errorMessage: data.error }]);
-    else this.close();
+    else  this.dialogRef.close();
   }
 
   constructor(protected injector: Injector) {
-    super();
     this.utilsService = injector.get(UtilityService);
+  }
+
+  ngOnInit()
+  {
+    this.prefixTitle = this.data.prefixTitle || this.prefixTitle;
+    this.onVerified =  this.data.onVerified || this.onVerified;
   }
 
   confirm() {
       this.onVerified.emit({ code: this.twoFactorCode, callBack: this.callBack, error: this.errorMessage });
   }
   cancel() {
-    this.close();
+    this.dialogRef.close();
   }
 
   preventKeys(event: KeyboardEvent) {

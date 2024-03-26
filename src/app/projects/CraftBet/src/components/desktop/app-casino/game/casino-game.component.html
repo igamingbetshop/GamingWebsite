@@ -44,28 +44,30 @@
             <div>
                 <div class="name">
                    <!-- <span (click)="toggleInfo()" class="icon icon-back"></span>-->
-                    {{game?.name}}
+                    {{game?.name | translate}}
                 </div>
              <!--   <div class="text">{{game?.providerName}}</div>-->
             </div>
             <div class="content">
                 <div class="content-row">
-                    <span>{{'RTP' | translate}} </span>
+                    <span>{{'Game.RTP' | translate}} </span>
                     <div class="flex_vertical-center gap-8">
                         <span>{{productInfo.RTP}} %</span>
                        <!-- <img src="../../../../../../../assets/images/percent.png"/>-->
                     </div>
                 </div>
                 <div class="content-row">
-                    <span>{{'Volatility' | translate}}</span>
+                    <span>{{'Game.Volatility' | translate}}</span>
                     <div class="flex_vertical-center gap-8">
                         <span>{{productInfo.Volatility}}</span>
                       <!--  <img src="../../../../../../../assets/images/speed-meter.png"/>-->
                     </div>
                 </div>
                 <div class="content-row">
-                    <span>{{'Tags' | translate}}</span>
-                    <span>{{categoryName}}</span>
+                    <span>{{'Game.Tags' | translate}}</span>
+                    <div class="flex_vertical-center gap-8">
+                      <span class="tags" *ngFor="let item of tags">#{{item | translate}}</span>
+                    </div>
                 </div>
 
             </div>

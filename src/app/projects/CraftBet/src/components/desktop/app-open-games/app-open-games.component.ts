@@ -6,8 +6,8 @@ import {LogoutHelper} from "@core/services/helpers/logout.helper";
 import {take} from "rxjs/operators";
 import {faArrowsAlt} from "@fortawesome/free-solid-svg-icons";
 import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
-import {SimpleModalService} from "ngx-simple-modal";
 import {StateService} from "@core/services/app/state.service";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({
@@ -23,7 +23,7 @@ export class AppOpenGamesComponent extends CommonOpenGamesComponent {
   constructor(public injector: Injector,
               private location:Location,
               private logoutHelper:LogoutHelper,
-              private simpleModalService:SimpleModalService, public stateService: StateService)
+              private dialog:MatDialog, public stateService: StateService)
   {
     super(injector);
   }
@@ -67,11 +67,9 @@ export class AppOpenGamesComponent extends CommonOpenGamesComponent {
     if(data.ResponseCode == 174)
     {
       localStorage.setItem('product-url', this.router.url);
-      this.simpleModalService.addModal(AppConfirmComponent, {
-        title: 'open_login',
-        message: true
-      }).subscribe((isConfirmed) => {
-        if(!isConfirmed)
+      const dialogRef =  this.dialog.open(AppConfirmComponent,{data:{title: 'open_login',message: true}});
+      dialogRef.afterClosed().subscribe(result => {
+        if(!result)
           localStorage.removeItem('product-url');
       });
       this.location.back();

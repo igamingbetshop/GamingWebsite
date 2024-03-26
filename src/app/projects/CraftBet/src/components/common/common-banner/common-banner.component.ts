@@ -2,9 +2,9 @@ import {Component, Input, ViewChild} from "@angular/core";
 import {BannersService} from "../../../../../../@core/services/api/banners.service";
 import {Router} from "@angular/router";
 import {AppConfirmComponent} from "../../desktop/app-confirm/app-confirm.component";
-import {SimpleModalService} from "ngx-simple-modal";
 import {SlickCarouselComponent} from "ngx-slick-carousel";
 import {UserLogined} from "../../../../../../@core/services/app/userLogined.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'common-banner',
@@ -46,7 +46,7 @@ export class CommonBannerComponent {
     constructor(public bannerService: BannersService,
                 private router: Router,
                 public authService: UserLogined,
-                private simpleModalService: SimpleModalService) {
+                private dislog: MatDialog) {
     }
 
     public redirectAnotherUrl(pageUrl) {
@@ -62,12 +62,9 @@ export class CommonBannerComponent {
         }
     }
 
-    public showConfirm(titleName = '') {
-        this.simpleModalService.addModal(AppConfirmComponent, {
-            title: titleName == '' ? 'Confirm title' : titleName,
-            message: true
-        }).subscribe((isConfirmed) => {
-        });
+    public showConfirm(titleName = '')
+    {
+        this.dislog.open(AppConfirmComponent, {data:{ title: titleName == '' ? 'Confirm title' : titleName,
+                message: true}});
     }
-
 }

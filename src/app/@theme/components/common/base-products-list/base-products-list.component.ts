@@ -1,12 +1,12 @@
-import {Injectable, Injector, OnDestroy, OnInit} from '@angular/core';
+import {Directive, inject, Injector, OnDestroy, OnInit} from '@angular/core';
 import {LocalStorageService, SaveData} from "@core/services";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {UserLogined} from "@core/services/app/userLogined.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {Subscription} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
 
-@Injectable()
+@Directive()
 export class BaseProductsListComponent implements OnInit, OnDestroy {
     protected localStorageService: LocalStorageService;
     protected router: Router;
@@ -14,7 +14,7 @@ export class BaseProductsListComponent implements OnInit, OnDestroy {
     protected baseControllerService: BaseControllerService;
     protected route: ActivatedRoute;
     protected loginService: UserLogined;
-    protected simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
 
     public productList: Array<any> = [];
     protected currentUrl: string;
@@ -29,7 +29,6 @@ export class BaseProductsListComponent implements OnInit, OnDestroy {
         this.baseControllerService = injector.get(BaseControllerService);
         this.route = injector.get(ActivatedRoute);
         this.loginService = injector.get(UserLogined);
-        this.simpleModalService = injector.get(SimpleModalService);
     }
 
     ngOnInit()

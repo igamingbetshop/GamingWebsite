@@ -204,10 +204,34 @@
                     >{{ date.Name | translate}}</option>
                 </select>
             </div>
+            <div class="periods">
+                <h2 class="self-limit-title period-label">{{ 'User.Reason' | translate }}:</h2>
+                <div class="custom_dropdown_reg" dropdown>
+                    <div class="flex_between current_item">
+                        <div *ngIf="!selectedReason" class="selected-item">{{ 'User.Select-Reason' | translate }}</div>
+                        <div *ngIf="selectedReason" class="selected-item">{{ selectedReason }}</div>
+                        <div class="change-icon2">
+                            <span class="icon-arrow-right"></span>
+                        </div>
+                    </div>
+                    <ul class="custom_dropdown_list right-top">
+                        <li *ngFor="let reason of reasons; let i = index" (click)="selectReason(reason)">{{ reason.Name }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="self-exclusion-row-date" *ngIf="selectedExclusionType">
+                <label class="date-input">{{ 'User.Confirm-With-Password' | translate }}</label>
+                <input class="self-exclusion-row-date-input self-exclusion-row-password" type="{{changePasswordType ? 'text' : 'password'}}" [(ngModel)]="setConfirmPassword"
+                       minlength="6" maxlength="16"
+                       placeholder="{{'Settings.Password' | translate}}">
+                <div (click)="changePassType()" class="change-password-field-type change-password-self">
+                    <span [ngClass]="changePasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                </div>
+            </div>
             <div class="self-exclusion-row-btn">
                 <div class="error-message" *ngIf="errorMessage">{{errorMessage}}</div>
                 <div class="success-message">{{successMessage}}</div>
-                <button type="button" [disabled]="!selectedExclusionType" class="common-button"
+                <button type="button" [disabled]="setConfirmPassword === '' || (selectedExclusionType !== selfExclusionTypes.Permanently && exclusionDate === null)" class="common-button"
                         (click)="openConfirmWindow()"
                 >{{'User.Confirm' | translate}}</button>
             </div>

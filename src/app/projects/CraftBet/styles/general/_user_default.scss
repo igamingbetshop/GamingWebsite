@@ -208,7 +208,7 @@
               }
 
               &:hover {
-                background: color(settings-left-menu-item-active-background);
+                background: var(--account-item-title-hover-background, color(settings-left-menu-item-active-background));
 
                 a {
                   color: color(account-submenu-item-hover);

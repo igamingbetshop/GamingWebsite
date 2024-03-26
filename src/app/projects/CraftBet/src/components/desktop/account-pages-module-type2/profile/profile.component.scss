@@ -47,6 +47,7 @@
     display: flex;
     gap: 20px;
     width: var(--settings-submit-details-width, auto);
+    margin: var(--settings-submit-details-margin, 0);
     .setting_btn {
       font-size: var(--settings-submit-details-font-size, 16px);
       border-radius: var(--settings-submit-details-border-radius, 4px);

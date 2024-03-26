@@ -13,27 +13,28 @@
 
   &_title {
     text-align: center;
-    padding: 0 10px;
+    padding: var(--m-tickets-title-padding, 0 10px);
     color: color(m-user-views-title);
-    font-size: 24px;
-    font-weight: normal;
+    font-size: var(--m-user-views-title-font-size, 24px);
+    font-weight: var(--m-user-views-title-font-weight, normal);
     margin-top: var(--m-user-views-title-margin-top, 64px);
   }
 
   .add-tickets {
-    padding: 0 10px;
-    margin: 25px 0;
-    text-align: right;
+    padding: var(--m-tickets-add-padding, 0 10px);
+    margin: var(--m-tickets-add-margin, 25px 0);
+    text-align: var(--m-tickets-add-text-align, right);
 
 
     button {
-      width: 100%;
+      width: var(--m-tickets-add-btn-width, 100%);
       border-radius: var(--m-settings-add-button-radius, 18px);
       background: color(m-settings-add-button-background);
-      box-shadow: none;
-      font-weight: bold;
+      box-shadow: var(--m-tickets-add-btn-box-shadow, none);
+      font-weight: var(--m-tickets-add-btn-font-weight, bold);
+      font-size: var(--m-tickets-add-btn-font-size, 16px);
       color: color(m-settings-add-button-text);
-      padding: 0 32px;
+      padding: var(--m-tickets-add-btn-padding, 0 32px);
     }
   }
 
@@ -64,21 +65,21 @@
 
     display: flex;
     flex-direction: column;
-    margin: 15px 20px;
+    margin: var(--m-tickets-history-content-margin, 15px 20px);
 
     &_item {
       display: flex;
       flex-direction: column;
-      border: 1px solid #a0aac5;
-      padding: 10px;
-      margin-bottom: 15px;
+      border: var(--m-tickets-item-border, 1px solid #a0aac5);
+      padding: var(--m-tickets-item-padding, 10px);
+      margin-bottom: var(--m-tickets-item-margin-bottom, 15px);
 
       &_topPanel {
         display: flex;
-        font-size: 12px;
+        font-size: var(--m-ticket-history-item-font-size, 12px);
         flex-grow: 1;
-        justify-content: space-between;
-        border-bottom: 1px solid rgba(255, 255, 255, .3);
+        justify-content: var(--m-ticket-history-item-justify-content, space-between);
+        border-bottom: var(--m-ticket-history-item-border-bottom, 1px solid rgba(255, 255, 255, .3));
         padding-bottom: var(--m-ticket-history-item-padding-bottom, 5px);
         padding-top: var(--m-ticket-history-item-padding-top, 5px);
         color: itemColor(ticket-history-item, $font-color);
@@ -90,8 +91,9 @@
       &_middlePanel {
         display: flex;
         flex-direction: column;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, .3);
+        padding: var(--m-ticket-middle-item-padding, 10px 0);
+        gap: var(--m-ticket-middle-item-gap, 0);
+        border-bottom: var(--m-ticket-middle-item-border-bottom, 1px solid rgba(255, 255, 255, .3));
         .info-item
         {
           color: color(m-tickets-info-text);
@@ -109,20 +111,20 @@
 
         .action-items {
           //width: 150px;
-          width: 65%;
-          height: 24px;
-          font-size: 18px;
+          width: var(--m-tickets-icons-items-width, 65%);
+          height: var(--m-tickets-icons-items-height, 24px);
+          font-size: var(--m-tickets-icons-font-size, 18px);
           display: flex;
           align-items: center;
           color: itemColor(m-tickets-icons-color, #000);
-          gap: 25px;
-          justify-content: flex-end;
+          gap: var(--m-tickets-icons-gap, 25px);
+          justify-content: var(--m-tickets-icons-justify-content, flex-end);
 
           .tickets_table_innerColumn {
-            width: 28%;
-            border-right: 1px solid rgba(255, 255, 255, .09);
-            float: left;
-            text-align: center;
+            width: var(--m-tickets-icons-width, 28%);
+            border-right: var(--m-tickets-icons-border-right, 1px solid rgba(255, 255, 255, .09));
+            float: var(--m-tickets-icons-float, left);
+            text-align: var(--m-tickets-icons-text-align, center);
             cursor: pointer;
             position: relative;
             color: itemColor(m-tickets-icons, #000);
@@ -191,8 +193,8 @@
       border-radius: var(--m-tickets-my-message-border-radius, 40px);
       font-size: var(--m-tickets-my-message-font-size, 14px);
       padding: var(--m-tickets-my-message-padding, 8px 15px 8px 30px);
-      min-width: 190px;
-      max-width: 90%;
+      min-width: var(--m-tickets-my-message-min-width, 190px);
+      max-width: var(--m-tickets-my-message-max-width, 90%);
 
       &.my-message {
         float: right;
@@ -207,8 +209,8 @@
       .author_message {
         display: block;
         font-weight: var(--tickets-author-message-font-weight, bolder);
-        font-size: 15px;
-        padding: 2px 0;
+        font-size: var(--tickets-author-message-font-size, 15px);
+        padding: var(--tickets-author-message-padding, 2px 0);
         color: var(--tikcets-author-message-color, #000);
       }
     }
@@ -225,7 +227,7 @@
         position: relative;
         label {
           color: itemColor(settings-input-label, #fff);
-          position: absolute;
+          position: var(--m-tickets-input-label-position, absolute);
           top: itemTop(m-tickets-input-label, 20px);
           left: itemLeft(settings-input-label, 8px);
           height: height(settings-input-label, 25px);
@@ -285,12 +287,12 @@
         display: block;
         float: right;
         width: width(settings-send-button, 70px);
-        margin-top: 10px;
+        margin-top: var(--settings-send-button-margin-top, 10px);
         margin-right: var(--settings-send-button-margin-right, 0px);
         height: height(settings-send-button, 37px);
         line-height: var(--m-settings-send-button-line-height, 44px);
-        background: linear-gradient(to bottom, var(--settings-button-gradient-first-color) 0%, var(--settings-button-gradient-second-color) 100%);
-        color: var(--settings-button-text-color);
+        background: var(--m-settings-send-button-background, linear-gradient(to bottom, var(--settings-button-gradient-first-color) 0%, var(--settings-button-gradient-second-color) 100%));
+        color: var(--m-settings-send-button-color, var(--settings-button-text-color));
 
         &:hover {
           background: linear-gradient(to bottom, var(--settings-button-gradient-active-first-color) 0%, var(--settings-button-gradient-active-second-color) 100%);
@@ -316,6 +318,9 @@
   border-radius: var(--m-open-ticket-border-radius, 7px);
   padding: var(--m-open-ticket-padding, 10px);
   color: var(--m-ticket-color, #fff);
+  .ticket-body {
+    padding: var(--m-add-ticket-content-padding, 16px);
+  }
   .ticket_header {
     font-size: var(--m-ticket-header-font, 18px);
     color: itemColor(m-open-ticket-header, #fff)
@@ -326,13 +331,13 @@
     font-size: var(--m-ticket-input-font, 16px);
     border: var(--m-ticket-input-border, none);
     border-radius: var(--m-ticket-input-border-radius, 3px);
-    text-indent: 16px;
+    text-indent: var(--m-ticket-input-text-indent, 16px);
     padding: var(--m-ticket-input-padding, 0);
   }
   textarea {
     width: 100%;
     height: var(--m-ticket-textarea-height, 190px);
-    text-indent: 16px;
+    text-indent: var(--m-ticket-input-text-indent, 16px);
     padding: var(--m-ticket-input-padding, 0);
     &:focus-visible {
       outline: none;
@@ -344,8 +349,8 @@
   }
   .setting_btn {
     padding: var(--m-send-ticket-padding, 10px);
-    width: 100%;
-    border: none;
+    width: var(--m-send-ticket-width, 100%);
+    border: var(--m-send-ticket-border, none);
     border-radius: var(--m-send-ticket-border-radius, 3px);
     height: var(--m-send-ticket-height, 44px);
     color: var(--m-send-ticket-btn-color, #fff);

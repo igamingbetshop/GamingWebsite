@@ -1,21 +1,17 @@
-import {Component, EventEmitter, Injector, Input, OnInit, Output} from '@angular/core';
-import {SimpleModalComponent} from "ngx-simple-modal";
+import {Component, EventEmitter, inject, Injector, Input, OnInit, Output} from '@angular/core';
 import {Controllers, Methods} from "../../../../@core/enums";
 import {take} from "rxjs";
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {UtilityService} from "../../../../@core/services/app/utility.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
-export interface ISecurityQuestions
-{
-    securityQuestionIds:number[],
-    onSecurityConfirmed:EventEmitter<any>
-}
+
 @Component({
     selector: 'security-questions-modal',
     templateUrl: './security-questions-modal.component.html',
     styleUrls: ['./security-questions-modal.component.scss']
 })
-export class SecurityQuestionsModalComponent extends SimpleModalComponent<ISecurityQuestions, boolean> implements OnInit
+export class SecurityQuestionsModalComponent implements OnInit
 {
     @Input('securityQuestionIds') securityQuestionIds:number[] = [];
 
@@ -25,12 +21,14 @@ export class SecurityQuestionsModalComponent extends SimpleModalComponent<ISecur
     securityQuestions:any[] = [];
     errorMessage:string;
     showMessage = false;
+    data:any = inject(MAT_DIALOG_DATA);
+    dialogRef = inject(MatDialogRef<SecurityQuestionsModalComponent>);
 
     callBack = (data:any) =>
     {
         if(data.hasOwnProperty('error'))
         this.utilsService.showMessageWithDelay(this, [{ errorMessage: data.error }]);
-        else this.close();
+        else this.dialogRef.close();
     }
     answersData:any[];
 
@@ -38,7 +36,6 @@ export class SecurityQuestionsModalComponent extends SimpleModalComponent<ISecur
     private utilsService: UtilityService;
     constructor(public injector: Injector)
     {
-        super();
         this.baseApiService = injector.get(BaseApiService);
         this.utilsService = injector.get(UtilityService);
     }
@@ -46,6 +43,7 @@ export class SecurityQuestionsModalComponent extends SimpleModalComponent<ISecur
     ngOnInit()
     {
         this.getSecurityQuestions();
+        this.securityQuestionIds = this.data.securityQuestionIds || this.securityQuestionIds;
     }
 
     errorHandler(event) {

@@ -359,7 +359,7 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
 
                 for (let i = 0; i < groups.length; i++) {
 
-                    if (groups[i] != {}) {
+                    if (Object.keys(groups[i]).length > 0) {
                         this.regFormSteps[i] = new FormGroup(groups[i]);
 
                         if (this.regFormSteps[i].controls.hasOwnProperty('CurrencyId')) {

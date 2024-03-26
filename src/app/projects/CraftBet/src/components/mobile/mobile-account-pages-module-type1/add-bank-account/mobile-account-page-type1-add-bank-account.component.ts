@@ -15,6 +15,6 @@ export class MobileAccountPageType1AddBankAccountComponent extends BaseAddBankAc
         delete params.openBankAccounts;
         this.router.navigate([], {queryParams: params});
         this.selectedBankAccount = undefined;
-        this.close();
+        this.dialogRef.close();
     }
 }

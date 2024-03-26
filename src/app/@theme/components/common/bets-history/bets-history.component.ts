@@ -1,7 +1,6 @@
-import {Inject, Injectable, Injector} from '@angular/core';
+import {inject, Inject, Injectable, Injector} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {BaseComponent} from '../../base/base.component';
-import {SimpleModalService} from "ngx-simple-modal";
 import {TranslateService} from "@ngx-translate/core";
 import {GetBetsHistoryService} from "@core/services/app/getBetsHistory.service";
 import {Product} from "@core/models";
@@ -10,9 +9,9 @@ import {format} from "date-fns";
 import {DOCUMENT} from "@angular/common";
 import {LocalStorageService} from "@core/services";
 import {ExportDataService} from "@core/services";
-import {take} from "rxjs";
 import * as moment from 'moment';
 import {UtilityService} from "@core/services/app/utility.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable()
 export class BetsHistoryComponent extends BaseComponent {
@@ -21,7 +20,7 @@ export class BetsHistoryComponent extends BaseComponent {
     public getBetsHistoryService: GetBetsHistoryService;
     private exportDataService:ExportDataService;
     public translate: TranslateService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     public localStorageService: LocalStorageService;
     public historyInPage: number = 10;
     public page = 1;
@@ -73,7 +72,6 @@ export class BetsHistoryComponent extends BaseComponent {
         this.localStorageService = injector.get(LocalStorageService);
         this.exportDataService = injector.get(ExportDataService);
         this.translate = injector.get(TranslateService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.document = injector.get(DOCUMENT);
 
         this.fb = injector.get(FormBuilder);

@@ -3,13 +3,13 @@
     <div class="mobile-promotions-section_top">
 
         <div class="mobile-fragment-title">{{promotionFragment.Title}}</div>
-        <div class="products-list">    <!--[ngStyle]="promotionFragment.Style"-->
+        <div class="products-list"  [ngStyle]="promotionFragment.Style">
 
             <div class="products-list_item"
                  *ngFor="let promotion of promotionFragment.Promotions"
                  [queryParams]="{id:promotion.Id}"
                  [routerLink]="['/promotions']"
-                >    <!--[ngStyle]="promotion.Style"-->
+                 [ngStyle]="promotion.Style">
                 <div class="promotions_item" >
                     <img src="../../../../../../../assets/images/promotions/medium/{{promotion?.ImageName}}"/>
                     <div class="see-more-btn">

@@ -1,6 +1,6 @@
 import {
     Component,
-    createNgModuleRef,
+    createNgModule,
     ElementRef,
     Inject,
     Injector,
@@ -128,7 +128,7 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
         if(this.asianAccountStatement)
         {
             const { BaseAsianAccountStatementModule } = await import("../../../../../../@theme/components/common/base-asian-account-statment/base-asian-account-statement.module");
-            const moduleRef = createNgModuleRef(BaseAsianAccountStatementModule, this.injector);
+            const moduleRef = createNgModule(BaseAsianAccountStatementModule, this.injector);
             const component = moduleRef.instance.getComponent();
             this.asianAccountStatement.createComponent(component, {ngModuleRef: moduleRef});
         }

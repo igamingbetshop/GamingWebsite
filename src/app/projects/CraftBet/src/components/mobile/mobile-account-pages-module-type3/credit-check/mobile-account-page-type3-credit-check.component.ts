@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SimpleModalService } from 'ngx-simple-modal';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ConfigService, SaveData } from '../../../../../../../@core/services';
@@ -7,6 +6,7 @@ import { BaseApiService } from '../../../../../../../@core/services/api/base-api
 import { UtilityService } from '../../../../../../../@core/services/app/utility.service';
 import { GetSettingsInfoService } from '../../../../../../../@core/services/app/getSettingsInfo.service';
 import { Controllers, Methods } from '../../../../../../../@core/enums';
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({
@@ -22,7 +22,7 @@ export class MobileAccountPageType3CreditCheckComponent implements OnInit {
   public selectedAccount;
   @ViewChild('verificationIframe') verificationIframe: ElementRef;
 
-  constructor(public simpleModalService: SimpleModalService, public savedDateService: SaveData,
+  constructor(public dialog: MatDialog, public savedDateService: SaveData,
               private baseApiService: BaseApiService, private utilsService: UtilityService,
               public getSettingsInfoService: GetSettingsInfoService, private router: Router,
               public configService: ConfigService) {

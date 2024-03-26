@@ -1,4 +1,4 @@
-import {createNgModuleRef, Directive, EventEmitter, Injector, OnDestroy, OnInit} from "@angular/core";
+import {createNgModule, Directive, EventEmitter, inject, Injector, OnDestroy, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Validator} from "@core/validators/validators";
 import {GetSettingsInfoService} from "@core/services/app/getSettingsInfo.service";
@@ -6,12 +6,12 @@ import {Methods, VerificationCodeTypes} from "@core/enums";
 import {take} from "rxjs";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {VerificationService} from "@core/services/api/verification.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {PasswordValidation} from "@core/services/password-validation";
 import {ConfigService, LocalStorageService} from "@core/services";
 import {UtilityService} from "@core/services/app/utility.service";
 import {TranslateService} from "@ngx-translate/core";
 import {LogoutHelper} from "@core/services/helpers/logout.helper";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BaseChangePassword implements OnInit, OnDestroy
@@ -28,7 +28,7 @@ export class BaseChangePassword implements OnInit, OnDestroy
     private baseApiService:BaseApiService;
     private getSettingsInfoService:GetSettingsInfoService;
     private verificationService: VerificationService;
-    private simpleModalService:SimpleModalService;
+    dialog = inject(MatDialog);
     public configService: ConfigService;
     private utilityService: UtilityService;
     public translate: TranslateService;
@@ -41,7 +41,6 @@ export class BaseChangePassword implements OnInit, OnDestroy
         this.getSettingsInfoService = injector.get(GetSettingsInfoService);
         this.baseApiService = injector.get(BaseApiService);
         this.verificationService = injector.get(VerificationService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.configService = injector.get(ConfigService);
         this.utilityService = injector.get(UtilityService);
         this.translate = injector.get(TranslateService);
@@ -147,22 +146,19 @@ export class BaseChangePassword implements OnInit, OnDestroy
     async openVerifyCode(type:string, targetOfSource:string)
     {
         const { VerifyCodeModule } = await import("../../modals/verify-code/verify-code.module");
-        const moduleRef = createNgModuleRef(VerifyCodeModule, this.injector);
+        const moduleRef = createNgModule(VerifyCodeModule, this.injector);
         const component = moduleRef.instance.getComponent();
         const callback = new EventEmitter();
         callback.subscribe(data => {
             data.callBack({});
             this.openSecurityQuestions(type, data.code, this.profileData.SecurityQuestions);
         });
-
-        this.simpleModalService.addModal(component, {isModal:true, type:type, targetOfSender:targetOfSource, onVerified:callback, activePeriodInMinutes: this.activePeriodInMinutes, prefixTitle: '', verificationCodeType:VerificationCodeTypes.PasswordChangeByMobile}).subscribe(data => {
-
-        });
+        this.dialog.open(component, {data:{isModal:true, type:type, targetOfSender:targetOfSource, onVerified:callback, activePeriodInMinutes: this.activePeriodInMinutes, prefixTitle: '', verificationCodeType:VerificationCodeTypes.PasswordChangeByMobile}});
     }
     async openSecurityQuestions(type:string, verifiedCode:string, questionIds:number[])
     {
         const { SecurityQuestionsModalModule } = await import("../../modals/security-questions-modal/security-questions-modal.module");
-        const moduleRef = createNgModuleRef(SecurityQuestionsModalModule, this.injector);
+        const moduleRef = createNgModule(SecurityQuestionsModalModule, this.injector);
         const component = moduleRef.instance.getComponent();
         const callback = new EventEmitter();
         callback.subscribe(data =>
@@ -181,11 +177,8 @@ export class BaseChangePassword implements OnInit, OnDestroy
                     data.callBack({error:resp['Description']});
                 }
             });
-
         });
-        this.simpleModalService.addModal(component, {securityQuestionIds:questionIds, onSecurityConfirmed:callback}).subscribe(data => {
-
-        });
+        this.dialog.open(component, {data:{securityQuestionIds:questionIds, onSecurityConfirmed:callback}});
     }
 
 }

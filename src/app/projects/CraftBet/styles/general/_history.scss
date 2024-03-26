@@ -29,7 +29,7 @@
     font-size: var(--bonuses-block-head-font-size, 16px) !important;
   }
   .block-head, .bets-history-block-head {
-    border-radius: 8px;
+    border-radius: var(--history-block-head-bg-border-radius, 8px);
     background-image: var(--history-block-head-bg, linear-gradient(to bottom, #16233a, #151a23));
     padding-left: var(--history-block-head-pdleft, 16px);
     padding-right: var(--history-block-head-pdright, 16px);

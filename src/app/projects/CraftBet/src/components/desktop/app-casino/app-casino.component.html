@@ -53,8 +53,9 @@
 
     </character-hierarchy>
 
-    <div class="open-lucky-game" (click)="openLuckyGame()">
-      <img class="" src="../assets/images/lucky-icon.svg">
+    <div class="open-lucky-game" (click)="openLuckyGame()"
+         *ngIf="fragments?.OpenLuckyGame?.Items?.length">
+        <img class="" src="../assets/images/lucky-icon.svg">
         <div class="text">{{'Lucky game' | translate}}</div>
     </div>
 </div>

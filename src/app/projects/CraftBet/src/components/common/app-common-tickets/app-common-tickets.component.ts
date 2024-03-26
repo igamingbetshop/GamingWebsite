@@ -1,25 +1,14 @@
-import {Directive,  Injector} from '@angular/core';
-import {SimpleModalService} from 'ngx-simple-modal';
+import {Directive, inject } from '@angular/core';
 import {AppCommonMessageModalComponent} from '../../common/app-common-message-modal/app-common-message-modal.component';
 import {BaseTicketsComponent} from '../../../../../../@theme/components/common/base-tickets/base-tickets.component';
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class AppCommonTicketsComponent extends BaseTicketsComponent {
 
+  newTicket = false;
+  dialog = inject(MatDialog);
 
-  public newTicket = false;
-
-  public simpleModalService: SimpleModalService;
-
-  constructor(public injector: Injector) {
-    super(injector);
-    this.simpleModalService = injector.get(SimpleModalService);
-  }
-
-  ngOnInit()
-  {
-    super.ngOnInit();
-  }
   openNewTicketContent() {
     this.newTicket = true;
     this.sendMessageForm.reset();
@@ -29,22 +18,15 @@ export class AppCommonTicketsComponent extends BaseTicketsComponent {
     this.newTicket = false;
   }
 
-  public deleteTicket(item) {
-    this.simpleModalService.addModal(AppCommonMessageModalComponent, {
-      title: 'Delete-ticket',
-      data: item,
-      message: true
-    });
+  public deleteTicket(item:any)
+  {
+    this.dialog.open(AppCommonMessageModalComponent, {data:{title: 'Delete-ticket',message: true, ticket:item}});
   }
 
 
-  public closeTicket(item)
+  public closeTicket(item:any)
   {
-    this.simpleModalService.addModal(AppCommonMessageModalComponent, {
-      title: 'close-ticket',
-      data: item,
-      message: true
-    });
+    this.dialog.open(AppCommonMessageModalComponent, {data:{title: 'close-ticket',message: true, ticket:item}});
   }
 
 }

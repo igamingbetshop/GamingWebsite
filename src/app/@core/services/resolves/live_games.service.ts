@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Resolve, ActivatedRouteSnapshot} from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import {ConfigService} from '../app/config.service';
 
 
 @Injectable()
-export class LiveGamesResolve implements Resolve<any> {
+export class LiveGamesResolve  {
   constructor(private configService: ConfigService) {}
 
 

@@ -1,36 +1,24 @@
-import { Component, Injector, NgModule, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
-import { ConfirmModel } from '@core/interfaces';
+import {Component, inject, NgModule, OnInit} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClient } from '@angular/common/http';
 import { LangService } from '@core/services/app/lang.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { SanitizerModule } from '../../../pipes/sanitizer/sanitizer.module';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DeviceDetectorService} from "ngx-device-detector";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-cms-popup',
   templateUrl: './cms-popup.component.html',
   styleUrls: ['./cms-popup.component.scss']
 })
-export class CmsPopupComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
-  public title: string;
-  public message: boolean;
-  public data: any;
-  public cmsPopupData: any;
-  public cmsPopupItem: any = {};
-  public loginedCmsPopupItem: any = {};
-  public deviceDetectorService: DeviceDetectorService;
-  private http: HttpClient;
-  private languageService: LangService;
+export class CmsPopupComponent implements OnInit {
 
-  constructor(public injector: Injector) {
-    super();
-    this.http = injector.get(HttpClient);
-    this.languageService = injector.get(LangService);
-    this.deviceDetectorService = injector.get(DeviceDetectorService);
-  }
-
+  data:any = inject(MAT_DIALOG_DATA);
+  deviceDetectorService = inject(DeviceDetectorService);
+  languageService = inject(LangService);
+  dialogRef = inject(MatDialogRef<CmsPopupComponent>);
+  http = inject(HttpClient);
   ngOnInit(): void {
     console.log('data in', this.data);
     if (this.data?.cmsPopupData) {
@@ -50,17 +38,22 @@ export class CmsPopupComponent extends SimpleModalComponent<ConfirmModel, boolea
 
     this.http.get<any>(window['debugPath'] + url + '?=' + window['VERSION']).subscribe(data => {
       if (this.data?.cmsPopupData) {
-        this.cmsPopupItem.Content = data?.Content;
-        this.cmsPopupItem.Type = data?.Type;
-        this.cmsPopupItem.Id = data?.Id;
-        this.cmsPopupItem.ImageName = data?.ImageName;
+        this.data.cmsPopupData.Content = data?.Content;
+       this.data.cmsPopupData.Type = data?.Type;
+       this.data.cmsPopupData.Id = data?.Id;
+       this.data.cmsPopupData.ImageName = data?.ImageName;
       } else if (this.data?.loginedCmsPopupData) {
-        this.loginedCmsPopupItem.Content = data?.Content;
-        this.loginedCmsPopupItem.Type = data?.Type;
-        this.loginedCmsPopupItem.Id = data?.Id;
-        this.loginedCmsPopupItem.ImageName = data?.ImageName;
+        this.data.loginedCmsPopupData.Content = data?.Content;
+        this.data.loginedCmsPopupData.Type = data?.Type;
+        this.data.loginedCmsPopupData.Id = data?.Id;
+        this.data.loginedCmsPopupData.ImageName = data?.ImageName;
       }
     });
+  }
+
+  close()
+  {
+    this.dialogRef.close();
   }
 
 }

@@ -1,7 +1,7 @@
 import {
   Component,
   ComponentRef,
-  createNgModuleRef,
+  createNgModule,
   Inject,
   Injector,
   NgModuleRef,
@@ -69,7 +69,7 @@ export class MobileAccountPageType3ProfileComponent extends BaseProfile {
           containerRef = this.mobileNumberRef;
         }
         const { SendCodeModule } = await import('./types/send-code/send-code.module');
-        const moduleRef = createNgModuleRef(SendCodeModule, this.injector);
+        const moduleRef = createNgModule(SendCodeModule, this.injector);
         this.createComponentWithInstances(moduleRef, containerRef, item.Title);
       }
         break;
@@ -91,7 +91,7 @@ export class MobileAccountPageType3ProfileComponent extends BaseProfile {
             break;
         }
         const { RegionModule } = await import('./types/region/region.module');
-        const moduleRef = createNgModuleRef(RegionModule, this.injector);
+        const moduleRef = createNgModule(RegionModule, this.injector);
         const componentRef = this.createComponentWithInstances(moduleRef, containerRef, item.Title);
         componentRef.instance.zIndex = 100 - item.Order;
         componentRef.instance.subItem = item.Config?.subItem;
@@ -100,7 +100,7 @@ export class MobileAccountPageType3ProfileComponent extends BaseProfile {
       case 'language':
       {
         const { LanguageModule } = await import('./types/language/language.module');
-        const moduleRef = createNgModuleRef(LanguageModule, this.injector);
+        const moduleRef = createNgModule(LanguageModule, this.injector);
         this.createComponentWithInstances(moduleRef, this.languageRef, item.Title);
       }
         break;

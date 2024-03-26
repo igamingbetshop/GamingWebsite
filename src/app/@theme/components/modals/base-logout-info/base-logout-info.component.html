@@ -1,16 +1,16 @@
-<div class="modal-content {{title}}">
+<div class="modal-content {{data.title}}">
   <div class="modal-body">
-    <div class="{{title}}_body">
-      {{'Info.' + title | translate}}
+    <div class="{{data.title}}_body">
+      {{'Info.' + data.title | translate}}
     </div>
 
     <div class="modal_content">
-      <p>{{'Info.LogOutMessage' + key | translate}}</p>
+      <p>{{'Info.LogOutMessage' + data.key | translate}}</p>
     </div>
 
   </div>
 
   <div class="modal_footer">
-    <button type="submit" (click)="close()" class="{{title}}_btn">{{'Info.Yes' | translate}}</button>
+    <button type="submit" (click)="close()" class="{{data.title}}_btn">{{'Info.Yes' | translate}}</button>
   </div>
 </div>

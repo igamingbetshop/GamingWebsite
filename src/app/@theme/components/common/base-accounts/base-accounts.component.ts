@@ -1,11 +1,11 @@
-import {Directive, EventEmitter, Injector, Input, Output, SimpleChanges} from "@angular/core";
-import {SimpleModalService} from "ngx-simple-modal";
+import {Directive, EventEmitter, inject, Injector, Input, Output, SimpleChanges} from "@angular/core";
 import {BaseComponent} from "../../base/base.component";
 import {LocalStorageService, SaveData} from "@core/services";
 import {ActivatedRoute} from "@angular/router";
 import {PaymentControllerService} from "@core/services/app/paymentController.services";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods} from "@core/enums";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 
@@ -14,7 +14,7 @@ export class BaseAccountsComponent extends BaseComponent {
     protected savedDateService: SaveData;
     public baseApiService: BaseApiService;
     public localStorageService: LocalStorageService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     private route: ActivatedRoute;
     public Accounts: any;
     public mappedAccounts: any;

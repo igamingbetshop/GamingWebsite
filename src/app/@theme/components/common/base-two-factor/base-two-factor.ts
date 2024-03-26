@@ -1,17 +1,17 @@
-import {createNgModuleRef, Directive, EventEmitter, Injector, OnInit} from "@angular/core";
+import {createNgModule, Directive, EventEmitter, inject, Injector, OnInit} from "@angular/core";
 import {BaseComponent} from "../../base/base.component";
 import {ProfileService} from "../../profile/service/profile.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {UtilityService} from "../../../../@core/services/app/utility.service";
 import {Controllers, Methods} from "../../../../@core/enums";
 import {take} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Directive()
 export class BaseTwoFactor extends BaseComponent implements OnInit {
     public profileService: ProfileService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     public baseApiService: BaseApiService;
     public utilityService: UtilityService;
 
@@ -31,7 +31,6 @@ export class BaseTwoFactor extends BaseComponent implements OnInit {
         super(injector);
         this.baseApiService = injector.get(BaseApiService);
         this.utilityService = injector.get(UtilityService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.profileService = injector.get(ProfileService);
         this.profileService.getClientInfo();
         this.profileService.profileData$.subscribe((data) => {
@@ -71,7 +70,7 @@ export class BaseTwoFactor extends BaseComponent implements OnInit {
 
     async disableAuthentication() {
         const { GoogleAuthenticateModule } = await import('../../modals/google-authenticate/google-authenticate.module');
-        const moduleRef = createNgModuleRef(GoogleAuthenticateModule);
+        const moduleRef = createNgModule(GoogleAuthenticateModule);
         const component = moduleRef.instance.getComponent();
         const callback = new EventEmitter();
         callback.subscribe(data => {
@@ -86,12 +85,7 @@ export class BaseTwoFactor extends BaseComponent implements OnInit {
                 }
             });
         });
-        this.simpleModalService.addModal(component, {
-            error: this.errorMessage,
-            onVerified: callback,
-            prefixTitle: 'Disable-authentication'
-        }).subscribe(data => {
-        });
+        this.dialog.open(component, {data:{ error: this.errorMessage,onVerified: callback,prefixTitle: 'Disable-authentication'}})
     }
 
     onInput(event) {

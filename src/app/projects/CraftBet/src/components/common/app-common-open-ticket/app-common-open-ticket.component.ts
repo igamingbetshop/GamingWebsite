@@ -1,5 +1,4 @@
-import {OnInit, Injector, Output, EventEmitter, Directive} from '@angular/core';
-import {SimpleModalComponent, SimpleModalService} from 'ngx-simple-modal';
+import {OnInit, Injector, Output, EventEmitter, Directive, inject} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {
   DefaultService,
@@ -12,10 +11,10 @@ import {Ticket} from "../../../../../../@core/models/index";
 import {Subscription} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {UtilityService} from "@core/services/app/utility.service";
-import {ConfirmModel} from "@core/interfaces";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Directive()
-export class AppCommonOpenTicketComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
+export class AppCommonOpenTicketComponent implements OnInit {
   @Output('onClose') onClose:EventEmitter<boolean> = new EventEmitter();
   public defaultService: DefaultService;
   public localStorageService: LocalStorageService;
@@ -25,9 +24,8 @@ export class AppCommonOpenTicketComponent extends SimpleModalComponent<ConfirmMo
   private translate: TranslateService;
   private utilService: UtilityService;
 
-  public title: string;
-  public message: boolean;
-  public data: any;
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<this>);
   public fb: FormBuilder;
   public ticketForm: FormGroup;
   public userData: any;
@@ -37,8 +35,8 @@ export class AppCommonOpenTicketComponent extends SimpleModalComponent<ConfirmMo
   public statusMessage: string;
   public clicked = false;
 
-  constructor(public injector: Injector) {
-    super();
+  constructor(public injector: Injector)
+  {
     this.defaultService = injector.get(DefaultService);
     this.localStorageService = injector.get(LocalStorageService);
     this.saveData = injector.get(SaveData);
@@ -119,5 +117,9 @@ export class AppCommonOpenTicketComponent extends SimpleModalComponent<ConfirmMo
         });
       }
     }
+  }
+  close()
+  {
+
   }
 }

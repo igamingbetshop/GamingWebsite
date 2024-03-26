@@ -1,4 +1,4 @@
-import {Directive, Injector} from '@angular/core';
+import {Directive, inject, Injector} from '@angular/core';
 import {BaseComponent} from '../../base/base.component';
 import {BonusesService} from "@core/services/api/bonuses.service";
 import {Bonus, BonusBet} from "@core/models";
@@ -6,7 +6,6 @@ import {Controllers, MenuType, Methods, Products} from "@core/enums";
 import {TranslateService} from "@ngx-translate/core";
 import {GetBetsHistoryService} from "@core/services/app/getBetsHistory.service";
 import {BaseQuestionTabComponent} from "../../modals/base-question-tab/base-question-tab.component";
-import {SimpleModalService} from 'ngx-simple-modal';
 import {BaseTriggersComponent} from "../base-triggers/base-triggers.component";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BaseApiService} from "@core/services/api/base-api.service";
@@ -15,6 +14,7 @@ import {UtilityService} from "@core/services/app/utility.service";
 import {Subject} from "rxjs";
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {DatePipe, DecimalPipe} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BonusesComponent extends BaseComponent {
@@ -26,7 +26,7 @@ export class BonusesComponent extends BaseComponent {
     private baseControllerService:BaseControllerService;
     private translateService: TranslateService;
     private utilService: UtilityService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     public baseApiService: BaseApiService;
     public utilityService: UtilityService;
     public translate: TranslateService;
@@ -67,7 +67,6 @@ export class BonusesComponent extends BaseComponent {
         this.getBetsHistoryService = injector.get(GetBetsHistoryService);
         this.translateService = injector.get(TranslateService);
         this.utilService = injector.get(UtilityService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.fb = injector.get(FormBuilder);
         this.baseApiService = injector.get(BaseApiService);
         this.baseControllerService = injector.get(BaseControllerService);
@@ -234,21 +233,17 @@ export class BonusesComponent extends BaseComponent {
     }
 
     public openTriggers(bonus: Bonus) {
-        this.simpleModalService.addModal(BaseTriggersComponent, {
-            title: 'Triggers',
-            data: bonus
-        }).subscribe(() => {
-        });
+        console.log('bonus',bonus);
+        this.dialog.open(BaseTriggersComponent, {data:{title: 'Triggers', bonus: bonus}});
     }
 
     deleteBonus(bonus, event: MouseEvent)
     {
         event.stopPropagation();
 
-        this.simpleModalService.addModal(BaseQuestionTabComponent, {
-            title: 'remove-bonuse',
-        }).subscribe((isConfirmed) => {
-            if (!!isConfirmed) {
+        let dialogRef = this.dialog.open(BaseQuestionTabComponent, {data:{title: 'remove-bonuse'}})
+        dialogRef.afterClosed().subscribe(result => {
+            if (!!result) {
                 const decimalPipe = new DecimalPipe('en');
                 this.bonusesService.DeleteBonus(bonus, this.selectedTab.bonusData);
                 this.subscriptions.push(this.bonusesService.notifyDeleteBonus.subscribe(data => {

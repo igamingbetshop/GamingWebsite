@@ -3,7 +3,6 @@ import {Directive, Injector, ViewChild} from '@angular/core';
 import {BaseComponent} from '../base/base.component';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ReCaptcha2Component} from "ngx-captcha";
 import {TranslateService} from "@ngx-translate/core";
 import {ConfigService, LoaderService, SaveData} from "@core/services";
 import {UserRegisterService} from "@core/services/app/userRegister.service";
@@ -67,7 +66,6 @@ export class RegistrationComponent extends BaseComponent {
     public errorMessage: string;
     public showSuccessView: boolean = false;
     public showSuccessMessage: boolean = false;
-    @ViewChild('captchaElem') captchaElem: ReCaptcha2Component;
     public theme: 'light' | 'dark' = 'light';
     public size: 'compact';
     public lang: string = 'en';
@@ -419,11 +417,6 @@ export class RegistrationComponent extends BaseComponent {
 
     }
 
-
-    // ReCaptcha
-    handleExpire() {
-        this.captchaElem.reloadCaptcha();
-    }
 
     handleLoad() {
     }

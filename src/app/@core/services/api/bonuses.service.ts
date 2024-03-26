@@ -8,7 +8,7 @@ import {Observable, Subject} from "rxjs";
 import {map} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
 
-@Injectable()
+@Injectable({providedIn:"root"})
 export class BonusesService {
 
     public userData: any;

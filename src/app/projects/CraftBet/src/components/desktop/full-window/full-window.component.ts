@@ -1,12 +1,12 @@
-import {AfterViewChecked, AfterViewInit, Component, Injector, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Injector} from '@angular/core';
 import {BaseFullWindowComponent} from "../../../../../../@theme/components/common/base-full-window/base-full-window.component";
 import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
-import {SimpleModalService} from "ngx-simple-modal";
 import {closeFullscreen, openFullscreen} from '../../../../../../@core/utils';
 import {FavoritesService} from "../../../../../../@core/services/api/favorites.service";
 import {Controllers, Methods} from "../../../../../../@core/enums";
 import {BaseApiService} from "../../../../../../@core/services/api/base-api.service";
 import {StateService} from "../../../../../../@core/services/app/state.service";
+import {MatDialog} from "@angular/material/dialog";
 import {SaveData} from "@core/services";
 
 @Component({
@@ -24,7 +24,7 @@ export class FullWindowComponent extends BaseFullWindowComponent implements Afte
 
     constructor(
         public injector: Injector,
-        private simpleModalService: SimpleModalService,
+        private dialog: MatDialog,
         private favoriteService: FavoritesService,
         private baseApiService: BaseApiService,
         private stateService:StateService,
@@ -91,13 +91,14 @@ export class FullWindowComponent extends BaseFullWindowComponent implements Afte
         /*If game hasn't demo mode*/
         if (data.ResponseCode == 174) {
             localStorage.setItem('product-url', this.router.url);
-            this.simpleModalService.addModal(AppConfirmComponent, {
-                title: 'open_login',
-                message: true
-            }).subscribe((isConfirmed) => {
-                if (!isConfirmed)
+           const dialogRef =  this.dialog.open(AppConfirmComponent, {data:{ title: 'open_login',
+                    message: true}});
+           dialogRef.afterClosed().subscribe(result => {
+                if(result)
+                {
                     localStorage.removeItem('product-url');
-            });
+                }
+           });
         }
     }
 

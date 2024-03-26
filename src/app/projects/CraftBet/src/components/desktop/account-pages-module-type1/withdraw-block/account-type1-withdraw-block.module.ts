@@ -5,11 +5,7 @@ import {WithdrawBlockDefaultComponent} from './withdraw-block-default/withdraw-b
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
-import {SimpleModalModule} from "ngx-simple-modal";
 import {HttpClientModule} from "@angular/common/http";
-import {FilterPipeModule} from "ngx-filter-pipe";
-import {NgxMaskModule} from "ngx-mask";
-import {ClickOutsideModule} from "ng-click-outside";
 import {NgxPrintModule} from "ngx-print";
 import {ThemeModule} from "../../../../../../../@theme/theme.module";
 import {DesktopMobileCommonModule} from "../../../common/common.module";
@@ -47,7 +43,6 @@ import {WithdrawType16DefaultComponent} from "./withdraw-payments/withdraw-type1
 import {WithdrawType16Component} from "./withdraw-payments/withdraw-type16/withdraw-type16.component";
 import {WithdrawType17DefaultComponent} from "./withdraw-payments/withdraw-type17/withdraw-type17-default/withdraw-type17-default.component";
 import {WithdrawType17Component} from "./withdraw-payments/withdraw-type17/withdraw-type17.component";
-import {LoaderModule} from "../../../common/loader/loader.module";
 import {OrderByPipeModule} from "../../../../../../../@theme/pipes/order-by/order-by-pipe.module";
 import {CommonPaymentNominalsModule} from "../../../common/app-common-payment-nominals/common-payment-nominals.module";
 import {CommonAccountsModule} from "../../../common/common-accounts/common-accounts.module";
@@ -76,6 +71,8 @@ import {WithdrawType20Component} from "./withdraw-payments/withdraw-type20/withd
 import {
     WithdrawType20DefaultComponent
 } from "./withdraw-payments/withdraw-type20/withdraw-type20-default/withdraw-type20-default.component";
+import {NgxMaskDirective} from "ngx-mask";
+import {LoaderComponent} from "../../../common/loader/loader.component";
 
 
 @NgModule({
@@ -137,19 +134,16 @@ import {
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
-        ClickOutsideModule,
+        NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
         DesktopMobileCommonModule,
-        LoaderModule,
         OrderByPipeModule,
         CommonPaymentNominalsModule,
         CommonAccountsModule,
-        DropdownDirectiveModule
+        DropdownDirectiveModule,
+        LoaderComponent
     ]
 })
 export class AccountType1WithdrawBlockModule {

@@ -3,7 +3,6 @@ import {TranslateModule} from '@ngx-translate/core';
 import {DesktopMobileCommonModule} from '../common/common.module';
 import {DesktopRoutingModule} from './desktop-routing.module';
 import {ThemeModule} from '../../../../../@theme/theme.module';
-import {SimpleModalModule} from 'ngx-simple-modal';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {HttpClientModule} from '@angular/common/http';
 import {AppMainComponent} from './app-main/app-main.component';
@@ -19,7 +18,6 @@ import {AppForgotPasswordRecoveryComponent} from './app-forgot-password-recovery
 import {AppOpenGamesComponent} from './app-open-games/app-open-games.component';
 import {SlickCarouselModule} from 'ngx-slick-carousel';
 import {AppLiveCasinoComponent} from './app-live-casino/app-live-casino.component';
-import {FilterPipeModule} from 'ngx-filter-pipe';
 import {AppOpenTicketComponent} from './app-open-ticket/app-open-ticket.component';
 import {UserInfoComponent} from './user-info/user-info.component';
 import {FaqComponent} from './faq/faq.component';
@@ -31,8 +29,7 @@ import {ParentCasinoComponent} from './parent-casino/parent-casino.component';
 import {AllNewsComponent} from "./news/all-news/all-news.component";
 import {CurrentNewsComponent} from "./news/current-news/current-news.component";
 import {EmailVerifyComponent} from "./email-verify/email-verify.component";
-import {ClickOutsideModule} from 'ng-click-outside';
-import {IConfig, NgxMaskModule} from 'ngx-mask';
+
 
 import {ErrorPageComponent} from './error-page/error-page.component';
 import {DefaultSportComponent} from './default-sport/default-sport.component';
@@ -43,11 +40,9 @@ import {InformationComponent} from './information/information.component';
 import {NgxPrintModule} from 'ngx-print';
 import {AddBankAccountComponent} from "./add-bank-account/add-bank-account.component";
 import {PaymentsListComponent} from './payments-list/payments-list.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ProductsListComponent } from './products-list/products-list.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {LoaderModule} from "../common/loader/loader.module";
 import {LoginButtonModule} from "../../../../../@theme/components/global-login-btn/login-button.module";
 import {GlobalSignUpBtnModule} from "../../../../../@theme/components/global-sign-up-btn/global-sign-up-btn.module";
 import {TicketsModule} from "../../../../../@theme/components/global-tickets/tickets.module";
@@ -91,10 +86,9 @@ import {CharacterHierarchyComponent} from "./app-casino/character-hierarchy/char
 import { BalanceComponent } from './balance/balance.component';
 import {RegisterPageComponent} from "./register-page/register-page.component";
 import { PaymentErrorComponent } from './payment-error/payment-error.component';
+import {LoaderComponent} from "../common/loader/loader.component";
+import {NgxMaskDirective} from "ngx-mask";
 
-const maskConfig: Partial<IConfig> = {
-    validation: true,
-};
 
 @NgModule({
     imports: [
@@ -103,18 +97,12 @@ const maskConfig: Partial<IConfig> = {
         ThemeModule,
         TranslateModule.forChild(),
         FontAwesomeModule,
-        SimpleModalModule,
         HttpClientModule,
         NgxPaginationModule,
         SlickCarouselModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(maskConfig),
-        ClickOutsideModule,
         NgxPrintModule,
-        InfiniteScrollModule,
         ReactiveFormsModule,
         FormsModule,
-        LoaderModule,
         LoginButtonModule,
         GlobalSignUpBtnModule,
         TicketsModule,
@@ -146,7 +134,9 @@ const maskConfig: Partial<IConfig> = {
         SessionTimerModule,
         ProgressBarModule,
         TimeComponent,
-        CharacterHierarchyComponent
+        CharacterHierarchyComponent,
+        LoaderComponent,
+        NgxMaskDirective
     ],
 
     exports: [PaymentsListComponent, AddBankAccountComponent, UserInfoComponent],

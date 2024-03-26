@@ -4,7 +4,7 @@
   padding: 0;
   height: var(--modal-payment-frame-height, 500px);
   max-height: var(--modal-payment-frame-max-height, 500px);
-  margin: unset!important;
+  margin: var(--modal-payment-frame-margin, unset)!important;
   top:50%;
   transform: translateY(-50%)!important;
 

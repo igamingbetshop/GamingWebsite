@@ -1007,7 +1007,7 @@
         flex: 2;
         overflow-y: hidden;
         padding: 0;
-        border-radius: unset;
+        border-radius: var(--withdraw-payment-list-border-radius, 0);
 
         .payment_list {
           display: flex;
@@ -1037,7 +1037,7 @@
               .payment-row {
                 height: 100%;
                 width: 100%;
-                border-top: 1px solid rgba(255, 255, 255, .1);
+                border-top: var(--account-payment-row-border-top, 1px solid rgba(255, 255, 255, .1));
                 display: flex;
                 justify-content: space-between;
                 padding-top: paddingTop(account-payment-row, 17px);
@@ -1046,12 +1046,13 @@
                 fa-icon {
                   justify-self: center;
                   align-self: center;
-                  margin-right: 16px;
+                  margin-right: var(--account-payment-row-icon-margin-right, 16px);
+                  color: var(--account-payment-row-icon-color, #fff);
                 }
 
                 .payment-row-item {
                   .payment-img {
-                    background: #fff;
+                    background: var(--payment-list-item-img-background, #fff);
                     width: width(payment-list-item-img, 30%);
                     height: height(payment-list-item-img, 60px);
                     background-size: 100% 100%;
@@ -1075,22 +1076,22 @@
                     padding-right: 0;
                     color: var(--account-payment-amount-color, #bbc6e9);
                     font-size: var(--account-payment-amount-font-size, 14px);
-                    font-weight: 600;
-                    line-height: 20px;
+                    font-weight: var(--account-payment-amount-font-weight, 600);
+                    line-height: var(--account-payment-amount-line-height, 20px);
                   }
 
                   .balance_info {
                     color: var(--account-payment-amount-color, #bbc6e9);
                     font-size: var(--account-payment-amount-font-size, 14px);
-                    font-weight: 600;
-                    line-height: 20px;
+                    font-weight: var(--account-payment-amount-font-weight, 600);
+                    line-height: var(--account-payment-amount-line-height, 20px);
                   }
 
                   .transaction-fee {
                     color: var(--account-payment-amount-color, #bbc6e9);
                     font-size: var(--account-payment-amount-font-size, 14px);
-                    font-weight: 600;
-                    line-height: 20px;
+                    font-weight: var(--account-payment-amount-font-weight, 600);
+                    line-height: var(--account-payment-amount-line-height, 20px);
                   }
                 }
 
@@ -1101,7 +1102,7 @@
                   .payment-row-header {
                     color: itemColor(payment-row-header, rgba(151, 161, 194, .5));
                     font-size: fontSize(payment-row-header, 14px);
-                    font-weight: 400;
+                    font-weight: fontWeight(payment-row-header, 400);
                     margin-bottom: marginBottom(payment-row-header, 6px);
                   }
                 }
@@ -1119,21 +1120,21 @@
               .bonus-refused {
                 display: var(--bonus-refused-display, flex);
                 align-items: center;
-                gap: 14px;
-                justify-content: flex-start;
+                gap: var(--bonus-refused-gap, 14px);
+                justify-content: var(--bonus-refused-justify-content, flex-start);
                 position: relative;
                 padding-left: var(--bonus-refused-padding-left, 43px);
                 cursor: pointer;
-                line-height: 18px;
+                line-height: var(--bonus-refused-line-height, 18px);
                 color: var(--account-content-item-color, #fff);
                 margin-top: var(--bonus-refused-margin-top, 16px);
               }
               .bonus-refused input[type="checkbox"] {
                 position: absolute;
                 left: var(--bonus-refused-input-left, 11.5px);
-                top: -3px;
-                width: 18px;
-                height: 18px;
+                top: var(--bonus-refused-input-top, -3px);
+                width: var(--bonus-refused-input-width, 18px);
+                height: var(--bonus-refused-input-height, 18px);
                 border: none;
                 border-radius: 100%;
                 background: var(--user-radio-unchecked-color, #131A2C);
@@ -1275,25 +1276,26 @@
                   .bonus-info {
                     position: absolute;
                     z-index: 999;
-                    width: 300px;
+                    width: var(--bonus-info-width, 300px);
                     right: var(--account-content-row-paddding);
-                    border-radius: 4px;
+                    border-radius: var(--bonus-info-border-radius, 4px);
                     background-color: var(--bonus-info-bg, #3B5175);
-                    padding: 10px;
-                    margin-top: 3px;
-                    font-size: $font-size-2;
-                    display: flex;
-                    justify-content: space-between;
-                    gap: 6px;
+                    padding: var(--bonus-info-padding, 10px);
+                    margin-top: var(--bonus-info-margin-top, 3px);
+                    font-size: var(--bonus-info-font-size, $font-size-2);
+                    display: var(--bonus-info-display, flex);
+                    justify-content: var(--bonus-info-justify-content, space-between);
+                    gap: var(--bonus-info-gap, 6px);
 
                     &__text {
-                      line-height: 16px;
-                      color: $account-content-item-color;
+                      line-height: var(--bonus-info-text-line-height, 16px);
+                      color: var(--bonus-info-text-color, $account-content-item-color);
                       opacity: 0.85;
                     }
 
                     &__close {
                       font-size: var(--bonus-info-font-size, 8px);
+                      color: var(--bonus-info-close-icon-color, #fff);
                       cursor: pointer;
                     }
                   }
@@ -1542,7 +1544,7 @@
           label {
             font-size: var(--payment-form-floating-label-font-size, 14px);
             pointer-events: none;
-            color: rgba(255, 255, 255, 0.4);
+            color: var(--payment-form-floating-label-color, rgba(255, 255, 255, 0.4));
             white-space: nowrap;
           }
 
@@ -1555,7 +1557,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(154, 168, 196, 0.3803921569);
+            border-bottom: var(--payment-form-field-border-bottom, 1px solid rgba(154, 168, 196, 0.3803921569));
             margin-bottom: var(--payment-form-field-margin-bottom, 24px);
 
             input, select {
@@ -1568,11 +1570,11 @@
               outline: none;
               background: none;
               padding: 0;
-              text-indent: 10px;
+              text-indent: var(--payment-form-field-input-text-indent, 10px);
               height: 100%;
-              min-height: 40px;
-              width: 84%;
-              color: white;
+              min-height: var(--payment-form-field-input-min-height, 40px);
+              width: var(--payment-form-field-input-width, 84%);
+              color: var(--payment-form-field-input-color, white);
             }
 
             select {
@@ -1610,7 +1612,7 @@
               top: 0;
               font-size: fontSize(payment-form-floating-label, 14px);
               pointer-events: none;
-              color: rgba(255, 255, 255, .4);
+              color: var(--payment-form-floating-label-color, rgba(255, 255, 255, .4));
               -webkit-transition: all .2s ease-in-out;
               transition: all .2s ease-in-out;
             }
@@ -1640,16 +1642,18 @@
           }
 
           .payment-btn {
-            border-radius: 4px;
-            width: 100%;
+            border-radius: var(--payment-form-button-border-radius, 4px);
+            border: var(--payment-form-button-border, none);
+            width: var(--payment-form-button-width, 100%);
             font-stretch: normal;
             font-style: normal;
-            line-height: 1.31;
+            line-height: var(--payment-form-button-line-height, 1.31);
+            font-size: var(--payment-form-button-font-size, 13px);
             letter-spacing: normal;
             text-align: center;
-            color: #ffffff;
+            color: var(--payment-form-button-color, #ffffff);
             height: var(--payment-form-button-height, 48px);
-            background: #ff172d;
+            background: var(--payment-form-button-background, #ff172d);
           }
 
           &.payment-form-select {
@@ -1662,16 +1666,18 @@
           margin-top: auto;
 
           button {
-            border-radius: 4px;
-            width: 100%;
+            border-radius: var(--payment-form-button-border-radius, 4px);
+            border: var(--payment-form-button-border, none);
+            width: var(--payment-form-button-width, 100%);
             font-stretch: normal;
             font-style: normal;
-            line-height: 1.31;
+            font-size: var(--payment-form-button-font-size, 13px);
+            line-height: var(--payment-form-button-line-height, 1.31);
             letter-spacing: normal;
             text-align: center;
-            color: #ffffff;
+            color: var(--payment-form-button-color, #ffffff);
             height: var(--payment-form-button-height, 48px);
-            background: #ff172d;
+            background: var(--payment-form-button-background, #ff172d);
 
             &:not([disabled]) {
               cursor: pointer

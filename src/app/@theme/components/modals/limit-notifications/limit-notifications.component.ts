@@ -1,32 +1,21 @@
-import {Component, Injector, OnInit} from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
-import { ConfirmModel } from '../../../../@core/interfaces';
+import {Component, inject} from '@angular/core';
 import { SignalRService } from '../../../../@core/services/soket/signal-r.service';
 import {TranslateService} from "@ngx-translate/core";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-limit-notifications',
   templateUrl: './limit-notifications.component.html',
   styleUrls: ['./limit-notifications.component.scss']
 })
-export class LimitNotificationsComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
-  public title: string;
-  public message: boolean;
-  public data: any;
-  public updatedData: any;
-  protected signalRService: SignalRService;
+export class LimitNotificationsComponent  {
 
-  constructor(public injector: Injector, public translate: TranslateService) {
-    super();
-    this.signalRService = injector.get(SignalRService);
+  data:any = inject(MAT_DIALOG_DATA);
+  signalRService = inject(SignalRService);
+  translate = inject(TranslateService);
+  dialogRef = inject(MatDialogRef<LimitNotificationsComponent>);
+  close()
+  {
+    this.dialogRef.close();
   }
-
-  ngOnInit(): void {
-    console.log('1212',this.data);
-    // this.translate.get('User.Limit Info details').subscribe((res) => {
-    // const currentValue = this.data?.updatedData?.LimitInfo.DailyDepositLimitPercent;
-    //   this.data.updatedData.LimitInfo.DailyDepositLimitPercent = res.replace('number', currentValue);
-    // });
-  }
-
 }

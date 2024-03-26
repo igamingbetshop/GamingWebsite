@@ -2,6 +2,7 @@
   display: flex;
   gap: 20px;
   width: var(--settings-submit-details-width, auto);
+  margin: var(--settings-submit-details-margin, 0);
   .setting_btn {
     font-size: var(--m-settings-profile-submit-details-font-size, 16px);
     font-weight: var(--settings-submit-details-font-weight, 500);
@@ -38,6 +39,8 @@ form {
   position: relative;
   height: 100%;
   width: var(--m-profile-settings-form-width, 90%);
+  margin: var(--m-profile-settings-form-margin, 0);
+  padding: var(--m-profile-settings-form-padding, 0);
   .active_item {
     pointer-events: unset;
   }

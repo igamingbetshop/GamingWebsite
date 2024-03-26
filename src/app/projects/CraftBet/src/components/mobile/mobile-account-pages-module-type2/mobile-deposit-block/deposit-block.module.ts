@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {TranslateModule} from "@ngx-translate/core";
 
 
-import {FilterPipeModule} from "ngx-filter-pipe";
 import {MobileDepositType1Component} from "./deposit-payments/deposit-type1/mobile-deposit-type1.component";
 import {MobileDepositType1DefaultComponent} from "./deposit-payments/deposit-type1/deposit-type1-default/mobile-deposit-type1-default.component";
 import {MobileDepositType2Component} from "./deposit-payments/deposit-type2/mobile-deposit-type2.component";
@@ -39,7 +38,6 @@ import {MobileDepositType16Component} from "./deposit-payments/deposit-type16/mo
 import {MobileDepositType16DefaultComponent} from "./deposit-payments/deposit-type16/deposit-type16-default/mobile-deposit-type16-default.component";
 import {DesktopMobileCommonModule} from "../../../common/common.module";
 import {ThemeModule} from "../../../../../../../@theme/theme.module";
-import {LoaderModule} from "../../../common/loader/loader.module";
 import {CommonBonusesModule} from "../../../common/app-common-bonuses/common-bonuses.module";
 import {PaymentsModule} from "../../../../../../../@core/modules/payments.module";
 import {CommonPaymentNominalsModule} from "../../../common/app-common-payment-nominals/common-payment-nominals.module";
@@ -47,8 +45,8 @@ import {CollapseDirectiveModule} from "../../../../../../../@theme/directives/co
 import {MobileDepositType17DefaultComponent} from "./deposit-payments/deposit-type17/deposit-type17-default/mobile-deposit-type17-default.component";
 import {MobileDepositType17Component} from "./deposit-payments/deposit-type17/mobile-deposit-type17.component";
 import {QRCodeModule} from "angularx-qrcode";
-import {NgxMaskModule} from "ngx-mask";
-
+import {NgxMaskDirective} from "ngx-mask";
+import {LoaderComponent} from "../../../common/loader/loader.component";
 
 
 @NgModule({
@@ -90,21 +88,19 @@ import {NgxMaskModule} from "ngx-mask";
   ],
     imports: [
         CommonModule,
-        TranslateModule,
         ThemeModule,
+        LoaderComponent,
         MobileDepositBlockRoutingModule,
         ReactiveFormsModule,
         FormsModule,
         DesktopMobileCommonModule,
-        FilterPipeModule,
         TranslateModule,
-        LoaderModule,
         CommonBonusesModule,
         PaymentsModule,
         CommonPaymentNominalsModule,
         CollapseDirectiveModule,
         QRCodeModule,
-        NgxMaskModule
+        NgxMaskDirective,
     ],
 })
 export class MobileDepositBlockModule {

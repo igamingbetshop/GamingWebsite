@@ -109,7 +109,8 @@
                 (click)="closeInfoBox()"></span>
           </div>
         </div>
-          <app-user-info [data]="selectedBet" *ngIf="showInfoBox == i && closeInfo"></app-user-info>
+          <app-user-info [info]="selectedBet" *ngIf="showInfoBox == i && closeInfo"></app-user-info>
+
       </div>
 
       <div class="pagination_section">

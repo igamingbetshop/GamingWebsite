@@ -7,7 +7,6 @@ import {BaseFrameComponent} from "./base-frame.component";
 @NgModule({
   declarations:[BaseFrameComponent],
   exports:[BaseFrameComponent],
-  entryComponents:[BaseFrameComponent],
   imports:[
     CommonModule,
     SanitizerModule,

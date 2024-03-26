@@ -1,32 +1,19 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SimpleModalComponent} from "ngx-simple-modal";
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {take} from "rxjs";
-
-export interface ConfirmModel {
-  title: string;
-  url:string;
-  cancelUrl?:string;
-  closable?:boolean;
-}
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'base-frame',
   templateUrl: './base-frame.component.html',
   styleUrls: ['./base-frame.component.scss']
 })
-export class BaseFrameComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit, OnDestroy {
+export class BaseFrameComponent implements OnInit, OnDestroy {
 
-  public title: string;
-  public url:string;
-  public closable:boolean = true;
-  public cancelUrl?:string;
   public deviceSize: any;
-
-  constructor(private baseApiService:BaseApiService)
-  {
-    super();
-  }
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<BaseFrameComponent>);
+  private baseApiService = inject(BaseApiService);
 
   ngOnInit()
   {
@@ -34,8 +21,9 @@ export class BaseFrameComponent extends SimpleModalComponent<ConfirmModel, boole
     addEventListener('message', this.onMessage);
   }
 
-  confirm() {
-    this.close();
+  confirm()
+ {
+    this.dialogRef.close(true);
   }
 
   onMessage = (data) =>
@@ -90,17 +78,17 @@ export class BaseFrameComponent extends SimpleModalComponent<ConfirmModel, boole
     const p = setTimeout(() => {
       this.close();
     }, 500);*/
-    if(this.cancelUrl)
+    if(this.data.cancelUrl)
     {
-      this.baseApiService.apiGet(this.cancelUrl, null, '').pipe(take(1)).subscribe(data => {
-        this.close();
+      this.baseApiService.apiGet(this.data.cancelUrl, null, '').pipe(take(1)).subscribe(data => {
+        this.dialogRef.close();
       }, error => {
-        this.close();
+        this.dialogRef.close();
       });
     }
     else
     {
-      this.close();
+      this.dialogRef.close();
     }
   }
 

@@ -3,7 +3,7 @@
     <div class="mobile-self-limitation_edit"
          [ngClass]="editSelfLimitation? 'selected' : ''"
          (click)="editSelfLimitation = true">
-        <button class="craft_btn setting_btn" type="submit" (click)="editSelfLimitation = true"
+        <button class="craft_btn setting_btn m-self-limit-edit" type="submit" (click)="editSelfLimitation = true"
                 [ngClass]="{'disable_item': editSelfLimitation, 'active_item': !editSelfLimitation}">
             <span class="icon-edit"></span>
             <span (click)="editSelfLimitation = true">{{'Settings.Edit' | translate}}</span>
@@ -76,7 +76,7 @@
 <!--            <span>{{'User.Minutes' | translate}}</span>-->
 <!--        </div>-->
         <div class="mobile-limit-type">
-            <p class="limit-type-title">{{'User.TotalDeposit' | translate}}</p>
+            <p class="limit-type-title m-limit-type-title">{{'User.TotalDeposit' | translate}}</p>
             <div class="limit-type_row">
                 <div class="limit-type-field">
                     <input class="mobile-limit-type-input" type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation,
@@ -106,7 +106,7 @@
         </div>
         <div class="limit-underline"></div>
         <div class="mobile-limit-type">
-            <p class="limit-type-title">{{'User.TotalBets' | translate}}</p>
+            <p class="limit-type-title m-limit-type-title">{{'User.TotalBets' | translate}}</p>
                 <div class="limit-type_row">
                     <div class="limit-type-field">
                         <input class="mobile-limit-type-input" type="number" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation,
@@ -136,7 +136,7 @@
         </div>
         <div class="limit-underline"></div>
         <div class="mobile-limit-type">
-            <p class="limit-type-title">{{'User.TotalLost' | translate}}</p>
+            <p class="limit-type-title m-limit-type-title">{{'User.TotalLost' | translate}}</p>
             <div class="limit-type_row">
                 <div class="limit-type-field">
                     <input type="number" class="mobile-limit-type-input" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation,
@@ -166,7 +166,7 @@
         </div>
         <div class="limit-underline"></div>
         <div class="mobile-limit-type">
-            <p class="limit-type-title">{{'User.SessionLimit' | translate}}</p>
+            <p class="limit-type-title m-limit-type-title">{{'User.SessionLimit' | translate}}</p>
             <div class="limit-type_row">
                 <div class="limit-type-field">
                     <input type="number" class="mobile-limit-type-input" [ngClass]="{'disable_item': !editSelfLimitation, 'active_item': editSelfLimitation}"

@@ -143,7 +143,7 @@
     }
     .setting_btn {
       font-size: var(--font-size-3, 16px);
-      padding: 0 12px;
+      padding: var(--settings-button-text-padding, 0 12px);
       margin: var(--settings-field-send-code-btn-margin,  7px 0 24px 0);
       width: var(--settings-field-send-code-btn-width, 104px);
       height: var(--settings-field-send-code-btn-height, auto);
@@ -151,7 +151,7 @@
       white-space: nowrap;
       background: linear-gradient(to bottom,var(--settings-button-gradient-first-color, #FFFFFF) 0%,var(--settings-button-gradient-second-color, #FFFFFF) 100%);
       color: var(--settings-button-text-color, #FFFFFF);
-      font-weight: 500;
+      font-weight: var(--settings-button-text-font-weight, 500);
       .active_item {
         pointer-events: unset;
       }

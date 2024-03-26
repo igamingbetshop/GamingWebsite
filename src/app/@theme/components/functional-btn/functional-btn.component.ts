@@ -3,12 +3,12 @@ import {getParsedUrl} from "../../../@core/utils";
 import {BaseApiService} from "../../../@core/services/api/base-api.service";
 import {Router} from "@angular/router";
 import {take} from "rxjs/operators";
-import {SimpleModalService} from "ngx-simple-modal";
 import {BaseFrameComponent} from "../modals/base-frame/base-frame.component";
 import {Methods} from "../../../@core/enums";
 import {LogoutHelper} from "../../../@core/services/helpers/logout.helper";
 import {SaveData} from "../../../@core/services";
 import {StateService} from "../../../@core/services/app/state.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'functional-btn',
@@ -29,7 +29,7 @@ export class FunctionalBtnComponent implements OnInit, OnDestroy {
 
   constructor(private baseApiService:BaseApiService,
               private logoutHelper:LogoutHelper,
-              private simpleModalService:SimpleModalService,
+              private dialog:MatDialog,
               private router:Router,
               private stateService:StateService,
               private savedDateService: SaveData)
@@ -151,13 +151,10 @@ export class FunctionalBtnComponent implements OnInit, OnDestroy {
               this.openedWindow.location.href = url;
               break;
             case 'Iframe':
-              this.simpleModalService.addModal(BaseFrameComponent,
-                  {
-                    title: '',
-                    url: url
-                  },
-                  {closeOnClickOutside: false}).subscribe(() => {
-              });
+              this.dialog.open(BaseFrameComponent, {data:{
+                  title: '',
+                  url: url
+                }, hasBackdrop:true});
               break;
             case 'NewWindow':
               this.popupCenter('', '_blank', screen.width * 0.5, screen.height * 0.5);

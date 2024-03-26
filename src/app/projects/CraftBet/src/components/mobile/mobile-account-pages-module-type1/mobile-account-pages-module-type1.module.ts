@@ -18,11 +18,7 @@ import {MobileAccountPageType1HistoryComponent} from './history/mobile-account-p
 import {MobileAccountPagesModuleType1RoutingModule} from "./mobile-account-pages-module-type1-routing.module";
 import {TranslateModule} from '@ngx-translate/core';
 import {NgxPaginationModule} from "ngx-pagination";
-import {SimpleModalModule} from "ngx-simple-modal";
 import {HttpClientModule} from "@angular/common/http";
-import {FilterPipeModule} from "ngx-filter-pipe";
-import {NgxMaskModule} from "ngx-mask";
-import {ClickOutsideModule} from "ng-click-outside";
 import {NgxPrintModule} from "ngx-print";
 import {MobileAccountPageType1AddBankAccountComponent} from './add-bank-account/mobile-account-page-type1-add-bank-account.component';
 import {MobileAccountPageType1UserInfoComponent} from './user-info/mobile-account-page-type1-user-info.component';
@@ -32,9 +28,7 @@ import {DesktopMobileCommonModule} from "../../common/common.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {OrderByPipeModule} from "../../../../../../@theme/pipes/order-by/order-by-pipe.module";
 import {CommonMessageModalModule} from "../../common/app-common-message-modal/common-message-modal.module";
-import {MobileUserInfoModule} from "../mobile-user-info/mobile-user-info.module";
 import {ExportDataService} from "../../../../../../@core/services";
-import {TriggersModule} from "../../../../../../@theme/components/common/base-triggers/triggers.module";
 import {FriendsService} from "../../../../../../@core/services/api/friends.service";
 import {GetSettingsService} from "../../../../../../@core/services/app/getSettings.service";
 import {BonusesService} from "../../../../../../@core/services/api/bonuses.service";
@@ -44,11 +38,12 @@ import {GetTransactionsService} from "../../../../../../@core/services/app/getTr
 import {GetPaymentsService} from "../../../../../../@core/services/app/getPayments.service";
 import {PaymentControllerService} from "../../../../../../@core/services/app/paymentController.services";
 import { MobileChangePasswordComponent } from './change-password/mobile-change-password.component';
-import {ProfileService} from "../../../../../../@theme/components/profile/service/profile.service";
 import { MobileSelfLimitationComponent } from './self-limitation/mobile-self-limitation.component';
 import {CommonBankMessageModalModule} from "../../common/app-common-bank-message-modal/common-bank-message-modal.module";
 import {HorizontalScrollDirectiveModule} from "../../../../../../@theme/directives/horizontal-scroll/horizontal-scroll.directive.module";
 import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
+import {NgxMaskDirective} from "ngx-mask";
+
 
 @NgModule({
     declarations: [
@@ -80,18 +75,13 @@ import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropd
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
-        ClickOutsideModule,
+        NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
         DesktopMobileCommonModule,
         OrderByPipeModule,
         CommonMessageModalModule,
-        MobileUserInfoModule,
-        TriggersModule,
         CommonBankMessageModalModule,
         HorizontalScrollDirectiveModule,
         DropdownDirectiveModule
@@ -107,7 +97,6 @@ import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropd
         GetTransactionsService,
         GetPaymentsService,
         PaymentControllerService,
-        ProfileService,
         DatePipe
     ]
 })

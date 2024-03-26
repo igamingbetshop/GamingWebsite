@@ -56,9 +56,37 @@ export class HorizontalScrollDirective implements OnChanges
             scrollElem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
     }
 
+    changeSlide(direction:number)
+    {
+        const elements = this.el.nativeElement.querySelectorAll('.sliderSelector');
+        const containerRect = this.el.nativeElement.getBoundingClientRect();
+        let el: Element | null = null;
+        let isFull = false;
+
+        for (const element of elements) {
+            const rect = element.getBoundingClientRect();
+            if (rect.left >= containerRect.left) {
+                el = element;
+                isFull = (rect.left === containerRect.left);
+                break;
+            }
+        }
+
+        if (el) {
+            const scrollOptions: ScrollIntoViewOptions = { behavior: 'smooth', block: 'nearest', inline: 'start' };
+            if (direction > 0) {
+                const next = isFull ? el.nextElementSibling : el;
+                if (next) next.scrollIntoView(scrollOptions);
+            } else {
+                const previous = el.previousElementSibling;
+                if (previous) previous.scrollIntoView(scrollOptions);
+            }
+        }
+    }
+
     getFirstVisibleElement(container)
     {
-        const elements = container.querySelectorAll('casino-game');
+        const elements = container.querySelectorAll('.sliderSelector');
         for (const element of elements)
         {
             const rect = element.getBoundingClientRect();

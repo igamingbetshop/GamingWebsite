@@ -86,7 +86,7 @@
 {
   .nav-bar
   {
-    padding: 0 16px;
+    padding: var(--product-navigation-tab-padding, 0 16px);
     white-space: nowrap;
     align-items: center;
     color: color(product-navigation-tab);
@@ -139,21 +139,22 @@
       {
         background-color: var(--casino-menu-fragment-item-hover-bg-color, transparent);
         color: var(--casino-menu-fragment-item-hover-color, #FFFFFF);
+        border: var(--casino-menu-fragment-item-hover-border, none);
         transform:perspective(1px) scale(1.05);
         transition: transform 1s;
       }
       .games-count
       {
         position: absolute;
-        padding: 0 10px;
+        padding: var(--casino-menu-games-count-padding, 0 10px);
         color: var(--casino-menu-games-count-color, white);
-        font-size: 14px;
-        top: -20px;
-        right: 10px;
-        font-weight: bold;
+        font-size: var(--casino-menu-games-count-font-size, 14px);
+        top: var(--casino-menu-games-count-top, -20px);
+        right: var(--casino-menu-games-count-right, 10px);
+        font-weight: var(--casino-menu-games-count-font-weight, bold);
         background: var(--casino-menu-games-count-background-color, red);
-        border-radius: 6px;
-        height: 29px;
+        border-radius: var(--casino-menu-games-count-border-radius, 6px);
+        height: var(--casino-menu-games-count-height, 29px);
         display: var(--casino-menu-games-count-display, flex);
         align-items: center;
         animation: fade .5s ease infinite alternate;

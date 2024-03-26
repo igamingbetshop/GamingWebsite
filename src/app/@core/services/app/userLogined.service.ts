@@ -1,11 +1,11 @@
-import {createNgModuleRef, EventEmitter, Injectable, Injector} from '@angular/core';
+import {createNgModule, EventEmitter, inject, Injectable, Injector} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {DeviceDetectorService} from "ngx-device-detector";
 import {User} from "@core/models";
 import {AuthService, ConfigService, LocalStorageService} from "@core/services";
 import {Subject} from "rxjs";
-import {SimpleModalService} from "ngx-simple-modal";
 import {HttpClient} from "@angular/common/http";
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable()
 export class UserLogined {
@@ -16,7 +16,7 @@ export class UserLogined {
     private route: ActivatedRoute;
     private router: Router;
     private deviceDetectorService: DeviceDetectorService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     private _firstLoginSbj:Subject<any> = new Subject();
     public onFirstLogin$ = this._firstLoginSbj.asObservable();
 
@@ -40,7 +40,6 @@ export class UserLogined {
         this.defaultOptions = this.configService.defaultOptions;
         this.returnUrl = this.defaultOptions.RedirectUrl;
         this.deviceDetectorService = injector.get(DeviceDetectorService);
-        this.simpleModalService = injector.get(SimpleModalService);
     }
 
     get isAuthenticated() {
@@ -70,7 +69,7 @@ export class UserLogined {
                 // this.localStorageService.add('user', responseData);
                 if (responseData.IsTwoFactorEnabled) {
                     const {GoogleAuthenticateModule} = await import('../../../@theme/components/modals/google-authenticate/google-authenticate.module');
-                    const moduleRef = createNgModuleRef(GoogleAuthenticateModule);
+                    const moduleRef = createNgModule(GoogleAuthenticateModule);
                     const component = moduleRef.instance.getComponent();
                     const callback = new EventEmitter();
                     callback.subscribe(data => {
@@ -90,12 +89,7 @@ export class UserLogined {
                             }
                         });
                     });
-                    this.simpleModalService.addModal(component, {
-                        error: this.errorMessage,
-                        onVerified: callback,
-                        prefixTitle: 'Enable-TwoFactor'
-                    }).subscribe(data => {
-                    });
+                    this.dialog.open(component, {data:{ error: this.errorMessage, onVerified: callback, prefixTitle: 'Enable-TwoFactor'}});
                 } else {
                     this.localStorageService.add('user', responseData);
                     if (rememberMe) {

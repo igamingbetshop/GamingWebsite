@@ -10,7 +10,7 @@ export interface IProfileState
   value:boolean;
 }
 
-@Injectable()
+@Injectable({providedIn:"root"})
 
 export class ProfileService
 {

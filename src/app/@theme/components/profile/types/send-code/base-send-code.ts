@@ -1,12 +1,22 @@
-import {createNgModuleRef, Directive, EventEmitter, HostListener, Injector, Input, OnDestroy, OnInit} from "@angular/core";
+import {
+    createNgModule,
+    Directive,
+    EventEmitter,
+    HostListener,
+    inject,
+    Injector,
+    Input,
+    OnDestroy,
+    OnInit
+} from "@angular/core";
 import {VerificationService} from "../../../../../@core/services/api/verification.service";
 import {BaseType} from "../base/base-type";
 import {TranslateService} from "@ngx-translate/core";
 import {UtilityService} from "../../../../../@core/services/app/utility.service";
-import {SimpleModalService} from "ngx-simple-modal";
 import {Subscription} from "rxjs";
 import {VerificationCodeTypes} from "../../../../../@core/enums";
 import {ConfigService} from "../../../../../@core/services";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class BaseSendCode extends BaseType implements OnInit, OnDestroy
@@ -21,7 +31,7 @@ export class BaseSendCode extends BaseType implements OnInit, OnDestroy
     verificationService: VerificationService;
     translate: TranslateService;
     utilityService: UtilityService;
-    simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     configService: ConfigService;
 
     errorMessage:string;
@@ -44,7 +54,6 @@ export class BaseSendCode extends BaseType implements OnInit, OnDestroy
         this.verificationService = injector.get(VerificationService);
         this.translate = injector.get(TranslateService);
         this.utilityService = injector.get(UtilityService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.configService = injector.get(ConfigService);
     }
 
@@ -119,7 +128,7 @@ export class BaseSendCode extends BaseType implements OnInit, OnDestroy
     async openVerifyCode(type:string, targetOfSource:string)
     {
         const { VerifyCodeModule } = await import("../../../modals/verify-code/verify-code.module");
-        const moduleRef = createNgModuleRef(VerifyCodeModule, this.injector);
+        const moduleRef = createNgModule(VerifyCodeModule, this.injector);
         const component = moduleRef.instance.getComponent();
         const callback = new EventEmitter();
         callback.subscribe(data => {
@@ -143,18 +152,15 @@ export class BaseSendCode extends BaseType implements OnInit, OnDestroy
                 });
             }
         });
-
-        this.simpleModalService.addModal(component, {isModal:true, type:type, targetOfSender:targetOfSource, onVerified:callback,
-            activePeriodInMinutes: this.activePeriodInMinutes, prefixTitle: '',
-            verificationCodeType: type == 'mobile' ? VerificationCodeTypes.MobileNumberVerification : VerificationCodeTypes.EmailVerification}).subscribe(data => {
-
-        });
+        this.dialog.open(component, {data:{isModal:true, type:type, targetOfSender:targetOfSource, onVerified:callback,
+                activePeriodInMinutes: this.activePeriodInMinutes, prefixTitle: '',
+                verificationCodeType: type == 'mobile' ? VerificationCodeTypes.MobileNumberVerification : VerificationCodeTypes.EmailVerification}})
     }
 
     async openSecurityQuestions(type:string, verifiedCode:string, questionIds:number[])
     {
         const { SecurityQuestionsModalModule } = await import("../../../modals/security-questions-modal/security-questions-modal.module");
-        const moduleRef = createNgModuleRef(SecurityQuestionsModalModule, this.injector);
+        const moduleRef = createNgModule(SecurityQuestionsModalModule, this.injector);
         const component = moduleRef.instance.getComponent();
         const callback = new EventEmitter();
         callback.subscribe(data =>
@@ -169,9 +175,8 @@ export class BaseSendCode extends BaseType implements OnInit, OnDestroy
                 else data.callBack({error:resp['Description']});
             });
         });
-        this.simpleModalService.addModal(component, {securityQuestionIds:questionIds, onSecurityConfirmed:callback}).subscribe(data => {
 
-        });
+        this.dialog.open(component, {data:{securityQuestionIds:questionIds, onSecurityConfirmed:callback}});
     }
 
     selectMobileCode(mobileCodeItem, type = '1')

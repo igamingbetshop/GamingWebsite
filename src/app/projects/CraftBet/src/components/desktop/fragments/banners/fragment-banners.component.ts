@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
 import {BaseBanners} from "../../../../../../../@theme/fragments/banners/base-banners";
 import {AppConfirmComponent} from "../../app-confirm/app-confirm.component";
-import {SimpleModalService} from "ngx-simple-modal";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'fragment-banners',
@@ -10,7 +10,7 @@ import {SimpleModalService} from "ngx-simple-modal";
 })
 export class FragmentBannersComponent extends BaseBanners {
 
-    constructor(protected injector: Injector, private simpleModalService: SimpleModalService) {
+    constructor(protected injector: Injector, private dialog: MatDialog) {
         super(injector);
     }
 
@@ -23,11 +23,9 @@ export class FragmentBannersComponent extends BaseBanners {
     }
 
     private showConfirm(titleName = '') {
-        this.simpleModalService.addModal(AppConfirmComponent, {
-            title: titleName == '' ? 'Confirm title' : titleName,
-            message: true
-        }).subscribe((isConfirmed) => {
-        });
+
+        this.dialog.open(AppConfirmComponent, {data:{title: titleName == '' ? 'Confirm title' : titleName,
+                message: true}})
     }
 }
 

@@ -7,7 +7,6 @@ import { BannersModule } from '../../common/common-banner/banners.module';
 import { FormsModule } from '@angular/forms';
 import { ToNumberPipeModule } from '../../../../../../@theme/pipes/to-number/to-number-pipe.module';
 import { OrderByPipeModule } from '../../../../../../@theme/pipes/order-by/order-by-pipe.module';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { MobileCasinoComponent } from './mobile-casino.component';
 import { MobileCasinoBannersModule } from './mobile-banners/mobile-casino-banners.module';
@@ -34,7 +33,6 @@ const routes: Routes = [
         ToNumberPipeModule,
         BannersModule,
         OrderByPipeModule,
-        InfiniteScrollModule,
         RouterModule.forChild(routes),
         SlickCarouselModule,
         MobileCasinoBannersModule,

@@ -1,4 +1,4 @@
-import {Component, createNgModuleRef, Injector} from '@angular/core';
+import {Component, createNgModule, Injector} from '@angular/core';
 import {BaseCasino} from "../../common/casino/base-casino.component";
 import {FragmentSource} from "../../../../../../@core/enums";
 import {CasinoProvidersService} from "./providers/casino-providers.service";
@@ -25,7 +25,7 @@ export class AppCasinoComponent extends BaseCasino
     async loadComponent():Promise<any>
     {
         const {LuckyGameModule} = await import('../app-casino/lucky-game/lucky-game.module');
-        const moduleRef = createNgModuleRef(LuckyGameModule, this.injector);
+        const moduleRef = createNgModule(LuckyGameModule, this.injector);
         const component = moduleRef.instance.getComponent();
         return component;
     }
@@ -33,16 +33,13 @@ export class AppCasinoComponent extends BaseCasino
     openLuckyGame()
     {
         this.loadComponent().then(component => {
-            this.simpleModalService.addModal(component, {
-                title: 'LuckyGame',
-                message: true,
-                data: {},
-            },{closeOnClickOutside: false}).subscribe(
-                (result) => {
+           const dialogRef =  this.dialog.open(component, {data:{title: 'LuckyGame',
+                    message: true,fragmentConfig:this.fragments?.LuckyGame?.Items[0]}, hasBackdrop:true});
+           dialogRef.afterClosed().subscribe(result => {
+               if(result)
+                   this.router.navigate(['/casino/all-games']);
+           });
 
-                    if(result)
-                        this.router.navigate(['/casino/all-games']);
-                });
         });
     }
 }

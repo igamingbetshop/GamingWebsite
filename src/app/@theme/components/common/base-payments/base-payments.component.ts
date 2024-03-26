@@ -1,16 +1,16 @@
-import {Directive, Injector} from '@angular/core';
+import {Directive, inject, Injector} from '@angular/core';
 import {BaseComponent} from '../../../components/base/base.component';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ConfigService, LocalStorageService} from "@core/services";
 import {GetPaymentsService} from '../../../../@core/services/app/getPayments.service';
 import {PaymentControllerService} from '../../../../@core/services/app/paymentController.services';
 import {TranslateService} from "@ngx-translate/core";
-import {SimpleModalService} from "ngx-simple-modal";
 import {BaseInfoBlockComponent} from "../../modals/base-info-block/base-info-block.component";
 import {BetsService} from "@core/services/app/bets.services";
 import {format} from "date-fns";
 import {UtilityService} from "@core/services/app/utility.service";
 import * as moment from "moment/moment";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 
@@ -61,7 +61,7 @@ export class BasePaymentsComponent extends BaseComponent {
   public getPaymentsService: GetPaymentsService;
   public translate: TranslateService;
   public paymentControllerService: PaymentControllerService;
-  public simpleModalService: SimpleModalService;
+  dialog = inject(MatDialog);
   public utilityService: UtilityService;
   public configService: ConfigService;
 
@@ -74,7 +74,6 @@ export class BasePaymentsComponent extends BaseComponent {
     this.getPaymentsService = injector.get(GetPaymentsService);
     this.translate = injector.get(TranslateService);
     this.paymentControllerService = injector.get(PaymentControllerService);
-    this.simpleModalService = injector.get(SimpleModalService);
     this.utilityService = injector.get(UtilityService);
     this.configService = injector.get(ConfigService);
     this.allowCancelConfirmedWithdraw = this.configService.defaultOptions.AllowCancelConfirmedWithdraw;
@@ -156,11 +155,8 @@ export class BasePaymentsComponent extends BaseComponent {
   }
 
   public openInfoBlock(message) {
-    this.simpleModalService.addModal(BaseInfoBlockComponent, {
-      title: 'Payments_Info',
-      message: message
-    }).subscribe((isConfirmed) => {
-    });
+
+    this.dialog.open(BaseInfoBlockComponent, {data:{title: 'Payments_Info',message: message}});
   }
 
   public getPaymentData(page) {

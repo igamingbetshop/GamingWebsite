@@ -1,30 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {SimpleModalComponent} from "ngx-simple-modal";
-
-export interface ConfirmModel {
-  title: string;
-}
+import {Component, inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-base-question-tab',
   templateUrl: './base-question-tab.component.html',
   styleUrls: ['./base-question-tab.component.scss']
 })
-export class BaseQuestionTabComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
+export class BaseQuestionTabComponent {
 
-  public title: string;
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<BaseQuestionTabComponent>);
 
-  constructor() {
-    super();
-  }
-
-  ngOnInit() {
-
-  }
-
-  confirm() {
-    this.result = true;
-    this.close();
+  close(confirm:boolean = false)
+  {
+    this.dialogRef.close(true);
   }
 
 }

@@ -3,7 +3,6 @@ import {TranslateModule} from "@ngx-translate/core";
 import {CommonModule} from "@angular/common";
 import {CasinoCategoryComponent} from "./casino-category.component";
 import {CasinoGameModule} from "../game/casino-game.module";
-import {SimpleModalModule} from "ngx-simple-modal";
 import {CasinoProvidersModule} from "../providers/casino-providers.module";
 import {CasinoMenuModule} from "../menu/casino-menu.module";
 import {RouterModule} from "@angular/router";
@@ -12,6 +11,7 @@ import {
   HorizontalScrollDirectiveModule
 } from "../../../../../../../@theme/directives/horizontal-scroll/horizontal-scroll.directive.module";
 import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanitizer.module";
+import {GroupByRowsPipe} from "../../../../../../../@theme/pipes/group-by-rows.pipe";
 
 @NgModule({
   declarations:[CasinoCategoryComponent],
@@ -20,13 +20,13 @@ import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanit
         CommonModule,
         TranslateModule,
         CasinoGameModule,
-        SimpleModalModule,
         CasinoProvidersModule,
         RouterModule,
         CasinoMenuModule,
         CasinoSearchModule,
         HorizontalScrollDirectiveModule,
-        SanitizerModule
+        SanitizerModule,
+        GroupByRowsPipe
     ]
 })
 

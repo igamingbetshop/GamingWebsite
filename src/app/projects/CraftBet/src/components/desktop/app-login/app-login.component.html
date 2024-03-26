@@ -4,7 +4,7 @@
     <img class="login-logo-svg" src="../../../../../../../assets/images/logo.svg"/>
     <div class="login-section {{mainClass}} {{sectionClass}}">
         <p class="login-title">{{'Login.Sign In' | translate}}</p>
-        <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
+        <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()" (keyup.enter)="submit()">
             <div class="authentication-buttons">
                 <button class="authentication-button" (click)="openModal('Login', $event)" [ngClass]="{'active': openedLogin}">{{'Login.Sign In' | translate}}</button>
                 <button class="authentication-button" (click)="openModal('Register', $event)">{{'Register.Registration' | translate}}</button>

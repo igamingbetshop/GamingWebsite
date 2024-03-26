@@ -28,18 +28,13 @@ import {WithdrawType3Component} from "./withdraw-payments/withdraw-type3/withdra
 import {WithdrawType2Component} from "./withdraw-payments/withdraw-type2/withdraw-type2.component";
 import {WithdrawType1Component} from "./withdraw-payments/withdraw-type1/withdraw-type1.component";
 import {DesktopMobileCommonModule} from "../../../common/common.module";
-import {FilterPipeModule} from "ngx-filter-pipe";
 import {TranslateModule} from "@ngx-translate/core";
 import {ThemeModule} from "../../../../../../../@theme/theme.module";
-import {LoaderModule} from "../../../common/loader/loader.module";
 import {CommonPaymentNominalsModule} from "../../../common/app-common-payment-nominals/common-payment-nominals.module";
 import {CommonAccountsModule} from "../../../common/common-accounts/common-accounts.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
-import {SimpleModalModule} from "ngx-simple-modal";
 import {HttpClientModule} from "@angular/common/http";
-import {NgxMaskModule} from "ngx-mask";
-import {ClickOutsideModule} from "ng-click-outside";
 import {NgxPrintModule} from "ngx-print";
 import {OrderByPipeModule} from "../../../../../../../@theme/pipes/order-by/order-by-pipe.module";
 import {AccountType2WithdrawBlockRoutingModule} from "./account-type2-withdraw-block-routing.module";
@@ -71,6 +66,8 @@ import {
     WithdrawType24DefaultComponent
 } from "./withdraw-payments/withdraw-type24/withdraw-type24-default/withdraw-type24-default.component";
 import {WithdrawType24Component} from "./withdraw-payments/withdraw-type24/withdraw-type24.component";
+import {NgxMaskDirective} from "ngx-mask";
+
 
 
 @NgModule({
@@ -130,15 +127,11 @@ import {WithdrawType24Component} from "./withdraw-payments/withdraw-type24/withd
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        SimpleModalModule,
         HttpClientModule,
-        FilterPipeModule,
-        NgxMaskModule.forRoot(),
-        ClickOutsideModule,
+        NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
         DesktopMobileCommonModule,
-        LoaderModule,
         OrderByPipeModule,
         CommonPaymentNominalsModule,
         CommonAccountsModule,

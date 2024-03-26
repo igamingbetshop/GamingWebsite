@@ -1,16 +1,15 @@
-import {Directive, Injector, OnInit} from "@angular/core";
+import {Directive, inject, Injector, OnInit} from "@angular/core";
 import {BaseComponent} from "../../base/base.component";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PasswordValidation} from "../../../../@core/services/password-validation";
-import {Controllers, Methods} from "../../../../@core/enums";
-import {SimpleModalService} from "ngx-simple-modal";
-import {tap} from "rxjs";
+import {Methods} from "../../../../@core/enums";
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {UtilityService} from "../../../../@core/services/app/utility.service";
 import {TranslateService} from "@ngx-translate/core";
 import {ReCaptchaV3Service} from "ng-recaptcha";
 import {ConfigService} from "../../../../@core/services";
 import {BaseInfoBlockComponent} from "../../modals/base-info-block/base-info-block.component";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Directive()
@@ -20,7 +19,7 @@ export class BaseAffiliateComponent extends BaseComponent implements OnInit {
     public translate: TranslateService;
     private recaptchaV3Service: ReCaptchaV3Service;
     public configService: ConfigService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
 
     public affiliateForm: FormGroup;
     public fb: FormBuilder;
@@ -45,7 +44,6 @@ export class BaseAffiliateComponent extends BaseComponent implements OnInit {
         this.translate = this.injector.get(TranslateService);
         this.configService = injector.get(ConfigService);
         this.recaptchaV3Service = injector.get(ReCaptchaV3Service);
-        this.simpleModalService = injector.get(SimpleModalService);
         const regex = new RegExp(this.configService.defaultOptions.PassRegEx);
         this.affiliateForm = this.fb.group({
             'FirstName': ['', [
@@ -103,11 +101,7 @@ export class BaseAffiliateComponent extends BaseComponent implements OnInit {
             if (data.ResponseCode === 0) {
                 this.affiliateForm.reset();
                 this.showCommunication = !this.showCommunication;
-                this.simpleModalService.addModal(BaseInfoBlockComponent, {
-                    title: 'Affiliate_Confirmation',
-                    info: 'Affiliate_Info'
-                }).subscribe((isConfirmed) => {
-                });
+                this.dialog.open(BaseInfoBlockComponent, {data:{title: 'Affiliate_Confirmation', info: 'Affiliate_Info'}});
             } else {
                 this.errorMessage = data.Description;
                 this.utilityService.showMessageWithDelay(this, [{'errorMessage': data.Description}]);
@@ -136,6 +130,7 @@ export class BaseAffiliateComponent extends BaseComponent implements OnInit {
 
     cancelType() {
         this.affiliateForm.get('CommunicationType').setValue('');
+        this.affiliateForm.get('CommunicationTypeValue').setValue('');
         this.showCommunication = !this.showCommunication;
         this.selectedType = '';
     }

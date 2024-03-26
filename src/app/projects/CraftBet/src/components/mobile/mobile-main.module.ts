@@ -6,10 +6,8 @@ import {NavigationService} from "../../../../../@core/services/app/navigation.se
 import {MobileBottomSideBarComponent} from './mobile-bottom-side-bar/mobile-bottom-side-bar.component';
 import {DesktopMobileCommonModule} from '../common/common.module';
 import {ToNumberPipeModule} from '../../../../../@theme/pipes/to-number/to-number-pipe.module';
-import {LoaderModule} from '../common/loader/loader.module';
 import {FragmentPositions, MenuType} from '../../../../../@core/enums';
 import {OpenGameGuard} from "../../../../../@core/services/helpers/open-game-guard";
-import {MobilePaymentErrorComponent} from "./mobile-payment-error/mobile-payment-error.component";
 
 
 export function liveRouteMatcher(url: UrlSegment[]) {
@@ -326,7 +324,6 @@ const routes: Routes = [
     imports: [
         DesktopMobileCommonModule,
         ToNumberPipeModule,
-        LoaderModule,
         RouterModule.forChild(routes)
     ],
     exports: [RouterModule]

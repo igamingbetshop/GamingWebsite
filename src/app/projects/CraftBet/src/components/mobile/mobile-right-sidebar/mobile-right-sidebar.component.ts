@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, createNgModuleRef, Injector, Input, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Component, createNgModule, Injector, Input, ViewChild, ViewContainerRef} from '@angular/core';
 import {AppCommonHeaderComponent} from "../../common/app-common-header/app-common-header.component";
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {MenuType} from "@core/enums";
@@ -104,7 +104,7 @@ export class MobileRightSidebarComponent extends AppCommonHeaderComponent implem
     async renderTickets()
     {
         const { TicketsModule } = await import("../../../../../../@theme/components/global-tickets/tickets.module");
-        const moduleRef = createNgModuleRef(TicketsModule, this.injector);
+        const moduleRef = createNgModule(TicketsModule, this.injector);
         const component = moduleRef.instance.getComponents();
         const ticketsComponent = this.ticketsRef.createComponent(component, {ngModuleRef: moduleRef});
         ticketsComponent.instance.unreadMessagesCount = this.unreadMessagesCount;

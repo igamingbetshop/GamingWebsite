@@ -6,13 +6,13 @@
   margin-top: var(--m-user-views-margin-top, 62px);
   min-height: calc(100vh - 62px);
   background: color(m-user-views-background);
-  padding: 15px 0;
+  padding: var(--m-user-views-padding, 15px 0);
 
   &_title {
     text-align: center;
     color: color(m-user-views-title);
-    font-size: 24px;
-    font-weight: normal;
+    font-size: var(--m-user-views-title-font-size, 24px);
+    font-weight: var(--m-user-views-title-font-weight, normal);
     margin-top: var(--m-user-views-title-payments-margin-top, 20px);
   }
 
@@ -21,7 +21,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 0 20px 20px;
+    margin: var(--m-history-tools-panel-margin, 0 20px 20px);
 
     .history-tools {
       margin-bottom: 10px;
@@ -39,7 +39,7 @@
 
       select, input {
         height: height(history-time-filter, 40px);
-        padding: 0 8px;
+        padding: var(--history-time-filter-padding, 0 8px);
         border-radius: var(--history-time-filter-border-radius, 5px);
         border: 1px solid itemColor(history-time-filter-border, #dadada);
         outline: none;
@@ -67,10 +67,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 40px;
-        padding: 0 8px;
+        height: height(history-time-filter, 40px);
+        padding: var(--history-time-filter-padding, 0 8px);
         border-radius: var(--history-time-filter-border-radius, 5px);
-        border: 1px solid #dadada;
+        border: 1px solid itemColor(history-time-filter-border, #dadada);
         outline: none;
         background: $header-top-bg;
 
@@ -80,8 +80,8 @@
       }
 
       .show-btn {
-        padding: 0 20px;
-        margin-top: 8px;
+        padding: var(--show-btn-padding, 0 20px);
+        margin-top: var(--show-btn-margin-top, 8px);
         background: backgroundColor(show-btn, #36b550);
         color: itemColor(show-btn, #fff);
         width: var(--show-btn-width, 175px);
@@ -125,11 +125,11 @@
   &_header {
     background: backgroundColor(payment-item-header, $header-top-bg);
     color: itemColor(payment-item-header, $font-color);
-    height: 50px;
+    height: var(--m-payment-item-header-height, 50px);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
+    justify-content: var(--m-payment-item-header-justify-content, space-between);
+    padding: var(--m-payment-item-header-padding, 0 15px);
 
     &.Payments-Active {
       background: backgroundColor(payments-active, #ffffff);
@@ -158,11 +158,10 @@
 
   &_bodyInfo {
     display: flex;
-    justify-content: space-between;
-    padding: 0 15px;
-    height: 30px;
+    justify-content: var(--m-payment-item-info-justify-content, space-between);
+    padding: var(--m-payment-item-info-padding, 0 15px);
+    height: var(--m-payment-item-info-height, 30px);
     align-items: center;
-
   }
 
 

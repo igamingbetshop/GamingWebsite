@@ -1,11 +1,11 @@
-import { Component, ElementRef, Injector, ViewChild } from '@angular/core';
+import {Component, ElementRef, inject, Injector, ViewChild} from '@angular/core';
 import { take } from 'rxjs/operators';
 import { add, format } from 'date-fns';
 import { encryptSelfExclusionData } from '@core/utils';
 import { SaveData } from '@core/services';
-import { SimpleModalService } from 'ngx-simple-modal';
 import { CommonSettingsComponent } from '../../../common/common-settings/common-settings.component';
 import { ConfirmWindowComponent } from '../../../../../../../@theme/components/common/confirm-window/confirm-window.component';
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-account-page-type3-self-limitation',
@@ -72,20 +72,20 @@ export class AccountPageType3SelfLimitationComponent extends CommonSettingsCompo
     public isCreditCheckOpened = false;
     public lossLimitError = false;
     public savedDateService: SaveData;
+    dialog = inject(MatDialog);
 
     constructor(public injector: Injector) {
         super(injector);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.savedDateService = injector.get(SaveData);
         this.currencyId = this.userData.CurrencyId;
         this.currencySymbol = this.userData.CurrencySymbol;
         this.selectedExclusionType = 'Temporary';
     }
 
-    closeAccount(form) {
-        this.simpleModalService.addModal(ConfirmWindowComponent, {
-            title: this.selectedExclusionType
-        }).subscribe(result => {
+    closeAccount(form)
+    {
+        const dialogRef = this.dialog.open(ConfirmWindowComponent, {data:{title: this.selectedExclusionType}});
+        dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 form.Credentials = encryptSelfExclusionData(this.setPassword);
                 this.getSettingsInfoService.closeAccount(form).pipe(take(1)).subscribe(data => {
@@ -256,10 +256,10 @@ export class AccountPageType3SelfLimitationComponent extends CommonSettingsCompo
         this.exclusionDate = newDate;
     }
 
-    openConfirmWindow() {
-        this.simpleModalService.addModal(ConfirmWindowComponent, {
-            title: this.selectedExclusionType
-        }).subscribe(result => {
+    openConfirmWindow()
+    {
+        const dialogRef = this.dialog.open(ConfirmWindowComponent, {data:{title: this.selectedExclusionType}});
+        dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.exclusionDate = this.exclusionDate ? this.exclusionDate : format(add(new Date(), { years: 100 }), 'yyyy-MM-dd');
                 const encryptedPassword = encryptSelfExclusionData(this.setConfirmPassword);
@@ -419,11 +419,12 @@ export class AccountPageType3SelfLimitationComponent extends CommonSettingsCompo
     async creditCheck() {
         const { AccountPageType3DefaultComponent } = await import('../default/account-page-type3-default.component');
         setTimeout(() => {
-            this.simpleModalService.removeAll().then();
-            this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-                { title: 'credit-check' }, { closeOnClickOutside: true }).subscribe(() => {
-            });
-            this.savedDateService.selectedItem.Href = 'credit-check';
+           this.dialog.closeAll();
+           const dialogRef =  this.dialog.open(AccountPageType3DefaultComponent, {data:{title: 'credit-check'}, hasBackdrop:true});
+           dialogRef.afterClosed().subscribe(result => {
+
+           });
+           this.savedDateService.selectedItem.Href = 'credit-check';
         }, 100);
     }
 

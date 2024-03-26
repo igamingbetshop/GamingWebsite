@@ -1,30 +1,19 @@
-import {Injectable, Injector} from '@angular/core';
-import {SimpleModalService} from 'ngx-simple-modal';
+import {Directive, inject } from '@angular/core';
 import {UserInfoComponent} from '../../desktop/user-info/user-info.component';
 import {BetsHistoryComponent} from '../../../../../../@theme/components/common/bets-history/bets-history.component';
+import {MatDialog} from "@angular/material/dialog";
 
 
-@Injectable()
+@Directive()
 export class AppCommonBetsHistoryComponent extends BetsHistoryComponent {
 
-  public simpleModalService: SimpleModalService;
-
-
-  constructor(public injector: Injector) {
-    super(injector);
-    this.simpleModalService = injector.get(SimpleModalService);
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
-  }
+  dialog = inject(MatDialog);
 
   public openInfo(data) {
-    this.simpleModalService.addModal(UserInfoComponent, {
-      title: 'User-Info',
-      message: true,
-      data: data
-    }).subscribe(() => {});
+    this.dialog.open(UserInfoComponent, {data:{
+        title: 'User-Info',
+        message: true,
+        info: data
+      }});
   }
-
 }

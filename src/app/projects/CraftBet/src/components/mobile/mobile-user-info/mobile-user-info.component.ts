@@ -1,20 +1,32 @@
-import {Component, Injector, OnInit} from '@angular/core';
-import {SimpleModalComponent} from "ngx-simple-modal";
-import {GetBetsHistoryService} from "@core/services/app/getBetsHistory.service";
+import {Component, inject, Injector, OnInit} from '@angular/core';
+import {GetBetsHistoryService} from "../../../../../../@core/services/app/getBetsHistory.service";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {ConfirmModel} from "@core/interfaces";
-import {LocalStorageService} from "@core/services";
+import {LocalStorageService} from "../../../../../../@core/services";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {CommonModule} from "@angular/common";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {TranslateModule} from "@ngx-translate/core";
+import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitizer.module";
+import {BetsService} from "../../../../../../@core/services/app/bets.services";
 
 @Component({
   selector: 'app-mobile-user-info',
   templateUrl: './mobile-user-info.component.html',
+  standalone:true,
+  imports:[
+    CommonModule,
+    FontAwesomeModule,
+    TranslateModule,
+    SanitizerModule
+  ],
+  providers: [GetBetsHistoryService, BetsService],
   styleUrls: ['./mobile-user-info.component.scss']
 })
-export class MobileUserInfoComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
+export class MobileUserInfoComponent implements OnInit {
 
-  public title: string;
-  public message: boolean;
-  public data: any;
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<MobileUserInfoComponent>);
+
   public userInfoList: any = {};
   public faTimes = faTimes;
   public isLoaded:boolean;
@@ -24,7 +36,6 @@ export class MobileUserInfoComponent extends SimpleModalComponent<ConfirmModel, 
   public CurrencySymbol: any;
 
   constructor(public injector: Injector) {
-    super();
     this.getBetsHistoryService = injector.get(GetBetsHistoryService);
     this.localStorageService = injector.get(LocalStorageService);
     const userData = this.localStorageService.get('user');
@@ -32,7 +43,7 @@ export class MobileUserInfoComponent extends SimpleModalComponent<ConfirmModel, 
   }
 
   ngOnInit() {
-    this.getBetsHistoryService.getBetsInfo(this.data).then((responseData) => {
+    this.getBetsHistoryService.getBetsInfo(this.data.info).then((responseData:any) => {
       if (responseData['ResponseCode'] === 0)
       {
         this.userInfoList = responseData['ResponseObject'];
@@ -47,4 +58,8 @@ export class MobileUserInfoComponent extends SimpleModalComponent<ConfirmModel, 
     });
   }
 
+  close()
+  {
+    this.dialogRef.close();
+  }
 }

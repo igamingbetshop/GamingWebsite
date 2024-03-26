@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { BaseHome} from '../../../../../../@theme/fragments/home/base-home';
 import { FragmentSource} from '../../../../../../@core/enums';
-import {MobileCharactersComponent} from "./mobile-characters/mobile-characters.component";
 
 @Component({
     selector: 'app-mobile-homepage',

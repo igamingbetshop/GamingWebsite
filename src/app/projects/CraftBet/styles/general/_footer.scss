@@ -112,6 +112,7 @@ $footerBottomSize: var(--footer--height);
           font-weight: var(--footer-column-title-font-weight, 400);
           border-right: 1px solid itemColor(footer-column-border, transparent);
           padding-right: paddingRight(footer-column, 0);
+          text-align: var(--footer-column-title-text-align, left);
           &:hover
           {
             color: color(footer-column-title-hover);
@@ -130,6 +131,7 @@ $footerBottomSize: var(--footer--height);
         {
           display: flex;
           align-items: center;
+          justify-content: var(--footer-column-item-justify-content, unset);
           cursor: default;
           gap: 16px;
           color: color(footer-column-item);
@@ -201,6 +203,8 @@ $footerBottomSize: var(--footer--height);
       border-bottom-style: borderBottomStyle(ft-text-style1, solid);
       border-top-style: borderTopStyle(ft-text-style1, solid);
       font-size: fontSize(ft-text-style1-text, 16px);
+      width: width(ft-text-style1, auto);
+      margin: var(--ft-text-style1-text-margin, 0);
       .info-text
       {
         width: width(ft-text-style1, 50%);
@@ -304,10 +308,13 @@ $footerBottomSize: var(--footer--height);
   {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: var(--ft-image-background-justify-content, center);
     flex-wrap: wrap;
     background-color: backgroundColor(ft-image-background, none);
     border-bottom: 2px solid itemColor(ft-border-bottom-color, none);
+    border-top: var(--ft-image-border-top, none);
+    border-left: var(--ft-image-border-left, none);
+    border-right: var(--ft-image-border-right, none);
     gap: var(--ft-image-background-gap, 0px);
     width: var(--ft-image-background-width, auto);
     margin: var(--ft-image-background-margin, 0);

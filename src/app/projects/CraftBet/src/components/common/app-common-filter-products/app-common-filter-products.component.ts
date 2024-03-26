@@ -32,11 +32,8 @@ export class AppCommonFilterProductsComponent extends BaseGamesComponent {
         if (this.isLogined)
             this.favoriteService.toggleFavorite(item);
         else {
-            this.simpleModalService.addModal(AppConfirmComponent, {
-                title: 'open_login',
-                message: true
-            }).subscribe((isConfirmed) => {
-            });
+            this.dialog.open(AppConfirmComponent, {data:{title: 'open_login',
+                    message: true}});
         }
     }
 

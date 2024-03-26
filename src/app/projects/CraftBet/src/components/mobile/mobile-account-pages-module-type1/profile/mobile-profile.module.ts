@@ -6,7 +6,6 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {RegExpInputDirectiveModule} from "../../../../../../../@theme/directives/reg-exp-input/reg-exp-input-directive.module";
-import {ProfileService} from "../../../../../../../@theme/components/profile/service/profile.service";
 import {LayoutService} from "../../../../../../../@core/services/app/layout.service";
 
 const routes: Routes = [
@@ -28,7 +27,6 @@ const routes: Routes = [
         MobileProfileComponent
     ],
     providers:[
-        ProfileService,
         LayoutService
     ]
 })

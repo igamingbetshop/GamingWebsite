@@ -20,10 +20,7 @@ export class ProductsListComponent extends BaseProductsListComponent {
     {
         // localStorage.setItem('product-url', this.router.url);
         if(!this.loginService.isAuthenticated) {
-            this.simpleModalService.addModal(AppConfirmComponent, {
-                title: 'open_login',
-                message: true
-            }).subscribe((isConfirmed) => {});
+            this.dialog.open(AppConfirmComponent,{data:{title: 'open_login',message: true}});
         } else {
             if (url.includes('/parent')) {
                 let remainingUrl = url.replace('/parent', '');
@@ -32,6 +29,7 @@ export class ProductsListComponent extends BaseProductsListComponent {
                 this.router.navigate(['/' + this.currentUrl + url]);
             }
         }
+
     }
 
 }

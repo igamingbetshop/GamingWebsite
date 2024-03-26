@@ -1,4 +1,4 @@
-import {Directive, ElementRef, EventEmitter, Injector, OnInit, Output, ViewChild} from '@angular/core';
+import {Directive, ElementRef, EventEmitter, inject, Injector, OnInit, Output, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../base/base.component';
 import {AuthService, ConfigService, LocalStorageService} from "@core/services";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -9,12 +9,13 @@ import {PasswordValidation} from "@core/services/password-validation";
 import {UtilityService} from '@core/services/app/utility.service';
 import {take} from "rxjs/operators";
 import {add, format} from 'date-fns'
-import {SimpleModalService} from "ngx-simple-modal";
 import {ConfirmWindowComponent} from "../confirm-window/confirm-window.component";
 import {GetSettingsInfoService} from "@core/services/app/getSettingsInfo.service";
 import {Subject} from "rxjs";
 import {UserRegisterService} from "@core/services/app/userRegister.service";
 import { encryptSelfExclusionData} from "@core/utils";
+import {MatDialog} from "@angular/material/dialog";
+import {BaseQuestionTabComponent} from "../../modals/base-question-tab/base-question-tab.component";
 
 @Directive()
 export class BaseSettingsComponent extends BaseComponent{
@@ -26,7 +27,7 @@ export class BaseSettingsComponent extends BaseComponent{
     public translate: TranslateService;
     public utilityService: UtilityService;
     public getSettingsInfoService: GetSettingsInfoService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     private authService: AuthService;
     public isSubmited: boolean = false;
 
@@ -140,7 +141,6 @@ export class BaseSettingsComponent extends BaseComponent{
         this.utilityService = injector.get(UtilityService);
         this.translate = injector.get(TranslateService);
         this.getSettingsInfoService = injector.get(GetSettingsInfoService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.userRegisterService = injector.get(UserRegisterService);
         this.authService = injector.get(AuthService);
 
@@ -448,9 +448,8 @@ export class BaseSettingsComponent extends BaseComponent{
     }
 
     openConfirmWindow() {
-        this.simpleModalService.addModal(ConfirmWindowComponent, {
-            title: this.selectedExclusionType
-        }).subscribe(result => {
+        const dialogRef = this.dialog.open(ConfirmWindowComponent, {data:{title: this.selectedExclusionType}})
+        dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.exclusionDate = this.exclusionDate ? this.exclusionDate : format(add(new Date(), {years: 100}), 'yyyy-MM-dd');
                 const encryptedPassword = encryptSelfExclusionData(this.setConfirmPassword);

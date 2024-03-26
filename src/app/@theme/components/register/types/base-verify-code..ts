@@ -1,6 +1,6 @@
 import {
     Directive,
-    EventEmitter,
+    EventEmitter, inject,
     Injector,
     Input,
     OnDestroy,
@@ -10,15 +10,15 @@ import {
 } from '@angular/core';
 
 import {ControlValueAccessor, FormGroup} from "@angular/forms";
-import {Controllers, Methods, VerificationCodeTypes} from "../../../../@core/enums";
+import {Controllers, Methods} from "../../../../@core/enums";
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {take} from "rxjs";
 import {UserRegisterService} from "../../../../@core/services/app/userRegister.service";
 import {isNotNullOrUndefined} from "../../../../@core/utils";
-import {SimpleModalComponent, SimpleModalService} from "ngx-simple-modal";
 import {UtilityService} from "../../../../@core/services/app/utility.service";
 import {ConfigService} from "../../../../@core/services";
 import {BaseService} from "../../../../@core/services/app/base.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 export interface IVerifyCode {
     isModal: boolean;
@@ -30,7 +30,7 @@ export interface IVerifyCode {
     verificationCodeType:number;
 }
 @Directive()
-export class BaseVerifyCode extends SimpleModalComponent<IVerifyCode, boolean> implements OnInit, OnDestroy, ControlValueAccessor
+export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
 {
     @Input('isModal') isModal: boolean = false;
     @Input('type') type: string;
@@ -62,7 +62,7 @@ export class BaseVerifyCode extends SimpleModalComponent<IVerifyCode, boolean> i
     {
         if(data.hasOwnProperty('error'))
             this.userRegisterService.errorMessage = data.error;
-        else this.close();
+        else this.dialogRef.close();
     }
     translationKeys:any = {mobile:'', email:'', MobileOrEmail: ''};
 
@@ -72,16 +72,15 @@ export class BaseVerifyCode extends SimpleModalComponent<IVerifyCode, boolean> i
 
     private baseApiService:BaseApiService;
     public userRegisterService:UserRegisterService;
-    public simpleModalService: SimpleModalService;
     private utilityService: UtilityService;
     private configService:ConfigService;
     public baseService: BaseService;
+    data:any = inject(MAT_DIALOG_DATA);
+    dialogRef = inject(MatDialogRef<BaseVerifyCode>);
     constructor(protected injector: Injector)
     {
-        super();
         this.baseApiService = injector.get(BaseApiService);
         this.userRegisterService = injector.get(UserRegisterService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.utilityService = injector.get(UtilityService);
         this.configService = injector.get(ConfigService);
         this.baseService = injector.get(BaseService);
@@ -90,6 +89,13 @@ export class BaseVerifyCode extends SimpleModalComponent<IVerifyCode, boolean> i
 
     ngOnInit()
     {
+        this.isModal = this.data.isModal || this.isModal;
+        this.targetOfSender = this.data.targetOfSender || this.targetOfSender;
+        this.type = this.data.type ||  this.type;
+        this.onVerified = this.data.onVerified || this.onVerified;
+        this.activePeriodInMinutes = this.data.activePeriodInMinutes ||  this.activePeriodInMinutes;
+        this.prefixTitle = this.data.prefixTitle ||  this.prefixTitle;
+        this.verificationCodeType = this.data.verificationCodeType ||  this.verificationCodeType;
         if (this.targetOfSender)
         {
           this.translationKeys[this.type] = this.targetOfSender;

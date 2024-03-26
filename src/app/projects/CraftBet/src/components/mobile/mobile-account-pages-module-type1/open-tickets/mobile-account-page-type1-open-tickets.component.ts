@@ -13,4 +13,9 @@ export class MobileAccountPageType1OpenTicketsComponent extends AppCommonOpenTic
     super(injector);
   }
 
+  override close()
+  {
+    this.dialogRef.close();
+  }
+
 }

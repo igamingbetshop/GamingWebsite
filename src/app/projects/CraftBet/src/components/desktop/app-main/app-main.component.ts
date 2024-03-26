@@ -1,6 +1,5 @@
-import {AfterViewInit, Component, createNgModuleRef, Injector} from '@angular/core';
+import {AfterViewInit, Component, createNgModule, Injector} from '@angular/core';
 import {CommonMainComponent} from '../../common/common-main/common-main.component';
-import {SimpleModalService} from "ngx-simple-modal";
 import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
 import {Location} from '@angular/common';
 import {BaseControllerService} from "@core/services/app/baseController.service";
@@ -8,10 +7,10 @@ import {LoaderService, SharedService} from "@core/services";
 
 import {ContentClasses} from "../../../../services/enums/dynamicllyClasses";
 import {ActivatedRoute} from "@angular/router";
-import {fromEvent, take} from "rxjs";
-import {debounceTime} from "rxjs/operators";
+import {take} from "rxjs";
 import {Controllers, Methods} from "@core/enums";
-import {CharactersComponent} from "../fragments/characters/characters.component";
+import {MatDialog} from "@angular/material/dialog";
+
 
 @Component({
     selector: 'app-app-main',
@@ -29,7 +28,7 @@ export class AppMainComponent extends CommonMainComponent implements AfterViewIn
     constructor(public injector: Injector,
                 private location: Location,
                 private route: ActivatedRoute,
-                public simpleModalService: SimpleModalService,
+                public dialog: MatDialog,
                 public baseControllerService: BaseControllerService,
                 public loaderService:LoaderService,
                 public sharedService: SharedService) {
@@ -37,13 +36,9 @@ export class AppMainComponent extends CommonMainComponent implements AfterViewIn
     }
 
     openRegister() {
-        let disposable = this.simpleModalService.addModal(AppConfirmComponent, {
-            title: "register",
-            message: true,
-        }, {}).subscribe((isConfirmed) => {
-        });
 
-
+        this.dialog.open(AppConfirmComponent, {data:{ title: "register",
+                message: true}});
     }
 
     ngOnInit() {
@@ -78,7 +73,7 @@ export class AppMainComponent extends CommonMainComponent implements AfterViewIn
         if(characters.length > 1)
         {
             const { CharactersModule } = await import('../fragments/characters/characters.module');
-            const moduleRef = createNgModuleRef(CharactersModule, this.injector);
+            const moduleRef = createNgModule(CharactersModule, this.injector);
             const component = moduleRef.instance.getComponent();
             return component;
         }

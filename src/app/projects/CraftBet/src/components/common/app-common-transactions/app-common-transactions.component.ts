@@ -1,8 +1,8 @@
-import {Injectable, Injector} from '@angular/core';
+import {Directive, Injector} from '@angular/core';
 import {BaseTransactionsComponent} from '../../../../../../@theme/components/common/base-transactions/base-transactions.component';
 
 
-@Injectable()
+@Directive()
 export class AppCommonTransactionsComponent extends BaseTransactionsComponent {
 
   public settings = {

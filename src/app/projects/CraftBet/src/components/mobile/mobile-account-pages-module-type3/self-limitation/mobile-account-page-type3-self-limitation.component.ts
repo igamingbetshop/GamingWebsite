@@ -93,9 +93,8 @@ export class MobileAccountPageType3SelfLimitationComponent extends CommonSetting
     }
 
     closeAccount(form) {
-        this.simpleModalService.addModal(ConfirmWindowComponent, {
-            title: this.selectedExclusionType
-        }).subscribe(result => {
+        const dialogRef =  this.dialog.open(ConfirmWindowComponent,{data:{title: this.selectedExclusionType}});
+        dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 form.Credentials = encryptSelfExclusionData(this.setPassword);
                 this.getSettingsInfoService.closeAccount(form).pipe(take(1)).subscribe(data => {
@@ -253,9 +252,8 @@ export class MobileAccountPageType3SelfLimitationComponent extends CommonSetting
     }
 
     openConfirmWindow() {
-        this.simpleModalService.addModal(ConfirmWindowComponent, {
-            title: this.selectedExclusionType
-        }).subscribe(result => {
+        const dialogRef =  this.dialog.open(ConfirmWindowComponent,{data:{title: this.selectedExclusionType}});
+        dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.exclusionDate = this.exclusionDate ? this.exclusionDate : format(add(new Date(), {years: 100}), 'yyyy-MM-dd');
                 const encryptedPassword = encryptSelfExclusionData(this.setConfirmPassword);

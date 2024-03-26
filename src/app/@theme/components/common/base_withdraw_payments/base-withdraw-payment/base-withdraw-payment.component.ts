@@ -1,7 +1,6 @@
-import {OnInit, Injector, Input, Directive, createNgModuleRef, EventEmitter} from '@angular/core';
+import {OnInit, Injector, Input, Directive, createNgModule, EventEmitter, inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PaymentControllerService} from '../../../../../@core/services/app/paymentController.services';
-import {SimpleModalService} from 'ngx-simple-modal';
 import {Subscription, tap} from "rxjs";
 import {ConfigService, SaveData} from "@core/services";
 import {LocalStorageService} from "@core/services";
@@ -10,6 +9,7 @@ import {GetPaymentsService} from "@core/services/app/getPayments.service";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods, VerificationCodeTypes} from "@core/enums";
 import {take} from "rxjs/operators";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Directive()
@@ -27,7 +27,7 @@ export class BaseWithdrawPaymentComponent implements OnInit {
     protected subscriptions: Subscription[] = [];
 
     public paymentControllerService: PaymentControllerService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     private savedDataService: SaveData;
     public localStorageService: LocalStorageService;
     public utilityService: UtilityService;
@@ -46,7 +46,6 @@ export class BaseWithdrawPaymentComponent implements OnInit {
         this.fb = injector.get(FormBuilder);
 
         this.paymentControllerService = injector.get(PaymentControllerService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.savedDataService = injector.get(SaveData);
         this.localStorageService = injector.get(LocalStorageService);
         this.utilityService = injector.get(UtilityService);
@@ -92,18 +91,20 @@ export class BaseWithdrawPaymentComponent implements OnInit {
         }));
     }
 
-    public popupCenter(url, title, w, h) {
-        let dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen['left'];
-        let dualScreenTop = window.screenTop != undefined ? window.screenTop : screen['top'];
+    public popupCenter(url, target, w, h) {
+        const dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen['left'];
+        const dualScreenTop = window.screenTop != undefined ? window.screenTop : screen['top'];
 
-        let width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-        let height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+        const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+        const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
 
-        let left = ((width / 2) - (w / 2)) + dualScreenLeft;
-        let top = ((height / 2) - (h / 2)) + dualScreenTop;
-        if (this.openedWindow)
+        const left = ((width / 2) - (w / 2)) + dualScreenLeft;
+        const top = ((height / 2) - (h / 2)) + dualScreenTop;
+        if (this.openedWindow) {
             this.openedWindow.close();
-        this.openedWindow = window.open(url, '_self', 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+        }
+        const features = 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left
+        this.openedWindow = window.open(url, target, features);
 
         if (window.focus) {
             this.openedWindow.focus();
@@ -164,7 +165,7 @@ export class BaseWithdrawPaymentComponent implements OnInit {
     async openVerifyCode(type:string, targetOfSource:string, activePeriodInMinutes:number, request:any, verificationCodeType)
     {
         const { VerifyCodeModule } = await import('../../../modals/verify-code/verify-code.module');
-        const moduleRef = createNgModuleRef(VerifyCodeModule, this.injector);
+        const moduleRef = createNgModule(VerifyCodeModule, this.injector);
         const component = moduleRef.instance.getComponent();
         const callback = new EventEmitter();
         callback.subscribe(data => {
@@ -173,12 +174,8 @@ export class BaseWithdrawPaymentComponent implements OnInit {
             this.submitted = true;
             this.paymentControllerService.createPayment(request);
         });
-
-        this.simpleModalService.addModal(component, {isModal: true, type: type, targetOfSender: targetOfSource, onVerified: callback, activePeriodInMinutes: activePeriodInMinutes, prefixTitle: '', verificationCodeType:verificationCodeType}).subscribe(data => {
-
-        });
+        this.dialog.open(component, {data:{isModal: true, type: type, targetOfSender: targetOfSource, onVerified: callback, activePeriodInMinutes: activePeriodInMinutes, prefixTitle: '', verificationCodeType:verificationCodeType}})
     }
-
 
     get hasMinMaxError() {
         if(!this.amount) {

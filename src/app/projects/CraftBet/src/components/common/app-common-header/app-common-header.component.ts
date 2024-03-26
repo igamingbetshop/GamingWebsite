@@ -1,11 +1,10 @@
-import {Directive, Injector} from '@angular/core';
+import {Directive, inject, Injector} from '@angular/core';
 import {
     ConfigService,
     SharedService,
     LocalStorageService
 } from '../../../../../../@core/services';
 import {TranslateService} from "@ngx-translate/core";
-import {SimpleModalService} from 'ngx-simple-modal';
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {BaseHeaderComponent} from '../../../../../../@theme/components/common/base-header/base-header.component';
 import {BaseService} from "@core/services/app/base.service";
@@ -14,6 +13,7 @@ import {BalanceService} from "@core/services/api/balance.service";
 import {LangService} from "@core/services/app/lang.service";
 import {SignalRService} from "@core/services/soket/signal-r.service";
 import {MenuType} from "@core/enums";
+import {MatDialog} from "@angular/material/dialog";
 
 @Directive()
 export class AppCommonHeaderComponent extends BaseHeaderComponent {
@@ -26,7 +26,7 @@ export class AppCommonHeaderComponent extends BaseHeaderComponent {
     public sharedService: SharedService;
     public localStorageService: LocalStorageService;
     public translate: TranslateService;
-    public simpleModalService: SimpleModalService;
+    dialog = inject(MatDialog);
     public balanceService: BalanceService;
     public unreadMessagesCount: number;
     protected signalRService: SignalRService;
@@ -58,7 +58,6 @@ export class AppCommonHeaderComponent extends BaseHeaderComponent {
         this.sharedService = injector.get(SharedService);
         this.localStorageService = injector.get(LocalStorageService);
         this.translate = injector.get(TranslateService);
-        this.simpleModalService = injector.get(SimpleModalService);
         this.balanceService = injector.get(BalanceService);
         this.userData = this.localStorageService.get('user');
         this.userInfoData = this.userLogined.getUserInfo();

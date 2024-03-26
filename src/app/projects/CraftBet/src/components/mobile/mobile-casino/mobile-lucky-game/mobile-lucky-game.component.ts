@@ -1,19 +1,18 @@
-import {AfterViewInit, Component, Injector} from '@angular/core';
-import {SimpleModalComponent} from "ngx-simple-modal";
-import {ConfirmModel} from "../../../../../../../@core/interfaces";
+import {AfterViewInit, Component, inject, Injector} from '@angular/core';
 import {Methods} from "../../../../../../../@core/enums";
 import {take} from "rxjs/operators";
 import {getMappedGame} from "../../../../../../../@core/utils";
 import {BaseApiService} from "../../../../../../../@core/services/api/base-api.service";
 import {Router} from "@angular/router";
 import {UserLogined} from "../../../../../../../@core/services/app/userLogined.service";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'mobile-lucky-game',
     templateUrl: './mobile-lucky-game.component.html',
     styleUrls: ['./mobile-lucky-game.component.scss']
 })
-export class MobileLuckyGameComponent extends SimpleModalComponent<ConfirmModel, boolean> implements AfterViewInit{
+export class MobileLuckyGameComponent implements AfterViewInit{
     games: any[] = [];
     public totalFrames = 14;
     public animationDuration = 3500;
@@ -36,6 +35,7 @@ export class MobileLuckyGameComponent extends SimpleModalComponent<ConfirmModel,
     public openMode:number;
     public clientWidth:number = 36;
     public clientHeight:number = 36;
+    dialogRef = inject(MatDialogRef<MobileLuckyGameComponent>);
 
 
     constructor(protected injector: Injector,
@@ -43,7 +43,7 @@ export class MobileLuckyGameComponent extends SimpleModalComponent<ConfirmModel,
                 protected router:Router,
                 protected userLogged:UserLogined
     ) {
-        super();
+
     }
 
     ngOnInit() {
@@ -194,6 +194,11 @@ export class MobileLuckyGameComponent extends SimpleModalComponent<ConfirmModel,
     ngAfterViewInit()
     {
         this.animatedBlock = document.querySelectorAll('.animated-block');
+    }
+
+    close()
+    {
+        this.dialogRef.close();
     }
 
 }

@@ -112,16 +112,11 @@ export class CommonMainComponent extends BaseMainComponent {
             this.loadComponent().then(component => {
                 if(component)
                 {
-                    this.simpleModalService.addModal(component, {
-                        title: 'Characters',
-                        message: true,
-                        data: {},
-                    },{closeOnClickOutside: false}).subscribe(
-                        (result) => {
-
-                            if(result)
-                                this.router.navigate(['/casino/all-games']);
-                        });
+                   const dialogRef =  this.dialog.open(component, {data:{ title: 'Characters', message: true}});
+                    dialogRef.afterClosed().subscribe(result => {
+                        if(result)
+                            this.router.navigate(['/casino/all-games']);
+                    });
                 }
             });
         }

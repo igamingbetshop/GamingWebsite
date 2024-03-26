@@ -1,28 +1,19 @@
-import {Component, NgModule, OnInit} from '@angular/core';
-import {SimpleModalComponent} from "ngx-simple-modal";
+import {Component, inject, NgModule} from '@angular/core';
 import {GetSettingsInfoService} from "@core/services/app/getSettingsInfo.service";
 import {SanitizerModule} from "../../../pipes/sanitizer/sanitizer.module";
 import {TranslateModule} from "@ngx-translate/core";
-
-export interface ConfirmModel {
-    title: string;
-}
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-base-terms-conditions-accept',
     templateUrl: './base-terms-conditions-accept.component.html',
     styleUrls: ['./base-terms-conditions-accept.component.scss']
 })
-export class BaseTermsConditionsAcceptComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
-    public title: string;
-    public errorMessage: any;
-
-    constructor(public getSettingsInfoService: GetSettingsInfoService) {
-        super();
-    }
-
-    ngOnInit() {
-    }
+export class BaseTermsConditionsAcceptComponent  {
+    errorMessage: any;
+    data:any = inject(MAT_DIALOG_DATA);
+    dialogRef = inject(MatDialogRef<BaseTermsConditionsAcceptComponent>);
+    getSettingsInfoService = inject(GetSettingsInfoService);
 
     acceptTerms() {
         this.getSettingsInfoService.acceptTermCondition().subscribe(responseData => {
@@ -34,8 +25,9 @@ export class BaseTermsConditionsAcceptComponent extends SimpleModalComponent<Con
         });
     }
 
-    confirm() {
-        this.close();
+    close()
+    {
+        this.dialogRef.close();
     }
 
 }

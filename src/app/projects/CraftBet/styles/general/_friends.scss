@@ -259,13 +259,21 @@
   }
 
   .error_message {
-    top: 55px;
-    position: absolute;
+    top: var(--friends-invite-message-top, 55px);
+    position: var(--friends-invite-message-position, absolute);
+    left: var(--friends-invite-message-left, auto);
+    right: var(--friends-invite-message-right, auto);
+  }
+  .invalid-error-message {
+    display: var(--friends-invite-invalid-message-display, block);
   }
   .success-message {
-    color: #3c763d;
-    top: 55px;
-    position: absolute;
+    color: var(--friends-invite-success-message-color, #3c763d);
+    top: var(--friends-invite-message-top, 55px);
+    position: var(--friends-invite-message-position, absolute);
+    left: var(--friends-invite-message-left, auto);
+    right: var(--friends-invite-message-right, auto);
+    font-size: var(--friends-invite-message-font-size, 13px);
   }
 
 }

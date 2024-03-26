@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import {Component, inject, Injector} from '@angular/core';
 import { BaseDepositComponent } from '../../../../../../../../@theme/components/common/base-deposit/base-deposit.component';
 import { DepositType1Component } from '../deposit-payments/deposit-type1/deposit-type1.component';
 import { DepositType2Component } from '../deposit-payments/deposit-type2/deposit-type2.component';
@@ -20,10 +20,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { GetPaymentsService } from '../../../../../../../../@core/services/app/getPayments.service';
 import { LocalStorageService, SaveData } from '../../../../../../../../@core/services';
 import { BaseApiService } from '../../../../../../../../@core/services/api/base-api.service';
-import { SimpleModalService } from 'ngx-simple-modal';
 import {DepositType18Component} from "../deposit-payments/deposit-type18/deposit-type18.component";
 import {Controllers, Methods} from "../../../../../../../../@core/enums";
 import {take} from "rxjs/operators";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-deposit-block-default',
@@ -36,7 +36,7 @@ export class DepositBlockDefaultComponent extends BaseDepositComponent {
     public savedDateService: SaveData;
     public localStorageService: LocalStorageService;
     public baseApiService: BaseApiService;
-    public simpleModalService: SimpleModalService;
+    public dialog = inject(MatDialog);
     public bankTransferValue = false;
     messageKey;
     public banks = [];
@@ -51,7 +51,6 @@ export class DepositBlockDefaultComponent extends BaseDepositComponent {
         this.localStorageService = injector.get(LocalStorageService);
         this.userData = this.localStorageService.get('user');
         this.baseApiService = injector.get(BaseApiService);
-        this.simpleModalService = injector.get(SimpleModalService);
     }
 
     ngOnInit() {
@@ -152,11 +151,9 @@ export class DepositBlockDefaultComponent extends BaseDepositComponent {
 
     async redirectToSelfLimitation() {
         const { AccountPageType3DefaultComponent } = await import('../../default/account-page-type3-default.component');
-        this.simpleModalService.removeAll().then();
+        this.dialog.closeAll();
        setTimeout(() => {
-           this.simpleModalService.addModal(AccountPageType3DefaultComponent,
-               {title: 'self-limitation'}, {closeOnClickOutside: true}).subscribe(() => {
-           });
+           this.dialog.open(AccountPageType3DefaultComponent, {data:{title: 'self-limitation'},hasBackdrop:true})
            this.savedDateService.selectedItem.Href = 'self-limitation';
        }, 100);
     }

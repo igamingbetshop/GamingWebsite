@@ -15,7 +15,7 @@
 .mobile-login-section {
   display: flex;
   flex-grow: 1;
-  background: var(--m-register-section-bg, linear-gradient(180deg, #131A2C 0%, #313D4C 105.44%));
+  background: var(--m-login-section-bg, var(--m-register-section-bg, linear-gradient(180deg, #131A2C 0%, #313D4C 105.44%)));
   margin: var(--m-login-section, 0);
   flex-direction: column;
   min-height: calc(100vh);
@@ -69,7 +69,7 @@
   }
 
   &.showPaddingTop {
-    padding-top: 55px;
+    padding-top: var(--m-show-nav-panel-padding-top, 55px);
   }
 
   .close-icon
@@ -120,10 +120,17 @@
     margin-bottom: marginBottom(auth-form-field,0);
     border: var(--auth-form-field-border, 1px solid rgba(219, 237, 255, 0.7));
     border-radius: var(--auth-form-field-border-radius, 6px);
-    input
+    .input_field
     {
       text-indent: 16px;
-      &::placeholder{color: itemColor(m-login-form-field-placeholder, #fff)!important;}
+      &::placeholder{
+        color: itemColor(m-login-form-field-placeholder, #fff);
+        opacity: var(--m-login-form-field-placeholder-opacity, 0.3);
+      }
+    }
+    .input_field:focus::placeholder {
+      opacity: var(--register-input-label-focus-placeholder-opacity, 1);
+      color: var(--m-login-form-field-focus-placeholder-color, var(--m-login-form-field-placeholder-color));
     }
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
@@ -142,6 +149,7 @@
       font-weight: fontWeight(m-login-form-field-label, 400);
       color: itemColor(m-login-form-field-label, #dbedff);
       position: var(--m-login-form-field-label-position, absolute);
+      display: var(--m-login-form-field-label-display, block);
     }
   }
 

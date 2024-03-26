@@ -1,7 +1,6 @@
 import {Component, Injector } from '@angular/core';
 import {BaseCreateDynamicComponent} from "../../../../../../../../../@theme/components/common/base-create-dynamic/base-create-dynamic.component";
 import {WithdrawType1DefaultComponent} from "./withdraw-type1-default/withdraw-type1-default.component";
-import {WithdrawType3DefaultComponent} from "../withdraw-type3/withdraw-type3-default/withdraw-type3-default.component";
 
 @Component({
   selector: 'app-withdraw-type1',

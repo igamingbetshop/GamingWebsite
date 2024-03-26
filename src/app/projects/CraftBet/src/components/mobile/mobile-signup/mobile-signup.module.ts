@@ -3,12 +3,9 @@ import {CommonModule} from "@angular/common";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MobileSignupComponent} from "./mobile-signup.component";
 import {RouterModule, Routes} from "@angular/router";
-import {LoaderModule} from "../../common/loader/loader.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitizer.module";
-import {NgxMaskModule} from "ngx-mask";
-import {ConfigService} from "../../../../../../@core/services";
 import { DropdownDirectiveModule } from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
 import {SecurityQuestionsModule} from "./security-questions/security-questions.module";
 import {VerifyCodeModule} from "./verify-code/verify-code..module";
@@ -18,6 +15,8 @@ import {
   FilterMobileCodePipeModule
 } from "../../../../../../@theme/pipes/filter-by-mobile-code/filter-mobile-code-pipe.module";
 import {OnlyNumberDirectiveModule} from "../../../../../../@theme/directives/only-number/only-number.directive.module";
+import {NgxMaskDirective} from "ngx-mask";
+import {LoaderComponent} from "../../common/loader/loader.component";
 
 const routes: Routes = [
   {
@@ -30,11 +29,11 @@ const routes: Routes = [
     imports: [
         CommonModule,
         FontAwesomeModule,
-        LoaderModule,
+        LoaderComponent,
         TranslateModule,
         ReactiveFormsModule,
         SanitizerModule,
-        NgxMaskModule.forRoot(),
+        NgxMaskDirective,
         RouterModule.forChild(routes),
         DropdownDirectiveModule,
         SecurityQuestionsModule,
@@ -44,7 +43,7 @@ const routes: Routes = [
         FilterMobileCodePipeModule,
         FormsModule,
         OnlyNumberDirectiveModule
-    ],
+    ]
 })
 
 export class MobileSignupModule

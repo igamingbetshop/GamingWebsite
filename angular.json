@@ -36,7 +36,8 @@
               "src/assets",
               "src/assets/images/left-arrow.png",
               "src/assets/images/right-arrow.png",
-              "src/mobile.html"
+              "src/mobile.html",
+              { "glob": "robots.txt", "input": "src/assets/", "output": "/" }
             ],
             "styles": [
               "node_modules/slick-carousel/slick/slick.scss",
@@ -134,17 +135,17 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "craft-bet:build"
+            "buildTarget": "craft-bet:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "craft-bet:build:production"
+              "buildTarget": "craft-bet:build:production"
             },
             "stg": {
-              "browserTarget": "craft-bet:build:stg"
+              "buildTarget": "craft-bet:build:stg"
             },
             "development": {
-              "browserTarget": "craft-bet:build:development"
+              "buildTarget": "craft-bet:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -152,7 +153,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CraftBet:build"
+            "buildTarget": "CraftBet:build"
           }
         },
         "test": {
@@ -337,21 +338,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "craft-bet-la:build"
+            "buildTarget": "craft-bet-la:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "craft-bet-la:build:production"
+              "buildTarget": "craft-bet-la:build:production"
             },
             "stg": {
-              "browserTarget": "craft-bet-la:build:stg"
+              "buildTarget": "craft-bet-la:build:stg"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "craft-bet-la:build"
+            "buildTarget": "craft-bet-la:build"
           }
         },
         "test": {
@@ -385,7 +386,6 @@
       }
     }
   },
-  "defaultProject": "craft-bet",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

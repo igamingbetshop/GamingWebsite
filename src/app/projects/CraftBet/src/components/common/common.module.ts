@@ -1,11 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DefaultSimpleModalOptionConfig, defaultSimpleModalOptions, SimpleModalModule} from 'ngx-simple-modal';
 import {ThemeModule} from "../../../../../@theme/theme.module";
+import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material/dialog";
 
 @NgModule({
   imports: [
-    SimpleModalModule.forRoot({container: 'modal-container'}, { ...defaultSimpleModalOptions}),
     ThemeModule
   ],
   exports: [
@@ -14,10 +13,7 @@ import {ThemeModule} from "../../../../../@theme/theme.module";
   ],
 
   providers: [
-    {
-      provide: DefaultSimpleModalOptionConfig,
-      useValue: {...defaultSimpleModalOptions, ...{ closeOnEscape: true, closeOnClickOutside: true, animated: false }}
-    }
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
   ]
 })
 export class DesktopMobileCommonModule

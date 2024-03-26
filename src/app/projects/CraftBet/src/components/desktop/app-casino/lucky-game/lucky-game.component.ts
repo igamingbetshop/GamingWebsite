@@ -1,21 +1,21 @@
-import {AfterViewInit, Component, Injector, OnInit} from '@angular/core';
-import {SimpleModalComponent, SimpleModalService} from "ngx-simple-modal";
-import {ConfirmModel} from "../../../../../../../@core/interfaces";
+import {AfterViewInit, Component, inject, Injector, Input} from '@angular/core';
 import {Methods} from "../../../../../../../@core/enums";
-import {filter, take} from "rxjs/operators";
-import {getMappedGame, getParsedUrl} from "../../../../../../../@core/utils";
+import {take} from "rxjs/operators";
+import {getMappedGame} from "../../../../../../../@core/utils";
 import {BaseApiService} from "../../../../../../../@core/services/api/base-api.service";
 import {Router} from "@angular/router";
-import {AppConfirmComponent} from "../../app-confirm/app-confirm.component";
 import {UserLogined} from "../../../../../../../@core/services/app/userLogined.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
     selector: 'lucky-game',
     templateUrl: './lucky-game.component.html',
     styleUrls: ['./lucky-game.component.scss']
 })
-export class LuckyGameComponent extends SimpleModalComponent<ConfirmModel, boolean> implements AfterViewInit{
+export class LuckyGameComponent implements AfterViewInit{
     games: any[] = [];
+    public isAnimated:boolean = false;
+    public imageName:any;
     public totalFrames = 14;
     public animationDuration = 3500;
     public timePerFrame = this.animationDuration / this.totalFrames;
@@ -38,18 +38,22 @@ export class LuckyGameComponent extends SimpleModalComponent<ConfirmModel, boole
     public openMode:number;
     public clientWidth:number = 54;
     public clientHeight:number = 54;
-
+    public coords:any;
+    dialogRef = inject(MatDialogRef<LuckyGameComponent>);
+    data:any = inject(MAT_DIALOG_DATA);
 
     constructor(protected injector: Injector,
                 private apiService: BaseApiService,
                 protected router:Router,
                 protected userLogged:UserLogined
     ) {
-        super();
+
     }
 
     ngOnInit() {
        this.getGames({PageSize:50});
+       this.imageName = this.data.fragmentConfig?.Config.ImageName;
+       this.coords = this.data.fragmentConfig?.Config.coords;
     }
 
     getGames(filter, concatData = false): void
@@ -112,6 +116,21 @@ export class LuckyGameComponent extends SimpleModalComponent<ConfirmModel, boole
     startAnimation() {
         this.startTime = null;
         requestAnimationFrame(this.animateWidth);
+    }
+
+    showAnimation(){
+        this.isAnimated = true;
+        this.selectedGame = null;
+        document.querySelector('#spinner').classList.add('disabled');
+        setTimeout(() => {
+            this.isAnimated = false;
+            document.querySelector('#spinner').classList.remove('disabled');
+        }, 3000);
+        requestAnimationFrame(this.animateFrame);
+        this.startAnimation();
+        this.openSelectedGame();
+        this.spin();
+
     }
 
     openSelectedGame()
@@ -211,4 +230,8 @@ export class LuckyGameComponent extends SimpleModalComponent<ConfirmModel, boole
         this.animatedBlock = document.querySelectorAll('.animated-block');
     }
 
+    close()
+    {
+        this.dialogRef.close();
+    }
 }

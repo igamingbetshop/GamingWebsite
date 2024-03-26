@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {ActivatedRoute,CanLoad, Route, Router} from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import {ConfigService, LocalStorageService, SaveData} from "@core/services";
 
 @Injectable()
-export class AccountPagesLoadGuard implements CanLoad {
+export class AccountPagesLoadGuard  {
 
     private isLoaded: boolean;
     public accountTemplateType = '1';

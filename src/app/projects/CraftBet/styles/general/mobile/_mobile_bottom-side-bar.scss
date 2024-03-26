@@ -62,7 +62,7 @@
 
     &__text {
       //font-family: Roboto;
-      font-size: 12px;
+      font-size: fontSize(bottom-sideBar-text,12px);
       line-height: 1.17;
       letter-spacing: normal;
       text-align: left;

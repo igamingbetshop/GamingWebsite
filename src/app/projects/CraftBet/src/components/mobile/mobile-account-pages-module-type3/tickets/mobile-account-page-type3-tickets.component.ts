@@ -30,11 +30,7 @@ export class MobileAccountPageType3TicketsComponent extends AppCommonTicketsComp
 
   public openNewTicket() {
     this.sendMessageForm.reset();
-    this.simpleModalService.addModal(MobileAccountPageType3OpenTicketsComponent, {
-      title: 'Open ticket',
-      message: true
-    }).subscribe(() => {
-    });
+    this.dialog.open(MobileAccountPageType3OpenTicketsComponent, {data:{title: 'Open ticket',message: true}})
   }
 
   public openMessage(ticket, i) {

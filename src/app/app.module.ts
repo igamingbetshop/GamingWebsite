@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from '@core/core.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -9,13 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JWTInterceptor } from '@core/interceptors/jwt.interceptor';
 import {ConfigService} from "@core/services";
-import {SimpleModalModule} from "ngx-simple-modal";
+import {IConfig, provideEnvironmentNgxMask} from "ngx-mask";
+import {RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module} from "ng-recaptcha";
+import {getRecaptchaKey} from "@core/utils";
 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, window['debugPath'] + '/assets/json/translations/', '.json' + '?=' + window['VERSION']);
 }
-
 
 
 export function provideConfig(config: ConfigService) {
@@ -26,6 +27,17 @@ export function initConfig(config: ConfigService)
 {
   return () => config.load();
 }
+export class GlobalErrorHandler extends ErrorHandler {
+  handleError(error) {
+    // Custom error handling logic
+    throw error;
+  }
+}
+
+const maskConfig: Partial<IConfig> = {
+  validation: true,
+};
+
 
 @NgModule({
   declarations: [
@@ -34,9 +46,9 @@ export function initConfig(config: ConfigService)
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     BrowserModule,
+    RecaptchaV3Module,
     AppRoutingModule,
     HttpClientModule,
-    SimpleModalModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -50,6 +62,10 @@ export function initConfig(config: ConfigService)
   bootstrap: [AppComponent],
   providers: [
     {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler
+    },
+    {
       provide: APP_INITIALIZER,
       useFactory: initConfig,
       deps: [ConfigService],
@@ -57,11 +73,13 @@ export function initConfig(config: ConfigService)
     },
     [
       {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true},
+      { provide: RECAPTCHA_V3_SITE_KEY, useFactory: getRecaptchaKey, deps: [ConfigService]},
       /*{
         provide: AuthServiceConfig,
         deps: [ConfigService],
         useFactory: provideConfig
       }*/
+      provideEnvironmentNgxMask(maskConfig)
     ]
   ]
 })

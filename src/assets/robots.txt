@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /config.json
+Disallow: /node_modules/
+Disallow: /package-lock.json
+Disallow: /package.json
+Disallow: /yarn.lock
+Disallow: /404.html
+Disallow: /403-error

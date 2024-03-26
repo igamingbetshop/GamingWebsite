@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {ActivatedRoute, ActivatedRouteSnapshot, CanLoad, Route, Router} from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Route, Router } from '@angular/router';
 import {ConfigService, LocalStorageService} from "@core/services";
 
 @Injectable()
-export class CustomPathGuard implements CanLoad {
+export class CustomPathGuard  {
 
   private isLoaded: boolean;
   public accountTemplateType = '1';

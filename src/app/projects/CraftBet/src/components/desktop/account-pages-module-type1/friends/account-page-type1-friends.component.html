@@ -20,7 +20,7 @@
         <input id="name" class="send-email_input" name="name" #name="ngModel"
                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$" [(ngModel)]="email"
                placeholder="{{'Account.Email-placeholder' | translate}}">
-        <button class="send-email_btn" (click)="inviteFriend()" [ngClass]="{'uk-disabled' : name.invalid || !email}">
+        <button class="send-email_btn" (click)="inviteFriend()" [disabled]="name.invalid || !email">
           <span>{{'Friends.SendLetter' | translate}}</span>
         </button>
         <div [ngClass]="{'error_message' : showError == 2, 'success-message' : showError == 1}" *ngIf="!!showError">

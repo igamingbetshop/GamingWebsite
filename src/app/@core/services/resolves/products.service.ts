@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Resolve, ActivatedRouteSnapshot} from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import {ConfigService} from '../app/config.service';
 import {GetJackpotService} from "@core/services/api/getJackpot.service";
 import {DeviceDetectorService} from "ngx-device-detector";
@@ -11,7 +11,7 @@ export interface casinoDataType {
 }
 
 @Injectable()
-export class ProductsResolve implements Resolve<any> {
+export class ProductsResolve  {
     constructor(public configService: ConfigService, public getJackpotService: GetJackpotService,
                 private deviceService: DeviceDetectorService) {
     }

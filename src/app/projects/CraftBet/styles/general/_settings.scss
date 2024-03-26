@@ -767,9 +767,9 @@ input[type=number] {
   align-items: center;
   padding-bottom: var(--change-password-inputs-padding-bottom, 20px);
   padding-top: var(--change-password-inputs-padding-top, 0);
-  width: 100%;
+  width: var(--change-password-form-width, 100%);
   background: var(--change-password-form-background, unset);
-  border-radius: 6px;
+  border-radius: var(--change-password-form-border-radius, 6px);
   .change-password-inputs {
     display: flex;
     flex-direction: column;
@@ -784,13 +784,15 @@ input[type=number] {
       font-size: var(--change-password-page-field-type-font-size, 18px);
     }
     input {
-      margin: 10px 0 8px 0;
+      margin: var(--change-password-inputs-margin, 10px 0 8px 0);
       height: height(change-password-inputs, 40px);
       color: var(--change-password-inputs-color, #000);
       text-indent: var(--change-password-inputs-text-indent, 16px);
       border: var(--change-password-inputs-border, 1px solid #dbedff);
       border-radius: var(--change-password-inputs-border-radius, 2px);
       background: var(--change-password-inputs-background, transparent);
+      font-size: var(--change-password-inputs-font-size, 14px);
+      font-weight: var(--change-password-inputs-font-weight, 400);
     }
     .error_message {
       font-size: var(--change-password-inputs-error-message-font-size, 13px);
@@ -827,10 +829,11 @@ input[type=number] {
       display: block;
     }
     input:focus::placeholder {
-      opacity: 1;
+      opacity: var(--change-password-inputs-placeholder-focused-opacity, 1);
+      color: var(--change-password-inputs-placeholder-color, rgb(135, 143, 162));
     }
       input::placeholder {
-        opacity: 0;
+        opacity: var(--change-password-inputs-placeholder-opened-opacity, 0);
       }
       input:focus ~ label,
       input:not(:placeholder-shown) ~ label {
@@ -850,6 +853,10 @@ input[type=number] {
       color: itemColor(change-password-btn, #fff);
       margin: var(--change-password-btn-margin, 0 auto);
       display: display(change-password-btn, flex);
+      font-size: var(--change-password-btn-font-size, 16px);
+      font-weight: var(--change-password-btn-font-weight, 600);
+      height: var(--change-password-btn-height, 44px);
+      line-height: var(--change-password-btn-line-height, 44px);
       justify-content: center;
       align-items: center;
     }
@@ -874,12 +881,12 @@ input[type=number] {
 @media screen and (min-width: 0px) and (max-width: 1700px) {
   input:focus ~ label,
   input:not(:placeholder-shown) ~ label {
-    font-size: 12px;
+    //font-size: 12px;
     width: var(--settings-focus-label-focused-small-width, auto);
   }
   select:focus~label,
   select:not([value=""]):valid~label {
-    font-size: 12px;
+    //font-size: 12px;
     width: var(--settings-focus-label-focused-small-width, auto);
   }
 }

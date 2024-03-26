@@ -37,12 +37,7 @@ export class PromotionFragmentsComponent extends BasePromotionFragments{
   {
     if(!this.loginService.isAuthenticated) {
       localStorage.setItem('product-url', this.router.url);
-      this.simpleModalService.addModal(AppConfirmComponent, {
-        title: 'open_login',
-        message: true
-      }).subscribe((isConfirmed) => {
-
-      });
+      this.dialog.open(AppConfirmComponent,{data:{title: 'open_login',message: true}});
     } else {
       this.router.navigate(['/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + 'bonuses']);
     }

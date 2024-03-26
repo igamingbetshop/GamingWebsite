@@ -1,4 +1,4 @@
-import {Component, ComponentRef, createNgModuleRef, NgModuleRef, ViewContainerRef} from "@angular/core";
+import {Component, ComponentRef, createNgModule, NgModuleRef, ViewContainerRef} from "@angular/core";
 import {BaseProfile} from "../../../../../../../@theme/components/profile/base-profile";
 
 @Component({
@@ -16,7 +16,7 @@ export class ProfileComponent extends BaseProfile
             case 'birth-date':
             {
                 const { BirthDateModule } = await import('./types/birth-date/birth-date.module');
-                const moduleRef = createNgModuleRef(BirthDateModule, this.injector);
+                const moduleRef = createNgModule(BirthDateModule, this.injector);
                 this.createComponentWithInstances(moduleRef, this.birthDateRef, item);
             }
             break;
@@ -28,7 +28,7 @@ export class ProfileComponent extends BaseProfile
                 else if(item.Title == 'MobileNumber')
                     containerRef = this.mobileNumberRef;
                 const { SendCodeModule } = await import("./types/send-code/send-code.module");
-                const moduleRef = createNgModuleRef(SendCodeModule, this.injector);
+                const moduleRef = createNgModule(SendCodeModule, this.injector);
                 this.createComponentWithInstances(moduleRef, containerRef, item);
             }
             break;
@@ -51,7 +51,7 @@ export class ProfileComponent extends BaseProfile
                         break;
                 }
                 const { RegionModule } = await import("./types/region/region.module");
-                const moduleRef = createNgModuleRef(RegionModule, this.injector);
+                const moduleRef = createNgModule(RegionModule, this.injector);
                 const componentRef = this.createComponentWithInstances(moduleRef, containerRef, item);
                 componentRef.instance.zIndex = 100 - item.Order;
                 componentRef.instance.subItem = item.Config?.subItem;
@@ -60,7 +60,7 @@ export class ProfileComponent extends BaseProfile
             case 'language':
             {
                 const { LanguageModule } = await import('./types/language/language.module');
-                const moduleRef = createNgModuleRef(LanguageModule, this.injector);
+                const moduleRef = createNgModule(LanguageModule, this.injector);
                 this.createComponentWithInstances(moduleRef, this.languageRef, item);
             }
             break;

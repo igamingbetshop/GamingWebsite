@@ -1,6 +1,6 @@
 import {
     Component,
-    ComponentRef, createNgModuleRef,
+    ComponentRef, createNgModule,
     EventEmitter,
     Injector,
     Output,
@@ -320,7 +320,7 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
             case 'languageDpd':
                 {
                     const { LanguageModule } = await import('../../../../../../@theme/components/global-language/language.module');
-                    const moduleRef = createNgModuleRef(LanguageModule, this.injector);
+                    const moduleRef = createNgModule(LanguageModule, this.injector);
                     const component = moduleRef.instance.getComponent();
                     const languagesComponent = this.languages.createComponent(component, {ngModuleRef: moduleRef});
                     menuItem.isMobile = true;
@@ -331,7 +331,7 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
             case 'loginBtn':
                 {
                     const { LoginButtonModule } = await import("../../../../../../@theme/components/global-login-btn/login-button.module");
-                    const moduleRef = createNgModuleRef(LoginButtonModule, this.injector);
+                    const moduleRef = createNgModule(LoginButtonModule, this.injector);
                     const component = moduleRef.instance.getComponent();
                     const loginBtnComponent = this.loginButton.createComponent(component, {ngModuleRef: moduleRef});
                     loginBtnComponent.instance.menuList = menuItem;
@@ -341,7 +341,7 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
             case 'time':
                 {
                     const { TimeModule } = await import("../time/time.module");
-                    const moduleRef = createNgModuleRef(TimeModule, this.injector);
+                    const moduleRef = createNgModule(TimeModule, this.injector);
                     const component = moduleRef.instance.getComponent();
                     const timeComponent = this.timeRef.createComponent(component, {ngModuleRef: moduleRef});
                     timeComponent.instance.modeOpenType = 'm-popup';
@@ -356,7 +356,7 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
         if(!this.navbarRef)
         {
             const { MobileNavigationBarModule } = await import("../mobile-navigation-bar/mobile-navigation-bar.module");
-            const moduleRef = createNgModuleRef(MobileNavigationBarModule, this.injector);
+            const moduleRef = createNgModule(MobileNavigationBarModule, this.injector);
             const component = moduleRef.instance.getComponent();
             this.navbarRef = this.mobileNavbarRef.createComponent(component, {ngModuleRef: moduleRef});
             this.navbarRef.instance.menuItems = this.centralMenuItems;
@@ -370,11 +370,7 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
                 // this.translate.get('User.Limit Info details').subscribe((res) => {
                 //     this.updatedData = res.replace('number', currentValue);
                 // });
-                this.simpleModalService.addModal(LimitNotificationsComponent, {
-                    title: 'Limit Notifications',
-                    data: { notLogin: true, updatedData: data },
-                    message: true
-                }).subscribe(() => {});
+                this.dialog.open(LimitNotificationsComponent,{data:{ title: 'Limit Notifications',message: true, updatedData: data, notLogin: true}});
             }
         });
         this.signalRService.onBetLimitInfo$.subscribe(res => {
@@ -383,11 +379,7 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
                 // this.translate.get('User.Limit Info details').subscribe((res) => {
                 //     this.updatedData = res.replace('number', currentValue);
                 // });
-                this.simpleModalService.addModal(LimitNotificationsComponent, {
-                    title: 'Limit Notifications',
-                    data: { notLogin: true, updatedData: res },
-                    message: true
-                }).subscribe(() => {});
+                this.dialog.open(LimitNotificationsComponent,{data:{ title: 'Limit Notifications',message: true, updatedData: res, notLogin: true}});
             }
         });
     }

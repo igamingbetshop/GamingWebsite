@@ -8,13 +8,14 @@
   margin-top: var(--m-user-views-margin-top, 62px);
   min-height: calc(100vh - 62px);
   background: $register-btn-bg;
-  padding: 15px 0;
+  padding: var(--m-user-views-padding, 15px 0);
 
   &_title {
     text-align: center;
     //color: $register-active-menu;
-    font-size: 24px;
-    font-weight: normal;
+    font-size: var(--m-user-views-title-font-size, 24px);
+    font-weight: var(--m-user-views-title-font-weight, normal);
+    margin-top: var(--m-user-views-title-margin-top, 20px);
   }
 
   .history-tools-panel {
@@ -22,7 +23,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 0 20px 20px;
+    margin: var(--m-history-tools-panel-margin, 0 20px 20px);
 
     label {
       color: itemColor(account-dropdown-label, #dadbe0);
@@ -42,10 +43,10 @@
       }
 
       select, input {
-        height: 40px;
-        padding: 0 8px;
-        border-radius: 5px;
-        border: 1px solid #dadada;
+        height: height(history-time-filter, 40px);
+        padding: var(--history-time-filter-padding, 0 8px);
+        border-radius: var(--history-time-filter-border-radius, 5px);
+        border: 1px solid itemColor(history-time-filter-border, #dadada);
         outline: none;
         background: $header-top-bg;
         color: $font-color;
@@ -66,10 +67,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 40px;
-        padding: 0 8px;
-        border-radius: 5px;
-        border: 1px solid #dadada;
+        height: height(history-time-filter, 40px);
+        padding: var(--history-time-filter-padding, 0 8px);
+        border-radius: var(--history-time-filter-border-radius, 5px);
+        border: 1px solid itemColor(history-time-filter-border, #dadada);
         outline: none;
         background: $header-top-bg;
 
@@ -81,8 +82,8 @@
       .show-btn {
         background: backgroundColor(show-btn, #36b550);
         color: itemColor(show-btn, #fff);
-        padding: 0 20px;
-        margin-top: 8px;
+        padding: var(--show-btn-padding, 0 20px);
+        margin-top: var(--show-btn-margin-top, 8px);
         width: width(show-btn, 175px);
         border-radius: var(--show-btn-border-radius, 4px);
 

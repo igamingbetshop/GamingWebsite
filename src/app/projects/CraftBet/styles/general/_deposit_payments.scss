@@ -4,7 +4,7 @@
     padding: 0;
     width: 100%;
     clear: both;
-    margin-bottom: 24px;
+    margin-bottom: var(--payment-section2-form-field-margin-bottom, 24px);
 
     &.nominals-fields-3 {
       height: 122px;
@@ -16,8 +16,8 @@
 
 
     &__label {
-      font-size: $font-size-4;
-      font-weight: 600;
+      font-size: var(--deposit-payments-input-label-font-size, $font-size-4);
+      font-weight: var(--deposit-payments-input-label-font-weight, 600);
       font-stretch: normal;
       font-style: normal;
       line-height: 1.36;
@@ -42,8 +42,8 @@
     {
       font-size: var(--payment-form-floating-label-font-size, 14px);
       pointer-events: none;
-      color: rgba(255, 255, 255, 0.4);
-      line-height: 32px;
+      color: var(--payment-form-floating-label-color, rgba(255, 255, 255, 0.4));
+      line-height: var(--payment-form-floating-label-line-height, 32px);
     }
     .payment-form-field__column
     {
@@ -55,7 +55,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #9aa8c461;
+      border-bottom: var(--payment-form-field-border-bottom, 1px solid #9aa8c461);
       margin-bottom: marginBottom(payment-form-field, 24px);
       .error_message
       {
@@ -65,7 +65,7 @@
       }
       .currency
       {
-        font-size: .875rem;
+        font-size: fontSize(currency, .875rem);
         color: itemColor(currency,#97a1c2);
       }
       input {
@@ -117,11 +117,11 @@
         outline: none;
         background: none;
         padding: 0;
-        text-indent: 10px;
+        text-indent: var(--payment-form-field-input-text-indent, 10px);
         height: 100%;
         min-height: 40px;
-        width: 84%;
-        color: white;
+        width: var(--payment-form-field-input-width, 84%);
+        color: var(--payment-form-field-input-color, white);
       }
 
       input:focus ~ .floating-label, select:focus ~ .floating-label
@@ -157,36 +157,36 @@
         top: 0;
         font-size: fontSize(payment-form-floating-label, 14px);
         pointer-events: none;
-        color: rgba(255,255,255,.4);
+        color: var(--payment-form-floating-label-color ,rgba(255,255,255,.4));
         -webkit-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
       }
       .payment-select {
-        border-radius: 4px;
-        text-indent: 10px;
+        border-radius: var(--payment-form-field-select-border-radius, 4px);
+        text-indent: var(--payment-form-field-select-text-indent, 10px);
         opacity: 0.6;
         width: 100%;
         height: 100%;
         min-height: 40px;
-        border: none;
+        border: var(--payment-form-field-select-border, none);
         outline: none;
-        color: rgba(255, 255, 255, 0.4) !important;
-        padding: 0 16px;
-        background-color: transparent!important;
+        color: var(--payment-form-field-select-color, rgba(255, 255, 255, 0.4)) !important;
+        padding: var(--payment-form-field-select-padding, 0 16px);
+        background: var(--payment-form-field-select-background, transparent) !important;
         option{ color: black !important;}
       }
 
 
     }
     .payment-form-field__column_btn{
-      border-radius: 4px;
+      border-radius: var(--payment-form-button-border-radius, 4px);
       width: 100%;
       font-stretch: normal;
       font-style: normal;
       line-height: 1.31;
       letter-spacing: normal;
       text-align: center;
-      color: #ffffff;
+      color: var(--payment-form-button-color, #ffffff);
       height: height(payment-form-button, 48px);
 
       .error_message {
@@ -228,7 +228,7 @@
         height: var(--activate-bonus-btn-top-height, 50px);
         line-height: var(--activate-bonus-btn-top-line-height, 50px);
         border-radius: var(--activate-bonus-btn-top-border-radius, 3px);
-        border: none;
+        border: var(--activate-bonus-btn-top-border, none);
         cursor: pointer;
         text-transform: capitalize;
       }
@@ -584,7 +584,7 @@
         padding: 0;
         text-indent: 10px;
         background: $account-content-item-bg-color;
-        width: 100%;
+        width: var(--account-content-item-init-width, 100%);
         min-height: var(--activate-bonus-btn-height-height, 44px);
         border-radius: var(--activate-bonus-btn-border-radius, 6px);
         color: var(--account-content-item-color-color, #fff);
@@ -599,8 +599,8 @@
         background-color: var(--account-content-withdraw-payment-select-background-color, #f6f5f5);
         color: var(--account-content-item-color-color, #fff);
         border-radius: var(--activate-bonus-btn-border-radius, 6px);
-        padding: 0;
-        text-indent: 10px;
+        padding: var(--account-content-withdraw-payment-select-padding, 0);
+        text-indent: var(--account-content-withdraw-payment-select-text-indent, 10px);
         opacity: var(--account-content-withdraw-payment-select-opacity, 0.6);
         font-weight: var(--account-content-withdraw-payment-select-font-weight, 400);
         font-size: var(--account-content-withdraw-payment-select-font-size, 14px);

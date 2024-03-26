@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
-import {SimpleModalService} from "ngx-simple-modal";
 import {UserLogined} from "@core/services/app/userLogined.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-app-live-casino',
@@ -18,7 +18,7 @@ export class AppLiveCasinoComponent implements OnInit {
   constructor(public route: ActivatedRoute,
               public baseControllerService: BaseControllerService,
               private router:Router,
-              private simpleModalService:SimpleModalService,
+              private dialog:MatDialog,
               private loginService:UserLogined)
   {
     this.route.data.subscribe((routeData) => {
@@ -36,10 +36,7 @@ export class AppLiveCasinoComponent implements OnInit {
   {
     if(!this.loginService.isAuthenticated)
     {
-      this.simpleModalService.addModal(AppConfirmComponent, {
-        title: 'open_login',
-        message: true
-      }).subscribe((isConfirmed) => {});
+      this.dialog.open(AppConfirmComponent,{data:{title: 'open_login',message: true}});
     }
     else
     {

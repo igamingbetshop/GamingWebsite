@@ -227,7 +227,8 @@
       display: block;
     }
     input:focus::placeholder {
-      opacity: 1;
+      opacity: var(--login-input-label-focus-placeholder-opacity, 1);
+      color: var(--login-form-field-focus-placeholder-color, var(--login-form-field-placeholder-color)) !important;
     }
     input::placeholder {
       opacity: var(--login-input-label-placeholder-opacity, 0);
@@ -303,7 +304,7 @@
       border-radius: 6px;
       border: none;
       font-weight: 400;
-      &::placeholder{color: itemColor(login-field-placeholder, #000)!important;}
+      //&::placeholder{color: itemColor(login-field-placeholder, #000)!important;}
       &:focus {
         border: 2px solid itemColor(login-field-focus, transparent);
       }
@@ -327,7 +328,7 @@
         }
         input
         {
-          &::placeholder{color: itemColor(login-form-field-placeholder, #69696B)!important;}
+          &::placeholder{color: itemColor(login-form-field-placeholder, #69696B);}
         }
       }
 

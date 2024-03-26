@@ -11,9 +11,6 @@ import { AppCommonBankMessageModalComponent } from './app-common-bank-message-mo
         CommonModule,
         FontAwesomeModule,
         TranslateModule
-    ],
-    entryComponents: [
-        AppCommonBankMessageModalComponent
     ]
 })
 export class CommonBankMessageModalModule {

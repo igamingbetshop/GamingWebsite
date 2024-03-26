@@ -5,8 +5,18 @@
     <div class="header">{{'PICK YOUR LUCKY GAME' | translate}}</div>
     <div class="lucky-game-content">
         <div class="animation-container">
-            <div class="animation-frame" (click)="resetAnimation()">
+           <!-- <div class="animation-frame" (click)="resetAnimation()">
                 <img [src]="src" alt="Frame">
+            </div>-->
+
+            <div class="animation-frame" [ngStyle]="{'display' : isAnimated ? 'none' : 'block'}">
+                <img src="../assets/images/slots/{{imageName[0]}}"  usemap="#workmap">
+                <map name="workmap">
+                    <area shape="rect" coords="{{coords}}" style="cursor:pointer" (click)="showAnimation()">
+                </map>
+            </div>
+            <div class="animation-frame"  [ngStyle]="{'display' : isAnimated ? 'block' : 'none'}">
+                <img src="../assets/images/slots/{{imageName[1]}}">
             </div>
             <div class="animated-games-box">
                 <div class="animated-block">
@@ -45,7 +55,7 @@
            </div>
             <p class="game-name" *ngIf="selectedGame != null">{{gameName}}</p>
             <div class="buttons">
-                <button id="spinner" class="spin-button" (click)="resetAnimation()">{{'Spin' | translate}}</button>
+                <button id="spinner" class="spin-button" (click)="showAnimation()">{{'Spin' | translate}}</button>  <!-- (click)="resetAnimation()"-->
                 <button class="play-button"
                         (click)="close()"
                         [routerLink]="['/product/'+ winnerGameId + '/real/' + openMode]"

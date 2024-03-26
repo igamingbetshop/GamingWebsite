@@ -32,6 +32,14 @@ export class BaseNewsComponent extends BaseComponent
   private baseApiService:BaseApiService;
 
   public subMenuItems: Array<any> = [];
+  newsTypes:any = {
+    0:'Sport',
+    1:'Casino',
+    2:'Live Casino',
+    3:'Virtual Games',
+    4:'Skill Games'
+  }
+
 
   constructor(public injector: Injector, )
   {

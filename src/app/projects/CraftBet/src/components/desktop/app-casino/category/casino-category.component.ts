@@ -1,11 +1,11 @@
 import {Component, Injector, Input, ViewEncapsulation} from '@angular/core';
 import {BaseCasinoCategory} from "../../../../../../../@theme/fragments/casino/category/base-casino-category";
 import {AppConfirmComponent} from "../../app-confirm/app-confirm.component";
-import {SimpleModalService} from "ngx-simple-modal";
 import {Fragment} from "../../../../../../../@core/models";
 import {StateService} from "../../../../../../../@core/services/app/state.service";
 import {FragmentSource, FragmentType, FragmentTypes} from "../../../../../../../@core/enums";
 import {getFragmentsByType, getParsedUrl} from "../../../../../../../@core/utils";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'casino-category',
@@ -22,7 +22,7 @@ export class CasinoCategoryComponent extends BaseCasinoCategory
 
     constructor(protected injector:Injector,
                 private stateService:StateService,
-                private simpleModalService:SimpleModalService)
+                private dialog:MatDialog)
     {
         super(injector);
     }
@@ -66,11 +66,11 @@ export class CasinoCategoryComponent extends BaseCasinoCategory
         {
             const url = this.router.url + '/' + typeId  + '/' + type + '/' + openMode;
             localStorage.setItem('product-url', url);
-            this.simpleModalService.addModal(AppConfirmComponent, {
-                title: 'open_login',
-                message: true
-            }).subscribe((isConfirmed) => {
-                if(!isConfirmed)
+
+            const dialogRef = this.dialog.open(AppConfirmComponent, {data:{ title: 'open_login',
+                    message: true}});
+            dialogRef.afterClosed().subscribe(result => {
+                if(!result)
                     localStorage.removeItem('product-url');
             });
         } else {

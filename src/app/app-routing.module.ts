@@ -24,7 +24,7 @@ const appRoutes: Routes = [
     {
         path:'',
         component:AppComponent,
-        children:[...mobilePreloadModules]
+        children:[...desktopPreloadModules]
     },
     {
         path: '**', redirectTo: '', pathMatch: 'full'
@@ -32,7 +32,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy', enableTracing:true})],
+    imports: [RouterModule.forRoot(appRoutes)],
     exports: [RouterModule]
 })
 export class AppRoutingModule

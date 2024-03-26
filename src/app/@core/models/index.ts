@@ -310,6 +310,7 @@ export class ProductIno {
     RTP:number;
     Turnover:number;
     Volatility:string;
+    Tags:string;
     IsFavorite: boolean;
 }
 

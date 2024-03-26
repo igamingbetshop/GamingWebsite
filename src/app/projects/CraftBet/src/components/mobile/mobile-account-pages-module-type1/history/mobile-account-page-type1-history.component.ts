@@ -1,6 +1,5 @@
 import {Component, Injector} from '@angular/core';
 import {LayoutService} from "@core/services/app/layout.service";
-import {MobileUserInfoComponent} from "../../mobile-user-info/mobile-user-info.component";
 import {BetsHistoryComponent} from "../../../../../../../@theme/components";
 
 @Component({
@@ -13,12 +12,11 @@ export class MobileAccountPageType1HistoryComponent extends BetsHistoryComponent
         super(injector);
     }
 
-    public openInfo(data) {
-        this.simpleModalService.addModal(MobileUserInfoComponent, {
-            title: 'User Info',
-            message: true,
-            data: data
-        }).subscribe((isConfirmed) => {});
+    async openInfo(data) {
+
+        const {MobileUserInfoComponent} = await import('../../mobile-user-info/mobile-user-info.component');
+        this.dialog.open(MobileUserInfoComponent, {data:{title: 'User Info',
+                message: true,info:data}})
     }
 
 }

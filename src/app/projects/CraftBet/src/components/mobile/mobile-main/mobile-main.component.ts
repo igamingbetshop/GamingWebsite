@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   ComponentRef,
-  createNgModuleRef,
+  createNgModule,
   HostListener,
   Injector,
   OnInit,
@@ -79,7 +79,7 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
     if(characters.length > 1)
     {
       const { MobileCharactersModule  } = await import('../mobile-homepage/mobile-characters/mobile-characters.module');
-      const moduleRef = createNgModuleRef(MobileCharactersModule, this.injector);
+      const moduleRef = createNgModule(MobileCharactersModule, this.injector);
       const component = moduleRef.instance.getComponent();
       return component;
     }
@@ -134,7 +134,7 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
        if(!this.bottomSideBarComponent)
        {
          const { BottomSideBarModule } = await import("../../../../../../@theme/components/global-bottom-side-bar/bottom-side-bar.module");
-         const moduleRef = createNgModuleRef(BottomSideBarModule, this.injector);
+         const moduleRef = createNgModule(BottomSideBarModule, this.injector);
          const component = moduleRef.instance.getComponent();
          this.bottomSideBarComponent = this.bottomSideBarRef.createComponent(component, {ngModuleRef: moduleRef});
        }
@@ -155,7 +155,7 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
         {
           this.isFooterCreated = true;
           const { MobileFooterModule } = await import("../mobile-footer/mobile-footer.module");
-          const moduleRef = createNgModuleRef(MobileFooterModule, this.injector);
+          const moduleRef = createNgModule(MobileFooterModule, this.injector);
           const component = moduleRef.instance.getComponent();
           this.footerRef = this.mobileFooterRef.createComponent(component, {ngModuleRef: moduleRef});
         }

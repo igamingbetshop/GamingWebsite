@@ -1,23 +1,15 @@
-import {OnInit, Injector, OnDestroy, Injectable} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
+import {Injector, Directive, inject} from '@angular/core';
 import {ConfigService} from "@core/services";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods} from "@core/enums";
 import {UserLogined} from "@core/services/app/userLogined.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
-export interface ConfirmModel {
-  title: string;
-  message: boolean;
-  data: any;
-}
+@Directive()
 
-@Injectable()
-
-export  class BaseWelcomeBonusComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit, OnDestroy {
-
-  public title: string;
-  public message: boolean;
-  public data: any;
+export  class BaseWelcomeBonusComponent  {
+  data:any = inject(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef<BaseWelcomeBonusComponent>);
   public chosenBonusCard:any;
   public welcomeBonusActivationKey:any;
   public bonusCards = [
@@ -48,7 +40,6 @@ export  class BaseWelcomeBonusComponent extends SimpleModalComponent<ConfirmMode
   public loginService:UserLogined;
 
   constructor(public injector: Injector) {
-    super();
     this.baseApiService = injector.get(BaseApiService);
     this.configService = injector.get(ConfigService);
     this.loginService = injector.get(UserLogined);
@@ -88,22 +79,11 @@ export  class BaseWelcomeBonusComponent extends SimpleModalComponent<ConfirmMode
   refuseBonus()
   {
     this.chosenBonusCard = null;
-    this.close();
+    this.dialogRef.close();
   }
 
   addBonusToBalance()
   {
 
   }
-
-  ngOnInit()
-  {
-
-  }
-
-  ngOnDestroy(): void
-  {
-
-  }
-
 }

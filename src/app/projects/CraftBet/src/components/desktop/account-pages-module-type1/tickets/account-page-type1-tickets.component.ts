@@ -13,11 +13,9 @@ export class AccountPageType1TicketsComponent extends AppCommonTicketsComponent 
   }
 
   public openNewTicket() {
-    this.simpleModalService.addModal(AccountPageType1OpenTicketsComponent, {
-      title: 'Open ticket',
-      message: true
-    }).subscribe(() => {
-    });
+
+    this.dialog.open(AccountPageType1OpenTicketsComponent, {data:{title: 'Open ticket',
+        message: true}});
   }
 
   ngOnInit() {

@@ -11,13 +11,12 @@ import { CustomBlockBettingStatementSportItemComponent } from './custom-block-be
 import {TranslateModule} from "@ngx-translate/core";
 import {ThemeModule} from "../../../../../../@theme/theme.module";
 import {DesktopMobileCommonModule} from "../../common/common.module";
-import {FilterPipeModule} from "ngx-filter-pipe";
 import { CustomBlockMenuComponent } from './custom-block-menu/custom-block-menu.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {NgxPrintModule} from 'ngx-print';
-import {LoaderModule} from "../../common/loader/loader.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ExportDataService} from "../../../../../../@core/services";
+import {LoaderComponent} from "../../common/loader/loader.component";
 
 
 @NgModule({
@@ -38,10 +37,9 @@ import {ExportDataService} from "../../../../../../@core/services";
     ReactiveFormsModule,
     ThemeModule,
     DesktopMobileCommonModule,
-    FilterPipeModule,
     NgxPrintModule,
     NgxPaginationModule,
-    LoaderModule
+    LoaderComponent
   ],
   providers:[
     ExportDataService

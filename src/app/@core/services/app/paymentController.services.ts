@@ -302,14 +302,15 @@ export class PaymentControllerService {
 
         this.resetPaymentParams(true);
         this.GetUserAccounts();
-        this.paymentsService.defaultRequest(request).then((recponceData) => {
-            if (recponceData['ResponseCode'] === 0) {
+        this.paymentsService.defaultRequest(request).then((responseData) => {
+            if (responseData['ResponseCode'] === 0)
+            {
                 if (data.paymentType === 'deposit') {
                     this.bonusesService.GetDepositBonusInfo(data.PaymentSystemId);
                 }
-                this.notifyGetCreatePaymentData.next(recponceData['ResponseObject']);
+                this.notifyGetCreatePaymentData.next(responseData['ResponseObject']);
             } else {
-                this.notifyGetCreatePaymentError.next(recponceData);
+                this.notifyGetCreatePaymentError.next(responseData);
             }
 
         });
@@ -323,11 +324,11 @@ export class PaymentControllerService {
         request.Token = this.userData.Token ? this.userData.Token : '';
         request.ClientId = this.userData.Id;
 
-        this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/GetPartnerBetShops`, request).subscribe(recponceData => {
-            if (recponceData['ResponseCode'] === 0) {
-                this.notifyGetPartnerBetShops.next(recponceData['BetShops']);
+        this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/GetPartnerBetShops`, request).subscribe(responseData => {
+            if (responseData['ResponseCode'] === 0) {
+                this.notifyGetPartnerBetShops.next(responseData['BetShops']);
             } else {
-                this.notifyGetPartnerBetShopsError.next(recponceData['Description']);
+                this.notifyGetPartnerBetShopsError.next(responseData['Description']);
             }
         });
     }
@@ -339,11 +340,11 @@ export class PaymentControllerService {
         request.LanguageId = this.defaultOption.Language;
         request.TypeId = RegionTypes.City;
 
-        this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/GetRegions`, request).subscribe((recponceData) => {
-            if (recponceData['ResponseCode'] === 0) {
-                this.notifyGetRegionsList.next(recponceData['ResponseObject']);
+        this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/GetRegions`, request).subscribe((responseData) => {
+            if (responseData['ResponseCode'] === 0) {
+                this.notifyGetRegionsList.next(responseData['ResponseObject']);
             } else {
-                this.notifyGetRegionsError.next(recponceData['Description']);
+                this.notifyGetRegionsError.next(responseData['Description']);
             }
         });
     }

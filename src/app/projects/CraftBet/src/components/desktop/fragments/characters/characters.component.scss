@@ -300,6 +300,8 @@
       height: 48px;
       min-width: 118px;
       cursor: pointer;
+      pointer-events: auto;
+      user-select: auto;
     }
   }
   ::-webkit-scrollbar-track { border-radius: 10px!important; border: 0.6px solid rgba(239, 236, 236, 0.2) !important;
@@ -347,6 +349,8 @@
     width: 187px;
     height: 187px;
     flex-shrink: 0;
+    display: block;
+    margin: 0 auto;
   }
   .title
   {

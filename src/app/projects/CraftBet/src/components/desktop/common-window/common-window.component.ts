@@ -1,8 +1,8 @@
-import {Component, Injector} from "@angular/core";
+import {Component, inject, Injector} from "@angular/core";
 import {BaseComponent} from "../../../../../../@theme/components/base/base.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserLogined} from "../../../../../../@core/services/app/userLogined.service";
-import {SimpleModalService} from "ngx-simple-modal";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-common-window',
@@ -14,7 +14,7 @@ export class CommonWindowComponent extends BaseComponent {
     protected route: ActivatedRoute;
     protected router: Router;
     protected userLoginService:UserLogined;
-    protected simpleModalService:SimpleModalService;
+    protected dialog = inject(MatDialog);
 
     constructor(injector: Injector) {
         super(injector);
@@ -22,7 +22,6 @@ export class CommonWindowComponent extends BaseComponent {
         window.scroll(0, 0);
         this.router = injector.get(Router);
         this.userLoginService = injector.get(UserLogined);
-        this.simpleModalService = injector.get(SimpleModalService);
     }
 
     ngOnInit() {

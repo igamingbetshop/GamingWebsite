@@ -8,7 +8,7 @@ import {UserLogined} from "@core/services/app/userLogined.service";
 import {ConfigService, DefaultService, LocalStorageService, PaymentsService} from "@core/services";
 import {BaseApiService} from "@core/services/api/base-api.service";
 
-@Injectable()
+@Injectable({providedIn:"root"})
 
 export class GetPaymentsService {
 
@@ -244,7 +244,7 @@ export class GetPaymentsService {
                 let payments = data.ResponseObject.PaymentRequests;
                 this._notifyGetBetShopList.subscribe((betshopData) => {
                     for (let i = 0; i < payments.length; i++) {
-                        if (payments[i].BetShopId == betshopData.id) {
+                        if (payments[i].BetShopId == betshopData?.Id) {
                             payments[i].BetshopName = betshopData ? betshopData.Name : '';
                         }
                     }

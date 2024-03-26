@@ -1,27 +1,21 @@
-import {Component, NgModule, OnInit} from '@angular/core';
-import {SimpleModalComponent} from "ngx-simple-modal";
+import {Component, inject, NgModule, OnInit} from '@angular/core';
 import {GetSettingsInfoService} from "@core/services/app/getSettingsInfo.service";
 import {CommonModule} from "@angular/common";
 import {GlobalChangePasswordModule} from "../../global-change-password/global-change-password.module";
 import {TranslateModule} from "@ngx-translate/core";
-
-export interface ConfirmModel {
-  title: string;
-}
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-base-reset-password-info',
   templateUrl: './base-reset-password-info.component.html',
   styleUrls: ['./base-reset-password-info.component.scss']
 })
-export class BaseResetPasswordInfoComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
+export class BaseResetPasswordInfoComponent implements  OnInit {
 
-  public title: string;
   public deviceSize: any;
-
-  constructor(public getSettingsInfoService: GetSettingsInfoService) {
-    super();
-  }
+  data:any = inject(MAT_DIALOG_DATA);
+  getSettingsInfoService = inject(GetSettingsInfoService);
+  dialogRef = inject(MatDialogRef<BaseResetPasswordInfoComponent>)
 
   ngOnInit() {
     this.deviceSize = window.innerWidth;
@@ -29,14 +23,13 @@ export class BaseResetPasswordInfoComponent extends SimpleModalComponent<Confirm
     this.getSettingsInfoService._notifyGetChangePasswordResponseMessage.subscribe(data => {
       if (data.message == 'Success')
       {
-        //this.close();
         location.reload();
       }
     });
   }
 
   confirm() {
-    this.close();
+    this.dialogRef.close(true);
   }
 
 }

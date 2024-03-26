@@ -60,7 +60,7 @@
              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$" [(ngModel)]="email"
              placeholder="{{'Account.Email-placeholder' | translate}}">
     </div>
-    <button class="send-email_btn" (click)="inviteFriend()" [ngClass]="{'uk-disabled' : name.invalid || !email}">
+    <button class="send-email_btn" (click)="inviteFriend()" [disabled]="name.invalid || !email">
       <span>
         {{'Friends.SendLetter' | translate}}
       </span>

@@ -177,9 +177,9 @@
 
 .payment-deposit-btn {
   outline: none;
-  width: 100%;
-  color: #fff;
-  padding: 0 32px;
+  width: var(--m-payment-button-width, 100%);
+  color: var(--m-payment-button-color, #fff);
+  padding: var(--m-payment-button-padding, 0 32px);
   text-transform: var(--payment-button-text-transform, uppercase);
   font-size: var(--payment-button-font-size, 16px);
   background: -webkit-linear-gradient(90deg, var(--payment-button-background-gradient-first-color) 0, var(--payment-button-background-gradient-second-color) 100%);
@@ -188,7 +188,7 @@
   line-height: var(--payment-button-ine-height, 40px);
   border-radius: var(--payment-button-border-radius, 3px);
   margin: var(--payment-button-margin, 0px);
-  border: none;
+  border: var(--payment-button-border, none);
   cursor: pointer;
 }
 

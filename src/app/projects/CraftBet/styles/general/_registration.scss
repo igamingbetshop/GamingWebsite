@@ -1439,7 +1439,7 @@ select {
     top: itemTop(allFormItems, 118px);
     //position: absolute;
     position: position(allFormItems, unset);
-    background-color: backgroundColor(register, #FFFFFF);
+    background: var(--allFormItems-background, var(--register-background-color));
     z-index: 1;
     padding: var(--all-form-items-padding, 0 40px);
     width: 100%;
@@ -1578,10 +1578,12 @@ select {
       display: block;
     }
     input:focus::placeholder {
-      opacity: 1;
+      opacity: var(--register-input-label-focus-placeholder-opacity, 1);
+      color: var(--reg-text-focus-placeholder-color, var(--reg-text-placeholder-color));
     }
     input::placeholder {
       opacity: var(--register-input-label-placeholder-opacity, 0);
+      color: itemColor(reg-text-placeholder, #69696B);
     }
     input:focus ~ label,
     input:not(:placeholder-shown) ~ label {
