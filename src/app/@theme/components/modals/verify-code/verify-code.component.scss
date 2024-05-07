@@ -1,17 +1,21 @@
 .modal-content1 {
-  margin-top: 180px !important;
+  //margin-top: 180px !important;
   //height: auto !important;
+  .icon-close-modal {
+    color: var(--recovery-verify-code-close-icon-color, #fff);
+    cursor: pointer;
+  }
 }
 .modal-content2 {
-  margin-top: 0px ;
-  margin-bottom: 0px;
+  margin-top: var(--recovery-verify-code-margin-top, 0);
+  margin-bottom: var(--recovery-verify-code-margin-bottom, 0px);
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: var(--recovery-verify-code-margin-left, auto);
+  margin-right: var(--recovery-verify-code-margin-right, auto);
   border-radius: var(--forgot-password-confirmation-content-border-radius, 6px);
   width: var(--forgot-password-confirmation-content-width, 568px);
   height: var(--forgot-password-confirmation-content-height, 586px);
-  padding-top: 0px;
+  padding-top: var(--recovery-verify-code-padding-top, 0px);
   box-shadow: var(--forgot-password-confirmation-content-box-shadow, none);
   background: var(--recovery-verify-code-background, #1d2e4a);
   display: flex;
@@ -245,7 +249,7 @@
     width: var(--m-forgot-password-confirmation-content-width, 90%);
     margin-left: var(--m-forgot-password-confirmation-content-margin-left, 20px);
     height: var(--m-forgot-password-confirmation-content-height, 60%);
-    margin-top: var(--m-forgot-password-confirmation-content-margin-top, 60px) !important;
+    //margin-top: var(--m-forgot-password-confirmation-content-margin-top, 60px) !important;
     overflow: auto;
     .modal_content {
       p {

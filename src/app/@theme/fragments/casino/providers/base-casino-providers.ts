@@ -1,14 +1,11 @@
 import {Directive, Injector, Input, OnInit} from "@angular/core";
-import { take } from "rxjs/operators";
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
-import {Methods} from "../../../../@core/enums";
 import {FragmentData} from "../../../../@core/models";
 import {CasinoFilterService} from "../../../../@core/services/app/casino-filter.service";
-import {getMappedGame} from "../../../../@core/utils";
 import {ConfigService} from "../../../../@core/services";
 import {
     CasinoProvidersService
-} from "../../../../projects/CraftBet/src/components/desktop/app-casino/providers/casino-providers.service";
+} from "./casino-providers.service";
 
 @Directive()
 export class BaseCasinoProviders implements OnInit {

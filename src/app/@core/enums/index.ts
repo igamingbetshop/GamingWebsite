@@ -160,7 +160,8 @@ export enum Methods
   GET_VERIFICATION_PAGE_URL = "GetVerificationPageUrl",
   SELECT_SESSION_ACCOUNT = "SelectSessionAccount",
   GET_PAYOUT_LIMIT = "GetPayoutLimit",
-  SAVE_PAYOUT_LIMIT = "SavePayoutLimit"
+  SAVE_PAYOUT_LIMIT = "SavePayoutLimit",
+  VIEW_POPUP = "ViewPopup"
 }
 
 export enum DateTypes

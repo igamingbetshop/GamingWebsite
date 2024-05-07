@@ -7,13 +7,13 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
   templateUrl: './verify-code.component.html',
   styleUrls: ['./verify-code.component.scss'],
   encapsulation:ViewEncapsulation.None,
-  providers:[
+  /*providers:[
     { provide: MatDialogRef, useValue: {} },
     {
       provide: MAT_DIALOG_DATA,
       useValue: {}
     }
-  ]
+  ]*/
 })
 export class VerifyCodeComponent extends BaseVerifyCode {
   public logoUrl: string = '';
@@ -22,5 +22,9 @@ export class VerifyCodeComponent extends BaseVerifyCode {
   }
   errorHandler(event) {
     event.target.src = '../../../../../../../assets/images/logo.png';
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

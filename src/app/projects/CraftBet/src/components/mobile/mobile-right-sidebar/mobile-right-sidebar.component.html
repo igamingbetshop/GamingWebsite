@@ -53,7 +53,8 @@
                     <app-mobile-account-page-type2-balance *ngIf="isLogin" [useAccountType]="useAccountType" [balances]="accountBalances" [templateType]="2"
                                                            (selectedAccountChange)="onSelectedAccountChange($event)"></app-mobile-account-page-type2-balance>
                 </div>
-                <div class="additional-deposit-btn" [innerHTML]="'User.Deposit-Custom' | translate | sanitizer: 'html'"></div>
+                <div class="additional-deposit-btn" [innerHTML]="'User.Deposit-Custom' | translate | sanitizer: 'html'"
+                     [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/deposit'"></div>
 
                 <ul class="general-menu">
                     <div class="menu_items">

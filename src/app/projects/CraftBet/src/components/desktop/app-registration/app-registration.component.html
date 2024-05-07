@@ -812,7 +812,6 @@
 
 
                                 <div *ngSwitchCase="'Region2'" class="form_field form_field__{{form_elem?.Type}}">
-                                    <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
 
                                     <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
 
@@ -832,13 +831,13 @@
                                             <option *ngFor="let city of cityList; let i = index" [selected]="i==0"
                                                     [value]="city.Id">{{city?.Name}}</option>
                                         </select>
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                                     </div>
 
                                 </div>
 
 
                                 <div *ngSwitchCase="'Region1'" class="form_field form_field__{{form_elem?.Type}}">
-                                    <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
 
                                     <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
                                         <select [formControlName]="form_elem.Title" class="custom_dropdown_reg"
@@ -848,6 +847,7 @@
                                             <option *ngFor="let country of countryList"
                                                     [ngValue]="country.Id">{{country?.Name}}</option>
                                         </select>
+                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                                     </div>
                                 </div>
 
@@ -934,6 +934,7 @@
                     </div>
                 </form>
                 <div *ngIf="showSuccessMessage" class="reg-success-message">
+                    <fa-icon class="check-circle-icon" [icon]="['fas', 'check-circle']"></fa-icon>
                     {{'Register.Success-Message' | translate}}
                 </div>
             </div>

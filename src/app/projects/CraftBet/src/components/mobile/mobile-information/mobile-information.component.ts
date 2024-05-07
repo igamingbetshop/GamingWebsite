@@ -4,6 +4,10 @@ import {LayoutService} from "@core/services/app/layout.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {take} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
+import {LoaderService} from "@core/services";
+import {DeviceDetectorService} from "ngx-device-detector";
+import * as html2pdf from 'html2pdf.js';
+import * as jsPDF from "jspdf";
 
 @Component({
   selector: 'app-mobile-information',
@@ -18,7 +22,9 @@ export class MobileInformationComponent implements OnInit {
               public renderer: Renderer2,
               public router: Router,
               private http: HttpClient,
-              private translateService:TranslateService ,public elem: ElementRef) {
+              private translateService: TranslateService, public elem: ElementRef,
+              private loaderService: LoaderService,
+              private deviceDetector: DeviceDetectorService) {
     this.route.params.subscribe((params) =>
     {
       this.getPage(params.productId);
@@ -42,6 +48,59 @@ export class MobileInformationComponent implements OnInit {
         clearTimeout(this.timeout);
       });
     });
+  }
+
+  onTemplateClick(event:MouseEvent)
+  {
+    const target = event.target as HTMLElement;
+    if(target.id.startsWith("download"))
+    {
+      this.loaderService.show();
+      const path = target.id.split("_")[1];
+      const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+      this.http.get(window['debugPath'] + `/assets/html/${path + '_' +  this.translateService.currentLang}.html`, { headers, responseType: 'text'}).pipe(take(1)).subscribe(data =>
+      {
+        if(this.deviceDetector.isMobile() || this.deviceDetector.isTablet())
+        {
+          let doc = new jsPDF('p', 'pt');
+          doc.fromHTML(data, 10, 10, {
+            'width': 200
+          });
+          doc.save(path + '.pdf');
+          this.loaderService.hide();
+        }
+        else
+        {
+          const opt = {
+            filename: path,
+            margin:10,
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+            image: {
+              type: "jpeg",
+              quality: 1.0,
+            },
+            html2canvas: {
+              scale: 1.5,
+              dpi: 192,
+              letterRendering: true,
+              allowTaint: true,
+            },
+            jsPDF: {
+              unit: "mm",
+
+              format: [260, 280],
+              orientation: "landscape",
+              compress: true,
+            }
+          }
+          html2pdf().set(opt).from(data).save().then(data => {
+            this.loaderService.hide();
+          });
+        }
+
+      });
+    }
+
   }
 
 }

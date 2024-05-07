@@ -29,6 +29,7 @@ export class DepositBlockDefaultComponent extends BaseDepositComponent {
 
   ngOnInit() {
     super.ngOnInit();
+    this.scrollToTop();
   }
 
   createComponent(Id: number, Type: number, ContentType: number, info?:number[], maxMinAmount?: any) {
@@ -156,6 +157,13 @@ export class DepositBlockDefaultComponent extends BaseDepositComponent {
         break;
       }
     }
+  }
+
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
 
 }

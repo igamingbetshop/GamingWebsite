@@ -16,6 +16,7 @@ export class GlobalLanguageComponent implements OnInit, OnDestroy {
     public itemClassname: string;
     public dropdownImage: string;
     public dropdownTitle: string;
+    public dropdownKey: string;
     public itemTitle: string;
     public listTitle: boolean = false;
 
@@ -65,6 +66,7 @@ export class GlobalLanguageComponent implements OnInit, OnDestroy {
         this.itemClassname = this.menuItem.className;
         this.dropdownImage = this.menuItem.dropdownImage;
         this.dropdownTitle = this.menuItem.dropdownTitle;
+        this.dropdownKey = this.menuItem.dropdownKey;
         this.itemTitle = this.menuItem.itemTitle;
         this.class = this.menuItem.className + '-type';
         this.isMobile = this.menuItem?.isMobile;

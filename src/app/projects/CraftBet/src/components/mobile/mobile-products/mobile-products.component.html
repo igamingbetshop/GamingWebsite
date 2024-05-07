@@ -1,5 +1,8 @@
 <div class="mobile-live-casino-section min-height">
-
+    <div class="mobile-products-title">{{'Game.ProductTitle' | translate}}</div>
+    <div class="mobile-products-title-icon">
+        <fa-icon [icon]="['fas', 'angle-down']"></fa-icon>
+    </div>
     <div class="grouped-products-content flex_around">
         <a class="grouped-products-content_item" routerLinkActive="active" *ngFor="let item of productList"
            [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/products/' + item.Icon + '.png)'}"

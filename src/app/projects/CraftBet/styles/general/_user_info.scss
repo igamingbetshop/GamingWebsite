@@ -2,7 +2,7 @@
   max-width: var(--user-modal-section-max-width, 1000px) !important;
   &.register_PSection
   {
-    max-width: var(--register-modal-section-max-width, 53%) !important;
+    //max-width: var(--register-modal-section-max-width, 53%) !important;
     max-height: var(--register-modal-section-max-height, 100%);
   }
 
@@ -11,7 +11,7 @@
     width: 100%;
     background-color: backgroundColor(user-info-box,rgba(30, 46, 72, 1));
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    margin-top: 26px!important;
+    margin-top: 0px!important;
   }
 
   h3 {
@@ -248,7 +248,7 @@
 @media screen and (min-width: 1377px) and (max-width: 1800px) {
   .modal-content {
     &.register_PSection {
-      max-width: var(--modal-content-register-section-small-max-width, 53%) !important;
+      //max-width: var(--modal-content-register-section-small-max-width, 53%) !important;
     }
   }
 }
@@ -272,6 +272,7 @@
   .modal-content {
     &.register_PSection {
       max-height: var(--register-modal-section-small-max-height, 100%);
+      max-width: var(--register-modal-section-small-max-width, 78%) !important;
     }
   }
 }

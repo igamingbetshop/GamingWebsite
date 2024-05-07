@@ -1,16 +1,29 @@
-import {Component, HostBinding, Injector} from '@angular/core';
+import {Component, Injector} from '@angular/core';
 import {MenuType} from "@core/enums";
 import {BaseFooterComponent} from '../../../../../../@theme/components/common/base-footer/base-footer.component';
 import {ConfigService} from "@core/services";
+import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitizer.module";
+import {TranslateModule} from "@ngx-translate/core";
+import {CollapseDirectiveModule} from "../../../../../../@theme/directives/collapse/collapse-directive.module";
+import {FunctionalBtnModule} from "../../../../../../@theme/components/functional-btn/functional-btn.module";
+import {NgClass, NgStyle} from "@angular/common";
 
 @Component({
   selector: 'app-mobile-footer',
   templateUrl: './mobile-footer.component.html',
-  styleUrls: ['./mobile-footer.component.scss']
+  styleUrls: ['./mobile-footer.component.scss'],
+  standalone:true,
+  imports:[
+    NgClass,
+    NgStyle,
+    SanitizerModule,
+    TranslateModule,
+    CollapseDirectiveModule,
+    FunctionalBtnModule
+  ]
 })
 export class MobileFooterComponent extends BaseFooterComponent {
 
-  @HostBinding('style.display') display = 'block';
   public customStyleName = 'styleType';
   public configService: ConfigService;
   public defaultOptions: any;
@@ -110,7 +123,9 @@ export class MobileFooterComponent extends BaseFooterComponent {
      {
        if ((item.Type == 1) && !this.isLogin)
        {
-
+         localStorage.setItem('payment-url', item.Href);
+         this.router.navigate(['/login']);
+         localStorage.removeItem('product-url');
        } else {
          sessionStorage.setItem('openWithFooter', JSON.stringify(true));
          this.router.navigate([item.Href]);

@@ -4,9 +4,9 @@
   padding: 0;
   height: var(--modal-payment-frame-height, 500px);
   max-height: var(--modal-payment-frame-max-height, 500px);
-  margin: var(--modal-payment-frame-margin, unset)!important;
-  top:50%;
-  transform: translateY(-50%)!important;
+  margin: var(--modal-payment-frame-margin, 0 auto)!important;
+  //top:50%;
+  //transform: translateY(-50%)!important;
 
   .icon-close-modal
   {
@@ -22,7 +22,8 @@
   }
 
   &.small-size {
-    width: 100%;
+    width: 95%;
+    min-width: 95%;
   }
   iframe
   {

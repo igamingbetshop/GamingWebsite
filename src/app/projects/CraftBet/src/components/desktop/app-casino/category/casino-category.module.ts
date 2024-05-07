@@ -12,6 +12,7 @@ import {
 } from "../../../../../../../@theme/directives/horizontal-scroll/horizontal-scroll.directive.module";
 import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 import {GroupByRowsPipe} from "../../../../../../../@theme/pipes/group-by-rows.pipe";
+import {InfiniteScrollDirective} from "../../../../../../../@theme/directives/infinite-scroll.directive";
 
 @NgModule({
   declarations:[CasinoCategoryComponent],
@@ -26,7 +27,8 @@ import {GroupByRowsPipe} from "../../../../../../../@theme/pipes/group-by-rows.p
         CasinoSearchModule,
         HorizontalScrollDirectiveModule,
         SanitizerModule,
-        GroupByRowsPipe
+        GroupByRowsPipe,
+        InfiniteScrollDirective
     ]
 })
 

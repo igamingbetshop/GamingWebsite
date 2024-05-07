@@ -10,8 +10,9 @@
 .router_section {
   background: color(header-background);
   display: flow-root;
-  transform: translate(var(--header-transform, 0px)) ;
+  //transform: translate(var(--header-transform, 0px)) ;
   margin-top: var(--header-margin-top, 0);
+  padding-top: var(--header-padding-top, 0);
 }
 
 body
@@ -153,7 +154,7 @@ body
                         >.general-menu_item_link
                         {
                           position: absolute;
-                          top: var(--general-menu-item-top,24px);
+                          top: var(--general-menu-item-top, 18px);
                           left: calc(var(--header-menu-item-style1--img-width, 40px) + 10px);
                         }
                       }
@@ -335,7 +336,16 @@ body
             {
               &:before{display: none}
             }
-
+            @media screen and (min-width: 0px) and (max-width: 1280px)
+            {
+              margin-left: -28px;
+              a
+              {
+                height: 44px;
+                line-height: 41px;
+                font-size: 18px;
+              }
+            }
           }
           &.pagination-next{
             background: none;
@@ -357,6 +367,16 @@ body
               text-transform: uppercase;
               color: var(--pagination-next-color, rgb(255, 255, 255)) !important;
               &:after{display: none}
+            }
+            @media screen and (min-width: 0px) and (max-width: 1280px)
+            {
+              margin-right: 117px;
+              a
+              {
+                height: 44px;
+                line-height: 41px;
+                font-size: 18px;
+              }
             }
           }
           &.current

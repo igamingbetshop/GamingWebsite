@@ -128,7 +128,6 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
     protected subscribePaymentResponse()
     {
         this.paymentControllerService.notifyGetCreatePaymentData.pipe(take(1)).subscribe((resData) => {
-            console.log('createPayment', resData);
             this.paymentForm.reset();
             this.submitted = false;
             switch (this.contentType) {

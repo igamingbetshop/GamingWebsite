@@ -49,7 +49,7 @@ export class SaveData
     private clickCount = 0;
     private lastSelectedItem: any = null;
 
-    private casinoGames:any = {count:0, games:[]};
+    private casinoGames:any = {count:0, games:[], totalCount:0};
 
     setCasinoGames(games:any)
     {
@@ -63,7 +63,7 @@ export class SaveData
 
     deleteCasinoGames()
     {
-        this.casinoGames = {count:0, games:[]};
+        this.casinoGames = {count:0, games:[], totalCount:0};
     }
 
     public updateScrollPositionData(shouldUpdate:boolean = false, pageIndex:number, pageSize:number)

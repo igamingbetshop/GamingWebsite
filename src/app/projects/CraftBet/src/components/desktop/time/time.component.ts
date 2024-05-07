@@ -4,11 +4,12 @@ import {BaseTime} from "../../../../../../@theme/components/time/base-time";
 import {FormsModule} from "@angular/forms";
 import {TimezoneFilterPipe} from "../../../../../../@theme/pipes/timezone-filter.pipe";
 import {TranslateService} from "@ngx-translate/core";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-time',
   standalone: true,
-  imports: [CommonModule, FormsModule, TimezoneFilterPipe],
+  imports: [CommonModule, FormsModule, TimezoneFilterPipe, FontAwesomeModule],
   templateUrl: './time.component.html',
   styleUrls: ['./time.component.scss'],
   encapsulation:ViewEncapsulation.Emulated

@@ -7,7 +7,7 @@
             class="payment_list_item">
             <input class="payment_list_item_radio_button" type="radio" [(ngModel)]="currentPayment" [value]="item" id="paymentSystem{{i}}" [hidden]="true">
             <div class="payment_list_item_img"
-            [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/withdraw/' +  item.PaymentSystemId + '.svg)'}"></div>
+                 [ngStyle]="{'background-image': 'url(' + item.IconSrc + ')'}"></div>
             <div class="payment_list_item_min_amount">
                 {{'Deposit.Min-Amount' | translate}} {{item.MinAmount}}
                 <span *ngIf="item.CurrencyId === currencyId">{{currencySymbol}}</span>

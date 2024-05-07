@@ -36,7 +36,7 @@
   height: calc(100% - 76px);
 
   .promotions-slider {
-    height: calc((var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px)) * 3.4);
+    height: calc((var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px)) * 4 + 82px);
     max-width: 396px;
     min-width: 320px;
     flex: 1;
@@ -234,7 +234,7 @@
     }
     .promotion-description
     {
-      height: calc(((var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px)) * 2.4) - 23px);
+      height: calc(((var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px)) * 3.3) - 20px);
       overflow-y: auto;
       padding-right: 16px;
       margin-top: 16px;

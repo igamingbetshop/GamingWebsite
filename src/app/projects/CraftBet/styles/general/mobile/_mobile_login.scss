@@ -12,6 +12,13 @@
   height: height(m-login-bg, 100vh);
 }
 
+app-mobile-login
+{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+
 .mobile-login-section {
   display: flex;
   flex-grow: 1;
@@ -338,10 +345,15 @@
 
   .login-bottom-text
   {
-    margin: marginTop(m-login-bottom-text, 10px) auto 0 auto;
+    margin: marginTop(m-login-bottom-text, 10px auto 0 auto);
+    text-align: var(--m-login-bottom-text-text-align, center);
+    width: var(--m-login-bottom-text-width, auto);
     color: color(m-login-bottom-text);
     display: display(m-login-bottom-text, block);
     .icon-safety{margin-right: 8px}
+    .icon-safety-text {
+      display: var(--m-login-secure-text-display, none);
+    }
   }
   .login-language-bar {
     display: var(--m-login-language-bar-display, none);

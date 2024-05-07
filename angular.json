@@ -36,8 +36,7 @@
               "src/assets",
               "src/assets/images/left-arrow.png",
               "src/assets/images/right-arrow.png",
-              "src/mobile.html",
-              { "glob": "robots.txt", "input": "src/assets/", "output": "/" }
+              "src/mobile.html"
             ],
             "styles": [
               "node_modules/slick-carousel/slick/slick.scss",

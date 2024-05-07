@@ -16,7 +16,7 @@
             <div>{{'User.Amount' | translate}}: <span>{{userInfoList['BetAmount'] | number: '1.2-2'}} {{CurrencySymbol}}</span></div>
             <div *ngIf="showBonus">{{'User.BonusAmount' | translate}}: <span>{{userInfoList['BonusAmount']}}</span></div>
             <div *ngIf="userInfoList['Status'] === 1">{{'User.Poss-Win' | translate}}: <span>{{userInfoList['PossibleWin'] | number: '1.2-2'}}</span></div>
-            <div *ngIf="userInfoList['Status'] !== 1">{{'User.Win-Amount' | translate}}: <span>{{userInfoList['WinAmount'] | number: '1.2-2'}}</span></div>
+            <div *ngIf="userInfoList['Status'] !== 1">{{'User.Win-Amount' | translate}}: <span>{{userInfoList['WinAmount'] | number: '1.2-2'}} {{CurrencySymbol}}</span></div>
             <div *ngIf="userInfoList['Coefficient'] !== 0">{{'User.Coefficient' | translate}}: <span>{{userInfoList['Coefficient']}}</span></div>
             <div>{{'User.Bet_Date' | translate}}: <span>{{userInfoList['BetDate'] | date: 'dd/MM/yyyy HH:mm'}}</span></div>
             <div>{{'User.Bet-status' | translate}}: <span class="status-name status-{{userInfoList['StatusName']}}">{{userInfoList['StatusName']}}</span></div>
@@ -54,7 +54,7 @@
                   <div class="short-column"><span class="column-text">{{item?.Coefficient}}</span></div>
                   <div class="short-column"><span class="column-text" *ngIf="item?.State != null">{{item?.State}}</span><span *ngIf="item?.State == null" class="empty-result">-</span></div>
                   <div class="short-column"><span class="column-text">{{item?.StatusName}}</span></div>
-                  <div class="short-column"><span class="column-text">{{item?.EventDate | date: 'dd/MM/yyyy h:mm'}}</span></div>
+                  <div class="short-column"><span class="column-text">{{item?.EventDate | date: 'dd/MM/yyyy HH:mm'}}</span></div>
                 </div>
                 </div>
 

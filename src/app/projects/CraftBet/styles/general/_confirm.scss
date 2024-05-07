@@ -79,7 +79,7 @@
   }
 
   border-radius: 3px;
-  margin: 110px auto;
+  //margin: 110px auto;
   padding-top: paddingTop(modal-content, 24px);
   padding-bottom: paddingBottom(modal-content, 24px);
   padding-left: paddingLeft(modal-content, 32px);
@@ -89,20 +89,14 @@
     text-align: right;
     color: $font-color;
     cursor: pointer;
+    position: static!important;
 
     .fa {
       color: itemColor(modal_close_icon, #ccc);
       cursor: pointer;
     }
 
-    .icon-close-modal{
-      position: absolute;
-      right: itemRight(popup-close-icon, 38px);
-      top: itemTop(popup-close-icon, 12px);
-      z-index: 1;
-      color: itemColor(popup-close-icon, #fff);
-      display: display(popup-close-icon, block);
-    }
+
 
     padding: 0;
     display: initial;
@@ -179,9 +173,14 @@
 
   }
 }
-.mat-mdc-dialog-panel{max-width: none!important;width: 100%; height:100%}
+//.mat-mdc-dialog-panel{max-width: none!important;width: 100%;}
 .mat-mdc-dialog-container .mdc-dialog__surface  {
-  background-color: transparent!important;
+  background-color: transparent !important;
+  box-shadow: none!important;
+  overflow-x: hidden;
+}
+.cdk-global-overlay-wrapper {
+  background-color: var(--modal-dialog-background-color, transparent) !important;
   box-shadow: none!important;
 }
 
@@ -190,14 +189,6 @@
 {
   .modal-content
   {
-    .modal-body {
-      .icon-close-modal {
-        top: var(--popup-close-icon-small-top, 31px);
-        //right: 31px;
-        //right: 43px;
-        right: var(--popup-close-icon-small-right, 65px);
-      }
-    }
     .modal_content {
       margin: var(--modal-content-small-margin, 0 auto);
     }
@@ -238,27 +229,11 @@
     }
   }
 }
-@media screen and (min-width: 1600px) and (max-width: 1800px) {
-  .modal-content {
-    .modal-body {
-      .icon-close-modal {
-        right: var(--popup-close-icon-big-right, 120px);
-        //right: 94px;
-      }
-    }
-  }
-}
+
 @media screen and (min-width: 1377px) and (max-width: 1600px)
 {
   .modal-content
   {
-    .modal-body {
-      .icon-close-modal {
-        top: var(--popup-close-icon-medium-top, 35px);
-        //right: 70px;
-        right: var(--popup-close-icon-medium-right, 100px);
-      }
-    }
     &.login_PSection {
       width: calc(var(--modal-login-section-width, 570px) * 0.9);
       max-height:  calc(var(--modal-login-section-height, 400px) * 0.9);

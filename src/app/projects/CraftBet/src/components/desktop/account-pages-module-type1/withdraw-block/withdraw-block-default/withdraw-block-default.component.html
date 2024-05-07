@@ -10,7 +10,7 @@
                         (click)="selectPayment(item)"
                         [ngClass]="{'selected':item?.PaymentSystemId == currentPayment?.PaymentSystemId}"
                         class="payment_list_item">
-                        <div class="payment_list_item_img" [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/withdraw/' +  item.PaymentSystemId + '.png)'}"></div>
+                        <div class="payment_list_item_img" [ngStyle]="{'background-image': 'url(' + item.IconSrc + ')'}"></div>
 <!--                        <img src="../../../../../../../assets/images/payments/{{item.PaymentSystemId}}.png"/>-->
                         <div class="payment_list_item__info">
                             <div  class="info_text" style="-webkit-box-orient: vertical"

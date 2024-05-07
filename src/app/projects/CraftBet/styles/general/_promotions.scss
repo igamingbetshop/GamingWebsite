@@ -125,14 +125,31 @@
           color: itemColor(promotions-title,rgba(28, 167, 236, 1));
           font-weight: fontWeight(promotions-title, 500);
           font-size: fontSize(promotions-title,16px);
-          margin-bottom: 8px;
+          text-transform: var(--promotions-text-title-transform,capitalize);
+          border: 1px solid var(--promotions-title-border-color,transparent);
+          border-radius: var(--promotions-title-border-radius, 0);
+          padding-left: var(--promotions-title-padding-left, 0);
+          padding-right: var(--promotions-title-padding-right, 0);
+          padding-top: var(--promotions-title-padding-top, 0);
+          padding-bottom: var(--promotions-title-padding-bottom, 0);
+          width: fit-content;
+          margin-bottom: var(--promotions-title-margin-bottom, 8px);
+          margin-top: var(--promotions-title-margin-top, 0);
+          margin-left: var(--promotions-title-margin-left, 0);
+          margin-right: var(--promotions-title-margin-right, 0);
+          p,h2{margin: 0; padding: 0}
         }
         p {
           height: unset;
+          width: fit-content;
           overflow: unset;
           text-overflow: unset;
           color: itemColor(promotions-text,rgba(219, 237, 255, 0.9));
-          margin: 0;
+          margin-bottom: var(--promotions-text-paragraph-margin-bottom, 0);
+          margin-top: var(--promotions-text-paragraph-margin-top, 0);
+          margin-left: var(--promotions-text-paragraph-margin-left, 0);
+          margin-right: var(--promotions-text-paragraph-margin-right, 0);
+          text-align: var(--promotions-text-paragraph-text-align, left);
         }
         &:before
         {

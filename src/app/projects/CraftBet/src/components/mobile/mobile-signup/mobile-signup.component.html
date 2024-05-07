@@ -270,7 +270,7 @@
 
                         </div>
 
-                        <div *ngSwitchCase="'Currency'" class="form_field">
+                        <div *ngSwitchCase="'Currency'" class="form_field mobile-custom-currency">
 
 
 
@@ -593,7 +593,13 @@
                         *ngIf="(stepsLength.length != 1) && (stepsLength.length != currentStep)"> {{'Register.Next' | translate}} </span>
             </button>
         </div>
-        <div class="reg-step-navigate-buttons reg-step-navigate-button-login show-reg-step-navigate-button-login">{{'Login.Already_have_an_account' | translate}}
+        <div class="line">
+            <span class="left-line"></span>
+            <span class="text">OR</span>
+            <span class="right-line"></span>
+        </div>
+        <div class="reg-step-navigate-buttons reg-step-navigate-button-login show-reg-step-navigate-button-login">
+            <span class="m-reg-already-have-account">{{'Login.Already_have_an_account' | translate}}</span>
             <a [routerLink]="['/login']">{{'Login.Sign In' | translate}}</a>
         </div>
     </div>
@@ -875,7 +881,6 @@
 
 
                         <div *ngSwitchCase="'Region2'" class="form_field form_field__{{form_elem?.Type}}">
-                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                             <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
 
                                 <select [formControlName]="form_elem.Title" class="custom_dropdown_reg"
@@ -894,11 +899,11 @@
                                     <option *ngFor="let city of cityList; let i = index" [selected]="i==0"
                                             [ngValue]="city.Id">{{city?.Name}}</option>
                                 </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                             </div>
                         </div>
 
                         <div *ngSwitchCase="'Region1'" class="form_field form_field__{{form_elem?.Type}}">
-                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
 
                             <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
                                 <select [formControlName]="form_elem.Title" class="custom_dropdown_reg"
@@ -908,6 +913,7 @@
                                     <option *ngFor="let country of countryList"
                                             [ngValue]="country.Id">{{country?.Name}}</option>
                                 </select>
+                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                             </div>
 
                         </div>
@@ -1003,7 +1009,9 @@
                 {{'Register.Register' | translate}}
             </button>
         </div>
-        <div class="reg-step-navigate-buttons reg-step-navigate-button-login">{{'Login.Already_have_an_account' | translate}}
+
+        <div class="reg-step-navigate-buttons reg-step-navigate-button-login">
+            <span class="m-reg-already-have-account">{{'Login.Already_have_an_account' | translate}}</span>
             <a [routerLink]="['/login']">{{'Login.Sign In' | translate}}</a>
         </div>
     </div>

@@ -177,23 +177,67 @@
     height: auto;
     width: 100%;
     text-align: center;
-    left: 0;
-    top: 17%;
+    left: var(--casino-game-real-btn-left, 0);
+    top: var(--casino-game-real-btn-top, 17%);
     visibility: hidden;
 
     &.game-open-center {
-      /* height: 100%;*/
+      top: var(--casino-game-real-btn-center-top, var(--casino-game-real-btn-top, 17%));
+      .game-btn_real {
+        display: var(--casino-game-real-btn-display, inline-block);
+      }
+      .game-btn_real-pic {
+        display: var(--casino-game-real-btn-img-display, none);
+        width: var(--casino-game-real-btn-img-width, auto);
+        height: var(--casino-game-real-btn-img-height, auto);
+        margin: var(--casino-game-real-btn-img-margin, 0);
+        justify-content: center;
+        align-items: center;
+        .game-btn_real-pic-inner {
+          width: auto;
+          padding: var(--casino-game-real-btn-img-padding, 0);
+          border-radius: var(--casino-game-real-btn-img-border-radius, 50%);
+          border: var(--casino-game-real-btn-img-border, none);
+        }
+      }
     }
-
+    &.game-open-top {
+      .game-btn_real {
+        display: var(--casino-game-real-btn-display, inline-block);
+      }
+      .game-btn_real-pic {
+        display: var(--casino-game-real-btn-img-display, none);
+        width: var(--casino-game-real-btn-img-width, auto);
+        height: var(--casino-game-real-btn-img-height, auto);
+        margin: var(--casino-game-real-btn-img-margin, 0);
+        justify-content: center;
+        align-items: center;
+        .game-btn_real-pic-inner {
+          width: auto;
+          padding: var(--casino-game-real-btn-img-padding, 0);
+          border-radius: var(--casino-game-real-btn-img-border-radius, 50%);
+          border: var(--casino-game-real-btn-img-border, none);
+        }
+      }
+    }
     &.game-open-demo {
-      top: 50%;
+      top: var(--casino-game-demo-btn-top, 50%);
       left: itemLeft(product-demo-button, 0);
+      text-transform: var(--casino-game-demo-btn-text-transform, none);
+      .game-btn_demo-pic {
+        display: var(--casino-game-btn_demo-pic-display, none);
+        width: var(--casino-game-btn_demo-pic-width, auto);
+        height: var(--casino-game-btn_demo-pic-height, auto);
+        padding: var(--casino-game-btn_demo-pic-padding, 0);
+        margin: var(--casino-game-btn_demo-pic-margin, 0);
+        border: var(--casino-game-btn_demo-pic-border, none);
+      }
     }
   }
 
   .game-btn {
     display: inline-block;
-    width: 106px;
+    width: var(--casino-game-demo-btn-width, 106px);
     line-height: 32px;
     padding: 0 5px;
     cursor: pointer;
@@ -217,7 +261,18 @@
     }
 
     &_demo {
-      text-decoration: underline;
+      text-decoration: var(--casino-game-btn_demo-text-decoration, underline);
+      border: var(--casino-game-demo-btn-border, none);
+      border-radius: var(--casino-game-demo-btn-border-radius, 6px);
+      height: var(--casino-game-demo-btn-height, auto);
+      display: var(--casino-game-demo-btn-display, inline-block);
+      font-size: var(--casino-game-demo-btn-font-size, 16px);
+      margin: var(--casino-game-demo-btn-margin, 0);
+      justify-content: var(--casino-game-demo-btn-justify-content, center);
+      align-items: center;
+      .game-btn_demo-text {
+        margin-left: var(--casino-game-demo-btn-margin-left, 0);
+      }
       /* background: color(product-demo-button-background);*/
     }
   }
@@ -299,7 +354,7 @@
       &.game-open-demo {
        /* top: 30%;*/
         .game-btn {
-          width: auto;
+          width: var(--casino-game-demo-btn-small-width, auto);
         }
       }
     }

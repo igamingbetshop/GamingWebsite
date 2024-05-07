@@ -3,11 +3,14 @@
 
 .search-box {
   display: flex;
-  width: 100%;
+  width: var(--m-casino-search-box-section-width, 100%);
   justify-content: var(--m-casino-search-box-section, center);
   gap: 16px;
   order: var(--search-block-order, 1);
   background: backgroundColor(m-casino-search-box-section, #1C1F2A);
+  position: var(--m-casino-search-box-section-position, relative);
+  right: var(--m-casino-search-box-section-right, auto);
+  left: var(--m-casino-search-box-section-left, auto);
 
   .search_field {
     border-top-left-radius: borderTopLeftRadius(m-search-field, 6px);
@@ -31,15 +34,15 @@
     width: width(m-search-field, 100%);
 
     .search-icon {
-      width: 36px;
-      height: 36px;
-      line-height: 36px;
+      width: var(--m-search-icon-box-width, 36px);
+      height: var(--m-search-icon-box-height, 36px);
+      line-height: var(--m-search-icon-box-line-height, 36px);
       text-align: center;
-      border-radius: 5px;
+      border-radius: var(--m-search-icon-box-border-radius, 5px);
       box-shadow: var(--m-search-icon-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
       background-image: linear-gradient(to bottom, itemColor(m-search-icon-gradient-first, #1376f8), itemColor(m-search-icon-gradient-second, #194074));
       cursor: pointer;
-      font-size: 16px;
+      font-size: var(--m-search-icon-box-font-size, 16px);
     }
 
     input {
@@ -50,11 +53,12 @@
       padding: 0 0 0 5px;
       background: none;
       color: var(--m-search-providers-input-color, rgba(255, 255, 255, 0.6));
-      font-size: 16px;
+      font-size: var(--m-search-providers-input-font-size, 16px);
+      width: var(--m-search-providers-input-width, auto);
     }
 
     ::placeholder {
-      font-size: 16px;
+      font-size: var(--m-search-providers-input-placeholder-font-size, 16px);
       color: var(--m-search-providers-input-placeholder-color, rgba(255, 255, 255, 0.6));
     }
   }

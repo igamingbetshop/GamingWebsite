@@ -194,6 +194,8 @@
 
 .payment-deposit-btn-field {
   text-align: center;
+  width: var(--m-deposit-subit-form-btn-width, 100%);
+  margin: var(--m-deposit-subit-form-btn-margin, 0);
 }
 
 

@@ -11,7 +11,7 @@
                     <div class="two-factor-steps-title">{{ 'Settings.Otp-step2-title' | translate }}</div>
                     <div class="two-factor-steps-description">
                         <div class="two-factor-img-part">
-                            <img *ngIf="qrCodeImageSrc" [src]="qrCodeImageSrc" alt="" [width]="_qrCodeWidth" [height]="_qrCodeHeight">
+                            <qrcode *ngIf="qrData" [qrdata]="qrData.Data" [width]="145" [errorCorrectionLevel]="'M'"></qrcode>
                         </div>
                         <div class="two-factor-steps-description-in" [innerHtml]="'Settings.Otp-step2-description' | translate |  sanitizer: 'html'"></div>
                         <div>{{ qrData?.Key }}</div>

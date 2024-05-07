@@ -2,6 +2,8 @@ import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {MobileProductsComponent} from "./mobile-products.component";
+import {TranslateModule} from "@ngx-translate/core";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 const routes: Routes = [
     {
@@ -11,9 +13,11 @@ const routes: Routes = [
 ];
 @NgModule({
     declarations:[MobileProductsComponent],
-    imports:[
+    imports: [
         CommonModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        TranslateModule,
+        FontAwesomeModule
     ]
 })
 

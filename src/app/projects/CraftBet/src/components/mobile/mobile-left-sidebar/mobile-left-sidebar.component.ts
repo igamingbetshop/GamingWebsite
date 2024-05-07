@@ -35,6 +35,7 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
     public faAngleUp = faAngleUp;
     public faAngleDown = faAngleDown;
     public menuHeight:string = 'calc(100% - 100px)';
+    public hideLeftSideBar:string = 'block';
     public languages:any[] = [];
     public isSingleLang:boolean;
     public languageMenuItem:any = {itemTitle:'1'};
@@ -67,6 +68,14 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
             this.generalMenuItems.map((item) => {
                 return item.SubMenu.map((itemPic) => { itemPic.Src = itemPic.Icon.includes('.') ? '../../../../../../../assets/images/mobile-menu/' + itemPic.Icon : null; });
             });
+
+            if (this.generalMenuItems[0]?.SubMenu.length <= 1 && this.isSingleLang) {
+            let showLeftSideBar = getComputedStyle(document.documentElement).getPropertyValue('--m-hide-language-product');
+                if (showLeftSideBar.trim() === '') {
+                    showLeftSideBar = 'none';
+                }
+                this.hideLeftSideBar = showLeftSideBar;
+            }
             this.renderLazyLoadComponents();
         });
         this.getMobileHeaderPanel();

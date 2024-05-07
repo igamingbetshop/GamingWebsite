@@ -10,7 +10,7 @@
 </div>-->
 <div class="form_field auto-complete"
      [style.zIndex]="zIndex"
-     [ngClass]="{'disable_item':!(profileService.editState$ | async).value, 'active_item':  (profileService.editState$ | async).value}"
+     [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
      dropdown>
     <input type="text"
            placeholder="{{'User.' + formControlName + 'EmptyOption' | translate}}"

@@ -293,7 +293,7 @@
 
 .mobile_info {
   color: $account-content-item-color;
-  margin-left: 12px;
+  margin-left: var(--m-withdraw-content-column-margin-left, 12px);
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -301,6 +301,9 @@
   line-height: 1.36;
   letter-spacing: normal;
   position: relative;
+  margin-bottom: var(--m-withdraw-content-column-margin-bottom, 0px);
+  margin-right: var(--m-withdraw-content-column-margin-right, 0px);
+  width: var(--m-withdraw-content-column-width, auto);
 
   .info_text {
     word-break: break-all;
@@ -308,14 +311,17 @@
 
   .balance_info {
     color: var(--account-payment-amount-color, rgba(232, 217, 12, 0.85));
-    width: 100%;
-    margin-top: 10px;
+    width: var(--account-payment-amount-width, 100%);
     font-size: var(--account-payment-amount-font-size, 14px);
-    font-weight: 600;
+    font-weight: var(--account-payment-amount-font-weight, 600);
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.33;
+    line-height: var(--account-payment-amount-line-height, 1.33);
     letter-spacing: normal;
+    border: var(--account-payment-amount-border, none);
+    border-radius: var(--account-payment-amount-border-radius, 10px);
+    margin: var(--account-payment-amount-margin, 10px 0 0 0);
+    padding: var(--account-payment-amount-padding, 10px);
 
     span {
       &:first-child {
@@ -1096,8 +1102,8 @@
                 }
 
                 .payment-row-item {
-                  width: 23%;
-                  height: 100%;
+                  width: var(--payment-row-item-list-width, 23%);
+                  height: var(--payment-row-item-list-height, 100%);
 
                   .payment-row-header {
                     color: itemColor(payment-row-header, rgba(151, 161, 194, .5));
@@ -1105,6 +1111,9 @@
                     font-weight: fontWeight(payment-row-header, 400);
                     margin-bottom: marginBottom(payment-row-header, 6px);
                   }
+                }
+                .hide-commission-percent {
+                  display: var(--payment-row-item-commission-display, block);
                 }
               }
             }

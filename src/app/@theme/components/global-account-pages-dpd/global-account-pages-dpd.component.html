@@ -1,4 +1,5 @@
-<div id="custom_dropdown_style1" class="custom_dropdown_style1 custom_dropdown {{itemClassname}}-type-Dpd" dropdown>
+<div id="custom_dropdown_style1" class="custom_dropdown_style1 custom_dropdown {{itemClassname}}-type-Dpd" dropdown
+        [ngClass]="{'custom_dropdown_hover': menuItem['hoverHighlight']}">
     <div id="current_item" class="flex_between current_item">
         <ng-container *ngIf="showUserId; else hideUserId">
             <div class="user-id-info" (click)="headNavigate()">
@@ -29,7 +30,7 @@
         <fa-icon class="dpd-icon" [icon]="faCaretDown"></fa-icon>
     </div>
 
-    <ul id="custom_dropdown_list" class="custom_dropdown_list right-top {{itemClassname}}-custom-ul">
+    <ul id="custom_dropdown_list" class="custom_dropdown_list right-top {{itemClassname}}-custom-ul custom-ul-hover">
         <div class="tail"></div>
 
         <div class="lang_grid">

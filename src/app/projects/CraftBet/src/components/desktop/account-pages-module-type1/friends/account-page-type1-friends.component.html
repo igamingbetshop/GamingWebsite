@@ -36,7 +36,8 @@
 
 
   <div class="friends-block-head block-head">
-    <div>{{'Friends.ID' | translate}}</div>
+    <div class="block-head-id">{{'Friends.ID' | translate}}</div>
+    <div>{{'Friends.Email' | translate}}</div>
     <div>{{'Friends.FirstName' | translate}}</div>
     <div>{{'Friends.LastName' | translate}}</div>
     <div>{{'Friends.Amount' | translate}}</div>
@@ -47,12 +48,12 @@
     <section>
       <div class="friends-block"
            *ngFor="let friend of friends">
-        <div class="friends-block_item block_item">{{friend.Id}}</div>
+        <div class="friends-block_item block_item block_item_id">{{friend.Id}}</div>
+        <div class="friends-block_item block_item">{{friend.Email}}</div>
         <div class="friends-block_item block_item">{{friend.FirstName}}</div>
         <div class="friends-block_item block_item">{{friend.LastName}}</div>
         <div class="friends-block_item block_item">{{friend.BonusAmount}}</div>
-        <div class="friends-block_item block_item"><span *ngIf="friend.BonusAmount > 0">{{'Friends.Active' | translate}}</span><span
-                *ngIf="!(friend.BonusAmount == 0)">{{'Friends.InActive' | translate}}</span></div>
+        <div class="friends-block_item block_item">{{friend.StatusName}}</div>
         <div class="friends-block_item">{{friend.CreationTime | date:'HH:mm dd/MM/yyyy'}}</div>
       </div>
     </section>

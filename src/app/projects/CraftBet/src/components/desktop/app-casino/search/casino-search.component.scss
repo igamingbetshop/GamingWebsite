@@ -36,6 +36,11 @@
       position: position(search-providers-icon, absolute);
       left: itemLeft(search-providers-icon, 235px);
       font-size: fontSize(search-providers-icon, 18px);
+      .search-icon-fas {
+        position: var(--search-providers-icon-fas-position, relative);
+        left: var(--search-providers-icon-fas-left, unset);
+        top: var(--search-providers-icon-fas-top, unset);
+      }
     }
   }
 }

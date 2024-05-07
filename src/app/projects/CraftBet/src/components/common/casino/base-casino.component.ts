@@ -6,7 +6,7 @@ import {getFragmentsByType} from "../../../../../../@core/utils";
 import {Subscription, take} from "rxjs";
 import {CasinoFilterService} from "../../../../../../@core/services/app/casino-filter.service";
 import {StateService} from "../../../../../../@core/services/app/state.service";
-import {CasinoProvidersService} from "../../desktop/app-casino/providers/casino-providers.service";
+import {CasinoProvidersService} from "../../../../../../@theme/fragments/casino/providers/casino-providers.service";
 import {BaseApiService} from "../../../../../../@core/services/api/base-api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {filter} from "rxjs/operators";

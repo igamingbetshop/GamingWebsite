@@ -44,13 +44,15 @@ export class BasePasswordRecoveryComponent extends BaseComponent {
 
     this.urlKey = this.utilityService.getParsedUrl(location.toString())["RecoveryCode"];
 
-
+    const regex = new RegExp(this.configService.defaultOptions.PassRegEx);
     this.resetPasswordFormGroup = this.formBuilder.group({
       RecoveryToken: [this.urlKey],
       Password: ['', [
         Validators.required,
         Validator.noWhitespaceValidator,
-        Validators.minLength(6)]],
+        Validators.minLength(6),
+        Validators.pattern(regex)
+      ]],
       ConfirmPassword: ['', [
         Validators.required,
         Validator.noWhitespaceValidator,

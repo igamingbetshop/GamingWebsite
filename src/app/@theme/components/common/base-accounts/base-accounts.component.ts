@@ -130,7 +130,9 @@ export class BaseAccountsComponent extends BaseComponent {
     selectedAccountBalance(event, account)
     {
         event.stopPropagation();
-        this.selectSessionAccount(account, event);
+        if (this.useAccountType) {
+            this.selectSessionAccount(account, event);
+        }
     }
 
     isSelectedAccount(account): boolean {

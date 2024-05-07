@@ -23,6 +23,7 @@ export class BaseCharacterHierarchy implements OnInit, OnDestroy
     public currentItem:any;
     public currentCompPoint:number;
     public page: number = 1;
+    public itemCount:number;
 
     constructor(protected injector:Injector)
     {
@@ -62,6 +63,9 @@ export class BaseCharacterHierarchy implements OnInit, OnDestroy
                                 this.currentCompPoint = this.characterHierarchy[i].Children[k].CompPoints;
                                 this.currentItem = this.characterHierarchy[i].Children[k];
                                 this.selfHierarchy = [...this.characterHierarchy[i].Children];
+                                if(this.characterHierarchy[i].Children[k].ParentId === this.characterHierarchy[i].Parent.Id){
+                                    this.itemCount = parseInt(this.characterHierarchy[i].Parent.NickName) || 5;
+                                }
                                 break parentLoop;
                             }
                         }

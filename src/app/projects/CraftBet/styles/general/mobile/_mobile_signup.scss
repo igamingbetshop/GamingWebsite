@@ -1,3 +1,4 @@
+
 .mobile-registration-section {
   background: var(--m-register-section-bg, linear-gradient(180deg, #131A2C 0%, #313D4C 105.44%));
   //min-height: 100vh;
@@ -276,6 +277,10 @@
       }
       .top-row {
         margin-top: var(--m-form-item-top-row-margin-top, 0px);
+        .mobile-custom-currency {
+          width: var(--m-currency-select-field-width, var(--register-form-field-width, 100%));
+          margin: 0 auto;
+        }
         .form_field {
           position: relative;
           .error-field-message
@@ -469,6 +474,28 @@
       }
     }
   }
+  .line
+  {
+    margin: var(--m-reg-page-line-margin, 18px 0);
+    display: display(m-reg-page-line, none);
+    align-items: center;
+    span
+    {
+      display: inline-block;
+      &.left-line, &.right-line
+      {
+        background: var(--m-reg-line-background-color, linear-gradient(180deg, rgba(194, 229, 255, 0.5) 0%, rgba(139, 173, 198, 0.5) 52.6%, rgba(81, 115, 139, 0.5) 100%));
+        width: calc(50% - 10px);
+        height: 1px;
+      }
+      &.text
+      {
+        font-size: var(--reg-line-or-text-font-size, 10px);
+        color: var(--reg-line-or-text-color, #ffffff);
+        margin: var(--reg-line-or-text-margin, 0 3px);
+      }
+    }
+  }
   .reg-step-navigate-buttons {
     width: width(m-reg-button, 100%);
     margin-left: marginLeft(m-reg-button, 0);
@@ -487,6 +514,7 @@
   .reg-step-navigate-button-login {
     margin-top: var(--m-reg-btn-margin-top, 16px);
     display: var(--m-reg-login-btn-display, flex);
+    gap: var(--m-reg-login-btn-gap, 0);
     color: var(--reg-btn-color, #fff);
     min-width: var(--next-btn-width, 100px);
     cursor: pointer;
@@ -496,10 +524,20 @@
     justify-content: center;
     padding-top: 0;
     border: 1px solid itemColor(login-btn-border, #fff);
-    border-radius: 4px;
+    border-radius: var(--login-btn-boder-radius, 4px);
+    .m-reg-already-have-account {
+
+    }
     a {
-      margin-left: 6px;
+      margin-left: var(--m-reg-login-btn-margin-left, 6px);
+      margin-right: var(--m-reg-login-btn-margin-right, 0);
+      margin-top: var(--m-reg-login-btn-margin-top, 0);
+      margin-bottom: var(--m-reg-login-btn-margin-bottom, 0);
       color: itemColor(login-btn-color, #fff);
+      border: var(--m-reg-login-btn-border, none);
+      border-radius: var(--m-reg-login-btn-border-radius, 0);
+      padding: var(--m-reg-login-btn-padding, 0);
+      width: var(--m-reg-login-btn-width, auto);
     }
   }
   form{

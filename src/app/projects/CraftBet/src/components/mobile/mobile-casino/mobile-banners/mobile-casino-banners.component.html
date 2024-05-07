@@ -12,8 +12,8 @@
                 <div class="banner-wrapper"></div>
                 <div class="banner-wrapper2"></div>
                 <div class="banner-content">
-                    <div class="banner-description">{{banner.Head}}</div>
-                    <div class="banner-content-description">{{banner.Body}}</div>
+                    <div class="banner-description" [innerHTML]="banner.Head | sanitizer: 'html'"></div>
+                    <div class="banner-content-description" [innerHTML]="banner.Body | sanitizer: 'html'"></div>
                     <div *ngIf="banner.ShowRegistration" class="banner-action distans-right"
                          (click)="onRegisterOpen(); $event.stopPropagation()">{{'Login.Sign Up' | translate}}</div>
 

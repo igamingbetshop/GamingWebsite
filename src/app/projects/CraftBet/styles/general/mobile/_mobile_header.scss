@@ -9,6 +9,7 @@
 
     height: height(m-header-panel1, 100%);
     background-color: backgroundColor(m-header, #e8eff5);
+    background-image: backgroundImage(m-header, none);
     max-width: width(m-header-panel1-max, 100%);
     padding-top: paddingTop(m-header-panel1, 32px);
     padding-bottom: paddingBottom(m-header-panel1, 32px);
@@ -51,7 +52,7 @@
       align-items: itemAlign(m-header-panel1, center);
       width: 100%;
       flex-direction: row;
-      justify-content: flex-start;
+      justify-content: var(--m-header-panel1-justify-content, flex-start);
 
       &.betweenFlex {
         justify-content: space-between;
@@ -163,6 +164,16 @@
       background-image: backgroundImage(m-join-us-btn, linear-gradient(180deg, #194074 0%, #1376F8 100%));
       background-color: backgroundColor(m-join-us-btn, unset);
       white-space: nowrap;
+      justify-content: var(--m-join-us-btn-justify-content, space-between);
+      min-width: var(--m-join-us-btn-min-width, auto);
+      align-items: center;
+      .global_login-btn_rightIcon {
+        display: var(--m-button-style1-icon-display, none);
+        background: var(--m-button-style1-icon-background, #fff);
+        color: var(--m-button-style1-icon-color, #4874FF);
+        border-radius: var(--m-button-style1-icon-border-radius, 50%);
+        padding: var(--m-button-style1-icon-padding, 3px 7px 1px 9px);
+      }
     }
   }
 
@@ -889,8 +900,9 @@
   .sign-up {
     margin-bottom: marginBottom(m-button-style1, 0);
     margin-top: marginTop(m-button-style1, 0);
-    margin-left: marginLeft(m-button-style1, 10px);
+    margin-left: var(--m-button-style1-btn-margin-left, var(--m-button-style1-margin-left));
     margin-right: marginRight(m-button-style1, 0);
+    width: var(--m-button-style1-btn-width, auto);
 
     .signup_btn {
       width: 100%;
@@ -911,6 +923,16 @@
       border-bottom-right-radius: borderBottomRightRadius(m-button-style1, 4px);
       font-size: var(--m-button-style1-font-size, 14px);
       font-weight: var(--m-button-style1-font-weight, 500);
+      display: var(--m-button-style1-display, block);
+      justify-content: var(--m-button-style1-justify-content, space-between);
+      align-items: center;
+      .global_login-btn_rightIcon {
+        display: var(--m-button-style1-icon-display, none);
+        background: var(--m-button-style1-icon-background, #fff);
+        color: var(--m-button-style1-icon-color, #4874FF);
+        border-radius: var(--m-button-style1-icon-border-radius, 50%);
+        padding: var(--m-button-style1-icon-padding, 3px 7px 1px 9px);
+      }
     }
   }
 

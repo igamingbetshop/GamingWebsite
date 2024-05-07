@@ -47,6 +47,7 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
     public faUser = faUser;
     centralMenuItems: any[] = [];
     public balanceTypes = {bonus:false, unused:false};
+    public hideLeftSideBar = 'block';
 
     @ViewChild('languages', { read: ViewContainerRef }) languages;
     @ViewChild('loginButton', { read: ViewContainerRef }) loginButton;
@@ -269,6 +270,7 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
             else this.userInfo = "";
         }
         this.openLimitNotifications();
+        this.hideSingleProductLanguage();
 /*
         this.saveData.openPopup.subscribe((data) => {
             if (data == 'm-popup') {
@@ -311,6 +313,12 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
          }*/
         this.router.navigate(['home']);
         this.clickInRoute("home");
+    }
+
+    hideSingleProductLanguage() {
+        let showLeftSideBar = getComputedStyle(document.documentElement).getPropertyValue('--m-hide-language-product');
+        if(showLeftSideBar)
+            this.hideLeftSideBar = showLeftSideBar;
     }
 
     private async renderLazyLoadComponents(menuItem)
@@ -388,6 +396,10 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
     {
         if(item.Href)
             this.router.navigate(['/' + item.Href]);
+    }
+
+    redirectToSignUp() {
+        localStorage.setItem('product-url', this.defaultOptions.RedirectUrl);
     }
 
 }

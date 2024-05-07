@@ -46,66 +46,6 @@ export class AppComponent implements OnInit {
         translate.use(language ? language : 'en').subscribe(data => {
             this.translationLoaded = true;
         });
-
-        let font, fontBold, fontFamily;
-
-        switch (language) {
-            case "fa":
-            case "f9":
-                font = new FontFace(
-                    "IRANSans",
-                    "url(assets/fonts/IRANSansWeb_Light.woff2) format('woff2')",
-                    {weight: "600"}
-                );
-                fontBold = new FontFace(
-                    "IRANSans",
-                    "url(assets/fonts/IRANSansWeb_Bold.woff2) format('woff2')",
-                    {weight: "700"}
-                );
-                fontFamily = "IranSans, serif";
-                break;
-            case "he":
-                font = new FontFace(
-                    "Arimo",
-                    "url(assets/fonts/ArimoBold.ttf)",
-                    {weight: "400"}
-                );
-                fontBold = new FontFace(
-                    "Arimo",
-                    "url(assets/fonts/ArimoRegular.ttf)",
-                    {weight: "700"}
-                );
-                fontFamily = "Arimo, sans-serif";
-                break;
-            case "ko":
-                font = new FontFace(
-                    "Luckysuper",
-                    "url(assets/fonts/Luckysuper.ttf)",
-                    {weight: "400"}
-                );
-                fontBold = new FontFace(
-                    "Luckysuper",
-                    "url(assets/fonts/Luckysuper.ttf)",
-                    {weight: "700"}
-                );
-                fontFamily = "Luckysuper, sans-serif";
-                break;
-            default:
-        }
-
-        if (font) {
-            Promise.all([
-                font.load(),
-                fontBold.load()
-            ]).then((loadedFonts) => {
-                // Render them at the same time
-                loadedFonts.forEach(font => {
-                    document['fonts']['add'](font);
-                });
-                document.body.style.fontFamily = fontFamily;
-            });
-        }
-
         this.isLogin = this.userLogined.isAuthenticated;
     }
 

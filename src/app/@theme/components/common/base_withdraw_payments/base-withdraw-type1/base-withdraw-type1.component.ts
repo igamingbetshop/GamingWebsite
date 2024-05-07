@@ -1,8 +1,8 @@
-import {Injectable, Injector} from '@angular/core';
+import {Directive, Injector} from '@angular/core';
 import {BaseWithdrawPaymentComponent} from "../base-withdraw-payment/base-withdraw-payment.component";
 import {FormControl, Validators} from "@angular/forms";
 
-@Injectable()
+@Directive()
 export class BaseWithdrawType1Component extends BaseWithdrawPaymentComponent {
 
   public amountValue: any;

@@ -25,13 +25,29 @@
       filter: var(--b-sideBar-image-filter,grayscale(100%));
     }
 
+    .item-center .b-sideBar__image {
+      position: var(--bottom-sideBar-item-center-position, relative);
+      top: var(--bottom-sideBar-item-center-top, -20px);
+      width: var(--bottom-sideBar-item-center-top-width, var(--bottom-sideBar-image-size, 23px));
+      height: var(--bottom-sideBar-item-center-top-height, var(--bottom-sideBar-image-size, 23px));
+    }
+    .item-center::before {
+      content: "";
+      position: var(--bottom-sideBar-item-center-img-position, absolute);
+      top: var(--bottom-sideBar-item-center-img-top, -18px);
+      left: var(--bottom-sideBar-item-center-img-left, 19px);
+      width: var(--bottom-sideBar-item-center-img-width, 50%);
+      height: var(--bottom-sideBar-item-center-img-height, 61%);
+      background-color: var(--bottom-sideBar-item-center-img-background-color, transparent);
+      border-radius: var(--bottom-sideBar-item-center-img-border-radius, 50%);
+    }
 
     &__item {
       display: flex;
       align-items: center;
       flex-direction: column;
       position: relative;
-      padding-top: 10px;
+      padding-top: var(--bottom-sideBar-padding-top, 10px);
       height: var(--bottom-sideBar-height, 60px);
       width: var(--bottom-sideBar-width, 80%);
       &.active-item

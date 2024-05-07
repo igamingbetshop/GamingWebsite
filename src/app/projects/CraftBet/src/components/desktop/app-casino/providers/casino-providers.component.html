@@ -22,36 +22,17 @@
                        [style.order]="fragment.Order"
                        [fragmentConfig]="fragment">
         </casino-search>
-        <ng-container *ngIf="fragmentConfig.Config.type !== 'dropdown'; else dropdownContainer">
-            <ul class="provider-list default_scroll"
-                [style.grid-template-columns]="'repeat(' + (fragmentConfig.Config.count+1) +',1fr)'">
-                <li *ngFor="let provider of fragmentConfig.Config.showAll ? providers :  (providers | filterByName : casinoFilterService.providerPattern); let i = index"
-                    (click)="stateService.changeProvidersPopupState(false);selectProvider(provider)"
-                    [ngStyle]="provider.style"
-                    [class.all-providers]="provider.Id == 0"
-                    [class.selected]="casinoFilterService.providers | compareByKey: provider : 'Id'">
-                    <img [src]="provider.imageSrc">
-                    <span>{{ provider?.Label }}</span>
-                </li>
-                <button *ngIf="fragmentConfig.Config.showAll"  (click)="stateService.changeProvidersPopupState(true)" class="providers-see-all">{{ 'Providers.SeeAll' | translate }}</button>
-            </ul>
-        </ng-container>
-        <ng-template #dropdownContainer>
-            <div class="custom_dropdown_reg custom_dropdown_providers" [class.opened]="dropdownOpened">
-                <div class="flex_between current_item" (click)="toggleDropdown()">
-                    <div class="selected-item">{{ 'Providers.Providers' | translate }}</div>
-                    <div class="change-icon">
-                        <span class="icon-arrow-right"></span>
-                    </div>
-                </div>
-                <ul class="custom_dropdown_list right-top provider-dropdown-list">
-                    <li class="provider-dropdown-list-items" *ngFor="let provider of providers" (click)="selectProvider(provider)"
-                        [ngStyle]="provider.style">
-                        <input class="provider-checkbox" type="checkbox" [checked]="casinoFilterService.providers | compareByKey: provider : 'Id'">
-                        <span>{{ provider.Name }}</span>
-                    </li>
-                </ul>
-            </div>
-        </ng-template>
+        <ul class="provider-list default_scroll"
+            [style.grid-template-columns]="'repeat(' + (fragmentConfig.Config.count+1) +',1fr)'">
+            <li *ngFor="let provider of fragmentConfig.Config.showAll ? providers :  (providers | filterByName : casinoFilterService.providerPattern); let i = index"
+                (click)="stateService.changeProvidersPopupState(false);selectProvider(provider)"
+                [ngStyle]="provider.style"
+                [class.all-providers]="provider.Id == 0"
+                [class.selected]="casinoFilterService.providers | compareByKey: provider : 'Id'">
+                <img [src]="provider.imageSrc">
+                <span>{{ provider?.Label }}</span>
+            </li>
+            <button *ngIf="fragmentConfig.Config.showAll"  (click)="stateService.changeProvidersPopupState(true)" class="providers-see-all">{{ 'Providers.SeeAll' | translate }}</button>
+        </ul>
     </div>
 </div>

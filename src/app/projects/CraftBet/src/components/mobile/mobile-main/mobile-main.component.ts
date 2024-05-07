@@ -11,8 +11,7 @@ import {
 } from '@angular/core';
 import {CommonMainComponent} from '../../common/common-main/common-main.component';
 import {SharedService} from "@core/services";
-import {fromEvent, take} from "rxjs";
-import {debounceTime} from "rxjs/operators";
+import {take} from "rxjs";
 import {Controllers, Methods} from "@core/enums";
 
 @Component({
@@ -38,11 +37,8 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
 
   isExpired: true;
   @ViewChild('bottomSideBarRef', { read: ViewContainerRef }) bottomSideBarRef;
-  @ViewChild('mobileFooterRef', { read: ViewContainerRef }) mobileFooterRef;
-
-  footerRef:ComponentRef<any>;
-  isFooterCreated:boolean;
   bottomSideBarComponent:ComponentRef<any>;
+  hideFooter:boolean = true;
 
   constructor(public injector: Injector,
               public sharedService: SharedService,
@@ -125,6 +121,7 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
     setTimeout(() => {
       this.renderLazyLoadComponents()
     }, 10);
+    this.checkFooterDisplay();
   }
 
  async renderLazyLoadComponents()
@@ -140,33 +137,11 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
        }
       this.bottomSideBarComponent.instance.menuList = this.mobileBottomSideBar;
     }
-    if(!this.router.url.includes('/prematch')
-     && !this.router.url.includes('/live')
-      && !this.router.url.includes('/esport') && !this.router.url.includes('/login') && !this.router.url.includes('/signup')
-        || this.router.url.includes('/livecasino'))
-    {
-      if(this.footerRef)
-      {
-        this.footerRef.instance.display = 'block';
-      }
-      else
-      {
-        if(!this.isFooterCreated)
-        {
-          this.isFooterCreated = true;
-          const { MobileFooterModule } = await import("../mobile-footer/mobile-footer.module");
-          const moduleRef = createNgModule(MobileFooterModule, this.injector);
-          const component = moduleRef.instance.getComponent();
-          this.footerRef = this.mobileFooterRef.createComponent(component, {ngModuleRef: moduleRef});
-        }
-      }
-    }
-    else
-    {
-      if(this.footerRef)
-      {
-        this.footerRef.instance.display = 'none';
-      }
-    }
+  }
+
+  private checkFooterDisplay()
+  {
+    const url = this.router.url;
+    this.hideFooter = url.includes('/prematch') || url.includes('/live') || url.includes('/esport') || url.includes('/login') || url.includes('/signup') || url.includes('/livecasino');
   }
 }

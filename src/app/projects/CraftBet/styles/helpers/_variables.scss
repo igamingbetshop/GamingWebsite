@@ -342,7 +342,7 @@ Display
 **/
 
 @function gridGap($veriable-name, $grid-row-gap-size, $grid-column-gap-size) {
-  @return var(--#{$veriable-name}-grid-gap, $grid-row-gap-size, $grid-column-gap-size);
+  @return var(--#{$veriable-name}-grid-gap, $grid-row-gap-size $grid-column-gap-size);
 }
 
 @function gridRow($veriable-name, $rowNumber) {

@@ -380,7 +380,7 @@
           .title_menu {
             &.active {
               box-shadow: none;
-              border-left: 2px solid itemColor(account-title-border-left, transparent);
+              border: 2px solid itemColor(account-title-border, transparent);
             }
           }
 
@@ -496,7 +496,7 @@
               background: color(account-item-title-selected-bg);
               color: color(account-item-title-selected);
               box-shadow: none;
-              border-left: 2px solid itemColor(account-title-border-left, transparent);
+              border: 2px solid itemColor(account-title-border, transparent);
             }
 
           }
@@ -580,6 +580,7 @@
             .user-right-panel_list {
               .item_menu {
                 font-size: fontSize(account-content-item, 16px);
+                border: var(--account-content-item-border, none);
                 color: color(account-menu-list);
                 display: flex;
                 flex-direction: column;
@@ -599,6 +600,7 @@
                 &.active {
                   color: color(account-right-content-item);
                   background: var(--account-right-content-item-active-background, var(--account-main-bg-color, #213454));
+                  border: var(--account-right-content-item-active-border, none);
 
                   .selected {
                     color: color(account-right-content-item-selected);

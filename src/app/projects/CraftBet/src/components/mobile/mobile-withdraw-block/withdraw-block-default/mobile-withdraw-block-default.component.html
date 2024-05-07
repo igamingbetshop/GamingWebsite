@@ -56,7 +56,7 @@
                             *ngFor="let item of paymentSystemList;"
                             [ngClass]="{'selected_payment':item?.PaymentSystemId == currentPayment?.PaymentSystemId}"
                             (click)="selectPayment(item)">
-                        <img src="../../../../../../../assets/images/withdraw/{{item.PaymentSystemId}}.png"/>
+                        <img src="../../../../../../../assets/images/withdraw/{{item.IconSrc}}"/>
                     </li>
                 </ul>
             </div>

@@ -26,6 +26,7 @@ export class BaseFriendsComponent implements OnInit {
     {"Id": 2, "Name": "Filter_Period.7 days", Range: 168},
     {"Id": 3, "Name": "Filter_Period.1 month", Range: 720}
   ];
+  public friendsStates;
   selectedTimeFilter = this.friendsTimeFilter[0];
   private userData: any;
   private defaultOptions: any;
@@ -45,7 +46,7 @@ export class BaseFriendsComponent implements OnInit {
     this.userData = this.localStorageService.get('user');
     this.currencyId = this.userData ? this.userData.CurrencyId : '';
     this.balanceService = this.injector.get(BalanceService);
-
+    this.getFriendsStates();
     this.subscriptions.push(
         this.balanceService.notifyUpdateBalance.subscribe(data => this.balances = data)
     );
@@ -54,14 +55,22 @@ export class BaseFriendsComponent implements OnInit {
   ngOnInit() {
     this.defaultOptions = this.configService.defaultOptions;
     const platformId = this.defaultOptions.PartnerId * 100;
-    console.log(this.userData, 'userData')
     this.referralLink = window.location.origin +  '/signup' + "/?ReferenceCode=" + this.userData.Id + "&AffiliatePlatformId=" + platformId;
     this.getFriends(this.selectedTimeFilter.Range);
   }
 
+  getFriendsStates() {
+    this.friendsService.getClientStatus().subscribe((data) => {
+      this.friendsStates = data;
+    });
+  }
+
   getFriends(range) {
     this.friendsService.getFriends(range).subscribe(data => {
-      this.friends = data;
+      this.friends = data.map((friend) => {
+        friend.StatusName = this.friendsStates.find((val) => val.Value === friend.Status)?.Name;
+        return friend;
+      });
     });
   }
 

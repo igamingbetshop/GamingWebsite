@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {Router} from "@angular/router";
 import {FontAwesomeIcons} from "../../../../../../../@theme/font-awsome/font-awesome-icons";
+import {DeviceDetectorService} from "ngx-device-detector";
 
 @Component({
     selector: 'casino-search-fragment',
@@ -29,7 +30,7 @@ export class CasinoSearchFragmentComponent
     providers: any[] = [];
     categories: any[] = [];
 
-    constructor(private apiService: BaseApiService, private router:Router)
+    constructor(private apiService: BaseApiService, private router:Router, private deviceDetector:DeviceDetectorService)
     {
         this.onPatternChange$.pipe(debounceTime(500)).subscribe(pattern => {
             if(pattern && pattern.trim().length >= this.termMinlength)
@@ -53,7 +54,8 @@ export class CasinoSearchFragmentComponent
 
     openGame(game)
     {
-        this.router.navigate([`/casino/all-games/${game.Id}/real/2`]).then(() => {
+        const url = this.deviceDetector.isDesktop() ? `/casino/all-games/${game.Id}/real/2` : `/casino/all-games/${game.Id}/real/1?redirect=true`
+        this.router.navigateByUrl(url).then(() => {
             window.scrollTo({
                 top: 0
             });
@@ -79,7 +81,7 @@ export class CasinoSearchFragmentComponent
     }
 
     openAutoComplete() {
-        this.showAutocomplete = this.pattern && (this.pattern.trim().length >= this.termMinlength) && !!this.items.length;
+        this.showAutocomplete = this.pattern && (this.pattern.trim().length >= this.termMinlength) && (!!this.items.length || !!this.providers.length);
     }
 
     closeAutoComplete() {

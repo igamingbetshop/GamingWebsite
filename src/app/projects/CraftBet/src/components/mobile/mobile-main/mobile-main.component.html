@@ -26,8 +26,14 @@
     <router-outlet></router-outlet>
     <div class="mobile-scrollTop" [ngClass]="{'show': showScrollTop}" (click)="scrollToTop()"><i class="icon-next-arrow"></i></div>
     <ng-template #bottomSideBarRef></ng-template>
-    <ng-template #mobileFooterRef></ng-template>
-    <div class="rotate-cover" *ngIf="isShowDeviceLayoutBackground">
-        <div>{{ 'Info.DeviceRotate' | translate }}</div>
-    </div>
+    @defer (when !hideFooter)
+    {
+       <app-mobile-footer  [hidden]="hideFooter"></app-mobile-footer>
+    }
+    @if(isShowDeviceLayoutBackground)
+    {
+        <div class="rotate-cover">
+            <div>{{ 'Info.DeviceRotate' | translate }}</div>
+        </div>
+    }
 </div>

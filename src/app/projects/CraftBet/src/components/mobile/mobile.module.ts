@@ -19,6 +19,7 @@ import {PaymentControllerService} from "../../../../../@core/services/app/paymen
 import {BonusesService} from "../../../../../@core/services/api/bonuses.service";
 import {FunctionalBtnModule} from "../../../../../@theme/components/functional-btn/functional-btn.module";
 import {LanguageModule} from "../../../../../@theme/components/global-language/language.module";
+import {MobileFooterComponent} from "./mobile-footer/mobile-footer.component";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {LanguageModule} from "../../../../../@theme/components/global-language/l
         FunctionalBtnModule,
         DropdownDirectiveModule,
         MobileAccountPageType2BalanceModule,
-        LanguageModule
+        LanguageModule,
+        MobileFooterComponent
     ],
 
     providers: [

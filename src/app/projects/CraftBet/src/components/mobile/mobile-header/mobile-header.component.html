@@ -91,7 +91,7 @@
                 </div>
 
                 <div *ngIf="menuItem.contentType == 'leftMenu'" (click)="$event.stopPropagation()">
-                    <div class="mobile-header-section_bars">
+                    <div class="mobile-header-section_bars" [style.display]="hideLeftSideBar">
                         <fa-icon [icon]="faBars" [size]="'2x'" (click)="onLeftSidebarOpen()"></fa-icon>
                     </div>
                 </div>
@@ -107,14 +107,14 @@
                     <div class="mobile-header-section_topPanel_right">
                         <fa-icon *ngIf="menuItem.icon; else joinUsRef" [icon]="faUser" [size]="'2x'" (click)="onRightSidebarOpen()"></fa-icon>
                         <ng-template #joinUsRef>
-                            <button class="join-us" (click)="saveData.getMobileLoginPreviousState()" [routerLink]="['/login']">{{'Login.join-us' | translate}}</button>
+                            <button class="join-us" (click)="saveData.getMobileLoginPreviousState()" [routerLink]="['/login']">{{'Login.join-us' | translate}} <fa-icon [icon]="['fas', 'angle-right']" class="global_login-btn_rightIcon"></fa-icon></button>
                             <fa-icon class="join-us-icon" [icon]="faUser" [size]="'2x'" [routerLink]="['/login']"></fa-icon>
                         </ng-template>
                     </div>
                 </div>
 
-                <div class="sign-up" *ngIf="menuItem.contentType === 'signupBtn'">
-                    <button type="button"  class="signup_btn"  [routerLink]="['/signup']">{{ 'Login.Sign Up' | translate }}</button>
+                <div class="sign-up" *ngIf="menuItem.contentType === 'signupBtn' && !isLogin" (click)="redirectToSignUp()">
+                    <button type="button"  class="signup_btn"  [routerLink]="['/signup']">{{ 'Login.Sign Up' | translate }}  <fa-icon [icon]="['fas', 'angle-right']" class="global_login-btn_rightIcon"></fa-icon></button>
                 </div>
 
             </li>

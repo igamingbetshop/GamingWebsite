@@ -8,3 +8,4 @@ Disallow: /package.json
 Disallow: /yarn.lock
 Disallow: /404.html
 Disallow: /403-error
+https://craftbet.com/sitemap.xml

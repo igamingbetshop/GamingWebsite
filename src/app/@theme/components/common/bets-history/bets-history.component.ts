@@ -27,6 +27,7 @@ export class BetsHistoryComponent extends BaseComponent {
     public noHistory;
     public total: number;
     public filterChanged = false;
+    public closeInfo:boolean;
     public CurrencyId: any;
     public CurrencySymbol: any;
     public utilityService: UtilityService;
@@ -179,6 +180,7 @@ export class BetsHistoryComponent extends BaseComponent {
         if (this.form.valid) {
             this.getBetsHistoryService.getBetsHistoryList(input);
         }
+        this.closeInfo = false;
     }
 
     public submit(page) {

@@ -3,6 +3,9 @@
     <div class="modal-body" *ngIf="!isModal">
         <img class="recovery-logo" [src]="logoUrl" (error)="errorHandler($event)"/>
     </div>
+    <div class="modal-body" style="justify-content: flex-end">
+        <span class="icon-close-modal" (click)="close()"></span>
+    </div>
     <div class="modal_content">
         <p class="prefix-title">{{prefixTitle + 'Recovery.' + type | translate : translationKeys}}</p>
         <div class="form_field">

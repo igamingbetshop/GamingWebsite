@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Injector, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, Injector, } from '@angular/core';
 import { BaseCasinoProviders} from '../../../../../../../@theme/fragments/casino/providers/base-casino-providers';
 import { StateService} from '../../../../../../../@core/services/app/state.service';
 
@@ -15,7 +15,7 @@ export class MobileCasinoProvidersComponent extends BaseCasinoProviders
        this.calcGridItemCount();
     }
     public gridFrCount; // TODO later should be changed to dynamic
-    dropdownOpened: boolean = false;
+
 
     constructor(
         protected injector: Injector,
@@ -43,23 +43,6 @@ export class MobileCasinoProvidersComponent extends BaseCasinoProviders
         }
         else if (window.matchMedia('(max-width: 1200px)').matches) {
             this.gridFrCount = 8;
-        }
-    }
-
-    toggleDropdown() {
-        this.dropdownOpened = !this.dropdownOpened;
-    }
-
-    closeDropdown() {
-        this.dropdownOpened = false;
-    }
-
-    @HostListener('document:click', ['$event'])
-    handleClickOutside(event: MouseEvent) {
-        console.log(event.target);
-        const targetElement = event.target as HTMLElement;
-        if (!this.elementRef.nativeElement.contains(targetElement)) {
-            this.closeDropdown();
         }
     }
 }

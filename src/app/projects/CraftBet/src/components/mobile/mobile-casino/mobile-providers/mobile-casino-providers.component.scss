@@ -7,32 +7,32 @@
   }
 
   .filter_field {
-    border-radius: 6px;
+    border-radius: inherit;
     background-image: linear-gradient(181deg, itemColor(m-providers-gradient-first, #1d2e4a) 100%, itemColor(m-providers-gradient-second, #364970) 0%);
     padding-top: paddingTop(m-provider-block, 0);
     padding-bottom: paddingBottom(m-provider-block, 0);
     padding-left: paddingLeft(m-provider-block, 0);
     padding-right: paddingRight(m-provider-block, 0);
     margin-bottom: marginBottom(m-provider-block, 0);
-    font-size: 14px;
-    font-weight: 500;
-    color: #ffffff;
+    font-size: fontSize(m-provider-block, 14px);
+    font-weight: var(--m-provider-block-font-weight, 500);
+    color: var(--m-provider-block-color, #ffffff);
     height: fit-content;
-    width: 100%;
+    width: var(--m-provider-block-width, 100%);
     order: var(--m-provider-block-order, 3);
 
     .provider-list {
-      display: grid;
+      display: var(--m-providers-block-list-display, grid);
       grid-template-columns: var(--m-grid-template, repeat(25, 1fr));
-      grid-auto-rows: minmax(min-content, max-content);
-      grid-gap: 2px 8px;
-      align-items: center;
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding: 7px;
+      grid-auto-rows: var(--m-providers-block-list-grid-auto-rows, minmax(min-content, max-content));
+      grid-gap: var(--m-providers-block-list-grid-gap, 2px 8px);
+      align-items: var(--m-providers-block-list-align-items, center);
+      overflow-y: var(--m-providers-block-list-overflow-y, auto);
+      overflow-x: var(--m-providers-block-list-overflow-x, hidden);
+      padding: var(--m-providers-block-list-padding, 7px);
 
       .providers-see-all {
-        min-width: 100px;
+        min-width: var(--m-provider-list-horizontal-min-width, 100px);
         white-space: nowrap;
         height: height(m-provider-list-horizontal, 30px);
         background-color: backgroundColor(m-provider-list-horizontal, #00aaeb);
@@ -40,22 +40,22 @@
         border-radius: var(--m-provider-list-horizontal-border-radius, 6px);
         font-size: fontSize(m-provider-list-horizontal, 16px);
         font-weight: fontWeight(m-provider-list-horizontal, 400);
-        border: none;
+        border: var(--m-provider-list-horizontal-border, none);
         cursor: pointer;
       }
 
       li {
-        text-align: center;
-        border-radius: 6px;
-        border: 1px solid transparent;
+        text-align: var(--m-providers-block-list-item-text-align, center);
+        border-radius: var(--m-providers-block-list-item-border-radius, 6px);
+        border: var(--m-providers-block-list-item-border, 1px solid transparent);
         transition: all .3s ease;
         filter: var(--filter-data, grayscale(1));
         font-size: fontSize(provider, 11px);
         opacity: 1;
         img
         {
-          max-width: inherit;
-          width: 100%;
+          max-width: var(--m-providers-block-list-item-img-max-width, inherit);
+          width: var(--m-providers-block-list-item-img-width, 100%);
           height: inherit;
           object-position: center;
         }
@@ -175,73 +175,6 @@
           border: solid 1px var(--m-provider-active-border, #0c6be8);
           filter: grayscale(0);
         }
-      }
-    }
-  }
-}
-
-.dropdown {
-  .search-providers{display: none}
-  .custom_dropdown_providers {
-    background: var(--m-providers-dropdown-select-background, transparent);
-    border: var(--m-providers-dropdown-select-border, 1px solid #fff);
-    border-radius: var(--m-providers-dropdown-select-border-radius, 6px);
-    margin: var(--m-providers-dropdown-select-margin, 12px 9px);
-    width: var(--m-providers-dropdown-select-width, 50%);
-    .current_item {
-      height: var(--m-providers-dropdown-select-height, 40px);
-      background: var(--m-providers-dropdown-select-background, transparent);
-      font-size: var(--m-providers-dropdown-select-font-size, 12px);
-      color: var(--m-providers-dropdown-select-color, #fff);
-      justify-content: var(--m-providers-dropdown-select-justify-content, space-between);
-      border: none;
-      .change-icon {
-        transform: rotate(90deg);
-        font-size: var(--m-providers-dropdown-icon-font-size, 12px);
-        color: var(--m-providers-dropdown-icon-color, #fff);
-      }
-    }
-    .current_item:hover {
-      color: var(--m-providers-dropdown-select-hover-color, #fff);
-      background: var(--m-providers-dropdown-select-hover-background, transparent)
-    }
-    .provider-dropdown-list {
-      background: var(--m-providers-dropdown-select-list-background, #fff);
-      color: var(--m-providers-dropdown-select-list-color, #000);
-      border-color: var(--m-providers-dropdown-select-list-border-color, transparent);
-      border-radius: var(--m-providers-dropdown-select-list-border-radius, 6px);
-      max-height: var(--m-providers-dropdown-select-list-max-height, 320px);
-      height: auto;
-      overflow-x: hidden;
-      .provider-dropdown-list-items {
-        font-size: var(--m-providers-dropdown-select-list-item-font-size, 12px);
-        font-weight: var(--m-providers-dropdown-select-list-item-font-weight, 500);
-        height: var(--m-providers-dropdown-select-list-item-height, 40px);
-        text-align: var(--m-providers-dropdown-select-list-item-text-align, left);
-        line-height: var(--m-providers-dropdown-select-list-item-line-height, 25px);
-        padding: var(--m-providers-dropdown-select-list-item-padding, 10px);
-        background: var(--m-providers-dropdown-select-list-item-background, transparent);
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        .provider-checkbox {
-          display: var(--m-providers-dropdown-select-list-checkbox-display, none);
-          width: var(--m-providers-dropdown-select-list-checkbox-width, 20px);
-          height: var(--m-providers-dropdown-select-list-checkbox-height, 23px);
-          margin-right: var(--m-providers-dropdown-select-list-checkbox-margin-right, 10px);
-          cursor: pointer;
-        }
-      }
-      .provider-dropdown-list-items:hover {
-        background: var(--m-providers-dropdown-select-list-item-hover-background, transparent);
-        color: var(--m-providers-dropdown-select-list-item-hover-color, #000);
-      }
-    }
-  }
-  .opened {
-    .current_item {
-      .change-icon {
-        transform: rotate(-90deg);
       }
     }
   }

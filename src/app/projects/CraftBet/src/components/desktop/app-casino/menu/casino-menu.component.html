@@ -3,6 +3,7 @@
         <div class="title"> {{'Game.AllGames' | translate}}</div>
         <ul class="default_scroll">
             <li *ngFor="let menuItem of menuItems"
+                [ngStyle]="menuItem.style"
                 [class.active]="menuItem.Id == casinoFilterService.selectedCategory?.Id"
                 (click)="selectCategory(menuItem)">
                 <ng-container [ngTemplateOutlet]="menuItem?.IconSrc ? hasImageSrc : noImageSrc"

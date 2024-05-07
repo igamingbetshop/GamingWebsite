@@ -38,6 +38,19 @@
     <h1 class="promotion-title" [ngStyle]="layoutService.layoutStyle"> <i class="icon-specials"></i> {{'Promotions.Promotions' | translate}}</h1>
 </div>
 
-<div class="mobile-promotion-fragments" *ngFor="let fragment of promotionFragments"  [ngStyle]="{'display' : selectedFragment ? 'none' : 'block'}">
-    <mobile-promotion-fragment  [promotionFragment]="fragment"></mobile-promotion-fragment>
-</div>
+@if (filteredFragment)
+{
+    <div class="mobile-promotion-fragments" [ngStyle]="{'display' : selectedFragment ? 'none' : 'block'}">
+        <div class="fragment-title">{{filteredFragment.Title}}</div>
+        <mobile-promotion-fragment  [promotionFragment]="filteredFragment"></mobile-promotion-fragment>
+    </div>
+}
+@else
+{
+    <div class="mobile-promotion-fragments" *ngFor="let fragment of promotionFragments"  [ngStyle]="{'display' : selectedFragment ? 'none' : 'block'}">
+        <div class="fragment-title">{{fragment.Title}}</div>
+        <mobile-promotion-fragment  [promotionFragment]="fragment"></mobile-promotion-fragment>
+    </div>
+}
+
+

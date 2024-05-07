@@ -23,7 +23,9 @@ export class MobileOpenGamesComponent extends BaseMobileOpenGameComponent implem
     }
 
     ngAfterViewInit() {
-        this.sizeCheck();
+        setTimeout(() => {
+            this.sizeCheck();
+        }, 500);
     }
 
     sizeCheck() {
@@ -36,8 +38,8 @@ export class MobileOpenGamesComponent extends BaseMobileOpenGameComponent implem
         }
     }
     setMobileOpenGameHeight(sizes:any) {
-        const productHeight:string = ` calc(100vh - ${sizes.height}px)`;
-        sizes.productHeight = productHeight || 'calc(100vh - 64px)';
+        const productHeight:string = ` calc(100dvh - ${sizes.height}px)`;
+        sizes.productHeight = productHeight || 'calc(100dvh - 64px)';
         this._mobileOpenGameSize.next(sizes);
     }
 

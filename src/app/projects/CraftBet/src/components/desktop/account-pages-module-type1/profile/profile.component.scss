@@ -107,6 +107,7 @@ form {
       left: 0;
     }
     .verify-icons {
+      display: var(--settings-profile-verify-icons-display, block);
       position: absolute;
       top: 18px;
       right: -29px;

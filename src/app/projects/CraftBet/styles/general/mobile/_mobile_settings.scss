@@ -619,6 +619,7 @@
 
   .setting_btn {
     @include m-common-button;
+    color: var(--m-profile-settings-edit-btn-color, $account-settings-btn);
     white-space: nowrap;
     margin: 16px 0;
     font-size: var(--m-change-password-btn-font-size, 16px);

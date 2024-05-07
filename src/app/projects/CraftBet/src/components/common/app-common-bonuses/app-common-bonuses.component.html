@@ -1,6 +1,6 @@
 <div class="bonus-label">{{'Info.PleaseChoseBonuce' | translate}}</div>
 
-<ul class="default-scroll">
+<ul class="default-scroll mobile-default-scroll">
     <li *ngFor='let item of bonusesList;let i = index' class="info-item">
         <div class="left-part" (click)="$event.stopPropagation()">
             <input type="radio" [checked]="item.selected" [value]="item.Id" (change)='radioChecked(item.Id,i)'  (click)="$event.stopPropagation()">

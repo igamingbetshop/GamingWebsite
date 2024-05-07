@@ -375,13 +375,21 @@ export class BaseMainComponent implements OnInit {
     openOnCmsPopup() {
         this.signalRService.onCmsPopupInfo$.subscribe(data => {
             this.cmsPopupData = data;
-            this.dialog.open(CmsPopupComponent, {data:{title: 'Cms Popup', cmsPopupData: data, message: true}});
+            if (data.Page !== null && this.router.url.startsWith(data.Page)) {
+                this.dialog.open(CmsPopupComponent, { data: { title: 'Cms Popup', cmsPopupData: data, message: true } });
+            } else if (data.Page === null) {
+                this.dialog.open(CmsPopupComponent, { data: { title: 'Cms Popup', cmsPopupData: data, message: true } });
+            }
         });
     }
 
     openLoginedCmsPopup(popups) {
         popups.forEach(popup => {
-            this.dialog.open(CmsPopupComponent, {data:{title: 'Cms Popup', loginedCmsPopupData: popup, message: true}});
+            if (popup.Page !== null && this.router.url.startsWith(popup.Page)) {
+                this.dialog.open(CmsPopupComponent, { data: { title: 'Cms Popup', loginedCmsPopupData: popup, message: true } });
+            } else if (popup.Page === null) {
+                this.dialog.open(CmsPopupComponent, { data: { title: 'Cms Popup', loginedCmsPopupData: popup, message: true } });
+            }
         });
     }
 }

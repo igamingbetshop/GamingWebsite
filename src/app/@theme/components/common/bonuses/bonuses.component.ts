@@ -119,6 +119,10 @@ export class BonusesComponent extends BaseComponent {
                         });
                         this.bonusesData.headers.splice(0, 1);
                         this.bonusesData.headers.splice(3, 0, 'Count');
+                        const indexOfTurnoverCount = this.bonusesData.headers.indexOf('TurnoverCount');
+                        if (indexOfTurnoverCount !== -1) {
+                            this.bonusesData.headers.splice(indexOfTurnoverCount, 1);
+                        }
                     }
                     if (this.availableTypes.includes(item.TypeId))
                     {

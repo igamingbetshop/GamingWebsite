@@ -79,7 +79,7 @@
       position: absolute;
       flex-direction: column;
       width: 100%;
-      height: calc(100% - 60px);
+      height: var(--left-sidebar-lang-height, calc(100% - 60px));
       justify-content: flex-end;
       /*  background: white;*/
       /* z-index: 10;*/
@@ -156,9 +156,58 @@
     }
 
   }
+  .left-sidebar-menu-deposit-part {
+    color: var(--m-left-sidebar-menu-deposit-part-color, #fff);
+    background: var(--m-left-sidebar-menu-deposit-part-background, transparent);
+    display: var(--m-left-sidebar-menu-deposit-part-display, none);
+    flex-direction: var(--m-left-sidebar-menu-deposit-part-flex-direction, column);
+    width: var(--m-left-sidebar-menu-deposit-part-width, 100%);
+    font-size: var(--m-left-sidebar-menu-deposit-part-font-size, 14px);
+    height: var(--m-left-sidebar-menu-deposit-part-height, auto);
+    margin: var(--m-left-sidebar-menu-deposit-part-margin, 0 auto);
+    align-items: center;
+    .left-sidebar-user-part-not-logined {
+      display: var(--m-left-sidebar-menu-not-logined-display, none);
+    }
+    .character-img
+    {
+      margin: var(--m-left-sidebar-menu-character-img-margin, 0 auto);
+      display: var(--m-left-sidebar-menu-character-img-display, none);
+      text-align: var(--m-left-sidebar-menu-character-img-text-align, center);
+      img
+      {
+        height: var(--m-left-sidebar-menu-character-img-height, 58px);
+        width: var(--m-left-sidebar-menu-character-img-width, 58px);
+      }
+    }
+    .left-sidebar-user-id {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .left-sidebar-deposit-btn {
+      width: var(--left-sidebar-deposit-btn-width, auto);
+      min-width: var(--left-sidebar-deposit-btn-min-width, 50px);
+      border-radius: var(--left-sidebar-deposit-btn-border-radius, 6px);
+      height: var(--left-sidebar-deposit-btn-height, auto);
+      background: var(--left-sidebar-deposit-btn-background, none);
+      color: var(--left-sidebar-deposit-btn-color, #fff);
+      text-align: var(--left-sidebar-deposit-btn-text-align, center);
+      padding: var(--left-sidebar-deposit-btn-padding, 8px 5px);
+      margin: var(--left-sidebar-deposit-btn-margin, 10px 0);
+      font-size: var(--left-sidebar-deposit-btn-font-size, 14px);
+      font-weight: var(--left-sidebar-deposit-btn-font-weight, 600);
+    }
+  }
   .left-sidebar-menu-top-img-part {
     color: var(--m-left-sidebar-menu-top-img-part-color, transparent);
     display: var(--m-left-sidebar-menu-top-img-part-display, none);
+    width: var(--m-left-sidebar-menu-top-img-part-width,100%);
+    height: var(--m-left-sidebar-menu-top-img-part-height,auto);
+    margin-left: var(--m-left-sidebar-menu-top-img-part-margin-left,0);
+    margin-right: var(--m-left-sidebar-menu-top-img-part-margin-right,0);
+    margin-top: var(--m-left-sidebar-menu-top-img-part-margin-top,0);
+    margin-bottom: var(--m-left-sidebar-menu-top-img-part-margin-bottom,0);
   }
   .left-sidebar-menu-bottom-img-part {
     color: var(--m-left-sidebar-menu-bottom-img-part-color, transparent);

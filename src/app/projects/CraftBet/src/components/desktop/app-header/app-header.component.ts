@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Inject, Injector, ViewChild} from '@angular/core';
+import {Component, createNgModule, ElementRef, HostListener, Inject, Injector, ViewChild} from '@angular/core';
 import {AppCommonHeaderComponent} from '../../common/app-common-header/app-common-header.component';
 import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
 import { ActivatedRoute, NavigationEnd} from "@angular/router";
@@ -75,6 +75,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
     private moreMenuWidth:number = 0;
     public menuDirection:string;
     public isExpandedMenu:boolean;
+    public isOpenedDropdown:boolean;
     public userLogined:UserLogined;
 
     public openModal: boolean;
@@ -140,6 +141,9 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                     if (JSON.parse(JSON.parse(styleTypeItem))['title'] != undefined) {
                         item['dropdownTitle'] = JSON.parse(JSON.parse(styleTypeItem))['title'];
                     }
+                    if (JSON.parse(JSON.parse(styleTypeItem))['key'] != undefined) {
+                        item['dropdownKey'] = JSON.parse(JSON.parse(styleTypeItem))['key'];
+                    }
                     if (JSON.parse(JSON.parse(styleTypeItem))['itemTitle'] != undefined) {
                         item['itemTitle'] = JSON.parse(JSON.parse(styleTypeItem))['itemTitle'];
                     }
@@ -160,6 +164,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
 
         this.menuDirection = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.direction || this.menuDirection;
         this.isExpandedMenu = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.expanded || this.isExpandedMenu;
+        this.isOpenedDropdown = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.opened_Dpd || this.isOpenedDropdown;
 
         this.baseControllerService.GetMenu('HeaderPanel2Menu',
             'en').then((data: any) =>
@@ -170,12 +175,24 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                 if(item.Orientation)
                     isLeft = false;
                 const styleTypeItem = item['StyleType'];
+                const parsedStyleTypeItem = JSON.parse(JSON.parse(styleTypeItem));
                 const itemType = item.Type.substring(0, item.Type.indexOf('_')),
                     itemClassType = item.Type.substring(item.Type.lastIndexOf("_") + 1);
                 if(item.SubMenu.length > 0)
                 {
                     let repeatPathElement = array.find(el => el.Href.split('/')[0] == item.Href);
                     item.preventActive = !!repeatPathElement;
+                    if(parsedStyleTypeItem.hasIcons == 1)
+                    {
+                        item.SubMenu = JSON.parse(JSON.stringify(item.SubMenu));
+                        item.SubMenu.forEach(item => {
+                            if(item.Icon)
+                            {
+                                const icon = item.Icon;
+                                item.Icon = `${window['debugPath']}/assets/images/header-panel-2-menu/${icon}.svg`;
+                            }
+                        })
+                    }
                 }
                 if(item.Icon)
                 {
@@ -184,7 +201,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                     item.IconHover = `${window['debugPath']}/assets/images/header-panel-2-menu/hover/${icon}`;
                 }
 
-                const parsedStyleTypeItem = JSON.parse(JSON.parse(styleTypeItem));
+
 
                 item.data = parsedStyleTypeItem;
 
@@ -194,6 +211,10 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
 
                 if (parsedStyleTypeItem['animated'] != undefined) {
                     item['animated'] = parsedStyleTypeItem['animated'] === '1' ? true : false;
+                }
+
+                if (parsedStyleTypeItem['hasIcons'] != undefined) {
+                    item['hasIcons'] = parsedStyleTypeItem['hasIcons'] === '1' ? true : false;
                 }
 
                 if (parsedStyleTypeItem['new'] != undefined) {
@@ -211,8 +232,16 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                     item['dropdownImage'] = parsedStyleTypeItem['images'];
                 }
 
+                if (parsedStyleTypeItem['imageName'] != undefined) {
+                    item['imageName'] = parsedStyleTypeItem['imageName'];
+                    item['coords'] = parsedStyleTypeItem['coords'];
+                }
+
                 if (parsedStyleTypeItem['title'] != undefined) {
                     item['dropdownTitle'] = parsedStyleTypeItem['title'];
+                }
+                if (parsedStyleTypeItem['key'] != undefined) {
+                    item['dropdownKey'] = parsedStyleTypeItem['key'];
                 }
                 if (this.isLogin)
                 {
@@ -247,7 +276,6 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                 }
             });
             this.saveStateSbj.next(true);
-
         });
 
         this.saveData.showSignUpSection.subscribe((data) => {
@@ -339,6 +367,9 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
 
                 if (parsedStyleTypeItem['title'] != undefined) {
                     item['dropdownTitle'] = parsedStyleTypeItem['title'];
+                }
+                if (parsedStyleTypeItem['key'] != undefined) {
+                    item['dropdownKey'] = parsedStyleTypeItem['key'];
                 }
                 item.Src = item.Icon.includes('.') ? '../../../../../../../assets/images/header-panel-1-menu/' + item.Icon : null;
                 if (this.isLogin)
@@ -689,5 +720,37 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
             this.document.body.classList.add("isLeftMenu");
             this.document.body.classList.remove("isExpandedLeftMenu");
         }
+    }
+
+    async loadComponent(): Promise<any>
+    {
+        const { LuckyGameModule } = await import('../app-casino/lucky-game/lucky-game.module');
+        const moduleRef = createNgModule(LuckyGameModule, this.injector);
+        const component = moduleRef.instance.getComponent();
+        return component;
+    }
+
+    openLuckyGame()
+    {
+        let objectWithImageName = null;
+        for (const item of this.generalMenuItems) {
+            if (item && item.imageName) {
+                objectWithImageName = item;
+                objectWithImageName.Config = {
+                    ImageName: objectWithImageName.imageName,
+                };
+                if (objectWithImageName.coords) {
+                    objectWithImageName.Config.coords = objectWithImageName.coords;
+                }
+                break;
+            }
+        }
+        this.loadComponent().then(component => {
+            const dialogRef = this.dialog.open(component, {data:{title: 'LuckyGame',
+                    message: true, fragmentConfig: objectWithImageName}, hasBackdrop: true});
+            dialogRef.afterClosed().subscribe(result => {
+            });
+
+        });
     }
 }

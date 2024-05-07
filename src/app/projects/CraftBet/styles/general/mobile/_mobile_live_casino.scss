@@ -7,10 +7,32 @@
   flex-direction: column;
   flex-grow: 1;
   position: relative;
-
+  .mobile-products-title {
+    display: var(--m-live-casino-products-title-display, none);
+    justify-content: var(--m-live-casino-products-title-justify-content, center);
+    align-items: center;
+    margin: var(--m-live-casino-products-title-margin, 0);
+    padding: var(--m-live-casino-products-title-padding, 0);
+    font-size: var(--m-live-casino-products-title-font-size, 16px);
+    font-weight: var(--m-live-casino-products-title-font-weight, 400);
+    border-bottom: var(--m-live-casino-products-title-border-bottom, none);
+    border-radius: var(--m-live-casino-products-title-border-radius, 0);
+    color: var(--m-live-casino-products-title-color, #fff);
+    background: var(--m-live-casino-products-title-background-color, transparent);
+    width: var(--m-live-casino-products-title-width, 100%);
+  }
+  .mobile-products-title-icon {
+    display: var(--m-live-casino-products-title-icon-display, none);
+    justify-content: var(--m-live-casino-products-title-icon-justify-content, center);
+    color: var(--m-live-casino-products-title-icon-color, #fff);
+    margin: var(--m-live-casino-products-title-icon-margin, 0);
+    font-size: var(--m-live-casino-products-title-icon-font-size, 23px);
+    align-items: center;
+  }
   .grouped-products-content {
     padding-top: calc(100px + var(--mobile-nav-bar-height));
-    display: flex;
+    display: var(--m-grouped-products-content-display, flex);
+    grid-template-columns: var(--m-grouped-products-content-grid-template-columns, repeat(2,1fr));
     flex-direction: row;
     flex-wrap: wrap;
     flex-grow: 1;
@@ -18,8 +40,11 @@
 
     &_item {
       width: var(--m-grouped-products-content-item-width, 140px);
-      height: 170px;
-      margin-bottom: 15px;
+      height: var(--m-grouped-products-content-item-height, 170px);
+      margin-bottom: var(--m-grouped-products-content-item-margin-bottom, 15px);
+      margin-left: var(--m-grouped-products-content-item-margin-left, 0px);
+      margin-right: var(--m-grouped-products-content-item-margin-right, 0px);
+      margin-top: var(--m-grouped-products-content-item-margin-top, 0px);
       background-size: var(--m-grouped-products-content-item-background-size, contain);
       cursor: pointer;
       background-repeat: no-repeat;

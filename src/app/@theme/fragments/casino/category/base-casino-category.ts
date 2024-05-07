@@ -1,4 +1,4 @@
-import {Directive, HostBinding, HostListener, Injector, Input, OnDestroy, OnInit} from "@angular/core";
+import {Directive, HostBinding, Injector, Input, OnDestroy, OnInit, signal, WritableSignal} from "@angular/core";
 import {take} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 import { Subscription } from "rxjs";
@@ -9,17 +9,19 @@ import {getMappedGame} from "../../../../@core/utils";
 import {UserLogined} from "../../../../@core/services/app/userLogined.service";
 import {FragmentData} from "../../../../@core/models";
 import {CasinoFilterService} from "../../../../@core/services/app/casino-filter.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Directive()
 export class BaseCasinoCategory implements OnInit, OnDestroy
 {
     @Input('fragmentConfig') fragmentConfig:FragmentData;
-    @HostBinding("style.order") order;
-
-    categoryId;
-    categoryName;
+    @HostBinding("style.order") order:number|string;
+    categoryId:number|string;
+    categoryName:string;
     games: any[] = [];
     leftGamesCount: number = 0;
+    private viewedGamesCount: number = 0;
+    leftGamesCountMessage:WritableSignal<string> = signal("");
 
     protected router:Router;
     protected userLogged:UserLogined;
@@ -28,9 +30,11 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
     private apiService: BaseApiService;
     private saveData:SaveData;
     protected route:ActivatedRoute;
+    private translate:TranslateService;
     casinoFilterService:CasinoFilterService;
     private isFirstTime:boolean = true;
     markForSave:boolean = false;
+    isLoading:boolean;
 
     /*@HostListener('window:scroll', ['$event'])
     onScroll(event)
@@ -47,6 +51,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
         this.userLogged = injector.get(UserLogined);
         this.saveData = injector.get(SaveData);
         this.casinoFilterService = injector.get(CasinoFilterService);
+        this.translate = injector.get(TranslateService);
     }
 
     /*updateScrollPosition()
@@ -58,6 +63,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
 
     getGames(filter, concatData = false, autoScroll = null): void
     {
+        this.isLoading = true;
         if(filter.CategoryId === -1)
             filter.CategoryId = null;
 
@@ -71,7 +77,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
                          return game;
                      });
                      this.games = concatData ? [...this.games, ...games] : games;
-                     this.leftGamesCount = data.ResponseObject.LeftGamesCount;
+                     this.setGamesLeftCount( data.ResponseObject.LeftGamesCount, data.ResponseObject.TotalGamesCount);
                      if(autoScroll)
                      {
                          const p = setTimeout(() =>
@@ -82,7 +88,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
                      if(concatData && this.markForSave)
                      {
                          this.markForSave = false;
-                         this.saveData.setCasinoGames({games:this.games, count:this.leftGamesCount});
+                         this.saveData.setCasinoGames({games:this.games, count:this.leftGamesCount, totalCount:data.ResponseObject.TotalGamesCount});
                      }
                      else
                      {
@@ -91,8 +97,8 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
                              this.saveData.deleteCasinoGames();
                          }
                      }
-
                 }
+                this.isLoading = false;
             });
     }
 
@@ -108,7 +114,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
                 if(gamesFromCache.games?.length && this.isFirstTime)
                 {
                    this.games = [...gamesFromCache.games];
-                   this.leftGamesCount = gamesFromCache.count;
+                    this.setGamesLeftCount(gamesFromCache.count, gamesFromCache.totalCount);
                 }
                 else
                 {
@@ -180,5 +186,20 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
     openGame(typeId, type, openMode = 1)
     {
         localStorage.setItem('opened-url', this.router.url);
+    }
+
+    loadMoreItems()
+    {
+        this.markForSave = true;
+        this.casinoFilterService.nextPage();
+    }
+
+    private setGamesLeftCount(leftCount:number, totalCount:number = 0)
+    {
+        this.leftGamesCount = leftCount;
+        this.viewedGamesCount = totalCount - this.leftGamesCount;
+        this.translate.get("Game.LeftGamesCountMessage").subscribe((res: string) => {
+            this.leftGamesCountMessage.set(res.replace("{VIEWED_COUNT}", this.viewedGamesCount.toString()).replace("{LEFT_COUNT}", this.leftGamesCount.toString()));
+        });
     }
 }

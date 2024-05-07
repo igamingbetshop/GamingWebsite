@@ -6,6 +6,8 @@ import { SanitizerModule } from '../../../pipes/sanitizer/sanitizer.module';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {HttpClient} from "@angular/common/http";
+import {Controllers, Methods} from "@core/enums";
+import {BaseApiService} from "@core/services/api/base-api.service";
 
 @Component({
   selector: 'app-cms-popup',
@@ -19,6 +21,7 @@ export class CmsPopupComponent implements OnInit {
   languageService = inject(LangService);
   dialogRef = inject(MatDialogRef<CmsPopupComponent>);
   http = inject(HttpClient);
+  baseApiService = inject(BaseApiService);
   ngOnInit(): void {
     console.log('data in', this.data);
     if (this.data?.cmsPopupData) {
@@ -31,9 +34,9 @@ export class CmsPopupComponent implements OnInit {
   private loadPopupData(popupId: number): void {
     let url: string;
     if (this.deviceDetectorService.isDesktop()) {
-      url = '/assets/json/popups/' + popupId + '_' + this.languageService.currentLangKey + '.json';
+      url = '/assets/json/popups/web/' + popupId + '_' + this.languageService.currentLangKey + '.json';
     } else {
-      url = '/assets/json/popups/' + popupId + '_' + this.languageService.currentLangKey + '.json'; // to change
+      url = '/assets/json/popups/mobile/' + popupId + '_' + this.languageService.currentLangKey + '.json';
     }
 
     this.http.get<any>(window['debugPath'] + url + '?=' + window['VERSION']).subscribe(data => {
@@ -54,6 +57,15 @@ export class CmsPopupComponent implements OnInit {
   close()
   {
     this.dialogRef.close();
+  }
+
+  closeLoginedPopup(data) {
+    console.log(data);
+    this.baseApiService.apiRequest({ Id: data?.Id }, Controllers.CLIENT, Methods.VIEW_POPUP).subscribe((data) => {
+      if (data['ResponseCode'] == 0) {
+        this.dialogRef.close();
+      }
+    });
   }
 
 }

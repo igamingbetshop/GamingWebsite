@@ -1,6 +1,7 @@
 import {
     Directive,
-    EventEmitter, inject,
+    EventEmitter,
+    inject,
     Injector,
     Input,
     OnDestroy,
@@ -75,8 +76,8 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
     private utilityService: UtilityService;
     private configService:ConfigService;
     public baseService: BaseService;
-    data:any = inject(MAT_DIALOG_DATA);
-    dialogRef = inject(MatDialogRef<BaseVerifyCode>);
+    data:any = inject(MAT_DIALOG_DATA, {optional:true});
+    dialogRef = inject(MatDialogRef<BaseVerifyCode>, {optional:true});
     constructor(protected injector: Injector)
     {
         this.baseApiService = injector.get(BaseApiService);
@@ -89,13 +90,14 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
 
     ngOnInit()
     {
-        this.isModal = this.data.isModal || this.isModal;
-        this.targetOfSender = this.data.targetOfSender || this.targetOfSender;
-        this.type = this.data.type ||  this.type;
-        this.onVerified = this.data.onVerified || this.onVerified;
-        this.activePeriodInMinutes = this.data.activePeriodInMinutes ||  this.activePeriodInMinutes;
-        this.prefixTitle = this.data.prefixTitle ||  this.prefixTitle;
-        this.verificationCodeType = this.data.verificationCodeType ||  this.verificationCodeType;
+        this.isModal = this.data?.isModal || this.isModal;
+        this.targetOfSender = this.data?.targetOfSender || this.targetOfSender;
+        this.type = this.data?.type ||  this.type;
+        this.onVerified = this.data?.onVerified || this.onVerified;
+        this.activePeriodInMinutes = this.data?.activePeriodInMinutes ||  this.activePeriodInMinutes;
+        this.prefixTitle = this.data?.prefixTitle ||  this.prefixTitle;
+        this.verificationCodeType = this.data?.verificationCodeType ||  this.verificationCodeType;
+        console.log('this.data', this.data);
         if (this.targetOfSender)
         {
           this.translationKeys[this.type] = this.targetOfSender;
@@ -159,7 +161,7 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
         }
         else
         {
-            if(!this.targetOfSender)
+            if(!this.targetOfSender && this.formControlName)
                 this.formGroup.get(this.formControlName).setValue('');
         }
     }
@@ -317,7 +319,7 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
                         {
                             this.errorMessage = null;
                             this.userRegisterService.errorMessage = '';
-                            if(!this.targetOfSender)
+                            if(!this.targetOfSender && this.formControlName)
                                 this.formGroup.get(this.formControlName).setValue(code);
                             this.onVerified.emit({type:'sms', questionIds:data.ResponseObject.SecurityQuestions, code:code, callBack:this.callBack});
                             this.otp = code;
@@ -327,7 +329,7 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
                             this.errorMessage = data.Description;
                             this.userRegisterService.errorMessage = data.Description;
                             this.utilityService.showMessageWithDelay(this, [{'errorMessage': data.Description}]);
-                            if(!this.targetOfSender)
+                            if(!this.targetOfSender && this.formControlName)
                                 this.formGroup.get(this.formControlName).setValue('');
                         }
                     });
@@ -352,7 +354,7 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
                         {
                             this.userRegisterService.errorMessage = '';
                             this.errorMessage = null;
-                            if(!this.targetOfSender)
+                            if(!this.targetOfSender && this.formControlName)
                                 this.formGroup.get(this.formControlName).setValue(code);
                             this.onVerified.emit({type:'email', questionIds:data.ResponseObject.SecurityQuestions, code:code, callBack:this.callBack});
                             this.otp = code;
@@ -362,7 +364,7 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
                             this.userRegisterService.errorMessage = data.Description;
                             this.utilityService.showMessageWithDelay(this, [{'errorMessage': data.Description}]);
                             this.errorMessage = data.Description;
-                            if(!this.targetOfSender)
+                            if(!this.targetOfSender && this.formControlName)
                                 this.formGroup.get(this.formControlName).setValue('');
                         }
                     });
@@ -400,7 +402,7 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
                         this.userRegisterService.errorMessage = data.Description;
                         this.utilityService.showMessageWithDelay(this, [{'errorMessage': data.Description}]);
                         this.errorMessage = data.Description;
-                        if(!this.targetOfSender)
+                        if(!this.targetOfSender && this.formControlName)
                             this.formGroup.get(this.formControlName).setValue('');
                     }
                 });

@@ -20,7 +20,7 @@
           <div class="flex_between" *ngIf="userInfoList['Status'] === 1"><span class="mobile-user-history-content__label">{{'User.Poss-Win' | translate}}
             :</span> {{userInfoList['PossibleWin'] | number: '1.2-2'}}</div>
           <div class="flex_between" *ngIf="userInfoList['Status'] !== 1"><span class="mobile-user-history-content__label">{{'User.Win-Amount' | translate}}
-            :</span> {{userInfoList['WinAmount'] | number: '1.2-2'}}</div>
+            :</span> {{userInfoList['WinAmount'] | number: '1.2-2'}} {{CurrencySymbol}}</div>
           <div class="flex_between" *ngIf="userInfoList['Coefficient'] !== 0"><span class="mobile-user-history-content__label">{{'User.Coefficient' | translate}}
             :</span> {{userInfoList['Coefficient']}}</div>
           <div class="flex_between"><span class="mobile-user-history-content__label">{{'User.Status' | translate}}
@@ -64,7 +64,7 @@
                 <div class="border-line"></div>
                 <div class="table-list__row event-date">
                   <div class="header-item header-item__6">{{'User.Event_Date' | translate}}</div>
-                  <div class="body-item body-item__6">{{item?.EventDate | date: 'dd/MM h:mm'}}</div>
+                  <div class="body-item body-item__6">{{item?.EventDate | date: 'dd/MM HH:mm'}}</div>
                 </div>
               </div>
             </div>

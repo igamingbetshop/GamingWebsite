@@ -115,10 +115,15 @@ export class BaseDepositComponent extends BaseComponent {
 
         this.paymentsService.getPaymentSystem(inputData).then((data) =>
         {
-            if (data['ResponseCode'] === 0) {
-                let depositItems = data['PartnerPaymentSystems'].filter(item => item.Type == '2');
+            if (data['ResponseCode'] === 0)
+            {
+                let depositItems = data['PartnerPaymentSystems'].filter(item =>  item.Type == '2').map(item => {
+                    item.IconSrc = `../../../../../../../assets/images/deposit/${item.PaymentSystemId}.${item.ImageExtension}`;
+                    return item;
+                });
 
-                if (typeof currentDepositId !== 'undefined') {
+                if (typeof currentDepositId !== 'undefined')
+                {
                     let choseDeposit = depositItems.filter(item => item.PaymentSystemId == currentDepositId);
                     let openFromFooter = JSON.parse(sessionStorage.getItem('openWithFooter'));
 
@@ -140,7 +145,8 @@ export class BaseDepositComponent extends BaseComponent {
                 } else {
                     this.paymentSystemList = depositItems;
                     this.selectPayment(this.paymentSystemList[0], false);
-                    if (this.configService.defaultOptions.AccountTemplateType == '1') {
+                    if (this.configService.defaultOptions.AccountTemplateType == '1')
+                    {
                         this.paymentSystemList[0].Opened = true;
                     } else {
                         this.paymentSystemList[0].Opened = false;

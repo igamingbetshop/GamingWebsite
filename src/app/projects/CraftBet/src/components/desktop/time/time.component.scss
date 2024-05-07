@@ -4,22 +4,46 @@
   justify-content: center;
   position: relative;
   flex-direction: var(--show-time-mode-flex-direction, row);
+  align-items: center;
   .show-last-login {
     display: var(--header-last-login-display, none);
   }
-  >span{cursor: pointer;text-align: var(--icon-timezone-text-align, left)}
+  >span{cursor: pointer;text-align: var(--icon-timezone-text-align, left);display:flex;}
+  .time-arrow_icon {
+    margin-left: var(--show-time-arrow-icon-margin-left, 5px);
+    margin-right: var(--show-time-arrow-icon-margin-right, 0);
+    margin-top: var(--show-time-arrow-icon-margin-top, 0);
+    margin-bottom: var(--show-time-arrow-icon-margin-bottom, 0);
+    color: var(--show-time-arrow-icon-color, #fff);
+    font-size: var(--show-time-arrow-icon-font-size, 16px);
+    display: var(--show-time-arrow-icon-display, none);
+    transition: all 0.4s ease;
+  }
   .timezones-box
   {
     display: none;
     flex-direction: column;
     position: absolute;
     background: var(--timezones-bg, #101824);
-    input{flex:1; padding: 5px; border-radius: 5px; border: none; outline: none}
+    border: var(--timezones-box-border, none);
+    input{
+      flex:1;
+      padding: var(--timezones-box-input-padding, 5px);
+      border-radius: var(--timezones-box-input-border-radius, 5px);
+      border: var(--timezones-box-input-border, none);
+      outline: none;
+      background: var(--timezones-box-input-background, #fff);
+      color: var(--timezones-box-input-color, #000);
+      text-indent: var(--timezones-box-input-text-indent, 10px);
+    }
+    input::placeholder{
+      color: var(--timezones-box-input-placeholder-color, #fff);
+    }
     transform: none;
     top:37px;
     right: 0;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: var(--timezones-box-border-radius, 5px);
+    padding: var(--timezones-box-padding, 10px);
     .timezones
     {
       width: 400px;
@@ -49,5 +73,8 @@
   &.opened
   {
     .timezones-box{display: flex}
+    .time-arrow_icon {
+      transform: rotateZ(-180deg);
+    }
   }
 }

@@ -2,9 +2,9 @@
 @import "../../../../../../../styles/helpers/variables";
 
 .modal-content {
-  margin-top: 180px;
+  //margin-top: 180px;
   max-width: var(--tickets-messages-modal-section-max-width, 1000px) !important;
-  padding-right: var(--tickets-messages-modal-padding-right, 0);
+  padding-right: var(--tickets-messages-modal-padding-right, 24px);
   height: var(--tickets-messages-modal-section-height, auto);
   h2 {
     color: var(--tickets-messages-title-color, #000);

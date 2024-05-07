@@ -1,131 +1,130 @@
-<!--<div class="mobile-footer-section">
-    <ng-container *ngFor="let menuItem of footerMenuList">
-        <div class="mobile-social-icons" *ngIf="menuItem?.BackgroundType !== 'text'">
-            <a class="cursor_{{item?.Type}}" *ngFor="let item of menuItem?.SubMenu" (click)="socialChange(item)"
-               [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/mobile-footer-menu/' + item?.Icon
-             + ')'}" [ngClass]="item.Type == 'icons' ? item.Icon : 'sport-element'">
-            </a>
-        </div>
-    </ng-container>
-
-
-    <div class="footer-section_boxMenu_bottom" *ngIf="footerLogoList.length > 0">
-        <div class="payments_section">
-
-            <ng-container *ngFor="let item of footerLogoList">
-                <a *ngIf="item.Type == 1" class="payments_section_item" routerLinkActive="active"
-                   (click)="navigateInDepositPage(item)"
-                   [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/mobile-footer-menu/' +  item?.Icon}"
-                   class="payments_section_item"></a>
-                <div *ngIf="item.Type == 2" class="mobile-license">
-                    <div [innerHtml]="item?.Href | sanitizer: 'html'"></div>
-                </div>
-            </ng-container>
-        </div>
-    </div>
-    <div>
-        <span class="top-info">{{'Footer.InfoText' | translate}}</span>
-        <span class="bottom-info">{{ 'Footer.CopyRight' | translate }}</span>
-    </div>
-</div>-->
-
 <div class="mobile-footer-section" id="mobileFooterSection">
-<ng-container *ngFor="let commonItem of commonItems">
-    <ng-container [ngSwitch]="commonItem.Type">
-        <div *ngSwitchCase="'m-ft-menu-item'">
-            <div class="mobile-footer-section_boxMenu {{customStyleName}}_boxMenu">
-                <div class="mobile-footer-section_boxMenu_top {{customStyleName}}_boxMenu_top">
-
-                     <div class="footer-column {{customStyleName}}" *ngFor="let menuItem of commonItem.Menu"
-                        [ngClass]="{'showFooter':animateFooter}" collapse>
-
-                       <div class="footer-column-title" (click)="redirectInToPag(menuItem)">
-                           <span>{{'Footer.' + menuItem.Title | translate}}</span>
-                           <i class="icon-arrow"></i>
-                       </div>
-                         <div class="footer-column-content">
-                             <ng-container *ngFor="let item of menuItem?.SubMenu">
-                                 <a class="footer-column-item" *ngIf="item?.OpenInRouting; else openNewTab" routerLinkActive="active"
-                                    (click)="goDepositPage(item)"
-                                    [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' + item?.Icon
-             + ')'}">
-                                     <div [innerHtml]="'Footer.' + item.Title | translate | sanitizer: 'html'"></div>
-                                 </a>
-                                 <ng-template #openNewTab>
-                                     <a class="footer-column-item" target="_blank" href="{{item?.Href}}">
-                                         <div [innerHtml]="'Footer.' + item.Title | translate | sanitizer: 'html'"></div>
-                                     </a>
-                                 </ng-template>
-                             </ng-container>
-                         </div>
-
-                   </div>
-                </div>
-            </div>
-        </div>
-
-        <div *ngSwitchCase="'m-ft-images'" [className]="commonItem.className ? 'm-ft-images ' + commonItem.className : 'm-ft-images'">
-            <ng-container *ngFor="let item of commonItem.SubMenu">
-                <ng-container [ngSwitch]="item.Type">
-                    <!--Payments-->
-                    <div *ngSwitchCase="'1'" class="ft-images-type1">
-                        <a  class="ft-images-type1-item" routerLinkActive="active"
-                            (click)="goDepositPage(item)"
-                            [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' +  item?.Icon}"></a>
-                    </div>
-
-                    <!--License-->
-                    <div *ngSwitchCase="'2'">
-                        <div  class="ft-images-type2 license" [innerHtml]="item.Href | sanitizer: 'html'"></div>
-                    </div>
-
-                    <!--Socials-->
-                    <div *ngSwitchCase="'3'">
-                        <div class="ft-images-type3">
-                            <a class="ft-images-type3-item"  (click)="socialChange(item)"
-                               [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' + item?.Icon
-             + ')'}">
-                            </a>
+    @for(commonItem of commonItems; track commonItem.Id)
+    {
+        @switch (commonItem.Type)
+        {
+            @case ('m-ft-menu-item')
+            {
+                <div>
+                    <div class="mobile-footer-section_boxMenu {{customStyleName}}_boxMenu">
+                        <div class="mobile-footer-section_boxMenu_top {{customStyleName}}_boxMenu_top">
+                            @for (menuItem of commonItem.Menu; track menuItem.Id)
+                            {
+                                <div class="footer-column {{customStyleName}}"
+                                     [ngClass]="{'showFooter':animateFooter}" collapse>
+                                    <div class="footer-column-title" (click)="redirectInToPag(menuItem)">
+                                        <span>{{'Footer.' + menuItem.Title | translate}}</span>
+                                        <i class="icon-arrow"></i>
+                                    </div>
+                                    <div class="footer-column-content">
+                                        @for (item of menuItem?.SubMenu; track item.Id)
+                                        {
+                                            @if(item?.OpenInRouting)
+                                            {
+                                                <a class="footer-column-item" routerLinkActive="active"
+                                                   (click)="goDepositPage(item)"
+                                                   [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/footer-menu/' + item?.Icon+ ')'}">
+                                                    <div [innerHtml]="'Footer.' + item.Title | translate | sanitizer: 'html'"></div>
+                                                </a>
+                                            }
+                                            @else
+                                            {
+                                                <a class="footer-column-item" target="_blank" href="{{item?.Href}}">
+                                                    <div [innerHtml]="'Footer.' + item.Title | translate | sanitizer: 'html'"></div>
+                                                </a>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
+                </div>
+            }
+            @case ('m-ft-images')
+            {
+                <div [className]="commonItem.className ? 'm-ft-images ' + commonItem.className : 'm-ft-images'">
+                    <div class="m-ft-images-title">{{'Footer.' + commonItem?.Title | translate}}</div>
+                    @for (item of commonItem.SubMenu; track item.Id)
+                    {
+                        @switch (item.Type)
+                        {
+                            @case ('1')
+                            {
+                                <div class="ft-images-type1">
+                                    <a  class="ft-images-type1-item" routerLinkActive="active"
+                                        (click)="goDepositPage(item)"
+                                        [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/mobile-footer-menu/' +  item?.Icon}"></a>
+                                </div>
+                            }
+                            @case ('2')
+                            {
+                                <div>
+                                    <div  class="ft-images-type2 license" [innerHtml]="item.Href | sanitizer: 'html'"></div>
+                                </div>
+                            }
+                            @case ('3')
+                            {
+                                <div>
+                                    <div class="ft-images-type3">
+                                        <a class="ft-images-type3-item"  (click)="socialChange(item)"
+                                           [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/mobile-footer-menu/' + item?.Icon+ ')'}">
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            }
+            @case ('m-ft-text')
+            {
+                <div [className]="commonItem.className ? 'm-ft-text ' + commonItem.className : 'm-ft-text'">
 
-                    <!--Others-->
-                    <div *ngSwitchDefault>
-
+                    @for (item of commonItem.SubMenu; track item.Id)
+                    {
+                        @switch (item.Type)
+                        {
+                            @case('1')
+                            {
+                                <div>
+                                    <div  class="ft-images-type2 license" [innerHtml]="item.Href | sanitizer: 'html'"></div>
+                                </div>
+                            }
+                            @case('2')
+                            {
+                                <div class="info-text">
+                                    <input type="checkbox" id="{{item.Title}}">
+                                    <p [innerHTML]="'Footer.' + item.Title | translate | sanitizer: 'html'"></p>
+                                    <label class="see-more" for="{{item.Title}}" role="button">{{'Footer.see more' | translate }}</label>
+                                    <label class="see-less" for="{{item.Title}}" role="button">{{'Footer.see less' | translate }}</label>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            }
+            @case ('m-ft-common-btn')
+            {
+                @if(isLogin)
+                {
+                    <div [className]="commonItem.className ? 'm-ft-common ' + commonItem.className : 'm-ft-common'">
+                        <functional-btn [menuItem]="commonItem" class="{{commonItem.className}}" itemClassname="{{commonItem.className}}"></functional-btn>
                     </div>
-                </ng-container>
-            </ng-container>
-
-        </div>
-        <div *ngSwitchCase="'m-ft-text'" [className]="commonItem.className ? 'm-ft-text ' + commonItem.className : 'm-ft-text'">
-            <ng-container *ngFor="let item of commonItem.SubMenu, let i = index">
-                <ng-container [ngSwitch]="item.Type">
-                    <!--License-->
-                    <div *ngSwitchCase="'1'">
-                        <div  class="ft-images-type2 license" [innerHtml]="item.Href | sanitizer: 'html'"></div>
-                    </div>
-                    <!--Text-->
-                    <div *ngSwitchCase="'2'" class="info-text">
-                        <input type="checkbox" id="{{item.Title}}">
-                        <p [innerHTML]="'Footer.' + item.Title | translate | sanitizer: 'html'"></p>
-                        <label class="see-more" for="{{item.Title}}" role="button">{{'Footer.see more' | translate }}</label>
-                        <label class="see-less" for="{{item.Title}}" role="button">{{'Footer.see less' | translate }}</label>
-                    </div>
-                </ng-container>
-            </ng-container>
-
-        </div>
-        <ng-container *ngIf="isLogin">
-            <div *ngSwitchCase="'m-ft-common-btn'" [className]="commonItem.className ? 'm-ft-common ' + commonItem.className : 'm-ft-common'">
-                <functional-btn [menuItem]="commonItem" class="{{commonItem.className}}" itemClassname="{{commonItem.className}}"></functional-btn>
-            </div>
-        </ng-container>
-        <div *ngSwitchCase="'m-ft-contacts'" [className]="commonItem.className ? 'm-ft-contacts ' + commonItem.className : 'm-ft-contacts'">
-            <div class="ft-contacts-item" *ngFor="let item of commonItem.SubMenu">
-                <span class="icon-{{item?.Icon}}"  (click)="socialChange(item)"> </span>
-                <span>{{item?.Title | translate}}</span>
-            </div>
-        </div>
-    </ng-container>
-</ng-container>
+                }
+            }
+            @case ('m-ft-contacts')
+            {
+                <div [className]="commonItem.className ? 'm-ft-contacts ' + commonItem.className : 'm-ft-contacts'">
+                    @for (item of commonItem.SubMenu; track item.Id)
+                    {
+                        <div class="ft-contacts-item">
+                            <span class="icon-{{item?.Icon}}"  (click)="socialChange(item)"> </span>
+                            <span>{{item?.Title | translate}}</span>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    }
 </div>

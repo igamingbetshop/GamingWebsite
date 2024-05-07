@@ -41,7 +41,6 @@ export class MobileSignupComponent extends BaseRegisterDynamicFieldsComponent {
 
   ngOnInit() {
     super.ngOnInit();
-    document.querySelectorAll("")
   }
 
   ngOnDestroy() {

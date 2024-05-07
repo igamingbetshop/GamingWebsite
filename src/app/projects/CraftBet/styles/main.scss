@@ -56,11 +56,12 @@ body {
 .modal-content {
   background-color:#ffffff;
   border-radius: 4px;
-  margin: 16px auto;
+  //margin: 16px auto;
+  margin: 0 auto;
   max-width: 755px;
   min-width: var(--all-modal-content-min-width, 504px);
   position: relative;
-  margin-top: marginTop(all-modal-content, 145.35px) !important;
+  //margin-top: marginTop(all-modal-content, 145.35px) !important;
   //width: 370px;
 
   &.User-Info {
@@ -125,9 +126,27 @@ body {
 .modal-header {
   border-bottom:1px solid #cecece;
 }
-
 .modal-body {
   padding: 16px;
+}
+.modal-body, .forgot-password-section_content {
+  >.icon-close-modal{
+    position: absolute;
+    right: 5%;
+    top: 3%;
+    z-index: 1;
+    color: itemColor(popup-close-icon, #fff);
+    font-size: fontSize(popup-close-icon,16px);
+    display: display(popup-close-icon, block);
+    @media screen and (min-width: 0px) and (max-width: 1376px)
+    {
+      font-size: calc(var(--popup-close-icon-font-size,16px) * 0.7);
+    }
+    @media screen and (min-width: 1377px) and (max-width: 1610px)
+    {
+      font-size: calc(var(--popup-close-icon-font-size,16px) * 0.9);
+    }
+  }
 }
 
 .modal-footer {

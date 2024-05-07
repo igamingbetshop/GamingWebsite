@@ -2,8 +2,8 @@
         <h2>{{'Character.' + 'MapTitle' | translate}}</h2>
         <div class="m-character-hierarchy">
              <!--   <img class="map-image" src="../assets/images/characters/mobile-map.png">-->
-                <img class="map-image"  [src]="selfHierarchy[page - 1]?.BackgroundImageData">
-                <div class="m-character-hierarchy-content level{{item.Order}}" *ngFor="let item of selfHierarchy | paginate: { itemsPerPage: 5, currentPage: page }; let i = index"
+                <img class="map-image"  [src]="selfHierarchy[(page - 1) * this.itemCount]?.BackgroundImageData">
+                <div class="m-character-hierarchy-content level{{item.Order}}" *ngFor="let item of selfHierarchy | paginate: { itemsPerPage: this.itemCount, currentPage: page }; let i = index"
                      [class.last]="item.Id === lastItem.Id">
                         <div  class="character-level"
                               [class.active]="item.Selected == true"
@@ -33,9 +33,9 @@
 
         <div class="character-pagination">
                 <pagination-controls
-                        nextLabel=""
+                        nextLabel="{{'Next' | translate}}"
                         autoHide="true"
-                        previousLabel=""
+                        previousLabel="{{'Prev' | translate}}"
                         (pageChange)="page = $event"></pagination-controls>
         </div>
 </div>

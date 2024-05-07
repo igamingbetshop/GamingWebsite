@@ -27,11 +27,17 @@
                (click)="openGame(game, 'real')">
                 {{'Game.Real' | translate}}
             </a>
+            <div class="game-btn_real-pic">
+                <img class="game-btn game-btn_real-pic-inner" src="../../../../../../../assets/images/play-btn.png"
+                     (click)="openGame(game, 'real')">
+            </div>
         </div>
         <div class="game-open game-open-demo" *ngIf="game.hasDemo">
             <a class="game-btn game-btn_demo" title="{{'Game.Demo' | translate}}"
                (click)="openGame(game, 'demo')">
-                {{'Game.Demo' | translate}}
+                <img class="game-btn game-btn_demo game-btn_demo-pic"
+                     src="../../../../../../../assets/images/play-btn.png">
+                <span class="game-btn_demo-text">{{'Game.Demo' | translate}}</span>
             </a>
         </div>
         <div class="jackpot"

@@ -17,6 +17,22 @@
   &_content {
     display: flex;
     margin: var(--m-withdraw-section-content-margin, 0 15px);
+    app-common-accounts {
+      .payment-system-block {
+        width: var(--m-payment-client-info-width, 100%);
+        padding: var(--m-payment-client-info-padding, 14px);
+        border: var(--m-payment-client-info-border, none);
+        margin-left: var(--m-payment-client-info-margin-left, 0);
+        margin-right: var(--m-payment-client-info-margin-right, 0);
+      }
+    }
+    app-common-bonuses {
+      .mobile-default-scroll {
+        width: var(--m-default-scroll-width, auto);
+        margin: var(--m-default-scroll-margin, 0);
+        padding: var(--m-default-scroll-padding, 0);
+      }
+    }
 
     .payment_header {
       background: $account-deposit-section-bg;
@@ -47,28 +63,34 @@
         padding-right: var(--m-bonus-refused-padding-right, 0px);
         cursor: pointer;
         line-height: var(--m-bonus-refused-line-height, 18px);
+        font-size: var(--m-bonus-refused-font-size, 16px);
         color: var(--account-content-item-color, #fff);
         margin-top: var(--m-bonus-refused-margin-top, 5px);
+        margin-bottom: var(--m-bonus-refused-margin-bottom, 0px);
+        margin-left: var(--m-bonus-refused-margin-left, 0px);
+        margin-right: var(--m-bonus-refused-margin-right, 0px);
+        width: var(--m-bonus-refused-width, 100%);
       }
       .bonus-refused input[type="checkbox"] {
         position: absolute;
         left: var(--m-bonus-refused-input-left, -1px);
         top: var(--m-bonus-refused-input-top, -3px);
-        width: 18px;
-        height: 18px;
-        border: none;
+        width: var(--m-bonus-refused-input-width, 18px);
+        height: var(--m-bonus-refused-input-height, 18px);
+        border: var(--m-user-radio-unchecked-border, none);
         border-radius: 100%;
         background: var(--m-user-radio-unchecked-color, #131A2C);
         cursor: pointer;
       }
       .bonus-refused input[type="checkbox"]:checked::after {
         content: '';
-        width: 8px;
-        height: 8px;
+        width: var(--m-user-radio-checked-width, 8px);
+        height: var(--m-user-radio-checked-height, 8px);
         background: var(--m-user-radio-checked-color, linear-gradient(180deg, #DBEDFF 0%, #7A9EC2 49.48%, #6295C8 100%));
         position: absolute;
-        top: 5px;
-        left: 5px;
+        top: var(--m-user-radio-checked-top, 5px);
+        left: var(--m-user-radio-checked-left, 5px);
+        border: var(--m-user-radio-checked-border, none);
         border-radius: 100%;
         transition: all 0.1s ease;
         opacity: 1;
@@ -114,23 +136,24 @@
           input[type="radio"]:not(:checked):before {
             content: '';
             position: absolute;
-            left: -2px;
-            top: -3px;
-            width: 18px;
-            height: 18px;
-            border: none;
+            left: var(--m-user-radio-unchecked-left, -2px);
+            top: var(--m-user-radio-unchecked-top, -3px);
+            width: var(--m-user-radio-unchecked-width, 18px);
+            height: var(--m-user-radio-unchecked-height, 18px);
+            border: var(--m-user-radio-unchecked-border, none);
             border-radius: 100%;
             background: var(--m-user-radio-unchecked-color, #131A2C);
           }
           input[type="radio"]:checked:after,
           input[type="radio"]:not(:checked):after {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: var(--m-user-radio-checked-width, 8px);
+            height: var(--m-user-radio-checked-height, 8px);
             background: var(--m-user-radio-checked-color, linear-gradient(180deg, #DBEDFF 0%, #7A9EC2 49.48%, #6295C8 100%));
             position: absolute;
-            top: 2px;
-            left: 3px;
+            top: var(--m-user-radio-checked-top, 2px);
+            left: var(--m-user-radio-checked-left, 3px);
+            border: var(--m-user-radio-checked-border, none);
             border-radius: 100%;
             transition: all 0.1s ease;
           }
@@ -146,7 +169,7 @@
           }
           .bonus-name {
             color: $account-content-item-color;
-            font-size: $font-size-3;
+            font-size: var(--m-bonus-name-font-size, $font-size-3);
             max-width: var(--m-bonus-name-max-width, 450px);
             overflow: hidden;
             white-space: nowrap;
@@ -202,7 +225,7 @@
       }
 
       .content_col {
-        margin-top: 15px;
+        margin-top: var(--m-withdraw-content-column-margin-top, 15px);
         text-align: var(--m-withdraw-text-align, justify);
 
         &:last-child {
@@ -417,6 +440,9 @@
                     font-weight: fontWeight(m-payment-row-header, 400);
                     margin-bottom: marginBottom(m-payment-row-header, 6px);
 
+                  }
+                  .hide-commission-percent {
+                    display: var(--m-payment-row-item-commission-display, block);
                   }
                   .balance_info {
                     color: var(--m-account-payment-amount-color, #bbc6e9);

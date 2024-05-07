@@ -40,54 +40,62 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
         super.ngOnInit();
     }
 
-    createComponent(Id: number, Type: number, info?: number[], CommissionPercent?: number) {
-        super.createComponent(Id, Type, info, CommissionPercent);
+    createComponent(Id: number, Type: number, ContentType: number, info?: number[], CommissionPercent?: number) {
+        super.createComponent(Id, Type, ContentType, info, CommissionPercent);
         switch (Type) {
             case 1: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType1Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
             }
             case 2: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType2Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
             }
             case 3: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType3Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
             }
             case 4: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType4Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
             }
             case 5: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType5Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
             }
             case 6: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType6Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
             }
             case 7: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType7Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
             }
             case 8: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType8Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
             }
@@ -95,6 +103,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 9: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType9Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
             }
@@ -102,6 +111,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 10: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType10Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
@@ -109,6 +119,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 11: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType11Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
@@ -116,6 +127,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 12: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType12Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
@@ -123,6 +135,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 13: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType13Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
@@ -130,6 +143,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 14: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType14Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.CommissionPercent = CommissionPercent;
                 break;
@@ -137,6 +151,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 15: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType15Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.contentType = Type;
                 this.componentRef.instance.nominals = info;
                 break;
@@ -144,6 +159,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 16: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType16Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.contentType = Type;
                 this.componentRef.instance.nominals = info;
                 break;
@@ -151,6 +167,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 18: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType18Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.contentType = Type;
                 this.componentRef.instance.nominals = info;
                 break;
@@ -158,6 +175,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 20: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType20Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.contentType = Type;
                 this.componentRef.instance.nominals = info;
                 break;
@@ -165,6 +183,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 21: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType21Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.contentType = Type;
                 this.componentRef.instance.nominals = info;
                 break;
@@ -172,6 +191,7 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 22: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType22Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.contentType = Type;
                 this.componentRef.instance.nominals = info;
                 break;
@@ -179,13 +199,15 @@ export class MobileWithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 23: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType23Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.contentType = Type;
                 this.componentRef.instance.nominals = info;
                 break;
             }
-            case 23: {
+            case 24: {
                 this.componentRef = this.entry.createComponent(MobileWithdrawType24Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.contentType = Type;
                 this.componentRef.instance.nominals = info;
                 break;

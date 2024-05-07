@@ -17,7 +17,9 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
   @ViewChild("sliderComponent") sliderComponent;
   promotionFragments:PromotionFragment[] = [];
   selectedPromotionId:number | string;
+  selectedFragmentId:number | string;
   selectedFragment:PromotionFragment;
+  filteredFragment:PromotionFragment;
   promotion:Promotion = new Promotion();
   slides:any[] = [];
   private baseApiService:BaseApiService;
@@ -48,6 +50,7 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
     this.getPromotionFragments();
     this.subscription.add(this.route.queryParams.subscribe(param => {
       this.selectedPromotionId = param.id;
+      this.selectedFragmentId = param.groupId;
       if(this.selectedPromotionId)
       {
         this.http.get<any>(window['debugPath'] + '/assets/json/promotions/' + param.id
@@ -64,7 +67,17 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
         });
       }
       if(this.promotionFragments.length)
+      {
         this.selectFragmentByPromotionId();
+      }
+      if(this.selectedFragmentId)
+      {
+        if(this.promotionFragments.length)
+        {
+          this.filteredFragment = this.promotionFragments.find(fragment =>  fragment.Id == this.selectedFragmentId);
+        }
+      }
+      else this.filteredFragment = null;
     }));
   }
 
@@ -83,7 +96,14 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
                 f.Style = JSON.parse(f.StyleType);
               return f;
             });
-            this.selectFragmentByPromotionId();
+            if(this.selectedPromotionId)
+            {
+              this.selectFragmentByPromotionId();
+            }
+            if(this.selectedFragmentId)
+            {
+              this.filteredFragment = this.promotionFragments.find(fragment =>  fragment.Id == this.selectedFragmentId);
+            }
           }
         }));
   }
@@ -99,16 +119,19 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
         if(this.selectedPromotionId == this.promotionFragments[i].Promotions[j].Id)
         {
           this.selectedFragment = this.promotionFragments[i];
-          if (this.sliderComponent.initialized)
+          if(this.sliderComponent)
           {
-            this.sliderComponent.unslick();
-            this.slides = [];
+            if (this.sliderComponent.initialized)
+            {
+              this.sliderComponent.unslick();
+              this.slides = [];
+            }
+            setTimeout(() => {
+              this.slides = [...this.selectedFragment.Promotions];
+              if (!this.sliderComponent.initialized)
+                this.sliderComponent.initSlick();
+            }, 100);
           }
-          setTimeout(() => {
-            this.slides = [...this.selectedFragment.Promotions];
-            if (!this.sliderComponent.initialized)
-              this.sliderComponent.initSlick();
-          }, 100);
           break parentLoop;
         }
       }

@@ -44,6 +44,7 @@
         </div>
       </div>
       <div *ngSwitchCase="'ft-images'" [className]="commonItem.className ? 'ft-images ' + commonItem.className : 'ft-images'">
+        <div class="ft-images-title">{{'Footer.' + commonItem?.Title | translate}}</div>
         <ng-container *ngFor="let item of commonItem.SubMenu">
           <ng-container [ngSwitch]="item.Type">
             <!--Payments-->

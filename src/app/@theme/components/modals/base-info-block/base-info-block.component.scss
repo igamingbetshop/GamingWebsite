@@ -11,7 +11,7 @@
   height: var(--affiliate-confirmation-height, 182px);
   width: var(--affiliate-confirmation-width, 310px);
   padding: var(--affiliate-confirmation-padding, 25px 20px);
-  margin: var(--affiliate-confirmation-margin, 250px auto 0) !important;
+  margin: var(--affiliate-confirmation-margin, 0px auto 0) !important;
   .modal-body {
     color: var(--affiliate-confirmation-title-color, #fff);
     text-align: var(--affiliate-confirmation-title-text-align, center);

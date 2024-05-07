@@ -13,8 +13,7 @@
                     <li class="payment_list_item" *ngFor="let item of paymentSystemList; let i = index"
                         (click)="selectPayment(item, false)"
                         [ngClass]="{'selected': item?.PaymentSystemId == currentPayment?.PaymentSystemId}">
-                        <div class="payment_list_item_img" [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/deposit/' +  item.PaymentSystemId + '.png)'}"></div>
-<!--                        <img src="../../../../../../../assets/images/payments/{{item.PaymentSystemId}}.png"/>-->
+                        <div class="payment_list_item_img" [ngStyle]="{'background-image': 'url(' + item.IconSrc + ')'}"></div>
                         <div class="payment_list_item__info">
                             <div class="info_text" style="-webkit-box-orient: vertical"
                                  [innerHTML]="'Deposit.' + 'PAYMENT_MESSAGE' + item?.PaymentSystemId | translate | sanitizer: 'html'"></div>

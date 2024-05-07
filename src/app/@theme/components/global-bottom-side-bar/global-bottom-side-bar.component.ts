@@ -17,8 +17,15 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
                 menuListItem.Href = menuListItem.Href.replace('real', 'demo');
                 this.selectedItemHref = this.router.url.slice(1).replace('real', 'demo');
             }
+            if (JSON.parse(menuListItem.StyleType)['centerHighlight'] !== undefined) {
+                menuListItem.centerHighlight = JSON.parse(menuListItem.StyleType)['centerHighlight'] === 1 ? true : false;
+            }
             return menuListItem;
         });
+        const centerIndex = this._menuList.findIndex(item => item.centerHighlight === true);
+        if (centerIndex !== -1 && this._menuList.length % 2 !== 0) {
+            this.center = Math.floor(this._menuList.length / 2);
+        }
     }
 
     get menuList(): Array<any> {
@@ -38,6 +45,7 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
     public selectedItemHref;
     private subscription:Subscription;
     public _menuList: Array<any>;
+    public center;
 
     constructor(private injector: Injector) {
         this.router = injector.get(Router);

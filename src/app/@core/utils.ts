@@ -312,7 +312,7 @@ export function generateRundomString(length:number)
 
 export function getMappedGame(game:any):any
 {
-  game.gameImage = game["i"].startsWith('http') ? game["i"] : 'https://resources.' + environment.hostName + '/products/' + game["i"];
+  game.gameImage = (game["i"] && game["i"].startsWith('http')) ? game["i"] : 'https://resources.' + environment.hostName + '/products/' + game["i"];
   game.name = game["n"];
   game.hasDemo = game["hd"];
   game.nickName = game["nn"];

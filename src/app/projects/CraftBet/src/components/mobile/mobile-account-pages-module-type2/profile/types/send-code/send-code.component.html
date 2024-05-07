@@ -3,7 +3,7 @@
 
         <div class="form_field form_field-email-verify">
             <input type="text" [(ngModel)]="dataModel" (ngModelChange)="onModelChange($event)"  placeholder="{{'Settings.Email' | translate}}"
-                   [ngClass]="{ 'disable_item': (!(profileService.editState$ | async).value), 'active_item': (profileService.editState$ | async).value,
+                   [ngClass]="{ 'disable_item': (!(profileService.editState$ | async).value || formElement.Config?.disabled), 'active_item': (profileService.editState$ | async).value,
                     'error-border': formGroup.get(formControlName).hasError('required')|| formGroup.get(formControlName).hasError('pattern')}"
             />
             <label [class.required-field]="formElement.Config?.mandatory">{{'Register.Email-verify' | translate}}</label>
@@ -68,7 +68,7 @@
                            #mobileDataModelInput="ngModel"
                            required
                            placeholder="{{currentValueMobileCode.Mask ? currentValueMobileCode.Mask : 'Register.Mobile-number-placeholder' | translate}}"
-                           [ngClass]="{'disable_item':!(profileService.editState$ | async).value, 'active_item': (profileService.editState$ | async).value,
+                           [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item': (profileService.editState$ | async).value,
                            'error-border': mobileDataModelInput.invalid}"/>
                 </div>
 

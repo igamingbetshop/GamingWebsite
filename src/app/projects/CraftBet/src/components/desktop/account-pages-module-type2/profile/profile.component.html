@@ -28,7 +28,7 @@
                            [formControlName]="formItem.Title"
                            [placeholder]="formItem.Title" reg-exp-input [regExp]="formItem.RegExp"
                            [name]="formItem.Title"
-                           [ngClass]="{'disable_item':!(profileService.editState$ | async).value, 'active_item':  (profileService.editState$ | async).value, 'disable_input': (profileService.profileData$ | async)[formItem?.Title + 'Disabled'],
+                           [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formItem.Config?.disabled, 'active_item':  (profileService.editState$ | async).value, 'disable_input': (profileService.profileData$ | async)[formItem?.Title + 'Disabled'],
                                         'error-border': formGroup.get(formItem?.Title).hasError('required')|| formGroup.get(formItem?.Title).hasError('pattern')}">
                     <label *ngIf="formItem.Config.hasLabel" [class.required-field]="formItem.Config?.mandatory">{{'User.' + formItem.Title | translate}}</label>
                     <span class="error-field-message" *ngIf="(formGroup.get(formItem?.Title).hasError('required') && formGroup.get(formItem?.Title).touched) || formGroup.get(formItem?.Title).hasError('pattern')">{{'Error.' + formItem?.Title + 'FieldNotValid' | translate}}</span>

@@ -10,11 +10,14 @@ import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods, VerificationCodeTypes} from "@core/enums";
 import {take} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
+import {BaseFrameComponent} from "../../../modals/base-frame/base-frame.component";
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Directive()
 export class BaseWithdrawPaymentComponent implements OnInit {
 
+    @Input() contentType: number;
     @Input() paymentSystemId: number;
     @Input() nominals: number[];
     @Input() maxMinAmount: any;
@@ -34,6 +37,7 @@ export class BaseWithdrawPaymentComponent implements OnInit {
     public configService: ConfigService;
     protected paymentService:GetPaymentsService;
     protected baseApiService:BaseApiService;
+    public translate: TranslateService;
 
     public errorMessage: string;
     public successMessage: string;
@@ -52,6 +56,7 @@ export class BaseWithdrawPaymentComponent implements OnInit {
         this.paymentService = injector.get(GetPaymentsService);
         this.configService = injector.get(ConfigService);
         this.baseApiService = injector.get(BaseApiService);
+        this.translate = injector.get(TranslateService);
     }
 
     ngOnInit() {
@@ -74,20 +79,49 @@ export class BaseWithdrawPaymentComponent implements OnInit {
         this.subscriptions.push(this.paymentControllerService.notifyGetCreatePaymentData.subscribe((data) => {
             this.paymentForm.reset();
             this.submitted = false;
-            if(data.Url)
-            {
-                this.popupCenter('', '', screen.width * 0.5, screen.height * 0.5);
-                this.openedWindow.location.href = data['Url'];
+            switch (this.contentType) {
+                case 1:
+                    this.popupCenter('', '_self', screen.width, screen.height);
+                    this.openedWindow.location.href = data['Url'];
+                    break;
+                case 2:
+                    this.popupCenter('', '_blank', screen.width, screen.height);
+                    this.openedWindow.location.href = data['Url'];
+                    break;
+                case 3:
+                    if(data['Url'])
+                    {
+                        this.popupCenter('', '_self', screen.width, screen.height);
+                        this.openedWindow.location.href = data['Url'];
+                    }
+                    else
+                    {
+                        if(data.Description)
+                        {
+                            this.translate.get(`Payment.${data.Description}`).subscribe((res: string) => {
+                                this.successMessage = res;
+                                this.paymentControllerService.getUserAccount();
+                                this.paymentControllerService.getUserAccountData();
+                                setTimeout(() => this.successMessage = '', 5000);
+                            });
+                        }
+                        else
+                        {
+                            this.successMessage = 'success';
+                            this.paymentControllerService.getUserAccount();
+                            this.paymentControllerService.getUserAccountData();
+                            setTimeout(() => this.successMessage = '', 5000);
+                        }
+                    }
+                    break;
+                case 4:
+                    this.dialog.open(BaseFrameComponent, {data:{ title: '',url: data['Url'],cancelUrl: data['CancelUrl']}, disableClose:true});
+                    break;
+                case 5:
+                    this.popupCenter('', '_blank', screen.width * 0.5, screen.height * 0.5);
+                    this.openedWindow.location.href = data['Url'];
+                    break;
             }
-            else
-            {
-                this.successMessage = 'Success';
-                this.paymentControllerService.getUserAccount();
-                this.paymentControllerService.getUserAccountData();
-            }
-            setTimeout(() => {
-                this.successMessage = '';
-            }, 5000);
         }));
     }
 

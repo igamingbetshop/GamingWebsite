@@ -99,6 +99,7 @@
     border-radius:  var(--category-fragment-see-all-radius, 8px);
     background-color: var(--category-fragment-see-all-bg, #ff172d);
     color:  var(--category-fragment-see-all-color, #FFFFFF);
+    border: var(--category-fragment-see-all-border, none);
     cursor: pointer;
     min-width: var(--category-fragment-see-all-min-width,95px);
     margin-right: 25px;
@@ -164,7 +165,8 @@
     justify-content: space-between;
     height: height(title-field, 60px);
     div:first-child {
-      width: 5%;
+      width: var(--filter-section-hidden-content-width, 5%);
+      display: var(--filter-section-hidden-content-display, block);
     }
     .back-section {
       color: itemColor(filter-section-back, #fff);
@@ -272,6 +274,22 @@
     }
   }
   @include show-all-label;
+}
+
+.left-count{
+  border: 1px solid #9BB1D4;
+  height: 30px;
+  width: 236px;
+  position: fixed;
+  bottom: 16px;
+  background: #1D2E4A;
+  right: 16px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  pointer-events: none;
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1500px) {

@@ -348,6 +348,7 @@
         align-items: var(--right-menu-title-align-items, center);
         font-weight: var(--right-menu-title-font-weight, 400);
         font-size: var(--right-menu-title-font-size, 14px);
+        width: var(--right-menu-title-width, auto);
         color: var(--right-menu-title-color, var(--right-menu-item-color));
         .title_menu_img {
           width: var(--right-menu-title-img-width, auto);
@@ -417,6 +418,9 @@
           flex-direction: flexDirection(right-menu-logout-field, row);
           padding-left: var(--right-menu-item-logout-padding-left, var(--right-menu-item-padding-left, 15px));
           padding-right: var(--right-menu-item-logout-padding-right, var(--right-menu-item-padding-right, 15px));
+          width: var(--right-menu-item-logout-width, auto);
+          margin: var(--right-menu-item-logout-margin, 0);
+          background: var(--right-menu-item-logout-width, transparent);
         }
 
         font-size: fontSize(right-menu-item, 14px);
@@ -428,6 +432,10 @@
         border-bottom: var(--right-menu-item-border-bottom, none);
 
         color: itemColor(right-menu-item, #000000);
+        background: var(--right-menu-item-background, transparent);
+        border-radius: var(--right-menu-item-border-radius, 0);
+        width: var(--right-menu-item-width, auto);
+        margin: var(--right-menu-item-margin, 0);
 
         &__icon {
           font-weight: fontWeight(right-menu-item-icon, normal);
@@ -461,6 +469,7 @@
     font-weight: fontWeight(right-menu-item-icon, normal);
     font-size: fontSize(right-menu-item-icon, 22px);
     margin-right: marginRight(right-menu-item-icon, 16px);
+    display: var(--right-menu-item-icon-display, block);
   }
 }
 .left-part-menuItem-icon {

@@ -1,7 +1,7 @@
 <div class="bottom-sideBar-section" id="bottom-sideBar">
     <ul class="b-sideBar">
-        <li *ngFor="let item of menuList" (click)="openTab(item)" class="b-sideBar__item"
-            [ngClass]="{ 'active-item': selectedOrder === item.Order}">
+        <li *ngFor="let item of menuList;let i = index;" (click)="openTab(item)" class="b-sideBar__item item-center"
+            [ngClass]="{ 'active-item': selectedOrder === item.Order, 'item-center': (center && i === center)}">
             <div class="b-sideBar__image" *ngIf="item.Icon.includes('.')" [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/mobile-bottom-menu/' +
                  item?.Icon
                   + ')'}">

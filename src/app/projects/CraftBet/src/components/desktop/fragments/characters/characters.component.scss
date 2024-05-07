@@ -17,6 +17,7 @@
   margin: 90px auto;
   border-radius: 16px;
   padding-top: 8px;
+  min-width: 1000px;
   .container-header
   {
     position: relative;
@@ -517,6 +518,7 @@
   {
     height: 590px;
     margin: 10px auto;
+    min-width: 300px;
     .carousel {
       top: -90px;
     }
@@ -535,6 +537,7 @@
   {
     height: 464px;
     margin: 10px auto;
+    min-width: 300px;
     .carousel {
       top: -90px;
       transform: scale(.8);

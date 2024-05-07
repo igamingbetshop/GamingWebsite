@@ -3,7 +3,7 @@
 
         <div class="form_field">
             <input type="text" [(ngModel)]="dataModel" (ngModelChange)="onModelChange($event)"  placeholder="{{'Settings.Email' | translate}}"
-                   [ngClass]="{ 'disable_item': (!(profileService.editState$ | async).value), 'active_item': (profileService.editState$ | async).value,
+                   [ngClass]="{ 'disable_item': (!(profileService.editState$ | async).value || formElement.Config?.disabled), 'active_item': (profileService.editState$ | async).value,
                     'error-border': formGroup.get(formControlName).hasError('required')|| formGroup.get(formControlName).hasError('pattern')}"
                    [style.width]="!(profileService.profileData$ | async)?.IsEmailVerified && !(profileService.editState$ | async).value ? '80%': '100%'"
                    />
@@ -70,7 +70,7 @@
                            #mobileDataModelInput="ngModel"
                            required
                            placeholder="{{currentValueMobileCode.Mask ? currentValueMobileCode.Mask : 'Register.Mobile-number-placeholder' | translate}}"
-                           [ngClass]="{'disable_item':!(profileService.editState$ | async).value, 'active_item': (profileService.editState$ | async).value,
+                           [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item': (profileService.editState$ | async).value,
                            'error-border': mobileDataModelInput.invalid}"/>
                 </div>
                 <button type="submit" class="craft_btn verify_btn setting_btn"

@@ -342,13 +342,18 @@
                  [ngClass]="menuDirection === 'left' ? 'left' :  ''"
             [class.expanded-menu]="isExpandedMenu">
 
-                <div  class="menu-icon" *ngIf="menuDirection === 'left'" (click)="expandLeftMenu()">
-                    <i class="icon-more"></i>
+                <div  class="menu-icon" *ngIf="menuDirection === 'left'" >
+                    <input type="checkbox" id="menu">
+                    <label  for="menu" (click)="expandLeftMenu()">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </label>
                 </div>
                 <ul #generalMenu class="general-menu">
 
                     <ng-container>
-                        <li  [attr.data-id]="'header-panel2-menu-' + menuItem.Title" collapse
+                        <li  [attr.data-id]="'header-panel2-menu-' + menuItem.Title" collapse="{{isOpenedDropdown}}"
                              class="general-menu_item dynamic-item {{menuItem?.className}}" *ngFor="let menuItem of generalMenuLeftItems"
                             (click)="onMenuItem(menuItem)"
                             [ngClass]="{'full-right': menuItem?.Orientation,
@@ -392,6 +397,10 @@
                             <div *ngIf="menuItem.contentType == 'character' && userLogined.user?.CharacterId &&  menuDirection === 'left'" class="character-img">
                                 <img  src="../../../../../../../assets/images/characters/{{userLogined.user?.CharacterId}}.png">
                             </div>
+                            <div *ngIf="menuItem.contentType == 'luckyGame' && menuDirection === 'left'" class="lucky-img" (click)="openLuckyGame()">
+                                <img class="left-menu-showed" src="../../../../../../../assets/images/{{menuItem?.Title}}.gif">
+                                <img class="left-menu-hidden" src="../../../../../../../assets/images/{{menuItem?.Title}}-closed.gif">
+                            </div>
 
                             <div *ngIf="menuItem.contentType == 'time' && !asianWebRoute" class="timezone">
                                 <app-time [menuItem]="menuItem" dropdown></app-time>
@@ -409,10 +418,11 @@
 	                            <span>{{userData?.Id}}</span>
 	                        </div>
 
-                           <!-- <div class="user_id" [routerLink]="['/user/account']"
-                                 *ngIf="menuItem.contentType == 'userIdTxt'">
-                                {{userData?.Id}}
-                            </div>-->
+                           <div class="user_id" [routerLink]="['/user/account']"
+                                 *ngIf="menuItem.contentType == 'userNameTxt'">
+                               <span>{{'User.User_Name' | translate}}</span>
+                               <span>{{userData?.UserName}}</span>
+                            </div>
                             <div *ngIf="(menuItem.contentType === 'signupBtn')" class="default_width">
                                 <app-global-sign-up-btn class="{{menuItem.className}}-type"
                                                         [menuItem]="menuItem"
@@ -457,8 +467,9 @@
 
                             <div class="general-menu-sub-menu" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title">
                                 <ul>
-                                    <li *ngFor="let subItem of menuItem.SubMenu" (click)="$event.stopPropagation(); openSubMenuByUrl('/' + menuItem.Href + subItem.Href)"><a
-                                            class="general-menu_item_link">{{'Header.' + subItem.Title | translate}}</a></li>
+                                    <li *ngFor="let subItem of menuItem.SubMenu" (click)="$event.stopPropagation(); openSubMenuByUrl('/' + menuItem.Href + subItem.Href)">
+                                        <img [src]="subItem?.Icon" alt="" *ngIf="menuItem?.hasIcons">
+                                        <a class="general-menu_item_link">{{'Header.' + subItem.Title | translate}}</a></li>
                                 </ul>
                             </div>
                             <fa-icon [icon]="faCaretDown" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title"></fa-icon>

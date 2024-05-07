@@ -1,5 +1,5 @@
 <span class="icon-clock"></span>
-<span>{{currentDate}}</span>
+<span>{{currentDate}} <fa-icon [icon]="['fas', 'angle-down']" class="time-arrow_icon"></fa-icon></span>
 <span class="show-last-login" *ngIf="userData">{{lastLogin}}: {{userData?.LastLogin | date: 'd-MM-yyyy,hh:mm a'}}</span>
 <div class="timezones-box" *ngIf="isDropDown">
     <input (click)="$event.stopPropagation()" [(ngModel)]="searchPattern">

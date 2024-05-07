@@ -55,4 +55,18 @@ export class FriendsService
     });
     return this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/ApiRequest`, request);
   }
+
+  getClientStatus() {
+    const {WebApiUrl, PartnerId} = this.getSettings();
+    let request = new Request();
+    request.Controller = Controllers.DOCUMENT;
+    request.Method = Methods.GET_CLIENT_STATUSES;
+    request.TimeZone = this.configService.timeZone;
+    request.Token = this.userData.Token;
+    request.ClientId = this.userData.Id;
+    request.RequestData = '';
+    return this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/ApiRequest`, request).pipe(map(data => {
+      return data['ResponseCode'] == 0 ? data['ResponseObject'] : [];
+    }));
+  }
 }

@@ -56,7 +56,7 @@
                         <div class="payment_list_item_content">
                             <div class="payment-row">
                                 <div class="payment-row-item">
-                                    <div class="payment-img" [ngStyle]="{'background-image': 'url(../../../../../../../assets/images/withdraw/' +  item.PaymentSystemId + '.png)'}"></div>
+                                    <div class="payment-img" [ngStyle]="{'background-image': 'url(' + item.IconSrc + ')'}"></div>
 
                                 </div>
 
@@ -68,12 +68,12 @@
                                         <span>{{"Payments.Maximum" | translate}}:{{currentPayment?.MaxAmount | number}} {{ currencyId}}</span>
                                     </div>
                                     <ng-container *ngIf="item?.FixedFee;else commissionPercentRef">
-                                        <div class="balance_info">
+                                        <div class="balance_info hide-commission-percent">
                                             <span>{{"Payments.CommissionFixedFee" | translate}} - {{item?.FixedFee | number}} ({{ currencyId}})</span>
                                         </div>
                                     </ng-container>
                                     <ng-template #commissionPercentRef>
-                                        <div class="balance_info">
+                                        <div class="balance_info hide-commission-percent">
                                             <span>{{"Payments.CommissionPercent" | translate}} - {{item?.CommissionPercent || 0 | number}} %</span>
                                         </div>
                                     </ng-template>

@@ -211,6 +211,14 @@
     transform: translateX(100%);
   }
 }
+@keyframes slide {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 0;
+  }
+}
 .marqueeBottomToTop {
   animation-name: messages-marquee-bottom-to-top;
   animation-duration: 16s;

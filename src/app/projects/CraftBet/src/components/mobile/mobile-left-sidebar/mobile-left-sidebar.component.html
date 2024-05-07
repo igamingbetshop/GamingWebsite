@@ -1,4 +1,4 @@
-<div class="mobile-left-sidebar-section">
+<div class="mobile-left-sidebar-section" [style.display]="hideLeftSideBar">
     <app-custom-sidebar
             [position]="position"
             [overlay]="true"
@@ -14,8 +14,25 @@
                 <span class="icon-close-modal sidebar_heading_icon"></span>
                 <span class="icon-right-arrow sidebar_heading_icon"></span>
             </div>
+            <div class="left-sidebar-menu-deposit-part">
+                <div class="left-sidebar-user-part-logined" *ngIf="isLogin">
+                    <div class="character-img">
+                        <img src="../../../../../../../assets/images/characters/{{userLogined.user?.CharacterId}}.png">
+                    </div>
+                    <div class="left-sidebar-user-id">
+                        <span>{{'User.User_Name' | translate}}</span>
+                        <span>{{userData?.UserName}}</span>
+                    </div>
+                    <div class="left-sidebar-deposit-btn"
+                         [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/deposit'">
+                        {{'Header.Deposite' | translate}}
+                    </div>
+                </div>
+                <div class="left-sidebar-user-part-not-logined" *ngIf="!isLogin" [innerHTML]="'Header.Left-Menu-bottom-img' | translate | sanitizer: 'html'">
+                </div>
+            </div>
             <div [style.height]="menuHeight" class="flex_child" [hidden]="showLanguageDropdown">
-                <div class="left-sidebar-menu-top-img-part" [innerHTML]="'Header.Menu-top-img' | translate | sanitizer: 'html'">
+                <div class="left-sidebar-menu-top-img-part" [innerHTML]="'Header.Menu-top-img' | translate | sanitizer: 'html'" *ngIf="isLogin">
                 </div>
                 <ul class="general-menu" #menuContainerRef>
                     <li class="general-menu_heading" *ngFor="let menuHeading of generalMenuItems"

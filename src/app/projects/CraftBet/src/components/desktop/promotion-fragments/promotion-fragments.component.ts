@@ -7,11 +7,12 @@ import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitize
 import {TranslateModule} from "@ngx-translate/core";
 import {RouterModule} from "@angular/router";
 import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
+import {MobilePromotionFragmentComponent} from "../../mobile/mobile-promotion/mobile-promotion-fragment.component";
 
 @Component({
   selector: 'app-promotion-fragments',
   standalone: true,
-  imports: [CommonModule, PromotionFragmentComponent, SlickCarouselModule, SanitizerModule, TranslateModule, RouterModule],
+  imports: [CommonModule, PromotionFragmentComponent, SlickCarouselModule, SanitizerModule, TranslateModule, RouterModule, MobilePromotionFragmentComponent],
   templateUrl: './promotion-fragments.component.html',
   styleUrls: ['./promotion-fragments.component.scss']
 })

@@ -111,6 +111,7 @@
   display: var(--payment-client-info-display, flex);
   flex-direction: var(--payment-client-info-flex-direction, column);
   gap: var(--payment-client-info-gap, 34px);
+  cursor: var(--payment-client-info-cursor, default);
 
   .payment-systems__userAccount {
     width: 100%;

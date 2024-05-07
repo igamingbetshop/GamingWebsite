@@ -17,7 +17,7 @@
          [ngStyle]="fragmentConfig.Config.style">
         <div class="category-action">
             <header class="header" [innerHTML]="'Game.' + fragmentConfig.Title | translate | sanitizer : 'html'"></header>
-            <div *ngIf="fragmentConfig.Config.showAll" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]" class="show-all">{{ 'Category.ShowAll' | translate }}</div>
+            <div *ngIf="fragmentConfig.Config.showAll" [routerLink]="['/'+ this.position + '/', fragmentConfig.Config.id]" class="show-all" (click)="scrollToTop(0)">{{ 'Category.ShowAll' | translate }}</div>
         </div>
 
         <main>

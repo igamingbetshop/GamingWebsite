@@ -2,7 +2,7 @@
 
     <div class="birth_date_select">
         <div class="form_field distans-right settings-select-field">
-            <select #daysRef [ngClass]="{'disable_item':!(profileService.editState$ | async).value || config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
+            <select #daysRef [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
                     (change)="onModelChange()">
                 <option *ngFor="let day of days" [value]="day">{{day}}</option>
             </select>
@@ -10,7 +10,7 @@
         </div>
 
         <div class="form_field distans-right settings-select-field">
-            <select  #monthsRef [ngClass]="{'disable_item':!(profileService.editState$ | async).value || config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
+            <select  #monthsRef [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
                      (change)="onModelChange()">
                 <option *ngFor="let month of months"
                         [value]="month.Id">{{'Register.' + month?.Name | translate}}</option>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="form_field settings-select-field">
-            <select  #yearsRef [ngClass]="{'disable_item':!(profileService.editState$ | async).value || config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
+            <select  #yearsRef [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
                      (change)="onModelChange()">
                 <option *ngFor="let year of years"
                         [value]="year">{{year}}</option>

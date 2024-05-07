@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule} from '@angular/core';
+import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, InjectionToken, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from '@core/core.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -37,6 +37,10 @@ export class GlobalErrorHandler extends ErrorHandler {
 const maskConfig: Partial<IConfig> = {
   validation: true,
 };
+
+export const WINDOW = new InjectionToken<Window>('Window_Inject_Token', {
+  factory: () => window
+});
 
 
 @NgModule({

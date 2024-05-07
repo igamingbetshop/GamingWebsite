@@ -4,7 +4,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  cursor: default;
+  cursor: var(--account-statement-item-cursor, default);
   //font-size: var(--account-statement-item-account-font-size, 14px);
   .item-cell-account-img {
     width: var(--account-statement-item-img-width, 22px);

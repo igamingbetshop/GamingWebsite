@@ -42,8 +42,12 @@ export class UserInfoComponent implements OnInit {
       if (responseData['ResponseCode'] === 0)
       {
         this.userInfoList = responseData['ResponseObject'];
-        this.userInfoList.BonusAmount = this.userInfoList.PossibleWin == 0 ? 0 : (this.userInfoList.PossibleWin - this.userInfoList.Amount * this.userInfoList.Coefficient).toString().match(/^-?\d+(?:\.\d{0,4})?/)?.[0];
-        this.userInfoList.PossibleWin = this.userInfoList.PossibleWin.toString().match(/^-?\d+(?:\.\d{0,2})?/)?.[0];
+        if(this.userInfoList.BonusAmount){
+          this.userInfoList.BonusAmount = this.userInfoList.PossibleWin == 0 ? 0 : (this.userInfoList.PossibleWin - this.userInfoList.Amount * this.userInfoList.Coefficient).toString().match(/^-?\d+(?:\.\d{0,4})?/)?.[0];
+        }
+        if(this.userInfoList.PossibleWin){
+          this.userInfoList.PossibleWin = this.userInfoList.PossibleWin.toString().match(/^-?\d+(?:\.\d{0,2})?/)?.[0];
+        }
         this.betStatuses = this.getBetsHistoryService.betStatuses;
         this.betStatuses.forEach(betStatus => {
           if(this.userInfoList.Status === betStatus.Value) {

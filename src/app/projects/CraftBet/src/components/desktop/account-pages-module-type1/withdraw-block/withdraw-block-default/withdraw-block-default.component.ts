@@ -40,53 +40,61 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
         super.ngOnInit();
     }
 
-    createComponent(Id: number, Type: number, info?: number[], maxMinAmount?: any) {
-        super.createComponent(Id, Type, info, maxMinAmount);
+    createComponent(Id: number, Type: number, ContentType: number, info?: number[], maxMinAmount?: any) {
+        super.createComponent(Id, Type, ContentType, info, maxMinAmount);
         switch (Type) {
             case 1: {
                 this.componentRef = this.entry.createComponent(WithdrawType1Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 2: {
                 this.componentRef = this.entry.createComponent(WithdrawType2Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 3: {
                 this.componentRef = this.entry.createComponent(WithdrawType3Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 4: {
                 this.componentRef = this.entry.createComponent(WithdrawType4Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 5: {
                 this.componentRef = this.entry.createComponent(WithdrawType5Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 break;
             }
             case 6: {
                 this.componentRef = this.entry.createComponent(WithdrawType6Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 7: {
                 this.componentRef = this.entry.createComponent(WithdrawType7Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 8: {
                 this.componentRef = this.entry.createComponent(WithdrawType8Component);
                 this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
@@ -94,7 +102,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 9: {
                 this.componentRef = this.entry.createComponent(WithdrawType9Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
@@ -102,7 +110,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 10: {
                 this.componentRef = this.entry.createComponent(WithdrawType10Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -110,7 +118,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 11: {
                 this.componentRef = this.entry.createComponent(WithdrawType11Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -118,7 +126,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 12: {
                 this.componentRef = this.entry.createComponent(WithdrawType12Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -126,7 +134,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 13: {
                 this.componentRef = this.entry.createComponent(WithdrawType13Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -134,7 +142,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 14: {
                 this.componentRef = this.entry.createComponent(WithdrawType14Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -142,7 +150,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 15: {
                 this.componentRef = this.entry.createComponent(WithdrawType15Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -150,7 +158,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 16: {
                 this.componentRef = this.entry.createComponent(WithdrawType16Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -158,7 +166,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 17: {
                 this.componentRef = this.entry.createComponent(WithdrawType17Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -166,7 +174,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 18: {
                 this.componentRef = this.entry.createComponent(WithdrawType18Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -174,7 +182,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 20: {
                 this.componentRef = this.entry.createComponent(WithdrawType20Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -182,7 +190,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 21: {
                 this.componentRef = this.entry.createComponent(WithdrawType21Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -190,7 +198,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 22: {
                 this.componentRef = this.entry.createComponent(WithdrawType22Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -198,7 +206,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 23: {
                 this.componentRef = this.entry.createComponent(WithdrawType23Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -206,7 +214,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 24: {
                 this.componentRef = this.entry.createComponent(WithdrawType24Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
@@ -214,7 +222,7 @@ export class WithdrawBlockDefaultComponent extends BaseWithdrawComponent {
             case 25: {
                 this.componentRef = this.entry.createComponent(WithdrawType25Component);
                 this.componentRef.instance.paymentSystemId = Id;
-                this.componentRef.instance.contentType = Type;
+                this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;

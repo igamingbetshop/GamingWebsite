@@ -31,7 +31,7 @@
         </ngx-slick-carousel>
         <div class="actions" *ngIf="slideConfig.arrows">
             <span (click)="sliderComponent.slickPrev()"  *ngIf="selectedFragment?.Promotions.length > 4" class="icon-banner-arrow-left"></span>
-            <span (click)="sliderComponent.slickNext()" *ngIf="selectedFragment?.Promotions.length >= 4" class="icon-banner-arrow-right"></span>
+            <span (click)="sliderComponent.slickNext()" *ngIf="selectedFragment?.Promotions.length > 4" class="icon-banner-arrow-right"></span>
         </div>
     </div>
     <div class="promotion-item-content">
@@ -48,7 +48,18 @@
     </div>
 </div>
 
-<div class="promotion-fragments" *ngFor="let fragment of promotionFragments" [ngStyle]="{'display' : selectedFragment ? 'none' : 'grid'}">
-    <div class="fragment-title">{{fragment.Title}}</div>
-    <promotion-fragment  [promotionFragment]="fragment" ></promotion-fragment>
-</div>
+@if (filteredFragment)
+{
+    <div class="promotion-fragments" [ngStyle]="{'display' : selectedFragment ? 'none' : 'grid'}">
+        <div class="fragment-title">{{filteredFragment.Title}}</div>
+        <promotion-fragment  [promotionFragment]="filteredFragment" ></promotion-fragment>
+    </div>
+}
+@else
+{
+    <div class="promotion-fragments" *ngFor="let fragment of promotionFragments" [ngStyle]="{'display' : selectedFragment ? 'none' : 'grid'}">
+        <div class="fragment-title">{{fragment.Title}}</div>
+        <promotion-fragment  [promotionFragment]="fragment" ></promotion-fragment>
+    </div>
+}
+

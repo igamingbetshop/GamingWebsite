@@ -3,40 +3,80 @@
     {
         @case ('filter')
         {
-            <div [ngStyle]="fragmentConfig?.Config.style" class="filter-category-box filter">
-                <div class="filter-fragments" *ngIf="hasFilterBox">
-                    <casino-search *ngFor="let fragment of fragments?.Search?.Items"
-                                   [fragmentConfig]="fragment">
-                    </casino-search>
-                    <casino-menu *ngFor="let fragment of fragments?.Menus?.Items"
-                                 [fragmentConfig]="fragment">
-                    </casino-menu>
-                    <casino-providers *ngFor="let fragment of fragments?.Providers?.Items"
-                                      [fragmentConfig]="fragment">
-                    </casino-providers>
+            @if (fragmentConfig.Config.lazyLoad === false)
+            {
+                <div [ngStyle]="fragmentConfig?.Config.style" class="filter-category-box filter">
+                    <div class="filter-fragments" *ngIf="hasFilterBox">
+                        <casino-search *ngFor="let fragment of fragments?.Search?.Items"
+                                       [fragmentConfig]="fragment">
+                        </casino-search>
+                        <casino-menu *ngFor="let fragment of fragments?.Menus?.Items"
+                                     [fragmentConfig]="fragment">
+                        </casino-menu>
+                        <casino-providers *ngFor="let fragment of fragments?.Providers?.Items"
+                                          [fragmentConfig]="fragment">
+                        </casino-providers>
+                    </div>
+                    <ul class="product_list">
+                        <li class="product_list_item"
+                            *ngFor="let game of games;let i = index">
+                            <casino-game [game]="game"
+                                         [loadingType]="i > 30 ? 'lazy' : 'eager'"
+                                         [fragmentConfig]="fragmentConfig"
+                                         (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
+                            </casino-game>
+                        </li>
+                        @if(leftGamesCount)
+                        {
+                            <button class="more-button" (click)="markForSave = true; casinoFilterService.nextPage();">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+                        }
+                    </ul>
                 </div>
-                <ul class="product_list">
-                    <li class="product_list_item"
-                        *ngFor="let game of games;let i = index">
-                        <casino-game [game]="game"
-                                     [loadingType]="i > 30 ? 'lazy' : 'eager'"
-                                     [fragmentConfig]="fragmentConfig"
-                                     (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
-                        </casino-game>
-                    </li>
-                    <button *ngIf="leftGamesCount" class="more-button" (click)="markForSave = true; casinoFilterService.nextPage();">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
-                </ul>
-            </div>
+            }
+            @else
+            {
+                <div infinite-scroll #infiniteScrollRef="infiniteScroll" (onLoadItems)="loadMoreItems()" [isLoading]="isLoading" [ngStyle]="fragmentConfig?.Config.style" class="filter-category-box filter">
+                    <div class="filter-fragments" *ngIf="hasFilterBox">
+                        <casino-search *ngFor="let fragment of fragments?.Search?.Items"
+                                       [fragmentConfig]="fragment">
+                        </casino-search>
+                        <casino-menu *ngFor="let fragment of fragments?.Menus?.Items"
+                                     [fragmentConfig]="fragment">
+                        </casino-menu>
+                        <casino-providers *ngFor="let fragment of fragments?.Providers?.Items"
+                                          [fragmentConfig]="fragment">
+                        </casino-providers>
+                    </div>
+                    <ul class="product_list">
+                        <li class="product_list_item"
+                            *ngFor="let game of games;let i = index">
+                            <casino-game [game]="game"
+                                         [loadingType]="i > 30 ? 'lazy' : 'eager'"
+                                         [fragmentConfig]="fragmentConfig"
+                                         (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
+                            </casino-game>
+                        </li>
+                        @if (leftGamesCount && infiniteScrollRef.showTotals())
+                        {
+                            <div class="left-count">
+                                {{leftGamesCountMessage()}}
+                            </div>
+                        }
+                    </ul>
+                </div>
+            }
         }
         @case ('search')
         {
-            <div [ngStyle]="fragmentConfig?.Config.style"
-                class="filter-category-box">
-               <div class="title-field">
-                   <div></div>
-                   <div class="back-section" (click)="backFromSearch()">
-                       <i class="icon-back"></i>
-                       <p>{{'Category.back'| translate}}</p>
+            @if (fragmentConfig.Config.lazyLoad === false)
+            {
+                <div [ngStyle]="fragmentConfig?.Config.style"
+                     class="filter-category-box">
+                    <div class="title-field">
+                        <div></div>
+                        <div class="back-section" (click)="backFromSearch()">
+                            <i class="icon-back"></i>
+                            <p>{{'Category.back'| translate}}</p>
                         </div>
                         <div class="filter-title" *ngIf="categoryName">{{'Category.' + categoryName | translate}}</div>
                     </div>
@@ -47,9 +87,41 @@
                                          (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
                             </casino-game>
                         </li>
-                        <button *ngIf="leftGamesCount" class="more-button" (click)="markForSave = true; casinoFilterService.nextPage()">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+                        @if(leftGamesCount)
+                        {
+                            <button class="more-button" (click)="markForSave = true; casinoFilterService.nextPage();">{{'Game.See More' | translate}} <span>({{leftGamesCount}})</span></button>
+                        }
                     </ul>
-            </div>
+                </div>
+            }
+            @else
+            {
+                <div infinite-scroll #infiniteScrollRef="infiniteScroll" (onLoadItems)="loadMoreItems()" [isLoading]="isLoading" [ngStyle]="fragmentConfig?.Config.style"
+                     class="filter-category-box">
+                    <div class="title-field">
+                        <div></div>
+                        <div class="back-section" (click)="backFromSearch()">
+                            <i class="icon-back"></i>
+                            <p>{{'Category.back'| translate}}</p>
+                        </div>
+                        <div class="filter-title" *ngIf="categoryName">{{'Category.' + categoryName | translate}}</div>
+                    </div>
+                    <ul class="product_list">
+                        <li class="product_list_item"
+                            *ngFor="let game of games;let i = index">
+                            <casino-game [game]="game"
+                                         (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
+                            </casino-game>
+                        </li>
+                        @if (leftGamesCount && infiniteScrollRef.showTotals())
+                        {
+                            <div class="left-count">
+                                {{leftGamesCountMessage()}}
+                            </div>
+                        }
+                    </ul>
+                </div>
+            }
         }
         @case ('horizontal')
         {

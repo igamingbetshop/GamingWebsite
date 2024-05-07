@@ -562,6 +562,8 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
                             }
                         });
                         this.quickRegisterType = this.quickRegTypeList[0];
+                    } else if (item.Type !== 'dropdown') {
+                        this.quickFormTemplate = this.quickRegFieldsFullList;
                     }
                 });
 
@@ -620,7 +622,7 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
                 }
 
                 if (this.quickRegForm.controls.hasOwnProperty('PromoCode')) {
-                    if (this.saveData.registerReferalData['ReferenceCode']) {
+                    if (this.router.url.includes('ReferenceCode') && this.saveData.registerReferalData['ReferenceCode']) {
                         this.quickRegForm.controls['PromoCode'].patchValue(this.saveData.registerReferalData['ReferenceCode']);
                     }
                 }

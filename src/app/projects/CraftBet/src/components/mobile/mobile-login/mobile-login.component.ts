@@ -60,6 +60,7 @@ export class MobileLoginComponent extends AppCommonLoginComponent {
             if(openedUrl)
             {
                 localStorage.removeItem('opened-url');
+                localStorage.removeItem('payment-url');
                 this.router.navigate([openedUrl]);
             }
             else this.router.navigate([this.configService.defaultOptions.HomePageType]);

@@ -2,7 +2,7 @@
     <div class="modal-body">
         <div></div>
         <fa-icon [icon]="['fas', 'times']" (click)="close()" class="cms-popup-icon" [style.display]="data?.cmsPopupData ? 'block' : 'none'"></fa-icon>
-        <fa-icon [icon]="['fas', 'times']" (click)="close()" class="cms-popup-icon" [style.display]="data?.loginedCmsPopupData ? 'block' : 'none'"></fa-icon>
+        <fa-icon [icon]="['fas', 'times']" (click)="closeLoginedPopup(data?.loginedCmsPopupData)" class="cms-popup-icon" [style.display]="data?.loginedCmsPopupData ? 'block' : 'none'"></fa-icon>
     </div>
     <div class="modal_content" [style.display]="data?.cmsPopupData ? 'block' : 'none'">
         <div class="cms-popup-container" [innerHTML]="data.cmsPopupData?.Content | sanitizer: 'html'"></div>

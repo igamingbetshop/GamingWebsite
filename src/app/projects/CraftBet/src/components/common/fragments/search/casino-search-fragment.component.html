@@ -16,7 +16,7 @@
             <dd *ngFor="let category of categories" class="item" (click)="openCategory(category)">
                 {{category.Name}}
             </dd>
-            <dt class="header">{{'Game.Games' | translate}}</dt>
+            <dt class="header" *ngIf="items.length">{{'Game.Games' | translate}}</dt>
             <dd *ngFor="let game of items" class="item" (click)="openGame(game)">
                 {{game.N}}
             </dd>

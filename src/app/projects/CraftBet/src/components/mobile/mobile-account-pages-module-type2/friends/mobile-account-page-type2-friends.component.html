@@ -24,22 +24,23 @@
       </td>
     </tr>
     <tr>
-      <th>ID:</th>
-      <th>{{'Friends.FirstName' | translate}}:</th>
-      <th>{{'Friends.LastName' | translate}}:</th>
-      <th>{{'Friends.Amount' | translate}}:</th>
-      <th>{{'Friends.Status' | translate}}:</th>
-      <th>{{'Friends.Register' | translate}}:</th>
+      <th>{{'Friends.ID' | translate}}</th>
+      <th>{{'Friends.Email' | translate}}</th>
+      <th>{{'Friends.FirstName' | translate}}</th>
+      <th>{{'Friends.LastName' | translate}}</th>
+      <th>{{'Friends.Amount' | translate}}</th>
+      <th>{{'Friends.Status' | translate}}</th>
+      <th>{{'Friends.Register' | translate}}</th>
     </tr>
     </thead>
     <tbody *ngIf="friends.length > 0">
     <tr *ngFor="let friend of friends">
       <td>{{friend.Id}}</td>
+      <td>{{friend.Email}}</td>
       <td>{{friend.FirstName}}</td>
       <td>{{friend.LastName}}</td>
       <td>{{friend.BonusAmount}}</td>
-      <td><span *ngIf="friend.BonusAmount > 0">{{'Friends.Active' | translate}}</span><span
-        *ngIf="!(friend.BonusAmount == 0)">{{'Friends.InActive' | translate}}</span></td>
+      <td>{{friend.StatusName}}</td>
       <td>{{friend.CreationTime | date:'HH:mm dd/MM/yyyy'}}</td>
     </tr>
     </tbody>

@@ -47,7 +47,8 @@ export class BaseTwoFactor extends BaseComponent implements OnInit {
         this.baseApiService.apiRequest('', Controllers.CLIENT, Methods.GENERATE_QR_CODE).pipe(take(1)).subscribe((data) => {
             if (data.ResponseCode === 0) {
                 this.qrData = data.ResponseObject;
-                this.qrCodeImageSrc = `https://chart.apis.google.com/chart?chs=${this._qrCodeWidth}x${this._qrCodeHeight}&chld=M|0&cht=qr&chl=${this.qrData.Data}`;
+                // this.qrCodeImageSrc = `https://chart.apis.google.com/chart?chs=${this._qrCodeWidth}x${this._qrCodeHeight}&chld=M|0&cht=qr&chl=${this.qrData.Data}`;
+
             }
         });
     }

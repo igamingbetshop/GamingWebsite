@@ -59,4 +59,12 @@ export class MobileCasinoCategoryComponent extends BaseCasinoCategory {
         });
 
     }
+
+    scrollToTop(position = 0)
+    {
+        window.scrollTo({
+            top: position,
+            behavior: "smooth"
+        });
+    }
 }

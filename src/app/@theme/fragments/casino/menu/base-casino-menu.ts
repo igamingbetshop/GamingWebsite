@@ -6,7 +6,6 @@ import {CasinoFilterService} from "../../../../@core/services/app/casino-filter.
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {Methods} from "../../../../@core/enums";
 import {take} from "rxjs/operators";
-import {getMappedGame} from "../../../../@core/utils";
 
 @Directive()
 export class BaseCasinoMenu implements OnInit
@@ -40,7 +39,12 @@ export class BaseCasinoMenu implements OnInit
         this.prevPath = this.router.url.split('/')[1];
         this.type = this.fragmentConfig.Config.type;
         this.showAllGamesCount = (this.fragmentConfig && this.fragmentConfig.Config && this.fragmentConfig.Config.showAllGamesCount) ?? true;
-        this.menuItems = JSON.parse(JSON.stringify(this.configService.settings.MenuList.find(elem => elem.Type == this.route.snapshot.data['menuType']).Items)).map(menu => {
+        let menus = JSON.parse(JSON.stringify(this.configService.settings.MenuList.find(elem => elem.Type == this.route.snapshot.data['menuType']).Items));
+        if(this.fragmentConfig.Config.hasOwnProperty('menus') && Array.isArray(this.fragmentConfig.Config.menus))
+        {
+            menus = menus.filter(m => this.fragmentConfig.Config.menus.includes(m.Type));
+        }
+        this.menuItems = menus.map(menu => {
             if(menu.Icon.includes('.'))
                 menu.IconSrc = window['debugPath'] + '/assets/images/casino-menu/' + menu.Icon;
             const type = parseInt(menu.Type);

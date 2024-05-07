@@ -68,6 +68,9 @@ export class GlobalAccountPagesDpdComponent implements OnInit {
             this.accoutList.sort((a,b) => a.Order - b.Order);
 
         });
+        if (this.menuItem.config['hoverHighlight'] != undefined) {
+            this.menuItem['hoverHighlight'] = this.menuItem.config['hoverHighlight'] === '1' ? true : false;
+        }
     }
 
     private mergeSubMenus(source)

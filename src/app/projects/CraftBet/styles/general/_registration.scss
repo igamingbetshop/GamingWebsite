@@ -394,6 +394,7 @@
     flex-direction: column;
     align-items: center;
     padding-right: paddingRight(registration-section, 0);
+    min-width: var(--registration-section-min-width, 300px);
     .authentication-buttons {
       display: var(--register-authentication-btns-display, none);
       margin: var(--register-authentication-btns-margin, 0);
@@ -1693,18 +1694,18 @@ select {
 
 .reg-success-message {
   color: itemColor(regForm-success-message, #c41818);
-  position: position(regForm-success-message, absolute);
-  bottom: itemBottom(reg-success-message, 21px);
-  display: display(reg-success-message, block);
+  position: position(regForm-success-message, relative);
+  bottom: itemBottom(reg-success-message, 0);
+  display: display(reg-success-message, flex);
   justify-content: justifyContent(reg-success-message, unset);
   align-items: center;
   flex-direction: column;
-  top: itemTop(reg-success-message, 0);
+  top: itemTop(reg-success-message, 21px);
   left: itemLeft(reg-success-messasge, unset);
   width: width(reg-success-messasge, auto);
   font-size: fontSize(reg-success-messasge, 16px);
   .check-circle-icon {
-    display: display(reg-success-messasge-icon, none);
+    display: display(reg-success-messasge-icon, block);
     font-size: fontSize(reg-success-messasge-icon, 72px);
   }
   .successfully-registered {

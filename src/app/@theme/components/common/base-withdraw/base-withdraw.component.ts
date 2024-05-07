@@ -77,7 +77,10 @@ export class BaseWithdrawComponent extends BaseComponent {
         this.paymentsService.getPaymentSystem(data).then((data: any) => {
             if (data['ResponseCode'] === 0)
             {
-                this.paymentSystemList = data['PartnerPaymentSystems'].filter(item => item.Type == '1');
+                this.paymentSystemList = data['PartnerPaymentSystems'].filter(item =>  item.Type == '1').map(item => {
+                    item.IconSrc = `../../../../../../../assets/images/withdraw/${item.PaymentSystemId}.${item.ImageExtension}`;
+                    return item;
+                });
                 if(this.openFirstItemByDefault)
                     this.selectPayment(data['PartnerPaymentSystems'].filter(item => item.Type == '1')[0]);
             }
@@ -144,7 +147,7 @@ export class BaseWithdrawComponent extends BaseComponent {
             MinAmount : paymentData.MinAmount
         };
 
-        this.createComponent(paymentData.PaymentSystemId, paymentData.PaymentSystemType, paymentData.Info, maxMinAmount, paymentData.CommissionPercent);
+        this.createComponent(paymentData.PaymentSystemId, paymentData.PaymentSystemType, paymentData.ContentType, paymentData.Info, maxMinAmount, paymentData.CommissionPercent);
         this.currentPayment = paymentData;
         this.isShowDetails = !this.isShowDetails;
     }
@@ -153,7 +156,7 @@ export class BaseWithdrawComponent extends BaseComponent {
         this.isShowDetails = !this.isShowDetails;
     }
 
-    createComponent(Id: number, Type: number, info?: number[], maxMinAmount?: any,  CommissionPercent: number = 0) {
+    createComponent(Id: number, Type: number, ContentType: number, info?: number[], maxMinAmount?: any,  CommissionPercent: number = 0) {
         if(this.entry)
             this.entry.clear();
     }

@@ -33,6 +33,7 @@ $footerBottomSize: var(--footer--height);
     position: fixed;
     left: 50%;
     bottom: -28px;
+    z-index: 1;
 
     &.rotate-180 {
       transform: rotateZ(0deg);
@@ -318,8 +319,24 @@ $footerBottomSize: var(--footer--height);
     gap: var(--ft-image-background-gap, 0px);
     width: var(--ft-image-background-width, auto);
     margin: var(--ft-image-background-margin, 0);
+
     &.ft-images-style1
     {
+      position: var(--ft-images-style1-position, relative);
+      .ft-images-title {
+        display: var(--ft-images-style1-title-display, none);
+        background: var(--ft-images-style1-title-background, transparent);
+        color: var(--ft-images-style1-title-color, #000);
+        padding: var(--ft-images-style1-title-padding, 5px 10px);
+        font-size: var(--ft-images-style1-title-font-size, 16px);
+        border-radius: var(--ft-images-style1-title-border-radius, 6px);
+        border: var(--ft-images-style1-title-border, none);
+        width: var(--ft-images-style1-title-width, auto);
+        height: var(--ft-images-style1-title-height, auto);
+        font-weight: var(--ft-images-style1-title-font-weight, 600);
+        position: var(--ft-images-style1-title-position, absolute);
+        top: var(--ft-images-style1-title-top, 0px);
+      }
       .ft-images-type1
       {
         width: width(ft-images-style1, 128px);
@@ -356,6 +373,21 @@ $footerBottomSize: var(--footer--height);
     }
     &.ft-images-style2
     {
+      position: var(--ft-images-style2-position, relative);
+      .ft-images-title {
+        display: var(--ft-images-style2-title-display, none);
+        background: var(--ft-images-style2-title-background, transparent);
+        color: var(--ft-images-style2-title-color, #000);
+        padding: var(--ft-images-style2-title-padding, 5px 10px);
+        font-size: var(--ft-images-style2-title-font-size, 16px);
+        border-radius: var(--ft-images-style2-title-border-radius, 6px);
+        border: var(--ft-images-style2-title-border, none);
+        width: var(--ft-images-style2-title-width, auto);
+        height: var(--ft-images-style2-title-height, auto);
+        font-weight: var(--ft-images-style2-title-font-weight, 600);
+        position: var(--ft-images-style2-title-position, absolute);
+        top: var(--ft-images-style2-title-top, 0px);
+      }
       .ft-images-type1:first-child {
         margin-right: var(--ft-image-style2-type1-first-item-margin-right, 0);
         margin-left: var(--ft-image-style2-type1-first-item-margin-left, 0);
@@ -391,6 +423,21 @@ $footerBottomSize: var(--footer--height);
       }
     }
     &.ft-images-style3 {
+      position: var(--ft-images-style3-position, relative);
+      .ft-images-title {
+        display: var(--ft-images-style3-title-display, none);
+        background: var(--ft-images-style3-title-background, transparent);
+        color: var(--ft-images-style3-title-color, #000);
+        padding: var(--ft-images-style3-title-padding, 5px 10px);
+        font-size: var(--ft-images-style3-title-font-size, 16px);
+        border-radius: var(--ft-images-style3-title-border-radius, 6px);
+        border: var(--ft-images-style3-title-border, none);
+        width: var(--ft-images-style3-title-width, auto);
+        height: var(--ft-images-style3-title-height, auto);
+        font-weight: var(--ft-images-style3-title-font-weight, 600);
+        position: var(--ft-images-style3-title-position, absolute);
+        top: var(--ft-images-style3-title-top, 0px);
+      }
       .ft-images-type1
       {
         width: width(ft-images-style3, 128px);

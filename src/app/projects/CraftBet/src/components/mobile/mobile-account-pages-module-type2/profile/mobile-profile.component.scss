@@ -63,6 +63,7 @@ form {
       left: var(--m-settings-profile-details-error-message-left, 0);
     }
     .verify-icons {
+      display: var(--m-settings-profile-verify-icons-display, block);
       position: absolute;
       top: 18px;
       right: -29px;

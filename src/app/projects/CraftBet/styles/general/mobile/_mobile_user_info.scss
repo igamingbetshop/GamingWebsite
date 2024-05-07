@@ -1,7 +1,7 @@
 @import "../../../styles/helpers/variables";
 
 .mobile-modal-content {
-  margin: var(--m-info-modal-content-margin, 68px auto 0);
+  margin: var(--m-info-modal-content-margin, 0px auto 0);
   border-radius: var(--m-info-modal-content-border-radius, 20px);
   background: $account-deposit-section-bg;
   padding: 16px 0;
@@ -9,7 +9,7 @@
   &.mobile-info-modal-content {
    /* height: 430px;*/
     height: 70vh;
-    width: 90%;
+    width: 100%;
   }
 
   .modal-body {

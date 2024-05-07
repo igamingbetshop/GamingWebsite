@@ -1,7 +1,7 @@
 import {Component, createNgModule, Injector} from '@angular/core';
 import {BaseCasino} from "../../common/casino/base-casino.component";
 import {FragmentSource} from "../../../../../../@core/enums";
-import {CasinoProvidersService} from "./providers/casino-providers.service";
+import {CasinoProvidersService} from "../../../../../../@theme/fragments/casino/providers/casino-providers.service";
 
 
 @Component({

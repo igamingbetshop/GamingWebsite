@@ -3,7 +3,7 @@
 
         <div class="form_field">
             <input type="text" [(ngModel)]="dataModel" (ngModelChange)="onModelChange($event)"  placeholder="{{'Settings.Email' | translate}}"
-                   [ngClass]="{ 'disable_item': (!(profileService.editState$ | async).value), 'active_item': (profileService.editState$ | async).value }"
+                   [ngClass]="{ 'disable_item': (!(profileService.editState$ | async).value || formElement.Config?.disabled), 'active_item': (profileService.editState$ | async).value }"
             />
             <label [class.required-field]="formElement.Config?.mandatory">{{'Register.Email-verify' | translate}}</label>
             <button type="submit" class="craft_btn verify_btn setting_btn"
@@ -31,7 +31,7 @@
                    [(ngModel)]="dataModel"
                    (ngModelChange)="onModelChange($event)"
                    placeholder="{{'Register.Mobile-number-placeholder' | translate}}"
-                   [ngClass]="{'disable_item':!(profileService.editState$ | async).value, 'active_item': (profileService.editState$ | async).value}"
+                   [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item': (profileService.editState$ | async).value}"
                    />
             <label [class.required-field]="formElement.Config?.mandatory">{{'Register.Mobile-number-verify' | translate}}</label>
 

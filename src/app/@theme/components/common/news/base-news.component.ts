@@ -65,7 +65,7 @@ export class BaseNewsComponent extends BaseComponent
           this.currentNews.Title = data.title;
           this.currentNews.Description = data.description;
           this.currentNews.Id = data.id;
-          this.currentNews.DeltaTime = this.timeAgo(data.StartDate);
+          this.currentNews.DeltaTime = this.timeAgo(data.startDate);
           this.currentNews.ImageName = data.image;
           this.currentNews.Type = data.type;
           window.scrollTo(0,0);

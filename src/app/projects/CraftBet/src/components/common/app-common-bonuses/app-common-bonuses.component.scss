@@ -16,9 +16,10 @@
   font-style: normal;
   line-height: 1.36;
   letter-spacing: normal;
-  text-align: left;
-  color: var(--field-label-text-color, #FFFFFF);
+  text-align: var(--common-bonus-label-text-align, left);
+  color: var(--common-bonus-label-color, var(--field-label-text-color));
   margin-bottom: var(--field-label-text-margin-bottom, 15px);
+  margin-top: var(--field-label-text-margin-top, 0px);
   padding-left: var(--field-label-text-padding-left, 8px);
 }
 
@@ -32,7 +33,7 @@ ul {
   min-height: 25px;
   height: auto;
   max-height: 146px;
-  overflow-y: auto;
+  overflow-y: var(--common-bonus-info-list-overflow-y, auto);
   padding: var(--common-bonus-info-list-padding, 0 5px);
   .info-icon {
     font-size: var(--font-size-2, 14px);
