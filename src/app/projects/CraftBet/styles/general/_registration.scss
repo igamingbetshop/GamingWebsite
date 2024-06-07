@@ -431,6 +431,8 @@
       background-color: backgroundColor(d-register-tab-header,transparent);
       margin-top: marginTop(d-register-tab-header, 14px);
       margin-bottom: marginBottom(d-register-tab-header, 20px);
+      margin-left: marginLeft(d-register-tab-header, 0);
+      margin-right: marginRight(d-register-tab-header, 0);
       color: itemColor(d-register-tab-header,#fff);
       .close-icon {
         color: color(register-tab-text);
@@ -457,8 +459,8 @@
           border-top-right-radius: borderTopRightRadius(d-register-tab-selected,0);
           border-bottom-right-radius: borderBottomRightRadius(d-register-tab-selected,0);
           border-bottom-left-radius: borderBottomLeftRadius(d-register-tab-selected,0);
-          margin-right: marginRight(--d-register-tab-selected, auto);
-          margin-left: marginLeft(--d-register-tab-selected, auto);
+          margin-right: marginRight(d-register-tab-selected, auto);
+          margin-left: marginLeft(d-register-tab-selected, auto);
           border-bottom: 1px solid itemColor(reg-tab-selected-border-bottom, transparent);
           font-weight: fontWeight(--d-register-tab-selected, 700);
           pointer-events: var(--d-register-tab-selected-pointer-events, none);
@@ -469,6 +471,16 @@
           border-bottom: 1px solid itemColor(reg-tab-disabled-border-bottom, transparent);
           height: height(register-tab-disabled, auto);
         }
+      }
+      .reg_item::before {
+        content: '';
+        position: absolute;
+        bottom: var(--reg-form-header-before-bottom, -9px);
+        left: var(--reg-form-header-before-left, 0);
+        right: var(--reg-form-header-before-right, 0);
+        height: var(--reg-form-header-before-height, 0px);
+        background: var(--reg-form-header-before-background, transparent);
+        box-shadow: var(--reg-form-header-before-box-shadow, none);
       }
 
     }
@@ -481,11 +493,23 @@
       display: display(reg-form-info, none);
       margin-bottom: marginBottom(reg-form-info, 20px);
       margin-top: marginTop(reg-form-info, 20px);
+      width: var(--reg-form-info-width, auto);
       .reg-form-header
       {
         font-size: fontSize(reg-form-header, 14px);
         color: color(reg-form-header);
         margin-bottom: marginBottom(reg-form-header, 10px);
+        position: var(--reg-form-header-position, relative);
+      }
+      .reg-form-header::before {
+        content: '';
+        position: absolute;
+        bottom: var(--reg-form-header-before-bottom, -9px);
+        left: var(--reg-form-header-before-left, 0);
+        right: var(--reg-form-header-before-right, 0);
+        height: var(--reg-form-header-before-height, 0px);
+        background: var(--reg-form-header-before-background, transparent);
+        box-shadow: var(--reg-form-header-before-box-shadow, none);
       }
     }
     .hidden-title {
@@ -561,7 +585,7 @@
 }
 .remember-me-login-section {
   margin: var(--remember-me-login-margin, 0);
-  display: var(--remember-me-login-display, none) !important;
+  //display: var(--remember-me-login-display, none) !important;
   .login-checkbox {
     width: var(--remember-me-login-checkbox-width, auto);
     height: var(--remember-me-login-checkbox-height, auto);
@@ -572,7 +596,7 @@
 .form_field_checked {
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: var(--remember-me-login-align-items, center);
   text-align: var(--remember-me-login-text-align, left);
   position: relative;
   cursor: pointer;
@@ -1296,6 +1320,8 @@ select {
 }
 .currency-field-display {
   display: var(--currency-field-display, block) !important;
+  width: var(--currency-field-width, 100%) !important;
+  margin: var(--currency-field-margin, 0);
 }
 .form_field {
   &__Region4, &__RegionP {
@@ -1444,20 +1470,42 @@ select {
     z-index: 1;
     padding: var(--all-form-items-padding, 0 40px);
     width: 100%;
-
+    .progress-bar {
+      display: var(--regStep-progress-bar-display, none);
+      width: var(--regStep-progress-bar-width, 33%);
+      height: var(--regStep-progress-bar-height, 5px);
+      background-color: var(--regStep-progress-bar-background, #161f2c);
+      border-radius: var(--regStep-progress-bar-pborder-radius, 5px);
+      margin: var(--regStep-progress-bar-margin, 0 auto);
+      position: var(--regStep-progress-bar-position, relative);
+      left: var(--regStep-progress-bar-left, -19px);
+      right: var(--regStep-progress-bar-right, 0);
+      bottom: var(--regStep-progress-bar-bottom, 31px);
+    }
     .regSteps{
       display: display(regSteps,flex);
       justify-content: center;
+      gap: var(--regSteps-gap, 0px);
       margin-bottom: var(--regSteps-margin-bottom, 0px);
+      position: var(--regSteps-position, relative);
+      left: var(--regSteps-position-left, 0);
+      right: var(--regSteps-position-right, 0);
+      bottom: var(--regSteps-position-bottom, 0);
       .regStep{
         height: height(regStep, 20px);
         width: width(regStep, 20px);
         border-radius: 100%;
         margin-right: marginRight(regStep, 18px);
         background-color: backgroundColor(regStep, #131a2c);
-        border: solid 3px var(--regStep-border-color, transparent);
+        border: solid var(--reg-step-border-width, 3px) var(--regStep-border-color, transparent);
+        .regSteps-text {
+          display: var(--regStep-text-display, none);
+          color: var(--regStep-text-color, #fff);
+          margin: var(--regStep-text-margin, 24px 0 0 -7px);
+          font-size: var(--regStep-text-font-size, 12px);
+        }
         &.regStep_active{
-          border: solid 3px var(--reg-step-active-border-color, #dbedff);
+          border: solid var(--reg-step-active-border-width, 3px) var(--reg-step-active-border-color, #dbedff);
           background-color: var(--reg-step-active-background-color, transparent);
         }
         &.regStep_prev{
@@ -1483,10 +1531,52 @@ select {
       font-weight: var(--registration-hidden-title-weight, 400);
       color: var(--registration-hidden-title-color, #fff);
       margin: var(--registration-hidden-title-margin, 0);
+      position: var(--registration-hidden-title-position, relative);
     }
   }
   display: inline-block;
   //width: 100%;
+
+  .line {
+    margin: var(--register-page-line-margin, 18px 0);
+    display: display(register-page-line, none);
+    align-items: center;
+    span
+    {
+      display: inline-block;
+      &.left-line, &.right-line
+      {
+        background: var(--register-line-background-color, linear-gradient(180deg, rgba(194, 229, 255, 0.5) 0%, rgba(139, 173, 198, 0.5) 52.6%, rgba(81, 115, 139, 0.5) 100%));
+        width: calc(50% - 10px);
+        height: 1px;
+      }
+      &.text
+      {
+        font-size: var(--reg-line-or-text-font-size, 10px);
+        color: var(--reg-line-or-text-color, #ffffff);
+        margin: var(--reg-line-or-text-margin, 0 3px);
+      }
+    }
+  }
+  .register-login-part {
+    display: var(--register-login-part-display, none);
+    flex-direction: var(--register-login-part-flex-direction, row);
+    gap: var(--register-login-part-gap, 0px);
+    .reg-already-have-account {
+      color: var(--login-redirect-text-color, #ffffff);
+      font-size: var(--register-redirect-font-size, 16px);
+      text-align: var(--register-redirect-text-align, left);
+    }
+    .reg-already-have-account-btn {
+      color: var(--login-redirect-btn-color, #ffffff);
+      text-align: var(--register-redirect-btn-text-align, left);
+      border: var(--register-redirect-btn-border, none);
+      border-radius: var(--register-redirect-btn-border-radius, 6px);
+      padding: var(--register-redirect-btn-padding, 0px);
+      width: var(--register-redirect-btn-width, 100%);
+      margin: var(--register-redirect-btn-margin, 0 auto);
+    }
+  }
 
   .form_field {
     display: displayEvents(register-form-field, block);
@@ -2403,7 +2493,7 @@ select {
     }
 
     .reg_btn {
-      width: calc(var(reg-btn, 100px) * 0.9);
+      width: calc(var(--reg-btn-width, 100px) * 0.9);
       border-bottom-left-radius: borderBottomLeftRadius(reg-btn, 6px);
       border-bottom-right-radius: borderBottomRightRadius(reg-btn, 6px);
       border-top-left-radius: borderTopLeftRadius(reg-btn, 6px);

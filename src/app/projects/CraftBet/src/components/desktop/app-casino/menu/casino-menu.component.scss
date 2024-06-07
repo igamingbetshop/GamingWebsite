@@ -23,6 +23,7 @@
     border-bottom: 1px solid itemColor(nav-bar-title-border-bottom,transparent);
     padding-bottom: paddingBottom(nav-bar-title, 0);
     margin-bottom: marginBottom(nav-bar-title,31px);
+    cursor: default;
   }
   ul
   {
@@ -45,6 +46,7 @@
       transition: transform .3s;
       -webkit-font-smoothing: antialiased;
       backface-visibility: hidden;
+      cursor: default;
 
       &:hover {
         transform:perspective(1px) scale(1.07);
@@ -65,7 +67,6 @@
       a, i {
         text-decoration: none;
         color: itemColor(product-navigation-tab, #ffffff);
-        cursor: pointer;
         font-size: 16px;
         white-space: nowrap;
         margin-top: 8px;

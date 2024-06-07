@@ -30,8 +30,9 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
   private subscription:Subscription = new Subscription();
   protected loginService: UserLogined;
   dialog = inject(MatDialog);
-  public configService:ConfigService;
-  public layoutService:LayoutService;
+  configService:ConfigService;
+  layoutService:LayoutService;
+
 
   constructor(public injector: Injector)
   {
@@ -53,8 +54,8 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
       this.selectedFragmentId = param.groupId;
       if(this.selectedPromotionId)
       {
-        this.http.get<any>(window['debugPath'] + '/assets/json/promotions/' + param.id
-            + '_' +  this.languageService.currentLangKey + '.json' + '?=' + window['VERSION']).subscribe(data => {
+        this.getPromotionById(this.selectedPromotionId)
+        .subscribe(data => {
           this.promotion.Content = data.content;
 
           this.promotion.Title = data.title;
@@ -79,6 +80,12 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
       }
       else this.filteredFragment = null;
     }));
+  }
+
+  getPromotionById(id:number|string)
+  {
+    return  this.http.get<any>(window['debugPath'] + '/assets/json/promotions/' + id
+        + '_' +  this.languageService.currentLangKey + '.json' + '?=' + window['VERSION']);
   }
 
   getPromotionFragments()
@@ -136,6 +143,11 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  onSelectPromotion(promotion:Promotion, fragment:any)
+  {
+    this.router.navigate(["/promotions"], {queryParams:{id:promotion.Id}});
   }
 
   ngOnDestroy()

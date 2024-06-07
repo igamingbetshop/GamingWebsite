@@ -18,6 +18,7 @@
   padding-top: var(--recovery-verify-code-padding-top, 0px);
   box-shadow: var(--forgot-password-confirmation-content-box-shadow, none);
   background: var(--recovery-verify-code-background, #1d2e4a);
+  border: var(--recovery-verify-code-border, none);
   display: flex;
   flex-direction: column;
   .modal-body {
@@ -63,6 +64,7 @@
     }
     .prefix-title {
       display: var(--verification-code-predix-title-display, block);
+      text-align: var(--verification-code-predix-title-text-align, left);
     }
     .form_field {
       display: flex;
@@ -74,8 +76,8 @@
       .input{
         width: 51px;
         height: 50px;
-        border-radius: 7px;
-        font-size: 26px;
+        border-radius: var(--verification-code-border-radius, 7px);
+        font-size: var(--verification-code-font-size, 26px);
         color: var(--verification-code-text-color, #ffffff);
         text-indent: var(--verification-code-text-indent, 16px);
         text-align: var(--verification-code-text-align, left);
@@ -99,7 +101,7 @@
       padding-top: 28px;
       span {
         font-weight: var(--verify-code-otp-font-weight, 600);
-        font-size: 16px;
+        font-size: var(--verify-code-otp-font-size, 16px);
         &:first-child {
           color: var(--verify-code-otp-color, #ffffff);
         }
@@ -110,15 +112,16 @@
       }
     }
     .otp-expire-resend {
-      text-decoration: underline;
+      text-decoration: var(--otp-expire-resend-text-decoration, underline);
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 8px;
+      margin-top: var(--otp-expire-resend-margin-top, 8px);
+      font-size: var(--otp-expire-resend-font-size, 16px);
       cursor: pointer;
       color: var(--otp-expire-resend-color, rgba(185, 187, 194, 1));
       &.active {
-        color: #546BF9;
+        color: var(--otp-expire-resend-active-color, #546BF9);
         opacity: 1;
         pointer-events: auto;
         cursor: pointer;
@@ -248,6 +251,7 @@
   .modal-content2 {
     width: var(--m-forgot-password-confirmation-content-width, 90%);
     margin-left: var(--m-forgot-password-confirmation-content-margin-left, 20px);
+    margin-top: var(--m-forgot-password-confirmation-content-margin-top, 0px);
     height: var(--m-forgot-password-confirmation-content-height, 60%);
     //margin-top: var(--m-forgot-password-confirmation-content-margin-top, 60px) !important;
     overflow: auto;
@@ -269,7 +273,7 @@
       width: 100%;
       margin-bottom: var(--m-security-logo-bottom-margin, 10px);
       button {
-        height: calc(var(--forgot-password-button-text-height, 44px) - 10px);
+        height: var(--m-forgot-password-button-height, calc(var(--forgot-password-button-text-height, 44px) - 10px));
       }
     }
   }

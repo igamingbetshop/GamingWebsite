@@ -64,7 +64,10 @@ export class BaseCharacterHierarchy implements OnInit, OnDestroy
                                 this.currentItem = this.characterHierarchy[i].Children[k];
                                 this.selfHierarchy = [...this.characterHierarchy[i].Children];
                                 if(this.characterHierarchy[i].Children[k].ParentId === this.characterHierarchy[i].Parent.Id){
-                                    this.itemCount = parseInt(this.characterHierarchy[i].Parent.NickName) || 5;
+                                    this.itemCount = parseInt(this.characterHierarchy[i].Parent.NickName) || 5
+                                    if(this.itemCount != this.characterHierarchy[i].Children.length){
+                                        this.itemCount = 5
+                                    }
                                 }
                                 break parentLoop;
                             }

@@ -146,6 +146,7 @@ export class MobileFooterComponent extends BaseFooterComponent {
       else
       {
         this.router.navigate(['/' + item.Href]);
+        window.scroll(0,0);
       }
     }
   }

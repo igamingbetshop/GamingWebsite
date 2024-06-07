@@ -35,8 +35,8 @@
     grid-template-columns: var(--m-grouped-products-content-grid-template-columns, repeat(2,1fr));
     flex-direction: row;
     flex-wrap: wrap;
-    flex-grow: 1;
-    justify-content: space-evenly;
+    flex-grow: var(--m-grouped-products-content-flex-grow, 1);
+    justify-content: var(--m-grouped-products-content-justify-content, space-evenly);
 
     &_item {
       width: var(--m-grouped-products-content-item-width, 140px);

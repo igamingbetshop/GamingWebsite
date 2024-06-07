@@ -34,6 +34,11 @@ export class JWTInterceptor implements HttpInterceptor {
             this.loaderService.show();
         }
         delete req.body?.Loader;
+        const user = this.localStorageService.get('user');
+        if(req.body && user)
+        {
+            req.body.IsAgent = user.IsAgent;
+        }
 
         return next.handle(req)
             .pipe(
@@ -44,8 +49,7 @@ export class JWTInterceptor implements HttpInterceptor {
                         {
                             if (event.body.ResponseCode === 28 || event.body.ResponseCode === 29)
                             {
-                                const userData = this.localStorageService.get('user');
-                                if (userData)
+                                if (user)
                                 {
                                     this.logoutHelper.logout(event.body.ResponseObject ? event.body.ResponseObject : '');
                                 }

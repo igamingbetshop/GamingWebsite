@@ -58,7 +58,7 @@
       <td>
         {{CurrencyId}} {{item?.WinAmount | number:'1.2-2'}}
       </td>
-      <td><fa-icon [icon]="['fas', 'info-circle']" (click)="openInfo(item)" *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1"></fa-icon></td>
+      <td><fa-icon [icon]="['fas', 'info-circle']" (click)="openInfo(item)" *ngIf="(item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80) && item?.ProductId !== 1101"></fa-icon></td>
     </tr>
     </tbody>
   </table>

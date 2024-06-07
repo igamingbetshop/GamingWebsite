@@ -42,6 +42,8 @@ export class BaseCasinoProviders implements OnInit {
         if(this.fragmentConfig.Config.hasOwnProperty('categories'))
             req = {CategoryIds:this.fragmentConfig.Config.categories};
 
+        const logoFormat = this.fragmentConfig.Config.logoFormat || ".png";
+
         this.casinoProvidersService.getProviders(req).subscribe(providers => {
             if(this.fragmentConfig.Config.count)
             {
@@ -53,7 +55,7 @@ export class BaseCasinoProviders implements OnInit {
             }
             this.providers.forEach(provider => {
                 provider.style = this.fragmentConfig.Config.itemStyle;
-                provider.imageSrc = `../../../../../../../assets/images/providers/${provider?.Id}.png`;
+                provider.imageSrc = `../../../../../../../assets/images/providers/${provider?.Id}${logoFormat}`;
             });
         });
 

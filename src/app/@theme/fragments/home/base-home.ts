@@ -25,6 +25,8 @@ export class BaseHome implements OnInit, OnDestroy
     iframes: FragmentData[] = [];
     characters: FragmentData[] = [];
     casinoSearch: FragmentData[] = [];
+    winnerWidgets: FragmentData[] = [];
+    betsWidgets: FragmentData[] = [];
 
     private readonly route: ActivatedRoute;
     private readonly router: Router;
@@ -55,7 +57,7 @@ export class BaseHome implements OnInit, OnDestroy
     }
     ngOnDestroy()
     {
-
+        window.removeEventListener("message", this.onFrameMessage);
     }
 
     private async getFragments()
@@ -99,6 +101,13 @@ export class BaseHome implements OnInit, OnDestroy
                     break;
                 case 'characters' :
                     this.characters.push(fragmentData);
+                    break;
+                case 'wins-widget' :
+                    this.winnerWidgets.push(fragmentData);
+                    break;
+                case 'bet-widget' :
+                    this.betsWidgets.push(fragmentData);
+                    break;
                 case 'casino-search' :
                     this.casinoSearch.push(fragmentData);
                     break;
@@ -116,5 +125,28 @@ export class BaseHome implements OnInit, OnDestroy
                     break;
             }
         });
+    }
+
+    onLoadFrame(event:Event, fragment:FragmentData)
+    {
+        /*Check sportsbook*/
+        if(fragment.Config.productId === 6)
+        {
+            window.addEventListener('message', this.onFrameMessage);
+        }
+    }
+
+    onFrameMessage = (event:MessageEvent) =>
+    {
+        if (typeof event.data['origin'] !== 'undefined')
+        {
+            if (event.data['origin'] == 'widget')
+            {
+                if (typeof event.data.banner !== 'undefined' && event.data.banner.link)
+                {
+                    this.router.navigateByUrl(event.data.banner.link);
+                }
+            }
+        }
     }
 }

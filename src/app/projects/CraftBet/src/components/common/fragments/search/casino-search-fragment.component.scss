@@ -32,10 +32,10 @@
       outline: none;
       line-height: var(--search-fragment-line-height, 40px);
       font-size: var(--search-fragment-font-size, 10px);
-      text-transform: uppercase;
+      text-transform: var(--search-fragment-text-transform, uppercase);
       &::placeholder {
         font-size: var(--search-fragment-placeholder-font-size, 10px);
-        text-transform: uppercase;
+        text-transform: var(--search-fragment-placeholder-transform, uppercase);
         color: var(--search-fragment-ph-color, #CCCCCC);
       }
     }

@@ -2,6 +2,7 @@
   background: var(--change-password-content-background-color, unset);
   padding: 20px;
   border-radius: 6px;
+  cursor: default;
   .two-factor-title {
     margin: var(--two-factor-title-margin, 0);
     font-size: var(--two-factor-title-font-size, 18px);
@@ -97,11 +98,11 @@
           opacity: 0.6;
         }
         .error_message {
-          color: red;
-          position: absolute;
-          top: 51px;
-          font-size: 15px;
-          left: 42px;
+          color: var(--two-factor-error-message-color, red);
+          position: var(--two-factor-error-message-position, absolute);
+          top: var(--two-factor-error-message-top, 51px);
+          font-size: var(--two-factor-error-message-font-size, 15px);
+          left: var(--two-factor-error-message-left, 42px);
         }
       }
 

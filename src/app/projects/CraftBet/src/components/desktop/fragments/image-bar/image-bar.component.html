@@ -2,8 +2,10 @@
 <div class="image-bar-background" [ngStyle]="fragmentConfig?.Config.backgroundStyle"></div>
 <div class="image-bar {{fragmentConfig?.Config.type}}"
      [ngStyle]="fragmentConfig?.Config.style">
-    <div *ngFor="let item of fragmentConfig.Items" [ngStyle]="item.Config?.style">
-        <img (click)="navigateByBanner(item.Href)" [src]="item?.Src">
+    <div *ngFor="let item of fragmentConfig.Items" [ngStyle]="item.Config?.style"
+         (click)="navigateByBanner(item.Href)"
+         pointerOnLink="{{item.Href}}">
+        <img  [src]="item?.Src">
         <div class="image-bar-title" [innerHTML]="item.Title | translate | sanitizer: 'html'"></div>
         <div class="content-html" [innerHTML]="item.Title + '_Content' | translate | sanitizer: 'html'"></div>
     </div>

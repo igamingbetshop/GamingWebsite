@@ -16,12 +16,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
   ]*/
 })
 export class VerifyCodeComponent extends BaseVerifyCode {
-  public logoUrl: string = '';
+  public logoUrl: string = '../../../../../../../assets/images/' + window.location.hostname + '.png';
   constructor(public injector: Injector) {
     super(injector);
-  }
-  errorHandler(event) {
-    event.target.src = '../../../../../../../assets/images/logo.png';
   }
 
   close() {

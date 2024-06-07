@@ -120,6 +120,7 @@
       font-size: var(--payment-client-info-font-size, 20px);
       margin-bottom: var(--payment-client-info-name-margin-bottom, 0px);
       padding: var(--payment-client-info-name-padding, 0px);
+      border-radius: var(--payment-client-info-name-border-radius, 0px);
       background: var(--payment-client-info-name-background, unset);
     }
 

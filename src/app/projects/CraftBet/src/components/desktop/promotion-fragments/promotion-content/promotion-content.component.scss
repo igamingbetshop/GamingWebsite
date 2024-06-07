@@ -1,0 +1,52 @@
+:host
+{
+  flex: 3;
+  height: 100%;
+  .promotion-item-content
+  {
+    .promotion-item-image
+    {
+      width: 100%;
+      height: calc(var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px) + 8px);
+      box-shadow: var(--promotion-item-img-box-shadow, 0px 5px 7px 0px rgba(0, 0, 0, 0.4));
+      background: var(--promotion-item-img-background-color,rgba(20, 44, 68, 1));
+      border-radius: 6px;
+      padding: 16px;
+      img
+      {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+    .promotion-description
+    {
+      height: calc(((var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px)) * 3.3) - 20px);
+      overflow-y: auto;
+      padding-right: 16px;
+      margin-top: 16px;
+      cursor: default;
+
+      h2
+      {
+        color: var(--promotion-description-title-color,rgba(31, 179, 253, 1));
+        font-size: var(--promotion-description-title-font-size, 22px);
+        font-weight: var(--promotion-description-title-font-weight, 500);
+        margin-top: 0;
+        p{margin: 0}
+      }
+      .text-content
+      {
+        color: var(--text-content-color, #ffffff);
+        background: linear-gradient(179.46deg, var(--text-content-gradient1-color,#142C44) 0.45%, var(--text-content-gradient2-color,#131A2C) 104.46%);
+        box-shadow: 5px 0px 7px 0px rgba(0, 0, 0, 0.4);
+        border-radius: 6px;
+        padding: 20px;
+      }
+      .publish-date {
+        color: var(--promotion-description-publish-date-color, #fff);
+      }
+    }
+  }
+}

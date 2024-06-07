@@ -9,6 +9,7 @@ import {FontAwesomeIcons} from "../../../../../../../@theme/font-awsome/font-awe
 import {CompareByKeyPipeModule} from "../../../../../../../@theme/pipes/compare-by-key/compare-by-key-pipe.module";
 import {CasinoSearchModule} from "../search/casino-search.module";
 import {DropdownDirectiveModule} from "../../../../../../../@theme/directives/dropdown/dropdown-directive.module";
+import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 
 @NgModule({
   declarations:[CasinoProvidersComponent],
@@ -22,7 +23,8 @@ import {DropdownDirectiveModule} from "../../../../../../../@theme/directives/dr
         FormsModule,
         CasinoSearchModule,
         CompareByKeyPipeModule,
-        DropdownDirectiveModule
+        DropdownDirectiveModule,
+        SanitizerModule
     ]
 })
 

@@ -7,6 +7,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MobileForgotPasswordComponent} from "./mobile-forgot-password.component";
 import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 import {MobileOpenTicketComponent} from "../mobile-open-ticket/mobile-open-ticket.component";
+import {DefaultImageFallBackDirective} from "../../../../../../@theme/directives/default-image-fall-back.directive";
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
     SanitizerModule,
     RouterModule.forChild(routes),
     FormsModule,
+    DefaultImageFallBackDirective
   ]
 })
 

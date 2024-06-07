@@ -3,9 +3,11 @@
         <div class="payment-systems__userAccount__name" [ngClass]="{'selected': isSelectedAccount(account)}" (click)="selectedAccountBalance($event, account)">
             <input type="radio" [checked]="selectedAccount && selectedAccount.Id === account?.Id" id="radio{{i}}" class="radio-input"/>
             <label for="radio{{i}}" class="radio-label" (click)="selectedAccountBalance($event, account)"></label>
+            <img class="item-cell-account-img" src="../../../../../../../assets/images/accounts/{{account?.TypeId}}_{{account.PaymentSystemId}}_{{account.hasBetShop}}.svg">
             <span class="item-cell-account-name" *ngIf="account.Id === 0">{{ "Account." + account?.AccountTypeName | translate }}</span>
             <span class="item-cell-account-name" *ngIf="account.Id !== 0">{{ account?.AccountTypeName }}</span>
-            <span><span class="mobile-balance-name-currency-id">{{ CurrencyId }}</span> {{ account?.Balance | number }} <span class="mobile-balance-name-currency-symbol">{{currencySymbol}}</span></span>
+            <span class="mobile-balance-part"><span class="mobile-balance-name-currency-id">{{ CurrencyId }}</span> {{ account?.Balance | number }} <span class="mobile-balance-name-currency-symbol">{{currencySymbol}}</span></span>
+            <fa-icon *ngIf="selectedAccount?.Id === account?.Id" [icon]="faCheck" class="check-icon"></fa-icon>
         </div>
     </div>
 </div>

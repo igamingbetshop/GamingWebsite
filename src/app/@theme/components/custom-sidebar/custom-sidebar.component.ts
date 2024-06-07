@@ -18,7 +18,7 @@ export class CustomSidebarComponent implements OnInit {
   @Input() overlay = false;
   @Input() closeOnOutsideClick = false;
   @Input() closeOnSidebarClick = false;
-  screenWidth: string = '300px';
+  screenWidth: string = String(window.innerWidth);
 
   @Input() set isOpen(value: boolean)
   {

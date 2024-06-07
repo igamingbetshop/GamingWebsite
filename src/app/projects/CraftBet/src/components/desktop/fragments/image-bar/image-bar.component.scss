@@ -5,10 +5,12 @@
   display: block;
   margin: 0 auto;
   position: relative;
+  max-width: 100%;
   .title
   {
     color: white;
     text-align: center;
+    cursor:default;
   }
   .image-bar-background {
     position: absolute;
@@ -22,7 +24,8 @@
   {
     >*
     {
-      cursor: pointer;
+      cursor: default;
+      pointer-events: none;
       transition: transform 250ms;
       &:hover
       {

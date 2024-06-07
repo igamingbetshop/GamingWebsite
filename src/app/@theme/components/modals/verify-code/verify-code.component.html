@@ -1,7 +1,7 @@
 <div [ngClass]="{'modal-content1': isModal}" class="modal-content2">
     <ng-content></ng-content>
     <div class="modal-body" *ngIf="!isModal">
-        <img class="recovery-logo" [src]="logoUrl" (error)="errorHandler($event)"/>
+        <img class="recovery-logo" [src]="logoUrl" defaultImageFallBack [defaultSrc]="'../../../../../../../assets/images/logo.png'"/>
     </div>
     <div class="modal-body" style="justify-content: flex-end">
         <span class="icon-close-modal" (click)="close()"></span>

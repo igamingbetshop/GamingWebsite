@@ -31,6 +31,12 @@
     right: auto;
     left: var(--popup-close-icon-right, 38px);
   }
+  .mobile-login-top-part {
+    .icon-close-modal {
+      left: var(--m-login-close-icon-left, 0);
+      right: auto;
+    }
+  }
 }
 .login-page {
   display: var(--login-page-display, block);
@@ -319,8 +325,49 @@
       .form-accept-terms {
         display: var(--signin-form-accept-terms-display, none);
       }
+      .line {
+        margin: var(--login-page-line-margin, 18px 0);
+        display: display(login-page-line, none);
+        align-items: center;
+        span
+        {
+          display: inline-block;
+          &.left-line, &.right-line
+          {
+            background: var(--register-line-background-color, linear-gradient(180deg, rgba(194, 229, 255, 0.5) 0%, rgba(139, 173, 198, 0.5) 52.6%, rgba(81, 115, 139, 0.5) 100%));
+            width: calc(50% - 10px);
+            height: 1px;
+          }
+          &.text
+          {
+            font-size: var(--reg-line-or-text-font-size, 10px);
+            color: var(--reg-line-or-text-color, #ffffff);
+            margin: var(--reg-line-or-text-margin, 0 3px);
+          }
+        }
+      }
+      .login-register-part {
+        display: var(--login-register-part-display, none);
+        flex-direction: var(--login-register-part-flex-direction, row);
+        gap: var(--login-register-part-gap, 0px);
+        .login-bottom-text {
+          color: var(--login-redirect-text-color, #ffffff);
+          font-size: var(--register-redirect-font-size, 16px);
+          text-align: var(--register-redirect-text-align, left);
+        }
+        .login-dont-have-account-btn {
+          color: var(--login-redirect-btn-color, #ffffff);
+          text-align: var(--register-redirect-btn-text-align, left);
+          border: var(--register-redirect-btn-border, none);
+          border-radius: var(--register-redirect-btn-border-radius, 6px);
+          padding: var(--register-redirect-btn-padding, 0px);
+          width: var(--register-redirect-btn-width, 100%);
+          margin: var(--register-redirect-btn-margin, 0 auto);
+          cursor: pointer;
+        }
+      }
       .form_field {
-        margin: 25px auto 0 auto;
+        margin: var(--login-modal-section-form-field-margin, 25px auto 0 auto);
         .forget-password-text {
           display: display(modal-forget-password-text,none);
           justify-content: justifyContent(modal-forget-password-text, unset);
@@ -403,7 +450,13 @@
 
   &.login_modal_section {
     width: 100%;
+    .form_field1 {
+      width: width(login-modal-section-form-field-1, 100%) !important;
+    }
 
+    .form_field2 {
+      width: width(login-modal-section-form-field-2, 50%) !important;
+    }
     .form_field {
       width: var(--login-modal-section-form-field-width, 100%);
       height: var(--login-modal-section-form-field-height, 44px);
@@ -501,17 +554,27 @@ app-app-confirm {
     padding-left: paddingLeft(login-text, 0px);
     padding-right: paddingRight(login-text, 0px);
   }
-  &.login_PSection {
-    .login-section.modal_section form .form_field {
-      &:nth-child(1) {
-        margin-top: marginTop(login-section-field, 20px);
-      }
-
-      &:nth-child(2) {
-        margin-top: marginTop(login-section-field-second, 30px);
-      }
-    }
+  .login-title::before {
+    content: '';
+    position: absolute;
+    bottom: var(--login-title-before-bottom, -9px);
+    left: var(--login-title-before-left, 0);
+    right: var(--login-title-before-right, 0);
+    height: var(--login-title-before-height, 0px);
+    background: var(--login-title-before-background, transparent);
+    box-shadow: var(--login-title-before-box-shadow, none);
   }
+  //&.login_PSection {
+  //  .login-section.modal_section form .form_field {
+  //    &:nth-child(1) {
+  //      margin-top: marginTop(login-section-field, 20px);
+  //    }
+  //
+  //    &:nth-child(2) {
+  //      margin-top: marginTop(login-section-field-second, 30px);
+  //    }
+  //  }
+  //}
   .login_PSection_redirect a{
     text-decoration: var(--login-redirect-href-text-decoration, underline);
     margin-left: var(--login-redirect-href-text-margin-left, 0px);

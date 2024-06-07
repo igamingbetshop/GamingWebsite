@@ -3,7 +3,7 @@
                         (beforeChange)="currentSlide = $event.currentSlide"
                         [config]="fragmentConfig.Config">
         <div ngxSlickItem *ngFor="let banner of banners" class="banner" (click)="navigateByBanner(banner.Link, $event)">
-            <div class="banner_image" [class.has-href]="banner.Link">
+            <div class="banner_image"  pointerOnLink="{{banner.Link}}">
                 <picture>
                     <source *ngFor="let source of banner.sources" [media]="banner.media" [srcset]="banner.srcset">
                     <img [src]="bannerService.bannersPath + banner?.Image">

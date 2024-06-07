@@ -10,6 +10,19 @@
                [style.order]="fragment.Order"
                [style.margin-top.px]="fragment.Config.marginTop">
     </app-mobile-image-bar>
+    <winners-widget *ngFor="let fragment of winnerWidgets"
+                    [fragmentConfig]="fragment"
+                    [style.margin-top.px]="fragment.Config.marginTop"
+                    [style.order]="fragment.Order">
+    </winners-widget>
+    @for (fragment of betsWidgets; track fragment.Id)
+        {
+       <bets-widget [fragmentConfig]="fragment"
+                [style.margin-top.px]="fragment.Config.marginTop"
+                [style.order]="fragment.Order">
+
+       </bets-widget>
+        }
     <casino-search-fragment *ngFor="let fragment of casinoSearch"
                             [fragmentConfig]="fragment"
                             [style.margin-bottom.px]="fragment.Config.marginBottom"

@@ -6,6 +6,9 @@
   .birth_date_select {
     display: flex;
     align-items: center;
+    .distans-right {
+      margin-right: var(--profile-birth-date-select-margin-right, 15px);
+    }
     .form_field {
       width: 100%;
       position: relative;

@@ -18,7 +18,7 @@ export class AppLoginComponent extends AppCommonLoginComponent {
   public configService: ConfigService;
   public defaultOptions: any;
 
-  public logoUrl: string = '';
+  public logoUrl: string = '../../../../../../../assets/images/' + window.location.hostname + '.png';
 
   constructor(public injector: Injector, private route: ActivatedRoute) {
     super(injector);
@@ -29,10 +29,6 @@ export class AppLoginComponent extends AppCommonLoginComponent {
     event.stopPropagation();
     event.preventDefault();
     this.onNavigate.emit();
-  }
-
-  errorHandler(event) {
-    event.target.src = '../../../../../../../assets/images/logo.png';
   }
 
   ngOnInit() {

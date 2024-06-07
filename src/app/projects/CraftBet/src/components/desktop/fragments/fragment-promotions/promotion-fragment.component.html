@@ -2,26 +2,27 @@
   <div class="products-list">
 
     <div class="promotion_container" [ngStyle]="promotionFragment.Style">
-      <div class="products-list_item"
-           *ngFor="let promotion of promotionFragment.Promotions"
-         [queryParams]="{id:promotion.Id}"
-         [routerLink]="['/promotions']"
-         [ngStyle]="promotion.Style">
-        <div class="promotions_item" [ngClass]="promotion.Title">
-          <img src="../../../../../../../assets/images/promotions/medium/{{promotion.ImageName}}"/>
-          <div class="see-more-btn">
-            <i class="icon-specials"></i>
-            <button>{{'Promotion.See More' | translate}}</button>
-          </div>
+        @for (promotion of promotionFragment.Promotions; track promotion.Id)
+        {
+            <div class="products-list_item"
+                 (click)="selectPromotion(promotion)"
+                 [ngStyle]="promotion.Style">
+                <div class="promotions_item" [ngClass]="promotion.Title">
+                    <img src="../../../../../../../assets/images/promotions/medium/{{promotion.ImageName}}"/>
+                    <div class="see-more-btn">
+                        <i class="icon-specials"></i>
+                        <button>{{'Promotion.See More' | translate}}</button>
+                    </div>
 
-        </div>
-        <div class="promotions_text">
-          <div>
-            <p class="promotions_title" [innerHtml]="promotion.Title"></p>
-            <p [innerHtml]="promotion.Description"></p>
-          </div>
-        </div>
-      </div>
+                </div>
+                <div class="promotions_text">
+                    <div>
+                        <p class="promotions_title" [innerHtml]="promotion.Title"></p>
+                        <p [innerHtml]="promotion.Description"></p>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
   </div>
 </div>

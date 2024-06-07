@@ -5,16 +5,18 @@ import {GlobalAccountPagesDpdComponent} from "./global-account-pages-dpd.compone
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {GlobalLogoutModule} from "../global-logout/global-logout.module";
 import {DropdownDirectiveModule} from "../../directives/dropdown/dropdown-directive.module";
+import {PointerOnLinkDirective} from "../../directives/pointer-on-link/pointer-on-link.directive";
 
 @NgModule({
     declarations:[GlobalAccountPagesDpdComponent],
     exports:[GlobalAccountPagesDpdComponent],
-    imports:[
+    imports: [
         CommonModule,
         FontAwesomeModule,
         TranslateModule,
         GlobalLogoutModule,
-        DropdownDirectiveModule
+        DropdownDirectiveModule,
+        PointerOnLinkDirective
     ]
 })
 

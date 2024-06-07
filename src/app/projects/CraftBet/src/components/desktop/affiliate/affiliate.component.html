@@ -1,6 +1,11 @@
 <div class="about_us_section affiliate_section min-height">
     <div class="affiliate affiliate_height">
         <h2>{{'Affiliate.Affiliate-title' | translate}}</h2>
+        <div class="affiliate-tab-inner-title">
+            <div>{{'Affiliate.Affiliate-inner-title' | translate}}</div>
+            <div [innerHTML]="'Affiliate.Affiliate-inner-description' | translate | sanitizer: 'html'"></div>
+        </div>
+
         <form class="affiliate-section" [formGroup]="affiliateForm" autocomplete="off">
             <div class="form_field">
                 <input type="text" placeholder="{{'Affiliate.Name-placeholder' | translate}}"
@@ -119,19 +124,19 @@
         <div class="error_message">{{errorMessage}}</div>
         <div class="affiliate-support-section">
             <div class="support-part">
-                <div>
+                <div class="support-part-item">
                     <h3>{{'Affiliate.10 MINUTES' | translate}}</h3>
                     <span>{{'Affiliate.Average Cash Out Time' | translate}}</span>
                 </div>
-                <div>
+                <div class="support-part-item">
                     <h3>{{'Affiliate.24/7' | translate}}</h3>
                     <span>{{'Affiliate.Live Chat Support' | translate}}</span>
                 </div>
-                <div>
+                <div class="support-part-item">
                     <h3>{{'Affiliate.4,500+' | translate}}</h3>
                     <span>{{'Affiliate.Casino Games' | translate}}</span>
                 </div>
-                <div>
+                <div class="support-part-item">
                     <h3>{{'Affiliate.2,700,00+' | translate}}</h3>
                     <span>{{'Affiliate.Registered Players' | translate}}</span>
                 </div>
@@ -141,7 +146,7 @@
     </div>
     <div class="affiliate-right-part affiliate_height">
         <div class="right-part-buttons">
-            <div class="submit-details">
+            <div class="submit-details submit-details1">
                 <button type="submit" class="craft_btn"
                         (click)="selectTab(tabs.affiliateAbout)"
                         [ngClass]="{'active':selectedTab == tabs.affiliateAbout}">

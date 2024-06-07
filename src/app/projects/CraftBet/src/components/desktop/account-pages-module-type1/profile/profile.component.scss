@@ -11,10 +11,11 @@
   justify-content: space-between;
   align-items: center;
   height: var(--change-password-second-tab-heirght, 32px);
+  span{cursor:default}
   .settings_edit {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: var(--edit-button-gap, 14px);
     justify-content: var(--edit-button-justify-content, unset);
     width: var(--edit-button-width, 53px);
     height: var(--edit-button-height, 40px);
@@ -28,9 +29,13 @@
       color: var(--edit-button-color, #4AA4FF);
       text-decoration: var(--edit-button-text-decoration, underline);
       font-size: var(--edit-button-text-font-size, 13px);
+      font-weight: var(--edit-button-text-font-weight, 400);
       cursor: pointer;
     }
-    .icon-edit{color: var(--edit-icon-color, #FFFFFF)}
+    .icon-edit{
+      color: var(--edit-icon-color, #FFFFFF);
+      font-size: var(--edit-button-icon-font-size, 16px);
+    }
     &.selected
     {
       button{ color: var(--edit-button-selected-color)}
@@ -80,7 +85,7 @@ form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  column-gap: 100px;
+  column-gap: var(--profile-settings-form-column-gap, 100px);
   row-gap: var(--profile-settings-form-row-gap, 0px);
   position: relative;
   height: 100%;

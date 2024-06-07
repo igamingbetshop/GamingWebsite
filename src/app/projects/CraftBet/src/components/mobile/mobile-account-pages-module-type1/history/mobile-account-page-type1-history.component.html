@@ -70,7 +70,7 @@
         <td>{{'Bet.' + item?.statusTypeName | translate}}</td>
         <td class="status-{{item?.State}}">{{item?.betStatusName}}</td>
         <!--      <td><fa-icon [icon]="['fas', 'info-circle']" (click)="openInfo(item)" *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1"></fa-icon></td>-->
-        <td><span class="icon-eye-password eye-class" *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80"
+        <td><span class="icon-eye-password eye-class" *ngIf="(item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80) && item?.ProductId !== 1101"
                   (click)="openInfo(item)"></span></td>
       </tr>
       </tbody>

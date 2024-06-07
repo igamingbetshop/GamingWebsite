@@ -11,6 +11,9 @@ import {FormsModule} from "@angular/forms";
 import {FontAwesomeIcons} from "../../../../../../../@theme/font-awsome/font-awesome-icons";
 import {LayoutService} from "../../../../../../../@core/services/app/layout.service";
 import {NgxPaginationModule} from "ngx-pagination";
+import {
+    HorizontalScrollDirectiveModule
+} from "../../../../../../../@theme/directives/horizontal-scroll/horizontal-scroll.directive.module";
 
 @Component({
     selector: 'mobile-character-hierarchy',
@@ -23,7 +26,8 @@ import {NgxPaginationModule} from "ngx-pagination";
             TranslateModule,
             FormsModule,
             FontAwesomeIcons,
-            NgxPaginationModule
+            NgxPaginationModule,
+            HorizontalScrollDirectiveModule
         ]
 })
 export class MobileCharacterHierarchyComponent extends BaseCharacterHierarchy

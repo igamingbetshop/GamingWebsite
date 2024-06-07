@@ -52,7 +52,7 @@ export class GlobalLanguageComponent implements OnInit, OnDestroy {
 
         this.currentLang = this.langService.getCurrentLang('');
 
-        if (this.currentLang['key'] === 'fa' || this.currentLang['key'] === 'f9' || this.currentLang['key'] === 'he')
+        if (this.currentLang['key'] === 'fa' || this.currentLang['key'] === 'f9' || this.currentLang['key'] === 'he' || this.currentLang['key'] === 'ar')
         {
             this.sharedService.rightToLeftOrientation.next(true);
         }
@@ -75,7 +75,7 @@ export class GlobalLanguageComponent implements OnInit, OnDestroy {
 
     public changeLanguage(langKey)
     {
-        if (langKey === 'fa' || langKey === 'f9' || langKey === 'he') {
+        if (langKey === 'fa' || langKey === 'f9' || langKey === 'he' || langKey === 'ar') {
             this.sharedService.rightToLeftOrientation.next(true);
         } else {
             this.sharedService.rightToLeftOrientation.next(false);

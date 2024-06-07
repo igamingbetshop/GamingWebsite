@@ -54,7 +54,7 @@ export class BaseCasino implements OnInit, OnDestroy {
       if(params)
       {
         if(params.pattern)
-          this.casinoFilterService.setPatter(params.pattern);
+          this.casinoFilterService.setPattern(params.pattern);
         if(params.providers)
         {
           const providerIds = params.providers.split(",");

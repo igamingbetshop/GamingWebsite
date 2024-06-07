@@ -1,6 +1,6 @@
 .item-cell-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: var(--account-statement-item-justify-content ,space-between);
   align-items: center;
   width: 100%;
   height: 100%;
@@ -29,6 +29,11 @@
     margin-left: var(--account-statement-item-account-balance-margin-left, 0px);
     font-size: var(--account-statement-item-account-balance-font-size, 12px);
   }
+  .check-icon {
+    display: var(--balance-check-icon-display, none);
+    margin-left: var(--balance-check-icon-margin-left, auto);
+    margin-right: var(--balance-check-icon-margin-right, 10px);
+  }
   .item_cell {
     display: table-cell;
     vertical-align: middle;
@@ -55,7 +60,7 @@
   background: var(--account-statement-item-hover-background, transparent);
 }
 .selected {
-  background: var(--account-statement-item-selected-background, transparent);
+  background: var(--account-statement-item-selected-background, transparent) !important;
 }
 .redirect-part {
   color: var(--account-statement-footer-color, #fff);

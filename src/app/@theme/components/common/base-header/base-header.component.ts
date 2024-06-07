@@ -131,6 +131,7 @@ export class BaseHeaderComponent extends BaseComponent {
             else
             {
                 this.router.navigate(['/' + href.split('?')[0]], {queryParams: result ? result : ''});
+                window.scroll(0,0);
                 this.saveData.isGameOpenFromInternal.next(true);
                 this.saveData.changeUrlName.next(href);
                 if(href == 'prematch' || href == 'live' || href == 'sport/prematch' || href == 'sport/live')

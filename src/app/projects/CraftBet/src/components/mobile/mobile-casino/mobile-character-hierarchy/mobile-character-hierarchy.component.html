@@ -1,14 +1,13 @@
 <div class="mobile-map" *ngIf="userLogined.isAuthenticated" [ngStyle]="layoutService.layoutStyle">
         <h2>{{'Character.' + 'MapTitle' | translate}}</h2>
-        <div class="m-character-hierarchy">
-             <!--   <img class="map-image" src="../assets/images/characters/mobile-map.png">-->
-                <img class="map-image"  [src]="selfHierarchy[(page - 1) * this.itemCount]?.BackgroundImageData">
+        <div class="m-character-hierarchy" [ngClass]="this.itemCount > 5? 'change-layout' : ''"
+             [ngStyle]="{'background-image': 'var(--m-map-background-image,url(' + selfHierarchy[(page - 1) * this.itemCount]?.BackgroundImageData + '))'}">
+              <!--  <img class="map-image"  [src]="selfHierarchy[(page - 1) * this.itemCount]?.BackgroundImageData">-->
                 <div class="m-character-hierarchy-content level{{item.Order}}" *ngFor="let item of selfHierarchy | paginate: { itemsPerPage: this.itemCount, currentPage: page }; let i = index"
-                     [class.last]="item.Id === lastItem.Id">
-                        <div  class="character-level"
-                              [class.active]="item.Selected == true"
-                              [class.next-levels]="item?.CompPoints > currentCompPoint"
-                        >
+                     [class.last]="item.Id === lastItem.Id"
+                     [class.active]="item.Selected == true"
+                     [class.next-levels]="item?.CompPoints > currentCompPoint">
+                        <div  class="character-level">
                             <img *ngIf="item.Id === lastItem.Id && selfHierarchy.length > 1" class="level-bg"  src="../assets/images/characters/last-level.png">
                             <img *ngIf="selfHierarchy.length == 1" class="level-bg"  src="../assets/images/characters/level0.png">
                             <img *ngIf="item.Id !== lastItem.Id" class="level-bg" src="../assets/images/characters/level{{i}}.png">
@@ -25,7 +24,8 @@
                         <div class="info">
                                 <div>
                                         <span>{{item.Title | translate}}</span>
-                                        <p>{{item.Description | translate}}</p>
+                                        <p class="level">{{'Level' | translate}}:{{item.Title | translate}}</p>
+                                        <p>{{'Description' | translate}}:{{item.Description | translate}}</p>
                                 </div>
                         </div>
                 </div>

@@ -63,6 +63,7 @@ export class MobileMoreMenuComponent implements OnInit, OnDestroy {
       window.location.href = item.Href;
     } else {
       this.router.navigate([item.Href]);
+      window.scroll(0,0);
     }
   }
 

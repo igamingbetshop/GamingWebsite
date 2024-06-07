@@ -2,7 +2,7 @@
 <span>{{currentDate}} <fa-icon [icon]="['fas', 'angle-down']" class="time-arrow_icon"></fa-icon></span>
 <span class="show-last-login" *ngIf="userData">{{lastLogin}}: {{userData?.LastLogin | date: 'd-MM-yyyy,hh:mm a'}}</span>
 <div class="timezones-box" *ngIf="isDropDown">
-    <input (click)="$event.stopPropagation()" [(ngModel)]="searchPattern">
+    <input placeholder="{{'Header.Search-Timezone' | translate}}" (click)="$event.stopPropagation()" [(ngModel)]="searchPattern">
     <ul class="timezones">
         <li *ngFor="let timeZone of timezones | timezoneFilter : searchPattern" (click)="setTimeZone(timeZone)">
             <div>{{timeZone.value}}</div>

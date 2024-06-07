@@ -107,7 +107,7 @@
           </div>
           <div class="bets-block_item block_item info">
             <button type="button" class="info-btn" (click)="openInfo(item)"
-                    *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1">{{'User.Info' | translate}}</button>
+                    *ngIf="(item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80) && item?.ProductId !== 1101">{{'User.Info' | translate}}</button>
           </div>
         </div>
       </div>

@@ -77,6 +77,9 @@
       .choose-document{
         position: relative;
       }
+      .verify_field {
+        width: var(--account-verification-form-verify-field-width, 30%);
+      }
       .choose-document:after {
         content: '<>';
         font: 17px "Consolas", monospace;
@@ -138,6 +141,7 @@
         box-sizing: border-box;
         height: var(--account-verification-label-inline-height, 49px);
         font-size: var(--account-verification-label-font-size, 16px);
+        font-weight: var(--account-verification-label-font-weight, 400);
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
@@ -149,6 +153,7 @@
         position: absolute;
         border: none;
         right: var(--account-verification-file-button-right, 4px);
+        left: var(--account-verification-file-button-left, auto);
         top: var(--account-verification-file-button-top, 6px);
         border-radius: var(--account-verification-file-button-border-radius, 21px);
         color: var(--account-verification-file-button-color, #fff);
@@ -178,7 +183,7 @@
         margin-top: 0;
         margin-bottom: 0;
         &.change_name, &.choose_input {
-          min-width: 308px;
+          min-width: var(--account-verification-choose-input-min-width, 308px);
           background: var(--select-file-bg, linear-gradient(180deg, #314566 0%, #192333 100%));
           border-radius: var(--account-verification-choose-input-border-radius, 6px);
           border: none;

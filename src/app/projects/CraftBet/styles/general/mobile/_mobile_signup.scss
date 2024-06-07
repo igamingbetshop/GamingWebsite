@@ -32,6 +32,16 @@
     margin-right: var(--m-register-logo-margin-right, auto);
     background: var(--m-register-logo-background, transparent);
   }
+  .mobile-register-logo-png {
+    display: var(--m-register-logo-png-display, none);
+    height: height(m-register-logo, 36px);
+    width: width(m-register-logo, 156px);
+    margin-top: var(--m-register-logo-margin-top, 11px);
+    margin-bottom: var(--m-register-logo-margin-bottom, 29px);
+    margin-left: var(--m-register-logo-margin-left, auto);
+    margin-right: var(--m-register-logo-margin-right, auto);
+    background: var(--m-register-logo-background, transparent);
+  }
   .required-field
   {
     .required-field-text {
@@ -75,7 +85,7 @@
   }
 
   &.showPaddingTop {
-    padding-top: 75px;
+    padding-top: var(--m-register-section-show-padding-top, 75px);
   }
 
   .signup-input {
@@ -88,7 +98,18 @@
     margin-top: marginTop(m-signup-reg-text, 20px);
     margin-bottom: marginBottom(m-signup-reg-text, 20px);
     color: color(m-signup-reg-text);
-    flex:1;
+    flex: var(--m-signup-reg-text-flex, 1);
+    position: var(--m-signup-reg-text-position, relative);
+  }
+  .register-text::before {
+    content: '';
+    position: absolute;
+    bottom: var(--m-reg-form-header-before-bottom, -9px);
+    left: var(--m-reg-form-header-before-left, 0);
+    right: var(--m-reg-form-header-before-right, 0);
+    height: var(--m-reg-form-header-before-height, 0px);
+    background: var(--m-reg-form-header-before-background, transparent);
+    box-shadow: var(--m-reg-form-header-before-box-shadow, none);
   }
 
   &_header {

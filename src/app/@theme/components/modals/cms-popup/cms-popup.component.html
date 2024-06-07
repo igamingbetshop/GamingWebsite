@@ -1,13 +1,15 @@
-<div class="modal-content">
+<div class="modal-content" [style.display]="loadedData ? 'block' : 'none'">
     <div class="modal-body">
         <div></div>
-        <fa-icon [icon]="['fas', 'times']" (click)="close()" class="cms-popup-icon" [style.display]="data?.cmsPopupData ? 'block' : 'none'"></fa-icon>
-        <fa-icon [icon]="['fas', 'times']" (click)="closeLoginedPopup(data?.loginedCmsPopupData)" class="cms-popup-icon" [style.display]="data?.loginedCmsPopupData ? 'block' : 'none'"></fa-icon>
+        <fa-icon [icon]="['fas', 'times']" (click)="closePopup(data?.cmsPopupData, 2)" class="cms-popup-icon" [style.display]="data?.cmsPopupData ? 'block' : 'none'"></fa-icon>
+        <fa-icon [icon]="['fas', 'times']" (click)="closePopup(data?.loginedCmsPopupData, 2)" class="cms-popup-icon" [style.display]="data?.loginedCmsPopupData ? 'block' : 'none'"></fa-icon>
     </div>
     <div class="modal_content" [style.display]="data?.cmsPopupData ? 'block' : 'none'">
-        <div class="cms-popup-container" [innerHTML]="data.cmsPopupData?.Content | sanitizer: 'html'"></div>
+        <img class="cms-popup-image" [src]="data.cmsPopupData?.ImageName">
+        <div (click)="addClickListener(cmsPopupContainer, $event)" class="cms-popup-container" #cmsPopupContainer [innerHTML]="data.cmsPopupData?.Content | sanitizer: 'html'"></div>
     </div>
     <div class="modal_content" [style.display]="data?.loginedCmsPopupData ? 'block' : 'none'">
-        <div class="cms-popup-container" [innerHTML]="data.loginedCmsPopupData?.Content | sanitizer: 'html'"></div>
+        <img class="cms-popup-image" [src]="data.loginedCmsPopupData?.ImageName">
+        <div (click)="addClickListener(loginedCmsPopupContainer, $event)" class="cms-popup-container" #loginedCmsPopupContainer [innerHTML]="data.loginedCmsPopupData?.Content | sanitizer: 'html'"></div>
     </div>
 </div>

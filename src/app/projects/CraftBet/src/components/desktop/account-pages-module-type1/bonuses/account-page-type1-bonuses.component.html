@@ -48,7 +48,7 @@
 
                 <ng-container *ngIf="bonusesData?.headers.length !== 0">
                     <div class="bonus-header-name" *ngFor="let head of bonusesData?.headers">{{'User.' + head | translate}}</div>
-                    <div class="bonus-header-name"></div>
+                    <div class="bonus-header-name bonus-empty-header-name"></div>
                 </ng-container>
                 <ng-container *ngIf="bonusesData?.body.length > 0; else emptyBonuses">
                     <ng-container *ngFor="let bonus of bonusesData?.body">

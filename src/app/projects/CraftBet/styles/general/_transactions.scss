@@ -44,11 +44,17 @@
         //}
       }
     }
+    .show-custom-btn {
+      left: var(--transactions-history-tools-show-btn-left, var(--history-tools-show-btn-left, auto)) !important;
+    }
   }
 
   form {
     width: 100%;
     display: inline-flex;
+  }
+  .transactions-form {
+    grid-template-columns: var(--transactions-tools-grid-template-columns, var(--history-tools-grid-template-columns, unset));
   }
 
   table {

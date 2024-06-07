@@ -105,8 +105,35 @@ export class CommonGetTextComponent extends BaseComponent implements AfterViewIn
         }
 
       });
+    } else if (target.id.startsWith('print')) {
+      const path = target.id.split("_")[1];
+      const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+      this.http.get(window['debugPath'] + `/assets/html/${path + '_' + this.translate.currentLang}.html`, {
+        headers,
+        responseType: 'text'
+      }).pipe(take(1)).subscribe(data => {
+        this.printHtmlContent(data);
+      });
     }
 
+  }
+
+  printHtmlContent(htmlContent) {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const iframeDocument = iframe.contentWindow?.document;
+    if (iframeDocument) {
+      iframeDocument.open();
+      iframeDocument.write(htmlContent);
+      iframeDocument.close();
+      iframe.contentWindow?.focus();
+      iframe.contentWindow?.print();
+    }
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+    }, 1000);
   }
 
 
@@ -124,6 +151,8 @@ export class CommonGetTextComponent extends BaseComponent implements AfterViewIn
             this.router.navigate(['/terms']);
           });
         });
+        const event = new CustomEvent("onInfoPageReady", {detail:{page:this.pageTitle}});
+        window.dispatchEvent(event);
         clearTimeout(this.timeout);
       });
     });

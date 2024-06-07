@@ -14,12 +14,25 @@
     }
     .radio-input {
       margin: var(--m-payment-balance-info-radio-margin, 0);
+      display: var(--m-payment-balance-info-radio-display, none);
+    }
+    .mobile-balance-part {
+      display: var(--mobile-balance-part-display, flex);
+      flex-direction: var(--mobile-balance-part-flex-direction, row);
+      gap: var(--mobile-balance-part-gap, 0);
+    }
+    .check-icon {
+      display: var(--mobile-balance-check-icon-display, none);
+      margin-left: var(--mobile-balance-check-icon-margin-left, auto);
+      margin-right: var(--mobile-balance-check-icon-margin-right, 10px);
     }
     &__name {
       font-size: var(--m-payment-balance-info-items-font-size, 12px);
       margin-bottom: var(--m-payment-balance-info-items-margin-bottom, 0);
       border-bottom: var(--m-payment-balance-info-items-border-bottom, none);
       padding: var(--m-payment-balance-info-items-padding, 0px);
+      gap: var(--m-payment-balance-info-items-gap, 5px);
+      justify-content: var(--m-payment-balance-info-items-justify-content, space-between);
       .item-cell-account-name {
         margin-right: var(--m-payment-balance-info-name-margin-right, 0);
       }
@@ -28,6 +41,12 @@
       }
       .mobile-balance-name-currency-symbol {
         display: var(--m-payment-balance-info-currency-symbol-display, none);
+      }
+      .item-cell-account-img {
+        width: var(--m-account-statement-item-img-width, 22px);
+        height: var(--m-account-statement-item-img-height, 20px);
+        margin: var(--m-account-statement-item-img-margin, 0);
+        display: var(--m-account-statement-item-img-display, none);
       }
     }
     &__name:last-child {

@@ -132,6 +132,7 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
             }
             default:
                 this.router.navigate(['/' + item.Href]);
+                window.scroll(0,0);
                 if (item.Title == "Home")
                     this.sharedService.notifyRouteChangeToSport(item.Href);
                 if(item.Href.startsWith('sport') && this.configService.defaultOptions.SportOpenMode === 'migrated')

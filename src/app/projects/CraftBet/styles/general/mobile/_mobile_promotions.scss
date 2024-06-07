@@ -297,10 +297,16 @@
   background: color(m-product-background);
   color:color(m-promotion-title);
   font-size: fontSize(m-promotion-title, 20px);
-  text-align: center;
-  padding-top: 23px;
+  font-weight: fontWeight(m-promotion-title, 400);
+  text-align: var(--m-promotion-title-text-align, center);
+  padding-top: var(--m-promotion-title-padding-top, 23px);
+  padding-left: var(--m-promotion-title-padding-left, 0);
   margin-bottom: -1px;
-  i{font-size: 18px; margin-right: 6px}
+  i{
+    font-size: 18px;
+    margin-right: 6px;
+    display: var(--m-promotion-title-icon-display, inline-block);
+  }
 }
 
 
@@ -308,11 +314,17 @@
 {
   .fragment-title
   {
-    background: var(--m-product-background-color, #FFFFFF);
+    background: var(--m-fragment-title-background, transparent);
     color: var(--m-fragment-title-color, #FFFFFF);
-    font-size: var(--m-pfragment-title-font-size, 20px);
-    padding-top: 23px;
-    padding-bottom: 26px;
-    padding-left: 8px;
+    font-size: var(--m-fragment-title-font-size, 20px);
+    font-weight: var(--m-fragment-title-font-weight, 400);
+    padding-top: var(--m-fragment-title-padding-top, 23px);
+    padding-bottom: var(--m-fragment-title-padding-bottom, 26px);
+    padding-left: var(--m-fragment-title-padding-left, 8px);
+    padding-right: var(--m-fragment-title-padding-right, 0px);
+    width: var(--m-promotion-item-title-width, auto);
+    margin: var(--m-promotion-item-title-margin, 0);
+    border-radius: var(--m-promotion-item-title-border-radius, 0);
+    text-align: var(--m-promotion-item-title-text-align, left);
   }
 }

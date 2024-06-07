@@ -789,7 +789,7 @@
   background-repeat: no-repeat!important;
 
   .banner_image {
-    width: 100%;
+    width: var(--casino-banner-image-width, 100%);
     height: var(--banner-image-height, 360px);
     position: relative;
     background-image: linear-gradient(to right, #131a2c 1%, rgba(83, 83, 83, 0.02) 36%, rgba(84, 84, 84, 0) 45%);

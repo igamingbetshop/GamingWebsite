@@ -9,6 +9,8 @@ import {ImageBarModule} from "../fragments/image-bar/image-bar.module";
 import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 import {FragmentCharactersModule} from "../fragments/fragment-characters/fragment-characters.module";
 import {CasinoSearchFragmentComponent} from "../../common/fragments/search/casino-search-fragment.component";
+import {WinnersWidgetModule} from "../fragments/winners-widget/winners-widget.module";
+import {BetsWidgetModule} from "../fragments/bets-widget/bets-widget.module";
 
 const routes:Routes = [{
   path: '',
@@ -25,7 +27,9 @@ const routes:Routes = [{
         SanitizerModule,
         CasinoSearchFragmentComponent,
         RouterModule.forChild(routes),
-        FragmentCharactersModule
+        FragmentCharactersModule,
+        WinnersWidgetModule,
+        BetsWidgetModule
     ],
   exports:[
     RouterModule

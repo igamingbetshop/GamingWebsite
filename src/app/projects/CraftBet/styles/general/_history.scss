@@ -4,6 +4,7 @@
   color: $account-content-item-color;
   padding: var(--account-content-row-paddding);
   height: var(--payment-section-content-width, auto);
+  cursor:default;
   .success_message {
     bottom: itemBottom(success-message-settings-verification, 50px);
     left: itemLeft(success-message-settings-verification, 0px);
@@ -42,8 +43,8 @@
       display: var(--bank-account-hide-field-display, block);
     }
     div {
-      padding-top: 11px;
-      padding-bottom: 11px;
+      padding-top: var(--payments-section-block-head-padding-top, 11px);
+      padding-bottom: var(--payments-section-block-head-padding-bottom, 11px);
       width: calc(100% / 6);
       text-align: var(--payments-section-block-head-text-align, center);
       &.info-btn-head {
@@ -338,6 +339,7 @@
         padding: var(--edit-button-padding, 0 32px);
         height: height(edit-button, 40px);
         border-radius: var(--edit-button-border-radius, 3px);
+        width: var(--history-tools-show-btn-width, auto);
         cursor: pointer;
       }
       &:last-child {
@@ -345,7 +347,10 @@
         //right: 0;
         //bottom: 0;
         //margin: 0;
-        margin-left: auto;
+        margin-left: var(--history-tools-show-btn-margin-left, auto);
+        left: var(--history-tools-show-btn-left, auto);
+        top: var(--history-tools-show-btn-top, auto);
+        grid-area: var(--history-tools-show-btn-grid-area, unset);
       }
       .winkel-calendar {
         .wc-date-container {
@@ -389,9 +394,12 @@
     }
   }
   form {
-    width: 100%;
-    display: flex;
+    width: var(--history-tools-width, 100%);
+    display: var(--history-tools-display, flex);
     gap: var(--history-tools-panel-gap, 0px);
+    justify-content: var(--history-tools-justify-content, unset);
+    grid-template-columns: var(--history-tools-grid-template-columns, unset);
+    margin: var(--history-tools-margin, 0);
   }
   .pagination_section {
     margin-top: 15px;

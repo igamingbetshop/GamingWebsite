@@ -1,4 +1,4 @@
-import {Directive, Injector, Input, OnInit} from "@angular/core";
+import {Directive, Injector, input, OnInit} from "@angular/core";
 import {BaseApiService} from "../../../@core/services/api/base-api.service";
 import {SignalRService} from "../../../@core/services/soket/signal-r.service";
 import {ActivatedRoute} from "@angular/router";
@@ -7,10 +7,16 @@ import {Methods} from "../../../@core/enums";
 import {Subscription, take} from "rxjs";
 import {getFakeAmountRangeByCurrency, getMappedGame, getRandomInt} from "../../../@core/utils";
 
+
 @Directive()
 export class BaseWinnersWidgets implements OnInit
 {
-    @Input('fragmentConfig') widgetItem;
+    itemConfig:any;
+    fragmentConfig = input.required({transform: (data: any) => {
+            this.itemConfig = data.Config.itemConfig;
+            return data;
+        }});
+
     public winners: any[] = [];
 
     protected isUpdated = false;

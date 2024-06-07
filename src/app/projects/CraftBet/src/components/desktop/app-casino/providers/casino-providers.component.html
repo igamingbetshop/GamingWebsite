@@ -32,7 +32,8 @@
                 <img [src]="provider.imageSrc">
                 <span>{{ provider?.Label }}</span>
             </li>
-            <button *ngIf="fragmentConfig.Config.showAll"  (click)="stateService.changeProvidersPopupState(true)" class="providers-see-all">{{ 'Providers.SeeAll' | translate }}</button>
+            <button *ngIf="fragmentConfig.Config.showAll" (click)="stateService.changeProvidersPopupState(true)" class="providers-see-all"
+                    [innerHTML]="'Providers.SeeAll' | translate | sanitizer : 'html'"></button>
         </ul>
     </div>
 </div>

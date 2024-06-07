@@ -1,0 +1,32 @@
+<div class="winners-widget" [style.width.px]="fragmentConfig().Config.data?.width">
+    <header>
+        <i class="pointer icon-{{fragmentConfig().data?.icon}}"></i>
+        <div class="pointer">{{'Game.' + fragmentConfig().Title | translate}}</div>
+        <div></div>
+    </header>
+    <main>
+        <div class="widget-container" [class.vertical]="itemConfig?.vertical">
+            <ngx-slick-carousel class="carousel widget-carousel"
+                                #slickModal="slick-carousel"
+                                (afterChange)="afterChangeSlide($event)"
+                                [config]="fragmentConfig().Config.data">
+                <div ngxSlickItem *ngFor="let winner of winners"  class="widget-item">
+                    <div class="content"  [style]="itemConfig?.boxCSS">
+                        <img [src]="winner?.ImageUrl" alt="">
+                        <div class="details">
+                            <div>
+                                <span [style]="itemConfig?.idLabelCSS">{{'Game.PlayerName' | translate}}</span>
+                                <span [style]="itemConfig?.dateCSS">{{winner.CreationDate | date: 'HH:mm:ss'}}</span>
+                            </div>
+                            <div [style]="itemConfig?.idCSS">{{winner.ClientName}}</div>
+                            <div [style]="itemConfig?.amountLabelCSS">{{'Game.Winning' | translate}}</div>
+                            <div [style]="itemConfig?.amountCSS"> {{winner.CurrencyId}} {{winner.Amount}}</div>
+                        </div>
+                    </div>
+                </div>
+            </ngx-slick-carousel>
+        </div>
+    </main>
+</div>
+
+

@@ -12,6 +12,7 @@
     color: color(m-user-views-title);
     text-align: center;
     margin: var(--m-withdraw-title-margin, 0);
+    display: var(--m-withdraw-title-display, block);
   }
 
   &_content {
@@ -44,6 +45,12 @@
       font-size: 18px;
       font-weight: bold;
       color: $account-deposit-header-bg;
+    }
+    .additional-payment-system-title {
+      color: var(--m-withdraw-additional-payment-title-color, #fff);
+      text-align: var(--m-withdraw-additional-payment-title-text-align, center);
+      display: var(--m-withdraw-additional-payment-title-display, none);
+      margin: var(--m-withdraw-additional-payment-title-margin, 0);
     }
 
     &_block {

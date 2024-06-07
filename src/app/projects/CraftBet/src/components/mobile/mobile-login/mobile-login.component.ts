@@ -2,7 +2,6 @@ import {Component, Injector, Input} from '@angular/core';
 import {AppCommonLoginComponent} from "../../common/app-common-login/app-common-login.component";
 import {ConfigService} from "@core/services";
 import {MenuType} from "@core/enums";
-import {BaseControllerService} from "@core/services/app/baseController.service";
 import {Location} from "@angular/common";
 
 @Component({
@@ -17,7 +16,7 @@ export class MobileLoginComponent extends AppCommonLoginComponent {
     public isSignUpButton: any;
     @Input() className: string;
 
-    constructor(public injector: Injector, public configService: ConfigService, public baseControllerService: BaseControllerService) {
+    constructor(public injector: Injector, public configService: ConfigService) {
         super(injector);
         if (this.userLogined.isAuthenticated) {
             this.router.navigate([this.configService.defaultOptions.HomePageType]);
@@ -46,9 +45,6 @@ export class MobileLoginComponent extends AppCommonLoginComponent {
         event.target.src = '../../../../../../../assets/images/register/mobile_background.png';
     }
 
-    errorHandlerLogo(event) {
-        event.target.src = '../../../../../../../assets/images/logo.png';
-    }
 
     goBack()
     {

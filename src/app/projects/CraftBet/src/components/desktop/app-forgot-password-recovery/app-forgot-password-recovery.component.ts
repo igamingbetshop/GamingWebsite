@@ -7,16 +7,14 @@ import {BasePasswordRecoveryComponent} from '../../../../../../@theme/components
   styleUrls: ['./app-forgot-password-recovery.component.scss']
 })
 export class AppForgotPasswordRecoveryComponent extends BasePasswordRecoveryComponent {
-  public logoUrl: string = '';
+  public logoUrl: string = '../../../../../../../assets/images/' + window.location.hostname + '.png';
   public showPassword: boolean = false;
   public showConfirmPass: boolean = false;
 
   constructor(public injector: Injector) {
     super(injector);
   }
-  errorHandler(event) {
-    event.target.src = '../../../../../../../assets/images/logo.png';
-  }
+
   showHidePassword() {
     this.showPassword = !this.showPassword;
   }

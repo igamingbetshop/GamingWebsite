@@ -18,6 +18,7 @@
     flex: 1;
     display: flex;
     flex-direction: flexDirection(mobile-nav-bar, column);
+    gap: var(--mobile-nav-bar-gap, 0px);
     justify-content: justifyContent(mobile-nav-bar, center);
     font-size: fontSize(mobile-nav-bar, 12px);
     font-weight: fontWeight(mobile-nav-bar, normal);
@@ -26,12 +27,14 @@
     align-items: itemAlign(mobile-nav-bar, center);
     min-width: width(mobile-nav-bar-min, 78px);
     border: var(--m-nav-bar-border-size, 0px) solid var(--m-nav-bar-border-color, #ffffff);
+    border-radius: var(--m-nav-bar-border-radius, 0);
     outline: none;
     white-space: nowrap;
 
     &.active {
       background-color: backgroundColor(mobile-nav-bar-active, none);
       background-image: backgroundImage(mobile-nav-bar-active, none);
+      border: var(--mobile-nav-bar-active-border, none);
       color: itemColor(mobile-nav-bar-active, #fff);
 
     }

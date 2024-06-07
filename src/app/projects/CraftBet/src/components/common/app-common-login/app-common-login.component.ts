@@ -3,17 +3,20 @@ import {Location} from '@angular/common';
 import {LocalStorageService} from "@core/services";
 import {BaseComponent} from '../../../../../../@theme/components/base/base.component';
 import {Validator} from '../../../../../../@core/validators/validators';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SaveData} from "@core/services";
 import {Router} from "@angular/router";
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {UtilityService} from "@core/services/app/utility.service";
+import {MenuType} from "../../../../../../@core/enums";
+import {BaseControllerService} from "../../../../../../@core/services/app/baseController.service";
 
 @Directive()
 export class AppCommonLoginComponent extends BaseComponent {
 
     public fb: FormBuilder;
     public userLogined: UserLogined;
+    public baseControllerService: BaseControllerService;
     public saveData: SaveData;
     public router: Router;
 
@@ -22,7 +25,7 @@ export class AppCommonLoginComponent extends BaseComponent {
 
     private utilsService: UtilityService;
     private localStorageService: LocalStorageService;
-    public rememberMe: boolean;
+    public rememberMe = false;
     public submitted = false;
     public openedLogin = false;
     // public isUserIconHidden;
@@ -30,6 +33,8 @@ export class AppCommonLoginComponent extends BaseComponent {
     protected location:Location;
 
     public changePasswordType: boolean = false;
+    public loginFieldsList: Array<any> = [];
+    public formReady;
 
     constructor(public injector: Injector)
     {
@@ -40,16 +45,59 @@ export class AppCommonLoginComponent extends BaseComponent {
         this.saveData = injector.get(SaveData);
         this.router = injector.get(Router);
         this.localStorageService = injector.get(LocalStorageService);
+        this.baseControllerService = injector.get(BaseControllerService);
         this.rememberMe = !!this.localStorageService.get('login');
         this.location = injector.get(Location);
-        this.loginForm = this.fb.group({
-            ClientIdentifier: [this.localStorageService.get('login') || '', [
-                Validators.required,
-                Validator.noWhitespaceValidator
-            ]],
-            Password: [null, [
-                Validators.required
-            ]]
+        // this.loginForm = this.fb.group({});
+        // this.loginForm = this.fb.group({
+        //     ClientIdentifier: [this.localStorageService.get('login') || '', [
+        //         Validators.required,
+        //         Validator.noWhitespaceValidator
+        //     ]],
+        //     Password: [null, [
+        //         Validators.required
+        //     ]]
+        // });
+        this.getFormControlNames();
+    }
+
+    getFormControlNames() {
+        let loginGroup = {};
+        this.baseControllerService.GetMenu(MenuType.LOGIN, 'en').then((menuData) => {
+            this.loginFieldsList = this.parseStyleProperties(menuData[0].SubMenu);
+            this.loginFieldsList.forEach((input_template) => {
+
+                if (input_template.ValidationName) {
+                    loginGroup[input_template.Title] = new FormControl('', [Validators.required]);
+                    if (input_template.Title === 'ClientIdentifier') {
+                        loginGroup[input_template.Title] = new FormControl(this.localStorageService.get('login') || '', [Validators.required]);
+                    } else {
+                        loginGroup[input_template.Title] = new FormControl('', [Validators.required]);
+                    }
+                    if (input_template.Type == 'checkbox') {
+                        loginGroup[input_template.Title].setValidators([Validators.requiredTrue]);
+                    }
+
+                    if (input_template.Type == 'password') {
+                        const savedPassword = this.localStorageService.get('identifier');
+                        if(savedPassword) {
+                            loginGroup[input_template.Title] = new FormControl(atob(savedPassword), [Validators.required]);
+                        }
+                    }
+                } else {
+                    if (input_template.Type == 'checkbox') {
+                        if (input_template.Title === 'RememberMe') {
+                            loginGroup[input_template.Title] = new FormControl(this.rememberMe, []);
+                        } else {
+                            loginGroup[input_template.Title] = new FormControl(false, []);
+                        }
+                    } else {
+                        loginGroup[input_template.Title] = new FormControl('', []);
+                    }
+                }
+            });
+            this.loginForm = new FormGroup(loginGroup);
+            this.formReady = true;
         });
     }
 
@@ -59,9 +107,6 @@ export class AppCommonLoginComponent extends BaseComponent {
             this.submitted = false;
         }));
         this.openedLogin = true;
-        const savedPassword = this.localStorageService.get('identifier');
-        if(savedPassword)
-            this.loginForm.get("Password").setValue(atob(savedPassword));
     }
 
     public changePassType() {
@@ -71,10 +116,11 @@ export class AppCommonLoginComponent extends BaseComponent {
 
     public submit(): any
     {
+        this.loginForm.markAllAsTouched();
         this.submitted = true;
         if (this.loginForm.valid) {
             const params = this.loginForm.getRawValue();
-            this.userLogined.userLogin(params, false, this.rememberMe);
+            this.userLogined.userLogin(params, false, params?.RememberMe);
         }
     }
 
@@ -104,6 +150,27 @@ export class AppCommonLoginComponent extends BaseComponent {
                 event.preventDefault();
             }
         }
+    }
+
+    parseStyleProperties(stylesList) {
+        return stylesList.filter((item) => {
+            let parseInfoData = JSON.parse(item.Href);
+            if (parseInfoData['FieldSize'] == undefined) {
+                item['FieldSize'] = parseInfoData['size'];
+            }
+
+            if (parseInfoData['mandatory'] == undefined) {
+                item['ValidationName'] = false;
+            } else {
+                item['ValidationName'] = parseInfoData['mandatory'] == '1' ? true : false;
+            }
+            if (parseInfoData['hasLabel'] == undefined) {
+                item['HasLabel'] = false;
+            } else {
+                item['HasLabel'] = parseInfoData['hasLabel'] == '1' ? true : false;
+            }
+            return item;
+        });
     }
 
 }

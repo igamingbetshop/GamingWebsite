@@ -2,25 +2,41 @@
   background: var(--affiliate-section-background, #131a2c);
   padding-top: var(--affiliate-section-padding-top, 0);
   padding-bottom: var(--affiliate-section-padding-bottom, 0);
-  display: flex;
+  display: var(--affiliate-section-display, flex);
 }
 
 .affiliate {
   background: var(--affiliate-background-color, #131a2c);
-  //margin: 0 auto 0 auto;
-  //padding: 38px 36px 0;
-  padding: 0 36px;
-  width: 45%;
+  padding: var(--affiliate-top-section-padding, 0 36px);
+  width: var(--affiliate-top-section-width, 45%);
+  position: var(--affiliate-top-section-position, relative);
+  display: var(--affiliate-top-section-display, block);
+  gap: var(--affiliate-top-section-gap, 0);
 
   h2 {
     color: var(--affiliate-title-color, #fff);
     font-size: var(--affiliate-title-font-size, 20px);
     font-weight: var(--affiliate-title-font-weight, 500);
-    margin: 20px 0;
+    margin: var(--affiliate-title-margin, 20px 0);
+    position: var(--affiliate-title-position, relative);
+    top: var(--affiliate-title-top, auto);
+  }
+  .affiliate-tab-inner-title {
+    display: var(--affiliate-tab-inner-title-display, none);
+    width: var(--affiliate-tab-inner-title-width, 100%);
+    margin: var(--affiliate-tab-inner-title-margin, 0 auto);
+    font-size: var(--affiliate-tab-inner-title-font-size, 22px);
+    font-weight: var(--affiliate-tab-inner-title-font-weight, 900);
+    line-height: var(--affiliate-tab-inner-title-line-height, 30.05px);
+    text-align: var(--affiliate-tab-inner-title-text-align, left);
+    position: var(--affiliate-tab-inner-title-position, relative);
+    top: var(--affiliate-tab-inner-title-top, auto);
+    left: var(--affiliate-tab-inner-title-left, auto);
+    color: var(--affiliate-tab-inner-title-color, #fff);
   }
 
   &_height {
-    min-height: 560px;
+    min-height: var(--affiliate-min-height, 560px);
     height: var(--about-us-height, auto);
   }
 
@@ -45,7 +61,13 @@
     background: var(--affiliate-submit-btn-background, linear-gradient(rgba(25, 64, 116, 1), rgba(19, 118, 248, 1)));
     color: var(--affiliate-submit-btn-color, #fff);
     width: var(--affiliate-submit-btn-width, 100%);
+    border-radius: var(--affiliate-submit-btn-border-radius, 4px);
   }
+}
+.submit-details1 {
+  background: var(--affiliate-right-btns-content-background, transparent);
+  padding: var(--affiliate-right-btns-content-padding, 0);
+  border-radius: var(--affiliate-right-btns-content-border-radius, 0);
 }
 
 .error_message {
@@ -54,11 +76,14 @@
 }
 
 .affiliate-section {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 50px;
-  row-gap: 25px;
+  display: var(--affiliate-section-form-display, grid);
+  grid-template-columns: var(--affiliate-section-form-column-grid-template-columns, repeat(2, 1fr));
+  column-gap: var(--affiliate-section-form-column-gap, 50px);
+  row-gap: var(--affiliate-section-form-row-gap, 25px);
+  padding: var(--affiliate-section-form-padding, 0);
   align-items: center;
+  width: var(--affiliate-section-form-width, auto);
+  background: var(--affiliate-section-form-background, transparent);
 
   .form_field {
     width: 100%;
@@ -208,6 +233,9 @@
     select, input {
       color: var(--affiliate-field-color, #fff);
       border-radius: var(--affiliate-field-border-radius, 5px);
+      border: var(--affiliate-field-border, 1px solid #dbedff);
+      background: var(--affiliate-field-background, transparent);
+      height: var(--affiliate-field-height, 40px);
     }
 
     input:focus ~ label {
@@ -235,6 +263,7 @@
 
     input::placeholder {
       opacity: 0;
+      color: var(--affiliate-field-placeholder-color, rgb(135, 143, 162))
     }
 
     input:focus ~ label,
@@ -265,28 +294,30 @@
 }
 
 .affiliate-support-section {
-  padding-top: 75px;
+  padding-top: var(--affiliate-section-support-padding-top, 75px);
+  width: var(--affiliate-section-support-full-width, auto);
 
   .support-part {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 50px;
-    row-gap: 25px;
+    display: var(--affiliate-section-support-display, grid);
+    grid-template-columns: var(--affiliate-section-support-grid-template-columns, repeat(2, 1fr));
+    column-gap: var(--affiliate-section-support-column-gap, 50px);
+    row-gap: var(--affiliate-section-support-row-gap, 25px);
     align-items: center;
+    width: var(--affiliate-section-support-width, auto);
 
-    div {
-      background: var(--affiliate-support-part-background-color, rgba(45, 52, 69, 1));
+    .support-part-item {
+      //background: var(--affiliate-support-part-background-color, rgba(45, 52, 69, 1));
       height: var(--affiliate-support-part-height, 124px);
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      flex-direction: var(--affiliate-support-flex-direction, column);
       color: var(--affiliate-support-part-color, rgba(19, 26, 44, 1));
       border-radius: var(--affiliate-support-part-border-radius, 5px);
 
       h3 {
-        margin-bottom: 3px;
-        margin-top: 0px;
+        margin-bottom: var(--affiliate-support-part-title-margin-bottom, 3px);
+        margin-top: var(--affiliate-support-part-title-margin-top, 0px);
         font-size: var(--affiliate-support-part-title-font-size, 30px);
         font-weight: var(--affiliate-support-part-title-font-weight, 700);
       }
@@ -296,13 +327,24 @@
         font-weight: var(--affiliate-support-part-section-font-weight, 500);
       }
     }
+    .support-part-item:nth-child(1) {
+      background: var(--affiliate-support-part1-background, var(--affiliate-support-part-background-color, rgba(45, 52, 69, 1)));
+    }
+    .support-part-item:nth-child(2) {
+      background: var(--affiliate-support-part2-background, var(--affiliate-support-part-background-color, rgba(45, 52, 69, 1)));
+    }
+    .support-part-item:nth-child(3) {
+      background: var(--affiliate-support-part3-background, var(--affiliate-support-part-background-color, rgba(45, 52, 69, 1)));
+    }
+    .support-part-item:nth-child(4) {
+      background: var(--affiliate-support-part4-background, var(--affiliate-support-part-background-color, rgba(45, 52, 69, 1)));
+    }
   }
 }
 
 .affiliate-right-part {
-  width: 55%;
-  //margin: 38px 16px 0 0;
-  margin: 0 16px;
+  width: var(--affiliate-right-section-width, 55%);
+  margin: var(--affiliate-right-section-margin, 0 16px);
 
   h2 {
     color: var(--affiliate-title-color, #fff);
@@ -311,28 +353,29 @@
   }
 
   .right-part-buttons {
-    display: flex;
-    justify-content: flex-end;
+    display: var(--affiliate-right-part-btns-display, flex);
+    justify-content: var(--affiliate-right-part-btns-justify-content, flex-end);
     align-items: center;
-    margin: 10px 0;
+    margin: var(--affiliate-right-part-btns-margin, 10px 0);
 
     button {
       font-weight: var(--affiliate-submit-btn-font-weight, 500);
       font-size: var(--affiliate-submit-btn-font-size, 16px);
       background: var(--affiliate-Commission-btn-background, #42495A);
-      color: var(--affiliate-submit-btn-color, #fff);
+      color: var(--affiliate-Commission-btn-color, var(--affiliate-submit-btn-color, #fff));
       white-space: nowrap;
-      margin-right: 10px;
+      margin-right: var(--affiliate-submit-btn-margin-right, 10px);
     }
 
     .active {
       background: var(--affiliate-about-btn-background, linear-gradient(rgba(25, 64, 116, 1), rgba(19, 118, 248, 1)));
+      color: var(--affiliate-about-btn-active-color, var(--affiliate-submit-btn-color, #fff))
     }
   }
 
   .box {
     border-radius: var(--affiliate-right-part-border-radius, 5px);
-    padding: 24px;
+    padding: var(--affiliate-right-part-padding, 24px);
     background: var(--affiliate-right-part-background-color, radial-gradient(rgba(208, 217, 231, 0.3), rgba(196, 196, 196, 0), rgba(196, 196, 196, 0.3)));
     height: var(--affiliate-right-part-height, 650px);
     color: var(--affiliate-right-part-color, #000);
@@ -341,7 +384,7 @@
 
 @media screen and (min-width: 1200px) and (max-width: 1680px) {
   .affiliate {
-    width: 70%;
+    width: var(--affiliate-top-medium-section-width, 70%);
 
     .affiliate-support-section {
       .support-part {

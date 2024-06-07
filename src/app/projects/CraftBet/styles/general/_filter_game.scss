@@ -253,6 +253,7 @@
         bottom: 0;
         background: var(--casino-game-title-shown-background-color, #1d2e4a);
         display: none;
+        cursor: default;
 
         &__heart {
           color: $color-white;

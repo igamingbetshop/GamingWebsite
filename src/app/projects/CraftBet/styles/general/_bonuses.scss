@@ -168,7 +168,13 @@
           padding-right: var(--bonus-block-header-padding-right, 0px);
           &:first-child {
             padding-left: var(--bonus-block-header-padding-left, 5px);
+            border-bottom-left-radius: var(--bonus-block-header-border-radius, 0px);
+            border-top-left-radius: var(--bonus-block-header-border-radius, 0px);
           }
+        }
+        .bonus-empty-header-name {
+          border-bottom-right-radius: var(--bonus-block-header-border-radius, 0px);
+          border-top-right-radius: var(--bonus-block-header-border-radius, 0px);
         }
         .bonus-body-name {
           background-color: var(--history-block-section-bg, #16233a);
@@ -271,6 +277,7 @@
 
 .modal-content {
   &.triggers, &.confirm {
+    cursor:default;
     .triggers-section {
       margin: var(--triggers-section-title-margin, 25px 0);
     }

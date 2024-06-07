@@ -120,6 +120,6 @@ export class AppCommonOpenTicketComponent implements OnInit {
   }
   close()
   {
-
+    this.dialogRef.close();
   }
 }

@@ -338,7 +338,15 @@ export class BaseForgotPasswordComponent extends BaseComponent implements AfterV
          this.changeStep(5);
          const time = setTimeout(() => {
            clearTimeout(time);
-           this.router.navigate(['/home']);
+           if(matchMedia('(max-width: 1200px)').matches)
+           {
+             this.router.navigate(['/login']);
+           }
+           else
+           {
+             this.saveData.openPopup.next("1");
+             this.router.navigate(['/']);
+           }
            this.showSuccessMessage = false;
            this.forgotPasswordForm.reset();
          }, 3000);

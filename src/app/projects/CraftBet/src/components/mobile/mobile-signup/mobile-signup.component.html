@@ -7,6 +7,7 @@
         <span class="reg-icon-close-modal icon-close-modal" (click)="getMobileLoginPreviousState()"></span>
     </div>
     <img class="mobile-register-logo-svg" src="../../../../../../../assets/images/logo.svg"/>
+    <img class="mobile-register-logo-png" src="../../../../../../../assets/images/logo.png"/>
     <div class="mobile-registration-section_header">
         <div class="mobile-registration-section_menu" *ngIf="defaultOptions?.RegisterType.length > 1; else showRegText">
             <a class="reg_item" *ngFor="let item of defaultOptions?.RegisterType" (click)="selectRegType(item)"

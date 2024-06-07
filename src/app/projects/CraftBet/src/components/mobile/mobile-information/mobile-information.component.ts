@@ -60,17 +60,6 @@ export class MobileInformationComponent implements OnInit {
       const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
       this.http.get(window['debugPath'] + `/assets/html/${path + '_' +  this.translateService.currentLang}.html`, { headers, responseType: 'text'}).pipe(take(1)).subscribe(data =>
       {
-        if(this.deviceDetector.isMobile() || this.deviceDetector.isTablet())
-        {
-          let doc = new jsPDF('p', 'pt');
-          doc.fromHTML(data, 10, 10, {
-            'width': 200
-          });
-          doc.save(path + '.pdf');
-          this.loaderService.hide();
-        }
-        else
-        {
           const opt = {
             filename: path,
             margin:10,
@@ -96,11 +85,36 @@ export class MobileInformationComponent implements OnInit {
           html2pdf().set(opt).from(data).save().then(data => {
             this.loaderService.hide();
           });
-        }
-
+      });
+    } else if (target.id.startsWith('print')) {
+      const path = target.id.split("_")[1];
+      const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+      this.http.get(window['debugPath'] + `/assets/html/${path + '_' + this.translateService.currentLang}.html`, {
+        headers,
+        responseType: 'text'
+      }).pipe(take(1)).subscribe(data => {
+        this.printContent(data);
       });
     }
 
+  }
+
+  public printContent(htmlContent) {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const iframeDocument = iframe.contentWindow?.document;
+    if (iframeDocument) {
+      iframeDocument.open();
+      iframeDocument.write(htmlContent);
+      iframeDocument.close();
+      iframe.contentWindow?.focus();
+      iframe.contentWindow?.print();
+    }
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+    }, 1000);
   }
 
 }

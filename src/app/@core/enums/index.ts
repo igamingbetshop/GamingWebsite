@@ -216,6 +216,7 @@ export enum MenuType
   MOBILE_CENTRAL_MENU = "MobileCentralMenu",
   NEWS_MENU = "NewsMenu",
   REGISTRATION = "Registration",
+  LOGIN = "Login",
   LIVE_CASINO = "LiveCasinoMenu",
   HEADER_PANEL_2_MENU = "HeaderPanel2Menu",
   HEADER_PANEL_1_MENU = "HeaderPanel1Menu"

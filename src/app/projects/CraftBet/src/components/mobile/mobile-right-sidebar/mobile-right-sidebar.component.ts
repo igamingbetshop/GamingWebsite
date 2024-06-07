@@ -20,7 +20,7 @@ export class MobileRightSidebarComponent extends AppCommonHeaderComponent implem
     public faUser = faUser;
     public selectedAccount;
     public selectedAccountBalance;
-    public accountBalances;
+    public accountBalances = [];
     public useAccountType;
     @Input() fullScreen: boolean = false;
     @ViewChild('ticketsRef', { read: ViewContainerRef }) ticketsRef;
@@ -90,6 +90,7 @@ export class MobileRightSidebarComponent extends AppCommonHeaderComponent implem
             localStorage.setItem('deviceType', JSON.stringify('2'));
             window.location.reload();
         }
+        window.scroll(0,0);
         this.savedDateService.currentSubItem = submenu;
         this.savedDateService.selectedItem = submenu;
     }

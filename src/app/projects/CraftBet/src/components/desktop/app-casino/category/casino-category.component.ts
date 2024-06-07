@@ -80,9 +80,18 @@ export class CasinoCategoryComponent extends BaseCasinoCategory
     }
     scrollToTop(position = 0)
     {
-        window.scrollTo({
-            top: position,
-            behavior: "smooth"
-        });
+       const p =  setTimeout(() => {
+            clearTimeout(p);
+            const filterBox = document.querySelector(".filter-category-box");
+            if(filterBox)
+            {
+                const rect = filterBox.getBoundingClientRect();
+                position = window.scrollY + rect.top;
+            }
+            window.scrollTo({
+                top: position,
+                behavior: "smooth"
+            });
+        }, 100);
     }
 }

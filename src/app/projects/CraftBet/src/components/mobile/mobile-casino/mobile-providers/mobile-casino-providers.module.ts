@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeIcons } from '../../../../../../../@theme/font-awsome/font-awesome-icons';
 import {CompareByKeyPipeModule} from "../../../../../../../@theme/pipes/compare-by-key/compare-by-key-pipe.module";
 import {DropdownDirectiveModule} from "../../../../../../../@theme/directives/dropdown/dropdown-directive.module";
+import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 
 @NgModule({
   declarations: [MobileCasinoProvidersComponent],
@@ -20,7 +21,8 @@ import {DropdownDirectiveModule} from "../../../../../../../@theme/directives/dr
         FontAwesomeIcons,
         FormsModule,
         CompareByKeyPipeModule,
-        DropdownDirectiveModule
+        DropdownDirectiveModule,
+        SanitizerModule
     ]
 })
 

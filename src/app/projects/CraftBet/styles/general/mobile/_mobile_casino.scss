@@ -44,8 +44,9 @@
   }
 
   .banner_image {
-    width: 100%;
+    width: var(--m-casino-banner-width, 100%);
     height: var(--m-casino-banner-height, 326px);
+    margin: var(--m-casino-banner-margin, 0);
   }
   .banner-content {
     display: flex;
@@ -962,7 +963,7 @@
     width: fit-content;
     margin: var(--casino-game-title-margin, 54px auto);
     span {
-      margin-left: 16px;
+      margin-left: var(--m-casino-more-btn-margin-left, 16px);
       color: var(--casino-more-btn-color, #007AFF);
     }
   }

@@ -2,597 +2,945 @@
 
     <div class="header-section__top"  [ngClass]="menuDirection === 'top' ? 'top' :  ''">
 
-        <div class="header-section__group1" *ngIf="group1MenuItems.length > 0">
-            <ul class="panel1-menu">
-                <li *ngFor="let menuItem of group1MenuItems"
-                    [attr.data-id]="'header-group1-menu_' + menuItem.Title"
-                    (click)="saveData.getCurrentSubItem(menuItem); changePage(menuItem.Href)"
-                    class="{{menuItem?.className}}"
-                    [ngClass]="{'full-right': menuItem?.Orientation,
-            'active': menuItem.Href == activeRouterName,
-          'animated infinite pulse': menuItem?.animated}">
-                    <div *ngIf="menuItem.contentType == 'logoImg'">
-                        <div class="header-section_topPanel_left">
-                            <img class="logo_img"
-                                 (click)="clickInRoute('/' +  menuItem.Href)"
-                                 [src]="logoUrl"  (error)="errorHandler($event, menuItem.Icon)"/>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        @if(group1MenuItems.length > 0)
+        {
+            <div class="header-section__group1">
+                <ul class="panel1-menu">
+                    @for ( menuItem of group1MenuItems; track menuItem.Id)
+                    {
+                        <li [attr.data-id]="'header-group1-menu_' + menuItem.Title"
+                            (click)="saveData.getCurrentSubItem(menuItem); changePage(menuItem.Href)"
+                            class="{{menuItem?.className}}"
+                            [ngClass]="{'full-right': menuItem?.Orientation,
+                            'active': menuItem.Href == activeRouterName,
+                            'animated infinite pulse': menuItem?.animated}">
+                            @if(menuItem.contentType == 'logoImg')
+                            {
+                                <div>
+                                    <div class="header-section_topPanel_left">
+                                        <img class="logo_img" pointerOnLink="{{menuItem.Href}}"
+                                             (click)="clickInRoute('/' +  menuItem.Href)"
+                                             [src]="logoUrl"  (error)="errorHandler($event)"/>
+                                    </div>
+                                </div>
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
 
         <div class="header-section__group2">
-            <div *ngIf="marqueeProperty && marqueeText !== undefined" class="marquee-global {{marqueePropertyDetails?.className}}">
-                <ul class="messages-marquee-text {{marqueePropertyDetails?.animationName}}" [marqueeDuration]="marqueePropertyDetails?.duration" [marqueeAnimation]="marqueePropertyDetails?.timingFunction">
-                    <li *ngFor="let marquee of marqueeText; let i = index" style="margin-right: 20px; padding-right: 20px;">
-                        {{marquee}}
-                    </li>
-                </ul>
-            </div>
-            <div class="header-section_topPanel flex_between" [class.top-menu]="isExpandedMenu" *ngIf="showPanel1">
-                <ul #panel1MenuRef class="general-menu">
-                    <li  [attr.data-id]="'header-panel1-menu_' + menuItem.Title"
-                        class="general-menu_item dynamic-item {{menuItem?.className}}" *ngFor="let menuItem of panel1MenuLeftItems"
-                        (click)="onMenuItem(menuItem)"
-                        [ngClass]="{'full-right': menuItem?.Orientation,
-              'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated,
-              'onlyMenuItem' : menuItem.className == 'header-menu-item-style1',
-              'hide-marquee': menuItem?.Type === 'marqueeItem_marquee',
-               'active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
-               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}">
-                        <div class="underline-active-hover" [ngClass]="{'underline-active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
-               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.startsWith(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}"></div>
-                        <i class="icon-{{menuItem?.Icon}}" *ngIf="menuItem?.Icon && !menuItem?.Icon.includes('.')"></i>
-                        <img *ngIf="menuItem?.Icon.includes('.') && (menuItem?.contentType !== 'logoImg')" src="../../../../../../../assets/images/{{menuItem?.Icon}}" alt="">
-                        <a class="general-menu_item_link"
-                           *ngIf="!menuItem?.OpenInRouting && (menuItem?.contentType == 'standard')"
-                           target="_blank"
-                           href="{{menuItem.Href}}">
-                            {{'Header.' + menuItem?.Title | translate}}
-                        </a>
-                        <a class="general-menu_item_link"
-                           *ngIf="menuItem?.OpenInRouting && (menuItem?.contentType == 'standard')"
-                        >
-                            {{'Header.' + menuItem?.Title | translate}}
-                        </a>
-
-                        <div *ngIf="menuItem.contentType == 'depositBtn'">
-                            {{'Header.Deposite' | translate}}
-                        </div>
-
-
-                        <div *ngIf="menuItem.contentType == 'logoImg'">
-                            <div class="header-section_topPanel_left">
-                                <img class="logo_img"
-                                     (click)="clickInRoute('/' + configService.defaultOptions['HomePageType'])"
-                                     [routerLink]="['/' + configService.defaultOptions['HomePageType']]"
-                                     [src]="logoUrl" (error)="errorHandler($event)"/>
-                            </div>
-                        </div>
-
-
-                        <div *ngIf="menuItem.contentType == 'loginBtn'" class="default_width">
-                            <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
-                        </div>
-                        <div *ngIf="menuItem.contentType == 'chatBtn'" class="default_width">
-                            <chant-opener></chant-opener>
-                        </div>
-                        <div *ngIf="menuItem.contentType == 'Btn'" class="default_width">
-                            <i *ngIf="menuItem.Icon" class="icon icon-{{menuItem.Icon}}"></i>{{'Header.' + menuItem.Title | translate}}
-                        </div>
-
-                        <div *ngIf="menuItem.contentType == 'loginScn'">
-                            <app-login [mainClass]="'header_section'" [contentType]="menuItem.contentType" sectionClass="{{menuItem.className}}"
-                                       (onNavigate)="onNavigateToForgot()"
-                                       class="{{menuItem.className}}-type" *ngIf="!isLogin"></app-login>
-                        </div>
-
-
-                        <div *ngIf="(menuItem.contentType === 'signupBtn')" class="default_width">
-                            <app-global-sign-up-btn class="{{menuItem.className}}-type"
-                                                    itemClassname="{{menuItem.className}}" [menuItem]="menuItem"></app-global-sign-up-btn>
-                        </div>
-
-                        <div *ngIf="(menuItem.contentType === 'commonBtn')" class="default_width">
-                            <functional-btn [menuItem]="menuItem" class="{{menuItem.className}}-type" itemClassname="{{menuItem.className}}"
-                                            [openModal]="openModal"></functional-btn>
-                        </div>
-
-                        <div *ngIf="(menuItem.contentType === 'zoomBtn')" class="default_width">
-                            <zoom-btn [menuItem]="menuItem" class="{{menuItem.className}}-type" itemClassname="{{menuItem.className}}"></zoom-btn>
-                        </div>
-
-                        <div class="user_id" [routerLink]="['/user/account']"
-                             *ngIf="menuItem.contentType == 'userIdTxt'">
-                            <span>{{'User.User_Id' | translate}}</span>
-                            <span>{{userData?.Id}}</span>
-                        </div>
-
-                        <div class="balance_section" *ngIf="menuItem.contentType == 'unusedBalanceTxt'" (click)="$event.stopPropagation()">
-                            <span>{{'User.UnusedBalance' | translate}}</span> <span> {{userInfoData?.CurrencyId}} {{unusedBalance | toNumber | number: '.2'}}</span>
-                        </div>
-
-                        <div *ngIf="menuItem.contentType == 'balanceTxt'">
-                            <app-balance [menuItem]="menuItem.config"></app-balance>
-                        </div>
-
-                        <div class="flex_column_center"
-                             *ngIf="menuItem.contentType == 'bonusBalanceTxt' && bonus != '0.00'">
-                            <span>{{'User.Bouns' | translate}}</span>&nbsp;<span>{{currencySymbol}} {{bonus | toNumber | number: '.2'}}</span>
-                        </div>
-
-                        <div *ngIf="menuItem.contentType == 'chatImg'" class="chat-item">
-                            <a [href]="menuItem.Href" target="_blank" rel="nofollow"><fa-icon [icon]="['fas', 'headphones']"></fa-icon></a>
-                        </div>
-
-                        <div *ngIf="menuItem.contentType == 'ticketsImg'" class="envelope-item">
-                            <div *ngIf="isLogin; else notLoginTicket">
-                                <app-global-tickets unreadMessagesCount="{{unreadMessagesCount}}" [menuItem]="menuItem"
-                                                    class="{{menuItem.className}}-type" [openModal]="openModal"></app-global-tickets>
-                            </div>
-
-                            <ng-template #notLoginTicket>
-                                <div class="user_tickets" (click)="openNotLoginNewTicket(menuItem)">
-                                    <i class="icon icon-message"></i>
-                                </div>
-                            </ng-template>
-                        </div>
-
-                        <div *ngIf="(menuItem.contentType === 'accountPagesDpd')">
-                            <app-global-account-pages-dpd class="{{menuItem.className}}-type"
-                                                          [menuItem]="menuItem"
-                                                          itemClassname="{{menuItem.className}}" [openModal]="openModal"></app-global-account-pages-dpd>
-                        </div>
-
-                        <div *ngIf="(menuItem.contentType == 'logoutBtn')">
-                            <app-global-logout class="{{menuItem.className}}-type" itemIconName="{{menuItem.Icon}}"
-                                               itemClassname="{{menuItem.className}}"></app-global-logout>
-                        </div>
-
-
-                        <div *ngIf="(menuItem.contentType === 'languageDpd')" class="default_width">
-                            <app-global-language [menuItem]="menuItem"></app-global-language>
-                        </div>
-
-                        <div *ngIf="menuItem.contentType == 'lightBtn'" class="default_width">
-                            <i class="icon-idea"></i>
-                        </div>
-
-                        <div *ngIf="menuItem.contentType == 'time' && !asianWebRoute">
-                           <app-time [menuItem]="menuItem" dropdown></app-time>
-                        </div>
-
-
-                        <div class="general-menu-sub-menu" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title">
-                            <ul style="right: unset">
-                                <li *ngFor="let subItem of menuItem.SubMenu" (click)="$event.stopPropagation(); openSubMenuByUrl('/' + menuItem.Href + subItem.Href)"><a
-                                        class="general-menu_item_link">{{subItem.Title | translate}}</a></li>
-                            </ul>
-                        </div>
-                        <fa-icon [icon]="faCaretDown" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title"></fa-icon>
-
-                    </li>
-                    <li #panel1MoreMenuRef  [attr.data-id]="'header-panel1-menu-more-enu'" class="general-menu_item header-menu-item-style1 header-menu-more" *ngIf="panel1MenuLeftItems.length">
-                        <a class="general-menu_item_link">{{'Header.More' | translate}}</a>
-                        <div class="general-menu-sub-menu">
-                            <ul>
-                                <li *ngFor="let menu of panel1MenuMoreItems"
-                                    [attr.data-id]="'header-panel1-menu-' + menu.Title" class="general-menu-sub-menu-li">
-                                    <a class="general-menu_item_link" (click)="onMenuItem(menu)">{{'Header.' + menu.Title | translate}}
-                                        <div *ngIf="menu.SubMenu.length" class="general-menu-sub-menu general-menu-sub-menu-item">
-                                            <ul>
-                                                <li *ngFor="let subMenu of menu.SubMenu"
-                                                    [attr.data-id]="'header-panel1-menu-' + subMenu.Title">
-                                                    <a class="general-menu_item_link" [href]="subMenu.Href">
-                                                        {{'Header.' + subMenu.Title | translate}}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <fa-icon [icon]="faCaretDown"></fa-icon>
-                    </li>
-                    <div #panel1RightPartRef class="right-part">
-                        <li *ngFor="let menuItem of panel1MenuRightItems"
-                            [attr.data-id]="'header-panel1-menu-' + menuItem.Title"
-                            class="{{menuItem?.className}}"
-                            (click)="onMenuItem(menuItem)"
-                            [ngClass]="{'full-right': menuItem?.Orientation,
-              'active': menuItem?.Href == activeRouterName,
-              'animated infinite pulse': menuItem?.animated}">
-<!--                            <img src="../../../../../../../assets/images/header/{{menuItem?.Icon}}"  *ngIf="menuItem?.Icon && menuItem.contentType !== 'ticketsImg'">-->
-                            <a class="general-menu_item_link"
-                               *ngIf="!menuItem?.OpenInRouting && (menuItem?.contentType == 'standard')"
-                               target="_blank"
-                               href="{{menuItem.Href}}">
-                                {{'Header.' + menuItem?.Title | translate}}
-                            </a>
-                            <a class="general-menu_item_link"
-                               *ngIf="menuItem?.OpenInRouting && (menuItem?.contentType == 'standard')"
-                            >
-                                {{'Header.' + menuItem?.Title | translate}}
-                            </a>
-
-                            <div *ngIf="menuItem.contentType == 'depositBtn'">
-                                {{'Header.Deposite' | translate}}
-                            </div>
-                            <div *ngIf="menuItem.contentType == 'chatBtn'" class="default_width">
-                                <chant-opener></chant-opener>
-                            </div>
-                            <div *ngIf="(menuItem.contentType === 'commonBtn')" class="default_width">
-                                <functional-btn [menuItem]="menuItem" class="{{menuItem.className}}-type" itemClassname="{{menuItem.className}}"
-                                                [openModal]="openModal"></functional-btn>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'logoImg'">
-                                <div class="header-section_topPanel_left">
-                                    <img class="logo_img"
-                                         (click)="clickInRoute('/' + configService.defaultOptions['HomePageType'])"
-                                         [routerLink]="['/' + configService.defaultOptions['HomePageType']]"
-                                         [src]="logoUrl"  (error)="errorHandler($event)"/>
-                                </div>
-                            </div>
-
-
-                            <div *ngIf="menuItem.contentType == 'loginBtn'" class="default_width">
-                                <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
-                            </div>
-                            <div *ngIf="menuItem.contentType == 'loginDpd'" class="dropdown-login-section" [style.display]="showLoginDropdown ? 'block': 'none'">
-                                <div class="login-close-modal-icon">
-                                    <span class="icon-close-modal" (click)="showLoginDropdown = false"></span>
-                                </div>
-                                <app-login [mainClass]="'login_modal_section'" [contentType]="menuItem.contentType"
-                                           (onNavigate)="onNavigateToForgot()"
-                                           class="{{menuItem.className}}-type" *ngIf="!isLogin"></app-login>
-                                <div class="login_PSection_redirect">
-                                    <div>
-                                        {{'Login.Dont_have_an_account' | translate}} <a
-                                            (click)="showConfirm('open_register')">{{'Login.Sign Up' | translate}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div *ngIf="menuItem.contentType == 'Btn'" class="default_width">
-                                <i *ngIf="menuItem.Icon" class="icon icon-{{menuItem.Icon}}"></i>{{'Header.' + menuItem.Title | translate}}
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'loginScn'">
-                                <app-login [mainClass]="'header_section'" [contentType]="menuItem.contentType" sectionClass="{{menuItem.className}}"
-                                           (onNavigate)="onNavigateToForgot()"
-                                           class="{{menuItem.className}}-type" *ngIf="!isLogin"></app-login>
-                            </div>
-
-
-                            <div *ngIf="(menuItem.contentType === 'signupBtn')" class="default_width">
-                                <app-global-sign-up-btn class="{{menuItem.className}}-type"
-                                                        [menuItem]="menuItem"
-                                                        itemClassname="{{menuItem.className}}"></app-global-sign-up-btn>
-                            </div>
-
-                            <div class="user_id" [routerLink]="['/user/account']"
-                                 *ngIf="menuItem.contentType == 'userIdTxt'">
-                                <span>{{'User.User_Id' | translate}}</span>
-                                <span>{{userData?.Id}}</span>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'balanceTxt'">
-                                <app-balance [menuItem]="menuItem.config"></app-balance>
-                            </div>
-                            <div class="flex_column_center"
-                                 *ngIf="menuItem.contentType == 'bonusBalanceTxt' && bonus != '0.00'">
-                                <span>{{'User.Bouns' | translate}}</span>
-                                <span>{{bonus}} {{currencySymbol}}</span>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'chatImg'" class="chat-item">
-                                <a [href]="menuItem.Href" target="_blank" rel="nofollow"></a>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'ticketsImg'" class="envelope-item">
-                                <div *ngIf="isLogin; else notLoginTicket">
-                                    <app-global-tickets unreadMessagesCount="{{unreadMessagesCount}}" [menuItem]="menuItem"
-                                                        class="{{menuItem.className}}-type" [openModal]="openModal"></app-global-tickets>
-                                </div>
-
-                                <ng-template #notLoginTicket>
-                                    <div class="user_tickets" (click)="openNotLoginNewTicket()">
-                                        <i class="icon icon-message"></i>
-                                    </div>
-                                </ng-template>
-                            </div>
-
-                            <div *ngIf="(menuItem.contentType === 'accountPagesDpd')">
-                                <app-global-account-pages-dpd class="{{menuItem.className}}-type"
-                                                              [menuItem]="menuItem"
-                                                              itemClassname="{{menuItem.className}}" [openModal]="openModal"></app-global-account-pages-dpd>
-                            </div>
-
-                            <div *ngIf="(menuItem.contentType == 'logoutBtn')">
-                                <app-global-logout class="{{menuItem.className}}-type" itemIconName="{{menuItem.Icon}}"
-                                                   itemClassname="{{menuItem.className}}"></app-global-logout>
-                            </div>
-
-
-                            <div *ngIf="(menuItem.contentType === 'languageDpd')" class="default_width global-language">
-                                <app-global-language [menuItem]="menuItem"></app-global-language>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'lightBtn'" class="default_width">
-                                <i class="icon-idea"></i>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'time' && !asianWebRoute" class="header-panel-first-part">
-                                <app-time [menuItem]="menuItem" dropdown></app-time>
-                            </div>
-
-                        </li>
-                    </div>
-                </ul>
-              <!--  <div class="accounts-info">
-                    <app-account-page-type2-balance *ngIf="isLogin" [templateType]="2"></app-account-page-type2-balance>
-                </div>-->
-
-            </div>
-
-
-            <div class="header-section_bottomPanel flex_between" *ngIf="generalMenuLeftItems.length > 0"
-                 [ngClass]="menuDirection === 'left' ? 'left' :  ''"
-            [class.expanded-menu]="isExpandedMenu">
-
-                <div  class="menu-icon" *ngIf="menuDirection === 'left'" >
-                    <input type="checkbox" id="menu">
-                    <label  for="menu" (click)="expandLeftMenu()">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </label>
+            @if(marqueeProperty && marqueeText !== undefined)
+            {
+                <div class="marquee-global {{marqueePropertyDetails?.className}}">
+                    <ul class="messages-marquee-text {{marqueePropertyDetails?.animationName}}"
+                        [marqueeDuration]="marqueePropertyDetails?.duration"
+                        [marqueeAnimation]="marqueePropertyDetails?.timingFunction">
+                        @for (marquee of marqueeText; track $index)
+                        {
+                            <li style="margin-right: 20px; padding-right: 20px;">
+                                {{marquee}}
+                            </li>
+                        }
+                    </ul>
                 </div>
-                <ul #generalMenu class="general-menu">
+            }
 
-                    <ng-container>
-                        <li  [attr.data-id]="'header-panel2-menu-' + menuItem.Title" collapse="{{isOpenedDropdown}}"
-                             class="general-menu_item dynamic-item {{menuItem?.className}}" *ngFor="let menuItem of generalMenuLeftItems"
-                            (click)="onMenuItem(menuItem)"
-                            [ngClass]="{'full-right': menuItem?.Orientation,
-              'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated,
-              'onlyMenuItem' : menuItem.className == 'header-menu-item-style1',
-               'active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
-               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.startsWith(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive),
-               'onlySubMenuLength': menuItem.SubMenu.length}">
+            @if(showPanel1)
+            {
+                <div class="header-section_topPanel flex_between" [class.top-menu]="isExpandedMenu">
+                    <ul #panel1MenuRef class="general-menu">
+                        <li  [attr.data-id]="'header-panel1-menu_' + menuItem.Title"
+                             class="general-menu_item dynamic-item {{menuItem?.className}}" *ngFor="let menuItem of panel1MenuLeftItems"
+                             (click)="onMenuItem(menuItem)"
+                             pointerOnLink="{{menuItem.Href}}"
+                             [ngClass]="{'full-right': menuItem?.Orientation,
+                              'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated,
+                              'onlyMenuItem' : menuItem.className == 'header-menu-item-style1',
+                              'hide-marquee': menuItem?.Type === 'marqueeItem_marquee',
+                              'active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
+                               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}">
                             <div class="underline-active-hover" [ngClass]="{'underline-active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
-               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}"></div>
-                           <!-- <i class="icon-{{menuItem?.Icon}}" *ngIf="menuItem?.Icon && !menuItem?.Icon.includes('.')"></i>
-                            <img *ngIf="menuItem?.Icon.includes('.') && (menuItem?.contentType !== 'logoImg')" src="../../../../../../../assets/images/{{menuItem?.Icon}}" alt="">-->
-                            <div class="icon-box" *ngIf="menuItem?.Icon && menuItem?.contentType !== 'logoImg'">
-                                <img [src]="menuItem?.Icon" alt="">
-                                <img [src]="menuItem?.IconHover" alt="">
-                            </div>
+                                || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.startsWith(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}"></div>
+                            @if(menuItem.Icon)
+                            {
+                                @if (menuItem.Icon.includes('.'))
+                                {
+                                    @if(menuItem.contentType !== 'logoImg')
+                                    {
+                                        <img  src="../../../../../../../assets/images/{{menuItem?.Icon}}" alt="">
+                                    }
+                                }
+                                @else
+                                {
+                                    <i class="icon-{{menuItem?.Icon}}"></i>
+                                }
+                            }
+                            @if (menuItem?.Icon && !menuItem?.Icon.includes('.'))
+                            {
+                                <i class="icon-{{menuItem?.Icon}}"></i>
+                            }
 
-                            <a class="general-menu_item_link"
-                               *ngIf="menuItem?.OpenInRouting && (menuItem?.contentType != 'time') && (menuItem?.contentType != 'logout-btn') && (menuItem?.contentType != 'depositBtn')">
-                                {{'Header.' + menuItem?.Title | translate}}
-                            </a>
-
-                            <span class="new-logo-item" *ngIf="menuItem?.new">New</span>
-
-                            <a class="general-menu_item_link"
-                               *ngIf="!menuItem?.OpenInRouting && (menuItem?.contentType == 'standard')"
-                               target="_blank"
-                               href="{{menuItem.Href}}">
-                                {{'Header.' + menuItem?.Title | translate}}
-                            </a>
-
-                            <div *ngIf="(menuItem.contentType === 'accountPagesDpd') &&  menuDirection === 'left'">
-                                <app-global-account-pages-dpd class="{{menuItem.className}}-type"
-                                                              [menuItem]="menuItem"
-                                                              itemClassname="{{menuItem.className}}" [openModal]="openModal"></app-global-account-pages-dpd>
-                            </div>
-                            <div *ngIf="menuItem.contentType == 'depositBtn'">
-                                {{'Header.Deposite' | translate}}
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'character' && userLogined.user?.CharacterId &&  menuDirection === 'left'" class="character-img">
-                                <img  src="../../../../../../../assets/images/characters/{{userLogined.user?.CharacterId}}.png">
-                            </div>
-                            <div *ngIf="menuItem.contentType == 'luckyGame' && menuDirection === 'left'" class="lucky-img" (click)="openLuckyGame()">
-                                <img class="left-menu-showed" src="../../../../../../../assets/images/{{menuItem?.Title}}.gif">
-                                <img class="left-menu-hidden" src="../../../../../../../assets/images/{{menuItem?.Title}}-closed.gif">
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'time' && !asianWebRoute" class="timezone">
-                                <app-time [menuItem]="menuItem" dropdown></app-time>
-                            </div>
-
-                            <div *ngIf="(menuItem.contentType == 'logoutBtn')" class="default_width">
-                                <app-global-logout class="{{menuItem.className}}-type" itemIconName="{{menuItem.Icon}}"
-                                                   itemClassname="{{menuItem.className}}"></app-global-logout>
-                            </div>
-
-
-	                        <div class="user_id" [routerLink]="['/user/account']"
-	                             *ngIf="menuItem.contentType == 'userIdTxt'">
-	                            <span>{{'User.User_Id' | translate}}</span>
-	                            <span>{{userData?.Id}}</span>
-	                        </div>
-
-                           <div class="user_id" [routerLink]="['/user/account']"
-                                 *ngIf="menuItem.contentType == 'userNameTxt'">
-                               <span>{{'User.User_Name' | translate}}</span>
-                               <span>{{userData?.UserName}}</span>
-                            </div>
-                            <div *ngIf="(menuItem.contentType === 'signupBtn')" class="default_width">
-                                <app-global-sign-up-btn class="{{menuItem.className}}-type"
-                                                        [menuItem]="menuItem"
-                                                        itemClassname="{{menuItem.className}}"></app-global-sign-up-btn>
-                            </div>
-
-                            <div *ngIf="(menuItem.contentType === 'languageDpd')" class="default_width">
-                                <app-global-language [menuItem]="menuItem"></app-global-language>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'lightBtn'" class="default_width">
-                                <i class="icon-idea"></i>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'loginScn'">
-                                <app-login [mainClass]="'header_section'"
-                                           [contentType]="menuItem.contentType" sectionClass="{{menuItem.className}}"
-                                           (onNavigate)="onNavigateToForgot()"
-                                           class="{{menuItem.className}}-type" *ngIf="!isLogin"></app-login>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'loginBtn'">
-                                <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
-                            </div>
-
-
-
-                            <div *ngIf="menuItem.contentType == 'balanceTxt'">
-                                <app-balance [menuItem]="menuItem.config"></app-balance>
-                            </div>
-
-                            <div class="balance_section" *ngIf="menuItem.contentType == 'unusedBalanceTxt'" (click)="$event.stopPropagation()">
-                                <span>{{'User.UnusedBalance' | translate}}</span> <span> {{unusedBalance | toNumber | number: '.2'}} {{currencySymbol}}</span>
-                            </div>
-
-                            <div class="flex_column_center"
-                                 *ngIf="menuItem.contentType == 'bonusBalanceTxt' && bonus != '0.00'">
-                                <span>{{'User.Bouns' | translate}}</span>
-                                <span>{{bonus}} {{currencySymbol}}</span>
-                            </div>
-
-
-                            <div class="general-menu-sub-menu" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title">
-                                <ul>
-                                    <li *ngFor="let subItem of menuItem.SubMenu" (click)="$event.stopPropagation(); openSubMenuByUrl('/' + menuItem.Href + subItem.Href)">
-                                        <img [src]="subItem?.Icon" alt="" *ngIf="menuItem?.hasIcons">
-                                        <a class="general-menu_item_link">{{'Header.' + subItem.Title | translate}}</a></li>
-                                </ul>
-                            </div>
-                            <fa-icon [icon]="faCaretDown" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title"></fa-icon>
-                        </li>
-
-                        <li #moreMenu *ngIf="menuDirection !== 'left'"  [attr.data-id]="'header-panel2-menu-more-menu'"
-                            class="general-menu_item header-menu-item-style1 header-menu-more" [hidden]="!generalMenuLeftItems.length">
-                            <a class="general-menu_item_link">{{'Header.More' | translate}}</a>
-                            <div class="general-menu-sub-menu">
-                                <ul>
-                                    <li *ngFor="let menu of generalMenuMoreItems"
-                                        [attr.data-id]="'header-panel1-menu-' + menu.Title" class="general-menu-sub-menu-li">
-                                        <a class="general-menu_item_link" (click)="onMenuItem(menu)">{{'Header.' + menu.Title | translate}}
-                                            <div *ngIf="menu.SubMenu.length" class="general-menu-sub-menu general-menu-sub-menu-item">
-                                                <ul>
-                                                    <li *ngFor="let subMenu of menu.SubMenu"
-                                                        [attr.data-id]="'header-panel1-menu-' + menu.Title">
-                                                        <a class="general-menu_item_link" [href]="subMenu.Href">
-                                                            {{'Header.' + subMenu.Title | translate}}
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                            @switch (menuItem.contentType)
+                            {
+                                @case ('standard')
+                                {
+                                    @if(menuItem.OpenInRouting)
+                                    {
+                                        <a class="general-menu_item_link"   pointerOnLink="{{menuItem.Href}}">
+                                            {{'Header.' + menuItem?.Title | translate}}
                                         </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <fa-icon [icon]="faCaretDown"></fa-icon>
+                                    }
+                                    @else
+                                    {
+                                        <a class="general-menu_item_link"
+                                           target="_blank"
+                                           href="{{menuItem.Href}}"   pointerOnLink="{{menuItem.Href}}">
+                                            {{'Header.' + menuItem?.Title | translate}}
+                                        </a>
+                                    }
+                                }
+                                @case ('depositBtn')
+                                {
+                                    <div>
+                                        {{'Header.Deposite' | translate}}
+                                    </div>
+                                }
+                                @case ('logoImg')
+                                {
+                                    <div class="transform-logo">
+                                        <div class="header-section_topPanel_left">
+                                            <img class="logo_img" pointerOnLink="{{menuItem.Href}}"
+                                                 (click)="clickInRoute('/' + configService.defaultOptions['HomePageType'])"
+                                                 [routerLink]="['/' + configService.defaultOptions['HomePageType']]"
+                                                 [src]="logoUrl" (error)="errorHandler($event)"/>
+                                        </div>
+                                    </div>
+                                }
+                                @case('loginBtn')
+                                {
+                                    <div class="default_width">
+                                        <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
+                                    </div>
+                                }
+                                @case('chatBtn')
+                                {
+                                    <div class="default_width">
+                                        <chant-opener></chant-opener>
+                                    </div>
+                                }
+                                @case('Btn')
+                                {
+                                    <div class="default_width">
+                                        @if(menuItem.Icon)
+                                        {
+                                            <i class="icon icon-{{menuItem.Icon}}"></i>
+                                        }
+                                        {{'Header.' + menuItem.Title | translate}}
+                                    </div>
+                                }
+                                @case('loginScn')
+                                {
+                                    <div>
+                                        @if(!isLogin)
+                                        {
+                                            <app-login [mainClass]="'header_section'"
+                                                       [contentType]="menuItem.contentType"
+                                                       sectionClass="{{menuItem.className}}"
+                                                       (onNavigate)="onNavigateToForgot()"
+                                                       class="{{menuItem.className}}-type"></app-login>
+                                        }
+                                    </div>
+                                }
+                                @case('signupBtn')
+                                {
+                                    <div class="default_width">
+                                        <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                                itemClassname="{{menuItem.className}}"
+                                                                [menuItem]="menuItem">
+                                        </app-global-sign-up-btn>
+                                    </div>
+                                }
+                                @case('commonBtn')
+                                {
+                                    <div class="default_width">
+                                        <functional-btn [menuItem]="menuItem"
+                                                        class="{{menuItem.className}}-type"
+                                                        itemClassname="{{menuItem.className}}"
+                                                        [openModal]="openModal"></functional-btn>
+                                    </div>
+                                }
+                                @case('zoomBtn')
+                                {
+                                    <div class="default_width">
+                                        <zoom-btn [menuItem]="menuItem"
+                                                  class="{{menuItem.className}}-type"
+                                                  itemClassname="{{menuItem.className}}">
+                                        </zoom-btn>
+                                    </div>
+                                }
+                                @case('userIdTxt')
+                                {
+                                    <div class="user_id" [routerLink]="['/user/account']">
+                                        <span>{{'User.User_Id' | translate}}</span>
+                                        <span>{{userData?.Id}}</span>
+                                    </div>
+                                }
+                                @case('unusedBalanceTxt')
+                                {
+                                    <div class="balance_section"
+                                         (click)="$event.stopPropagation()">
+                                        <span>{{'User.UnusedBalance' | translate}}</span> <span> {{userInfoData?.CurrencyId}} {{unusedBalance | toNumber | number: '.2'}}</span>
+                                    </div>
+                                }
+                                @case('balanceTxt')
+                                {
+                                    <div>
+                                        <app-balance [menuItem]="menuItem.config"></app-balance>
+                                    </div>
+                                }
+                                @case('bonusBalanceTxt')
+                                {
+                                    @if (bonus != '0.00')
+                                    {
+                                        <div class="flex_column_center">
+                                            <span>{{'User.Bouns' | translate}}</span>&nbsp;<span>{{currencySymbol}} {{bonus | toNumber | number: '.2'}}</span>
+                                        </div>
+                                    }
+                                }
+                                @case ('chatImg')
+                                {
+                                    <div class="chat-item">
+                                        <a [href]="menuItem.Href" target="_blank"
+                                           rel="nofollow">
+                                            <fa-icon [icon]="['fas', 'headphones']"></fa-icon>
+                                        </a>
+                                    </div>
+                                }
+                                @case ('ticketsImg')
+                                {
+                                    <div class="envelope-item">
+                                        @if(isLogin)
+                                        {
+                                            <div>
+                                                <app-global-tickets unreadMessagesCount="{{unreadMessagesCount}}"
+                                                                    [menuItem]="menuItem"
+                                                                    class="{{menuItem.className}}-type"
+                                                                    [openModal]="openModal">
+                                                </app-global-tickets>
+                                            </div>
+                                        }
+                                        @else
+                                        {
+                                            <div class="user_tickets" (click)="openNotLoginNewTicket(menuItem)">
+                                                <i class="icon icon-message"></i>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                @case ('accountPagesDpd')
+                                {
+                                    <div>
+                                        <app-global-account-pages-dpd class="{{menuItem.className}}-type"
+                                                                      [menuItem]="menuItem"
+                                                                      itemClassname="{{menuItem.className}}"
+                                                                      [openModal]="openModal">
+                                        </app-global-account-pages-dpd>
+                                    </div>
+                                }
+                                @case ('logoutBtn')
+                                {
+                                    <div>
+                                        <app-global-logout class="{{menuItem.className}}-type"
+                                                           itemIconName="{{menuItem.Icon}}"
+                                                           itemClassname="{{menuItem.className}}">
+                                        </app-global-logout>
+                                    </div>
+                                }
+                                @case ('languageDpd')
+                                {
+                                    <div class="default_width">
+                                        <app-global-language [menuItem]="menuItem"></app-global-language>
+                                    </div>
+                                }
+                                @case ('lightBtn')
+                                {
+                                    <div class="default_width">
+                                        <i class="icon-idea"></i>
+                                    </div>
+                                }
+                                @case ('time')
+                                {
+                                    @if (!asianWebRoute)
+                                    {
+                                        <div>
+                                            <app-time [menuItem]="menuItem" dropdown></app-time>
+                                        </div>
+                                    }
+                                }
+                            }
+                            @if (menuItem.SubMenu.length && menuItem.SubMenu[0].Title)
+                            {
+                                <div class="general-menu-sub-menu">
+                                    <ul style="right: unset">
+                                        @for (subItem of menuItem.SubMenu; track subItem.Id)
+                                        {
+                                            <li (click)="$event.stopPropagation(); openSubMenuByUrl('/' + menuItem.Href + subItem.Href)">
+                                                <a class="general-menu_item_link"   pointerOnLink="{{subItem.Href}}">{{subItem.Title | translate}}</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <fa-icon [icon]="faCaretDown"></fa-icon>
+                            }
                         </li>
-                    </ng-container>
-                    <ng-container>
-                        <li  [attr.data-id]="'header-panel1-menu-' + menuItem.Title"
-                             class="general-menu_item {{menuItem?.className}}"
-                            *ngFor="let menuItem of generalMenuRightItems"
-                            (click)="onMenuItem(menuItem)"
-                            [ngClass]="{'full-right': menuItem?.Orientation,
-              'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated,
-              'onlyMenuItem' : menuItem.className == 'header-menu-item-style1',
-               'active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
-               || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive),
-               'onlySubMenuLength': menuItem.SubMenu.length}">
-                            <div class="icon-box" *ngIf="menuItem?.Icon && menuItem?.contentType !== 'logoImg'">
-                                <img [src]="menuItem?.Icon" alt="">
-                                <img [src]="menuItem?.IconHover" alt="">
+                        @if (panel1MenuLeftItems.length)
+                        {
+                            <li #panel1MoreMenuRef
+                                [attr.data-id]="'header-panel1-menu-more-enu'"
+                                class="general-menu_item header-menu-item-style1 header-menu-more">
+                                <a class="general-menu_item_link">{{'Header.More' | translate}}</a>
+                                <div class="general-menu-sub-menu">
+                                    <ul>
+                                        @for (menu of panel1MenuMoreItems; track menu.Id)
+                                        {
+                                            <li [attr.data-id]="'header-panel1-menu-' + menu.Title" class="general-menu-sub-menu-li">
+                                                <a class="general-menu_item_link" (click)="onMenuItem(menu)"  pointerOnLink="{{menu.Href}}">{{'Header.' + menu.Title | translate}}
+                                                    @if(menu.SubMenu.length)
+                                                    {
+                                                        <div class="general-menu-sub-menu general-menu-sub-menu-item">
+                                                            <ul>
+                                                                @for (subMenu of menu.SubMenu; track subMenu.Id)
+                                                                {
+                                                                    <li [attr.data-id]="'header-panel1-menu-' + subMenu.Title">
+                                                                        <a class="general-menu_item_link" [href]="subMenu.Href"  pointerOnLink="{{subMenu.Href}}">
+                                                                            {{'Header.' + subMenu.Title | translate}}
+                                                                        </a>
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                    }
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <fa-icon [icon]="faCaretDown"></fa-icon>
+                            </li>
+                        }
+                        <div #panel1RightPartRef class="right-part">
+                            @for(menuItem of panel1MenuRightItems; track menuItem.Id)
+                            {
+                                <li [attr.data-id]="'header-panel1-menu-' + menuItem.Title"
+                                    class="{{menuItem?.className}}"
+                                    pointerOnLink="{{menuItem.Href}}"
+                                    (click)="onMenuItem(menuItem)"
+                                    [ngClass]="{'full-right': menuItem?.Orientation,
+                                 'active': menuItem?.Href == activeRouterName,
+                                 'animated infinite pulse': menuItem?.animated}">
+                                    @switch(menuItem.contentType)
+                                    {
+                                        @case ('standard')
+                                        {
+                                            @if (menuItem.OpenInRouting)
+                                            {
+                                                <a class="general-menu_item_link"   pointerOnLink="{{menuItem.Href}}">
+                                                    {{'Header.' + menuItem?.Title | translate}}
+                                                </a>
+                                            }
+                                            @else
+                                            {
+                                                <a class="general-menu_item_link"
+                                                   target="_blank"
+                                                   href="{{menuItem.Href}}"  pointerOnLink="{{menuItem.Href}}">
+                                                    {{'Header.' + menuItem?.Title | translate}}
+                                                </a>
+                                            }
+                                        }
+                                        @case ('depositBtn')
+                                        {
+                                            <div>
+                                                {{'Header.Deposite' | translate}}
+                                            </div>
+                                        }
+                                        @case ('chatBtn')
+                                        {
+                                            <div class="default_width">
+                                                <chant-opener></chant-opener>
+                                            </div>
+                                        }
+                                        @case ('commonBtn')
+                                        {
+                                            <div class="default_width">
+                                                <functional-btn [menuItem]="menuItem" class="{{menuItem.className}}-type"
+                                                                itemClassname="{{menuItem.className}}"
+                                                                [openModal]="openModal"></functional-btn>
+                                            </div>
+                                        }
+                                        @case ('logoImg')
+                                        {
+                                            <div>
+                                                <div class="header-section_topPanel_left">
+                                                    <img class="logo_img" pointerOnLink="{{menuItem.Href}}"
+                                                         (click)="clickInRoute('/' + configService.defaultOptions['HomePageType'])"
+                                                         [routerLink]="['/' + configService.defaultOptions['HomePageType']]"
+                                                         [src]="logoUrl"  (error)="errorHandler($event)"/>
+                                                </div>
+                                            </div>
+                                        }
+                                        @case ('loginBtn')
+                                        {
+                                            <div class="default_width">
+                                                <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
+                                            </div>
+                                        }
+                                        @case ('loginDpd')
+                                        {
+                                            <div class="dropdown-login-section" [style.display]="showLoginDropdown ? 'block': 'none'">
+                                                <div class="login-close-modal-icon">
+                                                    <span class="icon-close-modal" (click)="showLoginDropdown = false"></span>
+                                                </div>
+                                                <app-login [mainClass]="'login_modal_section'" [contentType]="menuItem.contentType"
+                                                           (onNavigate)="onNavigateToForgot()"
+                                                           class="{{menuItem.className}}-type" *ngIf="!isLogin"></app-login>
+                                                <div class="login_PSection_redirect">
+                                                    <div>
+                                                        {{'Login.Dont_have_an_account' | translate}} <a
+                                                            (click)="showConfirm('open_register')">{{'Login.Sign Up' | translate}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        @case ('Btn')
+                                        {
+                                            <div class="default_width">
+                                                @if (menuItem.Icon){ <i class="icon icon-{{menuItem.Icon}}"></i>}
+                                               {{'Header.' + menuItem.Title | translate}}
+                                            </div>
+                                        }
+                                        @case ('loginScn')
+                                        {
+                                            <div>
+                                                @if(!isLogin)
+                                                {
+                                                    <app-login [mainClass]="'header_section'"
+                                                               [contentType]="menuItem.contentType"
+                                                               sectionClass="{{menuItem.className}}"
+                                                               (onNavigate)="onNavigateToForgot()"
+                                                               class="{{menuItem.className}}-type">
+                                                    </app-login>
+                                                }
+                                            </div>
+                                        }
+                                        @case ('signupBtn')
+                                        {
+                                            <div class="default_width">
+                                                <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                                        [menuItem]="menuItem"
+                                                                        itemClassname="{{menuItem.className}}">
+                                                </app-global-sign-up-btn>
+                                            </div>
+                                        }
+                                        @case ('userIdTxt')
+                                        {
+                                            <div class="user_id" [routerLink]="['/user/account']">
+                                                <span>{{'User.User_Id' | translate}}</span>
+                                                <span>{{userData?.Id}}</span>
+                                            </div>
+                                        }
+                                        @case ('balanceTxt')
+                                        {
+                                            <div>
+                                                <app-balance [menuItem]="menuItem.config"></app-balance>
+                                            </div>
+                                        }
+                                        @case ('bonusBalanceTxt')
+                                        {
+                                            @if(bonus != '0.00')
+                                            {
+                                                <div class="flex_column_center">
+                                                    <span>{{'User.Bouns' | translate}}</span>
+                                                    <span>{{bonus}} {{currencySymbol}}</span>
+                                                </div>
+                                            }
+                                        }
+                                        @case ('chatImg')
+                                        {
+                                            <div class="chat-item">
+                                                <a [href]="menuItem.Href" target="_blank" rel="nofollow"></a>
+                                            </div>
+                                        }
+                                        @case ('ticketsImg')
+                                        {
+                                            <div class="envelope-item">
+                                                @if(isLogin)
+                                                {
+                                                    <div>
+                                                        <app-global-tickets unreadMessagesCount="{{unreadMessagesCount}}"
+                                                                            [menuItem]="menuItem"
+                                                                            class="{{menuItem.className}}-type"
+                                                                            [openModal]="openModal">
+                                                        </app-global-tickets>
+                                                    </div>
+                                                }
+                                                @else
+                                                {
+                                                    <div class="user_tickets" (click)="openNotLoginNewTicket(menuItem)">
+                                                        <i class="icon icon-message"></i>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                        @case ('accountPagesDpd')
+                                        {
+                                            <div>
+                                                <app-global-account-pages-dpd class="{{menuItem.className}}-type"
+                                                                              [menuItem]="menuItem"
+                                                                              itemClassname="{{menuItem.className}}"
+                                                                              [openModal]="openModal">
+                                                </app-global-account-pages-dpd>
+                                            </div>
+                                        }
+                                        @case ('logoutBtn')
+                                        {
+                                            <div>
+                                                <app-global-logout class="{{menuItem.className}}-type"
+                                                                   itemIconName="{{menuItem.Icon}}"
+                                                                   itemClassname="{{menuItem.className}}">
+                                                </app-global-logout>
+                                            </div>
+                                        }
+                                        @case ('languageDpd')
+                                        {
+                                            <div class="default_width global-language">
+                                                <app-global-language [menuItem]="menuItem"></app-global-language>
+                                            </div>
+                                        }
+                                        @case ('lightBtn')
+                                        {
+                                            <div class="default_width">
+                                                <i class="icon-idea"></i>
+                                            </div>
+                                        }
+                                        @case ('time')
+                                        {
+                                            @if(!asianWebRoute)
+                                            {
+                                                <div class="header-panel-first-part">
+                                                    <app-time [menuItem]="menuItem" dropdown></app-time>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                </li>
+                            }
+                        </div>
+                    </ul>
+                </div>
+            }
+
+            @if (generalMenuLeftItems.length > 0)
+            {
+                <div class="header-section_bottomPanel flex_between"
+                     [ngClass]="menuDirection === 'left' ? 'left' :  ''"
+                     [class.expanded-menu]="isExpandedMenu">
+                    @if (menuDirection === 'left')
+                    {
+                        @if (isAnimated == true){
+                            <div  class="menu-icon">
+                                <input type="checkbox" id="menu">
+                                <label for="menu" (click)="expandLeftMenu()">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </label>
                             </div>
+                        }
+                        @if (!isAnimated && isExpandedMenu == false){
+                            <img class="menu-icon" src="../assets/images/menu.png" (click)="expandLeftMenu()">
+                        }
+                        @if (!isAnimated && isExpandedMenu == true){
+                            <img class="menu-icon" src="../assets/images/close.png" (click)="expandLeftMenu()">
+                        }
+                    }
+                    <ul id="generalMenu" class="general-menu">
+                        @for (menuItem of generalMenuLeftItems; track menuItem.Id)
+                        {
+                            <li  [attr.data-id]="'header-panel2-menu-' + menuItem.Title" collapse="{{isOpenedDropdown}}"
+                                 class="general-menu_item dynamic-item {{menuItem?.className}}"
+                                 (click)="onMenuItem(menuItem)"
+                                 pointerOnLink="{{menuItem.Href}}"
+                                 [ngClass]="{'full-right': menuItem?.Orientation,
+                                  'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated,
+                                  'onlyMenuItem' : menuItem.className == 'header-menu-item-style1',
+                                   'active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
+                                   || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.startsWith(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive),
+                                   'onlySubMenuLength': menuItem.SubMenu.length}">
+                                <div class="underline-active-hover" [ngClass]="{'underline-active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
+                                || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive)}"></div>
+                                @if(menuItem?.Icon && menuItem?.contentType !== 'logoImg')
+                                {
+                                    <div class="icon-box">
+                                        <img [src]="menuItem?.Icon" alt="">
+                                        <img [src]="menuItem?.IconHover" alt="">
+                                    </div>
+                                }
 
-                            <a class="general-menu_item_link"
-                               *ngIf="menuItem?.OpenInRouting && (menuItem?.contentType != 'time') && (menuItem?.contentType != 'logout-btn')">
-                                {{'Header.' + menuItem?.Title | translate}}
-                            </a>
-                            <span class="new-logo-item" *ngIf="menuItem?.new">New</span>
+                                @if(menuItem?.OpenInRouting && (menuItem?.contentType != 'time') && (menuItem?.contentType != 'logout-btn') && (menuItem?.contentType != 'depositBtn'))
+                                {
+                                    <a class="general-menu_item_link"  pointerOnLink="{{menuItem.Href}}">
+                                        {{'Header.' + menuItem?.Title | translate}}
+                                    </a>
+                                }
+                                @if (menuItem?.new)
+                                {
+                                    <span class="new-logo-item">New</span>
+                                }
+                                @switch (menuItem.contentType)
+                                {
+                                    @case ('standard')
+                                    {
+                                        @if(!menuItem?.OpenInRouting)
+                                        {
+                                            <a class="general-menu_item_link"
+                                               target="_blank"
+                                               href="{{menuItem.Href}}"  pointerOnLink="{{menuItem.Href}}">
+                                                {{'Header.' + menuItem?.Title | translate}}
+                                            </a>
+                                        }
+                                    }
+                                    @case ('accountPagesDpd')
+                                    {
+                                        @if(menuDirection === 'left')
+                                        {
+                                            <div>
+                                                <app-global-account-pages-dpd class="{{menuItem.className}}-type"
+                                                                              [menuItem]="menuItem"
+                                                                              itemClassname="{{menuItem.className}}"
+                                                                              [openModal]="openModal">
+                                                </app-global-account-pages-dpd>
+                                            </div>
+                                        }
+                                    }
+                                    @case ('depositBtn')
+                                    {
+                                        <div>
+                                            {{'Header.Deposite' | translate}}
+                                        </div>
+                                    }
+                                    @case ('character')
+                                    {
+                                        @if (userLogined.user?.CharacterId &&  menuDirection === 'left')
+                                        {
+                                            <div class="character-img">
+                                                <img  src="../../../../../../../assets/images/characters/{{userLogined.user?.CharacterId}}.png">
+                                            </div>
+                                        }
+                                    }
+                                    @case ('luckyGame')
+                                    {
+                                        @if (menuDirection === 'left')
+                                        {
+                                            <div class="lucky-img" (click)="openLuckyGame()">
+                                                <img class="left-menu-showed" src="../../../../../../../assets/images/{{menuItem?.Title}}.svg">
+                                                <img class="left-menu-hidden" src="../../../../../../../assets/images/{{menuItem?.Title}}-closed.svg">
+                                            </div>
+                                        }
+                                    }
+                                    @case ('time')
+                                    {
+                                        @if (!asianWebRoute)
+                                        {
+                                            <div class="timezone">
+                                                <app-time [menuItem]="menuItem" dropdown></app-time>
+                                            </div>
+                                        }
+                                    }
+                                    @case ('logoutBtn')
+                                    {
+                                        <div class="default_width">
+                                            <app-global-logout class="{{menuItem.className}}-type"
+                                                               itemIconName="{{menuItem.Icon}}"
+                                                               itemClassname="{{menuItem.className}}">
+                                            </app-global-logout>
+                                        </div>
+                                    }
+                                    @case ('userIdTxt')
+                                    {
+                                        <div class="user_id" [routerLink]="['/user/account']">
+                                            <span>{{'User.User_Id' | translate}}</span>
+                                            <span>{{userData?.Id}}</span>
+                                        </div>
+                                    }
+                                    @case ('userNameTxt')
+                                    {
+                                        <div class="user_id" [routerLink]="['/user/account']">
+                                            <span>{{'User.User_Name' | translate}}</span>
+                                            <span>{{userData?.UserName}}</span>
+                                        </div>
+                                    }
+                                    @case ('signupBtn')
+                                    {
+                                        <div class="default_width">
+                                            <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                                    [menuItem]="menuItem"
+                                                                    itemClassname="{{menuItem.className}}">
+                                            </app-global-sign-up-btn>
+                                        </div>
+                                    }
+                                    @case ('languageDpd')
+                                    {
+                                        <div class="default_width">
+                                            <app-global-language [menuItem]="menuItem"></app-global-language>
+                                        </div>
+                                    }
+                                    @case ('lightBtn')
+                                    {
+                                        <div class="default_width">
+                                            <i class="icon-idea"></i>
+                                        </div>
+                                    }
+                                    @case ('loginScn')
+                                    {
+                                        @if (!isLogin)
+                                        {
+                                            <div>
+                                                <app-login [mainClass]="'header_section'"
+                                                           [contentType]="menuItem.contentType"
+                                                           sectionClass="{{menuItem.className}}"
+                                                           (onNavigate)="onNavigateToForgot()"
+                                                           class="{{menuItem.className}}-type">
+                                                </app-login>
+                                            </div>
+                                        }
+                                    }
+                                    @case ('loginBtn')
+                                    {
+                                        <div>
+                                            <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
+                                        </div>
+                                    }
+                                    @case ('balanceTxt')
+                                    {
+                                        <div>
+                                            <app-balance [menuItem]="menuItem.config"></app-balance>
+                                        </div>
+                                    }
+                                    @case ('unusedBalanceTxt')
+                                    {
+                                        <div class="balance_section" (click)="$event.stopPropagation()">
+                                            <span>{{'User.UnusedBalance' | translate}}</span> <span> {{unusedBalance | toNumber | number: '.2'}} {{currencySymbol}}</span>
+                                        </div>
+                                    }
+                                    @case ('unusedBalanceTxt')
+                                    {
+                                        <div class="balance_section" (click)="$event.stopPropagation()">
+                                            <span>{{'User.UnusedBalance' | translate}}</span> <span> {{unusedBalance | toNumber | number: '.2'}} {{currencySymbol}}</span>
+                                        </div>
+                                    }
+                                    @case ('bonusBalanceTxt')
+                                    {
+                                        @if (bonus != '0.00')
+                                        {
+                                            <div class="flex_column_center"
+                                                 *ngIf="menuItem.contentType == 'bonusBalanceTxt' && bonus != '0.00'">
+                                                <span>{{'User.Bouns' | translate}}</span>
+                                                <span>{{bonus}} {{currencySymbol}}</span>
+                                            </div>
+                                        }
+                                    }
+                                }
 
-                            <a class="general-menu_item_link"
-                               *ngIf="!menuItem?.OpenInRouting && (menuItem?.contentType == 'standard')"
-                               target="_blank"
-                               href="{{menuItem.Href}}">
-                                {{'Header.' + menuItem?.Title | translate}}
-                            </a>
-                            <div *ngIf="menuItem.contentType == 'time' && !asianWebRoute" class="timezone">
-                               <app-time [menuItem]="menuItem" dropdown></app-time>
-                            </div>
+                                @if (menuItem.SubMenu.length && menuItem.SubMenu[0].Title)
+                                {
+                                    <div class="general-menu-sub-menu">
+                                        <ul>
+                                            @for (subItem of menuItem.SubMenu; track subItem.Id)
+                                            {
+                                                <li (click)="$event.stopPropagation(); openSubMenuByUrl('/' + menuItem.Href + subItem.Href)"
+                                                    pointerOnLink="{{subItem.Href}}" [ngClass]="{'active': subItem?.Href == activeRouterName}">
+                                                    <img [src]="subItem?.Icon" alt="" *ngIf="menuItem?.hasIcons">
+                                                    <a class="general-menu_item_link"  pointerOnLink="{{subItem.Href}}">{{'Header.' + subItem.Title | translate}}</a></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <fa-icon [icon]="faCaretDown"></fa-icon>
+                                }
+                            </li>
+                        }
+                        @if (menuDirection !== 'left')
+                        {
+                            <li id="moreMenu" [attr.data-id]="'header-panel2-menu-more-menu'"
+                                class="general-menu_item header-menu-item-style1 header-menu-more" [hidden]="!generalMenuLeftItems.length">
+                                <a class="general-menu_item_link">{{'Header.More' | translate}}</a>
+                                <div class="general-menu-sub-menu">
+                                    <ul>
+                                        @for (menu of generalMenuMoreItems; track menu.Id)
+                                        {
+                                            <li [attr.data-id]="'header-panel1-menu-' + menu.Title" class="general-menu-sub-menu-li">
+                                                <a class="general-menu_item_link" (click)="onMenuItem(menu)" pointerOnLink="{{menu.Href}}">{{'Header.' + menu.Title | translate}}
+                                                    @if (menu.SubMenu.length)
+                                                    {
+                                                        <div class="general-menu-sub-menu general-menu-sub-menu-item">
+                                                            <ul>
+                                                                @for (subMenu of menu.SubMenu; track subMenu.Id)
+                                                                {
+                                                                    <li [attr.data-id]="'header-panel1-menu-' + menu.Title">
+                                                                        <a class="general-menu_item_link" [href]="subMenu.Href"  pointerOnLink="{{subMenu.Href}}">
+                                                                            {{'Header.' + subMenu.Title | translate}}
+                                                                        </a>
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                    }
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <fa-icon [icon]="faCaretDown"></fa-icon>
+                            </li>
+                        }
 
-                            <div *ngIf="(menuItem.contentType == 'logoutBtn')" class="default_width">
-                                <app-global-logout class="{{menuItem.className}}-type" itemIconName="{{menuItem.Icon}}"
-                                                   itemClassname="{{menuItem.className}}"></app-global-logout>
-                            </div>
+                        @for (menuItem of generalMenuRightItems; track menuItem.Id)
+                        {
+                            <li  [attr.data-id]="'header-panel1-menu-' + menuItem.Title"
+                                 class="general-menu_item {{menuItem?.className}}"
+                                 (click)="onMenuItem(menuItem)"
+                                 pointerOnLink="{{menuItem.Href}}"
+                                 [ngClass]="{'full-right': menuItem?.Orientation,
+                                 'new-icon': menuItem?.new, 'animated infinite pulse': menuItem?.animated,
+                                 'onlyMenuItem' : menuItem.className == 'header-menu-item-style1',
+                                 'active': ((menuItem.Href | removeAnchor) == activeRouterName) || ((menuItem.Href | removeAnchor) == activeRouterName.substring(activeRouterName.indexOf('/') + 1))
+                                 || ((menuItem.Href | removeAnchor) == realRouteName) || ((menuItem.Href == activeRouterName) || (activeRouterName.includes(menuItem.Href) && !menuItem.Href.includes('sport')) && !menuItem.preventActive),
+                                 'onlySubMenuLength': menuItem.SubMenu.length}">
 
-
-                            <div *ngIf="(menuItem.contentType === 'signupBtn')" class="default_width">
-                                <app-global-sign-up-btn class="{{menuItem.className}}-type"
-                                                        [menuItem]="menuItem"
-                                                        itemClassname="{{menuItem.className}}"></app-global-sign-up-btn>
-                            </div>
-
-                            <div *ngIf="(menuItem.contentType === 'languageDpd')" class="default_width">
-                                <app-global-language [menuItem]="menuItem"></app-global-language>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'lightBtn'" class="default_width">
-                                <i class="icon-idea"></i>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'loginScn'">
-                                <app-login [mainClass]="'header_section'" [contentType]="menuItem.contentType" sectionClass="{{menuItem.className}}"
-                                           (onNavigate)="onNavigateToForgot()"
-                                           class="{{menuItem.className}}-type" *ngIf="!isLogin"></app-login>
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'loginBtn'">
-                                <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
-                            </div>
-
-                            <div class="user_id" [routerLink]="['/user/account']"
-                                 *ngIf="menuItem.contentType == 'userIdTxt'">
-                                {{userData?.Id}}
-                            </div>
-
-                            <div *ngIf="menuItem.contentType == 'balanceTxt'">
-                                <app-balance [menuItem]="menuItem.config"></app-balance>
-                            </div>
-
-                            <div class="balance_section" *ngIf="menuItem.contentType == 'unusedBalanceTxt'" (click)="$event.stopPropagation()">
-                                <span>{{'User.UnusedBalance' | translate}}</span> <span> {{unusedBalance | toNumber | number: '.2'}} {{currencySymbol}}</span>
-                            </div>
-
-                            <div class="flex_column_center"
-                                 *ngIf="menuItem.contentType == 'bonusBalanceTxt' && bonus != '0.00'">
-                                <span>{{'User.Bouns' | translate}}</span>
-                                <span>{{bonus}} {{currencySymbol}}</span>
-                            </div>
-
-
-                            <div class="general-menu-sub-menu" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title">
-                                <ul>
-                                    <li *ngFor="let subItem of menuItem.SubMenu" (click)="$event.stopPropagation(); openSubMenuByUrl('/' + menuItem.Href + subItem.Href)"><a
-                                            class="general-menu_item_link">{{subItem.Title | translate}}</a></li>
-                                </ul>
-                            </div>
-                            <fa-icon [icon]="faCaretDown" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title"></fa-icon>
-                        </li>
-                    </ng-container>
-                </ul>
-            </div>
+                                @if(menuItem?.Icon && menuItem?.contentType !== 'logoImg')
+                                {
+                                    <div class="icon-box">
+                                        <img [src]="menuItem?.Icon" alt="">
+                                        <img [src]="menuItem?.IconHover" alt="">
+                                    </div>
+                                }
+                                @if(menuItem?.OpenInRouting && (menuItem?.contentType != 'time') && (menuItem?.contentType != 'logout-btn'))
+                                {
+                                    <a class="general-menu_item_link"  pointerOnLink="{{menuItem.Href}}">
+                                        {{'Header.' + menuItem?.Title | translate}}
+                                    </a>
+                                }
+                                @if (menuItem?.new)
+                                {
+                                    <span class="new-logo-item">New</span>
+                                }
+                                @switch (menuItem.contentType)
+                                {
+                                    @case ('time')
+                                    {
+                                        @if (!asianWebRoute)
+                                        {
+                                            <div class="timezone">
+                                                <app-time [menuItem]="menuItem" dropdown></app-time>
+                                            </div>
+                                        }
+                                    }
+                                    @case ('logoutBtn')
+                                    {
+                                        <div class="default_width">
+                                            <app-global-logout class="{{menuItem.className}}-type"
+                                                               itemIconName="{{menuItem.Icon}}"
+                                                               itemClassname="{{menuItem.className}}">
+                                            </app-global-logout>
+                                        </div>
+                                    }
+                                    @case ('signupBtn')
+                                    {
+                                        <div class="default_width">
+                                            <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                                    [menuItem]="menuItem"
+                                                                    itemClassname="{{menuItem.className}}">
+                                            </app-global-sign-up-btn>
+                                        </div>
+                                    }
+                                    @case ('languageDpd')
+                                    {
+                                        <div class="default_width">
+                                            <app-global-language [menuItem]="menuItem"></app-global-language>
+                                        </div>
+                                    }
+                                    @case ('lightBtn')
+                                    {
+                                        <div class="default_width">
+                                            <i class="icon-idea"></i>
+                                        </div>
+                                    }
+                                    @case ('loginScn')
+                                    {
+                                        <div>
+                                            <app-login [mainClass]="'header_section'"
+                                                       [contentType]="menuItem.contentType"
+                                                       sectionClass="{{menuItem.className}}"
+                                                       (onNavigate)="onNavigateToForgot()"
+                                                       class="{{menuItem.className}}-type" *ngIf="!isLogin">
+                                            </app-login>
+                                        </div>
+                                    }
+                                    @case ('loginBtn')
+                                    {
+                                        <div >
+                                            <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
+                                        </div>
+                                    }
+                                    @case ('userIdTxt')
+                                    {
+                                        <div class="user_id" [routerLink]="['/user/account']">
+                                            {{userData?.Id}}
+                                        </div>
+                                    }
+                                    @case ('balanceTxt')
+                                    {
+                                        <div>
+                                            <app-balance [menuItem]="menuItem.config"></app-balance>
+                                        </div>
+                                    }
+                                    @case ('unusedBalanceTxt')
+                                    {
+                                        <div class="balance_section" (click)="$event.stopPropagation()">
+                                            <span>{{'User.UnusedBalance' | translate}}</span> <span> {{unusedBalance | toNumber | number: '.2'}} {{currencySymbol}}</span>
+                                        </div>
+                                    }
+                                    @case ('bonusBalanceTxt')
+                                    {
+                                        @if (bonus != '0.00')
+                                        {
+                                            <div class="flex_column_center">
+                                                <span>{{'User.Bouns' | translate}}</span>
+                                                <span>{{bonus}} {{currencySymbol}}</span>
+                                            </div>
+                                        }
+                                    }
+                                }
+                                @if (menuItem.SubMenu.length && menuItem.SubMenu[0].Title)
+                                {
+                                    <div class="general-menu-sub-menu">
+                                        <ul>
+                                            @for (subItem of menuItem.SubMenu; track subItem.Id)
+                                            {
+                                                <li (click)="$event.stopPropagation(); openSubMenuByUrl('/' + menuItem.Href + subItem.Href)">
+                                                    <a class="general-menu_item_link"  pointerOnLink="{{subItem.Href}}">{{subItem.Title | translate}}</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <fa-icon [icon]="faCaretDown" *ngIf="menuItem.SubMenu.length && menuItem.SubMenu[0].Title"></fa-icon>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
         </div>
     </div>
 </div>

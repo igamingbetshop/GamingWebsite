@@ -97,11 +97,11 @@
           opacity: 0.6;
         }
         .error_message {
-          color: red;
-          position: absolute;
-          top: 51px;
-          font-size: 15px;
-          left: 42px;
+          color: var(--two-factor-error-message-color, red);
+          position: var(--two-factor-error-message-position, absolute);
+          top: var(--two-factor-error-message-top, 51px);
+          font-size: var(--two-factor-error-message-font-size, 15px);
+          left: var(--two-factor-error-message-left, 42px);
         }
       }
 

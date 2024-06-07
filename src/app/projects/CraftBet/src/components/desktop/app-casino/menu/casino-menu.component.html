@@ -5,7 +5,8 @@
             <li *ngFor="let menuItem of menuItems"
                 [ngStyle]="menuItem.style"
                 [class.active]="menuItem.Id == casinoFilterService.selectedCategory?.Id"
-                (click)="selectCategory(menuItem)">
+                (click)="selectCategory(menuItem)"
+                pointerOnLink="{{menuItem.Href}}" >
                 <ng-container [ngTemplateOutlet]="menuItem?.IconSrc ? hasImageSrc : noImageSrc"
                               [ngTemplateOutletContext]="{menuItem:menuItem}">
                 </ng-container>

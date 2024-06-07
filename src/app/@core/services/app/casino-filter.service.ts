@@ -68,6 +68,7 @@ export class CasinoFilterService {
       this.selectedCategory = category;
       this.categories = [category];
     }
+    this.#resetPagination();
     this.notifyFilterChange();
   }
 
@@ -96,6 +97,7 @@ export class CasinoFilterService {
         else this.providers = [provider];
       }
     }
+    this.#resetPagination();
     this.notifyFilterChange();
   }
 
@@ -162,7 +164,7 @@ export class CasinoFilterService {
     this.notifyFilterChange(true);
   }
   
-  setPatter(pattern)
+  setPattern(pattern)
   {
     this.gamePattern = pattern
   }
@@ -173,8 +175,13 @@ export class CasinoFilterService {
     this.selectedCategory = null;
     this.gamePattern = '';
     this.categories = [];
-    this.pageIndex = this.DEFAULT_PAGE_INDEX;
+    this.#resetPagination();
+  }
+
+  #resetPagination()
+  {
     this.pageSize = this.DEFAULT_PAGE_SIZE;
+    this.pageIndex = this.DEFAULT_PAGE_INDEX
   }
 
 }

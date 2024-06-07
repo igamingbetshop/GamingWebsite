@@ -238,6 +238,7 @@
     .left-block
     {
       flex: 1;
+      cursor:default;
       .current-news-image
       {
         position: relative;
@@ -304,6 +305,7 @@
     .right-block
     {
       flex: 1;
+      cursor:default;
       .current-fragment-item
       {
         height: fit-content;
@@ -313,13 +315,14 @@
         border-bottom: 1px solid rgba(198, 215, 234, 0.20);
         display: flex;
         gap: 32px;
-        cursor: pointer;
+
         .news_item
         {
           position: relative;
           height: fit-content;
           width: fit-content;
           min-width: 40%;
+          cursor: pointer;
           img
           {
             width: 374px;
@@ -446,6 +449,7 @@
   border-left: 4px solid #1CA7EC;
   padding-left: 18px;
   z-index: 1;
+  cursor: default;
   .current-news-name
   {
     color: white;

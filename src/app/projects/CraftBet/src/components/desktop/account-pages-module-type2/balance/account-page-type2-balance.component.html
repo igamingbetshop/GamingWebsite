@@ -8,6 +8,7 @@
             <span class="item-cell-account-name" *ngIf="account.Id === 0">{{"Account." + account?.AccountTypeName | translate}}</span>
             <span class="item-cell-account-name" *ngIf="account.Id !== 0">{{account?.AccountTypeName}}</span>
             <span class="item-cell-account-balance"><span *ngIf="account.CurrencyId">{{ currencySymbol }}</span><span *ngIf="!currencySymbol">{{ CurrencyId}}</span> {{account?.Balance | number}}</span>
+            <fa-icon *ngIf="selectedAccount?.Id === account?.Id" [icon]="faCheck" class="check-icon"></fa-icon>
         </div>
     </div>
     <div class="redirect-part" (click)="openBalance()">

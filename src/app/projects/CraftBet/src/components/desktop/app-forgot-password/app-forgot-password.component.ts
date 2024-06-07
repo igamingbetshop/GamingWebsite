@@ -17,13 +17,9 @@ import {AppOpenTicketComponent} from "../app-open-ticket/app-open-ticket.compone
 })
 export class AppForgotPasswordComponent extends BaseForgotPasswordComponent {
   @ViewChild('inputElement') public inputElement: ElementRef;
-  public logoUrl: string = '';
+  public logoUrl: string = '../../../../../../../assets/images/' + window.location.hostname + '.png';
   constructor(public injector: Injector) {
     super(injector);
-  }
-
-  errorHandler(event) {
-    event.target.src = '../../../../../../../assets/images/logo.png';
   }
 
   async changeStep(step:number)

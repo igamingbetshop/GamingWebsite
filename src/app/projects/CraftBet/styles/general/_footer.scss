@@ -13,6 +13,7 @@ $footerBottomSize: var(--footer--height);
   background-size: var(--footer-background-image-size, unset);
   background-position: var(--footer-background-image-position, center);
   background-attachment: var(--footer-background-image-attachment, unset);
+  border-top: var(--footer-border-top, none);
 
   .footer-open-button {
     margin-left: auto;
@@ -118,7 +119,6 @@ $footerBottomSize: var(--footer--height);
           {
             color: color(footer-column-title-hover);
           }
-          &.has-href,&[href]:not([href=""]){cursor: pointer}
         }
         &_line {
           border: 1px solid var(--footer-column-line-border-color, transparent);
@@ -146,7 +146,6 @@ $footerBottomSize: var(--footer--height);
           {
             color: color(footer-column-item-hover);
           }
-          &.has-href,&[href]:not([href=""]){cursor: pointer}
         }
         &:first-child
         {
@@ -206,6 +205,7 @@ $footerBottomSize: var(--footer--height);
       font-size: fontSize(ft-text-style1-text, 16px);
       width: width(ft-text-style1, auto);
       margin: var(--ft-text-style1-text-margin, 0);
+      cursor: default;
       .info-text
       {
         width: width(ft-text-style1, 50%);
@@ -353,15 +353,15 @@ $footerBottomSize: var(--footer--height);
           background-repeat: no-repeat;
           background-position: center center;
           background-size: contain;
-          cursor: var(--ft-images-img-style1-cursor, default);
-          &.has-href{cursor: pointer}
+          cursor: default;
+          pointer-events: none;
           border-radius: 6px;
           display: inline-block;
           width: width(ft-images-img-style1, auto);
           height: height(ft-images-img-style1, auto);
+          filter: var(--ft-images-img-style1-filter, none);
           &:active, &:visited {
             text-decoration: none;
-            cursor: pointer;
             color: $color-white;
           }
           &:hover {
@@ -406,7 +406,7 @@ $footerBottomSize: var(--footer--height);
           background-color: backgroundColor(ft-images-style2, #23334f);
           background-size: 100% 100%;
           background-repeat: no-repeat;
-          cursor: pointer;
+          cursor: default;
           outline: none;
 
           border-top-left-radius: borderTopLeftRadius(ft-images-style2, 4px);
@@ -455,14 +455,13 @@ $footerBottomSize: var(--footer--height);
           background-position: center center;
           background-size: contain;
           cursor: default;
-          &.has-href{cursor: pointer}
+          pointer-events: none;
           border-radius: 6px;
           display: inline-block;
           width: width(ft-images-img-style3, auto);
           height: height(ft-images-img-style3, auto);
           &:active, &:visited {
             text-decoration: none;
-            cursor: pointer;
             color: $color-white;
           }
           &:hover {
@@ -490,14 +489,13 @@ $footerBottomSize: var(--footer--height);
           background-position: center center;
           background-size: contain;
           cursor: default;
-          &.has-href{cursor: pointer}
+          pointer-events: none;
           border-radius: 6px;
           display: inline-block;
           width: width(ft-images-img-style4, auto);
           height: height(ft-images-img-style4, auto);
           &:active, &:visited {
             text-decoration: none;
-            cursor: pointer;
             color: $color-white;
           }
           &:hover {
@@ -521,7 +519,6 @@ $footerBottomSize: var(--footer--height);
       img
       {
         margin-right: marginRight(ft-contacts-style1, 0);
-        cursor: pointer;
         outline: none;
         height: height(ft-contacts-style1, 44px);
         width: width(ft-contacts-style1, auto);
@@ -530,8 +527,8 @@ $footerBottomSize: var(--footer--height);
       .ft-contacts-item
       {
         color: color(ft-contacts-style1);
-        cursor: pointer;
-
+        cursor: default;
+        pointer-events: none;
 
         margin-left: marginLeft(ft-contacts-style1, 0);
         margin-right: marginRight(ft-contacts-style1, 0);

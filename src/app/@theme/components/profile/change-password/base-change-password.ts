@@ -2,7 +2,7 @@ import {createNgModule, Directive, EventEmitter, inject, Injector, OnDestroy, On
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Validator} from "@core/validators/validators";
 import {GetSettingsInfoService} from "@core/services/app/getSettingsInfo.service";
-import {Methods, VerificationCodeTypes} from "@core/enums";
+import {MenuType, Methods, VerificationCodeTypes} from "@core/enums";
 import {take} from "rxjs";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {VerificationService} from "@core/services/api/verification.service";
@@ -12,6 +12,7 @@ import {UtilityService} from "@core/services/app/utility.service";
 import {TranslateService} from "@ngx-translate/core";
 import {LogoutHelper} from "@core/services/helpers/logout.helper";
 import {MatDialog} from "@angular/material/dialog";
+import {BaseControllerService} from "@core/services/app/baseController.service";
 
 @Directive()
 export class BaseChangePassword implements OnInit, OnDestroy
@@ -24,6 +25,7 @@ export class BaseChangePassword implements OnInit, OnDestroy
     changePasswordMessage: any;
     errorMessage: any;
     activePeriodInMinutes: number;
+    private staySignedIn:boolean;
 
     private baseApiService:BaseApiService;
     private getSettingsInfoService:GetSettingsInfoService;
@@ -34,6 +36,7 @@ export class BaseChangePassword implements OnInit, OnDestroy
     public translate: TranslateService;
     public logoutHelper: LogoutHelper;
     public localStorageService: LocalStorageService;
+    private baseControllerService:BaseControllerService;
 
     constructor(protected injector:Injector)
     {
@@ -46,6 +49,7 @@ export class BaseChangePassword implements OnInit, OnDestroy
         this.translate = injector.get(TranslateService);
         this.logoutHelper = injector.get(LogoutHelper);
         this.localStorageService = injector.get(LocalStorageService);
+        this.baseControllerService = injector.get(BaseControllerService);
     }
     ngOnInit()
     {
@@ -75,6 +79,26 @@ export class BaseChangePassword implements OnInit, OnDestroy
         this.formGroup.get('NewPassword').valueChanges.subscribe(val => {
             val && this.formGroup.get('ConfirmPassword').updateValueAndValidity();
         });
+        this.getSettings();
+    }
+
+    private async getSettings()
+    {
+        try {
+            const data = await this.baseControllerService.GetMenu(MenuType.ACCOUNT_TAB_LIST, 'en');
+            const profileSettings = data.find((item: any) => item.Title === 'Profile_Settings');
+
+            if (profileSettings && profileSettings.SubMenu) {
+                const changePassSettings = profileSettings.SubMenu.find((item: any) => item.Title === "ChangePassword");
+
+                if (changePassSettings && changePassSettings.StyleType) {
+                    const settings = JSON.parse(changePassSettings.StyleType);
+                    this.staySignedIn = settings.staySignedIn;
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching or parsing menu data:', error);
+        }
     }
 
     saveResetPassword()
@@ -112,9 +136,12 @@ export class BaseChangePassword implements OnInit, OnDestroy
                             this.changePasswordMessage.message = res;
                             this.utilityService.showError('', this, 'changePasswordMessage');
                         });
-                        this.logoutHelper.logout();
-                        this.localStorageService.remove('identifier');
-                        this.localStorageService.remove('login');
+                        if(!this.staySignedIn)
+                        {
+                            this.logoutHelper.logout();
+                            this.localStorageService.remove('identifier');
+                            this.localStorageService.remove('login');
+                        }
                     }
                 });
                 this.formGroup.reset();

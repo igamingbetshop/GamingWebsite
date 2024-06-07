@@ -1,0 +1,36 @@
+<div class="bets-widget-container" [style.width.px]="fragmentConfig().Config.data?.width"
+[class.show-more]="showMore()">
+    <h2 class="title">{{'Game.' + fragmentConfig().Title | translate}}</h2>
+    <div class="wrapper"></div>
+    <div class="last-bets-content">
+        <table>
+            <thead>
+               <tr>
+                 <th [style]="itemConfig?.idLabelCSS">{{'game' | translate}}</th>
+                 <th [style]="itemConfig?.idLabelCSS">{{'player' | translate}}</th>
+                 <th [style]="itemConfig?.idLabelCSS">{{'bet amount' | translate}}</th>
+                 <th [style]="itemConfig?.idLabelCSS">{{'profit amount' | translate}}</th>
+               </tr>
+            </thead>
+            <tbody>
+                @for(bet of filteredBets(); track $index){
+                        <tr>
+                            <td [style]="itemConfig?.dataCSS">
+                                <img  [src]="bet?.ImageUrl">
+                                <span>{{bet.GameName}}</span>
+                            </td>
+                            <td  [style]="itemConfig?.dataCSS">{{bet.ClientName}}</td>
+                            <td  [style]="itemConfig?.dataCSS">{{bet.Amount}} {{bet.CurrencyId}}</td>
+                            <td [style]="itemConfig?.dataCSS" class="bet-amount">{{bet.BetAmount}} {{bet.CurrencyId}}</td>
+                        </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="show-more-btn" (click)="toggleShowMore()">
+        <span>{{showMore() ? 'Show less': 'Show More' | translate}}</span>
+        <i class="icon-arrow"></i>
+    </div>
+</div>
+
+

@@ -4,6 +4,7 @@
   display: flex;
   gap: 6px;
   margin-top: var(--payment-section-content-margin-top, 0px);
+  cursor: default;
   .nav-tabs
   {
     font-weight: bold;

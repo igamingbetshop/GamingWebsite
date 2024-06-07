@@ -19,7 +19,7 @@ import {MobileOpenTicketComponent} from "../mobile-open-ticket/mobile-open-ticke
 })
 export class MobileForgotPasswordComponent extends BaseForgotPasswordComponent {
   public bgUrl: string = '';
-  public logoUrl: string = '';
+  public logoUrl: string = '../../../../../../../assets/images/' + window.location.hostname + '.png';
   location: Location;
   @ViewChild('inputElement') public inputElement: ElementRef;
 
@@ -32,9 +32,6 @@ export class MobileForgotPasswordComponent extends BaseForgotPasswordComponent {
     event.target.src = '../../../../../../../assets/images/register/mobile_background.png';
   }
 
-  errorHandlerLogo(event) {
-    event.target.src = '../../../../../../../assets/images/logo.png';
-  }
   async changeStep(step:number)
   {
     super.changeStep(step);

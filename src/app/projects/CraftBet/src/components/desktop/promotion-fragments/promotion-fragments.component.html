@@ -34,32 +34,21 @@
             <span (click)="sliderComponent.slickNext()" *ngIf="selectedFragment?.Promotions.length > 4" class="icon-banner-arrow-right"></span>
         </div>
     </div>
-    <div class="promotion-item-content">
-        <div class="promotion-item-image">
-            <img  src="../../../../../../../assets/images/promotions/{{promotion.ImageName}}">
-        </div>
-        <div class="promotion-description">
-            <h2 [innerHtml]="promotion.Description | sanitizer: 'html'"></h2>
-
-            <div class="text-content" [innerHtml]="promotion.Content | sanitizer: 'html'"></div>
-
-            <p class="publish-date">{{'Promotion.PublishedDate' | translate}} {{promotion.Date}}</p>
-        </div>
-    </div>
+    <promotion-content [promotion]="promotion"></promotion-content>
 </div>
 
 @if (filteredFragment)
 {
     <div class="promotion-fragments" [ngStyle]="{'display' : selectedFragment ? 'none' : 'grid'}">
         <div class="fragment-title">{{filteredFragment.Title}}</div>
-        <promotion-fragment  [promotionFragment]="filteredFragment" ></promotion-fragment>
+        <promotion-fragment  [promotionFragment]="filteredFragment" (onSelect)="onSelectPromotion($event, filteredFragment)"></promotion-fragment>
     </div>
 }
 @else
 {
     <div class="promotion-fragments" *ngFor="let fragment of promotionFragments" [ngStyle]="{'display' : selectedFragment ? 'none' : 'grid'}">
         <div class="fragment-title">{{fragment.Title}}</div>
-        <promotion-fragment  [promotionFragment]="fragment" ></promotion-fragment>
+        <promotion-fragment  [promotionFragment]="fragment" (onSelect)="onSelectPromotion($event, fragment)"></promotion-fragment>
     </div>
 }
 

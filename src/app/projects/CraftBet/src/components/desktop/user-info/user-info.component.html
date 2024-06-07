@@ -35,7 +35,8 @@
                   <div class="short-column"><span class="column-text">{{'User.Coefficient' | translate}}</span></div>
                   <div class="short-column"><span class="column-text">{{'User.Result' | translate}}</span></div>
                   <div class="short-column"><span class="column-text">{{'Status' | translate}}</span></div>
-                  <div class="short-column"><span class="column-text">{{'User.Event_Date' | translate}}</span></div>
+                  <div class="short-column" *ngIf="userInfoList['Status'] !== 1"><span class="column-text">{{'User.Event_Date' | translate}}</span></div>
+                    <div class="short-column" *ngIf="userInfoList['Status'] === 1"><span class="column-text">{{'User.Score' | translate}}</span></div>
                 </div>
 
                 </div>
@@ -54,7 +55,8 @@
                   <div class="short-column"><span class="column-text">{{item?.Coefficient}}</span></div>
                   <div class="short-column"><span class="column-text" *ngIf="item?.State != null">{{item?.State}}</span><span *ngIf="item?.State == null" class="empty-result">-</span></div>
                   <div class="short-column"><span class="column-text">{{item?.StatusName}}</span></div>
-                  <div class="short-column"><span class="column-text">{{item?.EventDate | date: 'dd/MM/yyyy HH:mm'}}</span></div>
+                  <div class="short-column" *ngIf="userInfoList['Status'] !== 1"><span class="column-text">{{item?.EventDate | date: 'dd/MM/yyyy HH:mm'}}</span></div>
+                    <div class="short-column" *ngIf="userInfoList['Status'] === 1"><span class="column-text">{{item?.MatchState}}</span></div>
                 </div>
                 </div>
 

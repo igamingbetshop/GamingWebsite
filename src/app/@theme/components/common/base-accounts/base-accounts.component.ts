@@ -6,6 +6,7 @@ import {PaymentControllerService} from "@core/services/app/paymentController.ser
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods} from "@core/enums";
 import {MatDialog} from "@angular/material/dialog";
+import {faCheck} from "@fortawesome/free-solid-svg-icons";
 
 @Directive()
 
@@ -25,6 +26,7 @@ export class BaseAccountsComponent extends BaseComponent {
     public selectedAccount;
     public clientAccounts = [];
     public openedItems: any[] = [];
+    public faCheck = faCheck;
     @Input() useAccountType;
     @Input() balances;
     @Output() selectedAccountChange = new EventEmitter<any>();
@@ -92,19 +94,19 @@ export class BaseAccountsComponent extends BaseComponent {
                 const storedAccountId = JSON.parse(localStorage.getItem('selectedAccountId'));
                 if (storedAccountId)
                 {
-                    const account = this.Accounts.find(acc => acc.Id === storedAccountId.Id);
+                    const account = this.Accounts?.find(acc => acc.Id === storedAccountId.Id);
                     if (account)
                     {
                         this.selectSessionAccount(account);
                     }
                     else
                     {
-                        this.selectSessionAccount(this.Accounts[0]);
+                        this.selectSessionAccount(this.Accounts?.[0]);
                     }
                 }
                 else
                 {
-                    this.selectSessionAccount(this.Accounts[0]);
+                    this.selectSessionAccount(this.Accounts?.[0]);
                 }
             } else {
                 if(this.templateType == 2)
@@ -141,7 +143,7 @@ export class BaseAccountsComponent extends BaseComponent {
 
     selectSessionAccount(account, event?)
     {
-        this.baseApiService.apiRequest(account.Id, Controllers.CLIENT, Methods.SELECT_SESSION_ACCOUNT).subscribe((responseData) => {
+        this.baseApiService.apiRequest(account?.Id, Controllers.CLIENT, Methods.SELECT_SESSION_ACCOUNT).subscribe((responseData) => {
             if (responseData.ResponseCode == 0)
             {
                 this.selectedAccount = account;
@@ -187,8 +189,10 @@ export class BaseAccountsComponent extends BaseComponent {
                         let b = groupedBalances.find(b => !b.BlockForGroup && (b.TypeId === 1 || b.TypeId === 2));
                         if(b)
                         {
-                            b.Balance += balance.Balance;
-                            b.Ids.push(balance.Id);
+                            if (!b.Ids.includes(balance.Id)) {
+                                b.Balance += balance.Balance;
+                                b.Ids.push(balance.Id);
+                            }
                         }
                         else
                         {

@@ -14,10 +14,10 @@ export class BaseDepositType6Component extends BaseDepositPaymentComponent {
     this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
     this.paymentForm.addControl('CardNumber', new FormControl('', [Validators.required]));
 
-    this.paymentControllerService.notifyGetCreatePaymentData.subscribe((data) => {
+   /* this.paymentControllerService.notifyGetCreatePaymentData.subscribe((data) => {
       this.popupCenter('', '', screen.width * 0.5, screen.height * 0.5);
       this.openedWindow.location.href = data['Url'];
-    });
+    });*/
   }
 
 

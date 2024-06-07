@@ -119,7 +119,7 @@
       display: none;
       position: absolute;
       bottom: -2px;
-      left: 0px;
+      left: 0;
       z-index: 1;
       color: #FFFFFF;
       font-size: 12px;
@@ -129,6 +129,7 @@
       border-bottom-right-radius: var(--casino-game-title-shown-border-bottom-right-radius, 0px);
       padding: var(--casino-game-title-shown-padding, 0px);
       width: 100%;
+      cursor: default;
     }
     .show-hovered-game-names {
       visibility: visible;

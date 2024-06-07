@@ -37,14 +37,14 @@ export class CommonHomepageComponent implements OnInit, OnDestroy {
     ngOnInit() {
         window.addEventListener('message', (data) => {
             this.pageChangePath(data);
-        }, {passive:true});
+        }, );
     }
 
     ngOnDestroy(): void {
         window.removeEventListener("message", this.pageChangePath);
     }
 
-    pageChangePath(event) {
+    pageChangePath = (event) => {
         /* if (typeof event.data['origin'] !== 'undefined')
          {
            if (event.data['origin'] == 'sportsbook')

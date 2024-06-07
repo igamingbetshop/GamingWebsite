@@ -1,6 +1,6 @@
 .modal-content.mobile-add-bank-account
 {
-  min-width: 96%;
+  min-width: var(--m-add-bank-account-min-width, 300px);
   position: relative;
   display: block;
   width: var(--m-add-bank-account-width, 100%);

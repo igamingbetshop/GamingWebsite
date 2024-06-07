@@ -63,8 +63,10 @@
 
                 <div class="border-line"></div>
                 <div class="table-list__row event-date">
-                  <div class="header-item header-item__6">{{'User.Event_Date' | translate}}</div>
-                  <div class="body-item body-item__6">{{item?.EventDate | date: 'dd/MM HH:mm'}}</div>
+                  <div class="header-item header-item__6"  *ngIf="userInfoList['Status'] !== 1">{{'User.Event_Date' | translate}}</div>
+                  <div class="header-item header-item__6" *ngIf="userInfoList['Status'] === 1">{{'User.Score' | translate}}</div>
+                  <div class="body-item body-item__6" *ngIf="userInfoList['Status'] !== 1">{{item?.EventDate | date: 'dd/MM HH:mm'}}</div>
+                  <div class="body-item body-item__6 score" *ngIf="userInfoList['Status'] === 1">{{item?.MatchState}}</div>
                 </div>
               </div>
             </div>

@@ -23,7 +23,7 @@ export class CasinoProvidersService
         }
         else
         {
-            this.currentFilter = filter;
+           this.currentFilter = filter;
            return  this.apiService.apiRequest(filter, undefined, Methods.GET_GAME_PROVIDERS, false).pipe(map(data => {
                 if (data.ResponseCode === 0)
                 {

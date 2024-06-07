@@ -14,6 +14,9 @@
     </div>
     <div class="affiliate-section">
         <div class="affiliate-tab" *ngIf="selectedTab === tabs.affiliateTitle">
+            <div class="affiliate-tab-inner-title">{{'Affiliate.Affiliate-inner-title' | translate}}</div>
+            <div class="affiliate-tab-inner-title affiliate-tab-inner-description"
+                 [innerHTML]="'Affiliate.Affiliate-inner-description' | translate | sanitizer: 'html'"></div>
             <form class="affiliate-section" [formGroup]="affiliateForm">
                 <div class="form_field">
                     <input type="text" placeholder="{{'Affiliate.Name-placeholder' | translate}}"
@@ -128,19 +131,19 @@
             <div class="error_message">{{errorMessage}}</div>
             <div class="affiliate-support-section">
                 <div class="support-part">
-                    <div>
+                    <div class="support-part-item">
                         <h3>{{'Affiliate.10 MINUTES' | translate}}</h3>
                         <span>{{'Affiliate.Average Cash Out Time' | translate}}</span>
                     </div>
-                    <div>
+                    <div class="support-part-item">
                         <h3>{{'Affiliate.24/7' | translate}}</h3>
                         <span>{{'Affiliate.Live Chat Support' | translate}}</span>
                     </div>
-                    <div>
+                    <div class="support-part-item">
                         <h3>{{'Affiliate.4,500+' | translate}}</h3>
                         <span>{{'Affiliate.Casino Games' | translate}}</span>
                     </div>
-                    <div>
+                    <div class="support-part-item">
                         <h3>{{'Affiliate.2,700,00+' | translate}}</h3>
                         <span>{{'Affiliate.Registered Players' | translate}}</span>
                     </div>

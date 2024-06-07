@@ -48,6 +48,16 @@ app-mobile-login
       top: var(--m-login-top-part-top, auto);
       left: var(--m-login-top-part-left, auto);
     }
+    .top-login-text-part::before {
+      content: '';
+      position: absolute;
+      bottom: var(--m-login-title-before-bottom, -9px);
+      left: var(--m-login-title-before-left, 0);
+      right: var(--m-login-title-before-right, 0);
+      height: var(--m-login-title-before-height, 0px);
+      background: var(--m-login-title-before-background, transparent);
+      box-shadow: var(--m-login-title-before-box-shadow, none);
+    }
   }
 
   .floating-label {
@@ -57,6 +67,7 @@ app-mobile-login
     height: auto;
     margin-top: marginTop(m-form-field-check, 9px);
     display: display(m-form-field-check, flex);
+    justify-content: var(--m-form-field-check-justify-content, center);
     align-items: center;
     position: var(--m-form-field-check-position, relative);
     top: var(--m-form-field-check-top, 0);
@@ -87,6 +98,7 @@ app-mobile-login
     margin-right: var(--m-login-close-icon-margin-right, 0);
     position: var(--m-login-close-icon-position, relative);
     right: var(--m-login-close-icon-right, auto);
+    top: var(--m-login-close-icon-top, auto);
   }
 
   .error-message{
@@ -205,7 +217,7 @@ app-mobile-login
     flex-direction: row;
     justify-content: var(--m-login-forget-password-container-justify-content, space-between);
     align-items: center;
-    position: relative;
+    position: var(--m-login-forget-password-container-position, relative);
     top: var(--m-login-forget-password-container-top, 0);
 
     .forgot_password {

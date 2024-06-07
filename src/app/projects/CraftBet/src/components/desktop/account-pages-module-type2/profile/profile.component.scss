@@ -20,7 +20,7 @@
   .settings_edit {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: var(--edit-button-gap, 14px);
     justify-content: var(--edit-button-justify-content, unset);
     width: var(--edit-button-width, 53px);
     height: var(--edit-button-height, 40px);

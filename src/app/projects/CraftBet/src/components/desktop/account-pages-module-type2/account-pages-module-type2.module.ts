@@ -43,6 +43,7 @@ import {ExportDataService} from "../../../../../../@core/services";
 import {DesktopModule} from "../desktop.module";
 import {NgxMaskDirective} from "ngx-mask";
 import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -96,7 +97,9 @@ import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropd
     GetPaymentsService,
     ProfileService,
     ExportDataService,
-    DatePipe
+    DatePipe,
+      { provide: MatDialogRef, useValue: {} },
+      { provide: MAT_DIALOG_DATA, useValue: {} }
   ],
   bootstrap: [
     AccountPageType2DefaultComponent

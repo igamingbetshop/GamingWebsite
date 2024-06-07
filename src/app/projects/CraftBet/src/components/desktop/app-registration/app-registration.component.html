@@ -61,15 +61,16 @@
                 <form *ngIf="!showSuccessMessage" [formGroup]="regFormSteps[currentStep - 1]" autocomplete="off" novalidate class="allForms">
 
                     <div class="allFormItems allFormItemsDesktop">
+                        <div class="progress-bar"></div>
                         <ul class="regSteps" *ngIf="regFormSteps.length > 1">
                             <li *ngFor="let elem of regFormSteps; let i = index" class="regStep"
                                 [ngClass]="{'regStep_active': (i+1) == currentStep, 'regStep_prev': ((currentStep-1) > 0) &&
-                            (i <= (currentStep-2))}"></li>
+                            (i <= (currentStep-2))}">
+                                <span class="regSteps-text">{{'Register.' + 'Step' + [i+1] | translate}}</span>
+                            </li>
                         </ul>
 
-                        <div class="hidden-title">
-                            {{'Register.AccountInformation' | translate}}
-                        </div>
+                        <div class="hidden-title" [innerHTML]="'Register.AccountInformation' | translate | sanitizer: 'html'"></div>
                         <div class="title-error" *ngIf="userRegisterService.errorMessage">
                             {{userRegisterService.errorMessage}}
                         </div>
@@ -589,6 +590,15 @@
                                 <span class="icon-arrow-to-left to-right"></span>
                             </button>
                         </div>
+                        <div class="line">
+                            <span class="left-line"></span>
+                            <span class="text">OR</span>
+                            <span class="right-line"></span>
+                        </div>
+                        <div class="register-login-part">
+                            <span class="reg-already-have-account">{{'Login.Already_have_an_account' | translate}}</span>
+                            <a class="reg-already-have-account-btn" (click)="openModal('Login', $event)">{{'Login.Sign In' | translate}}</a>
+                        </div>
 
 
                         <div class="error_message register_error_message">
@@ -632,9 +642,7 @@
 
                 <form [formGroup]="quickRegForm" autocomplete="off" novalidate class="quickForms">
                     <div class="allFormItems allFormItemsDesktop" *ngIf="quickFormTemplate.length > 0">
-                        <div class="hidden-title">
-                            {{'Register.AccountInformation' | translate}}
-                        </div>
+                        <div class="hidden-title" [innerHTML]="'Register.AccountInformation' | translate | sanitizer: 'html'"></div>
                         <div *ngFor="let form_elem of quickFormTemplate; trackBy: trackByMethod"
                              class="form-row-item form-row{{form_elem?.FieldSize}}"
                              [ngClass]="{'form-row-item__autoHeight': form_elem?.Type === 'Region4',

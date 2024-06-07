@@ -10,7 +10,7 @@
       height: styles.height,
       bottom: styles.bottom,
       overflowY:styles.overflowY,
-      transform: position === 'left' && isSidebarOpen ? 'translateX(0px)' : position === 'left' && !isSidebarOpen ? 'translateX(-'+screenWidth+')': 'unset',
+      transform: position === 'left' && isSidebarOpen ? 'translateX(0px)' : position === 'left' && !isSidebarOpen ? 'translateX('+(-styles.width + this.widthExtension)+')': 'unset',
       right: position === 'right' && isSidebarOpen ? '0px' : position === 'right' && !isSidebarOpen ? -styles.width + this.widthExtension : 'unset'
   }">
 <!--

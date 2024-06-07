@@ -2,7 +2,7 @@
   <h2 class="history-section_title">{{'User.Transactions_List' | translate}}</h2>
 
   <div class="history-tools-panel">
-    <form [formGroup]="form" (ngSubmit)="submit(1)">
+    <form [formGroup]="form" (ngSubmit)="submit(1)" class="transactions-form">
       <div class="history-tools history-tools-field">
         <select formControlName="timeFilter">
           <option *ngFor="let item of historyTimeFilter; let i = index" [ngValue]="i">
@@ -33,7 +33,7 @@
         <label>{{'User.Type' | translate}}</label>
       </div>
 
-      <div class="history-tools">
+      <div class="history-tools show-custom-btn">
         <label></label>
         <button class="craft_btn show-btn">{{'User.Show' | translate}}</button>
       </div>

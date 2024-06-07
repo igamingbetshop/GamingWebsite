@@ -11,6 +11,7 @@
   {
     color: white;
     text-align: center;
+    cursor: default;
   }
   //.slick-next:before, .slick-prev:before{display: none}
   .slick-next, .slick-prev{display: none}
@@ -23,10 +24,10 @@
     cursor: pointer;
   }
   .custom-slick-next {
-    right: 2%;
+    right: var(--home-fragment-banner-icon-next-right, 2%);
   }
   .custom-slick-prev {
-    left: 2%;
+    left: var(--home-fragment-banner-icon-prev-left, 2%);
   }
   .slick-prev:before {
     content: "←"!important;

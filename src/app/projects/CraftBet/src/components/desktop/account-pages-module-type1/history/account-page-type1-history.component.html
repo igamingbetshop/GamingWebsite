@@ -40,7 +40,7 @@
         <label>{{'User.Products' | translate}}</label>
       </div>
 
-      <div class="history-tools">
+      <div class="history-tools show-btn-style">
         <label></label>
         <button class="craft_btn show-btn">{{'User.Show' | translate}}</button>
       </div>
@@ -100,12 +100,12 @@
           <div class="bets-block_item block_item">{{CurrencySymbol}}{{item?.WinAmount | number}}</div>
           <div class="bets-block_item block_item"><span class="status status-{{item?.betStatusName}}">{{item?.betStatusName}}</span></div>
           <div class="bets-block_item block_item info" *ngIf="showInfoBox != i || !closeInfo">
-            <span class="icon-eye-password eye-class" *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80"
+            <span class="icon-eye-password eye-class" *ngIf="(item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80) && item?.ProductId !== 1101"
                   (click)="openInfoBox(item, i)"></span> <!-- (click)="openInfo(item)"-->
 
           </div>
           <div class="bets-block_item block_item info" *ngIf="closeInfo && showInfoBox == i">
-             <span class="icon-eye-password-close eye-class" *ngIf="item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80"
+             <span class="icon-eye-password-close eye-class" *ngIf="(item?.ProviderId == 100 || item?.ProviderId == 1 || item?.ProviderId == 80) && item?.ProductId !== 1101"
                 (click)="closeInfoBox()"></span>
           </div>
         </div>

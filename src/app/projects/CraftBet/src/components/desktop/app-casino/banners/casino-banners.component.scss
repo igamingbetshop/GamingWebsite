@@ -8,9 +8,7 @@
   width: 100%;
   direction: ltr;
   //.slick-next:before, .slick-prev:before{display: none}
-  .has-href {
-    cursor: pointer;
-  }
+
   .slick-next, .slick-prev{display: none}
   .slick-prev:before {
     content: "←"!important;

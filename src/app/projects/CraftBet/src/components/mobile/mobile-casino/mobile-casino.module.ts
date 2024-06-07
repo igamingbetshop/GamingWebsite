@@ -16,6 +16,7 @@ import { MobileCasinoMenuModule } from './mobile-menu/mobile-casino-menu.module'
 import { MobileCasinoCategoryModule} from './mobile-category/mobile-casino-category.module';
 import {MobileProgressBarModule} from "./mobile-progress-bar/mobile-progress-bar.module";
 import {MobileCharacterHierarchyComponent} from "./mobile-character-hierarchy/mobile-character-hierarchy.component";
+import {WinnersWidgetModule} from "../../desktop/fragments/winners-widget/winners-widget.module";
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
         MobileCasinoCategoryModule,
         MobileProgressBarModule,
         MobileCharacterHierarchyComponent,
+        WinnersWidgetModule,
     ]
 })
 

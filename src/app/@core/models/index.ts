@@ -177,6 +177,7 @@ export class User {
     SendSms: boolean;
     SessionId: 0;
     Token: string;
+    IsAgent:boolean;
     UserName: string;
     WelcomeBonusActivationKey: string;
     ZipCode: string;

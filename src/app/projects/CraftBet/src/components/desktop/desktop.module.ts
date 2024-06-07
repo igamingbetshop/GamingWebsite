@@ -58,7 +58,7 @@ import { CollapseDirectiveModule } from '../../../../../@theme/directives/collap
 import {SanitizerModule} from "../../../../../@theme/pipes/sanitizer/sanitizer.module";
 import {FunctionalBtnModule} from "../../../../../@theme/components/functional-btn/functional-btn.module";
 import {CasinoBannersModule} from "./app-casino/banners/casino-banners.module";
-import {WinnersWidgetModule} from "./app-casino/winners-widget/winners-widget.module";
+import {WinnersWidgetModule} from "./fragments/winners-widget/winners-widget.module";
 import {CasinoMenuModule} from "./app-casino/menu/casino-menu.module";
 import {CasinoProvidersModule} from "./app-casino/providers/casino-providers.module";
 import {CasinoCategoryModule} from "./app-casino/category/casino-category.module";
@@ -88,11 +88,14 @@ import {RegisterPageComponent} from "./register-page/register-page.component";
 import { PaymentErrorComponent } from './payment-error/payment-error.component';
 import {LoaderComponent} from "../common/loader/loader.component";
 import {NgxMaskDirective} from "ngx-mask";
+import {DefaultImageFallBackDirective} from "../../../../../@theme/directives/default-image-fall-back.directive";
+import {PointerOnLinkDirective} from "../../../../../@theme/directives/pointer-on-link/pointer-on-link.directive";
 
 
 @NgModule({
     imports: [
         DesktopMobileCommonModule,
+        PointerOnLinkDirective,
         DesktopRoutingModule,
         ThemeModule,
         TranslateModule.forChild(),
@@ -136,7 +139,8 @@ import {NgxMaskDirective} from "ngx-mask";
         TimeComponent,
         CharacterHierarchyComponent,
         LoaderComponent,
-        NgxMaskDirective
+        NgxMaskDirective,
+        DefaultImageFallBackDirective
     ],
 
     exports: [PaymentsListComponent, AddBankAccountComponent, UserInfoComponent],

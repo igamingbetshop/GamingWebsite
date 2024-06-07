@@ -43,8 +43,9 @@
                     </div>
                     <div class="info-block" [attr.href]="menuItem?.Href ? menuItem?.Href : null" dropdown (click)="navigateByHref(menuItem)">
                         <span *ngIf="(bonus && bonus != '0.00') || unusedBalance">{{'User.Balance' | translate}}</span>
-                        <span> {{currencySymbol}} {{balance | toNumber | number: '.2'}}</span>
-                        <app-mobile-account-page-type2-balance class="balance-popup" *ngIf="isLogin" [templateType]="2" [balances]="accountBalances"></app-mobile-account-page-type2-balance>
+                        <span> {{currencySymbol}} {{ selectedAccountBalance !== undefined ?  (selectedAccountBalance | toNumber | number: '.2') : (balance | toNumber | number: '.2')}}</span>
+                        <app-mobile-account-page-type2-balance class="balance-popup" *ngIf="isLogin" [useAccountType]="menuItem.useAccountType" [templateType]="2" [balances]="accountBalances"
+                                                               (selectedAccountChange)="onSelectedAccountChange($event)"></app-mobile-account-page-type2-balance>
                     </div>
                     <div *ngIf="balanceTypes.bonus && bonus && bonus != '0.00'" class="info-block">
                         <span>{{'User.Bouns' | translate}} </span>
@@ -63,10 +64,12 @@
 
                 <div *ngIf="menuItem.contentType == 'logoImg'">
                     <div>
-                        <img (click)="clickInRoute('/' + menuItem.Href);"
+                        <img class="mobile-logo" (click)="clickInRoute('/' + menuItem.Href);"
                              [ngClass]="{'logo-isLogedIn': isLogin}"
                              [routerLink]="['/' + menuItem.Href]"
                              [src]="logoUrl" (error)="errorHandler($event)"/>
+                        <img class="logo-mobile-logined" [ngClass]="{'logo-isLogedIn': isLogin}"
+                             [routerLink]="['/' + menuItem.Href]" src="../../../../../../../assets/images/logo-mobile-logined.png"/>
                     </div>
                 </div>
 

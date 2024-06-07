@@ -309,7 +309,7 @@
 }
 
 .mobile-open-tickets {
-  position: absolute;
+  //position: absolute;
   top: calc(var(--m-header-height)  + 10px);
   height: var(--m-ticket-height, 80%);
   left: 9px;
@@ -318,6 +318,7 @@
   border-radius: var(--m-open-ticket-border-radius, 7px);
   padding: var(--m-open-ticket-padding, 10px);
   color: var(--m-ticket-color, #fff);
+  min-width: var(--m-open-ticket-min-width, 300px);
   .ticket-body {
     padding: var(--m-add-ticket-content-padding, 16px);
   }

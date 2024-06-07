@@ -32,9 +32,11 @@
 
         <div class="right-block">
             <div class="current-fragment-item" *ngFor="let item of selectedFragment?.News, let i = index"
-                 [queryParams]="{id:item.Id}"
-                 [routerLink]="['/news']">
-                <div class="news_item">
+                 >
+                <div class="news_item"
+                     [queryParams]="{id:item.Id}"
+                     [routerLink]="['/news']"
+                    >
                     <img src="../../../../../../../assets/images/news/medium/{{item.ImageName}}"/>
                 </div>
 

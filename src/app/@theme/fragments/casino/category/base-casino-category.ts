@@ -111,6 +111,8 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
             this.subscription.add(this.casinoFilterService.onFilterChange$.subscribe(filter => {
 
                 const gamesFromCache = this.saveData.getCasinoGames();
+                /*Prevent get games from cache*/
+                this.isFirstTime = false;
                 if(gamesFromCache.games?.length && this.isFirstTime)
                 {
                    this.games = [...gamesFromCache.games];
@@ -191,7 +193,8 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
     loadMoreItems()
     {
         this.markForSave = true;
-        this.casinoFilterService.nextPage();
+        if(this.leftGamesCount)
+            this.casinoFilterService.nextPage();
     }
 
     private setGamesLeftCount(leftCount:number, totalCount:number = 0)

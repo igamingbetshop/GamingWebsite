@@ -119,7 +119,7 @@ color-scheme: var(--history-select-color-scheme, dark);
         height: auto;
       }
       &:last-child {
-        position: absolute;
+        position: var(--payments-history-tools-show-btn-position, absolute);
         right: 0;
         bottom: 0;
         margin: 0;

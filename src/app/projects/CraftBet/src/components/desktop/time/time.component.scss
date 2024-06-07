@@ -4,6 +4,7 @@
   justify-content: center;
   position: relative;
   flex-direction: var(--show-time-mode-flex-direction, row);
+  gap: var(--show-time-mode-gap, 10px);
   align-items: center;
   .show-last-login {
     display: var(--header-last-login-display, none);

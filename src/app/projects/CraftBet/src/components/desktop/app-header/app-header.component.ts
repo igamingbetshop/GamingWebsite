@@ -6,8 +6,8 @@ import {SaveData} from '../../../../../../@core/services/app/saveData.service';
 import {AppOpenTicketComponent} from "../app-open-ticket/app-open-ticket.component";
 import {PopupsService} from "@core/services/app/popups.service";
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import {Subject, take} from "rxjs";
-import {debounceTime} from "rxjs/operators";
+import {Subject, switchMap, take, timer} from "rxjs";
+import {debounceTime, filter, map} from "rxjs/operators";
 import {getParsedUrl} from "@core/utils";
 import {LimitNotificationsComponent} from "../../../../../../@theme/components/modals/limit-notifications/limit-notifications.component";
 import {MenuType, Methods} from "../../../../../../@core/enums";
@@ -67,8 +67,6 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
     public asianWebRoute = false;
     public realRouteName: any;
     public faCaretDown = faCaretDown;
-    @ViewChild('generalMenu') generalMenu:ElementRef;
-    @ViewChild('moreMenu') moreMenu:ElementRef;
     private saveStateSbj: Subject<boolean> = new Subject();
     private scrollWidth:number = 0;
     private itemsWidth:number[] = [];
@@ -76,6 +74,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
     public menuDirection:string;
     public isExpandedMenu:boolean;
     public isOpenedDropdown:boolean;
+    public isAnimated:boolean;
     public userLogined:UserLogined;
 
     public openModal: boolean;
@@ -165,6 +164,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         this.menuDirection = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.direction || this.menuDirection;
         this.isExpandedMenu = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.expanded || this.isExpandedMenu;
         this.isOpenedDropdown = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.opened_Dpd || this.isOpenedDropdown;
+        this.isAnimated = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.animated || this.isAnimated;
 
         this.baseControllerService.GetMenu('HeaderPanel2Menu',
             'en').then((data: any) =>
@@ -275,7 +275,14 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                     }
                 }
             });
-            this.saveStateSbj.next(true);
+            const p  = setTimeout(() => {
+                this.renderHeader(true);
+                this.saveStateSbj.pipe(debounceTime(300)).subscribe(data =>
+                {
+                    this.renderHeader(data);
+                });
+                clearTimeout(p);
+            },300);
         });
 
         this.saveData.showSignUpSection.subscribe((data) => {
@@ -447,7 +454,6 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
             this.document.body.classList.remove("isLeftMenu");
         }
 
-
         this.saveData.openPopup.subscribe((data) => {
             if (data == 1)
             {
@@ -461,7 +467,6 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                 this.showConfirm('open_register');
             }
         });
-
 
         this.stateService.onOpenModal$.subscribe(async (data) =>
         {
@@ -494,10 +499,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
             }
         });
 
-        this.saveStateSbj.pipe(debounceTime(300)).subscribe(data =>
-        {
-            this.renderHeader(data);
-        });
+
         this.panel1StateSbj.pipe(debounceTime(300)).subscribe(data =>
         {
             this.renderPanel1(data);
@@ -506,12 +508,6 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         this.openModal = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_1_MENU)?.openModal;
         this.openLimitNotifications();
     }
-
-    test(path: string) {
-        this.router.navigate(["/" + path]);
-    }
-
-
 
     public openLanguageMenu() {
         this.showLanguageDropdown = !this.showLanguageDropdown;
@@ -634,10 +630,10 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
 
    public renderHeader(isFirstTime:boolean = false)
     {
-        if(this.generalMenu && this.moreMenu)
+        const headerMenu = this.document.getElementById("generalMenu");
+        const moreMenu = this.document.getElementById("moreMenu");
+        if(headerMenu && moreMenu)
         {
-            const headerMenu = this.generalMenu.nativeElement
-            const moreMenu = this.moreMenu.nativeElement;
             if(isFirstTime)
             {
                 this.moreMenuWidth = moreMenu.clientWidth;
@@ -650,7 +646,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
 
             if(((this.scrollWidth) <= headerMenu.clientWidth + this.moreMenuWidth) || !(this.generalMenuLeftItems.length))
             {
-                headerMenu.querySelectorAll(".dynamic-item").forEach(elem => elem.style.display = 'flex');
+                headerMenu.querySelectorAll(".dynamic-item").forEach((elem:HTMLElement) => elem.style.display = 'flex');
                 moreMenu.style.display = 'none';
             }
             else
@@ -658,7 +654,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                 const menus = [];
                 moreMenu.style.display = 'flex';
                 let offset = this.scrollWidth - headerMenu.clientWidth + this.moreMenuWidth;
-                const dynamicItems = headerMenu.querySelectorAll(".dynamic-item");
+                const dynamicItems:any = headerMenu.querySelectorAll(".dynamic-item");
                 for(let i = dynamicItems.length - 1; i > 0; i--)
                 {
                     if(offset > 0)
@@ -687,7 +683,10 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
             mainContent.style.position = "relative";
             mainContent.style.top = header.offsetHeight + 'px';
         }
-        this.stateService.setDesktopHeaderSize({height:header.offsetHeight, width:header.offsetWidth});
+        if(header)
+        {
+            this.stateService.setDesktopHeaderSize({height:header.offsetHeight, width:header.offsetWidth});
+        }
     }
 
     getTickers() {

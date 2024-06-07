@@ -44,7 +44,8 @@ export class BaseImageBar implements OnInit, OnDestroy
                 localStorage.setItem('opened-url', this.router.url);
             }
             window.scrollTo(0, 0);
-            this.router.navigate(['/' + url.split('?')[0]], {queryParams: params ? params : null});
+            url = url.startsWith("/") ? url : `/${url}`;
+            this.router.navigateByUrl(url);
             if(url == 'prematch' || url == 'live' || url == 'sport/prematch' || url == 'sport/live')
             {
                 if(this.configService.defaultOptions.SportOpenMode === 'migrated')

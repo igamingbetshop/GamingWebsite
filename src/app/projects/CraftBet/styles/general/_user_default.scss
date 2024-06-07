@@ -1,6 +1,7 @@
 .user-default-section {
   min-height: 560px;
-  width: 100%;
+  width: var(--user-default-section-width, 100%);
+  margin: var(--user-default-section-margin, 0);
   background: color(product-background);
   color: $account-content-item-color;
 
@@ -103,6 +104,7 @@
           padding-bottom: paddingBottom(account-item-title, 12px);
           padding-left: paddingLeft(account-item-title, 20px);
           padding-right: paddingRight(account-item-title, 20px);
+          border: var(--account-item-title-border, none);
           .title_menu_dropdown_icon {
             display: display(account-item-title-dropdown-icon, block);
           }
@@ -129,6 +131,7 @@
           &:hover {
             background: var(--account-item-title-hover-bg, #0052BE);
             color: color(account-item-title-hover);
+            border: var(--account-item-title-hover-border, none);
 
             fa-icon {
               transform: var(--user-left-panel-sublist-rotate, rotate(-180deg));
@@ -140,6 +143,7 @@
             background: color(account-item-title-selected-bg);
             color: color(account-item-title-selected);
             font-weight: var(--account-item-title-selected-font-weight, 500);
+            border: var(--account-item-title-selected-border, none);
 
             .user-left-panel_subList {
               display: block;
@@ -272,7 +276,7 @@
               padding-bottom: paddingBottom(account-content-item, 8px);
               padding-left: paddingLeft(account-content-item, 16px);
               padding-right: paddingRight(account-content-item, 16px);
-              background: $account-main-bg-color;
+              background: var(--account-content-item-background, var(--account-main-bg-color, #213454));
               border-radius: var(--account-content-item-border-radius, 6px);
               text-decoration: none;
               position: relative;
@@ -281,6 +285,7 @@
               &.active {
                 color: color(account-right-content-item);
                 background: var(--account-right-content-item-active-background, var(--account-main-bg-color, #213454));
+                border: var(--account-right-content-item-active-border, none);
 
                 .selected {
                   color: color(account-right-content-item-selected);
@@ -303,6 +308,7 @@
           align-items: center;
           gap: $account-big-gap;
           margin-left: var(--user-info-section-icon-margin-left, auto);
+          cursor:default;
           .user-icon {
             position: relative;
             color: color(user-icon);
@@ -380,7 +386,7 @@
           .title_menu {
             &.active {
               box-shadow: none;
-              border: 2px solid itemColor(account-title-border, transparent);
+              border: var(--account-title-border-width, 2px) solid itemColor(account-title-border, transparent);
             }
           }
 

@@ -34,7 +34,8 @@
         <div class="tail"></div>
 
         <div class="lang_grid">
-            <li [attr.value]="i" class="custom_dropdown_list_item" *ngFor="let item of accoutList; let i = index">
+            <li [attr.value]="i" class="custom_dropdown_list_item" *ngFor="let item of accoutList; let i = index"
+                pointerOnLink="{{item.Href}}">
                 <div  [attr.data-id]="'account-dpd' + item.Title"
                       class="list-section">
                     <a (click)="savedDateService.getCurrentSubItem(item); changePage(item.Href, $event, i)" *ngIf="item.Type == 1"

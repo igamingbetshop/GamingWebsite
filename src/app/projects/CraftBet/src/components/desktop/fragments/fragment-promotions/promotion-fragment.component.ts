@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PromotionFragment} from "../../../../../../../@core/models";
+import {Component, Input, output} from '@angular/core';
+import {Promotion, PromotionFragment} from "../../../../../../../@core/models";
 import {TranslateModule} from "@ngx-translate/core";
 import {CommonModule} from "@angular/common";
-import {RouterModule} from "@angular/router";
+import {Router, RouterModule} from "@angular/router";
 
 @Component({
   selector: 'promotion-fragment',
@@ -10,18 +10,14 @@ import {RouterModule} from "@angular/router";
   imports:[CommonModule,TranslateModule, RouterModule],
   standalone:true
 })
-export class PromotionFragmentComponent  implements OnInit{
+export class PromotionFragmentComponent{
 
   @Input() promotionFragment:PromotionFragment;
+  onSelect = output<Promotion>();
 
-
-
-  constructor()
+  selectPromotion(item:any)
   {
+    this.onSelect.emit(item);
   }
 
-  ngOnInit()
-  {
-
-  }
 }

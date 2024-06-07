@@ -5,68 +5,72 @@
         <span class="top-login-text-part">{{'Login.Sign In' | translate}}</span>
         <span class="icon-close-modal close-icon" (click)="goBack()"></span>
     </div>
-    <img class="login-logo" [src]="logoUrl" (error)=" errorHandlerLogo($event)"/>
+    <img class="login-logo" [src]="logoUrl" defaultImageFallBack
+         [defaultSrc]="'../../../../../../../assets/images/logo.png'"/>
     <img class="mobile-login-logo-svg" src="../../../../../../../assets/images/logo.svg"/>
 
-    <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()" class="mobile-login-section_form">
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()" class="mobile-login-section_form" *ngIf="formReady">
         <div class="authentication-buttons">
-            <button class="authentication-button" (click)="openModal('Login', $event)" [ngClass]="{'active': openedLogin}">{{'Login.Sign In' | translate}}</button>
-            <button class="authentication-button" (click)="openModal('Register', $event)">{{'Register.Registration' | translate}}</button>
+            <button class="authentication-button" (click)="openModal('Login', $event)"
+                    [ngClass]="{'active': openedLogin}">{{'Login.Sign In' | translate}}</button>
+            <button class="authentication-button"
+                    (click)="openModal('Register', $event)">{{'Register.Registration' | translate}}</button>
         </div>
         <div class="login_password">
-            <div class="mobile-login-section_field form_field" [ngClass]="{'valid-input': loginForm.get('ClientIdentifier').valid,
-    'invalid-filed': (loginForm.get('ClientIdentifier').hasError('required') && loginForm.get('ClientIdentifier').dirty) }">
-                <div class="mobile-login-section_field_top flex_between common-field">
-                    <input type="text" name="username" formControlName="ClientIdentifier" class="input_field"
-                           [ngClass]="{'valid-input': loginForm.get('Password').valid,
-                            'invalid-filed': ((loginForm.get('ClientIdentifier').hasError('required') && submitted) || (loginForm.get('ClientIdentifier').touched && loginForm.get('ClientIdentifier').hasError('required'))) }"
-                           placeholder="{{'Login.Login' | translate}}" required/>
-                    <span class="floating-label">{{'Login.Login' | translate}}</span>
-                </div>
-            </div>
-            <div class="mobile-login-section_field form_field" [ngClass]="{'valid-input': loginForm.get('Password').valid,
+            <div *ngFor="let formItem of loginFieldsList">
+                <div [ngSwitch]="formItem.Type">
+                    <div *ngSwitchCase="'text'" class="mobile-login-section_field form_field" [ngClass]="{'valid-input': loginForm.get(formItem?.Title).valid,
+                'invalid-filed': (loginForm.get(formItem?.Title).hasError('required') && loginForm.get(formItem?.Title).dirty) }">
+                        <div class="mobile-login-section_field_top flex_between common-field">
+                            <input type="text" [name]="formItem?.Title" [formControlName]="formItem?.Title"
+                                   class="input_field"
+                                   [ngClass]="{'invalid-filed': ((loginForm.get(formItem?.Title).hasError('required') && submitted) || (loginForm.get(formItem?.Title).touched && loginForm.get(formItem?.Title).hasError('required'))) }"
+                                   [placeholder]="'Login.' + formItem.Title | translate"/>
+                            <span class="floating-label" *ngIf="formItem?.HasLabel">{{'Login.' + formItem.Title | translate}}</span>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'password'" class="mobile-login-section_field form_field" [ngClass]="{'valid-input': loginForm.get('Password').valid,
     'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) ||
     (loginForm.get('Password').touched && loginForm.get('Password').hasError('required'))) }">
-                <div class="mobile-login-section_field_top flex_between common-field">
-                    <input class="input_field password" type="{{changePasswordType ? 'text' : 'password'}}"
-                           placeholder="{{'Login.Password' | translate}}"
-                           [ngClass]="{'valid-input': loginForm.get('Password').valid,
+                        <div class="mobile-login-section_field_top flex_between common-field">
+                            <input class="input_field password" type="{{changePasswordType ? 'text' : 'password'}}"
+                                   [placeholder]="'Login.' + formItem.Title | translate"
+                                   [ngClass]="{'valid-input': loginForm.get('Password').valid,
     'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) ||
     (loginForm.get('Password').touched && loginForm.get('Password').hasError('required'))) }"
-                           formControlName="Password"
-                           required/>
-                    <span class="floating-label">{{'Login.Password' | translate}}</span>
-                    <div (click)="changePassType()" class="change-password-field-type">
-                        <span [ngClass]="changePasswordType ? 'icon-close-password-type' : 'icon-open-password-type'"></span>
+                                   [formControlName]="formItem?.Title"/>
+                            <span class="floating-label" *ngIf="formItem?.HasLabel">{{'Login.' + formItem.Title | translate}}</span>
+                            <div (click)="changePassType()" class="change-password-field-type">
+                                <span [ngClass]="changePasswordType ? 'icon-close-password-type' : 'icon-open-password-type'"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'checkbox'" class="mobile-form_field_checked remember-me">
+                        <input type="checkbox" class="login-checkbox distans-right" [checked]="formItem.Title"
+                               [formControlName]="formItem.Title"/>
+                        <label class="reg-conditions">{{'Login.' + formItem.Title | translate}}</label>
                     </div>
                 </div>
             </div>
-
-            <div class="forgot_container" *ngIf="isSignUpButton?.Type == 'signupBtn_button'">
-                <div class="mobile-form_field_checked remember-me">
-                    <input id="remeberMe" type="checkbox" class="reg-checkbox distans-right" [(ngModel)]="rememberMe"
-                           [ngModelOptions]="{standalone:true}"/>
-                    <label for="remeberMe" class="reg-conditions">{{'Login.Remember me' | translate}}</label>
-                </div>
-
+<!--            <div class="forgot_container" *ngIf="isSignUpButton?.Type == 'signupBtn_button'">-->
+            <div class="forgot_container">
                 <a class="forgot_password" [routerLink]="['/forgot-password']">
                     {{'Login.ForgotPassword' | translate}}
                 </a>
-
             </div>
             <div class="form-accept-terms" [innerHTML]="'Login.AcceptTerms' | translate | sanitizer: 'html'">
             </div>
         </div>
         <div class="form_field">
-           <div class="login-submit-btn">
-               <button
-                       type="submit"
-                       class="craft_btn login_btn"
-                       [disabled]="submitted || (configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid)"
-                       [ngClass]="{'signin_abled': configService.defaultOptions['FormValidationType'] === 'submit' || loginForm.valid}">
-                   {{'Login.Sign In' | translate}}
-               </button>
-           </div>
+            <div class="login-submit-btn">
+                <button
+                        type="submit"
+                        class="craft_btn login_btn"
+                        [disabled]="submitted || (configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid)"
+                        [ngClass]="{'signin_abled': configService.defaultOptions['FormValidationType'] === 'submit' || loginForm.valid}">
+                    {{'Login.Sign In' | translate}}
+                </button>
+            </div>
         </div>
         <div class="line">
             <span class="left-line"></span>
@@ -74,10 +78,12 @@
             <span class="right-line"></span>
         </div>
         <div class="form_field btn-after">
-            <button type="button"  class="craft_btn forgotPassword_btn"  [routerLink]="['/forgot-password']">{{'Login.ForgotPassword' | translate}}</button>
+            <button type="button" class="craft_btn forgotPassword_btn"
+                    [routerLink]="['/forgot-password']">{{'Login.ForgotPassword' | translate}}</button>
         </div>
         <div class="form_field btn-after">
-                <button type="button"  class="craft_btn signUp_btn"  [routerLink]="['/signup']">{{ 'Login.Sign Up' | translate }}</button>
+            <button type="button" class="craft_btn signUp_btn"
+                    [routerLink]="['/signup']">{{ 'Login.Sign Up' | translate }}</button>
         </div>
         <div class="line line2">
             <span class="left-line"></span>
@@ -92,7 +98,7 @@
         <div class="dont-have-account">
             <div>
                 {{'Login.Dont_have_an_account' | translate}} <a class="dont-have-account-register"
-                    (click)="router.navigate(['/signup'])">{{'Login.Sign Up' | translate}}</a>
+                                                                (click)="router.navigate(['/signup'])">{{'Login.Sign Up' | translate}}</a>
             </div>
         </div>
         <div class="error-message"

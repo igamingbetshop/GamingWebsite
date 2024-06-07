@@ -12,6 +12,7 @@ export class InfiniteScrollDirective
     document = inject(DOCUMENT);
     window = inject(WINDOW);
     isLoading = input.required<boolean>();
+    leftItemsCount = input.required<number>();
     onLoadItems = output<boolean>();
     showTotals:WritableSignal<boolean> = signal(false);
     timeout:any;
@@ -19,7 +20,7 @@ export class InfiniteScrollDirective
     @HostListener('window:scroll',['$event'])
     onWindowScroll(event:any)
     {
-        if(!this.isLoading() && this.window.innerHeight + this.window.scrollY >= this.document.body.offsetHeight)
+        if(this.leftItemsCount() > 0 && !this.isLoading() && this.window.innerHeight + this.window.scrollY >= this.document.body.offsetHeight)
         {
             this.onLoadItems.emit(true);
         }

@@ -14,7 +14,7 @@ import {GetJackpotService} from "@core/services/api/getJackpot.service";
 import {casinoDataType, ConfigService, SaveData} from "@core/services";
 import {DeviceDetectorService} from "ngx-device-detector";
 import {MenuType} from "@core/enums";
-import {getFakeAmountRangeByCurrency, getRandomInt} from "@core/utils";
+import {getFakeAmountRangeByCurrency, getMappedGame, getRandomInt} from "@core/utils";
 import {SignalRService} from "@core/services/soket/signal-r.service";
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {TranslateService} from "@ngx-translate/core";
@@ -386,24 +386,12 @@ export class BaseGamesComponent extends BaseComponent implements AfterViewInit {
             {
                 this.TotalGamesCount = data['ResponseObject']['TotalGamesCount'];
                 this.LeftGamesCount = data['ResponseObject']['LeftGamesCount'];
-                for (let i = 0; i < data['ResponseObject']['Games'].length; i++) {
-                    const product = {
-                        gameImage: data['ResponseObject']['Games'][i]["i"].startsWith('http') ? this.sanitizer.sanitize(SecurityContext.URL, data['ResponseObject']['Games'][i]["i"]) : this.sanitizer.sanitize(SecurityContext.URL,'https://resources.' + environment.hostName + '/products/' + data['ResponseObject']['Games'][i]["i"]),
-                        name: data['ResponseObject']['Games'][i]["n"],
-                        hasDemo: data['ResponseObject']['Games'][i]["hd"],
-                        nickName: data['ResponseObject']['Games'][i]["nn"],
-                        openMode: data['ResponseObject']['Games'][i]["o"],
-                        productId: data['ResponseObject']['Games'][i]["p"],
-                        providerId: data['ResponseObject']['Games'][i]["s"],
-                        providerName: data['ResponseObject']['Games'][i]["sp"],
-                        rating: data['ResponseObject']['Games'][i]["r"],
-                        jackpotValue: data['ResponseObject']['Games'][i]["jp"] ? Math.max(...JSON.parse(data['ResponseObject']['Games'][i]["jp"])) : null,
-                        subproviderId: data['ResponseObject']['Games'][i]["ss"],
-                        subproviderName: data['ResponseObject']['Games'][i]["sn"],
-                        isFavorite: data['ResponseObject']['Games'][i]["f"]
-                    };
-                    casinoGamesData.games.push(product);
-                }
+
+                const games = data.ResponseObject.Games.map(game => {
+                    game = getMappedGame(game);
+                    return game;
+                });
+                casinoGamesData.games = [...games];
 
                 this.filterGamesList.push(...casinoGamesData.games);
 

@@ -12,6 +12,8 @@ import { MobileImageBarModule} from './mobile-image-bar/mobile-image-bar.module'
 import { MobileCharactersModule} from './mobile-characters/mobile-characters.module';
 import {FragmentCharactersModule} from "./mobile-fragment-characters/mobile-fragment-characters.module";
 import {CasinoSearchFragmentComponent} from "../../common/fragments/search/casino-search-fragment.component";
+import {WinnersWidgetModule} from "../../desktop/fragments/winners-widget/winners-widget.module";
+import {BetsWidgetModule} from "../../desktop/fragments/bets-widget/bets-widget.module";
 
 const routes: Routes = [
     {
@@ -35,7 +37,9 @@ const routes: Routes = [
         MobileImageBarModule,
         MobileCharactersModule,
         FragmentCharactersModule,
-        CasinoSearchFragmentComponent
+        CasinoSearchFragmentComponent,
+        WinnersWidgetModule,
+        BetsWidgetModule
     ]
 })
 export class MobileHomeModule {

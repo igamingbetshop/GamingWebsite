@@ -399,6 +399,7 @@
       font-size: var(--account-content-header-font-size, 16px);
       line-height: var(--account-content-header-line-height, 18px);
       color: color(account-content-header);
+      cursor: default;
     }
 
     .underline {
@@ -436,7 +437,8 @@
             width: 100%;
             min-height: var(--account-content-item-min-height, 188px);
             background: $account-content-item-bg-color;
-            border-radius: 4px;
+            border-radius: var(--account-content-item-border-radius, 4px);
+            border: var(--account-content-item-border, none);
             padding: var(--account-content-item-padding, 24px);
             display: flex;
             cursor: pointer;
@@ -542,10 +544,12 @@
         &.right-part {
           /*width: var(--enter-payment-info-width, 550px);*/
           flex: 1;
-          height: 100%;
+          height: var(--amount-withdraw-height, 100%);
           overflow: var(--amount-withdraw-overflow, auto);
+          margin-bottom: var(--amount-withdraw-margin-bottom, 0);
           display: flex;
           flex-direction: column;
+          background: var(--amount-withdraw-background, var(--acount-content-parts-background-color, #213454));
 
           .form-column {
             margin-top: var(--amount-withdraw-margin-top, 45px);
@@ -626,11 +630,11 @@
             input[type="radio"]:not(:checked):before {
               content: '';
               position: absolute;
-              left: -2px;
-              top: -3px;
-              width: 18px;
-              height: 18px;
-              border: none;
+              left: var(--user-radio-unchecked-left, -2px);
+              top: var(--user-radio-unchecked-top, -3px);
+              width: var(--user-radio-unchecked-width, 18px);
+              height: var(--user-radio-unchecked-height, 18px);
+              border: var(--user-radio-unchecked-border, none);
               border-radius: 100%;
               background: var(--user-radio-unchecked-color, #131A2C);
             }
@@ -638,12 +642,12 @@
             input[type="radio"]:checked:after,
             input[type="radio"]:not(:checked):after {
               content: '';
-              width: 8px;
-              height: 8px;
+              width: var(--user-radio-checked-width, 8px);
+              height: var(--user-radio-checked-height, 8px);
               background: var(--user-radio-checked-color, linear-gradient(180deg, #DBEDFF 0%, #7A9EC2 49.48%, #6295C8 100%));
               position: absolute;
-              top: 2px;
-              left: 3px;
+              top: var(--user-radio-checked-top, 2px);
+              left: var(--user-radio-checked-left, 3px);
               border-radius: 100%;
               transition: all 0.1s ease;
             }
@@ -697,7 +701,7 @@
             .bonus-info {
               position: absolute;
               z-index: 999;
-              width: 300px;
+              width: var(--bonus-info-width, 300px);
               right: var(--account-content-row-paddding);
               border-radius: 4px;
               background-color: var(--bonus-info-bg, #3B5175);
@@ -933,22 +937,22 @@
   .bonus-refused input[type="checkbox"] {
     position: absolute;
     left: var(--bonus-refused-input-left, 11.5px);
-    top: -3px;
-    width: 18px;
-    height: 18px;
-    border: none;
+    top: var(--bonus-refused-input-top, -3px);
+    width: var(--bonus-refused-input-width, 18px);
+    height: var(--bonus-refused-input-height, 18px);
+    border: var(--bonus-refused-input-border, none);
     border-radius: 100%;
     background: var(--user-radio-unchecked-color, #131A2C);
     cursor: pointer;
   }
   .bonus-refused input[type="checkbox"]:checked::after {
     content: '';
-    width: 8px;
-    height: 8px;
+    width: var(--user-radio-bonus-refused-checked-width, 8px);
+    height: var(--user-radio-bonus-refused-checked-height, 8px);
     background: var(--user-radio-checked-color, linear-gradient(180deg, #DBEDFF 0%, #7A9EC2 49.48%, #6295C8 100%));
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: var(--user-radio-bonus-refused-checked-top, 5px);
+    left: var(--user-radio-bonus-refused-checked-left, 5px);
     border-radius: 100%;
     transition: all 0.1s ease;
     opacity: 1;

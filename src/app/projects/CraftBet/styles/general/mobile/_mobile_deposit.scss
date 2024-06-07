@@ -11,6 +11,7 @@
     padding-top: 15px;
     color: color(m-user-views-title);
     text-align: center;
+    display: var(--m-deposit-title-display, block);
   }
 
   &_content {
@@ -28,7 +29,12 @@
       font-weight: bold;
       color: $account-deposit-header-bg;
     }
-
+    .additional-payment-system-title {
+      color: var(--m-deposit-additional-payment-title-color, #fff);
+      text-align: var(--m-deposit-additional-payment-title-text-align, center);
+      display: var(--m-deposit-additional-payment-title-display, none);
+      margin: var(--m-deposit-additional-payment-title-margin, 0);
+    }
     &_block {
       width: 100%;
       display: flex;
