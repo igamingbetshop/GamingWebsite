@@ -228,5 +228,6 @@
     margin: var(--promotion-item-title-margin, 0);
     border-radius: var(--promotion-item-title-border-radius, 0);
     text-align: var(--promotion-item-title-text-align, left);
+    border-bottom: var(--promotion-item-title-border-bottom, none);
   }
 }

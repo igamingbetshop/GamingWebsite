@@ -258,6 +258,7 @@
             <input type="text" class="distans-right"
                    placeholder="{{'Register.Mobile-number-placeholder' | translate}}" formControlName="uMobileNumber"
                    [ngClass]="{'disable_item':userData?.IsMobileNumberVerified || !editData, 'active_item': editData}"
+                   [preventFirstDigit]="0"
                    numbersOnly/>
           </div>
           <div class="mobile_number_verify__item">

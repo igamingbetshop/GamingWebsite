@@ -247,6 +247,7 @@
       margin-bottom: var(--history-info-pagination-section-icons-margin-bottom, 0px);
       margin-right: var(--history-info-pagination-section-icons-margin-right, 0px);
       font-size: var(--history-info-pagination-section-icons-font-size, 23px);
+      gap: var(--history-info-pagination-section-icons-gap, 10px);
       cursor: pointer;
       display: flex;
       color: var(--history-info-account-view-button-color, #fff);

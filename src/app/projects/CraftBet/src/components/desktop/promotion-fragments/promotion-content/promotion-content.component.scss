@@ -10,8 +10,8 @@
       height: calc(var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px) + 8px);
       box-shadow: var(--promotion-item-img-box-shadow, 0px 5px 7px 0px rgba(0, 0, 0, 0.4));
       background: var(--promotion-item-img-background-color,rgba(20, 44, 68, 1));
-      border-radius: 6px;
-      padding: 16px;
+      border-radius: var(--promotion-item-img-border-radius, 6px);
+      padding: var(--promotion-item-img-padding, 16px);
       img
       {
         height: 100%;
@@ -24,8 +24,8 @@
     {
       height: calc(((var(--promotions-item-height, 200px) + var(--promotions-text-height, 93px)) * 3.3) - 20px);
       overflow-y: auto;
-      padding-right: 16px;
-      margin-top: 16px;
+      padding-right: var(--promotions-item-description-padding-right, 16px);
+      margin-top: var(--promotions-item-description-margin-top, 16px);
       cursor: default;
 
       h2
@@ -40,13 +40,37 @@
       {
         color: var(--text-content-color, #ffffff);
         background: linear-gradient(179.46deg, var(--text-content-gradient1-color,#142C44) 0.45%, var(--text-content-gradient2-color,#131A2C) 104.46%);
-        box-shadow: 5px 0px 7px 0px rgba(0, 0, 0, 0.4);
-        border-radius: 6px;
-        padding: 20px;
+        box-shadow: var(--promotion-text-content-box-shadow, 5px 0px 7px 0px rgba(0, 0, 0, 0.4));
+        border-radius: var(--promotion-text-content-border-radius, 6px);
+        padding: var(--promotion-text-content-padding, 20px);
       }
       .publish-date {
         color: var(--promotion-description-publish-date-color, #fff);
       }
+    }
+  }
+  .modal-content {
+    background: var(--promotions-modal-content-background, rgb(20, 44, 68));
+    max-height: var(--modal-login-section-height, 400px);
+    min-height: var(--min-modal-login-section-height, 250px);
+    overflow-y: var(--promotions-modal-content-overflow-y, hidden);
+    overflow-x: var(--promotions-modal-content-overflow-x, auto);
+    width: var(--promotions-modal-content-width, 100%);
+    max-width: var(--promotions-modal-content-max-width, var(--user-modal-section-max-width, 1000px)) !important;
+    padding: var(--promotions-modal-content-padding, 0);
+    .icon-close-modal {
+      position: var(--promotions-modal-content-close-icon-position, absolute);
+      right: var(--promotions-modal-content-close-icon-right, 8px);
+      top: var(--promotions-modal-content-close-icon-top, 7px);
+      color: var(--promotions-modal-content-close-icon-color, #fff);
+      cursor: pointer;
+    }
+    .promotion-item-image {
+      width: var(--promotions-modal-content-item-width, 100%);
+      height: var(--promotions-modal-content-item-height, auto);
+    }
+    .promotion-description{
+      height: var(--promotions-modal-description-height, 400px);
     }
   }
 }

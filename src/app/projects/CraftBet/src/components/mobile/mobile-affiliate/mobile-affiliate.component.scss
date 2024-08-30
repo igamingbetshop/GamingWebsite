@@ -15,6 +15,8 @@
       color: var(--affiliate-Commission-btn-color, var(--affiliate-submit-btn-color, #fff));
       height: var(--m-affiliate-submit-btn-height, 40px);
       padding: var(--m-affiliate-submit-btn-padding, 0 10px);
+      font-size: var(--m-affiliate-submit-btn-font-size, 16px);
+      font-weight: var(--m-affiliate-submit-btn-font-weight, 600);
       border: var(--m-affiliate-submit-btn-border, 1px solid #5CAAD3);
       white-space: nowrap;
     }
@@ -79,7 +81,7 @@
         width: var(--m-affiliate-section-support-width, auto);
 
         .support-part-item {
-          //background: var(--affiliate-support-part-background-color, rgba(45, 52, 69, 1));
+          //background: var(--affiliates-support-part-background-color, rgba(45, 52, 69, 1));
           height: var(--m-affiliate-support-part-height, 124px);
           display: flex;
           justify-content: center;

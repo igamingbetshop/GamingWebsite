@@ -47,6 +47,8 @@ import {AuthGuard} from "@core/services/helpers/auth-guard";
 import {CasinoFilterService} from "@core/services/app/casino-filter.service";
 import {StateService} from "@core/services/app/state.service";
 import {OpenGameGuard} from "@core/services/helpers/open-game-guard";
+import { IsAgentGuard } from "@core/services/helpers/is-agent.guard";
+import {AffiliateGuard} from "@core/services/helpers/affiliate-guard";
 
 const SERVICES = [
     LoaderService,
@@ -91,7 +93,9 @@ const SERVICES = [
     NavigationService,
     AuthGuard,
     StateService,
-    OpenGameGuard
+    OpenGameGuard,
+    IsAgentGuard,
+    AffiliateGuard
 ];
 
 @NgModule({

@@ -2,7 +2,7 @@
 @import "../../../../../../../styles/helpers/variables";
 .birth_date {
   width: 100%;
-  margin-right: 20px;
+  margin-right: var(--m-profile-birth-date-margin-right, 20px);
   .birth_date_select {
     display: flex;
     align-items: center;
@@ -16,7 +16,7 @@
       .disable_item {
         pointer-events: none;
         opacity: .8;
-        border-color: #cecece !important;
+        border-color: var(--m-profile-details-form-disable-input-border-color, #cecece) !important;
       }
       label {
         color: itemColor(settings-input-label, #fff);
@@ -80,8 +80,8 @@
           font-size: var(--settings-field-font-size, 16px);
           text-indent: 0;
           padding: var(--m-settings-field-padding, 0 4px);
-          border: var(--settings-field-border, none);
-          background: var(--account-content-item-bg-color);
+          border: var(--m-profile-details-form-input-border, var(--settings-field-border, none));
+          background: var(--m-profile-details-form-input-background, var(--account-content-item-bg-color));
           border-radius: var(--settings-field-border-radius, 6px);
           height: var(--settings-field-height, 40px);
           appearance: var(--open-ticket-appearance, auto);

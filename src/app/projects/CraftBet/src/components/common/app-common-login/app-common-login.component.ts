@@ -27,6 +27,7 @@ export class AppCommonLoginComponent extends BaseComponent {
     private localStorageService: LocalStorageService;
     public rememberMe = false;
     public submitted = false;
+    public isSubmitting = false;
     public openedLogin = false;
     // public isUserIconHidden;
     // public isPasswordIconHidden;
@@ -48,16 +49,6 @@ export class AppCommonLoginComponent extends BaseComponent {
         this.baseControllerService = injector.get(BaseControllerService);
         this.rememberMe = !!this.localStorageService.get('login');
         this.location = injector.get(Location);
-        // this.loginForm = this.fb.group({});
-        // this.loginForm = this.fb.group({
-        //     ClientIdentifier: [this.localStorageService.get('login') || '', [
-        //         Validators.required,
-        //         Validator.noWhitespaceValidator
-        //     ]],
-        //     Password: [null, [
-        //         Validators.required
-        //     ]]
-        // });
         this.getFormControlNames();
     }
 
@@ -105,6 +96,9 @@ export class AppCommonLoginComponent extends BaseComponent {
         this.subscriptions.push(this.userLogined.onLoginError$.subscribe((data) => {
             this.utilsService.showMessageWithDelay(this, [{'errorMessage': data.message}]);
             this.submitted = false;
+        }));
+        this.subscriptions.push(this.userLogined.isSubmitting$.subscribe((data) => {
+            this.isSubmitting = data;
         }));
         this.openedLogin = true;
     }

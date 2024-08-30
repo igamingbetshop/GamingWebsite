@@ -70,7 +70,74 @@
     .disable_item {
       pointer-events: none;
       opacity: .8;
-      border-color: #cecece !important;
+      border-color: var(--m-profile-details-form-disable-input-border-color, #cecece) !important;
+    }
+    .mobileData_tabs {
+      .custom_dropdown_reg {
+        .custom_dropdown_list{
+          li {
+            padding: var(--m-signup-custom-dropdown-padding, 5px 10px);
+            height: var(--m-signup-custom-dropdown-height, 30px);
+          }
+        }
+      }
+      .custom_dropdown_reg:first-child {
+        background: transparent;
+      }
+    }
+    .current_item {
+      border: var(--m-profile-details-form-input-border, var(--settings-field-border, none));
+      border-radius: var(--settings-field-border-radius, 6px);
+      background: var(--m-profile-details-form-input-background, var(--account-content-item-bg-color));
+      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      margin: var(--settings-profile-country-list-margin, -12px 0 0 0);
+      height: var(--settings-field-height, 40px);
+      position: var(--settings-profile-country-list-position, relative);
+      .custom-code-label {
+        position: absolute;
+        color: var(--settings-focus-label-focused, #fff);
+        transform: var(--custom-send-code-label-transform, translateY(-27px) translateX(0px) scale(0.75));
+        left: var(--custom-send-code-label-left, 0px);
+        font-size: var(--settings-font-size-label, 16px);
+      }
+      .custom-code-icon {
+        font-size: var(--m-custom-send-code-icon-font-size, 1.3rem);
+        position: var(--m-custom-send-code-icon-position, absolute);
+        right: var(--m-custom-send-code-icon-right, 11px);
+        top: var(--m-custom-send-code-icon-top, 1px);
+        color: var(--m-custom-send-code-icon-color, #fff);
+      }
+      .current_item-input {
+        margin: var(--settings-profile-country-list-margin, -3px 0 0 0);
+      }
+      input{
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border: none;
+        outline: none;
+      }
+      >div{display: block}
+      &:focus-within
+      {
+        input{opacity: 1}
+        >div{display: none!important;}
+      }
+    }
+    //.flex_vertical-center {
+    //  display: flex!important;
+    //  padding-left: 9px;
+    //  span {
+    //    color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+    //  }
+    //}
+    .custom_dropdown_list {
+      li {
+        color: var(--m-settings-profile-country-list-color, #fff);
+      }
     }
     input {
       margin: 10px 0 24px 0;
@@ -78,8 +145,8 @@
       font-size: var(--settings-field-font-size, 16px);
       text-indent: 0;
       padding-left: 16px;
-      border: var(--settings-field-border, none);
-      background: var(--account-content-item-bg-color);
+      border: var(--m-profile-details-form-input-border, var(--settings-field-border, none));
+      background: var(--m-profile-details-form-input-background, var(--account-content-item-bg-color));
       border-radius: var(--settings-field-border-radius, 6px);
       height: var(--settings-field-height, 40px);
       width: var(--settings-field-send-code-width, 100%);
@@ -104,7 +171,7 @@
       .disable_item {
         pointer-events: none;
         opacity: .8;
-        border-color: #cecece !important;
+        border-color: var(--m-profile-details-form-disable-input-border-color, #cecece) !important;
       }
     }
     label {
@@ -169,6 +236,24 @@
       padding-right: var(--settings-padding-right-focus-label-focused, 10px);
     }
   }
+  .select-mobile-code {
+    width: 50%;
+  }
+  select {
+    &:not(.choose_input) {
+      margin: 10px 0 24px 0;
+      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      font-size: var(--settings-field-font-size, 16px);
+      text-indent: 0;
+      padding-left: 6px;
+      border: var(--m-profile-details-form-input-border, var(--settings-field-border, none));
+      background: var(--account-content-item-bg-color);
+      border-radius: var(--settings-field-border-radius, 6px);
+      height: var(--settings-field-height, 40px);
+      appearance: var(--open-ticket-appearance, auto);
+    }
+    border: 1px solid rgba(219, 237, 255, 0.8);
+  }
   .required-field
   {
     &:after
@@ -179,4 +264,21 @@
       right: -6px;
     }
   }
+}
+.rightToLeft {
+
+  .form_field {
+    label {
+      right: var(--settings-input-label-left, 8px);
+      left: auto !important;
+    }
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
+      text-align: right;
+    }
+    .error-field-message {
+      right: 0;
+    }
+  }
+
 }

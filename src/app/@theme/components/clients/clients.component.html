@@ -1,0 +1,16 @@
+<div class="clients" dropdown>
+    <span>{{selectedClient().UserName}}</span>
+    <ul class="clients-list">
+        @for (client of clients(); track client.Id)
+        {
+            <li (click)="selectClient(client)">{{client.UserName}}</li>
+        }
+        @empty {
+        <li class="disabled"> {{'User.NoClients' | translate}}</li>
+        }
+    </ul>
+</div>
+
+
+
+

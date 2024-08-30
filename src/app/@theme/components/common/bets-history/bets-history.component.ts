@@ -12,6 +12,7 @@ import {ExportDataService} from "@core/services";
 import * as moment from 'moment';
 import {UtilityService} from "@core/services/app/utility.service";
 import {MatDialog} from "@angular/material/dialog";
+import {AccountsFilterStateService} from "@core/services/app/accounts-filter-state.service";
 
 @Injectable()
 export class BetsHistoryComponent extends BaseComponent {
@@ -31,6 +32,7 @@ export class BetsHistoryComponent extends BaseComponent {
     public CurrencyId: any;
     public CurrencySymbol: any;
     public utilityService: UtilityService;
+    private accountsFilterStateService:AccountsFilterStateService;
 
     public historyTimeFilter: Array<any> = [
         {"Name": "Filter_Period.24 hours"},
@@ -47,7 +49,6 @@ export class BetsHistoryComponent extends BaseComponent {
         'FilterIndex': 0
     };
 
-    public historyCount: number = 0;
     public errorMessage: string;
 
 
@@ -55,7 +56,6 @@ export class BetsHistoryComponent extends BaseComponent {
     public customFilterShow: boolean = false;
     public customButtons: boolean = false;
     public operationFilterIndex: number;
-    public betStatusesCurrentValue: any;
 
     public form: FormGroup;
     public fb: FormBuilder;
@@ -74,13 +74,14 @@ export class BetsHistoryComponent extends BaseComponent {
         this.exportDataService = injector.get(ExportDataService);
         this.translate = injector.get(TranslateService);
         this.document = injector.get(DOCUMENT);
+        this.accountsFilterStateService = injector.get(AccountsFilterStateService);
 
         this.fb = injector.get(FormBuilder);
 
         this.form = this.fb.group({
-            timeFilter: 0,
-            operationFilter: 0,
-            productId: null
+            timeFilter: this.accountsFilterStateService.getState("bets")["timeFilterIndex"],
+            operationFilter: this.accountsFilterStateService.getState("bets")["status"],
+            productId: this.accountsFilterStateService.getState("bets")["productId"]
         });
         this.getBetsHistoryService.getBetsStatusList();
 
@@ -96,7 +97,6 @@ export class BetsHistoryComponent extends BaseComponent {
         const userData = this.localStorageService.get('user');
         this.CurrencyId = userData ? userData.CurrencyId : '';
         this.CurrencySymbol = userData ? userData.CurrencySymbol : '';
-        this.getCreationDate(this.historyTimeFilter[0]);
 
         this.subscriptions.push(this.getBetsHistoryService.getProducts().subscribe(data => {
             if (data.ResponseCode == 0) {
@@ -104,29 +104,14 @@ export class BetsHistoryComponent extends BaseComponent {
             }
         }));
 
-        if (this.getBetsHistoryService.betStatuses.length > 0) {
-            this.getBetsHistory(1);
-
-            // With Custom Dropdowns
-            this.betStatusesCurrentValue = this.getBetsHistoryService.betStatuses[0];
-        } else {
-            let subscription = this.getBetsHistoryService.notifyGetStatusList$.subscribe((data) => {
-                // With Custom Dropdowns use that variable(with current item)
-                this.betStatusesCurrentValue = data[0];
-
-                this.getBetsHistory(1);
-                subscription.unsubscribe();
-            });
-        }
-
         this.form.get('timeFilter').valueChanges.subscribe((value) => {
             if (value == (this.historyTimeFilter.length - 1))
             {
                 this.customFilterShow = true;
                 const date = new Date();
                 date.setDate(date.getDate() - 1);
-                this.form.addControl('changedate', new FormControl(moment(new Date()).subtract(2, 'days').format('YYYY-MM-DDTHH:mm')));
-                this.form.addControl('changetTodate', new FormControl( moment(new Date()).format('YYYY-MM-DDTHH:mm')));
+                this.form.addControl('changedate', new FormControl(this.accountsFilterStateService.getState("bets")["fromDate"]));
+                this.form.addControl('changetTodate', new FormControl(this.accountsFilterStateService.getState("bets")["toDate"]));
             } else {
                 this.customFilterShow = false;
                 this.form.removeControl('changedate');
@@ -137,6 +122,9 @@ export class BetsHistoryComponent extends BaseComponent {
         this.form.get('operationFilter').valueChanges.subscribe((value) => {
             this.operationFilterIndex = value;
         });
+        this.form.get('timeFilter').setValue(this.accountsFilterStateService.getState("bets")["timeFilterIndex"]);
+        this.form.get('operationFilter').setValue(this.accountsFilterStateService.getState("bets")["status"]);
+        this.getBetsHistory(1);
     }
 
     public onDateSelect()
@@ -147,11 +135,10 @@ export class BetsHistoryComponent extends BaseComponent {
             this.historyFilter['CreatedBefore'] = this.betsService.getCreatedBefore();
         } else {
             this.historyFilter['CreatedBefore'] = format(new Date(this.todate),'YYYY-MM-DDTHH:mm');
-
         }
     }
 
-    public getCreationDate(index?) {
+    getCreationDate(index?) {
         this.historyFilter['CreatedFrom'] = this.betsService.getCreatedFrom(index);
         this.historyFilter['CreatedBefore'] = this.betsService.getCreatedBefore();
     }
@@ -165,6 +152,18 @@ export class BetsHistoryComponent extends BaseComponent {
             this.historyFilter['CreatedFrom'] = this.form.get('changedate').value;
             this.historyFilter['CreatedBefore'] = this.form.get('changetTodate').value;
         }
+
+        const state:any = {timeFilterIndex:this.form.getRawValue().timeFilter,
+            productId:this.form.get('productId').value,
+            status:this.operationFilterIndex || 0};
+
+        if(this.customFilterShow)
+        {
+          state.fromDate = this.historyFilter['CreatedFrom'];
+          state.toDate = this.historyFilter['CreatedBefore'];
+        }
+
+        this.accountsFilterStateService.setState("bets", state);
 
         const input = {
             id: null,

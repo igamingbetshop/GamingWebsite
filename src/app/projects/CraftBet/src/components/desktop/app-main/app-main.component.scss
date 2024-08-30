@@ -19,6 +19,12 @@
         }
       }
     }
+    app-time{
+      .timezones-box{
+        right: unset!important;
+        left: 0;
+      }
+    }
   }
 }
 

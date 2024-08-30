@@ -1,4 +1,30 @@
-
+.rightToLeft {
+  .custom_dropdown_reg.opened .custom_dropdown_list li, .custom_dropdown_reg.open .custom_dropdown_list li {
+    direction: rtl;
+  }
+  .custom_dropdown_reg .current_item img {
+    margin-left: 7px;
+  }
+  .mobile-registration-section .mobileData_tabs .ng-fa-icon {
+    left: var(--mobile-dpd-icon-right, 11px);
+    right: auto;
+  }
+  .mobile-registration-section .allFormItems .form-row-item.checkbox-mobile span {
+    text-align: right;
+  }
+  .mobile-registration-section .allFormItems .form-row-item .top-row .form_field label {
+    right: var(--m-signup-input-label-left, unset);
+    left: auto;
+  }
+  .mobile-login-section_field_top .floating-label {
+    right: var(--m-login-form-field-label-left, 10px);
+    left: auto;
+  }
+  .mobile-registration-section .allFormItems .form-row-item .top-row .form_field .m-change-password-field-type, .mobile-registration-section .allFormItems .form-row-item .top-row .form_field .m-change-password-field-type2 {
+    right: auto;
+    left: var(--m-change-password-field-type-right, 13px);
+  }
+}
 .mobile-registration-section {
   background: var(--m-register-section-bg, linear-gradient(180deg, #131A2C 0%, #313D4C 105.44%));
   //min-height: 100vh;
@@ -75,6 +101,7 @@
      {
        height: height(m-register-button, 44px);
        border-radius: var(--m-signup-fields-border-radius, 4px);
+       font-weight: var(--m-signup-fields-font-weight, 600);
      }
    }
  }
@@ -223,7 +250,7 @@
     display: block;
     background: color(m-register-button-background);
     color: color(m-register-button-text);
-    text-transform: uppercase;
+    text-transform: var(--m-register-button-text-transform, uppercase);
     font-weight: 400;
 
     &.register_abled {
@@ -314,12 +341,18 @@
             color: red;
             font-weight: bold;
           }
+          .error-field-message2
+          {
+            right: itemRight(register-error-field-message2, auto);
+          }
           .error-field-message-pass
           {
             bottom: var(--m-form-row-item-withLabel-full-error-bottom, -14px);
           }
           .password_form_field_top_mobile {
             display: var(--m-register-form-passwordData-item-display, flex);
+            flex-direction: var(--m-register-form-passwordData-item-flex-direction, var(--register-form-passwordData-item-flex-direction, row));
+            gap: var(--m-register-form-passwordData-item-gap, var(--register-form-field-grid-gap, 0px))
           }
           .m-change-password-field-type, .m-change-password-field-type2 {
             position: absolute;
@@ -485,6 +518,7 @@
       position: var(--mobile-dpd-icon-position, absolute);
       right: var(--mobile-dpd-icon-right, 11px);
       top: var(--mobile-dpd-icon-top, 8px);
+      display: var(--mobile-dpd-icon-display, block);
     }
     .custom_dropdown_reg {
       .custom_dropdown_list{

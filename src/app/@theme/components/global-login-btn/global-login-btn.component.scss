@@ -4,3 +4,9 @@
   background: none;
   border: none;
 }
+.hidden-login-text {
+  display: var(--header-login-btn-custom-icon-display, none);
+  position: var(--header-login-btn-custom-icon-position, relative);
+  width: var(--header-login-btn-custom-icon-width, 100%);
+  height: var(--header-login-btn-custom-icon-height, auto);
+}

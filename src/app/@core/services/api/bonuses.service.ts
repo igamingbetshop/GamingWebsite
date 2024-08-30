@@ -65,6 +65,19 @@ export class BonusesService {
         });
     }
 
+    CollectClientBonus(data)
+    {
+        const {WebApiUrl, PartnerId} = this.getSettings();
+        let request = new Request();
+        request.Controller = Controllers.DOCUMENT;
+        request.Method = Methods.COLLECT_BONUS;
+        request.Token = this.userData.Token;
+        request.ClientId = this.userData.Id;
+        request.PartnerId = PartnerId;
+        request.RequestData = JSON.stringify(data);
+        return this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/ApiRequest`, request);
+    }
+
     DeleteBonus(bonus: Bonus, data)
     {
         const {WebApiUrl, PartnerId} = this.getSettings();
@@ -154,6 +167,34 @@ export class BonusesService {
         return this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/ApiRequest`, request).pipe(map(data => {
             return data['ResponseCode'] == 0 ? data['ResponseObject'] : {Triggers: [], Bonus: {}};
         }));
+    }
+
+    getBonusWinnersInfo(bonus:Bonus) {
+        const {WebApiUrl, PartnerId} = this.getSettings();
+        let request = new Request();
+        request.Controller = Controllers.CLIENT;
+        request.Method = Methods.GET_BONUS_WINNERS_INFO;
+        request.Token = this.userData.Token;
+        request.ClientId = this.userData.Id;
+        request.PartnerId = PartnerId;
+        request.RequestData = JSON.stringify({BonusId:bonus.BonusId});
+
+        return this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/ApiRequest`, request);
+    }
+
+
+
+    spinWheel(bonusId:number)
+    {
+        const {WebApiUrl, PartnerId} = this.getSettings();
+        let request = new Request();
+        request.Controller = Controllers.CLIENT;
+        request.Method = Methods.SPIN_WHEEL;
+        request.Token = this.userData.Token;
+        request.ClientId = this.userData.Id;
+        request.PartnerId = PartnerId;
+        request.RequestData = JSON.stringify({Id:bonusId});
+        return this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/ApiRequest`, request);
     }
 
     ActivatePromoCode(promoCode): Observable<any> {

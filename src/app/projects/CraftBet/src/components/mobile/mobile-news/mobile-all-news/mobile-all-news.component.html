@@ -1,7 +1,7 @@
 <div  [ngStyle]="{'display' : selectedFragment ? 'block' : 'none'}">
   <div class="mobile-current-news-section" [ngStyle]="layoutService.layoutStyle" >
     <div class="news-title">
-      <span class="section-name">{{newsTypes[currentNews?.Type] | translate}}</span>
+      <span class="section-name">{{'News.' + newsTypes[currentNews?.Type] | translate}}</span>
       <span class="seperator">|</span>
       <span class="current-news-name" [innerHtml]="currentNews?.Title"></span>
     </div>
@@ -23,7 +23,7 @@
          </video>
       </div>-->
       <div class="news-info">
-        <p [innerHtml]="currentNews?.Content"></p>
+<!--        <p [innerHtml]="currentNews?.Content"></p>-->
         <p class="publish-date">
           <i class="icon-timezone"></i>
           <span>{{currentNews?.DeltaTime}} {{'ago' | translate}}</span>

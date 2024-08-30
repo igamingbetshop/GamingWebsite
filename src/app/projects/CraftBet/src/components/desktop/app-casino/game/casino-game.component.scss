@@ -292,6 +292,7 @@
       height: 100%;
     }
     .content {
+      display: var(--detailed-info-content-display, block);
       .content-row
       {
         height: 30px;
@@ -329,9 +330,11 @@
     }
     >div {
       .name {
-        font-size: 16px;
-        margin-bottom: 16px;
-        text-align: center;
+        font-size: var(--detailed-info-content-name-font-size, 16px);
+        font-weight: var(--detailed-info-content-name-font-weight, 400);
+        margin-bottom: var(--detailed-info-content-name-margin-bottom, 16px);
+        margin-top: var(--detailed-info-content-name-margin-top, 0);
+        text-align: var(--detailed-info-content-name-text-align, center);
       }
       .text {
         color: #676B80;

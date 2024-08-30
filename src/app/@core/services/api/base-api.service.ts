@@ -54,8 +54,8 @@ export class BaseApiService
         /*Authenticated fields*/
         if (this.authService.user)
         {
-            request.ClientId = this.authService.user.Id;
-            request.Token = this.authService.user.Token;
+            request.ClientId = data?.ClientId || this.authService.user.Id;
+            request.Token = data?.Token || this.authService.user.Token;
             request.TimeZone = this.configService.timeZone;
         }
         else delete request.ClientId;
@@ -119,7 +119,8 @@ export class BaseApiService
 
         if (this.authService.user)
         {
-            data.ClientId = this.authService.user.Id;
+            if(!data.ClientId)
+                data.ClientId = this.authService.user.Id;
             data.Token = this.authService.user.Token;
             data.TimeZone = this.configService.timeZone;
         }

@@ -14,12 +14,12 @@ export class BaseWithdrawType14Component extends BaseWithdrawPaymentComponent {
 
     ngOnInit() {
         super.ngOnInit();
-        this.paymentService.notifyGetBanksList$.subscribe(data => {
+        this.paymentService.notifyGetClientBanksList$.subscribe(data => {
             this.accountTypes = data.map(b => {
                 return {BankName:b.BankName, BankCode:b.BankCode}
             });
         });
-        this.paymentService.getBanks(this.paymentSystemId);
+        this.paymentService.getClientBanks(this.paymentSystemId);
         this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
         this.paymentForm.addControl('WalletNumber', new FormControl('', [Validators.required]));
         this.paymentForm.addControl('AccountType', new FormControl('', [Validators.required]));

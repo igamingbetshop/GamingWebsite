@@ -69,6 +69,18 @@ export class MobileRightSidebarComponent extends AppCommonHeaderComponent implem
                     this.menuList.splice(i,1);
                     i--;
                 }
+                const agentsReportIndex = this.menuList[i].SubMenu.findIndex(item => item.Href === 'agents-report');
+                if (agentsReportIndex !== -1) {
+                    const agentsReport = this.menuList[i].SubMenu[agentsReportIndex];
+                    if (!agentsReport.StyleType) {
+                        this.menuList[i].SubMenu.splice(agentsReportIndex, 1);
+                    } else {
+                        const styleTypeItem = JSON.parse(agentsReport.StyleType);
+                        if (!styleTypeItem || !(styleTypeItem.IsAgent && this.userData?.IsAgent === true)) {
+                            this.menuList[i].SubMenu.splice(agentsReportIndex, 1);
+                        }
+                    }
+                }
             }
         });
         this.useAccountType = this.baseControllerService.GetMenuByType(MenuType.MOBILE_RIGHT_SIDEBAR)?.useAccountType;

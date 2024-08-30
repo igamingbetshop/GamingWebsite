@@ -73,7 +73,7 @@
   right: 0;
   bottom: 0;
   display: block;
-  background: rgba(0,0,0,.1);
+  background: var(--fixed-loader-background, rgba(0,0,0,.1));
   img
   {
     position: absolute;

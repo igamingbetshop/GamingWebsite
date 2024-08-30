@@ -10,6 +10,7 @@ export class UserRegisterService {
     public notifyGetUserRegisterError: Subject<any> = new Subject<any>();
     public notifyGetUserRegisterData: Subject<any> = new Subject<any>();
     public notifyGetRegion: Subject<any> = new Subject<any>();
+    public notifyGetLands: Subject<any> = new Subject<any>();
     public notifyGetDistrict: Subject<any> = new Subject<any>();
     public notifyGetCountry: Subject<any> = new Subject<any>();
     public notifyGetCity: Subject<any> = new Subject<any>();
@@ -37,7 +38,7 @@ export class UserRegisterService {
     }
 
 
-    public getUserRegister(params, login): any
+    public getUserRegister(params, login, firstLoginUrl: boolean): any
     {
         this.authService.registration(params).subscribe((responceData) => {
             if (responceData['ResponseCode'] !== 0) {
@@ -48,7 +49,11 @@ export class UserRegisterService {
                     this.localStorageService.add("welcome-bonus-key", responceData.WelcomeBonusActivationKey);
                 this.localStorageService.remove('AffiliateData');
                 this.paramsLogin = {'ClientIdentifier': responceData.UserName, 'Password': params.Password};
-                login && this.userLogined.userLogin(this.paramsLogin);
+                if (this.defaultOptions.FirstLoginUrl && this.defaultOptions.FirstLoginUrl !== '') {
+                    firstLoginUrl = true;
+                }
+                console.log(firstLoginUrl);
+                login && this.userLogined.userLogin(this.paramsLogin, firstLoginUrl);
             }
         });
     }
@@ -147,4 +152,14 @@ export class UserRegisterService {
         });
     }
 
+    public getLands(id): any {
+        let requestData = {
+            LanguageId: this.defaultOptions.DefaultLanguage,
+            ParentId: JSON.parse(id),
+            TypeId: 6
+        };
+        this.authService.getRegion(requestData).then((response) => {
+            this.notifyGetLands.next((response['ResponseObject']));
+        });
+    }
 }

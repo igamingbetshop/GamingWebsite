@@ -18,7 +18,7 @@
                 <div class="paymet-item_bodyInfo"><span class="title">{{'User.Id' | translate}}</span> {{item?.Id}}
                 </div>
                 <div class="paymet-item_bodyInfo"><span
-                        class="title">{{'User.Status' | translate}}</span> {{item?.Status}}</div>
+                        class="title">{{'User.Status' | translate}}</span> {{item?.StatusName}}</div>
                 <div class="paymet-item_bodyInfo"><span
                         class="title">{{'User.BetShopId' | translate}}</span> {{item?.BetShopId}}
                 </div>
@@ -70,13 +70,13 @@
                     </div>
                     <div>{{"Payments.Maximum" | translate}} - {{currentPayment?.MaxAmount | number}} ({{ currencyId}})
                     </div>
-                    <div *ngIf="currentPayment?.CommissionPercent !== 0">
+                    <div *ngIf="currentPayment?.CommissionPercent !== 0" class="hide-commission-percent">
                         {{"Payments.CommissionPercent" | translate}} - {{currentPayment?.CommissionPercent | number}} %
                     </div>
-                    <div *ngIf="currentPayment?.FixedFee !== 0">
+                    <div *ngIf="currentPayment?.FixedFee !== 0" class="hide-commission-percent">
                         {{"Payments.CommissionFixedFee" | translate}} - {{currentPayment?.FixedFee | number}} ({{currencyId}})
                     </div>
-                    <div *ngIf="currentPayment?.CommissionPercent === 0 && currentPayment?.FixedFee === 0">
+                    <div *ngIf="currentPayment?.CommissionPercent === 0 && currentPayment?.FixedFee === 0" class="hide-commission-percent">
                         {{"Payments.Commission" | translate}} - {{ 0 | number}}
                     </div>
                 </div>

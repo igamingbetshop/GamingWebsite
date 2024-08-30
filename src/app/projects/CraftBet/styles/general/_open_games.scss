@@ -10,24 +10,25 @@
   }
 
   .gameName {
-    padding: 30px 0 0 0;
+    padding: var(--open-game-name-padding, 30px 0 0 0);
     color: itemColor(game-name,$color-white);
     text-align: center;
-    font-size: 40px;
-    margin-top: 0;
-    margin-bottom: 16px;
+    font-size: var(--open-game-name-font-size, 40px);
+    margin-top: var(--open-game-name-margin-top, 0);
+    margin-bottom: var(--open-game-name-margin-bottom, 16px);
   }
 
   .rating
   {
     text-align: center;
-    padding-bottom: 20px;
-    font-size: 24px;
+    padding-bottom: var(--open-game-rating-padding-bottom, 20px);
+    font-size: var(--open-game-rating-font-size, 24px);
+    display: var(--open-game-rating-display, block);
    .icon-star-box
    {
      position: relative;
      display: var(--open-game-icon-star-display, inline-block);
-     color: #fff;
+     color: var(--open-game-icon-star-color, #fff);
      &:before
      {
        letter-spacing: 5px;

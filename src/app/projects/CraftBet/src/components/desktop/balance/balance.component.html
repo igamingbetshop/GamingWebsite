@@ -7,13 +7,13 @@
 <div class="balance_section" *ngIf="menuItem?.OpenInRouting && menuItem.contentType == 'balanceTxt'" [routerLink]="menuItem.Href" (click)="navigateByHref(menuItem, $event)">
     <p class="header-user-name">{{userData?.UserName}}</p>
     <span class="header-balance-text">{{'User.Balance' | translate}}</span>
-    <span> {{balance | toNumber | number: '.2'}} {{currencySymbol}}</span>
+    <span>{{currencySymbol}} {{balance | toNumber | number: '.2'}} {{ !currencySymbol ? currencyId : '' }}</span>
 </div>
 <div class="balance_section" [attr.href]="menuItem?.Href ? menuItem?.Href : null" dropdown *ngIf="!menuItem?.OpenInRouting && menuItem.contentType == 'balanceTxt'" (click)="navigateByHref(menuItem, $event)">
     <p class="header-user-name">{{userData?.UserName}}</p>
     <span class="header-balance-text">{{'User.Balance' | translate}}</span>
-    <span> {{ selectedAccountBalance !== undefined ?  (selectedAccountBalance | toNumber | number: '.2') : (balance | toNumber | number: '.2')}} {{currencySymbol}}</span>
-    <app-account-page-type2-balance class="balance-popup" *ngIf="isLogin" [useAccountType]="menuItem.useAccountType" [balances]="accountBalances" [templateType]="2"
+    <span>{{currencySymbol}} {{ selectedAccountBalance !== undefined ?  (selectedAccountBalance | toNumber | number: '.2') : (balance | toNumber | number: '.2')}} {{ !currencySymbol ? currencyId : '' }}</span>
+    <app-account-page-type2-balance class="balance-popup" *ngIf="isLogin" [useAccountType]="menuItem.config.useAccountType" [balances]="accountBalances" [templateType]="2"
                                     (selectedAccountChange)="onSelectedAccountChange($event)"></app-account-page-type2-balance>
 </div>
 <div class="balance_section" *ngIf="menuItem.contentType == 'unusedBalanceTxt'" (click)="$event.stopPropagation()">

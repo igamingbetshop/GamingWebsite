@@ -26,35 +26,32 @@
         </div>
     </div>
     <div *ngSwitchCase="'MobileNumber'" class="form_field_large">
-
         <div class="form_field">
-<!--            <input type="text"-->
-<!--                   [(ngModel)]="dataModel"-->
-<!--                   (ngModelChange)="onModelChange($event)"-->
-<!--                   placeholder="{{'Register.Mobile-number-placeholder' | translate}}"-->
-<!--                   [ngClass]="{'disable_item':!(profileService.editState$ | async).value, 'active_item': (profileService.editState$ | async).value}"-->
-<!--                   />-->
-<!--            <label>{{'Register.Mobile-number-verify' | translate}}</label>-->
             <div class="mobileData_tabs">
-                <div class="custom_dropdown_reg" dropdown>
+                <div class="custom_dropdown_reg" dropdown
+                     [ngClass]="{'disable_item':!(profileService.editState$ | async).value, 'active_item': (profileService.editState$ | async).value}">
                     <div class="flex_between current_item" (click)="focusInput(mobileCodeInput, $event)">
-                        <label class="custom-code-label" [class.required-field]="formElement.Config?.mandatory">{{'Register.Mobile-number-verify' | translate}}</label>
-                        <input #mobileCodeInput [(ngModel)]="mobileCodePattern" [ngModelOptions]="{standalone:true}" class="current_item-input">
+                        <span class="custom-code-label"
+                              [class.required-field]="formElement.Config?.mandatory">{{ 'Register.Mobile-number-verify' | translate }}</span>
+                        <input #mobileCodeInput [(ngModel)]="mobileCodePattern" [ngModelOptions]="{standalone:true}"
+                               class="current_item-input">
                         <div class="flex_vertical-center"
                              [class.focus-style]="(profileService.editState$ | async).value">
                             <img src="../../../../../../../assets/images/countries/{{currentValueMobileCode?.Title | lowercase}}.png"/>
-                            <span>{{currentValueMobileCode?.Title}}
-                                ({{currentValueMobileCode?.Type}})</span>
+                            <span>{{ currentValueMobileCode?.Title }}
+                                ({{ currentValueMobileCode?.Type }})</span>
                         </div>
+                        <fa-icon class="custom-code-icon" [icon]="['fas', 'sort-down']"></fa-icon>
                     </div>
-
                     <ul class="custom_dropdown_list right-top">
-                        <li *ngFor="let code of mobileCodes | filterByMobileCode : mobileCodePattern" (click)="selectMobileCode(code)">
-                            <img src="../../../../../../../assets/images/countries/{{code?.Title | lowercase}}.png"/>
+                        @for (code of mobileCodes | filterByMobileCode : mobileCodePattern; track code.Title) {
+                            <li (click)="selectMobileCode(code)">
+                                <img src="../../../../../../../assets/images/countries/{{code?.Title | lowercase}}.png"/>
 
-                            <span> {{code?.Title}}
-                                ({{code?.Type}})</span>
-                        </li>
+                                <span> {{ code?.Title }}
+                                    ({{ code?.Type }})</span>
+                            </li>
+                        }
                     </ul>
 
                 </div>
@@ -64,23 +61,23 @@
                            placeHolderCharacter="0"
                            numbersOnly
                            name="'MobileNumber'"
+                           [preventFirstDigit]="0"
                            [mask]="currentValueMobileCode.Mask"
                            #mobileDataModelInput="ngModel"
                            required
                            placeholder="{{currentValueMobileCode.Mask ? currentValueMobileCode.Mask : 'Register.Mobile-number-placeholder' | translate}}"
                            [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item': (profileService.editState$ | async).value,
-                           'error-border': mobileDataModelInput.invalid}"/>
+                                   'error-border': mobileDataModelInput.invalid}"/>
                 </div>
-
             </div>
-<!--            <span class="error-field-message" *ngIf="formGroup.get(formControlName).hasError('required') || formGroup.get(formControlName).hasError('pattern')">{{'Error.MobileNumberFieldNotValid' | translate}}</span>-->
-            <span class="error-field-message" *ngIf="mobileDataModelInput.touched && mobileDataModelInput.invalid">{{'Error.MobileNumberFieldNotValid' | translate}}</span>
+            <span class="error-field-message"
+                  *ngIf="mobileDataModelInput.touched && mobileDataModelInput.invalid">{{ 'Error.MobileNumberFieldNotValid' | translate }}</span>
             <div class="verify-icons">
                 <span class="{{'icon-' + (profileService.profileData$ | async)[formControlName + 'VerificationState']}}"></span>
                 <div class="tooltip">
                     <div class="selected"></div>
                     <div class="tooltip-text">
-                        {{'User.icon-' + (profileService.profileData$ | async)[formControlName + 'VerificationState'] | translate}}
+                        {{ 'User.icon-' + (profileService.profileData$ | async)[formControlName + 'VerificationState'] | translate }}
                     </div>
                 </div>
             </div>

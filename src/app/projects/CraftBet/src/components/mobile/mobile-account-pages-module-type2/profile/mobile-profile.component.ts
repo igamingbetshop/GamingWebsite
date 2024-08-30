@@ -1,17 +1,40 @@
-import {Component, ComponentRef, createNgModule, Injector, NgModuleRef, ViewContainerRef} from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ComponentRef,
+    createNgModule, ElementRef,
+    Injector,
+    NgModuleRef,
+    ViewChild,
+    ViewContainerRef
+} from '@angular/core';
 import { LayoutService } from '../../../../../../../@core/services/app/layout.service';
 import { BaseProfile } from '../../../../../../../@theme/components/profile/base-profile';
+import { disableBodyScroll, enableBodyScroll} from 'body-scroll-lock';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './mobile-profile.component.html',
   styleUrls: ['./mobile-profile.component.scss']
 })
-export class MobileProfileComponent extends BaseProfile {
+export class MobileProfileComponent extends BaseProfile implements AfterViewInit {
+    @ViewChild('scrollRef') scrollRef: ElementRef;
 
   constructor(public injector: Injector, public layoutService: LayoutService) {
     super(injector);
   }
+
+    ngAfterViewInit() {
+        const isScrollLocked = this.saveData.getScrollLockState();
+        if (isScrollLocked) {
+            disableBodyScroll(this.scrollRef.nativeElement);
+        }
+    }
+    ngOnDestroy()
+    {
+        enableBodyScroll(this.scrollRef.nativeElement);
+    }
+
   async loadSpecialComponents(item) {
     switch (item.Type) {
       case 'birth-date':

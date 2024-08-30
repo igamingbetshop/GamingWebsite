@@ -1,5 +1,27 @@
 .live-casino-section {
   background: color(product-background);
+  .products-title {
+    display: var(--live-casino-products-title-display, none);
+    justify-content: var(--live-casino-products-title-justify-content, center);
+    align-items: center;
+    margin: var(--live-casino-products-title-margin, 0);
+    padding: var(--live-casino-products-title-padding, 0);
+    font-size: var(--live-casino-products-title-font-size, 21px);
+    font-weight: var(--live-casino-products-title-font-weight, 600);
+    border-bottom: var(--live-casino-products-title-border-bottom, none);
+    border-radius: var(--live-casino-products-title-border-radius, 0);
+    color: var(--live-casino-products-title-color, #fff);
+    background: var(--live-casino-products-title-background-color, transparent);
+    width: var(--live-casino-products-title-width, 100%);
+  }
+  .products-title-icon {
+    display: var(--live-casino-products-title-icon-display, none);
+    justify-content: var(--live-casino-products-title-icon-justify-content, center);
+    color: var(--live-casino-products-title-icon-color, #fff);
+    margin: var(--live-casino-products-title-icon-margin, 0);
+    font-size: var(--live-casino-products-title-icon-font-size, 23px);
+    align-items: center;
+  }
   .live-casino-flex_center {
     display: var(--grouped-products-content-display, flex);
     grid-template-columns: var(--grouped-products-content-grid-template-columns, none);
@@ -16,7 +38,7 @@
     &.no-justify{justify-content: var(--grouped-products-content-justify-content, normal)}
 
     &_item {
-      margin: 0 28px;
+      margin: var(--grouped-products-item-margin, 0 28px);
       cursor: pointer;
       background-repeat: no-repeat;
       img

@@ -49,7 +49,11 @@ export class GlobalLoginBtnComponent implements OnInit, OnChanges {
                     if (this.modeOpenType === 'm-popup') {
                         this.saveData.openPopup.next('m-popup');
                     } else {
-                        this.saveData.openPopup.next(1);
+                        if(this.menuItem.data.openType === "page") {
+                            this.router.navigate(["/login"]);
+                        } else {
+                            this.saveData.openPopup.next(1);
+                        }
                     }
                 }
             }

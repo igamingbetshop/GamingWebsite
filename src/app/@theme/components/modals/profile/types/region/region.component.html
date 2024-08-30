@@ -1,0 +1,28 @@
+<div class="form_field auto-complete"
+     [style.zIndex]="zIndex"
+     [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
+     dropdown>
+    <input type="text"
+           placeholder="{{'User.' + formControlName + 'EmptyOption' | translate}}"
+           [(ngModel)]="profileService[formControlName + 'Pattern']" (click)="onFocusPattern()">
+    <div class="dropdown-container">
+        <div class="items">
+            <div (click)="selectRegionOption({Id:null, Name:''})">{{'User.' + formControlName + 'EmptyOption' | translate}}</div>
+            <div *ngFor="let option of regionOptions | filterByKey : profileService[formControlName + 'Pattern'] : 'Name'"
+                 (click)="selectRegionOption(option)"
+                 class="item">
+                {{option.Name}}
+            </div>
+        </div>
+    </div>
+    <label [class.required-field]="formElement.Config?.mandatory">{{'User.' + formControlName | translate}}</label>
+    <div class="verify-icons">
+        <span class="{{'icon-' + (profileService.profileData$ | async)[formControlName + 'VerificationState']}}"></span>
+        <div class="tooltip">
+            <div class="selected"></div>
+            <div class="tooltip-text">
+                {{'User.icon-' + (profileService.profileData$ | async)[formControlName + 'VerificationState'] | translate}}
+            </div>
+        </div>
+    </div>
+</div>

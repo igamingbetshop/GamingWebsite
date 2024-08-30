@@ -94,13 +94,19 @@ form {
     pointer-events: unset;
   }
 
+  .profile-main-container {
+    background: var(--profile-form-main-container-background, transparent);
+    padding: var(--profile-form-main-container-padding, 0);
+  }
+
   .disable_item {
     pointer-events: none;
     opacity: .8;
-    border-color: #cecece !important;
+    border-color: var(--profile-details-form-disable-input-border-color, #cecece) !important;
   }
   .form_field {
-    width: 100%;
+    width: var(--profile-form-field-width, 100%);
+    margin: var(--profile-form-field-margin, 0);
     position: relative;
     .error-field-message
     {
@@ -114,8 +120,8 @@ form {
     .verify-icons {
       display: var(--settings-profile-verify-icons-display, block);
       position: absolute;
-      top: 18px;
-      right: -29px;
+      top: var(--settings-profile-verify-icons-item-top, 18px);
+      right: var(--settings-profile-verify-icons-item-right, -29px);
       font-size: 24px;
       cursor: pointer;
       .tooltip {
@@ -236,15 +242,18 @@ form {
         //border: 1px solid $border-color;
         color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
         font-size: var(--settings-field-font-size, 16px);
-        text-indent: 0;
-        padding-left: 16px;
+        text-indent: var(--settings-field-text-indent, 0);
+        padding-left: var(--settings-field-padding-left, 16px);
         border: var(--settings-field-border, none);
-        background: var(--account-content-item-bg-color);
+        background: var(--settings-field-background-color, var(--account-content-item-bg-color));
         border-radius: var(--settings-field-border-radius, 6px);
         height: var(--settings-field-height, 40px);
         appearance: var(--open-ticket-appearance, auto);
       }
       border: 1px solid rgba(219, 237, 255, 0.8);
+    }
+    input::placeholder {
+      color: var(--settings-field-placeholder-color, rgb(135, 143, 162));
     }
     input[type=checkbox] {
       height: var(--settings-field-checkbox-height, 18px);
@@ -278,4 +287,33 @@ form {
   p {
     margin-right: var(--success-message-settings-success-margin-right, auto);
   }
+}
+.rightToLeft {
+  .settings_header {
+    .submit-details .setting_btn .fas-save {
+      margin-right: 0;
+      margin-left: 13px;
+    }
+  }
+  form {
+    .form_field {
+      label {
+        right: var(--settings-input-label-left, 8px);
+        left: auto;
+      }
+      input:focus ~ label,
+      input:not(:placeholder-shown) ~ label {
+        text-align: right;
+        //transform: var(--settings-label-right-transform, translateY(-27px) translateX(179px) scale(0.75));
+      }
+      .error-field-message {
+        right: 0;
+      }
+      .verify-icons {
+        left: var(--settings-profile-verify-icons-right-item-right, -29px);
+        right: auto;
+      }
+    }
+  }
+
 }

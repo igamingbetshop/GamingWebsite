@@ -12,8 +12,9 @@ import {
 import {AppCommonHeaderComponent} from "../../common/app-common-header/app-common-header.component";
 import {MenuType} from "@core/enums";
 import {faAngleRight, faAngleDown, faAngleUp} from "@fortawesome/free-solid-svg-icons";
-import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { disableBodyScroll, clearAllBodyScrollLocks, enableBodyScroll } from 'body-scroll-lock';
 import {DOCUMENT} from "@angular/common";
+import {LayoutService} from "@core/services/app/layout.service";
 
 @Component({
     selector: 'app-mobile-left-sidebar',
@@ -39,6 +40,7 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
     public languages:any[] = [];
     public isSingleLang:boolean;
     public languageMenuItem:any = {itemTitle:'1'};
+    public layoutService: LayoutService;
 
     @ViewChild('menuContainerRef') menuContainerRef:ElementRef;
     @ViewChild('langContainerRef') langContainerRef:ElementRef;
@@ -48,10 +50,12 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
 
     constructor(public injector: Injector) {
         super(injector);
+        this.layoutService = injector.get(LayoutService);
         this.languages = this.configService.defaultOptions['Languages'];
         this.isSingleLang = this.languages.length === 1;
         this.document = injector.get(DOCUMENT);
         this.baseControllerService.GetMenu(MenuType.MOBILE_MENU, 'en').then((data: any) => {
+            console.log(data);
             const langIndex = data.findIndex(item => item.Type === "languageDpd_dropdown");
             if(langIndex > -1)
             {
@@ -64,6 +68,11 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
 
                 data.splice(langIndex, 0);
             }
+            const widthIndex = data.findIndex(item => item.Type === 'full');
+            if (widthIndex > -1) {
+                this.screenWidth = String(window.innerWidth);
+            }
+
             this.generalMenuItems = data;
             this.generalMenuItems.map((item) => {
                 return item.SubMenu.map((itemPic) => { itemPic.Src = itemPic.Icon.includes('.') ? '../../../../../../../assets/images/mobile-menu/' + itemPic.Icon : null; });
@@ -84,10 +93,16 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
             if (state) {
                 disableBodyScroll(this.menuContainerRef.nativeElement);
                 disableBodyScroll(this.langContainerRef.nativeElement);
+                this.saveData.setScrollLockState(true);
                 this.sidebarOpenState = true;
                 if (state['fullScreen']) {
                     this.fullScreen = state['fullScreen'];
                 }
+            } else {
+                enableBodyScroll(this.menuContainerRef.nativeElement);
+                enableBodyScroll(this.langContainerRef.nativeElement);
+                this.saveData.setScrollLockState(false);
+                this.sidebarOpenState = false;
             }
         });
         const width = getComputedStyle(document.documentElement).getPropertyValue('--m-left-sidebar-width');
@@ -146,7 +161,9 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
     isOpenChange(event)
     {
         this.showLanguageDropdown = false;
-        clearAllBodyScrollLocks();
+        enableBodyScroll(this.menuContainerRef.nativeElement);
+        enableBodyScroll(this.langContainerRef.nativeElement);
+        this.saveData.setScrollLockState(false);
     }
 
 }

@@ -1,0 +1,289 @@
+.form_field_large {
+  position: relative;
+  width: 100%;
+  .success_message {
+    bottom: var(--success-message-settings-bottom, 0px);
+  }
+  .form_field {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    gap: var(--settings-form-field-send-code-gap, 10px);
+    .error-field-message
+    {
+      font-size: var(--settings-profile-font-size, 15px);
+      color: red;
+      font-weight: var(--settings-profile-font-weight, 700);
+      position: absolute;
+      bottom: var(--settings-profile-error-bottom, 0);
+      left: var(--settings-profile-error-left, 0);
+      right: var(--settings-profile-error-right, 0);
+    }
+    .verify-icons {
+      display: var(--settings-profile-verify-icons-display, block);
+      position: absolute;
+      top: 18px;
+      right: -29px;
+      font-size: 24px;
+      cursor: pointer;
+      .tooltip {
+        display: none;
+        position: absolute;
+        top: 35px;
+        left: -3px;
+        .selected {
+          color: var(--verify-tooltip-icon-color, #111115);
+          width: 0;
+          height: 0;
+          border-left: 9px solid transparent;
+          border-right: 9px solid transparent;
+          border-bottom: 7px solid var(--verify-tooltip-icon-color, #111115);
+          position: absolute;
+          left: 6px;
+          top: -6px;
+        }
+        .tooltip-text {
+          font-size: var(--verify-tooltip-text-font-size, 14px);
+          background: var(--verify-tooltip-text-background, #111115);
+          color: var(--verify-tooltip-text-color, #fff);
+          padding: var(--verify-tooltip-text-padding, 5px 8px);
+          border-radius: var(--verify-tooltip-text-border-radius, 6px);
+          position: relative;
+          z-index: 100;
+          white-space: nowrap;
+          width: auto;
+        }
+      }
+      &:hover {
+        .tooltip {
+          display: block;
+        }
+      }
+    }
+    .icon-verified:before {
+      color: var(--profile-account-status-icon-verified-color, #4F9961);
+    }
+
+    .icon-pending:before {
+      color: var(--profile-account-status-icon-pending-color, #FFD439);
+    }
+
+    .icon-rejected:before {
+      color: var(--profile-account-status-icon-rejected-color, #5EA8FF);
+    }
+    .active_item {
+      pointer-events: unset;
+    }
+    .mobile_verify {
+      margin-right: var(--settings-form-field-send-code-icon-margin-right, 5px) !important;
+      margin-left: var(--settings-form-field-send-code-icon-margin-left, 5px) !important;
+    }
+
+    .disable_item {
+      pointer-events: none;
+      opacity: .8;
+      border-color: #cecece !important;
+    }
+    .mobileData_tabs .custom_dropdown_reg .current_item span {
+      font-size: var(--settings-field-font-size, 16px);
+    }
+    .mobileData_tabs .custom_dropdown_reg:first-child {
+      background: transparent;
+      .custom_dropdown_reg2 {
+        cursor: default;
+      }
+    }
+    .current_item {
+      border: var(--settings-field-border, none);
+      border-radius: var(--settings-field-border-radius, 6px);
+      min-height: var(--settings-field-min-height, 40px);
+      background: var(--account-content-item-bg-color);
+      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      margin: var(--settings-profile-country-list-margin, -12px 0 0 0);
+      position: var(--settings-profile-country-list-position, relative);
+      padding: var(--settings-profile-country-list-padding, 0);
+      .custom-code-label {
+        position: absolute;
+        color: var(--settings-focus-label-focused, #fff);
+        transform: var(--custom-send-code-label-transform, translateY(-27px) translateX(0px) scale(0.75));
+        left: var(--custom-send-code-label-left, 0px);
+        font-size: var(--settings-font-size-label, 16px);
+      }
+      .custom-code-icon {
+        font-size: var(--custom-send-code-icon-font-size, 1.3rem);
+        position: var(--custom-send-code-icon-position, absolute);
+        right: var(--custom-send-code-icon-right, 11px);
+        top: var(--custom-send-code-icon-top, 1px);
+        color: var(--custom-send-code-icon-color, #fff);
+      }
+      .current_item-input {
+        margin: var(--settings-profile-country-list-margin, -3px 0 0 0);
+      }
+      input{
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border: none;
+        outline: none;
+      }
+      >div{display: block}
+      &:focus-within
+      {
+        input{opacity: 1}
+        >div{display: none!important;}
+      }
+    }
+    //.flex_vertical-center {
+    //  display: flex!important;
+    //  padding-left: 9px;
+    //  span {
+    //    color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+    //  }
+    //}
+    .custom_dropdown_list {
+      li {
+        color: var(--m-settings-profile-country-list-color, #fff);
+      }
+    }
+    input {
+      margin: 10px 0 24px 0;
+      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      font-size: var(--settings-field-font-size, 16px);
+      text-indent: 0;
+      padding-left: 16px;
+      border: var(--settings-field-border, none);
+      background: var(--account-content-item-bg-color);
+      border-radius: var(--settings-field-border-radius, 6px);
+      height: var(--settings-field-height, 40px);
+      width: var(--settings-field-send-code-width, 100%);
+      //flex: 1 80%;
+    }
+    input::placeholder {
+      color: var(--settings-field-placeholder-color, rgb(135, 143, 162));
+    }
+    .setting_btn {
+      font-size: var(--font-size-3, 16px);
+      padding: var(--settings-button-text-padding, 0 12px);
+      margin: var(--settings-field-send-code-btn-margin,  7px 0 24px 0);
+      width: var(--settings-field-send-code-btn-width, 104px);
+      height: var(--settings-field-send-code-btn-height, auto);
+      border-radius: var(--settings-field-send-code-btn-border-radius, 4px);
+      white-space: nowrap;
+      background: linear-gradient(to bottom,var(--settings-button-gradient-first-color, #FFFFFF) 0%,var(--settings-button-gradient-second-color, #FFFFFF) 100%);
+      color: var(--settings-button-text-color, #FFFFFF);
+      font-weight: var(--settings-button-text-font-weight, 500);
+      display: var(--settings-field-send-code-btn-display, block);
+      .active_item {
+        pointer-events: unset;
+      }
+
+      .disable_item {
+        pointer-events: none;
+        opacity: .8;
+        border-color: #cecece !important;
+      }
+    }
+    label {
+      color: var(--settings-input-label-color, #fff);
+      position: absolute;
+      top: var(--settings-input-label-top, 20px);
+      left: var(--settings-input-label-left, 8px);
+      height: var(--settings-input-label-height, 25px);
+      transform-origin: 0 50%;
+      transition: transform 200ms, color 200ms;
+      pointer-events: none;
+      padding-left: var(--settings-input-label-padding-left, 6px);
+    }
+    .error-border {
+      border: var(--settings-field-invalid-border, 1px solid red) !important;
+    }
+    input:focus ~ label {
+      width: var(--settings-input-field-label-width, inherit);
+      height: var(--settings-input-label-focused-height, 11px);
+      background: var(--settings-background-color, #FFFFFF);
+      color: var(--settings-field-focus-label, #fff);
+      top: var(--settings-label-top, 20px);
+      font-size: var(--settings-background-color-font-size, 16px);
+    }
+    input:focus ~ .cut,
+    input:not(:placeholder-shown) ~ .cut {
+      transform: translateY(8px);
+      display: block;
+    }
+    input:focus ~ .cut {
+      display: block;
+    }
+    input:focus::placeholder {
+      opacity: 1;
+    }
+    input::placeholder {
+      opacity: 0;
+    }
+    .number_input::placeholder {
+      opacity: 1;
+    }
+    .number_input {
+      width: var(--settings-mobile-sms-code-width, 15%);
+      margin: var(--settings-field-send-code-btn-margin,  10px 0 24px 0);
+    }
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
+      transform: var(--settings-label-transform, translateY(-27px) translateX(0px) scale(0.75));
+      background-color: var(--settings-background-color, unset);
+      height: var(--settings-label-focused-height, 22px);
+      font-size: var(--settings-font-size-label, 16px);
+      color: var(--settings-focus-label-focused, #fff);
+      text-align: var(--settings-focus-label-focused-text-align, left);
+      width: var(--settings-focus-label-focused-width, auto);
+      padding-left: var(--settings-padding-left-focus-label-focused, 10px);
+      padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+    }
+    select:focus~label,
+    select:not([value=""]):valid~label {
+      transform:var(--register-select-label-transform, translateY(-27px) translateX(10px) scale(0.75));
+      top: var(--register-focused-select-label-top, 20px);
+      font-size: var(register-focused-label-font-size, 16px);
+      color: var(--settings-focus-label-focused, #fff);
+      background-color: var(--settings-background-color-focus-label-focused, unset);
+      padding-left: var(--settings-padding-left-focus-label-focused, 5px);
+      padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+    }
+  }
+  .select-mobile-code {
+    width: 50%;
+  }
+  select {
+    &:not(.choose_input) {
+      margin: 10px 0 24px 0;
+      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      font-size: var(--settings-field-font-size, 16px);
+      text-indent: 0;
+      padding-left: 16px;
+      border: var(--settings-field-border, none);
+      background: var(--account-content-item-bg-color);
+      border-radius: var(--settings-field-border-radius, 6px);
+      height: var(--settings-field-height, 40px);
+      appearance: var(--open-ticket-appearance, auto);
+    }
+    border: 1px solid rgba(219, 237, 255, 0.8);
+  }
+  .required-field
+  {
+    &:after
+    {
+      content: "*";
+      position: absolute;
+      top:-5px;
+      right: -6px;
+    }
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1376px)
+{
+  input, select {
+    width: 100% !important;
+  }
+}

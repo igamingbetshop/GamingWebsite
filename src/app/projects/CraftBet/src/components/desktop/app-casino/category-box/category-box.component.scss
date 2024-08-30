@@ -1,0 +1,80 @@
+casino-category
+{
+  &.search{display: none}
+  &.search-view
+  {
+    &:not(.search){display: none}
+    &.search,&.filter{display: block}
+  }
+}
+
+::ng-deep casino-category {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.open-lucky-game
+{
+  display: var(--open-slots-icon-display, flex);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 114px;
+  height: 128px;
+  border-radius: 20px 0 0 20px;
+  background: var(--open-slots-icon-background, #FFC015);
+  position: fixed;
+  right: 0;
+  top: 20%;
+  z-index: 1;
+  transition: all 0.3s;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  /*-webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;*/
+  .text
+  {
+    color: var(--open-slots-icon-text-color, #232323);
+    text-align: center;
+    font-size: var(--open-slots-icon-text-font-size, 14px);
+    font-weight: var(--open-slots-icon-text-font-weight, 800);
+    line-height: 26px; /* 185.714% */
+    text-transform: uppercase;
+  }
+  img
+  {
+    height: 92px;
+    width: 92px;
+  }
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translate(0px, 0px);
+    }
+    40% {
+      transform: translate(0px, -5px);
+    }
+    60% {
+      transform: translate(0px, -5px);
+    }
+  }
+}
+
+.left-menu-box
+{
+  display: flex;
+  .left-menu
+  {
+    background-color: black;
+    width: 200px;
+    min-width: 200px;
+  }
+  .content
+  {
+    flex:1;
+  }
+}

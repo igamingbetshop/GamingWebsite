@@ -15,7 +15,7 @@ import {ProfileService} from "./service/profile.service";
 import {UtilityService} from "../../../@core/services/app/utility.service";
 import {BaseApiService} from "../../../@core/services/api/base-api.service";
 import {Subscription} from "rxjs";
-import {ConfigService} from "../../../@core/services";
+import {ConfigService, SaveData, SharedService} from "../../../@core/services";
 import {StateService} from "@core/services/app/state.service";
 import {MatDialog} from "@angular/material/dialog";
 
@@ -45,10 +45,12 @@ export class BaseProfile implements OnInit, OnDestroy
         'send-code',
         'language'];
     public baseControllerService:BaseControllerService;
+    public saveData: SaveData;
     private changeDetector:ChangeDetectorRef;
     public getSettingsInfoService:GetSettingsInfoService;
     public utilityService:UtilityService;
     public baseApiService:BaseApiService;
+    public sharedService: SharedService;
     dialog = inject(MatDialog);
     protected stateService:StateService;
     profileService:ProfileService;
@@ -59,6 +61,7 @@ export class BaseProfile implements OnInit, OnDestroy
 
     private subscription:Subscription;
     private isFirstTimeUpdateClient:boolean = true;
+    public rightToLeftOrientation: boolean = false;
 
     constructor(protected injector:Injector)
     {
@@ -69,10 +72,15 @@ export class BaseProfile implements OnInit, OnDestroy
         this.utilityService = injector.get(UtilityService);
         this.baseApiService = injector.get(BaseApiService);
         this.configService = injector.get(ConfigService);
-        this.stateService = injector.get(StateService)
+        this.stateService = injector.get(StateService);
+        this.sharedService = injector.get(SharedService);
+        this.saveData = injector.get(SaveData);
     }
     ngOnInit()
     {
+        this.sharedService.rightToLeftOrientation.subscribe((responseData) => {
+            this.rightToLeftOrientation = responseData;
+        });
         this.subscription = new Subscription();
         this.subscription.add(this.profileService.profileData$.subscribe(data => {
             if(data)
@@ -108,11 +116,6 @@ export class BaseProfile implements OnInit, OnDestroy
                                     this.loadSpecialComponents(item);
                                 }
                             });
-                            if(this.stateService.getPaymentNavigationState === "fromDeposit")
-                            {
-                                this.profileService.changeEditState({value:true, isReset:true});
-                                this.formGroup.markAllAsTouched();
-                            }
                         }
                     });
                 }
@@ -129,18 +132,16 @@ export class BaseProfile implements OnInit, OnDestroy
         this.subscription.add(this.getSettingsInfoService.onSaveClientDetails$.subscribe((data) => {
             this.updateDataMessage = data;
             if(data.Client)
-                this.profileService.updateProfile(data.Client);
-            this.utilityService.showError('', this, "updateDataMessage");
-            if(this.stateService.getPaymentNavigationState === "fromDeposit" && data.Error === false)
             {
-                this.stateService.setPaymentNavigationState("fromProfile");
-                history.back();
+                this.profileService.updateProfile(data.Client);
+                this.onUpdate(data.Client);
             }
+
+            this.utilityService.showError('', this, "updateDataMessage");
         }));
     }
     ngOnDestroy()
     {
-        this.stateService.setPaymentNavigationState(null);
         this.subscription.unsubscribe();
     }
 
@@ -190,6 +191,7 @@ export class BaseProfile implements OnInit, OnDestroy
             return;
 
         const profile = this.formGroup.getRawValue();
+        profile.MobileNumber = profile.MobileCode + profile.MobileNumber;
 
         if(profile.hasOwnProperty('BirthDay'))
         {
@@ -247,5 +249,8 @@ export class BaseProfile implements OnInit, OnDestroy
             }
         });
     }
+    protected onUpdate(client:any)
+    {
 
+    }
 }

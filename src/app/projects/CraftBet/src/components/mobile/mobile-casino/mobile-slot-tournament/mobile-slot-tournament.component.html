@@ -1,0 +1,27 @@
+<div class="mobile-container" [ngStyle]="layoutService.layoutStyle">
+    <div id="tournament" class="block-tournament">
+        <div class="wrapper"  style="background-image: url('../assets/images/tournament-bg.png')"></div>
+        <div class="info"><span>{{'Start Date' | translate}}:</span>{{currentTournament().StartTime | date:'dd.MM.yy HH:mm a'}}{{timezone}}</div>
+        <div class="t-block-title"><span>{{currentTournament().Name}}</span></div>
+        <div class="countdown-end-date"><span>{{'Countdown to end date' | translate}}</span> {{currentTournament().FinishTime | date:'dd.MM.yy HH:mm a'}}{{timezone}}</div>
+
+        <i class="icon-arrow next" (click)="nextTournament()"></i>
+
+
+        <time-count-down [closeTime]="currentTournament().FinishTime"></time-count-down>
+
+        <i class="icon-arrow prev" (click)="prevTournament()"></i>
+
+        <div class="prize-fund">{{'Prize Fund' | translate}}</div>
+        <button class="prize-fund-button">
+            <span>{{currentTournament().CurrencyId}}  {{currentTournament().PrizePool}}</span>
+        </button>
+        <tournament-leaderboard [tournamentId]="selectedTournamentId()" [bonus]="currentTournament().Bonus"></tournament-leaderboard>
+        <div class="filter-tournament-section" (click)="openFilterPopup()">
+            <span>{{currentTournament().Name}}</span>
+            <fa-icon [icon]="faBars" [size]="'2x'"></fa-icon>
+        </div>
+    </div>
+</div>
+
+

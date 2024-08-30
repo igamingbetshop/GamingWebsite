@@ -1,4 +1,8 @@
 <div class="live-casino-section recponcive-height">
+    <div class="products-title">{{'Game.ProductTitle' | translate}}</div>
+    <div class="products-title-icon">
+        <fa-icon [icon]="['fas', 'angle-down']"></fa-icon>
+    </div>
     <div class="grouped-products-content max-width live-casino-flex_center" [class.no-justify]="productList.length > 4">
         <a class="grouped-products-content_item" routerLinkActive="active" *ngFor="let item of productList"
            (click)="openGame(item.Href)">

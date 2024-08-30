@@ -17,12 +17,14 @@
     select {
       //height: 40px;
       height: var(--surname-input-height, 40px);
+      font-size: var(--surname-input-font-size, 14px);
       background-color: backgroundColor(reg-form-select,transparent);
       padding-left: var(--reg-form-select-padding-left, 5px) !important;
     }
 
     input {
       height: var(--surname-input-height, 40px);
+      font-size: var(--surname-input-font-size, 14px);
       background-color: backgroundColor(reg-form-surname, transparent);
     }
   }
@@ -112,11 +114,6 @@
     padding: 0;
     margin: 0;
     list-style: none;
-
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     flex-flow: row wrap;
 
@@ -151,8 +148,8 @@
     display: block;
     background: color(register-button-background);
     color: color(register-button-text);
-    text-transform: uppercase;
-    font-weight: 400;
+    text-transform: var(--reg-btn-text-transform, uppercase);
+    font-weight: var(--reg-btn-font-weight, 400);
     font-size: fontSize(reg-btn, 18px);
     height: height(reg-btn, auto);
     line-height: height(reg-btn-line, 44px);
@@ -202,12 +199,31 @@
   }
 
   .error_message {
-    font-size: fontSize(reg-error-message,12px);
+    font-size: fontSize(reg-error-message, 12px);
+    font-weight: fontWeight(reg-error-message, 400);
     top: itemTop(reg-error-message, auto);
-    max-width: 100%;
-    position: absolute;
+    max-width: var(--reg-error-message-max-width, 100%);
+    position: var(--reg-error-message-position, absolute);
     bottom: itemBottom(reg-error-message,10px);
     left: itemLeft(reg-error-message,10px);
+    right: itemRight(reg-error-message,auto);
+    display: var(--reg-error-message-display, block);
+    color: var(--reg-error-message-color, var(--error-message-color, #FF0029));
+    background: var(--reg-error-message-background, transparent);
+    padding: var(--reg-error-message-padding, 0);
+    border-radius: var(--reg-error-message-border-radius, 0);
+    gap: var(--reg-error-message-gap, 0);
+    border: var(--reg-error-message-border, none);
+    align-items: center;
+
+    .register-icon-close {
+      display: var(--reg-error-message-icon-display, none);
+      font-size: var(--reg-error-message-icon-font-size, 20px);
+    }
+    .register-error-text {
+      display: var(--reg-error-message-text-display, none);
+      margin-bottom: var(--reg-error-message-text-margin-bottom, 10px);
+    }
 
     &.checkbox-err {
       position: absolute;
@@ -710,6 +726,8 @@ select {
     height: height(custom-dropdown-reg-code, 40px);
     background-color: backgroundColor(reg-dpd-current-item, #f2f2f4);
     font-size: fontSize(reg-dpd-current-item, 14px);
+    font-weight: var(--reg-dpd-current-item-font-weight, 400);
+    color: var(--reg-dpd-current-item-color, var(--reg-text-color, #fff));
     div:first-child
     {
       display: flex;
@@ -778,7 +796,7 @@ select {
 
       border-style: solid;
       border-width: thin;
-      border-color: #7C9ED1;
+      border-color: var(--custom_dropdown_list-register-border-color,#7C9ED1);
 
       img {
         margin-right: 10px;
@@ -794,6 +812,7 @@ select {
         padding: padding(custom-dropdown-list, 0 10px);
         width: 100%;
         border-radius: 0;
+        color: var(--reg-dpd-list-dropdown-item-color, var(--reg-text-color, #fff));
 
         &:hover {
           background: backgroundColor(reg-dpd-list-item-hover, #2193FB);
@@ -985,6 +1004,36 @@ select {
 }
 .rightToLeft
 {
+  .form_field_checked {
+    text-align: right;
+  }
+  .allFormItems .form_field select, .allFormItems .form_field input {
+    padding-right: var(--reg-field-padding-left, 9px);
+  }
+  .register_PSection_redirect {
+    right: var(--register-redirect-right-right, var(--register-redirect-left, 508px));
+    left: var(--register-redirect-right-left, auto);
+    text-align: right;
+  }
+  .flex_vertical-center {
+    flex-direction: var(--register-mobile-data-tabs-right-flex-direction, row-reverse);
+  }
+  .registration-section input::placeholder {
+    text-align: right;
+  }
+  .allFormItems .form_field label {
+    right: var(--signup-input-label-left, 8px);
+    left: auto;
+  }
+  .registration-section select {
+    text-align: var(--reg-text-select-right-text-align, right);
+  }
+  .custom_dropdown_reg .current_item {
+    direction: rtl;
+  }
+  .custom_dropdown_reg.opened .custom_dropdown_list li, .custom_dropdown_reg.open .custom_dropdown_list li {
+    direction: rtl;
+  }
   .begion_tabs
   {
     >.custom_dropdown_reg {
@@ -1238,12 +1287,7 @@ select {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .form-row-item {
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-}
+
 
 
 .form-row1 {
@@ -1280,7 +1324,8 @@ select {
     font-size: fontSize(register-form-label, 14px);
   }
   .change-password-field-type2 {
-    top: var(--change-password-field-type-top, 10px);
+    top: 50%;
+    transform: translateY(-50%);
     color: itemColor(change-password-field-type-top, #fff);
     cursor: pointer;
   }
@@ -1312,12 +1357,6 @@ select {
   select{background-color: backgroundColor(reg-form-select,transparent)}
 }
 
-@media only screen and (max-width: 380px) {
-  .form-row-item {
-    margin-left: 4px;
-    margin-right: 4px;
-  }
-}
 .currency-field-display {
   display: var(--currency-field-display, block) !important;
   width: var(--currency-field-width, 100%) !important;
@@ -1610,7 +1649,8 @@ select {
     .error-field-message2
     {
       bottom: itemBottom(register-error-field-message2, -21px);
-      display: display(register-error-field-message2, none);
+      right: itemRight(register-error-field-message2, auto);
+      display: display(register-error-field-message2, block);
     }
     .cut {
       background: var(--register-background-color, #FFFFFF);
@@ -1682,7 +1722,7 @@ select {
       background-color: var(--register-background-color, #FFFFFF);
       height: height(register-label-focused, 12px);
       font-size: var(--register-background-color-font-size-label, 20px);
-      color: var(--login-field-focus-label-focused, #fff);
+      color: var(--register-input-label-focused-color, var(--login-field-focus-label-focused, #fff));
     }
     select:focus~label,
     select:not([value=""]):valid~label {
@@ -1805,1074 +1845,3 @@ select {
     font-size: fontSize(regForm-success-message-registered, 16px);
   }
 }
-
-@media screen and (min-width: 1800px) {
-  .custom_dropdown_reg2
-  {
-    margin-left: 3px;
-  }
-  .allFormItems .password_form_field {
-    gap: var(--register-form-field-big-grid-gap, 17px);
-  }
-}
-@media screen and (min-width: 1600px) and (max-width: 1800px) {
-  .registration-section .register-form_section {
-    .allForms {
-      height: var(--reg-form-section-big-height, calc(100% - 80px));
-    }
-    .registration-section_menu {
-      width: calc(var(--d-register-tab-header-width, 100%) * 0.9);
-      .go_back{
-        left: var(--reg_go-back-big-left, 55px);
-      }
-    }
-  }
-  .custom_dropdown_reg {
-    .current_item {
-      div span {
-
-      }
-    }
-  }
-  .custom_dropdown_reg2
-  {
-    width: width(register-form-regionTab-item, 49%);
-  }
-}
-@media screen and (min-width: 0px) and (max-width: 1376px)
-{
-  .registration-section {
-    //height: height(registration-section, 672px);
-    .password_form_field_top_quick {
-      div {
-        .form_field {
-          input {
-            width: 100% !important;
-          }
-        }
-      }
-    }
-    .form_field_checked .reg-checkbox {
-      width: 20px !important;
-    }
-    .register-form_section {
-      .allForms {
-        height: var(--reg-form-section-small-height, calc(100% - 80px));
-      }
-    }
-    .form_field {
-      .mobileData_tabs {
-        .custom_dropdown_reg2 input {
-          width: 100% !important;
-        }
-      }
-      select {
-        height: calc(var(--surname-input-height, 40px) * 0.7);
-        font-size: calc(var(--input-select-style-font-size, 14px) * 0.7);
-        option
-        {
-          font-size: calc(var(--input-select-style-font-size, 14px) * 0.7) !important;
-        }
-      }
-      input {
-        height: calc(var(--surname-input-height, 40px) * 0.7);
-        width: 100% !important;
-        font-size: calc(var(--input-select-style-font-size, 14px) * 0.7);
-      }
-      input::placeholder {
-        font-size:  calc(var(--register-form-label-font-size, 16px) * 0.7);
-      }
-      input:not(:placeholder-shown) ~ label {
-        transform: var(--register-input-label-transform, translateY(-16px) translateX(10px) scale(0.75));
-        height: calc(var(--register-label-focused-height, 10px) * 0.7);
-        font-size: calc(var(--register-background-color-font-size-label, 14px) * 0.7);
-      }
-      .hidden-mobile-number-label {
-        top: -16px;
-      }
-      label
-      {
-        top:  calc(var(--signup-input-label-top, 20px) * 0.7);
-        font-size:  calc(var(--register-form-label-font-size, 16px) * 0.7);
-      }
-      .error-field-message{font-size: 8px}
-      select:not([value=""]):valid ~ label
-      {
-        height: calc(var(--signup-input-label-height, 25px) * 0.7);
-        font-size: calc(var(--register-focused-label-font-size, 14px) * 0.7);
-        //top: calc(var(--register-focused-select-label-top, 30px) * 0.7);
-        line-height: var(--register-focused-select-label-line-height, 0px);
-      }
-      input:focus ~ label
-      {
-        transform: var(--register-input-label-transform, translateY(-21px) translateX(10px) scale(.75));
-        height:  calc(var(--register-label-focused-height, 10px) * 0.7);
-        font-size:  calc(var(--register-background-color-font-size-label, 14px) * 0.7);
-      }
-      .change-password-field-type {
-        top: var(--change-password-field-icon-medium-position-top, auto);
-        font-size: 11px;
-      }
-      .form_field_checked
-      {
-        margin-top: calc(var(--reg-form-field-checked-margin-top, unset) * 0.7);
-        &_top {
-          .change-password-field-type {
-            top: var(--change-password-field-icon-medium-position-top, auto);
-          }
-        }
-        &_bottom {
-          input[type=checkbox]:before {
-            top: auto;
-          }
-          input[type=checkbox]:checked:after {
-            top:auto;
-            width: 7px;
-            height: 16px;
-            left: 5px;
-          }
-        }
-      }
-    }
-    &_menu {
-      margin-bottom: calc(var(--register-header-margin-bottom, 64px) * 0.7);
-      height: calc(var(--d-register-tab-header-height,unset) * 0.7) !important;
-      margin-top: calc(var(--d-register-tab-header-margin-top, unset) * 0.7) !important;
-
-      .reg_item {
-
-        //width: calc(50% - 22px);
-        font-size: 12px;
-        line-height: calc(var(--d-register-tab-line-height, 32px) * 0.7) !important;
-
-        &.active {
-          left: calc(var(--reg_item_active-left, 464px) * 0.7);
-          margin-left: calc(var(--register-form-item-margin-left, 1.5%) * 0.7);
-          height:  calc(var(--d-register-tab-selected-height, unset) * 0.7) !important;
-
-          .icon-arrow-to-left{
-            font-size: 13px;
-            margin-right: 12px;
-          }
-
-        }
-      }
-    }
-    .allFormItems {
-      &.allFormItemsDesktop {
-        .regSteps {
-          .regStep {
-            width: 22px;
-            margin-right: 6px;
-          }
-        }
-      }
-    }
-
-    &_form {
-
-      .full-reg-panel {
-        width: 100%;
-      }
-
-      .reg-panel {
-        width: 50%;
-      }
-    }
-
-    .quik_form {
-      .form_field {
-        width: 48%;
-      }
-
-      .checkbox-field {
-        margin-top: 15px;
-      }
-
-    }
-
-
-    .register-text {
-      right: 140px;
-    }
-
-    .reg_btn {
-      width: width(reg-btn, 100%);
-      border-bottom-left-radius: borderBottomLeftRadius(reg-btn, 6px);
-      border-bottom-right-radius: borderBottomRightRadius(reg-btn, 6px);
-      border-top-left-radius: borderTopLeftRadius(reg-btn, 6px);
-      border-top-right-radius: borderTopRightRadius(reg-btn, 6px);
-      margin: 0px auto 0 auto;
-      font-size: calc(var(--reg-btn-font-size, 18px) * 0.7);
-
-    }
-
-    .error_message {
-      font-size: 12px;
-      top: itemTop(reg-error-message, auto);
-      max-width: 100%;
-      position: absolute;
-      bottom: itemBottom(reg-error-message,10px);
-      left: 0;
-      text-align: left;
-    }
-
-    .register-background{
-      height:  calc(var(--register-background-height, 672px) * 0.7);
-      width: calc(var(--register-background-width, 400px) * 0.7);
-      border-radius: borderRadius(register-background, 6px, 6px, 6px, 6px);
-      position: relative;
-      padding-left: var(--register-background-small-padding-left, 12px);
-      padding-right: var(--register-background-small-padding-right, 12px);
-
-      .reg_item{
-        font-size: 12px;
-        line-height: 22px;
-        &.not_active{
-          margin: var(--reg-item-notActive-small-margin, 44px auto 54.9px auto);
-          padding: var(--reg-item-notActive-small-padding, 6px 9px 6px 10px);
-          box-shadow: var(--reg-item-notActive-small-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
-        }
-        &.disabled {
-          .reg_item_text {
-            &:before {
-              top: var(--reg-item-active-icon-small-top, 10px);
-              left: var(--reg-item-active-icon-small-left, 22px);
-            }
-          }
-        }
-      }
-
-      img {
-        margin-top:  calc(var(--register-logo-margin-top, 22px) * 0.7);
-        height: height(register-logo-small, auto);
-      }
-
-      .reg-prompt-text{
-        font-size: calc(var(--reg-prompt-textfont-size, 14px)* 0.7);
-        margin: var(--reg-prompt-text-small-margin, 5px auto 0 auto);
-        width: 80%;
-      }
-
-      .social-register-text{
-        width: 90%;
-        bottom: calc(var(--social-register-text-bottom, 105px) * 0.7);
-        font-size: calc(var(--social-register-text-font-size, 14px) * 0.7);
-      }
-
-      ul{
-        bottom:  calc(var(--register-social-icons-bottom, 69px) * 0.7);
-
-        li{
-          height: calc(var(--register-social-icons-height, 28px) * 0.7);
-          width:calc(var(--register-social-icons-width, 28px) * 0.7);
-          margin-right: calc(var(--register-social-icon-margin-right, 10px) * 0.7);
-        }
-      }
-
-      .safety-info{
-        width: calc(var(--register-safety-info-width, 90%) * 0.7);
-        padding-bottom: calc(var(--register-safety-info-padding-bottom, 16px) * 0.7);
-        font-size: calc(var(--register-safety-info-font-size, 16px) * 0.7);
-        /*bottom: calc(var(--register-safety-info-bottom, 0) * 0.7);*/
-
-        .divider-line{
-          height: height(divider-line, 1px);
-          margin-bottom: calc(var(--divider-line-margin-bottom, 16px) * 0.7);
-        }
-
-        &_text{
-          a{
-            margin-left: calc(var(--register-safety-href-margin-left, 8px) * 0.7);
-          }
-        }
-
-      }
-
-    }
-
-    .register-form_section{
-      //width: calc(100% - var(--register-background-width));
-      width: var(--registration-section-height-responsive, calc(100% - 300px));
-      max-height: calc(var(--registration-section-height, 672px) * 0.7);
-      //min-height:  calc(var(--registration-section-height, 672px) * 0.7);
-      min-height:  calc(var(--registration-section-height, 672px) * 0.7);
-      margin-left: calc(var(--modal-content-margin-left, 32px) * 0.7);
-      .registration-section_menu {
-        width: var(--d-register-tab-header-width, 100%);
-        .go_back {
-          //left: 76px;
-          left: var(--d-register-tab-header-go-back-small-left, 55px);
-        }
-        .reg_item.active {
-          font-size: calc(var(--register-tab-title-font-size, 16px) * 0.7);
-        }
-      }
-      .reg-form-info
-      {
-        .reg-form-header
-        {
-          font-size: calc(var(--reg-form-header-font-size, 14px) * 0.7);
-          margin-bottom: calc(var(--reg-form-header-margin-bottom, 10px) * 0.7);
-        }
-      }
-      form
-      {
-        .allFormItems
-        {
-          top: calc(var(--allFormItems-top, 118px) * 0.7);
-          padding: 0;
-        }
-      }
-
-    }
-
-    .default-radioButton-section{
-      &_customizeByButton{
-        .input_field{
-          width: calc(var(--radioButton-input-field-width, 49%) * 0.7);
-          height:  calc(var(--radioButton-input-field-height, 40px) * 0.7);
-
-          &_right{
-            right: itemRight(radioButton, 0);
-          }
-
-          input {
-            font-size: 14px;
-          }
-          span {
-            left: calc(var(--radioButton-input-text-left, 16px) * 0.7);
-          }
-        }
-
-      }
-
-    }
-
-  }
-  .form-row-item {
-    .top-row {
-      //.info-reg-field {
-      //  font-size: 11px;
-      //}
-    }
-  }
-  .custom_dropdown_reg:after{display: none}
-  .custom_dropdown_reg:after {
-    right: -2px;
-  }
-  .custom_dropdown_reg {
-    width: 100%;
-    height: 100%;
-    font-size: 10px;
-
-    .fa {
-      margin-top: -5px;
-    }
-
-
-    .current_item {
-      //padding: 0 5px;
-      height: calc(var(--surname-input-height, 40px) * 0.7);
-      min-height: calc(var(--surname-input-height, 40px) * 0.7);
-      line-height: 15px;
-      font-size: calc(var(--input-select-style-font-size, 14px) * 0.7);
-      img {
-        margin-right: 7px;
-        height: 15px;
-      }
-
-      span {
-        height: 25px;
-        line-height: 25px;
-        white-space: nowrap;
-      }
-
-      &_leftPart {
-        height: 25px;
-      }
-    }
-    &.opened, &.open {
-
-      .custom_dropdown_list {
-        width: 100%;
-        min-height: 21px;
-        max-height: calc(var(--custom_dropdown_list-height, 150px) * 0.7);
-        min-width: 50px;
-
-        img {
-          margin-right: 4px;
-          height: 15px;
-        }
-
-        li {
-          line-height: 21px;
-          height: 21px;
-          padding: 0 4px;
-          font-size: calc(var(--input-select-style-font-size, 14px) * 0.7);
-          display: flex;
-          justify-content: var(--input-select-style-justify-content, space-between);
-        }
-      }
-    }
-
-
-  }
-  .custom_dropdown_reg2{width: width(register-form-regionTab-item, 49%);}
-  .birthDate_tabs {
-    width: 100%;
-    height: 100%;
-
-    .custom_dropdown_reg {
-
-      &:not(:last-child) {
-        margin-right: calc(var(--register-form-birthData-item-margin-right, 15px) * 0.7);
-      }
-    }
-
-
-  }
-  .begion_tabs {
-    width: 100%;
-    &.default-select {
-      height: 100%;
-    }
-
-    .custom_dropdown_reg {
-      height: 100%;
-      width: calc(var(--register-form-regionTab-item-width, 49%) * 0.7);
-
-      &:nth-child(odd) {
-        margin-right: calc(var(--register-form-regionData-item-margin-right, 15px) * 0.7);
-      }
-    }
-
-    &__Region1 {
-      .custom_dropdown_reg {
-        width: 100%;
-
-        &:nth-child(odd) {
-          margin-right: 0;
-        }
-      }
-    }
-
-    &__Region2 {
-      .custom_dropdown_reg {
-        flex: 1 1 calc(var(--register-form-regionTab-item-width, 48%) * 0.7);
-      }
-    }
-
-    &__Region4, &__RegionP {
-      .custom_dropdown_reg {
-
-        flex: 1 1 calc(var(--register-form-regionTab-item-width, 48%) * 0.7);
-
-        &:nth-child(1), &:nth-child(2) {
-          margin-bottom: calc(var(--register-form-item-margin-bottom, 5px) * 0.7);
-        }
-
-        &:nth-child(3), &:nth-child(4) {
-          margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.7);
-        }
-      }
-
-      &.flex-column {
-
-        .custom_dropdown_reg {
-          flex: 1 1 calc(var(--register-form-regionTab-item-width, 100%) * 0.7);
-          margin: 0;
-        }
-
-        .begion_tabs-item {
-          &:nth-child(1) {
-            margin-bottom: calc(var(--register-form-item-margin-right, 5px) * 0.7);
-          }
-
-          &:nth-child(4), &:nth-child(7) {
-            margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.7);
-          }
-
-          &:nth-child(2), &:nth-child(3), &:nth-child(5), &:nth-child(6) {
-            margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.7);
-            margin-bottom: calc(var(--register-form-item-margin-right, 5px) * 0.7);
-          }
-
-        }
-      }
-    }
-
-    &__RegionP {
-      &.flex-column {
-        .begion_tabs-item {
-          &:nth-child(4) {
-            margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.7);
-            margin-bottom: calc(var(--register-form-item-margin-right, 5px) * 0.7);
-          }
-        }
-      }
-    }
-
-  }
-  .mobileData_tabs {
-    width: 100%;
-    height: 100%;
-    gap: 9px;
-
-    .custom_dropdown_reg {
-      width:var(--register-form-mobileData-item-width, 49%);
-
-      &:not(:last-child) {
-        margin-right: calc(var(--register-form-mobileData-item-margin-right, 0) * 0.7);
-      }
-    }
-  }
-
-  .form-row1 {
-    width: var(--register-form-row-item-1-medium-width, 97%);
-  }
-  .form-row-item {
-    margin-left: calc(var(--register-form-item-margin-left, 1.5%) * 0.7);
-    margin-right: calc(var(--register-form-item-margin-right, 1.5%) * 0.7);
-    margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.7);
-    margin-bottom: calc(var(--register-form-item-margin-bottom, 5px) * 0.7);
-
-    .password_form_field {
-      gap: 8px;
-    }
-    &_withLabel{
-      height: calc(var(--form-row-item-withLabel-height, 100px) * 0.7);
-      .top-row {
-        margin-top: var(--register-form-item-top-row-margin-top, 0px);
-      }
-    }
-
-    &_withoutLabel {
-      height: calc(var(--register-form-item-height, 41px) * 0.7);
-      .top-row {
-        margin-top: var(--register-form-item-top-row-margin-top, 0px);
-        .password_form_field {
-          &_top {
-            .change-password-field-type {
-              top: var(--change-password-field-icon-medium-position-top, auto);
-              font-size: 11px;
-            }
-          }
-        }
-      }
-    }
-  }
-  .form_field {
-    label {
-      font-size: calc(var(--register-form-label-font-size, 14px) * 0.7);
-      /* top: calc(var(--signup-input-label-top, unset) * 0.7) !important;*/
-    }
-
-  }
-  .reg-step-navigate-buttons {
-    padding-top: var(--register-form-item-small-padding-top, 14px);
-    height: calc(var(--register-form-item-height, 41px) * 0.7) !important;
-    margin-left: calc(var(--register-form-item-margin-left, 1.5%) * 0.7);
-    width: var(--register-form-item-small-width, 93%);
-    bottom: calc(var(--register-form-item-bottom, 30px) * 0.7);
-    left: 0;
-
-
-    .craft_btn {
-      height: 28px;
-      line-height: 28px;
-      &.prev-btn {
-        min-width: calc(var(--next-btn-width, 100px) * 0.7);
-      }
-
-      //&.not_active {
-      //  width: var(--not-active-btn-width, 100%);
-      //}
-
-      &.next-btn {
-        min-width:calc(var(--next-btn-width, 100px) * 0.7);
-        cursor: pointer;
-        //width: calc(var(--next-btn-width, 100px) * 0.9);
-        width: var(--not-active-btn-width, 100%);
-        margin-bottom: marginBottom(register-next-btn-small, 70px);
-        //height: calc(var(--next-btn-height, 44px) * 0.7);
-      }
-
-    }
-
-  }
-  .register_PSection_redirect
-  {
-    font-size: calc(var(--register-redirect-font-size, 16px) * 0.7);
-    left:  calc(var(--register-redirect-left, 432px) * 0.73);
-  }
-}
-@media screen and (min-width: 1600px) and (max-width: 1679px)
-{
-  .registration-section {
-    .register-form_section {
-      .allForms {
-        height: var(--reg-form-section-medium-s-height, calc(100% - 80px));
-      }
-    }
-  }
-}
-@media screen and (min-width: 1377px) and (max-width: 1599px)
-{
-  .registration-section {
-    .register-form_section {
-      .allForms {
-        height: var(--reg-form-section-medium-height, calc(100% - 80px));
-      }
-    }
-    .go_back{
-      left: var(--reg_go-back-medium-left, 16px);
-    }
-    .form_field {
-      select {
-        height: calc(var(--surname-input-height, 40px) * 0.9);
-      }
-      input {
-        height: calc(var(--surname-input-height, 40px) * 0.9);
-      }
-      .form_field_checked
-      {
-        margin-top: calc(var(--reg-form-field-checked-margin-top, unset) * 0.9);
-      }
-    }
-    &_menu {
-      margin-bottom: calc(var(--register-header-margin-bottom, 64px) * 0.9);
-      height: calc(var(--d-register-tab-header-height,unset) * 0.9) !important;
-      margin-top: calc(var(--d-register-tab-header-margin-top, unset) * 0.9) !important;
-
-      .reg_item {
-
-        //width: calc(50% - 22px);
-        font-size: 14px;
-        line-height: calc(var(--d-register-tab-line-height, 32px) * 0.9) !important;
-
-        &.active {
-          left: calc(var(--reg_item_active-left, 464px) * 0.9);
-          margin-left: calc(var(--register-form-item-margin-left, 1.5%) * 0.9);
-          height: calc(var(--d-register-tab-selected-height, unset) * 0.9) !important;
-
-          .icon-arrow-to-left{
-            font-size: 15px;
-            margin-right: 16px;
-          }
-
-        }
-      }
-    }
-
-    &_form {
-
-      .full-reg-panel {
-        width: 100%;
-      }
-
-      .reg-panel {
-        width: 50%;
-      }
-    }
-
-    .quik_form {
-      .form_field {
-        width: 48%;
-      }
-
-      .checkbox-field {
-        margin-top: 15px;
-      }
-
-    }
-
-
-    .register-text {
-      right: 140px;
-    }
-
-    .reg_btn {
-      width: calc(var(--reg-btn-width, 100px) * 0.9);
-      border-bottom-left-radius: borderBottomLeftRadius(reg-btn, 6px);
-      border-bottom-right-radius: borderBottomRightRadius(reg-btn, 6px);
-      border-top-left-radius: borderTopLeftRadius(reg-btn, 6px);
-      border-top-right-radius: borderTopRightRadius(reg-btn, 6px);
-      margin: 0px auto 0 auto;
-      font-size: calc(var(--reg-btn-font-size, 18px) * 0.9);
-
-    }
-
-    .error_message {
-      font-size: 14px;
-      top: itemTop(reg-error-message, auto);
-      max-width: 100%;
-      position: absolute;
-      bottom: itemBottom(reg-error-message,10px);
-      left: itemLeft(reg-error-message,10px);
-    }
-
-    .register-background{
-      height:  calc(var(--register-background-height, 672px) * 0.9);
-      width: calc(var(--register-background-width, 400px) * 0.9);
-      border-radius: borderRadius(register-background, 6px, 6px, 6px, 6px);
-      position: relative;
-      padding-left: var(--register-background-medium-padding-left, 14px);
-      padding-right: var(--register-background-medium-padding-right, 14px);
-
-      .reg_item{
-        font-size: 14px;
-        line-height: 28px;
-        &.not_active{
-          margin: var(--reg-item-notActive-medium-margin, 44px auto 54.9px auto);
-          padding: var(--reg-item-notActive-medium-padding, 6px 9px 6px 10px);
-          box-shadow: var(--reg-item-notActive-medium-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
-        }
-        &.disabled {
-          .reg_item_text {
-            &:before {
-              top: var(--reg-item-active-icon-medium-top, 12px);
-            }
-          }
-        }
-      }
-
-      img {
-        margin-top:  calc(var(--register-logo-margin-top, 22px) * 0.9);
-      }
-
-      .reg-prompt-text{
-        font-size: calc(var(--reg-prompt-textfont-size, 14px)* 0.9);
-        width: 80%;
-      }
-
-      .social-register-text{
-        width: 90%;
-        bottom: calc(var(--social-register-text-bottom, 105px) * 0.9);
-        font-size: calc(var(--social-register-text-font-size, 14px) * 0.9);
-      }
-
-      ul{
-        bottom:  calc(var(--register-social-icons-bottom, 69px) * 0.9);
-
-        li{
-          height: calc(var(--register-social-icons-height, 28px) * 0.9);
-          width:calc(var(--register-social-icons-width, 28px) * 0.9);
-          margin-right: calc(var(--register-social-icon-margin-right, 10px) * 0.9);
-        }
-      }
-
-      .safety-info{
-        width: calc(var(--register-safety-info-width, 90%) * 0.9);
-        padding-bottom: calc(var(--register-safety-info-padding-bottom, 16px) * 0.9);
-        font-size: calc(var(--register-safety-info-font-size, 16px) * 0.9);
-        /* bottom: calc(var(--register-safety-info-bottom, 0) * 0.9);*/
-
-        .divider-line{
-          height: height(divider-line, 1px);
-          margin-bottom: calc(var(--divider-line-margin-bottom, 16px) * 0.9);
-        }
-
-        &_text{
-          a{
-            margin-left: calc(var(--register-safety-href-margin-left, 8px) * 0.9);
-          }
-        }
-
-      }
-
-    }
-
-    .register-form_section{
-      //width: calc(100% - var(--register-background-width));
-      width: var(--registration-section-height-small-responsive, calc(100% - 250px));
-      max-height: calc(var(--registration-section-height, 672px) * 0.9);
-      min-height:  calc(var(--registration-section-height, 672px) * 0.9);
-      margin-left: calc(var(--modal-content-margin-left, 32px) * 0.9);
-      .registration-section_menu {
-        width: calc(var(--d-register-tab-header-width) * 0.9);
-      }
-      .reg-form-info
-      {
-        .reg-form-header
-        {
-          font-size: calc(var(--reg-form-header-font-size, 14px) * 0.9);
-          margin-bottom: calc(var(--reg-form-header-margin-bottom, 10px) * 0.9);
-        }
-      }
-      form
-      {
-        .allFormItems
-        {
-          top: calc(var(--allFormItems-top, 118px) * 0.9);
-        }
-      }
-    }
-
-    .default-radioButton-section{
-      &_customizeByButton{
-        .input_field{
-          width: calc(var(--radioButton-input-field-width, 49%) * 0.9);
-          height:  calc(var(--radioButton-input-field-height, 40px) * 0.9);
-
-          &_right{
-            right: itemRight(radioButton, 0);
-          }
-
-          input {
-            font-size: 14px;
-          }
-          span {
-            left: calc(var(--radioButton-input-text-left, 16px) * 0.9);
-          }
-        }
-
-      }
-
-    }
-
-  }
-  .form-row-item {
-    .top-row {
-      .info-reg-field {
-        font-size: 11px;
-      }
-    }
-  }
-  .custom_dropdown_reg:after{display: none}
-  .custom_dropdown_reg:after {
-    right: -2px;
-    top: 10px;
-  }
-  .custom_dropdown_reg {
-    width: 100%;
-    height: 100%;
-    font-size: 12px;
-
-    .fa {
-      margin-top: -5px;
-    }
-
-
-    .current_item {
-      //padding: 0 10px;
-      //height: 36px;
-
-      img {
-        margin-right: 10px;
-        height: 15px;
-      }
-
-      span {
-        height: 25px;
-        line-height: 25px;
-        white-space: nowrap;
-      }
-
-      &_leftPart {
-        height: 25px;
-        line-height: 25px;
-        white-space: nowrap;
-      }
-    }
-    &.opened, &.open {
-
-      .custom_dropdown_list {
-        width: 100%;
-        min-height: 21px;
-        max-height: calc(var(--custom_dropdown_list-height, 150px) * 0.9);
-        min-width: 50px;
-
-        img {
-          margin-right: 10px;
-          height: 15px;
-        }
-
-        li {
-          line-height: 21px;
-          height: 21px;
-          font-size: 12px;
-          padding: 0 10px;
-
-        }
-      }
-    }
-
-
-  }
-  .custom_dropdown_reg2
-  {
-    width: width(register-form-regionTab-item, 49%);
-  }
-  .birthDate_tabs {
-    width: 100%;
-    height: 100%;
-
-    .custom_dropdown_reg {
-
-      &:not(:last-child) {
-        margin-right: calc(var(--register-form-birthData-item-margin-right, 15px) * 0.9);
-      }
-    }
-
-
-  }
-  .begion_tabs {
-    width: 100%;
-    &.default-select {
-      height: 100%;
-    }
-
-    .custom_dropdown_reg {
-      height: 100%;
-      width: calc(var(--register-form-regionTab-item-width, 49%) * 0.9);
-
-      &:nth-child(odd) {
-        margin-right: calc(var(--register-form-regionData-item-margin-right, 15px) * 0.9);
-      }
-    }
-
-    &__Region1 {
-      .custom_dropdown_reg {
-        width: 100%;
-
-        &:nth-child(odd) {
-          margin-right: 0;
-        }
-      }
-    }
-
-    &__Region2 {
-      .custom_dropdown_reg {
-        flex: 1 1 calc(var(--register-form-regionTab-item-width, 48%) * 0.9);
-      }
-    }
-
-    &__Region4, &__RegionP {
-      .custom_dropdown_reg {
-
-        flex: 1 1 calc(var(--register-form-regionTab-item-width, 48%) * 0.9);
-
-        &:nth-child(1), &:nth-child(2) {
-          margin-bottom: calc(var(--register-form-item-margin-bottom, 5px) * 0.9);
-        }
-
-        &:nth-child(3), &:nth-child(4) {
-          margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.9);
-        }
-      }
-
-      &.flex-column {
-
-        .custom_dropdown_reg {
-          flex: 1 1 calc(var(--register-form-regionTab-item-width, 100%) * 0.9);
-          margin: 0;
-        }
-
-        .begion_tabs-item {
-          &:nth-child(1) {
-            margin-bottom: calc(var(--register-form-item-margin-right, 5px) * 0.9);
-          }
-
-          &:nth-child(4), &:nth-child(7) {
-            margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.9);
-          }
-
-          &:nth-child(2), &:nth-child(3), &:nth-child(5), &:nth-child(6) {
-            margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.9);
-            margin-bottom: calc(var(--register-form-item-margin-right, 5px) * 0.9);
-          }
-
-        }
-      }
-    }
-
-    &__RegionP {
-      &.flex-column {
-        .begion_tabs-item {
-          &:nth-child(4) {
-            margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.9);
-            margin-bottom: calc(var(--register-form-item-margin-right, 5px) * 0.9);
-          }
-        }
-      }
-    }
-
-  }
-  .mobileData_tabs {
-    width: 100%;
-    height: 100%;
-    gap: 11px;
-
-    .custom_dropdown_reg {
-      width:var(--register-form-mobileData-item-width, 49%);
-
-      &:not(:last-child) {
-        margin-right: calc(var(--register-form-mobileData-item-margin-right, 0) * 0.9);
-      }
-    }
-  }
-  .form-row-item {
-    //margin-left: calc(var(--register-form-item-margin-left, 1.5%) * 0.9);
-    margin-right: calc(var(--register-form-item-margin-right, 1.5%) * 0.9);
-    margin-top: calc(var(--register-form-item-margin-top, 15px) * 0.9);
-    margin-bottom: calc(var(--register-form-item-margin-bottom, 5px) * 0.9);
-
-    .password_form_field {
-      gap: 10px;
-    }
-    &_withLabel{
-      height: calc(var(--form-row-item-withLabel-height, 100px) * 0.9);
-    }
-
-    &_withoutLabel {
-      height: calc(var(--register-form-item-height, 41px) * 0.9);
-    }
-  }
-  .form-row1 {
-    width: var(--register-form-row-item-1-medium-width, 97%);
-  }
-  .form_field {
-    label {
-      font-size: calc(var(--register-form-label-font-size, 14px) * 0.9);
-      top: calc(var(--signup-input-label-top, 20px) * 0.9);
-    }
-
-  }
-  .reg-step-navigate-buttons {
-    padding-top: var(--register-form-item-medium-padding-top, 14px);
-    height: calc(var(--register-form-item-height, 41px) * 0.9) !important;
-    margin-left: calc(var(--register-form-item-margin-left, 1.5%) * 0.9);
-    width: var(--register-form-item-medium-width, 82%);
-    /*bottom: calc(var(--register-form-item-bottom, 30px) * 0.9);*/
-    left: auto;
-    .craft_btn {
-      height: 36px;
-      line-height: 36px;
-      &.prev-btn {
-        min-width: calc(var(--next-btn-width, 100px) * 0.9);
-      }
-
-      &.not_active {
-        width: var(--not-active-btn-width, 100%);
-      }
-
-      &.next-btn {
-        min-width:calc(var(--next-btn-width, 100px) * 0.9);
-        height: calc(var(--next-btn-height, 44px) * 0.9);
-        margin-bottom: var(--next-btn-medium-margin-bottom, 40px);
-        cursor: pointer;
-        width: 100%;
-      }
-
-    }
-
-  }
-  .register_PSection_redirect
-  {
-    font-size: calc(var(--register-redirect-font-size, 16px) * 0.9);
-    left:  calc(var(--register-redirect-left, 432px) * 0.8);
-    bottom: calc(var(--register-redirect-bottom, 0px) * 0.9);
-  }
-}
-

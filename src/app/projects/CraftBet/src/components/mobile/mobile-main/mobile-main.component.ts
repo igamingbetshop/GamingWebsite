@@ -23,6 +23,15 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
 
   public rightToLeftOrientation: boolean = false;
   isShowDeviceLayoutBackground:boolean = false;
+  private readonly footerExcludedUrls = [
+    '/prematch',
+    'sport/live',
+    '/esport',
+    '/login',
+    '/signup',
+    '/chart',
+    '/profile-details'
+  ];
 
 
   @HostListener('window:resize', ['$event'])
@@ -142,6 +151,6 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
   private checkFooterDisplay()
   {
     const url = this.router.url;
-    this.hideFooter = url.includes('/prematch') || url.includes('/live') || url.includes('/esport') || url.includes('/login') || url.includes('/signup') || url.includes('/livecasino');
+    this.hideFooter = this.footerExcludedUrls.some(elem => url.includes(elem));
   }
 }

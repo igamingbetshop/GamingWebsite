@@ -1,4 +1,4 @@
-<div class="mobile-modal-content mobile-info-modal-content">
+<div *ngIf="isLoaded" class="mobile-modal-content mobile-info-modal-content" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
   <div class="modal-body flex_between">
     <h1>{{'User.Info' | translate}}</h1>
     <fa-icon [icon]="faTimes" (click)="close()"></fa-icon>

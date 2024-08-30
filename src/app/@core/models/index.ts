@@ -93,6 +93,7 @@ export class Bonus {
     Name: string;
     PlayerId: number;
     ReuseNumber:number;
+    StatusId:number;
 }
 
 export class BonusBet {
@@ -336,4 +337,45 @@ export class FragmentData
     NickName:string;
     State:string;
     Items:any[]
+}
+
+export class ActiveTournaments
+{
+    Id:number;
+    PartnerId:number;
+    Name:string;
+    StartTime:string;
+    FinishTime:string;
+    Info: string;
+}
+
+export class ISegment {
+    [key: string]: any;
+    numbers: INumbers[];
+    temporalUnits: string;
+}
+
+export class INumbers {
+    displayTop: any;
+    displayBottom: any;
+    overlayTop: any;
+    overlayBottom: any;
+}
+
+export class ITimeRemaining {
+    [key: string]: any;
+    complete: any;
+    Seconds: any;
+    Minutes: any;
+    Hours: any;
+    Days: any;
+}
+
+export class PartnerCurrency {
+    CurrentRate: number;
+    Id: any;
+    Name: any;
+    Symbol: any;
+    Type: any;
+    Balance: number;
 }

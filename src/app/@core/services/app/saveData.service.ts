@@ -38,6 +38,8 @@ export class SaveData
     public changeNickName = new Subject();
     public currentScrollPosition$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
     public changeMobItem$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    private scrollLockState = new BehaviorSubject<boolean>(false);
+    public scrollLockState$ = this.scrollLockState.asObservable();
     public mobileLoginPreviousState;
     public currentSubItem;
     public selectedItem;
@@ -138,6 +140,14 @@ export class SaveData
         this.currentMobSubItem = item;
         // this.selectedMobItem = item;
         this.changeMobItem$.next(item);
+    }
+
+    setScrollLockState(isLocked: boolean) {
+        this.scrollLockState.next(isLocked);
+    }
+
+    getScrollLockState() {
+        return this.scrollLockState.getValue();
     }
 }
 

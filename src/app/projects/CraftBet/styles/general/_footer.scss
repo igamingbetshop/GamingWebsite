@@ -19,7 +19,6 @@ $footerBottomSize: var(--footer--height);
     margin-left: auto;
     margin-right: auto;
     background-color: color(footer-open-button-background);
-    /*background-image: url("~/assets/images/footer-arrow.png");*/
     background-position: center 31px;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -27,13 +26,13 @@ $footerBottomSize: var(--footer--height);
     text-align: center;
     line-height: 0;
     border: 1px solid color(header-menu-item-active-border);
-    height: 45px;
-    width: 75px;
-    margin-top: -50px;
+    height: var(--footer-open-button-height, 45px);
+    width: var(--footer-open-button-width, 75px);
+    margin-top: var(--footer-open-button-margin-top, -50px);
     transition: box-shadow 500ms;
     position: fixed;
-    left: 50%;
-    bottom: -28px;
+    left: var(--footer-open-button-left, 50%);
+    bottom: var(--footer-open-button-bottom, -28px);
     z-index: 1;
 
     &.rotate-180 {

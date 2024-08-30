@@ -44,7 +44,8 @@ export class BannersService {
       request.Token =  "";
       request.ClientId = 0;
     }
-    request.Type = this.router.url.includes('category') ? (this.deviceService.isMobile() ? 200 : 100) + Number(type) : type;
+    //request.Type = this.router.url.includes('category') ? (this.deviceService.isMobile() ? 200 : 100) + Number(type) : type;
+    request.Type =  type;
 
     return this.http.post(`${WebApiUrl}/${PartnerId}/api/Main/GetImages`, request).pipe(map(data => {
       return data['ResponseCode'] == 0 ? data['ResponseObject'] : [];

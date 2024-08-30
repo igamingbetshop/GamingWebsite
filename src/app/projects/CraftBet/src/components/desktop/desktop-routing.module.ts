@@ -31,6 +31,8 @@ import {AffiliateComponent} from "./affiliate/affiliate.component";
 import {OpenGameGuard} from "../../../../../@core/services/helpers/open-game-guard";
 import {RegisterPageComponent} from "./register-page/register-page.component";
 import {PaymentErrorComponent} from "./payment-error/payment-error.component";
+import {SlotTournamentComponent} from "./app-casino/slot-tournament/slot-tournament.component";
+import {LoginPageComponent} from "./login-page/login-page.component";
 
 const routes: Routes = [
     {
@@ -119,7 +121,7 @@ const routes: Routes = [
                 ]
             },
             {
-                path: 'affiliate',
+                path: 'affiliates',
                 component: AffiliateComponent
             },
             {
@@ -154,6 +156,12 @@ const routes: Routes = [
                         data: {isActiveFooter: false, position: FragmentPositions.Casino}
                     },
                     {
+                        path: ':provider/:providerId',
+                        canActivate:[OpenGameGuard],
+                        component: CommonWindowComponent,
+                        data: {isActiveFooter: false, position: FragmentPositions.Casino}
+                    },
+                    {
                         path: ':typeId',
                         component: AppCasinoComponent,
                         data: {
@@ -177,6 +185,10 @@ const routes: Routes = [
             {
                 path: 'character-hierarchy',
                 component: CharacterHierarchyComponent,
+            },
+            {
+                path: 'slot-tournament',
+                component: SlotTournamentComponent,
             },
             {
                 path: 'games',
@@ -227,11 +239,15 @@ const routes: Routes = [
             },
             {
                 path: 'category/:categoryId',
-                component: AppFilterGameComponent,
+                component: AppCasinoComponent,
                 data: {
+                    position:FragmentPositions.Category
+                }
+               /* component: AppFilterGameComponent,
+                data: {.
                     isActiveFooter: false,
                     slideKey: BannerTypes.CASINO
-                }
+                }*/
             },
             {
                 path: 'category/:id/:productId/:type/:openType',
@@ -333,6 +349,10 @@ const routes: Routes = [
                 component: AboutUsComponent
             },
             {
+                path: 'slot-wheel',
+                loadComponent: () => import('../desktop/fragments/slot-wheel/slot-wheel.component').then(c => c.SlotWheelComponent)
+            },
+            {
                 path: 'user/1',
                 data: {'roles': '1'},
                 canLoad: [AccountPagesLoadGuard],
@@ -352,6 +372,10 @@ const routes: Routes = [
                 path: 'register',
                 component:RegisterPageComponent
             },
+            {
+                path: 'login',
+                component: LoginPageComponent
+            }
         ]
     },
     {

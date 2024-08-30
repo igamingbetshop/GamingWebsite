@@ -1,4 +1,4 @@
-<div class="casino-section min-height recponcive-height" xmlns="http://www.w3.org/1999/html">
+<div class="casino-section min-height recponcive-height" [ngClass]="{'live-parent-casino-section': router.url.includes('/livecasino')}" xmlns="http://www.w3.org/1999/html">
   <router-outlet></router-outlet>
 
 </div>

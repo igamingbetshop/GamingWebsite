@@ -43,6 +43,12 @@ import {CommonBankMessageModalModule} from "../../common/app-common-bank-message
 import {HorizontalScrollDirectiveModule} from "../../../../../../@theme/directives/horizontal-scroll/horizontal-scroll.directive.module";
 import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
 import {NgxMaskDirective} from "ngx-mask";
+import {
+    MobileAccountPageType1ClientsTransactionsComponent
+} from "./transactions/clients-transactions/mobile-account-page-type1-clients-transactions.component";
+import {
+    MobileAccountPageType1AgentsTransactionsComponent
+} from "./transactions/agents-transactions/mobile-account-page-type1-agents-transactions.component";
 
 
 @NgModule({
@@ -84,7 +90,9 @@ import {NgxMaskDirective} from "ngx-mask";
         CommonMessageModalModule,
         CommonBankMessageModalModule,
         HorizontalScrollDirectiveModule,
-        DropdownDirectiveModule
+        DropdownDirectiveModule,
+        MobileAccountPageType1ClientsTransactionsComponent,
+        MobileAccountPageType1AgentsTransactionsComponent
     ],
 
     providers:[

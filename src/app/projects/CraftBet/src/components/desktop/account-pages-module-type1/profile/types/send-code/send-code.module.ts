@@ -1,14 +1,29 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SendCodeComponent} from "./send-code.component";
+import {
+    OnlyNumberDirectiveModule
+} from "../../../../../../../../../@theme/directives/only-number/only-number.directive.module";
+import {DropdownDirectiveModule} from "../../../../../../../../../@theme/directives/dropdown/dropdown-directive.module";
+import {
+    FilterMobileCodePipeModule
+} from "../../../../../../../../../@theme/pipes/filter-by-mobile-code/filter-mobile-code-pipe.module";
+import {NgxMaskDirective} from "ngx-mask";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
     imports: [
         CommonModule,
         TranslateModule,
         FormsModule,
+        OnlyNumberDirectiveModule,
+        DropdownDirectiveModule,
+        FilterMobileCodePipeModule,
+        NgxMaskDirective,
+        ReactiveFormsModule,
+        FaIconComponent
     ],
   exports: [
       SendCodeComponent

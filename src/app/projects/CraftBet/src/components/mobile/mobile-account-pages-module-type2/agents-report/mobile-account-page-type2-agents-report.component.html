@@ -1,0 +1,126 @@
+<div class="mobile-history-section mobile-agent-section">
+    <h2 class="mobile-history-section_title">{{'User.Agents-History' | translate}}</h2>
+    <div class="mobile-agents-form">
+        <form [formGroup]="form" (ngSubmit)="submit(1)" class="history-tools-panel">
+            <div class="history-tools1 history-tools-field">
+                <label>{{'User.Period-of-time' | translate}}</label>
+                <select formControlName="timeFilter">
+                    <option *ngFor="let item of historyTimeFilter; let i = index" [ngValue]="i">
+                        {{item.Name | translate}}
+                    </option>
+                </select>
+            </div>
+
+            <div *ngIf="customFilterShow" class="history-tools custom-tool">
+                <label>{{'User.From' | translate}}</label>
+                <input type="datetime-local" formControlName="changedate">
+            </div>
+
+            <div *ngIf="customFilterShow" class="history-tools custom-tool">
+                <label>{{'User.To' | translate}}</label>
+                <input type="datetime-local" formControlName="changedTodate">
+            </div>
+
+            <div class="history-tools">
+                <button class="craft_btn show-btn craft_btn-mobile">{{'User.Show' | translate}}</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="mobile-history-table">
+        <table>
+            <tbody class="bet-history-tbody">
+            <tr>
+                <td><span>{{'User.AgentId' | translate}}</span></td>
+                <td><span>{{'User.AgentFirstName' | translate}}</span></td>
+                <td><span>{{'User.AgentLastName' | translate}}</span></td>
+                <td><span>{{'User.AgentUserName' | translate}}</span></td>
+                <td><span>{{'User.TotalDepositAmount' | translate}}</span></td>
+                <td><span>{{'User.TotalWithdrawAmount' | translate}}</span></td>
+                <td><span>{{'User.TotalBetsCount' | translate}}</span></td>
+                <td><span>{{'User.TotalBetAmount' | translate}}</span></td>
+                <td><span>{{'User.TotalWinAmount' | translate}}</span></td>
+                <td><span>{{'User.TotalProfit' | translate}}</span></td>
+                <td><span>{{'User.TotalGGRCommission' | translate}}</span></td>
+                <td><span>{{'User.TotalTurnoverCommission' | translate}}</span></td>
+            </tr>
+            <ng-container
+                    *ngFor="let item of getBetsHistoryService.agentsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getBetsHistoryService.agentsListCount }, let i = index">
+                <tr>
+                    <td class="agents-block_item-id">
+                        <div class="icon-arrow-right"
+                             [ngClass]="{'icon-arrow-opened': openedParentId === item?.AgentId}"
+                             (click)="openParentId(item?.AgentId)"></div>
+                        <span>{{item?.AgentId}}</span>
+                    </td>
+                    <td>{{item?.AgentFirstName}}</td>
+                    <td>{{item?.AgentLastName}}</td>
+                    <td>{{item?.AgentUserName}}</td>
+                    <td>{{item?.TotalDepositAmount}}</td>
+                    <td>{{item?.TotalWithdrawAmount}}</td>
+                    <td>{{item?.TotalBetsCount}}</td>
+                    <td>{{item?.TotalBetAmount}}</td>
+                    <td>{{item?.TotalWinAmount}}</td>
+                    <td>{{item?.TotalProfit}}</td>
+                    <td>{{item?.TotalGGRCommission}}</td>
+                    <td>{{item?.TotalTurnoverCommission}}</td>
+                </tr>
+                <tr *ngIf="openedParentId === item?.AgentId">
+                    <td colspan="12">
+                        <table class="inner-child">
+                            <ng-container
+                                    *ngTemplateOutlet="childAgentsTemplate; context: { $implicit: item?.ChildAgents }"></ng-container>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>
+            </tbody>
+        </table>
+        <ng-template #childAgentsTemplate let-childAgents>
+            <ng-container *ngFor="let child of childAgents">
+                <div class="agents-block-child">
+                    <td class="agents-block_item-id">
+                        <div class="icon-arrow-right"
+                             [ngClass]="{'icon-arrow-opened': openedChildIds[child?.AgentId]}"
+                             (click)="openChildParentId(child?.AgentId)"></div>
+                        <span>{{child?.AgentId}}</span>
+                    </td>
+                    <td>{{child?.AgentFirstName}}</td>
+                    <td>{{child?.AgentLastName}}</td>
+                    <td>{{child?.AgentUserName}}</td>
+                    <td>{{child?.TotalDepositAmount}}</td>
+                    <td>{{child?.TotalWithdrawAmount}}</td>
+                    <td>{{child?.TotalBetsCount}}</td>
+                    <td>{{child?.TotalBetAmount}}</td>
+                    <td>{{child?.TotalWinAmount}}</td>
+                    <td>{{child?.TotalProfit}}</td>
+                    <td>{{child?.TotalGGRCommission}}</td>
+                    <td>{{child?.TotalTurnoverCommission}}</td>
+                </div>
+                <tr *ngIf="openedChildIds[child?.AgentId]">
+                    <td>
+                        <table class="inner-child">
+                            <tbody>
+                            <ng-container
+                                    *ngTemplateOutlet="childAgentsTemplate; context: { $implicit: child?.ChildAgents }"></ng-container>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>
+        </ng-template>
+    </div>
+    <div class="empty-bets empty-block" *ngIf="getBetsHistoryService.agentsList.length == 0">
+        <section class="empty-bets empty-block">
+            <span class="icon-tickets icon"></span>
+            <span class="empty-block-text">{{'User.Agents-empty' | translate}}</span>
+        </section>
+    </div>
+    <div class="pagination_section">
+        <pagination-controls [autoHide]="true" (pageChange)="getAgentsReportHistory($event)"
+                             previousLabel="{{'User.Previous' | translate}}"
+                             nextLabel="{{'User.Next' | translate}}"></pagination-controls>
+    </div>
+
+
+</div>

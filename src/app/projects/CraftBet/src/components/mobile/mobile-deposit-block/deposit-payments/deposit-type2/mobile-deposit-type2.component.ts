@@ -17,14 +17,15 @@ export class MobileDepositType2Component extends BaseCreateDynamicComponent {
     super.ngOnInit();
   }
 
-  createSubComponent(Id: number, ContentType: number, info:number[]) {
-    super.createSubComponent(Id, ContentType, info);
+  createSubComponent(Id: number, ContentType: number, info:number[], maxMinAmount) {
+    super.createSubComponent(Id, ContentType, info, maxMinAmount);
     switch (Id) {
       default: {
         this.componentRef = this.entry.createComponent(MobileDepositType2DefaultComponent);
         this.componentRef.instance.paymentSystemId = Id;
         this.componentRef.instance.contentType = ContentType;
         this.componentRef.instance.nominals = info;
+        this.componentRef.instance.maxMinAmount = maxMinAmount;
         break;
       }
     }

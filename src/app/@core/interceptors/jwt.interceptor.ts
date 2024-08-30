@@ -29,13 +29,13 @@ export class JWTInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler)
     {
         this.requests.push(req);
-        if(req.body?.Loader !== false)
+        if(req.body?.Loader !== false && req.url.includes('loader=false'))
         {
             this.loaderService.show();
         }
         delete req.body?.Loader;
         const user = this.localStorageService.get('user');
-        if(req.body && user)
+        if(req.body && user && !Object.hasOwn(req.body, "IsAgent"))
         {
             req.body.IsAgent = user.IsAgent;
         }

@@ -42,7 +42,7 @@
       </div>
     </div>
   </form>
-
+  <ng-container *ngIf="getPaymentsService.paymentHistoryItemsList.length > 0; else emptyPayments">
   <div class="paymet-item"
        *ngFor="let item of getPaymentsService.paymentHistoryItemsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getPaymentsService.paymentHistoryItemsCount }, let i = index">
     <div class="paymet-item_header Payments-{{item?.StatusName}}">
@@ -75,6 +75,14 @@
     </div>
 
   </div>
+  </ng-container>
+  <ng-template #emptyPayments>
+    <section class="empty-payments empty-block">
+      <span class="icon-transaction icon"></span>
+      <span class="empty-block-text">{{'User.Payments-empty' | translate}}</span>
+      <span class="empty-history-text">{{noHistory}}</span>
+    </section>
+  </ng-template>
 
   <!--  <loader></loader>-->
 

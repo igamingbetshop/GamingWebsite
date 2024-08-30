@@ -130,6 +130,7 @@
     @include flex-distance-between;
     padding-top: 10px;
     padding-bottom: 10px;
+    gap: var(--account-statement-row-item-gap, 0);
     border-bottom: 1px solid var(--acount-info-color);
     color: color(account-statement-item);
     &:first-child {

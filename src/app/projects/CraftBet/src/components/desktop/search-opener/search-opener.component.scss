@@ -1,0 +1,9 @@
+:host{
+  padding: 10px;
+  svg{
+    width: 16px;
+    height: 16px;
+    color:  var(--search-opener-color, #cccccc);
+    cursor: pointer;
+  }
+}

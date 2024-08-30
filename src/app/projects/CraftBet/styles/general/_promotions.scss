@@ -1,10 +1,22 @@
-
+.promotions-head-title-icon {
+  display: var(--promotions-title-icon-display, none);
+  justify-content: var(--promotions-title-icon-justify-content, center);
+  color: var(--promotions-title-icon-color, #fff);
+  margin: var(--promotions-title-icon-margin, 0);
+  font-size: var(--promotions-title-icon-font-size, 23px);
+  align-items: center;
+}
 .promotions-section {
   background: var(--promotions-products-list-background, var(--product-background-color, #FFFFFF));
   color: #d0d9e7;
   display: flex;
   /*width: 100%;*/
   max-width: var(--promotions-max-width, none);
+  background-size: var(--promotions-products-list-background-size, 100% 100%);
+  background-repeat: var(--promotions-products-list-background-repeat, no-repeat);
+  background-image: var(--promotions-products-list-background-image, unset);
+  background-attachment: var(--promotions-products-list-background-attachment, unset);
+  background-position: var(--promotions-products-list-background-position, unset);
 
   .promotion_container {
     display: grid;
@@ -111,7 +123,7 @@
 
       .promotions_text {
         display: block;
-        width: 100%;
+        width: var(--promotions-text-width, 100%);
         height: height(promotions-text,93px);
         font-size: fontSize(promotions-text,14px);
         box-shadow: var(--promotions-text-box-shadow, 5px 0px 7px 0px rgba(0, 0, 0, 0.4) inset);
@@ -132,7 +144,7 @@
           padding-right: var(--promotions-title-padding-right, 0);
           padding-top: var(--promotions-title-padding-top, 0);
           padding-bottom: var(--promotions-title-padding-bottom, 0);
-          width: fit-content;
+          width: var(--promotions-title-width, fit-content);
           margin-bottom: var(--promotions-title-margin-bottom, 8px);
           margin-top: var(--promotions-title-margin-top, 0);
           margin-left: var(--promotions-title-margin-left, 0);
@@ -141,7 +153,7 @@
         }
         p {
           height: unset;
-          width: fit-content;
+          width: var(--promotions-text-paragraph-width, fit-content);
           overflow: unset;
           text-overflow: unset;
           color: itemColor(promotions-text,rgba(219, 237, 255, 0.9));

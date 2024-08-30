@@ -1,4 +1,4 @@
-import {Directive, HostBinding, ElementRef, HostListener, Input} from '@angular/core';
+import {Directive, HostBinding, ElementRef, HostListener, Input, input} from '@angular/core';
 
 @Directive({
     selector: '[collapse]',
@@ -6,6 +6,7 @@ import {Directive, HostBinding, ElementRef, HostListener, Input} from '@angular/
 })
 export class CollapseDirective {
 
+    closeAll = input<boolean>(false);
     @Input('collapse')
     set collapse(value:boolean)
     {
@@ -17,7 +18,28 @@ export class CollapseDirective {
 
     @HostListener('click', ['$event']) onCollapseClick($event)
     {
-        $event.stopPropagation();
-        this.opened = !this.opened;
+        if(this.closeAll())
+        {
+            if(this.el.nativeElement == $event.currentTarget) {
+                $event.stopPropagation();
+                this.opened = !this.opened;
+                let event = new CustomEvent('closeCollapse', {detail:this.el.nativeElement});
+                document.dispatchEvent(event);
+            }
+        }
+        else
+        {
+            $event.stopPropagation();
+            this.opened = !this.opened;
+        }
+    }
+
+    @HostListener('document:closeCollapse', ['$event']) closeByDetails($event)
+    {
+        if(this.closeAll())
+        {
+            if($event.detail != this.el.nativeElement)
+                this.opened = false;
+        }
     }
 }

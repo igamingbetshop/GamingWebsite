@@ -1,18 +1,18 @@
 .allFormItems
 {
   width: 100%;
-  padding-top: 50px;
+  padding-top: var(--registration-verify-code-items-padding-top, 50px);
   .form_field {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: var(--registration-verify-code-form-gap, 16px);
     position: relative;
     .input{
-      width: 51px;
-      height: 50px;
-      border-radius: 7px;
-      font-size: 26px;
+      width: var(--registration-verification-code-text-width, 51px);
+      height: var(--registration-verification-code-text-height, 50px);
+      border-radius: var(--registration-verification-code-text-border-radius, 7px);
+      font-size: var(--registration-verification-code-text-font-size, 26px);
       padding-left: var(--verification-code-text-padding-left, 0);
       text-align: var(--verification-code-text-align, left);
       color: var(--verification-code-text-color, #000000);
@@ -32,7 +32,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 48px;
+    padding-top: var(--verify-code-otp-padding-top, 48px);
     span {
       font-weight: var(--verify-code-otp-font-weight, 600);
       font-size: var(--verify-code-otp-font-size, 16px);
@@ -68,11 +68,14 @@
 }
 @media screen and (min-width: 0px) and (max-width: 1610px)
 {
-  .allFormItems .form_field {
-    gap: 7px;
-    .input {
-      width: 40px;
-      height: 40px;
+  .allFormItems {
+    padding-top: var(--registration-verify-code-items-small-padding-top, var(--registration-verify-code-items-padding-top, 50px)) !important;
+    .form_field {
+      //gap: 7px;
+      .input {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
 }

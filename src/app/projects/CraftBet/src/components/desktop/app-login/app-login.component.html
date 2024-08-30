@@ -13,46 +13,48 @@
                 <button class="authentication-button"
                         (click)="openModal('Register', $event)">{{'Register.Registration' | translate}}</button>
             </div>
-            <div *ngFor="let formItem of loginFieldsList">
-                <div [ngSwitch]="formItem.Type">
-                    <div *ngSwitchCase="'text'"
-                         class="login-section_field form_field distans-right email form_field{{formItem?.FieldSize}}"
-                         [ngClass]="{'valid-input': loginForm.get(formItem?.Title).valid,
+            <div class="form-grid">
+                <ng-container *ngFor="let formItem of loginFieldsList">
+                    <ng-container [ngSwitch]="formItem.Type">
+                        <div *ngSwitchCase="'text'"
+                             class="login-section_field form_field distans-right email form_field{{formItem?.FieldSize}}"
+                             [ngClass]="{'valid-input': loginForm.get(formItem?.Title).valid,
     'invalid-filed': ((loginForm.get(formItem?.Title).hasError('required') && submitted) || (loginForm.get(formItem?.Title).touched && loginForm.get(formItem?.Title).hasError('required')) || errorMessage) }">
-                        <i class="icon-person"></i>
-                        <input type="text" [name]="formItem?.Title" [formControlName]="formItem?.Title"
-                               (click)="$event.stopPropagation()" class="inputText" maxlength="50"
-                               [placeholder]="'Login.' + formItem.Title | translate"/>
-                        <label class="floating-label"
-                               *ngIf="formItem?.HasLabel">{{'Login.' + formItem?.Title | translate}}</label>
-                    </div>
-                    <div *ngSwitchCase="'password'"
-                         class="login-section_field2 form_field distans-right form_field{{formItem?.FieldSize}}">
-                        <div class="login-section_field form_field distans-right password" [ngClass]="{'valid-input': loginForm.get('Password').valid,
-    'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) || (loginForm.get('Password').touched && loginForm.get('Password').hasError('required')) || errorMessage) }">
-                            <i class="icon-lock"></i>
-                            <input type="{{changePasswordType ? 'text' : 'password'}}" [name]="formItem?.Title"
-                                   maxlength="50"
-                                   (click)="$event.stopPropagation()" class="inputText"
-                                   [placeholder]="'Login.' + formItem.Title | translate"
-                                   [formControlName]="formItem?.Title"/>
+                            <i class="icon-person"></i>
+                            <input type="text" [name]="formItem?.Title" [formControlName]="formItem?.Title"
+                                   (click)="$event.stopPropagation()" class="inputText" maxlength="50"
+                                   [placeholder]="'Login.' + formItem.Title | translate"/>
                             <label class="floating-label"
-                                   *ngIf="formItem?.HasLabel">{{'Login.' + formItem.Title | translate}}</label>
+                                   *ngIf="formItem?.HasLabel">{{'Login.' + formItem?.Title | translate}}</label>
+                        </div>
+                        <div *ngSwitchCase="'password'"
+                             class="login-section_field2 form_field distans-right form_field{{formItem?.FieldSize}}">
+                            <div class="login-section_field form_field distans-right password" [ngClass]="{'valid-input': loginForm.get('Password').valid,
+    'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) || (loginForm.get('Password').touched && loginForm.get('Password').hasError('required')) || errorMessage) }">
+                                <i class="icon-lock"></i>
+                                <input type="{{changePasswordType ? 'text' : 'password'}}" [name]="formItem?.Title"
+                                       maxlength="50"
+                                       (click)="$event.stopPropagation()" class="inputText"
+                                       [placeholder]="'Login.' + formItem.Title | translate"
+                                       [formControlName]="formItem?.Title"/>
+                                <label class="floating-label"
+                                       *ngIf="formItem?.HasLabel">{{'Login.' + formItem.Title | translate}}</label>
 
-                            <div (click)="changePassType()" class="change-password-field-type">
-                                <span [ngClass]="changePasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                                <div (click)="changePassType()" class="change-password-field-type">
+                                    <span [ngClass]="changePasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div *ngSwitchCase="'checkbox'" class="form_field{{formItem?.FieldSize}}">
-                        <label class="form_field_checked remember-me-login remember-me-login-section">
-                            <input type="checkbox" class="login-checkbox distans-right" [checked]="formItem.Title"
-                                   [formControlName]="formItem.Title"/>
-                            <span class="reg-conditions">{{'Login.' + formItem.Title | translate}}</span>
-                        </label>
-                    </div>
+                        <div *ngSwitchCase="'checkbox'" class="form_field{{formItem?.FieldSize}}">
+                            <label class="form_field_checked remember-me-login remember-me-login-section">
+                                <input type="checkbox" class="login-checkbox distans-right" [checked]="formItem.Title"
+                                       [formControlName]="formItem.Title"/>
+                                <span class="reg-conditions">{{'Login.' + formItem.Title | translate}}</span>
+                            </label>
+                        </div>
 
-                </div>
+                    </ng-container>
+                </ng-container>
             </div>
             <div class="form-accept-terms" [innerHTML]="'Login.AcceptTerms' | translate | sanitizer: 'html'">
             </div>
@@ -62,13 +64,13 @@
             <div class="form_field">
                 <button type="submit" class="craft_btn login_btn {{sectionClass}}-btn" [ngClass]="{'not_active':
             configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid}"
-                        (click)="$event.stopPropagation()">
+                        (click)="$event.stopPropagation()" [disabled]="isSubmitting">
                     {{'Login.Sign In' | translate}}
                 </button>
             </div>
             <div class="line">
                 <span class="left-line"></span>
-                <span class="text">OR</span>
+                <span class="text">{{'Login.Or' | translate}}</span>
                 <span class="right-line"></span>
             </div>
             <div class="login-register-part">

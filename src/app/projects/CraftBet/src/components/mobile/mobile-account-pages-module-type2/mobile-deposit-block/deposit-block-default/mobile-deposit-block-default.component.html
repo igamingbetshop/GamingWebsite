@@ -21,12 +21,12 @@
                                 </div>
 
                                 <div class="payment_list_item__info payment-row-item">
-                                    <div class="payment-row-header">{{"Deposit with" | translate}} </div>
+                                    <div class="payment-row-header">{{"Deposit.Deposit with" | translate}} </div>
                                     <div class="info_text" style="-webkit-box-orient: vertical"
                                          [innerHTML]="'Deposit.' + 'PAYMENT_MESSAGE' + item?.PaymentSystemId | translate | sanitizer: 'html'"></div>
                                     <div class="balance_info">
                                         <span>{{"Payments.Minimum" | translate}}
-                                            :{{item?.MinAmount | number}} {{ CurrencyId}},</span>
+                                            :{{item?.MinAmount | number}} {{ CurrencyId}}</span>
                                         <span>{{"Payments.Maximum" | translate}}
                                             :{{item?.MaxAmount | number}} {{ CurrencyId}}</span>
                                     </div>
@@ -56,7 +56,7 @@
                             <div class="content_row form-column" *ngIf="item.Opened" (click)="$event.stopPropagation()">
                                 <div class="content_row_header">
                                     <span>{{'User.Deposit with' | translate}}</span>
-                                    <span class="" style="-webkit-box-orient: vertical"
+                                    <span class="content_row-payment-name" style="-webkit-box-orient: vertical"
                                           [innerHTML]="'Deposit.' + 'PAYMENT_MESSAGE' + item?.PaymentSystemId | translate | sanitizer: 'html'"></span>
                                 </div>
                                 <ng-container [ngTemplateOutlet]="paymentTemplate "

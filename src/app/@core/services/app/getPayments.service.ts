@@ -136,8 +136,8 @@ export class GetPaymentsService {
         });
     }
 
-    getPaymentAccountTypes() {
-        this.baseApiService.apiRequest(this.userData.Id, Controllers.DOCUMENT, Methods.GET_PAYMENT_ACCOUNT_TYPES).subscribe((data) => {
+    getPaymentAccountTypes(paymentSystemId: any) {
+        this.baseApiService.apiRequest(paymentSystemId, Controllers.DOCUMENT, Methods.GET_PAYMENT_ACCOUNT_TYPES).subscribe((data) => {
             if (data['ResponseCode'] == 0) {
                 this.paymentAccountTypes = data['ResponseObject'];
                 this._notifyGetPaymentAccountTypes.next(data['ResponseObject']);
@@ -306,7 +306,6 @@ export class GetPaymentsService {
                 this.paymentTypesList = responseData;
                 this._notifyGetPaymentTypesList.next(data['ResponseObject']);
             }
-
         });
     }
 

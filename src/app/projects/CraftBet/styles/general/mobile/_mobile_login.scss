@@ -67,7 +67,7 @@ app-mobile-login
     height: auto;
     margin-top: marginTop(m-form-field-check, 9px);
     display: display(m-form-field-check, flex);
-    justify-content: var(--m-form-field-check-justify-content, center);
+    justify-content: var(--m-form-field-check-justify-content, flex-start);
     align-items: center;
     position: var(--m-form-field-check-position, relative);
     top: var(--m-form-field-check-top, 0);
@@ -201,13 +201,29 @@ app-mobile-login
     }
     .login_password {
       margin: var(--m-login-form-field-margin, 15px 0 15px);
-      display: flex;
-      flex-direction: column;
+      display: var(--m-login-form-field-display, grid);
+      grid-template-columns: var(--m-login-form-field-grid-template-columns, repeat(2,1fr));
+      flex-direction: var(--m-login-form-field-flex-direction, column);
       gap: var(--m-login-form-field-gap, 16px);
       width: var(--m-login-form-field-width, auto);
 
       .input_field {
         color: itemColor(m-login-form-field-text, #FFFFFF);
+      }
+      .form_field1 {
+        grid-column: span 4;
+      }
+
+      .form_field2 {
+        grid-column: span 2;
+      }
+
+      .form_field3 {
+        grid-column: span 1;
+      }
+
+      .form_field4 {
+        grid-column: span 1;
       }
     }
   }
@@ -226,7 +242,9 @@ app-mobile-login
       color: color(m-forgot-password-text);
       text-decoration: var(--m-forgot-password-text-text-decoration, underline);
       display: var(--m-forgot-password-text-display, block);
-      position: unset;
+      position: var(--m-forgot-password-text-position, unset);
+      width: var(--m-forgot-password-text-width, auto);
+      top: var(--m-forgot-password-text-item-top, 0);
     }
   }
   .form-accept-terms {
@@ -243,6 +261,7 @@ app-mobile-login
     color: color(m-settings-button-text);
     height: height(m-login-btn, 44px);
     border-radius: var(--auth-form-field-border-radius, 4px);
+    font-weight: var(--m-login-btn-font-weight, 600);
   }
   .login-submit-btn {
     width: width(m-login-btn, 100%);
@@ -543,5 +562,45 @@ app-mobile-login
 .animated-popup {
   .fade-anim {
     transition: 0.5s;
+  }
+}
+.rightToLeft {
+  direction: rtl;
+  .change-password-field-type {
+    right: auto;
+  }
+  .mobile-settings-section .m-change-password_form label {
+    right: var(--change-password-input-label-left, 8px);
+  }
+  .mobile-settings-section .self-limitation label {
+    right: var(--m-self-limitation-label-left, 0);
+  }
+  .mobile-footer-section_boxMenu_top .footer-column .footer-column-content .footer-column-item {
+    text-align: var(--m-footer-column-item-right-text-align, right);
+  }
+  .mobile-footer-section .m-ft-images.m-ft-images-style1 .m-ft-images-title {
+    text-align: var(--m-ft-images-style1-title-right-text-align, right);
+  }
+  .mobile-footer-section .m-ft-text.m-ft-text-style2 .info-text {
+    text-align: var(--m-ft-text-style2-right-text-align, right);
+  }
+  .mobile-login-section .mobile-login-top-part .top-login-text-part {
+    right: var(--m-login-top-part-left, auto);
+    left: auto;
+  }
+  .mobile-forgot-password-section_content .change_block label {
+    right: 0;
+    left: auto;
+    transform-origin: right;
+  }
+  .mobile-forgot-password-section_content .change_block .recovery_input:focus ~ label, .mobile-forgot-password-section_content .change_block .recovery_input:not(:placeholder-shown) ~ label {
+    left: auto;
+  }
+  .forgot-password-section_content .forgot-password-title-bottom {
+    text-align: var(--recovery-logo-bottom-right-text-align, right);
+  }
+  .mobile-forgot-password-section_content .form_row .password-eye-show {
+    right: auto;
+    left: var(--m-forgot-password-eye-icon-right, 11px);
   }
 }

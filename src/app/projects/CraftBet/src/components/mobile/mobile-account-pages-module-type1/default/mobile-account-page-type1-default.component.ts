@@ -34,6 +34,18 @@ export class MobileAccountPageType1DefaultComponent extends CommonUserDefaultCom
             }
           }
         });
+        const agentsReportIndex = el.SubMenu.findIndex(item => item.Href === 'agents-report');
+        if (agentsReportIndex !== -1) {
+          const agentsReport = el.SubMenu[agentsReportIndex];
+          if (!agentsReport.StyleType) {
+            el.SubMenu.splice(agentsReportIndex, 1);
+          } else {
+            const styleTypeItem = JSON.parse(agentsReport.StyleType);
+            if (!styleTypeItem || !(styleTypeItem.IsAgent && this.userData.IsAgent === false)) { // todo true
+              el.SubMenu.splice(agentsReportIndex, 1);
+            }
+          }
+        }
       });
     });
   }

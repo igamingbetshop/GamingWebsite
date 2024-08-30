@@ -1,0 +1,29 @@
+.popup-container
+{
+  width:314px;
+  height: 364px;
+  border-radius: 8px;
+  background: var(--t-time-filter-background,linear-gradient(262.23deg, #13B9FF -34.96%, #32498A 7.04%, #13244A 98.14%));
+  font-size: 20px;
+  font-weight: 400;
+  color:  var(--t-time-filter-color,rgba(255, 255, 255, 1));
+
+  .time-filter-list
+  {
+    height: calc(100% - 34px);
+    overflow-y: auto;
+    .list-row
+    {
+      width: 100%;
+      height: 64px;
+      line-height: 64px;
+      text-align: center;
+      border-bottom: 1px solid rgba(61, 85, 153, 1);
+      &:last-child{border-bottom: none}
+      &.selected
+      {
+        background-color: var(--t-time-filter-row-selected-background, rgba(91, 111, 166, 1));
+      }
+    }
+  }
+}

@@ -94,7 +94,7 @@ export class BalanceService {
     public parseBalance(resp): Balance
     {
         let balance: Balance = resp;
-        for (let i = 0, count = balance.Balances.length; i < count; i++) {
+        for (let i = 0, count = balance.Balances?.length; i < count; i++) {
             switch (balance.Balances[i].TypeId)
             {
                 case 1:
@@ -121,6 +121,10 @@ export class BalanceService {
         balance.UnusedBalance = balance.UnusedBalance || "0";
         balance.TotalBalance = (Number(balance.AvailableBalance) + Number(balance.BonusBalance)).toString();
         return balance;
+    }
+
+    getPartnerCurrenciesByType(): any {
+        return this.baseApiService.apiRequest(null, Controllers.MAIN, Methods.GET_PARTNER_CURRENCIES, false);
     }
 }
 

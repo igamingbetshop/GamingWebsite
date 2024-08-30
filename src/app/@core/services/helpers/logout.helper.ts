@@ -38,6 +38,7 @@ export class LogoutHelper {
             localStorage.removeItem('defaultRoute');
             localStorage.removeItem('token');
             localStorage.removeItem('selectedAccountId');
+            this.localStorageService.remove("downLineClient");
 
             if (this.configService.defaultOptions.ShowLogoutInfoPopup && (this.configService.defaultOptions.ShowLogoutInfoPopup == '1')) {
                 this.showConfirm(type);

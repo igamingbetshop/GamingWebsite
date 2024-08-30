@@ -1,0 +1,173 @@
+.container
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.65vw;
+  width: 71%;
+  margin: 0 auto;
+  cursor: default;
+  padding-bottom: 30px;
+  position: relative;
+  .block-tournament
+  {
+    width: 48%;
+    min-width: 432px;
+    height: fit-content;
+    padding: 30px;
+    border-radius: 14px;
+    border: 1.5px;
+    position: relative;
+    background: var(--slot-tournament-block-background,radial-gradient(137.2% 127.99% at 135.7% -32.27%, #0082F4 0%, #163063 29.82%, #0D182E 67.32%));
+
+    &.hided-items
+    {
+      display: none;
+    }
+    @media screen and (min-width: 0) and (max-width: 1280px)
+    {width: 100%}
+    .wrapper
+    {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 300px;
+      width: 90%;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      border-bottom-right-radius: 100px;
+    }
+    .info
+    {
+      width: 283pxpx;
+      height: 30px;
+      line-height: 30px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0 18px 0 18px;
+      border-radius: 100px;
+      background: var(--block-tournament-info-bg-color,linear-gradient(212.83deg, rgba(40, 188, 255, 0.8) 17.26%, rgba(56, 106, 255, 0.8) 78.04%));
+      font-size: 14px;
+      font-weight: 700;
+      text-align: left;
+      color: var(--block-tournament-info-color,rgba(255, 255, 255, 1));
+    }
+    .t-block-title
+    {
+      font-size: 24px;
+      font-weight: 900;
+      text-align: center;
+      text-transform: uppercase;
+      color: var(--block-tournament-title-color,rgba(255, 255, 255, 1));
+      margin-top: 31px;
+      margin-bottom: 37px;
+      position: relative;
+      z-index: 1;
+      span{margin-right: 4px}
+    }
+    .countdown-end-date
+    {
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      color: var(--t-countdown-end-date-color,rgba(255, 255, 255, 1));
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 1;
+    }
+    .prize-fund
+    {
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--tournament-prize-fund-color,rgba(255, 255, 255, 1));
+      margin-bottom: 10px;
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+    }
+    .prize-fund-button
+    {
+      display: block;
+      width: 268px;
+      height: 60px;
+      line-height: 60px;
+      padding: 2px;
+      border-radius: 100px;
+      background: var(--t-prize-fund-button-bg-color,linear-gradient(158.61deg, #FBC12D 16.33%, #FE7A00 94.09%));
+      color: var(--t-prize-fund-button-color,rgba(255, 255, 255, 1));
+      font-size: 36px;
+      font-weight: 900;
+      text-align: center;
+      margin: 0 auto;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+      z-index: 1;
+      border: none;
+      &:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 100px;
+        border: 1px solid transparent;
+        background: var(--prize-fund-button-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: destination-out;
+        mask-composite: exclude;
+      }
+    }
+    p
+    {
+      padding: 0;
+      font-size: 14px;
+      font-weight: 400;
+      width: 86%;
+      text-align: center;
+      margin: 20px auto 28px auto;
+      color: var(--tournament-info-color,rgba(255, 255, 255, 1));
+    }
+  }
+  &.item-full-width
+  {
+    .block-tournament
+    {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+  .show-more
+  {
+    min-width: 110px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 100px;
+    background: var(--bonus-button-bg-color, radial-gradient(103.18% 103.18% at -3.18% 50%, rgba(56, 106, 255, 0.8) 0%, rgba(64, 105, 228, 0.8) 57.32%, rgba(40, 188, 255, 0.8) 100%));
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--bonus-button-color, rgb(255, 255, 255));
+    padding: 0 12px;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    border:none;
+    &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 100px;
+      border: 1px solid transparent;
+      background: var(--bonus-button-border-color, linear-gradient(90deg, #3C69EF 0%, #56C6FF 100%) border-box);
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+    }
+  }
+}
+
+

@@ -79,7 +79,9 @@
       height: 100%;
       white-space: nowrap;
       @include m-common-button;
-      padding: 0 20px;
+      color: var(--m-promo-bonus-button-color, #fefefe);
+      font-weight: var(--m-promo-bonus-button-font-weight, 700);
+      padding: var(--m-promo-bonus-button-padding, 0 20px);
       width: width(m-promo-bonus-button, 120px);
       line-height: height(m-promo-bonus-button-line, 44px);
       border-radius: var(--m-promo-bonus-button-border-radius, 4px);

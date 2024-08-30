@@ -148,10 +148,11 @@ export class CasinoFilterService {
         category.Id = null;
         break;
       case 'my-favorites':
+      case '0':
         category.Id = 0;
         break;
       default:
-        category.Id = parseInt(type);
+        category.Id = parseInt(type) || null;
         break;
     }
     this.addCategory(category);

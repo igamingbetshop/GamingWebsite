@@ -42,6 +42,12 @@ import { MobileSelfLimitationComponent } from './self-limitation/mobile-self-lim
 import {MobileChangePasswordComponent} from "./change-password/mobile-change-password.component";
 import {NgxMaskDirective} from "ngx-mask";
 import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
+import {
+    MobileAccountPageType2ClientsTransactionsComponent
+} from "./transactions/clients-transactions/mobile-account-page-type2-clients-transactions.component";
+import {
+    MobileAccountPageType2AgentsTransactionsComponent
+} from "./transactions/agents-transactions/mobile-account-page-type2-agents-transactions.component";
 
 
 @NgModule({
@@ -80,7 +86,9 @@ import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropd
         ThemeModule,
         DesktopMobileCommonModule,
         OrderByPipeModule,
-        DropdownDirectiveModule
+        DropdownDirectiveModule,
+        MobileAccountPageType2ClientsTransactionsComponent,
+        MobileAccountPageType2AgentsTransactionsComponent
     ],
     providers:[
         ExportDataService,

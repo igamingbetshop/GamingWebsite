@@ -70,7 +70,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: var(--verification-code-form-gap, 16px);
       position: relative;
       margin-top: 20px;
       .input{
@@ -81,7 +81,8 @@
         color: var(--verification-code-text-color, #ffffff);
         text-indent: var(--verification-code-text-indent, 16px);
         text-align: var(--verification-code-text-align, left);
-        border: var(--verification-code-border, 1px solid #dbedff)
+        border: var(--verification-code-border, 1px solid #dbedff);
+        background: var(--verification-code-background, transparent);
       }
       .error-otp
       {
@@ -107,8 +108,8 @@
         }
       }
       .timer-text {
-        color: rgba(89, 159, 97, 1);
-        margin-left: 10px;
+        color: var(--verify-code-timer-text-color, rgba(89, 159, 97, 1));
+        margin-left: var(--verify-code-timer-text-margin-left, 10px);
       }
     }
     .otp-expire-resend {
@@ -253,12 +254,18 @@
     margin-left: var(--m-forgot-password-confirmation-content-margin-left, 20px);
     margin-top: var(--m-forgot-password-confirmation-content-margin-top, 0px);
     height: var(--m-forgot-password-confirmation-content-height, 60%);
-    //margin-top: var(--m-forgot-password-confirmation-content-margin-top, 60px) !important;
     overflow: auto;
     .modal_content {
+      .otp-expire span:first-child {
+        color: var(--m-verify-code-otp-color, var(--verify-code-otp-color, #ffffff))
+      }
+      .otp-expire-resend {
+        color: var(--m-otp-expire-resend-color, var(--otp-expire-resend-color, rgb(185, 187, 194)));
+      }
       p {
         font-size: 14px;
         margin: 0;
+        color: var(--m-recovery-logo-color, var(--recovery-logo-color, #fff));
       }
       .form_field {
         margin-top: 25px;
@@ -266,6 +273,8 @@
         .input {
           width: 35px;
           height: 35px;
+          font-size: var(--m-verification-code-font-size, var(--verification-code-font-size, 26px));
+          text-indent: var(--m-verification-code-text-indent, var(--verification-code-text-indent, 16px));
         }
       }
     }
@@ -276,6 +285,16 @@
         height: var(--m-forgot-password-button-height, calc(var(--forgot-password-button-text-height, 44px) - 10px));
       }
     }
+  }
+}
+.rightToLeft {
+  direction: rtl;
+  .modal-content2 .modal_content .prefix-title {
+    text-align: right;
+  }
+  .modal-content2 .modal_content .otp-expire .timer-text {
+    margin-right: 10px;
+    margin-left: 0;
   }
 }
 

@@ -17,9 +17,9 @@
                     (click)="openModal('Register', $event)">{{'Register.Registration' | translate}}</button>
         </div>
         <div class="login_password">
-            <div *ngFor="let formItem of loginFieldsList">
-                <div [ngSwitch]="formItem.Type">
-                    <div *ngSwitchCase="'text'" class="mobile-login-section_field form_field" [ngClass]="{'valid-input': loginForm.get(formItem?.Title).valid,
+            <ng-container *ngFor="let formItem of loginFieldsList">
+                <ng-container [ngSwitch]="formItem.Type">
+                    <div *ngSwitchCase="'text'" class="mobile-login-section_field form_field form_field{{formItem?.FieldSize}}" [ngClass]="{'valid-input': loginForm.get(formItem?.Title).valid,
                 'invalid-filed': (loginForm.get(formItem?.Title).hasError('required') && loginForm.get(formItem?.Title).dirty) }">
                         <div class="mobile-login-section_field_top flex_between common-field">
                             <input type="text" [name]="formItem?.Title" [formControlName]="formItem?.Title"
@@ -29,7 +29,7 @@
                             <span class="floating-label" *ngIf="formItem?.HasLabel">{{'Login.' + formItem.Title | translate}}</span>
                         </div>
                     </div>
-                    <div *ngSwitchCase="'password'" class="mobile-login-section_field form_field" [ngClass]="{'valid-input': loginForm.get('Password').valid,
+                    <div *ngSwitchCase="'password'" class="mobile-login-section_field form_field form_field{{formItem?.FieldSize}}" [ngClass]="{'valid-input': loginForm.get('Password').valid,
     'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) ||
     (loginForm.get('Password').touched && loginForm.get('Password').hasError('required'))) }">
                         <div class="mobile-login-section_field_top flex_between common-field">
@@ -45,13 +45,13 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngSwitchCase="'checkbox'" class="mobile-form_field_checked remember-me">
+                    <div *ngSwitchCase="'checkbox'" class="mobile-form_field_checked remember-me form_field{{formItem?.FieldSize}}">
                         <input type="checkbox" class="login-checkbox distans-right" [checked]="formItem.Title"
                                [formControlName]="formItem.Title"/>
                         <label class="reg-conditions">{{'Login.' + formItem.Title | translate}}</label>
                     </div>
-                </div>
-            </div>
+                </ng-container>
+            </ng-container>
 <!--            <div class="forgot_container" *ngIf="isSignUpButton?.Type == 'signupBtn_button'">-->
             <div class="forgot_container">
                 <a class="forgot_password" [routerLink]="['/forgot-password']">
@@ -66,7 +66,7 @@
                 <button
                         type="submit"
                         class="craft_btn login_btn"
-                        [disabled]="submitted || (configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid)"
+                        [disabled]="submitted || (configService.defaultOptions['FormValidationType'] === 'blur' && !loginForm.valid) || isSubmitting"
                         [ngClass]="{'signin_abled': configService.defaultOptions['FormValidationType'] === 'submit' || loginForm.valid}">
                     {{'Login.Sign In' | translate}}
                 </button>
@@ -87,7 +87,7 @@
         </div>
         <div class="line line2">
             <span class="left-line"></span>
-            <span class="text">OR</span>
+            <span class="text">{{'Login.Or' | translate}}</span>
             <span class="right-line"></span>
         </div>
         <div class="error-message" *ngIf="errorMessage">

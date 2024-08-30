@@ -107,6 +107,7 @@
   min-height: var(--payment-client-info-min-height, 120px);
   height: var(--payment-client-info-height, auto);
   margin-bottom: var(--payment-client-info-margin-bottom, 44px);
+  margin-top: var(--payment-client-info-margin-top, 0);
   padding: var(--payment-client-info-padding, 14px);
   display: var(--payment-client-info-display, flex);
   flex-direction: var(--payment-client-info-flex-direction, column);

@@ -62,6 +62,13 @@
     </tr>
     </tbody>
   </table>
+  <div class="empty-bets empty-block" *ngIf="getBetsHistoryService.betsHistoryList.length == 0">
+    <section class="empty-bets empty-block">
+      <span class="icon-tickets icon"></span>
+      <span class="empty-block-text">{{'User.Bets-empty' | translate}}</span>
+      <span class="empty-history-text">{{noHistory}}</span>
+    </section>
+  </div>
 
   <!--  <loader></loader>-->
 

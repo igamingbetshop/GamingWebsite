@@ -43,6 +43,12 @@ import {CommonBankMessageModalModule} from "../../common/app-common-bank-message
 import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
 import {NgxMaskDirective} from "ngx-mask";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {
+    AccountPageType1ClientsTransactionsComponent
+} from "./transactions/clients-transactions/account-page-type1-clients-transactions.component";
+import {
+    AccountPageType1AgentsTransactionsComponent
+} from "./transactions/agents-transactions/account-page-type1-agents-transactions.component";
 
 @NgModule({
   declarations: [
@@ -53,7 +59,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
     AccountPageType1TransactionsComponent,
     AccountPageType1BonusesComponent,
     AccountPageType1TicketsComponent,
-    AccountPageType1StatementComponent,
     AccountPageType1MenuComponent,
     AccountPageType1DefaultComponent,
     AccountPageType1BettingStatmentItemComponent,
@@ -82,6 +87,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
         CollapseDirectiveModule,
         CommonBankMessageModalModule,
         DropdownDirectiveModule,
+        AccountPageType1ClientsTransactionsComponent,
+        AccountPageType1AgentsTransactionsComponent,
+        AccountPageType1StatementComponent
     ],
   providers:[
     GetSettingsService,

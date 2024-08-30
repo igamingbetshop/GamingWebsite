@@ -31,13 +31,6 @@
                 "src/styles"
               ]
             },
-            "assets": [
-              "src/app/projects/CraftBet/assets",
-              "src/assets",
-              "src/assets/images/left-arrow.png",
-              "src/assets/images/right-arrow.png",
-              "src/mobile.html"
-            ],
             "styles": [
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",
@@ -95,6 +88,22 @@
                 {
                   "replace": "src/app/projects/CraftBet/environments/environment.ts",
                   "with": "src/app/projects/CraftBet/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/app/projects/CraftBet/assets/js/init.js",
+                  "with": "src/app/projects/CraftBet/assets/js/init.prod.js"
+                }
+              ],
+              "assets": [
+                "src/app/projects/CraftBet/assets",
+                "src/assets",
+                "src/assets/images/left-arrow.png",
+                "src/assets/images/right-arrow.png",
+                "src/mobile.html",
+                {
+                  "input": "src/init/production",
+                  "output": "/",
+                  "glob": "*.js"
                 }
               ]
             },
@@ -126,7 +135,24 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "assets": [
+                "src/app/projects/CraftBet/assets",
+                "src/assets",
+                "src/assets/images/left-arrow.png",
+                "src/assets/images/right-arrow.png",
+                "src/mobile.html",
+                {
+                  "input": "src/init/development",
+                  "output": "/",
+                  "glob": "*.js"
+                },
+                {
+                  "input": "src/init",
+                  "output": "init/",
+                  "glob": "README.md"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -153,6 +179,188 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "buildTarget": "CraftBet:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "scripts": [],
+            "styles": [
+              "src/styles/main.scss"
+            ],
+            "assets": [
+              "src/favicon.ico"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "stake": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "Stake",
+            "index": "src/app/projects/Stake/index.html",
+            "main": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "polyfills": "src/polyfills.ts",
+            "allowedCommonJsDependencies": [
+              "file-saver",
+              "xlsx",
+              "ng-click-outside",
+              "ng-recaptcha",
+              "jspdf",
+              "raf",
+              "core-js",
+              "html2pdf.js"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
+            "assets": [
+              "src/app/projects/Stake/assets",
+              "src/assets",
+              "src/assets/images/left-arrow.png",
+              "src/assets/images/right-arrow.png",
+              "src/mobile.html"
+            ],
+            "styles": [
+              "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss",
+              "src/styles/main.scss",
+              "src/app/projects/Stake/styles/main.scss",
+              {
+                "input": "src/app/projects/Stake/styles/desktop.scss",
+                "bundleName": "desktop",
+                "inject": false
+              },
+              {
+                "input": "src/app/projects/Stake/styles/mobile.scss",
+                "bundleName": "mobile",
+                "inject": false
+              }
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "node_modules/iban/iban.js",
+              {
+                "input": "node_modules/document-register-element/build/document-register-element.js",
+                "inject": true
+              }
+            ],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "7kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/app/projects/Stake/environments/environment.ts",
+                  "with": "src/app/projects/Stake/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "stg": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/projects/Stake/environments/environment.ts",
+                  "with": "src/app/projects/Stake/environments/environment.stg.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "stake:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "stake:build:production"
+            },
+            "stg": {
+              "buildTarget": "stake:build:stg"
+            },
+            "development": {
+              "buildTarget": "stake:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "Stake:build"
           }
         },
         "test": {

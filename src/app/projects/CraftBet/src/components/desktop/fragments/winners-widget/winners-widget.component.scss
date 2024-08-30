@@ -1,5 +1,12 @@
 @import "../../../../../styles/helpers/variables";
 @import "../../../../../../../../styles/helpers/variables";
+:host {
+  display: block;
+  position: relative;
+  direction: ltr;
+  margin: 0 auto;
+  width: 100%;
+}
 .winners-widget
 {
   margin-top: 36px;
@@ -18,7 +25,7 @@
       }
       &:nth-child(2)
       {
-        margin-left: 16px;
+        margin-left: var(--bets-widget-header-margin-left, 16px);
         font-size: fontSize(bets-widget-header, 16px);
       }
       &:nth-child(3)

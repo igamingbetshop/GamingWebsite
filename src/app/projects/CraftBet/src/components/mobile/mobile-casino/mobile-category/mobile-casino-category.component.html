@@ -1,5 +1,6 @@
 <div [ngSwitch]="fragmentConfig.Config.type">
     <div *ngSwitchCase="'filter'"  [ngStyle]="fragmentConfig?.Config.style" class="filter-category-box">
+        <div class="title" *ngIf="fragmentConfig.Config.titleVisibility" [innerHTML]="'WebFragments.' + fragmentConfig.Title | translate | sanitizer: 'html'"></div>
         <ul id="m-product-grid" class="product_list">
             <li id="m-casino_game_item" class="product_list_item"
                 *ngFor="let game of games; let i = index">
@@ -39,7 +40,7 @@
             <div></div>
             <div class="back-section" (click)="backFromSearch()">
                 <i class="icon-back"></i>
-                <p>back</p>
+                <p>{{'Category.back'| translate}}</p>
             </div>
             <div class="filter-title" *ngIf="categoryName">{{ 'Category.' + categoryName | translate }}</div>
         </div>

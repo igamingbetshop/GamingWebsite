@@ -73,6 +73,7 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
     public openedLogin = false;
     @ViewChild('showFirstStepBackground') public showFirstStepBackground: ElementRef;
     @ViewChild('notScrollable') public notScrollable: ElementRef;
+    confirmPassword:boolean = true;
 
     constructor(public injector: Injector)
     {
@@ -94,7 +95,6 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
         const requestData = {TypeId: 5};
         this.userRegisterService.getCountry(requestData);
         this.passwordConfig = passwordConfigs(this.configService);
-
         this.subscriptions.push(this.userRegisterService.notifyGetCountry.subscribe((data) => {
             this.countryList = data;
 
@@ -255,6 +255,9 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
                     item['DropDownSelected'] = false;
 
                     let parseInfoData = JSON.parse(item.Href);
+
+                    if(item.Title === "Password")
+                        this.confirmPassword = parseInfoData['confirm'] !== false;
 
                     if (parseInfoData['FieldSize'] == undefined) {
                         item['FieldSize'] = parseInfoData['size'];
@@ -472,14 +475,19 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
 
                         if (this.regFormSteps[i].controls.hasOwnProperty('Password'))
                         {
-                            this.regFormSteps[i].addControl('confirmPassword', new FormControl('', [Validators.required]));
-                            this.regFormSteps[i].get('confirmPassword').setValidators([PasswordValidation.matchTo.bind(this.regFormSteps[i].get('Password')), Validators.required, Validators.pattern(new RegExp(this.configService.defaultOptions.PassRegEx))]);
+                            if(this.confirmPassword)
+                            {
+                                this.regFormSteps[i].addControl('confirmPassword', new FormControl('', [Validators.required]));
+                                this.regFormSteps[i].get('confirmPassword').setValidators([PasswordValidation.matchTo.bind(this.regFormSteps[i].get('Password')), Validators.required, Validators.pattern(new RegExp(this.configService.defaultOptions.PassRegEx))]);
+                            }
                             this.regFormSteps[i].get('Password').valueChanges.pipe(
                                 debounceTime(500),
                                 distinctUntilChanged()
                             ).subscribe((value) =>
                             {
-                                value && this.regFormSteps[i].get('confirmPassword').updateValueAndValidity();
+                                if(this.confirmPassword)
+                                    value && this.regFormSteps[i].get('confirmPassword').updateValueAndValidity();
+
                                 let validationMessage = '';
                                 for(let config of this.passwordConfig)
                                 {
@@ -562,8 +570,6 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
                             }
                         });
                         this.quickRegisterType = this.quickRegTypeList[0];
-                    } else if (item.Type !== 'dropdown') {
-                        this.quickFormTemplate = this.quickRegFieldsFullList;
                     }
                 });
 
@@ -586,6 +592,8 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
                     } else {
 
                         let parseInfoData = JSON.parse(input_template.Href);
+                        if(input_template.Title === "Password")
+                            this.confirmPassword = parseInfoData['confirm'] !== false;
                         if (parseInfoData.hasOwnProperty('regExp')) {
                             input_template['RegExp'] = parseInfoData['regExp'];
                         }
@@ -686,15 +694,20 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
                     }
                 }
 
-                if (this.quickRegForm.controls.hasOwnProperty('Password')) {
-                    this.quickRegForm.addControl('confirmPassword', new FormControl('', [Validators.required]));
-                    this.quickRegForm.get('confirmPassword').setValidators([PasswordValidation.matchTo.bind(this.quickRegForm.get('Password')), Validators.required, Validators.pattern(new RegExp(this.configService.defaultOptions.PassRegEx))]);
+                if (this.quickRegForm.controls.hasOwnProperty('Password'))
+                {
+                    if(this.confirmPassword)
+                    {
+                        this.quickRegForm.addControl('confirmPassword', new FormControl('', [Validators.required]));
+                        this.quickRegForm.get('confirmPassword').setValidators([PasswordValidation.matchTo.bind(this.quickRegForm.get('Password')), Validators.required, Validators.pattern(new RegExp(this.configService.defaultOptions.PassRegEx))]);
+                    }
                     this.quickRegForm.get('Password').valueChanges.pipe(
                         debounceTime(500),
                         distinctUntilChanged()
                     ).subscribe((value) =>
                     {
-                        value && this.quickRegForm.get('confirmPassword').updateValueAndValidity();
+                        if(this.confirmPassword)
+                            value && this.quickRegForm.get('confirmPassword').updateValueAndValidity();
                         let validationMessage = '';
                         for(let config of this.passwordConfig)
                         {
@@ -1061,27 +1074,29 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
         }
     }
 
-    getUserRegister(params, login = true) {
-        this.userRegisterService.getUserRegister(params, login);
+    getUserRegister(params, login = true, firstLoginUrl = false) {
+        this.userRegisterService.getUserRegister(params, login, firstLoginUrl);
     }
 
     protected register(reCaptchaKey ?: string, showSuccessView = true)
     {
         this.showSuccessView = showSuccessView;
-        if (this.saveData.registerReferalData)
-        {
-            if (this.saveData.registerReferalData['ReferenceCode'])
-                this.regForm.addControl('PromoCode', new FormControl(this.saveData.registerReferalData['ReferenceCode']));
-            if (this.saveData.registerReferalData['BonusCode'])
-                this.regForm.addControl('BonusCode', new FormControl(this.saveData.registerReferalData['BonusCode']));
-            if (this.saveData.registerReferalData['clickid'])
-                this.regForm.addControl('RefId', new FormControl(this.saveData.registerReferalData['clickid']));
-            if (this.saveData.registerReferalData['sourceid'])
-                this.regForm.addControl('AffiliateId', new FormControl(this.saveData.registerReferalData['sourceid']));
-            if (this.saveData.registerReferalData['AffiliatePlatformId'])
-                this.regForm.addControl('AffiliatePlatformId', new FormControl(this.saveData.registerReferalData['AffiliatePlatformId']));
-            if (this.saveData.registerReferalData['AgentCode'])
-                this.regForm.addControl('AgentCode', new FormControl(this.saveData.registerReferalData['AgentCode']));
+        const referralDataMapping = {
+            ReferenceCode: 'PromoCode',
+            C: 'PromoCode',
+            BonusCode: 'BonusCode',
+            clickid: 'RefId',
+            sourceid: 'AffiliateId',
+            AffiliatePlatformId: 'AffiliatePlatformId',
+            P: 'AffiliatePlatformId',
+            AgentCode: 'AgentCode'
+        };
+        for (const key in referralDataMapping) {
+            if (this.saveData.registerReferalData?.hasOwnProperty(key)) {
+                const controlName = referralDataMapping[key];
+                const value = this.saveData.registerReferalData[key];
+                this.regForm.addControl(controlName, new FormControl(value));
+            }
         }
 
         let params = this.regForm.getRawValue();
@@ -1118,9 +1133,10 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
             }
             //params.SecurityQuestions = this.securityQuestionState.value;
             let autoLogin = true;
+            let firstLoginUrl = false;
             if(this.registerType && this.registerType.Settings)
                 autoLogin = this.registerType.Settings.autoLogin;
-            this.getUserRegister(params, autoLogin);
+            this.getUserRegister(params, autoLogin, firstLoginUrl);
 
         }
     }

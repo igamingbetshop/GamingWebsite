@@ -1,8 +1,8 @@
 .verify-icons {
   display: var(--settings-profile-verify-icons-display, block);
   position: absolute;
-  top: 18px;
-  right: -29px;
+  top: var(--settings-profile-verify-icons-item-top, 18px);
+  right: var(--settings-profile-verify-icons-item-right, -29px);
   font-size: 24px;
   cursor: pointer;
   .tooltip {
@@ -70,7 +70,7 @@
   .disable_item {
     pointer-events: none;
     opacity: .8;
-    border-color: #cecece !important;
+    border-color: var(--profile-details-form-disable-input-border-color, #cecece) !important;
   }
 
   label {
@@ -140,10 +140,10 @@
       //border: 1px solid $border-color;
       color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
       font-size: var(--settings-field-font-size, 16px);
-      text-indent: 0;
-      padding-left: 16px;
+      text-indent: var(--settings-field-text-indent, 0);
+      padding-left: var(--settings-field-padding-left, 16px);
       border: var(--settings-field-border, none);
-      background: var(--account-content-item-bg-color);
+      background: var(--settings-field-background-color, var(--account-content-item-bg-color));
       border-radius: var(--settings-field-border-radius, 6px);
       height: var(--settings-field-height, 40px);
       appearance: var(--open-ticket-appearance, auto);
@@ -170,7 +170,7 @@
       background: white;
       display: none;
       top:60px;
-      border: 1px solid #cecece;
+      border: var(--profile-details-form-disable-input-border-color, 1px solid #cecece) !important;
       max-height: 300px;
       overflow-y: auto;
       z-index: 1;
@@ -219,5 +219,22 @@
     position: absolute;
     top:-5px;
     right: -6px;
+  }
+}
+.rightToLeft {
+  label {
+    right: var(--settings-input-label-left, 8px);
+    left: auto;
+  }
+  .error-field-message {
+    right: 0;
+  }
+  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    text-align: right;
+  }
+  .verify-icons {
+    left: var(--settings-profile-verify-icons-right-item-right, -29px);
+    right: auto;
   }
 }

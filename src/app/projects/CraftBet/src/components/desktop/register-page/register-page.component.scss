@@ -1,5 +1,15 @@
 .register-page
 {
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: var(--register-page-max-width, 1000px);
+  margin: var(--register-page-margin, 0 auto);
+  background-color: var(--register-page-background-color, transparent);
+  background-image: var(--register-page-background-image, unset);
+  background-repeat: var(--register-page-background-repeat, no-repeat);
+  background-size: var(--register-page-background-size, contain);
+  min-height: var(--register-page-min-height, auto);
+  padding: var(--register-page-padding, 0);
+  .register-page-full {
+    width: var(--registration-section-width, 100%);
+    margin: var(--registration-section-margin, 0);
+  }
 }

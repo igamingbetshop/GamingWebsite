@@ -193,6 +193,12 @@
       justify-content: var(--m-join-us-btn-justify-content, space-between);
       min-width: var(--m-join-us-btn-min-width, auto);
       align-items: center;
+      .hidden-login-text {
+        display: var(--m-header-login-btn-custom-icon-display, none);
+        position: var(--m-header-login-btn-custom-icon-position, relative);
+        width: var(--m-header-login-btn-custom-icon-width, 100%);
+        height: var(--m-header-login-btn-custom-icon-height, auto);
+      }
       .global_login-btn_rightIcon {
         display: var(--m-button-style1-icon-display, none);
         background: var(--m-button-style1-icon-background, #fff);
@@ -953,7 +959,7 @@
       background-image: backgroundImage(m-button-style1,  linear-gradient(180deg, rgba(219, 237, 255, 0.15) 0%, rgba(6, 42, 88, 0.15) 100%));
       background-color: backgroundColor(m-button-style1, unset);
       border: 1px solid itemColor(m-button-style1, unset);
-      line-height: 20px;
+      line-height: var(--m-button-style1-line-height, 20px);
 
       padding-right: paddingRight(m-button-style1, 10px);
       padding-bottom: paddingBottom(m-button-style1, 8px);
@@ -969,6 +975,12 @@
       display: var(--m-button-style1-display, block);
       justify-content: var(--m-button-style1-justify-content, space-between);
       align-items: center;
+      .hidden-register-text {
+        display: var(--m-header-reg-btn-custom-icon-display, none);
+        position: var(--m-header-reg-btn-custom-icon-position, relative);
+        width: var(--m-header-reg-btn-custom-icon-width, 100%);
+        height: var(--m-header-reg-btn-custom-icon-height, auto);
+      }
       .global_login-btn_rightIcon {
         display: var(--m-button-style1-icon-display, none);
         background: var(--m-button-style1-icon-background, #fff);
@@ -1123,6 +1135,10 @@
 .rightToLeft {
   .text-style1 {
     margin-left: marginRight(m-text-style1, 0);
+    transform: var(--m-text-style1-right-transform, none);
+  }
+  .button-style1 {
+    transform: var(--m-button-style1-right-transform, none);
   }
   .image-style1 {
     .mobile-logo {

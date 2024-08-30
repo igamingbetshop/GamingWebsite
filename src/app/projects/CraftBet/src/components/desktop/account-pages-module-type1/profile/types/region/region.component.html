@@ -1,10 +1,12 @@
 <div class="form_field auto-complete"
      [style.zIndex]="zIndex"
-     [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
+     [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation,'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
      dropdown>
     <input type="text"
            placeholder="{{'User.' + formControlName + 'EmptyOption' | translate}}"
-           [(ngModel)]="profileService[formControlName + 'Pattern']" (click)="onFocusPattern()">
+           [(ngModel)]="profileService[formControlName + 'Pattern']" (click)="onFocusPattern()"
+           [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}"
+    >
     <div class="dropdown-container">
         <div class="items">
             <div (click)="selectRegionOption({Id:null, Name:''})">{{'User.' + formControlName + 'EmptyOption' | translate}}</div>

@@ -4,6 +4,7 @@
      [ngStyle]="{'border-radius': fragmentConfig.Config.radius + 'px',
       'margin-left': fragmentConfig.Config.marginLeft + 'px', 'margin-right': fragmentConfig.Config.marginRight + 'px'}">
     <div class="filter_field">
+        <div class="title"> {{'Game.Providers' | translate}}</div>
         <div class="search-providers">
             <div class="search-providers-box">
                 <input type="text"
@@ -13,24 +14,28 @@
                 <div class="search-icon" [style.display]="!fragmentConfig.Config.showAll && (stateService.providersPopupState$ | async) ? 'block' : 'none'">
                     <fa-icon [icon]="['fas', 'search']"></fa-icon>
                 </div>
+                <div class="search-icon-disappeared">
+                    <fa-icon [icon]="['fas', 'search']"></fa-icon>
+                </div>
             </div>
             <header>{{ 'Providers.FilterByProvider' | translate }}</header>
             <i class="icon-close-modal" (click)="stateService.changeProvidersPopupState(false)"></i>
         </div>
-        <casino-search *ngFor="let fragment of fragments?.Search?.Items"
+        <casino-search *ngFor="let fragment of fragments?.Searches?.Items"
                        [style.margin-top.px]="fragment.Config.marginTop"
                        [style.order]="fragment.Order"
                        [fragmentConfig]="fragment">
         </casino-search>
         <ul class="provider-list default_scroll"
-            [style.grid-template-columns]="'repeat(' + (fragmentConfig.Config.count+1) +',1fr)'">
+            [style.grid-template-columns]="'repeat(' + (fragmentConfig.Config.showAll ? fragmentConfig.Config.count+1 : fragmentConfig.Config.count) +',1fr)'">
             <li *ngFor="let provider of fragmentConfig.Config.showAll ? providers :  (providers | filterByName : casinoFilterService.providerPattern); let i = index"
                 (click)="stateService.changeProvidersPopupState(false);selectProvider(provider)"
                 [ngStyle]="provider.style"
-                [class.all-providers]="provider.Id == 0"
+                [class.all-providers]="casinoFilterService.providers.length === 0 && provider.Id == 0"
                 [class.selected]="casinoFilterService.providers | compareByKey: provider : 'Id'">
                 <img [src]="provider.imageSrc">
                 <span>{{ provider?.Label }}</span>
+                <div *ngIf="fragmentConfig.Config.providersCount && provider?.GamesCount" class="providers-count">{{ provider?.GamesCount }}</div>
             </li>
             <button *ngIf="fragmentConfig.Config.showAll" (click)="stateService.changeProvidersPopupState(true)" class="providers-see-all"
                     [innerHTML]="'Providers.SeeAll' | translate | sanitizer : 'html'"></button>

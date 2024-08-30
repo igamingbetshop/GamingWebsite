@@ -1,4 +1,42 @@
-<div class="casino-game-section_banners recponcive-height flex_column_center">
+@if (leftMenuFragment())
+{
+    <div class="left-menu-box">
+        <div class="left-menu">
+            @switch (leftMenuFragment().type)
+            {
+                @case ("Menus")
+                {
+                    <casino-menu [style.order]="leftMenuFragment().fragmentData.Order"
+                                 [position]="position"
+                                 [style.margin-top.px]="leftMenuFragment().fragmentData.Config.marginTop"
+                                 [style.max-width.px]="leftMenuFragment().fragmentData.Config.maxWidth"
+                                 [fragmentConfig]="leftMenuFragment().fragmentData">
+                    </casino-menu>
+                }
+                @case ("Providers")
+                {
+                    <casino-providers [style.order]="leftMenuFragment().fragmentData.Order"
+                                 [position]="position"
+                                 [style.margin-top.px]="leftMenuFragment().fragmentData.Config.marginTop"
+                                 [style.max-width.px]="leftMenuFragment().fragmentData.Config.maxWidth"
+                                 [fragmentConfig]="leftMenuFragment().fragmentData">
+                    </casino-providers>
+                }
+            }
+
+        </div>
+        <div class="content">
+            <ng-container [ngTemplateOutlet]="casinoHref"></ng-container>
+        </div>
+    </div>
+}
+@else {
+    <div class="casino-section recponcive-height flex_column_center">
+        <ng-container [ngTemplateOutlet]="casinoHref"></ng-container>
+    </div>
+}
+
+<ng-template #casinoHref>
     <casino-banners *ngFor="let fragment of fragments?.Banners?.Items"
                     [fragmentConfig]="fragment"
                     [style.order]="fragment.Order"
@@ -33,20 +71,20 @@
                       [class.search-view]="stateService.categoriesSearchViewState$ | async"
                       [fragmentConfig]="fragment">
     </casino-category>
-    <casino-search *ngFor="let fragment of fragments?.Search?.Items"
+    <casino-search *ngFor="let fragment of fragments?.Searches?.Items"
                    [style.margin-top.px]="fragment.Config.marginTop"
                    [style.order]="fragment.Order"
                    [fragmentConfig]="fragment">
     </casino-search>
 
-    <progress-bar  *ngFor="let fragment of fragments?.ProgressBar?.Items"
+    <progress-bar  *ngFor="let fragment of fragments?.ProgressBars?.Items"
                    [style.margin-top.px]="fragment.Config.marginTop"
                    [style.order]="fragment.Order"
                    [fragmentConfig]="fragment">
     </progress-bar>
 
     <character-hierarchy
-            *ngFor="let fragment of fragments?.CharacterHierarchy?.Items"
+            *ngFor="let fragment of fragments?.CharacterHierarchies?.Items"
             [style.margin-top.px]="fragment.Config.marginTop"
             [style.order]="fragment.Order"
             [fragmentConfig]="fragment">
@@ -58,4 +96,4 @@
         <img class="" src="../assets/images/lucky-icon.svg">
         <div class="text">{{'Lucky game' | translate}}</div>
     </div>
-</div>
+</ng-template>

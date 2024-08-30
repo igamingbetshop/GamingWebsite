@@ -43,7 +43,8 @@ export enum Controllers
   CLIENT = "Client",
   DOCUMENT = "Document",
   MAIN = "Main",
-  PRODUCT = "Product"
+  PRODUCT = "Product",
+  AGENT = "Agent"
 }
 
 export enum Methods
@@ -61,7 +62,10 @@ export enum Methods
   GET_GAME_PROVIDERS = "GetGameProviders",
   SEARCH_CONTENT_INFO = "SearchContentInfo",
   GET_CLIENT_BONUS_TRIGGERS = "GetClientBonusTriggers",
+  GET_BONUS_WINNERS_INFO = "GetBonusWinnersInfo",
+  SPIN_WHEEL = "SpinWheel",
   GET_BONUSES = "GetBonuses",
+  COLLECT_BONUS = "CollectClientBonus",
   GET_BONUS_Balance = "GetBonusBalance",
   GET_BETS_HISTORY = "GetBetsHistory",
   CHANGE_NICK_NAME = "ChangeNickName",
@@ -90,6 +94,8 @@ export enum Methods
   GET_TICKET_MESSAGES = "GetTicketMessages",
   GET_TRANSACTION_HISTORY = "GetTransactionHistory",
   GET_OPERATION_TYPES = "GetOperationTypes",
+  GET_DOWN_LINE_CLIENTS = "GetDownlineClients",
+  CREATE_TOKEN = "CreateToken",
   GET_CLIENT_FAVORITE_PRODUCTS = "GetClientFavoriteProducts",
   REMOVE_CLIENT_FAVORITE_PRODUCT = "RemoveClientFavoriteProduct",
   GET_PROMOTIONS = "GetPromotions",
@@ -157,11 +163,17 @@ export enum Methods
   GET_CHARACTER_CURRENT_STATE = "GetCharacterCurrentState",
   GET_CHARACTERS_HIERARCHY = "GetCharacterHierarchy",
   ADD_CHARACTER_TO_CLIENT = "AddCharacterToClient",
+  GET_ACTIVE_TOURNAMENTS = "GetActiveTournaments",
+  GET_TOURNAMENT_LEADERBOARD = "GetTournamentLeaderboard",
   GET_VERIFICATION_PAGE_URL = "GetVerificationPageUrl",
   SELECT_SESSION_ACCOUNT = "SelectSessionAccount",
   GET_PAYOUT_LIMIT = "GetPayoutLimit",
   SAVE_PAYOUT_LIMIT = "SavePayoutLimit",
-  VIEW_POPUP = "ViewPopup"
+  VIEW_POPUP = "ViewPopup",
+  GET_REPORT_BY_AGENTS = "GetReportByAgents",
+  GET_TRANSACTIONS = "GetTransactions",
+  GET_PARTNER_CURRENCIES = "GetPartnerCurrencies",
+  GET_BET_INFO = "GetBetInfo"
 }
 
 export enum DateTypes
@@ -259,4 +271,10 @@ export enum FragmentSource
 {
   Web = 'WebFragments',
   Mobile = 'MobileFragments'
+}
+
+export enum PartnerCurrencyTypes
+{
+  Fiat = 1,
+  Crypto = 2
 }

@@ -1,26 +1,22 @@
 import {Injectable} from "@angular/core";
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import {ConfigService, LocalStorageService, SaveData} from "@core/services";
+import {CanLoad, Route, Router} from '@angular/router';
+import {ConfigService, SaveData} from "@core/services";
+import {UserLogined} from "@core/services/app/userLogined.service";
 
 @Injectable()
-export class AccountPagesLoadGuard  {
-
-    private isLoaded: boolean;
-    public accountTemplateType = '1';
+export class AccountPagesLoadGuard implements CanLoad {
 
     constructor(private router: Router,
-                private activatedRoute: ActivatedRoute,
-                private localStorageService: LocalStorageService,
+                private userLogin:UserLogined,
                 private saveData:SaveData,
                 public configService: ConfigService)
     {
-        this.isLoaded = false;
+
     }
 
     canLoad(route: Route): boolean
     {
-        const user = this.localStorageService.get('user');
-        if (!!user && user.Token && (route.data.roles === this.configService.defaultOptions.AccountTemplateType))
+        if (this.userLogin.isAuthenticated && (route.data.roles === this.configService.defaultOptions.AccountTemplateType))
         {
             return true;
         }
@@ -32,8 +28,12 @@ export class AccountPagesLoadGuard  {
             }
             else
             {
-                this.saveData.openPopup.next("1");
-                this.router.navigate(['/']);
+                this.router.navigate([this.router.url]).then(() => {
+                    const p = setTimeout(() => {
+                        this.saveData.openPopup.next("1");
+                        clearTimeout(p);
+                    });
+                });
             }
             return false;
         }

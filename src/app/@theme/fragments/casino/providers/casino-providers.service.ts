@@ -3,6 +3,7 @@ import {Methods} from "../../../../@core/enums";
 import {map} from "rxjs/operators";
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {Observable, of} from "rxjs";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable()
 export class CasinoProvidersService
@@ -10,7 +11,7 @@ export class CasinoProvidersService
     currentFilter;
     providers:any = [];
 
-    constructor(private apiService: BaseApiService)
+    constructor(private apiService: BaseApiService, private translate: TranslateService)
     {
 
     }
@@ -28,7 +29,7 @@ export class CasinoProvidersService
                 if (data.ResponseCode === 0)
                 {
                     this.providers = data.ResponseObject.Providers;
-                    this.providers.unshift({Id:0,Name:'All providers', Label:'All providers'});
+                    this.providers.unshift({Id:0,Name:this.translate.instant("Providers.All providers"), Label:this.translate.instant("Providers.All providers")});
                     return this.providers;
                 }
             }));

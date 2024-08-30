@@ -184,10 +184,6 @@ export class BaseDepositComponent extends BaseComponent {
 
     public selectDepositFromBack()
     {
-        if (this.stateService.getPaymentNavigationState !== "fromProfile") {
-            return;
-        }
-
         this.paymentSystemList.forEach(item =>
         {
             if (item.Id === BaseDepositComponent.backDepositId)
@@ -195,7 +191,6 @@ export class BaseDepositComponent extends BaseComponent {
                 item.Opened = true;
             }
         });
-        this.stateService.setPaymentNavigationState(null, true);
         BaseDepositComponent.backDepositId = null;
     }
 

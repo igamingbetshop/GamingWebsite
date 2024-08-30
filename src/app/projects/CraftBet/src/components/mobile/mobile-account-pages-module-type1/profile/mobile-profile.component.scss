@@ -1,15 +1,45 @@
+:host
+{
+  display: block;
+  position: relative;
+}
+.mobile-settings-section {
+  overflow-y: var(--m-profile-details-section-overflow-y, hidden);
+  position: var(--m-profile-details-section-position, relative);
+}
+.settings_header-mobile {
+  position: var(--m-profile-submit-details-position, sticky);
+  right: var(--m-profile-submit-details-right, 0);
+  top: var(--m-profile-submit-details-top, 10px);
+  background: var(--m-profile-submit-details-background, var(--account-content-item-bg-color));
+  width: var(--m-profile-submit-details-width, 100%);
+  padding: var(--m-profile-submit-details-padding, 7px 0);
+  z-index: 100;
+  .settings_edit {
+    width: var(--m-profile-edit-btn-width, 86%);
+    margin: var(--m-profile-edit-btn-margin, 0 auto);
+    display: var(--m-profile-edit-btn-display, flex);
+    justify-content: var(--m-profile-edit-btn-justify-content, flex-end);
+    align-items: center;
+    .icon-edit {
+      margin-right: 13px;
+      font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
+    }
+  }
+}
 .submit-details {
   display: flex;
-  gap: 20px;
+  gap: var(--m-profile-submit-details-gap, 20px);
   justify-content: var(--settings-submit-details-justify-content, center);
   width: var(--settings-submit-details-width, auto);
   .setting_btn {
     font-size: var(--settings-submit-details-font-size, 16px);
     font-weight: var(--settings-submit-details-font-weight, 500);
     padding: var(--settings-submit-details-padding, 0px 10px);
-    height: var(--settings-submit-details-height, 44px);
+    height: var(--m-settings-submit-details-height, 44px);
     background: linear-gradient(to bottom, var(--settings-button-gradient-first-color) 0%, var(--settings-button-gradient-second-color) 100%);
     color: var(--settings-button-text-color);
+    width: var(--m-profile-submit-details-width, 44%);
     .icon-close-modal {
       margin-right: 13px;
       font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
@@ -28,14 +58,27 @@
     }
   }
 }
+.tab-content-mobile {
+  padding: var(--m-profile-settings-form-padding, 110px 0 40px 0);
+  height: var(--m-profile-settings-form-height, calc(100vh - 233px));
+  overflow-y: var(--m-profile-settings-form-overflow-y, auto);
+  overflow-x: hidden;
+}
 form {
   display: var(--m-profile-settings-form-display, block);
   grid-template-columns: 1fr;
   align-items: center;
-  column-gap: 100px;
+  column-gap: var(--m-profile-settings-form-column-gap, 100px);
   position: relative;
-  height: 100%;
-  width: var(--m-profile-settings-form-width, 90%);
+  width: var(--m-profile-settings-form-width, 97%);
+  margin: var(--m-profile-settings-form-margin, 0);
+
+  .profile-main-container {
+    background: var(--m-profile-form-main-container-background, transparent);
+    padding: var(--m-profile-form-main-container-padding, 0);
+    width: var(--m-profile-form-main-container-width, auto);
+    margin: var(--m-profile-form-main-container-margin, 0);
+  }
   .active_item {
     pointer-events: unset;
   }
@@ -43,10 +86,10 @@ form {
   .disable_item {
     pointer-events: none;
     opacity: .8;
-    border-color: #cecece !important;
+    border-color: var(--m-profile-details-form-disable-input-border-color, #cecece) !important;
   }
   .form_field {
-    width: var(--m-settings-profile-form-field-width, 90%);
+    width: var(--m-settings-profile-form-field-width, 80%);
     margin: var(--m-settings-profile-form-field-margin, 0 auto);
     position: relative;
     .error-field-message
@@ -55,8 +98,9 @@ form {
       color: red;
       font-weight: var(--settings-profile-font-weight, 700);
       position: absolute;
-      bottom: 0;
-      left: 0;
+      bottom: var(--m-settings-profile-error-message-bottom, 0);
+      left: var(--m-settings-profile-error-message-left, 0);
+      right: var(--m-settings-profile-error-message-right, auto);
     }
     .verify-icons {
       display: var(--m-settings-profile-verify-icons-display, block);
@@ -175,8 +219,8 @@ form {
         font-size: var(--settings-field-font-size, 16px);
         text-indent: 0;
         padding-left: 16px;
-        border: var(--settings-field-border, none);
-        background: var(--account-content-item-bg-color);
+        border: var(--m-profile-details-form-input-border, var(--settings-field-border, none));
+        background: var(--m-profile-details-form-input-background, var(--account-content-item-bg-color));
         border-radius: var(--settings-field-border-radius, 6px);
         height: var(--settings-field-height, 40px);
         appearance: var(--open-ticket-appearance, auto);
@@ -215,4 +259,31 @@ form {
   p {
     margin-right: var(--m-success-message-settings-success-margin-right, auto);
   }
+}
+.rightToLeft {
+  .submit-details .setting_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+  }
+  form {
+    .form_field {
+      label {
+        right: var(--settings-input-label-left, 8px);
+        left: auto !important;
+        transform-origin: right;
+      }
+      input:focus ~ label,
+      input:not(:placeholder-shown) ~ label {
+        text-align: right;
+        //transform: var(--settings-label-right-transform, translateY(-27px) translateX(87px) scale(0.75));
+
+      }
+      .error-field-message {
+        right: 0;
+      }
+    }
+  }
+
 }

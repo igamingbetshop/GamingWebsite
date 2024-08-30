@@ -3,8 +3,8 @@
 
 .bets-widget-container
 {
-  padding: 30px;
-  background-color: #1b1d20;
+  padding: var(--bets-widget-container-padding, 30px);
+  background-color: var(--bets-widget-container-background, #1b1d20);
   position: relative;
   margin: 0 auto;
   @media screen and (min-width: 0) and (max-width: 1280px){
@@ -19,15 +19,15 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background: linear-gradient(180deg, rgba(27, 29, 32, 0) 0%, #1B1D20 100%);
+    background: var(--bets-widget-container-wrapper-background, linear-gradient(180deg, rgba(27, 29, 32, 0) 0%, #1B1D20 100%));
   }
   .title
   {
-    font-size: 28px;
-    font-weight: 600;
-    text-align: left;
-    margin-bottom: 30px;
-    color:#ffffff;
+    font-size: var(--bets-widget-container-title-font-size, 28px);
+    font-weight: var(--bets-widget-container-title-font-weight, 600);
+    text-align: var(--bets-widget-container-title-text-align, left);
+    margin-bottom: var(--bets-widget-container-title-margin-bottom, 30px);
+    color: var(--bets-widget-container-title-color, #ffffff);
     @media screen and (min-width: 0) and (max-width: 1280px){font-size: 22px; text-align: center}
   }
   .last-bets-content
@@ -36,19 +36,32 @@
     table
     {
       width: 100%;
+      border-spacing: var(--bets-widget-table-border-spacing, 2px);
       thead
       {
         tr
         {
+          background: var(--bets-widget-table-head-background, transparent);
           th
           {
-            font-size: 18px;
-            font-weight: 500;
-            text-align: left;
-            color: rgba(116, 127, 138, 1);
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(36, 38, 43, 1);
+            font-size: var(--bets-widget-table-thead-font-size, 18px);
+            font-weight: var(--bets-widget-table-thead-font-weight, 500);
+            text-align: var(--bets-widget-table-thead-text-align, left);
+            color: var(--bets-widget-table-thead-color, rgba(116, 127, 138, 1));
+            padding-bottom: var(--bets-widget-table-thead-padding-bottom, 12px);
+            padding-top: var(--bets-widget-table-thead-padding-top, 0);
+            padding-left: var(--bets-widget-table-thead-padding-left, 0);
+            border-bottom: var(--bets-widget-table-thead-border-bottom, 1px solid rgba(36, 38, 43, 1));
+            border-top: var(--bets-widget-table-thead-border-top, none);
             text-transform: capitalize;
+            &:first-child {
+              border-radius: var(--bets-widget-table-thead-first-border-radius, 0px);
+              border-left: var(--bets-widget-table-thead-first-border-left, none);
+            }
+            &:last-child {
+              border-radius: var(--bets-widget-table-thead-last-border-radius, 0px);
+              border-right: var(--bets-widget-table-thead-last-border-right, none);
+            }
             @media screen and (min-width: 0) and (max-width: 1280px){font-size: 12px};
           }
         }
@@ -59,13 +72,20 @@
         {
           td
           {
-            height: 48px;
-            line-height: 48px;
-            font-size: 18px;
-            font-weight: 500;
-            text-align: left;
-            color: rgba(255, 255, 255, 1);
-            border-bottom: 1px solid rgba(36, 38, 43, 1);
+            height: var(--bets-widget-table-td-height, 48px);
+            line-height: var(--bets-widget-table-td-line-height, 48px);
+            font-size: var(--bets-widget-table-td-font-size, 18px);
+            font-weight: var(--bets-widget-table-td-font-weight, 500);
+            text-align: var(--bets-widget-table-td-text-align, left);
+            color: var(--bets-widget-table-td-color, rgba(255, 255, 255, 1));
+            border-bottom: var(--bets-widget-table-td-border-bottom, 1px solid rgba(36, 38, 43, 1));
+            background: var(--bets-widget-table-td-background, transparent);
+            &:first-child {
+              border-radius: var(--bets-widget-table-td-first-border-radius, 0px);
+            }
+            &:last-child {
+              border-radius: var(--bets-widget-table-td-last-border-radius, 0px);
+            }
             @media screen and (min-width: 0) and (max-width: 1280px){
               font-size: 14px;
               height: 42px;

@@ -8,7 +8,7 @@
                     <div class="products-list-item" *ngFor="let item of newsFragment.News, let i = index"
                          [queryParams]="{id:item.Id}"
                          [routerLink]="['/news']">
-                        <div class="product-list-block-name type-{{item.Type}}">{{newsTypes[item.Type] | translate}}</div>
+                        <div class="product-list-block-name type-{{item.Type}}">{{'News.' + newsTypes[item.Type] | translate}}</div>
                         <div class="news_item">
                             <img src="../../../../../../../assets/images/news/medium/{{item.ImageName}}"/>
                         </div>
@@ -18,7 +18,7 @@
                             <p [innerHtml]="item.Description"></p>
                             <div class="date">
                                 <i class="icon-timezone"></i>
-                                <span class="published-date">{{item.DeltaTime}} {{'ago' | translate}}</span>
+                                <span class="published-date">{{item.DeltaTime}} {{'News.ago' | translate}}</span>
                             </div>
                         </div>
                     </div>

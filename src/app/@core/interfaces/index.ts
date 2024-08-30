@@ -12,6 +12,7 @@ export interface FontModel
   Type:string;
   Weight:string;
   Src:string;
+  Lang:string;
 }
 
 export interface Region
@@ -63,4 +64,15 @@ export interface BankAccount
   BankAccountNumber:number;
   IBAN:string;
   OwnerName:string;
+}
+
+export interface Tournament{
+  Id: number,
+  Name:string,
+  StartTime:Date,
+  FinishTime: Date,
+  Info: string,
+  PrizePool:number,
+  CurrencyId:any,
+  Bonus:number[],
 }

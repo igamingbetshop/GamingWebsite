@@ -54,6 +54,8 @@ export class GetBetsHistoryService {
   public betsHistoryList: any[] = [];
   public betsHistoryListCount: number;
   public betStatusName;
+  public agentsList: any[] = [];
+  public agentsListCount: number;
 
 
   public userData: any;
@@ -77,6 +79,59 @@ export class GetBetsHistoryService {
         this._notifyGetStatusList.next(responceData['ResponseObject']);
       }
     });
+  }
+
+  public getAgentsReportHistory(data, parentId?) {
+    const filter = {
+      'ClientId': this.userData.Id,
+      'CurrencyId': this.userData.CurrencyId,
+      'PartnerId': this.defaultOption.PartnerId,
+      'TimeZone': this.configService.timeZone,
+      'FromDate': data.createdFrom,
+      'ToDate': data.createdBefore,
+      'SkipCount': data['index'],
+      'TakeCount': data.historyInPage
+    };
+
+    if (data['ParentId']) {
+      filter['ParentId'] = data['ParentId'];
+    }
+
+    this.baseApiService.apiRequest(filter, Controllers.AGENT, Methods.GET_REPORT_BY_AGENTS).subscribe((datas) => {
+      if (datas['ResponseCode'] === 0) {
+        const fetchedData = datas.ResponseObject['Entities'];
+        const fetchedCount = datas.ResponseObject['Count'];
+
+        if (parentId) {
+          const parent = this.findAgentById(this.agentsList, parentId);
+          if (parent) {
+            parent.ChildAgents = fetchedData;
+          }
+        } else {
+          if (data['index'] === 0) {
+            this.agentsList = fetchedData;
+          } else {
+            this.agentsList = [...fetchedData];
+          }
+          this.agentsListCount = fetchedCount;
+        }
+      }
+    });
+  }
+
+  findAgentById(agents, agentId) {
+    for (const agent of agents) {
+      if (agent.AgentId === agentId) {
+        return agent;
+      }
+      if (agent.ChildAgents) {
+        const childAgent = this.findAgentById(agent.ChildAgents, agentId);
+        if (childAgent) {
+          return childAgent;
+        }
+      }
+    }
+    return null;
   }
 
   public getBetsHistoryList(data, transactionId?) {

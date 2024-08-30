@@ -1,10 +1,5 @@
 .modal-content {
   max-width: var(--user-modal-section-max-width, 1000px) !important;
-  &.register_PSection
-  {
-    //max-width: var(--register-modal-section-max-width, 53%) !important;
-    max-height: var(--register-modal-section-max-height, 100%);
-  }
 
   &.user-info-content {
     height: 364px;
@@ -245,35 +240,5 @@
     }
   }
 }
-@media screen and (min-width: 1377px) and (max-width: 1800px) {
-  .modal-content {
-    &.register_PSection {
-      //max-width: var(--modal-content-register-section-small-max-width, 53%) !important;
-    }
-  }
-}
-@media screen and (min-width: 1600px) and (max-width: 1800px) {
-  .modal-content {
-    &.register_PSection {
-      max-height: var(--register-modal-section-large-max-height, 100%);
-    }
-  }
-}
 
-@media screen and (min-width: 1377px) and (max-width: 1599px) {
-  .modal-content {
-    &.register_PSection {
-      max-height: var(--register-modal-section-medium-max-height, 100%);
-    }
-  }
-}
-
-@media screen and (min-width: 0px) and (max-width: 1376px) {
-  .modal-content {
-    &.register_PSection {
-      max-height: var(--register-modal-section-small-max-height, 100%);
-      max-width: var(--register-modal-section-small-max-width, 78%) !important;
-    }
-  }
-}
 

@@ -23,8 +23,7 @@ export class AppComponent implements OnInit {
 
     translationLoaded: boolean;
     isLogin: boolean;
-    tets:never;
-    balanceTimer;
+    language:string;
 
     constructor(
         public translate: TranslateService,
@@ -35,15 +34,15 @@ export class AppComponent implements OnInit {
         private baseApiService: BaseApiService,
         @Inject(DOCUMENT) private _document: Document) {
         translate.addLangs(this.configService.defaultOptions.Languages.map(lang => lang.key));
-        const language = localStorage.getItem('lang') || this.configService.defaultOptions.ServerDefaultLang || this.configService.defaultOptions.DefaultLanguage;
-        translate.setDefaultLang(language);
-        localStorage.setItem('lang', language);
-        this._document.documentElement.lang = language;
+        this.language = localStorage.getItem('lang') || this.configService.defaultOptions.ServerDefaultLang || this.configService.defaultOptions.DefaultLanguage;
+        translate.setDefaultLang(this.language);
+        localStorage.setItem('lang',  this.language);
+        this._document.documentElement.lang =  this.language;
         this.shardService.setLanguage$.subscribe((lang) => {
             localStorage.setItem('lang', lang);
             translate.use(lang);
         });
-        translate.use(language ? language : 'en').subscribe(data => {
+        translate.use( this.language ?  this.language : 'en').subscribe(data => {
             this.translationLoaded = true;
         });
         this.isLogin = this.userLogined.isAuthenticated;
@@ -61,9 +60,14 @@ export class AppComponent implements OnInit {
         this.baseApiService.apiGet(`${window['debugPath'] || window.location.origin}/assets/json/fonts.json?=${window['VERSION']}`, null, '')
             .pipe(take(1)).subscribe(data => {
             if (data instanceof Array) {
-                const fonts = data as Array<FontModel>;
-                if (fonts.length) {
+                let fonts = data as Array<FontModel>;
+                if (fonts.length)
+                {
                     const fontsSources: any = [];
+                    const index = fonts.findIndex(f => f.Lang === this.language);
+                    if(index > -1)
+                        fonts = fonts.filter(f => f.Lang === this.language);
+
                     fonts.forEach(fontData => {
                         const font = new FontFace(fontData.FontFamily, `url(${window['debugPath']}/assets/fonts/${fontData.Src})`, {weight: fontData.Weight});
                         fontsSources.push(font.load());

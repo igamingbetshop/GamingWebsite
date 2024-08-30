@@ -10,10 +10,10 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HomeBannersModule } from './mobile-banners/home-banners.module';
 import { MobileImageBarModule} from './mobile-image-bar/mobile-image-bar.module';
 import { MobileCharactersModule} from './mobile-characters/mobile-characters.module';
-import {FragmentCharactersModule} from "./mobile-fragment-characters/mobile-fragment-characters.module";
 import {CasinoSearchFragmentComponent} from "../../common/fragments/search/casino-search-fragment.component";
 import {WinnersWidgetModule} from "../../desktop/fragments/winners-widget/winners-widget.module";
 import {BetsWidgetModule} from "../../desktop/fragments/bets-widget/bets-widget.module";
+import {FragmentCharactersModule} from "./mobile-fragment-characters/mobile-fragment-characters.module";
 
 const routes: Routes = [
     {
@@ -39,7 +39,7 @@ const routes: Routes = [
         FragmentCharactersModule,
         CasinoSearchFragmentComponent,
         WinnersWidgetModule,
-        BetsWidgetModule
+        BetsWidgetModule,
     ]
 })
 export class MobileHomeModule {

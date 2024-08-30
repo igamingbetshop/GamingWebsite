@@ -22,8 +22,8 @@
     .verify-icons {
       display: var(--settings-profile-verify-icons-display, block);
       position: absolute;
-      top: 18px;
-      right: -29px;
+      top: var(--settings-profile-verify-icons-item-top, 18px);
+      right: var(--settings-profile-verify-icons-item-right, -29px);
       font-size: 24px;
       cursor: pointer;
       .tooltip {
@@ -91,16 +91,24 @@
       }
     }
     .current_item {
-      border: 1px solid var(--account-content-item-bg-color);
+      border: var(--settings-field-border, none);
       border-radius: var(--settings-field-border-radius, 6px);
       background: var(--account-content-item-bg-color);
       color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
       margin: var(--settings-profile-country-list-margin, -12px 0 0 0);
+      position: var(--settings-profile-country-list-position, relative);
       .custom-code-label {
         position: absolute;
         color: var(--settings-focus-label-focused, #fff);
         transform: var(--custom-send-code-label-transform, translateY(-27px) translateX(0px) scale(0.75));
         left: var(--custom-send-code-label-left, 0px);
+      }
+      .custom-code-icon {
+        font-size: var(--mobile-dpd-icon-font-size, 1.3rem);
+        position: var(--mobile-dpd-icon-position, absolute);
+        right: var(--mobile-dpd-icon-right, 11px);
+        top: var(--mobile-dpd-icon-top, 1px);
+        color: var(--custom-send-code-icon-color, #fff);
       }
       .current_item-input {
         margin: var(--settings-profile-country-list-margin, -12px 0 0 0);
@@ -133,14 +141,17 @@
       margin: 10px 0 24px 0;
       color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
       font-size: var(--settings-field-font-size, 16px);
-      text-indent: 0;
-      padding-left: 16px;
+      text-indent: var(--settings-field-text-indent, 0);
+      padding-left: var(--settings-field-padding-left, 16px);
       border: var(--settings-field-border, none);
       background: var(--account-content-item-bg-color);
       border-radius: var(--settings-field-border-radius, 6px);
       height: var(--settings-field-height, 40px);
-      width: var(--settings-field-send-code-width, 80%);
+      width: var(--settings-field-send-code-width, 100%);
       //flex: 1 80%;
+    }
+    input::placeholder {
+      color: var(--settings-field-placeholder-color, rgb(135, 143, 162));
     }
     .setting_btn {
       font-size: var(--font-size-3, 16px);
@@ -229,6 +240,24 @@
       padding-right: var(--settings-padding-right-focus-label-focused, 10px);
     }
   }
+  .select-mobile-code {
+    width: 50%;
+  }
+  select {
+    &:not(.choose_input) {
+      margin: 10px 0 24px 0;
+      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      font-size: var(--settings-field-font-size, 16px);
+      text-indent: var(--settings-field-text-indent, 0);
+      padding-left: var(--settings-field-padding-left, 16px);
+      border: var(--settings-field-border, none);
+      background: var(--account-content-item-bg-color);
+      border-radius: var(--settings-field-border-radius, 6px);
+      height: var(--settings-field-height, 40px);
+      appearance: var(--open-ticket-appearance, auto);
+    }
+    border: 1px solid rgba(219, 237, 255, 0.8);
+  }
   .required-field
   {
     &:after
@@ -245,4 +274,25 @@
   input, select {
     width: 100% !important;
   }
+}
+.rightToLeft {
+
+  .form_field {
+    label {
+      right: var(--settings-input-label-left, 8px);
+      left: auto !important;
+    }
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
+      text-align: right;
+    }
+    .error-field-message {
+      right: 0;
+    }
+    .verify-icons {
+      left: var(--settings-profile-verify-icons-right-item-right, -29px);
+      right: auto;
+    }
+  }
+
 }

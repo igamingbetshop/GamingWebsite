@@ -1,0 +1,31 @@
+
+<div class="leaderboard-box">
+    <div class="leaderboard-box-header">
+        <span>{{'Place Name' | translate}}</span>
+        <span class="header-right-items">
+                        <span>{{'Points' | translate}}</span>
+                       <span>{{'Bonus' | translate}}</span>
+                    </span>
+    </div>
+    <div class="leaderboard-box-content" [style.height.px]="tournamentLeaderboard()?.length * this.OFFSET_Y">
+        @for (item of tournamentLeaderboard(); track $index){
+            <div #tournament class="item content-row" [style.top.px]="item.Order * this.OFFSET_Y" [class.items-opacity]="$index < 3">
+                <div class="row-left-items">
+                    <span class="order">{{$index + 1}}</span>
+                    <span class="place-name" id="textContainer">{{item.Name}}</span>
+                </div>
+                <div class="row-right-items">
+                    <span class="points">{{item.Points}} <img src="assets/images/icons/star.png"></span>
+                        <div class="bonus">
+                            @if (item.Bonus){
+                            <span>{{currencyId}} {{item.Bonus}}</span>
+                            }
+                            @else {
+                              <span>0</span>
+                            }
+                        </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

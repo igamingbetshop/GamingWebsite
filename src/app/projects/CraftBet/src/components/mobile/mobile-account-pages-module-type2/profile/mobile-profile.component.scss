@@ -1,6 +1,36 @@
+.mobile-settings-section {
+  overflow-y: var(--m-profile-details-section-overflow-y, hidden);
+}
+.mobile-settings-section {
+  background-size: var(--m-profile-tab-content-background-size, 100% 100%);
+  background-repeat: var(--m-profile-tab-content-background-repeat, no-repeat);
+  background-image: var(--m-profile-tab-content-background-image, unset);
+  background-attachment: var(--m-profile-tab-content-background-attachment, unset);
+  background-position: var(--m-profile-tab-content-background-position, unset);
+}
+.settings_header-mobile {
+  position: var(--m-profile-submit-details-position, sticky);
+  right: var(--m-profile-submit-details-right, 0);
+  top: var(--m-profile-submit-details-top, 10px);
+  background: var(--m-profile-submit-details-background, var(--account-content-item-bg-color));
+  width: var(--m-profile-submit-details-width, 100%);
+  padding: var(--m-profile-submit-details-padding, 7px 0);
+  z-index: 100;
+  .settings_edit {
+    width: var(--m-profile-edit-btn-width, 86%);
+    margin: var(--m-profile-edit-btn-margin, 0 auto);
+    display: var(--m-profile-edit-btn-display, flex);
+    justify-content: var(--m-profile-edit-btn-justify-content, flex-end);
+    align-items: center;
+    .icon-edit {
+      margin-right: 13px;
+      font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
+    }
+  }
+}
 .submit-details {
   display: flex;
-  gap: 20px;
+  gap: var(--m-profile-submit-details-gap, 20px);
   width: var(--settings-submit-details-width, auto);
   margin: var(--settings-submit-details-margin, 0);
   .setting_btn {
@@ -30,17 +60,21 @@
     }
   }
 }
+.tab-content-mobile {
+  padding: var(--m-profile-settings-form-padding, 110px 0 40px 0);
+  height: var(--m-profile-settings-form-height, calc(100vh - 233px));
+  overflow-y: var(--m-profile-settings-form-overflow-y, auto);
+  overflow-x: hidden;
+}
 form {
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  column-gap: 100px;
+  column-gap: var(--m-profile-settings-form-column-gap, 100px);
   row-gap: var(--m-profile-settings-form-row-gap, 0px);
   position: relative;
-  height: 100%;
   width: var(--m-profile-settings-form-width, 90%);
-  margin: var(--m-profile-settings-form-margin, 0);
-  padding: var(--m-profile-settings-form-padding, 0);
+  margin: var(--m-profile-settings-form-margin, 0 auto);
   .active_item {
     pointer-events: unset;
   }
@@ -119,7 +153,7 @@ form {
       }
     }
     label {
-      color: var(--settings-input-label-color, #fff);
+      color: var(--m-settings-input-label-color, var(--settings-input-label-color, #fff));
       position: absolute;
       top: var(--m-settings-input-label-top, 19px);
       left: var(--settings-input-label-left, 8px);
@@ -159,7 +193,7 @@ form {
       background-color: var(--settings-background-color, unset);
       height: var(--settings-label-focused-height, 22px);
       font-size: var(--settings-font-size-label, 16px);
-      color: var(--settings-focus-label-focused, #fff);
+      color: var(--m-settings-profile-label-focused-color, var(--settings-focus-label-focused, #fff));
       text-align: var(--settings-focus-label-focused-text-align, left);
       width: var(--settings-focus-label-focused-width, auto);
       padding-left: var(--settings-padding-left-focus-label-focused, 5px);
@@ -168,9 +202,9 @@ form {
     select:focus~label,
     select:not([value=""]):valid~label {
       transform:var(--m-settings-profile-label-transform, translateY(-31px) translateX(-10px) scale(0.75));
-      top: var(--register-focused-select-label-top, 20px);
-      font-size: var(register-focused-label-font-size, 16px);
-      color: var(--settings-focus-label-focused, #fff);
+      top: var(--m-settings-label-top, 19px);
+      font-size: var(--settings-font-size-label, 16px);
+      color: var(--m-settings-profile-label-focused-color, var(--settings-focus-label-focused, #fff));
       background-color: var(--settings-background-color-focus-label-focused, unset);
       padding-left: var(--settings-padding-left-focus-label-focused, 5px);
       padding-right: var(--settings-padding-right-focus-label-focused, 10px);
@@ -178,7 +212,7 @@ form {
     input, select {
       &:not(.choose_input) {
         //border: 1px solid $border-color;
-        color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+        color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6)));
         font-size: var(--settings-field-font-size, 16px);
         text-indent: 0;
         padding-left: 16px;
@@ -200,7 +234,7 @@ form {
       cursor: pointer;
     }
     ::placeholder {
-      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6)));
     }
     input, .mobile_verify, >select {
       margin: var(--settings-form-fields-margin, 10px 0 24px 0);
@@ -216,4 +250,29 @@ form {
       right: -6px;
     }
   }
+}
+.rightToLeft {
+  .submit-details .setting_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+  }
+  form {
+    .form_field {
+      label {
+        right: var(--settings-input-label-left, 8px);
+        left: auto !important;
+        transform-origin: right;
+      }
+      input:focus ~ label,
+      input:not(:placeholder-shown) ~ label {
+        text-align: right;
+      }
+      .error-field-message {
+        right: 0;
+      }
+    }
+  }
+
 }

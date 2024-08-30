@@ -23,8 +23,8 @@
             <div class="info">
                 <div>
                     <span>{{item.Title | translate}}</span>
-                    <p class="level">{{'Level' | translate}}:{{item.Title | translate}}</p>
-                    <p>{{'Description' | translate}}:{{item.Description | translate}}</p>
+                    <p class="level" [innerHtml]="item?.Title"></p>
+                    <p  [innerHtml]="item?.Description"></p>
                 </div>
             </div>
         </div>

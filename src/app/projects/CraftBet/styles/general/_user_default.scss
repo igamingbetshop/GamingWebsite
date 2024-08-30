@@ -364,8 +364,43 @@
         font-size: fontSize(user-right-panel-title, 16px);
         text-transform: var(--user-right-panel-title-text-transform, unset);
         border-radius: var(--user-right-panel-title-border-radius, 0px);
+        .user-right-panel-list_title {
+          margin-left: var(--user-right-panel-list-title-margin-left, 0);
+        }
+
+        .user-icon {
+          display: var(--user-info-statments-right-part-display, none);
+          position: relative;
+          color: color(user-icon);
+
+          .icon-user-info {
+            font-size: var(--user-info-statments-right-part-font-size, 24px);
+          }
+
+          .user-info_content {
+            display: none;
+          }
+        }
+        .user-icon:hover {
+          color: color(user-icon-hover);
+
+          .user-info_content {
+            display: block;
+
+            .selected {
+              color: $account-content-item-color;
+              width: 0;
+              height: 0;
+              border-left: 9px solid transparent;
+              border-right: 9px solid transparent;
+              border-bottom: 7px solid $account-content-item-color;
+              position: absolute;
+              right: 3px;
+              top: 20px;
+            }
+          }
+        }
       }
-      //.user-right-panel_content
       &_content {
 
       }
@@ -434,9 +469,11 @@
 
 
     .user-default-section_top {
-      /*width: width(user-view-size, 1524px);*/
-      width: 83%;
-      margin: 0 auto;
+      width: width(user-panel,83%);
+      margin-top: marginTop(user-panel, 0);
+      margin-bottom: marginBottom(user-panel, 0);
+      margin-left: marginLeft(user-panel, auto);
+      margin-right: marginRight(user-panel, auto);
       display: flex;
       justify-content: space-between;
       gap: $account-middle-gap;

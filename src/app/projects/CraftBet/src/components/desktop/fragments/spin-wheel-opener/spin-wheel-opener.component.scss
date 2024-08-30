@@ -1,0 +1,38 @@
+.spin-wheel-opener{
+  width: calc(100% - 6px);
+  height: 42px;
+  cursor: pointer;
+  img{
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    &:first-child{display: none;}
+    &:last-child{display: block;}
+  }
+
+}
+.expanded-menu{
+  .spin-wheel-opener{
+    img{
+      &:first-child{display: block;}
+      &:last-child{display: none;}
+    }
+  }
+}
+.sidebar_open{
+  .spin-wheel-opener{
+    img{
+      &:first-child{display: block;}
+      &:last-child{display: none;}
+    }
+  }
+}
+.sidebar_close{
+  .spin-wheel-opener{
+    img{
+      height: auto;
+      &:first-child{display: none;}
+      &:last-child{display: block;}
+    }
+  }
+}

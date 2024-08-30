@@ -2,7 +2,7 @@
 import {Injectable} from "@angular/core";
 import {ConfigService} from "@core/services";
 import {BaseControllerService} from "@core/services/app/baseController.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {MenuType} from "@core/enums";
 import {NavigationStart, Router} from "@angular/router";
 
@@ -31,7 +31,6 @@ export class LayoutService {
             }
         });
     }
-
 
     getMobileCentralMenu() {
         let centralMenuItems: any[] = [];

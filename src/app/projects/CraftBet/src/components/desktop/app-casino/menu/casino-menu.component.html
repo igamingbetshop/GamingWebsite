@@ -17,7 +17,7 @@
 </ng-container>
 <ng-template #horizontalHref>
     <div class="horizontal" [ngStyle]="fragmentConfig.Config.style">
-        <casino-search *ngFor="let fragment of fragments?.Search?.Items"
+        <casino-search *ngFor="let fragment of fragments?.Searches?.Items"
                        [style.margin-top.px]="fragment.Config.marginTop"
                        [style.order]="fragment.Order"
                        [fragmentConfig]="fragment">

@@ -39,7 +39,7 @@
                 <div  [attr.data-id]="'account-dpd' + item.Title"
                       class="list-section">
                     <a (click)="savedDateService.getCurrentSubItem(item); changePage(item.Href, $event, i)" *ngIf="item.Type == 1"
-                       [class.selected]="selectedItem == i">
+                       [class.selected]="isSelected(item.Href)">
                         <span class="icon-{{item.Icon}} icon" *ngIf="item.Icon"></span>
                         <img [src]="item.Src" class="item-icon-img">
                         <span>{{'Header.' + item?.Title | translate}}</span>

@@ -55,7 +55,7 @@
   }
 
   &_title {
-    padding: 0 10px;
+    padding: var(--friends-table-header-text-padding, 0 10px);
     color: itemColor(friends-table-header-text, #fff);
     font-size: 24px;
     font-weight: normal;
@@ -228,6 +228,13 @@
       background-color: var(--m-friends-button-bg-color, unset);
       background-image: var(--m-friends-button-bg-image, linear-gradient(to bottom, #1376f8, #173b6d));
     }
+  }
+
+  .custom-referral {
+    display: var(--custom-referral-text-display, none);
+  }
+  .mobile-custom-referral {
+    display: var(--m-custom-referral-text-display, none);
   }
 
   .referralLink {

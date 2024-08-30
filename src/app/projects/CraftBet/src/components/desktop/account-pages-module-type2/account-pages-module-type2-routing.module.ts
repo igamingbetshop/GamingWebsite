@@ -19,6 +19,9 @@ import {AccountPageType2TransactionsComponent} from "./transactions/account-page
 import {AccountPageType2PaymentsComponent} from "./payments/account-page-type2-payments.component";
 import {AccountPageType2VerificationComponent} from "./verification/account-page-type2-verification.component";
 import {AccountPageType2ChangePasswordComponent} from "./change-password/account-page-type2-change-password.component";
+import {IsAgentGuard} from "../../../../../../@core/services/helpers/is-agent.guard";
+import {AccountsFilterStateService} from "@core/services/app/accounts-filter-state.service";
+import {GetBetsHistoryService} from "@core/services/app/getBetsHistory.service";
 
 const routes: Routes = [
     {
@@ -123,14 +126,20 @@ const routes: Routes = [
             {
                 path: 'changepassword',
                 component: AccountPageType2ChangePasswordComponent
+            },
+            {
+                path: 'agents-report',
+                canActivate: [IsAgentGuard],
+                loadComponent: () => import('./agents-report/account-page-type2-agents-report.component').then(m => m.AccountPageType2AgentsReportComponent)
             }
         ]
     }
-]
+];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
+    providers:[AccountsFilterStateService, GetBetsHistoryService]
 })
 
 export class AccountPagesModuleType2RoutingModule {

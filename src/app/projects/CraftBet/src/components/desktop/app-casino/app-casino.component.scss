@@ -63,3 +63,21 @@ casino-category
     }
   }
 }
+
+.left-menu-box
+{
+  display: flex;
+  gap: var(--casino-left-menu-box-gap, 0px);
+  margin-top: var(--casino-left-menu-box-margin-top, 0px);
+  padding: var(--casino-left-menu-box-padding, 0);
+  .left-menu
+  {
+    background-color: var(--casino-left-menu-box-background, black);
+    width: var(--casino-left-menu-box-width, 200px);
+    min-width: var(--casino-left-menu-box-min-width, 200px);
+  }
+  .content
+  {
+    flex:1;
+  }
+}

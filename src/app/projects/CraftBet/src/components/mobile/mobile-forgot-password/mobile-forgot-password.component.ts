@@ -53,9 +53,6 @@ export class MobileForgotPasswordComponent extends BaseForgotPasswordComponent {
         this.createComponentWithInstances(moduleRef, this.verifyOtpRef, this.getRecoveryType(), this.forgotPasswordForm.get("fEmail").value.toString());
         break;
       case 4:
-        // const { VerifyCodeModule } = await import("../../../../../../@theme/components/modals/verify-code/verify-code.module");
-        // const moduleRef = createNgModule(VerifyCodeModule, this.injector);
-        // this.createComponentWithInstances(moduleRef, this.verifyOtpRef, this.getRecoveryType(), this.forgotPasswordForm.get("fEmail").value.toString());
         break;
       case 5:
         break;

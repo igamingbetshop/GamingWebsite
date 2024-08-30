@@ -17,6 +17,8 @@ import {AccountPageType1HistoryComponent} from './history/account-page-type1-his
 import {SelfLimitationComponent} from './self-limitation/self-limitation.component';
 import {AccountPageType1VerificationComponent} from './verification/account-page-type1-verification.component';
 import {AccountPageType1ChangePasswordComponent} from './change-password/account-page-type1-change-password.component';
+import {IsAgentGuard} from "../../../../../../@core/services/helpers/is-agent.guard";
+import {AccountsFilterStateService} from "@core/services/app/accounts-filter-state.service";
 
 const routes: Routes = [
     {
@@ -123,6 +125,11 @@ const routes: Routes = [
                 path: 'payment',
                 loadChildren: () => import('../account-pages-module-type1/pay3000/account-page-type1-pay3000.module').then(m => m.AccountPageType1Pay3000Module),
             },
+            {
+                path: 'agents-report',
+                canActivate: [IsAgentGuard],
+                loadComponent: () => import('./agents-report/account-page-type1-agents-report.component').then(m => m.AccountPageType1AgentsReportComponent)
+            }
         ]
     }
 ];
@@ -130,6 +137,7 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
+    providers:[AccountsFilterStateService]
 })
 
 export class AccountPagesModuleType1RoutingModule {

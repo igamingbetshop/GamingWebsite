@@ -14,8 +14,7 @@ export class BaseCasinoProviders implements OnInit {
     providers: any[] = [];
     type:string = 'vertical';
     providerFilter: any = {name: ''};
-    selectedProvider: any = {};
-
+    selectedProvider:any = {};
     apiService: BaseApiService;
     configService: ConfigService;
     casinoFilterService:CasinoFilterService;
@@ -47,7 +46,7 @@ export class BaseCasinoProviders implements OnInit {
         this.casinoProvidersService.getProviders(req).subscribe(providers => {
             if(this.fragmentConfig.Config.count)
             {
-                this.providers = providers.slice(1, this.fragmentConfig.Config.count);
+                this.providers = providers.slice(1, this.fragmentConfig.Config.count + 1);
             }
             else
             {
@@ -56,6 +55,9 @@ export class BaseCasinoProviders implements OnInit {
             this.providers.forEach(provider => {
                 provider.style = this.fragmentConfig.Config.itemStyle;
                 provider.imageSrc = `../../../../../../../assets/images/providers/${provider?.Id}${logoFormat}`;
+                if (this.fragmentConfig.Config.showLabel) {
+                    provider.Label = provider.Name;
+                }
             });
         });
 

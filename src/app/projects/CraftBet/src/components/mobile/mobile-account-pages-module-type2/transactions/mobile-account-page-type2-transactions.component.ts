@@ -1,14 +1,11 @@
-import {Component, Injector} from '@angular/core';
-import {AppCommonTransactionsComponent} from "../../../common/app-common-transactions/app-common-transactions.component";
+import {Component} from '@angular/core';
+import {TransactionsContainer} from "../../../common/transactions-container";
 
 @Component({
   selector: 'app-mobile-account-page-type2-transactions',
   templateUrl: './mobile-account-page-type2-transactions.component.html'
 })
-export class MobileAccountPageType2TransactionsComponent extends AppCommonTransactionsComponent {
+export class MobileAccountPageType2TransactionsComponent extends TransactionsContainer{
 
-  constructor(public injector: Injector) {
-    super(injector);
-  }
 
 }

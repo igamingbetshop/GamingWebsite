@@ -32,6 +32,7 @@
     max-height: height(modal-login-section, 400px);
     height: auto;
     min-height: height(min-modal-login-section, 250px);
+    border: var(--modal-login-section-border, none);
 
     .modal_content {
       width: width(modal-login-content, 100%);
@@ -51,17 +52,6 @@
       top: itemTop(error-message-login, 4px);
     }
   }
-
-  &.register_PSection {
-    //width: width(modal-register-section, 800px);
-    //width: 936px;
-    .modal_content {
-      //width: width(modal-register-content, 100%);
-      //height: height(modal-register-content, 672px);
-    }
-  }
-
-
   h2 {
     text-align: center;
     font-size: 30px;
@@ -102,6 +92,49 @@
     display: initial;
     float: right;
 
+  }
+
+  @media screen and (min-width: 1600px) and (max-width: 1799px)
+  {
+    &.register_PSection, &.login_PSection {
+      zoom:90%;
+    }
+  }
+  @media screen and (min-width: 1500px) and (max-width: 1599px)
+  {
+    &.register_PSection, &.login_PSection {
+      zoom:85%;
+    }
+  }
+  @media screen and (min-width: 1400px) and (max-width: 1499px)
+  {
+    &.register_PSection, &.login_PSection {
+      zoom:80%;
+    }
+  }
+  @media screen and (min-width: 1300px) and (max-width: 1399px)
+  {
+    &.register_PSection, &.login_PSection {
+      zoom:75%;
+    }
+  }
+  @media screen and (min-width: 1200px) and (max-width: 1299px)
+  {
+    &.register_PSection, &.login_PSection {
+      zoom:70%;
+    }
+  }
+  @media screen and (max-width: 1199px)
+  {
+    &.register_PSection, &.login_PSection {
+      zoom:70%;
+    }
+  }
+  @media screen and (max-height: 650px)
+  {
+    &.register_PSection, &.login_PSection {
+      zoom:60%;
+    }
   }
 }
 
@@ -180,89 +213,6 @@
   overflow-x: hidden;
 }
 .cdk-global-overlay-wrapper {
-  background-color: var(--modal-dialog-background-color, transparent) !important;
+  background-color: var(--modal-dialog-background-color, rgba(0, 0, 0, 0.5)) !important;
   box-shadow: none!important;
-}
-
-
-@media screen and (min-width: 0px) and (max-width: 1376px)
-{
-  .modal-content
-  {
-    .modal_content {
-      margin: var(--modal-content-small-margin, 0 auto);
-    }
-    &.login_PSection {
-      width: calc(var(--modal-login-section-width, 570px) * 0.7);
-      max-height:  calc(var(--modal-login-section-height, 400px) * 0.7);
-      height: auto;
-      min-height:  calc(var(--min-modal-login-section-height, 250px) * 0.7);
-      //.modal_content {
-      //  width: calc(var(--modal-login-content-width, 100%) * 0.7);
-      //}
-    }
-  }
-
-  .login_PSection_redirect {
-    margin: var(--login-redirect-small-text-margin, 9px auto 0 auto);
-    font-size: calc(var(--login-redirect-text-font-size, 10px) * 0.7);
-    padding: 0;
-    line-height: var(--login-redirect-text-small-line-height, 12px);
-    bottom: var(--modal-login-footer-small-item-bottom, 0);
-    left: var(--modal-login-footer-small-item-left, 0);
-
-    a {
-      margin-left: 10.5px;
-      margin-right: 10.5px;
-    }
-    .safety-info{
-      width: calc(var(--login-safety-info-width, auto) * 0.7);
-      font-size: calc(var(--register-safety-info-font-size, 16px) * 0.7);
-
-      &_text{
-        span {
-          margin-left:calc(var(--login-safety-text-margin-left, 8px) * 0.7);
-          margin-right: 0;
-        }
-      }
-
-    }
-  }
-}
-
-@media screen and (min-width: 1377px) and (max-width: 1600px)
-{
-  .modal-content
-  {
-    &.login_PSection {
-      width: calc(var(--modal-login-section-width, 570px) * 0.9);
-      max-height:  calc(var(--modal-login-section-height, 400px) * 0.9);
-      height: auto;
-      min-height:  calc(var(--min-modal-login-section-height, 250px) * 0.9);
-      .modal_content {
-        //width: calc(var(--modal-login-content-width, 100%) * 0.9);
-      }
-    }
-  }
-  .login_PSection_redirect {
-    margin: var(--login-redirect-medium-text-margin, 9px auto 0 auto);
-    font-size: calc(var(--login-redirect-text-font-size, 12px) * 0.9);
-
-    a {
-      margin-left: 13.5px;
-      margin-right: 13.5px;
-    }
-    .safety-info{
-      width: calc(var(--login-safety-info-width, auto) * 0.9);
-      font-size: calc(var(--register-safety-info-font-size, 16px) * 0.9);
-
-      &_text{
-        span {
-          margin-left:calc(var(--login-safety-text-margin-left, 8px) * 0.9);
-          margin-right: 0;
-        }
-      }
-
-    }
-  }
 }

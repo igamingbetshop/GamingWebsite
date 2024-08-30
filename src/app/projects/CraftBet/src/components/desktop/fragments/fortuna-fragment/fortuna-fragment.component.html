@@ -1,0 +1,132 @@
+<div class="fortuna" id="fortuna">
+    <div class="container">
+        <div class="board">
+            <div class="wheel" [style.width.px]="wheelDiameter()" [style.height.px]="wheelDiameter()">
+                <div class="dial" [class.spinning]="isSpinning()">
+                    @for(slice of slices(); track slice.id; let even = $even; let odd = $odd)
+                    {
+                        <div class="slice" [style]="style()" [style.transform]="slice.transform" [class.even]="even">
+                            <div class="slice-content">
+                                <span class="label" [style.font-size.px]="labelSize()" [style.width.px]="this.wheelRadius()">
+                                    <span class="spin-name" >{{slice.label}}</span>
+                                    <img width="32" height="32" [ngSrc]="slice.iconSrc">
+                                </span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="62.47" height="56.21" viewBox="0 0 62.47 56.21">
+                    <defs>
+                        <style>
+                            .cls-1 {
+                                fill: url(#radial-gradient);
+                            }
+
+                            .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+                                fill-rule: evenodd;
+                            }
+
+                            .cls-2 {
+                                fill: url(#radial-gradient-2);
+                            }
+
+                            .cls-3 {
+                                fill: url(#radial-gradient-4);
+                                mix-blend-mode: screen;
+                            }
+
+                            .cls-10 {
+                                isolation: isolate;
+                            }
+
+                            .cls-4 {
+                                fill: url(#radial-gradient-6);
+                            }
+
+                            .cls-5 {
+                                fill: #ff6e1d;
+                            }
+
+                            .cls-6 {
+                                fill: url(#radial-gradient-7);
+                            }
+
+                            .cls-7 {
+                                fill: url(#radial-gradient-3);
+                            }
+
+                            .cls-8 {
+                                fill: url(#radial-gradient-5);
+                            }
+
+                            .cls-9 {
+                                fill: #999;
+                            }
+                        </style>
+                        <radialGradient id="radial-gradient" cx="48.71" cy="6.05" fx="48.71" fy="6.05" r="41.83" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#ffae43"/>
+                            <stop offset=".54" stop-color="#ff882c"/>
+                            <stop offset="1" stop-color="#ff6e1d"/>
+                        </radialGradient>
+                        <radialGradient id="radial-gradient-2" cx="15.39" cy="13.96" fx="15.39" fy="13.96" r="45.99" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#f7cb16"/>
+                            <stop offset=".24" stop-color="#f9c11a"/>
+                            <stop offset="1" stop-color="#ffa727"/>
+                        </radialGradient>
+                        <radialGradient id="radial-gradient-3" cx="26.73" cy="15.73" fx="26.73" fy="15.73" r="37.53" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#d66613"/>
+                            <stop offset=".44" stop-color="#c14d10"/>
+                            <stop offset="1" stop-color="#aa330e"/>
+                        </radialGradient>
+                        <radialGradient id="radial-gradient-4" cx="30.05" cy="15.79" fx="30.05" fy="15.79" r="46.39" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#ff6e1d"/>
+                            <stop offset=".04" stop-color="#f0681b"/>
+                            <stop offset=".25" stop-color="#a84b13"/>
+                            <stop offset=".45" stop-color="#6c330c"/>
+                            <stop offset=".63" stop-color="#3d2007"/>
+                            <stop offset=".78" stop-color="#1b1303"/>
+                            <stop offset=".91" stop-color="#070a00"/>
+                            <stop offset="1" stop-color="#000800"/>
+                        </radialGradient>
+                        <radialGradient id="radial-gradient-5" cx="3.12" cy="-3.13" fx="3.12" fy="-3.13" r="78.74" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#e3edff"/>
+                            <stop offset="1" stop-color="#5c8ef2"/>
+                        </radialGradient>
+                        <radialGradient id="radial-gradient-6" cx="40.29" cy="-22.76" fx="40.29" fy="-22.76" r="83.18" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#a6c4ff"/>
+                            <stop offset="1" stop-color="#3c6ac7"/>
+                        </radialGradient>
+                        <radialGradient id="radial-gradient-7" cx="-35.47" cy="15.39" fx="-35.47" fy="15.39" r="107.7" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#275fcf"/>
+                            <stop offset="1" stop-color="#053272"/>
+                        </radialGradient>
+                    </defs>
+                    <g class="cls-10">
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                                <g>
+                                    <path class="cls-9" d="M47.99,27.18L62.47,2.11C52.26,.72,41.83,0,31.24,0S10.21,.72,0,2.11L14.48,27.18l16.76,29.02,16.76-29.02h0Z"/>
+                                    <path class="cls-5" d="M53.99,6.36c-7.56-.76-15.16-1.14-22.75-1.14s-15.2,.38-22.75,1.14L31.24,45.77,53.99,6.36h0Z"/>
+                                    <polygon class="cls-1" points="31.24 45.77 31.24 21.4 8.48 6.36 31.24 45.77 31.24 45.77"/>
+                                    <path class="cls-2" d="M8.48,6.36l22.75,15.04L53.99,6.36c-7.56-.76-15.16-1.14-22.75-1.14s-15.2,.38-22.75,1.14h0Z"/>
+                                    <polygon class="cls-7" points="31.24 21.4 31.24 45.77 53.99 6.36 31.24 21.4 31.24 21.4"/>
+                                    <polygon class="cls-3" points="13.83 9.89 30.22 22.07 31.24 42.54 32.26 22.08 40.95 14.98 31.24 20.13 13.83 9.89 13.83 9.89"/>
+                                    <path class="cls-8" d="M8.48,6.36c7.56-.76,15.16-1.14,22.75-1.14s15.2,.38,22.75,1.14l8.48-4.25C52.26,.72,41.83,0,31.24,0S10.21,.72,0,2.11L8.48,6.36h0Z"/>
+                                    <polygon class="cls-4" points="31.24 45.77 8.48 6.36 0 2.11 14.48 27.18 31.24 56.21 31.24 45.77 31.24 45.77"/>
+                                    <polygon class="cls-6" points="53.99 6.36 31.24 45.77 31.24 56.21 47.99 27.18 62.47 2.11 53.99 6.36 53.99 6.36"/>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <img class="logo" [src]="logo()">
+        </div>
+    </div>
+    <div class="spin-box">
+        <div class="spin-box-title">{{'Lucky Win' | translate}}</div>
+        <button [class.disabled]="bonus().StatusId !== 1" id="spin" (click)="spin()" [hidden]="this.isSpinning()">{{'Just Spin' | translate}}</button>
+    </div>
+</div>

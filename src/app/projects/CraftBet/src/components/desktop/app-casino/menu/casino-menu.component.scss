@@ -9,31 +9,35 @@
 {
   display: flex;
   flex-direction: column;
-  padding: 8px;
-  border-radius: 6px;
+  padding: var(--provider-vertical-item-padding, 8px);
+  border-radius: var(--provider-item-border-radius, 6px);
   border: solid 1px itemColor(provider-item-border, #1d2e4a);
   height: var(--provider-item-height, 323px);
-  margin-bottom: 16px;
+  margin-bottom: var(--provider-item-margin-bottom, 16px);
   background-color: backgroundColor(all-games,transparent);
   .title
   {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: var(--casino-nav-bar-title-font-size, 18px);
+    font-weight: var(--casino-nav-bar-title-font-weight, 500);
     color:color(casino-nav-bar-title);
     border-bottom: 1px solid itemColor(nav-bar-title-border-bottom,transparent);
     padding-bottom: paddingBottom(nav-bar-title, 0);
     margin-bottom: marginBottom(nav-bar-title,31px);
     cursor: default;
+    border-top: var(--nav-bar-title-border-top, none);
+    padding-top: var(--nav-bar-title-padding-top, 0px);
+    padding-left: var(--nav-bar-title-padding-left, 15px);
+    padding-right: var(--nav-bar-title-padding-right, 15px);
   }
   ul
   {
     display: grid;
     grid-template-columns: repeat(3, 104px);
     grid-auto-rows: minmax(min-content, max-content);
-    grid-gap: 8px;
+    grid-gap: var(--casino-menu-list-grid-gap, 8px);
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 4px;
+    padding: var(--casino-menu-list-padding, 4px);
 
     li {
       height: 76px;

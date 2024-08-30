@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import {Directive, ElementRef, HostListener, input, Input} from '@angular/core';
 
 @Directive({
   selector: '[numbersOnly]'
@@ -8,6 +8,7 @@ export class OnlyNumberDirective {
   constructor(private el: ElementRef) { }
 
   @Input() OnlyNumber: boolean;
+  preventFirstDigit = input<number>();
 
   @HostListener('paste', ['$event']) blockPaste(e: ClipboardEvent) {
     let t =  e.clipboardData.getData('text/plain');
@@ -34,8 +35,14 @@ export class OnlyNumberDirective {
 
   @HostListener('keydown', ['$event']) onKeyDown(event)
   {
-
     let e = <KeyboardEvent> event;
+    if(!(e.target as HTMLInputElement).value && this.preventFirstDigit && this.preventFirstDigit() === +e.key)
+    {
+      e.stopPropagation();
+      e.preventDefault();
+      return false;
+    }
+
     //if(!/^[0-9]*\.?[0-9]*$/.test(event.target.value + e.key)){}
     if(e.keyCode == 188 || e.keyCode == 110 || e.key == '.')
     {

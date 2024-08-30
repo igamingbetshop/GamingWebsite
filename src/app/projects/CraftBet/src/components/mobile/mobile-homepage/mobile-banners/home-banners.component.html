@@ -1,5 +1,7 @@
 <div [ngStyle]="fragmentConfig?.Config.style">
-    <div class="title" *ngIf="'HomeMenu.' + fragmentConfig.Config.titleVisibility" [innerHTML]="fragmentConfig.Title | translate | sanitizer: 'html'"></div>
+    @if (fragmentConfig.Config.titleVisibility){
+        <div class="title" [innerHTML]="fragmentConfig.Title | translate | sanitizer: 'html'"></div>
+    }
     <img src="../../../../../../../../assets/images/slider-arrow-left.svg" alt="" class="custom-arrow custom-slick-prev"
          *ngIf="fragmentConfig.Config?.customArrows" (click)="slickCarousel.slickPrev()">
     <ngx-slick-carousel class="carousel"

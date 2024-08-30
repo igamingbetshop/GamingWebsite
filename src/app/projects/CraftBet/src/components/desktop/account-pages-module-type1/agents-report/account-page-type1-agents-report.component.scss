@@ -1,0 +1,54 @@
+.agents-block {
+  gap: 10px;
+  font-size: var(--agents-block-section-font-size, 12px);
+  padding: var(--history-block-section-bets-padding, 0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+.agents-block-child {
+  font-size: var(--agents-block-section-font-size, 12px);
+  padding: var(--agents-child-block-section-bets-padding, 10px 0 5px 5px);
+}
+.agents-block-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--history-block-head-mrgbottom, 8px);
+  color: var(--history-block-head-color, #fff);
+  font-size: var(--agents-block-head-font-size, 12px);
+  border-radius: var(--history-block-head-bg-border-radius, 8px);
+  background-image: var(--history-block-head-bg, linear-gradient(to bottom, #16233a, #151a23));
+  padding-left: var(--history-block-head-pdleft, 0);
+  padding-right: var(--history-block-head-pdright, 16px);
+}
+.agents-block-head-item {
+  padding-top: var(--agents-section-block-head-padding-top, 11px);
+  padding-bottom: var(--agents-section-block-head-padding-bottom, 11px);
+  width: auto;
+  text-align: var(--agents-section-block-head-text-align, center);
+  flex: 1;
+}
+
+.agents-block_item-id {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.icon-arrow-right {
+  font-size: 11px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.icon-arrow-opened {
+  transform: rotate(90deg);
+}
+.items {
+  display: flex;
+  align-items: center;
+}
+.transactions-block_item {
+  text-align: center;
+}

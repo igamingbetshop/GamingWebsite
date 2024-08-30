@@ -31,7 +31,7 @@ export class BaseWithdrawType16Component extends BaseWithdrawPaymentComponent {
     ngOnInit()
     {
         super.ngOnInit();
-        this.getPaymentsService.getPaymentAccountTypes();
+        this.getPaymentsService.getPaymentAccountTypes(this.paymentSystemId);
         this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
         // this.paymentForm.addControl('BankAccountNumber', new FormControl('', [Validators.required]));
         this.paymentForm.addControl('BankIBAN', new FormControl('', [Validators.required]));

@@ -12,7 +12,10 @@
   display: flow-root;
   //transform: translate(var(--header-transform, 0px)) ;
   margin-top: var(--header-margin-top, 0);
-  padding-top: var(--header-padding-top, 0);
+  padding-top: var(--main-router-section-padding-top, 0);
+  padding-left: var(--main-router-section-padding-left, 0);
+  padding-right: var(--main-router-section-padding-right, 0);
+  padding-bottom: var(--main-router-section-padding-bottom, 0);
 }
 
 body
@@ -57,6 +60,27 @@ body
                     &:hover
                     {
                       .general-menu-sub-menu{display: none}
+                    }
+                  }
+                  .header-menu-item-style2 {
+                    .general-menu_item_link {
+                      display: var(--header-menu-item-style2-closed-item-text-display, block);
+                    }
+                  }
+                  .header-menu-item-style3 {
+                    .general-menu-sub-menu ul {
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      li:hover {
+                        .general-menu_item_link {
+                          display: block;
+                        }
+                      }
+                    }
+                    fa-icon
+                    {
+                      display: none;
                     }
                   }
                 }
@@ -115,6 +139,24 @@ body
         }
       }
     }
+    #main-container.rightToLeft {
+      app-header {
+        .header-section {
+          .header-section__top {
+            .header-section__group2 {
+              .header-section_topPanel {
+                margin-right: var(--header-panel2-width, 100px);
+                margin-left: 0;
+              }
+            }
+          }
+        }
+      }
+      .router_section, .footer-section {
+        right: var(--header-panel2-width, 100px);
+        left: auto;
+      }
+    }
   }
   &.isExpandedLeftMenu
   {
@@ -159,7 +201,7 @@ body
                         {
                           position: absolute;
                           top: var(--general-menu-item-top, 18px);
-                          left: calc(var(--header-menu-item-style1--img-width, 40px) + 10px);
+                          left: calc(var(--header-menu-item-style1--img-width, 40px) + var(--general-menu-item-left, 10px));
                         }
                         &:hover
                         {
@@ -192,6 +234,34 @@ body
                     &:hover
                     {
                       .general-menu-sub-menu{display: var(--header-menu-item-style1-general-menu-sub-menu-hover-display,none)}
+                    }
+                  }
+                  .header-menu-item-style3 {
+                    &.onlySubMenuLength {
+                      .general-menu-sub-menu {
+                        ul{
+                          display: var(--header-menu-item-style3-general-menu-sub-menu-display, grid);
+                          grid-template-columns: var(--header-menu-item-style3-general-menu-sub-menu-grid-template-columns, repeat(2,1fr));
+                          gap: var(--header-menu-item-style3-general-menu-sub-menu-gap, 10px);
+                          width: var(--header-menu-item-style3-general-menu-sub-menu-width, 98%);
+                          margin:var(--header-menu-item-style3-general-menu-sub-menu-margin, 0 auto);
+                          li {
+                            display: var(--header-menu-item-style3-general-sub-menu-item-display, flex);
+                            gap: var(--header-menu-item-style3-general-sub-menu-item-gap, 5px);
+                            align-items: var(--header-menu-item-style3-general-sub-menu-item-align-items, center);
+                            justify-content: var(--header-menu-item-style3-general-sub-menu-item-justify-content, flex-start);
+                            background: var(--header-menu-item-style3-general-sub-menu-item-background, transparent);
+                            padding: var(--header-menu-item-style3-general-sub-menu-item-padding, 0);
+                            border-radius: var(--header-menu-item-style3-general-sub-menu-item-border-radius, 0);
+                            .general-menu_item_link {
+                              display: block;
+                            }
+                          }
+                        }
+                      }
+                      .ng-fa-icon {
+                        display: var(--header-menu-item-style3-dropdown-icon-display, none);
+                      }
                     }
                   }
                 }
@@ -252,6 +322,29 @@ body
           left:var(--header-panel2-width, 100px);
           width: calc(100% - var(--header-panel2-width, 100px));
         }
+      }
+    }
+    #main-container.rightToLeft
+    {
+      app-header{
+        .header-section{
+          .header-section__top{
+            .header-section__group2{
+              .header-section_topPanel {
+                margin-right: var(--expanded-top-menu-margin-left, var(--expanded-menu-width, 204px));
+                margin-left: 0;
+              }
+              .transform-logo {
+                transform:var(--expanded-menu-logo-transform, translateX(calc(0px + calc(var(--expanded-menu-width) - var(--header-panel1-padding-left)))));
+              }
+            }
+          }
+        }
+      }
+      .router_section, .footer-section
+      {
+        right: var(--expanded-menu-width, 0);
+        left: auto;
       }
     }
   }
@@ -418,4 +511,28 @@ select{cursor: pointer}
   #main-container {
     background-image: var(--main-background-small-image, unset);
   }
+}
+.modal-close-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  right: 0;
+  top:0;
+  padding: 16px;
+  cursor: pointer;
+  &:hover{
+    svg{
+      fill:#FFFFFF;
+    }
+  }
+  svg{
+    fill:rgba(177, 186, 211, 1);
+    transition: fill 0.3s ease;
+  }
+}
+:root {
+  --mat-dialog-container-small-max-width: 95vw;
 }

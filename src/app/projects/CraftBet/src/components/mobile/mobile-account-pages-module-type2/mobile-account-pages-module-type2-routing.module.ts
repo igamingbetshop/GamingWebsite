@@ -17,6 +17,8 @@ import {MobileAccountPageType2BettingStatementSportComponent} from './betting-st
 import {MobileAccountPageType2StatmentComponent} from "./statment/mobile-account-page-type2-statment.component";
 import {MobileSelfLimitationComponent} from "./self-limitation/mobile-self-limitation.component";
 import {MobileChangePasswordComponent} from "./change-password/mobile-change-password.component";
+import {IsAgentGuard} from "../../../../../../@core/services/helpers/is-agent.guard";
+import {AccountsFilterStateService} from "@core/services/app/accounts-filter-state.service";
 
 const routes: Routes = [
   {
@@ -110,6 +112,11 @@ const routes: Routes = [
       {
         path: 'balance',
         loadChildren: () => import('./balance/mobile-account-page-type2-balance.module').then(m => m.MobileAccountPageType2BalanceModule),
+      },
+      {
+        path: 'agents-report',
+        canActivate: [IsAgentGuard],
+        loadComponent: () => import('./agents-report/mobile-account-page-type2-agents-report.component').then(m => m.MobileAccountPageType2AgentsReportComponent)
       }
     ]
   }
@@ -119,7 +126,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[AccountsFilterStateService]
 })
 export class MobileAccountPagesModuleType2RoutingModule {
 }

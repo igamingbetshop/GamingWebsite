@@ -370,7 +370,7 @@
     max-height: 705px;
     height: auto;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: var(--account-withdraw-content-overflow-y, auto);
     padding-right: var(--account-withdraw-content-padding-right, 0px);
 
     &.amount-error-space {
@@ -392,14 +392,16 @@
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: var(--account-content-header-justify-content, space-between);
       text-align: left;
       font-style: normal;
-      font-weight: 500;
+      font-weight: var(--account-content-header-font-weight, 500);
       font-size: var(--account-content-header-font-size, 16px);
       line-height: var(--account-content-header-line-height, 18px);
       color: color(account-content-header);
       cursor: default;
+      background: var(--account-content-header-background, transparent);
+      padding: var(--account-content-header-padding, 0);
     }
 
     .underline {
@@ -420,7 +422,7 @@
 
       .payment-list-column {
         /*width: calc(100% - var(--enter-payment-info-width));*/
-        flex: 2;
+        flex: var(--payment-section-content-block-list-flex, 2);
         overflow-y: hidden;
 
         .payment_list {
@@ -429,12 +431,13 @@
           gap: $account-big-gap;
           /*width: var(--payment-width, 868px);*/
           width: 100%;
-          padding-right: 8px;
+          padding-right: var(--payment-column-list-items-padding-right, 8px);
+          margin: var(--payment-column-list-items-margin, 0);
           overflow-y: auto;
-          height: calc(100% - 55px);
+          height: var(--payment-column-list-items-height, calc(100% - 55px));
 
           &_item {
-            width: 100%;
+            width: var(--account-content-item-width, 100%);
             min-height: var(--account-content-item-min-height, 188px);
             background: $account-content-item-bg-color;
             border-radius: var(--account-content-item-border-radius, 4px);
@@ -493,7 +496,8 @@
                 letter-spacing: normal;
                 bottom: 13px;
                 display: flex;
-                justify-content: space-between;
+                justify-content: var(--account-payment-amount-justify-content, space-between);
+                gap: var(--account-payment-amount-gap, 0);
                 flex-wrap: wrap;
                 text-align: var(--account-payment-amount-text-align, left);
                 flex-direction: var(--account-payment-amount-flex-direction, row);
@@ -510,6 +514,7 @@
               }
               .balance_info_commission {
                 bottom: var(--account-payment-commission-bottom, -4px);
+                display: var(--account-payment-commission-display, block)
               }
               .balance_info_fixed {
                 bottom: var(--account-payment-commission-fixed-bottom, -18px);
@@ -560,6 +565,8 @@
           .deposit_payment_section {
           /*  height: 100%;*/
             width: 100%;
+            background: var(--withdraw-payment-section-content-background, transparent);
+            border-radius: var(--withdraw-payment-section-content-border-radius, 0);
 
             &__form {
               height: 100%;
@@ -582,6 +589,7 @@
               &_top {
                 height: 100%;
                 overflow-y: var(--amount-withdraw-scrollable-overflow, hidden);
+                overflow-x: var(--amount-withdraw-scrollable-overflow-x, auto);
                 padding: var(--amount-withdraw-scrollable-padding, 0);
               }
             }
@@ -595,7 +603,7 @@
         overflow-x: hidden;
         height: 100%;
         position: relative;
-        border-radius: 6px;
+        border-radius: var(--account-content-parts-border-radius, 6px);
         padding: var(--account-content-row-paddding, 20px);
         color: $account-content-item-color;
         background-color: backgroundColor(acount-content-parts, #213454);
@@ -933,6 +941,7 @@
     line-height: 18px;
     color: var(--account-content-item-color, #fff);
     margin-top: var(--bonus-refused-margin-top, 16px);
+    background: var(--bonus-refused-background, transparent)
   }
   .bonus-refused input[type="checkbox"] {
     position: absolute;
@@ -977,8 +986,11 @@
   }
 
   app-common-bonuses {
-    width: 95%;
-    margin: 0 auto;
+    width: var(--deposit-app-common-bonuses-width, 95%);
+    margin: var(--deposit-app-common-bonuses-margin, 0 auto);
+    background: var(--deposit-app-common-bonuses-background, transparent);
+    padding: var(--deposit-app-common-bonuses-padding, 0);
+    border-radius: var(--deposit-app-common-bonuses-border-radius, 0);
 
     .bonus-label {
       padding: 0;

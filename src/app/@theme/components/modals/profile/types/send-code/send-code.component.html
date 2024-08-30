@@ -1,0 +1,93 @@
+<ng-container [ngSwitch]="type">
+    <div *ngSwitchCase="'Email'" class="form_field_large">
+
+        <div class="form_field">
+            <input type="text" [(ngModel)]="dataModel" (ngModelChange)="onModelChange($event)"  placeholder="{{'Settings.Email' | translate}}"
+                   [ngClass]="{ 'disable_item': (!(profileService.editState$ | async).value || formElement.Config?.disabled), 'active_item': (profileService.editState$ | async).value,
+                    'error-border': formGroup.get(formControlName).hasError('required')|| formGroup.get(formControlName).hasError('pattern')}"
+                   [style.width]="!(profileService.profileData$ | async)?.IsEmailVerified && !(profileService.editState$ | async).value ? '80%': '100%'"
+                   />
+            <label [class.required-field]="formElement.Config?.mandatory">{{'Register.Email-verify' | translate}}</label>
+            <button type="submit" class="craft_btn verify_btn setting_btn"
+                    [ngClass]="{'active_item': (profileService.editState$ | async).value }" (click)="getVerificationCode('email')"
+                    *ngIf="!(profileService.profileData$ | async)?.IsEmailVerified && !(profileService.editState$ | async).value">{{'Settings.Send_Code' | translate}}</button>
+            <span class="error-field-message" *ngIf="formGroup.get(formControlName).hasError('required') || formGroup.get(formControlName).hasError('pattern')">{{'Error.EmailFieldNotValid' | translate}}</span>
+            <div class="verify-icons">
+                <span class="{{'icon-' + (profileService.profileData$ | async)[formControlName + 'VerificationState']}}"></span>
+                <div class="tooltip">
+                    <div class="selected"></div>
+                    <div class="tooltip-text">
+                        {{'User.icon-' + (profileService.profileData$ | async)[formControlName + 'VerificationState'] | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="error_message">
+            {{errorMessage}}
+        </div>
+    </div>
+    <div *ngSwitchCase="'MobileNumber'" class="form_field_large">
+
+        <div class="form_field">
+            <div class="mobileData_tabs">
+                <div class="custom_dropdown_reg" dropdown>
+                    <div class="flex_between current_item" (click)="focusInput(mobileCodeInput, $event)">
+                        <span class="custom-code-label" [class.required-field]="formElement.Config?.mandatory">{{'Register.Mobile-number-verify' | translate}}</span>
+                        <input #mobileCodeInput [(ngModel)]="mobileCodePattern" [ngModelOptions]="{standalone:true}" class="current_item-input">
+                        <div class="flex_vertical-center"
+                             [class.focus-style]="(profileService.editState$ | async).value">
+                            <img src="../../../../../../../assets/images/countries/{{currentValueMobileCode?.Title | lowercase}}.png"/>
+                            <span>{{currentValueMobileCode?.Title}}
+                                ({{currentValueMobileCode?.Type}})</span>
+                        </div>
+                        <fa-icon class="custom-code-icon" [icon]="['fas', 'sort-down']"></fa-icon>
+                    </div>
+
+                    <ul class="custom_dropdown_list right-top">
+                        @for (code of mobileCodes | filterByMobileCode : mobileCodePattern; track code.Title) {
+                            <li (click)="selectMobileCode(code)">
+                                <img src="../../../../../../../assets/images/countries/{{code?.Title | lowercase}}.png"/>
+
+                                <span> {{ code?.Title }}
+                                    ({{ code?.Type }})</span>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+                <div class="custom_dropdown_reg2">
+                    <input type="text" [(ngModel)]="mobileDataModel" (ngModelChange)="onMobileChange($event)"
+                           [showMaskTyped]="false"
+                           placeHolderCharacter="0"
+                           numbersOnly
+                           name="'MobileNumber'"
+                           [mask]="currentValueMobileCode.Mask"
+                           #mobileDataModelInput="ngModel"
+                           required
+                           placeholder="{{currentValueMobileCode.Mask ? currentValueMobileCode.Mask : 'Register.Mobile-number-placeholder' | translate}}"
+                           [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formElement.Config?.disabled, 'active_item': (profileService.editState$ | async).value,
+                           'error-border': mobileDataModelInput.invalid}"/>
+                </div>
+                <button type="submit" class="craft_btn verify_btn setting_btn"
+                        [ngClass]="{'active_item': (profileService.editState$ | async).value }"
+                        *ngIf="!(profileService.profileData$ | async)?.IsMobileNumberVerified && !(profileService.editState$ | async).value"
+                        (click)="getVerificationCode('mobile')">{{'Settings.Send_Code' | translate}}</button>
+            </div>
+            <span class="error-field-message" *ngIf="mobileDataModelInput.touched && mobileDataModelInput.invalid">{{'Error.MobileNumberFieldNotValid' | translate}}</span>
+            <div class="verify-icons">
+                <span class="{{'icon-' + (profileService.profileData$ | async)[formControlName + 'VerificationState']}}"></span>
+                <div class="tooltip">
+                    <div class="selected"></div>
+                    <div class="tooltip-text">
+                        {{'User.icon-' + (profileService.profileData$ | async)[formControlName + 'VerificationState'] | translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-verify-info">
+            <div class="error_message" *ngIf="!(profileService.profileData$ | async)?.IsMobileNumberVerified">
+                {{errorMessage}}
+            </div>
+        </div>
+    </div>
+</ng-container>

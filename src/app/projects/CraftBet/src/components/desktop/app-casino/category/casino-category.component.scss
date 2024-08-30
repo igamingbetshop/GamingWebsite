@@ -113,6 +113,11 @@
 
 .filter-category-box
 {
+  &:hover {
+    background: backgroundColor(catgory-center-hover, transparent) !important;
+    transition: all .3s ease;
+    filter: var(--catgory-center-filter, contrast(100%));
+  }
   &.filter
   {
     display: flex;
@@ -136,7 +141,7 @@
 
         padding-left: paddingLeft(search-providers,0);
         padding-right: paddingRight(search-providers,0);
-        margin-bottom: 24px;
+        margin-bottom: var(--search-providers-margin-bottom, 24px);
 
         input {
           height: 100%;
@@ -154,6 +159,7 @@
         ::placeholder
         {
           color: itemColor(search-providers-placeholder, rgba(255, 255, 255, 0.6));
+          font-size: var(--search-providers-placeholder-font-size, 14px);
         }
       }
     }
@@ -176,9 +182,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      height: 35px;
       cursor: pointer;
+      gap: var(--filter-section-back-gap, 6px);
       p {
-        margin-left: 12px;
+        border-radius: var(--filter-section-radius, 0);
+        border:var(--filter-section-back, none);
+        padding: 5px 10px;
       }
     }
     .filter-title {

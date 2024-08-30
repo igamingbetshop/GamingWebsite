@@ -1,6 +1,9 @@
 @import "../../../styles/helpers/variables";
 @import "../../../../../../styles/helpers/variables";
 
+.mobile-live-casino-section {
+  background-image: var(--m-live-casino-section-background-image, unset) !important;
+}
 .mobile-casino-section {
   min-height: calc(100vh - 62px);
   margin-top: 62px;
@@ -8,6 +11,11 @@
   flex-direction: column;
   width: 100%;
   background: color(m-product-background);
+  background-size: var(--m-casino-section-background-size, 100% 100%);
+  background-repeat: var(--m-casino-section-background-repeat, no-repeat);
+  background-image: var(--m-casino-section-background-image, unset);
+  background-attachment: var(--m-casino-section-background-attachment, unset);
+  background-position: var(--m-casino-section-background-position, unset);
 
   .draggable {
     height: var(--m-casino-banner-height, 326px)!important;

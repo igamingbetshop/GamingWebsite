@@ -15,6 +15,11 @@ import {Subject} from "rxjs";
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {DatePipe, DecimalPipe} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
+import {Router} from "@angular/router";
+import {
+    SlotWheelComponent
+} from "../../../../projects/CraftBet/src/components/desktop/fragments/slot-wheel/slot-wheel.component";
+import {take} from "rxjs/operators";
 
 @Directive()
 export class BonusesComponent extends BaseComponent {
@@ -27,6 +32,7 @@ export class BonusesComponent extends BaseComponent {
     private translateService: TranslateService;
     private utilService: UtilityService;
     dialog = inject(MatDialog);
+    router = inject(Router);
     public baseApiService: BaseApiService;
     public utilityService: UtilityService;
     public translate: TranslateService;
@@ -44,7 +50,7 @@ export class BonusesComponent extends BaseComponent {
     public sportPage: number = 1;
 
     public availableTypes = [4, 6, 7, 9, 10, 13];
-    public campaignTypes = [10, 11, 12, 13, 14];
+    public campaignTypes = [4, 10, 11, 12, 13, 14];
     public noHistory;
     tabs:any[] = [];
 
@@ -104,7 +110,7 @@ export class BonusesComponent extends BaseComponent {
             {
                 this.bonusesData = {headers:[],body:[]};
                 const decimalPipe = new DecimalPipe('en');
-                const excludedHeaders = ['StatusId','TypeId',"BonusId","ReuseNumber"];
+                const excludedHeaders = ['StatusId','TypeId',"BonusId","ReuseNumber","ConnectedBonuses"];
                 for(let i = 0; i < data.length; i++)
                 {
                     const item = data[i];
@@ -133,6 +139,7 @@ export class BonusesComponent extends BaseComponent {
                         item['TypeIdActive'] = false;
                     }
                     item.IsCampaign = this.campaignTypes.includes(item.TypeId);
+                    data.Collect =  data.Type === 1 && data.Status === 7 && data.ValidUntil !== null;
                     Object.keys(item).forEach(key =>
                     {
                         if(!excludedHeaders.includes(key))
@@ -236,9 +243,28 @@ export class BonusesComponent extends BaseComponent {
 
     }
 
-    public openTriggers(bonus: Bonus) {
-        console.log('bonus',bonus);
-        this.dialog.open(BaseTriggersComponent, {data:{title: 'Triggers', bonus: bonus}});
+    collect(bonus)
+    {
+        this.bonusesService.CollectClientBonus(bonus).pipe(take(1)).subscribe(data => {
+            if(data['ResponseCode'] === 0)
+                bonus.Collect = false;
+        });
+    }
+
+    public openTriggers(bonus: Bonus)
+    {
+       /* if(bonus.TypeId === 4 && bonus.TypeIdActive)
+        {
+            this.router.navigate(["/slot-wheel"], {queryParams:{bonusId:bonus.BonusId, id:bonus.Id}});
+        }*/
+        if(bonus.StatusId !== 7 && bonus.TypeId === 4 && bonus.TypeIdActive)
+        {
+            this.dialog.open(SlotWheelComponent, {data:{title: 'slot-wheel', bonusId:bonus.BonusId, id:bonus.Id, reuseNumber:bonus.ReuseNumber}});
+        }
+        else
+        {
+            this.dialog.open(BaseTriggersComponent, {data:{title: 'Triggers', bonus: bonus}});
+        }
     }
 
     deleteBonus(bonus, event: MouseEvent)
@@ -260,6 +286,7 @@ export class BonusesComponent extends BaseComponent {
                             data['CalculationTime'] = this.datePipe.transform(data.CalculationTime.toString(), 'dd/MM/yyyy HH:mm');
                             data['AwardingTime'] = this.datePipe.transform(data.AwardingTime.toString(), 'dd/MM/yyyy HH:mm');
                             data['IsCampaign'] = this.campaignTypes.includes(data.TypeId);
+                            data['Collect'] =  data.Type === 1 && data.Status === 7 && data.ValidUntil !== null;
                             return data;
                         }
                         return item;

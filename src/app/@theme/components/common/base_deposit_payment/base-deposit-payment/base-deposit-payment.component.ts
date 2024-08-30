@@ -1,4 +1,4 @@
-import {OnInit, Injector, OnDestroy, Input, Directive, inject} from '@angular/core';
+import {OnInit, Injector, OnDestroy, Input, Directive, inject, createNgModule} from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {PaymentControllerService} from '../../../../../@core/services/app/paymentController.services';
 import {Subscription} from "rxjs";
@@ -59,12 +59,13 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
     public bonusService: BonusesService;
     public amount: number;
     public hasProfileError = false;
-    public updatedData;
     public stateService:StateService;
 
     protected subscriptions: Subscription[] = [];
     protected paymentService: GetPaymentsService;
     protected utilityService: UtilityService;
+
+    private payload:any;
 
     constructor(
         public injector: Injector
@@ -122,12 +123,7 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
         this.subscriptions.push(this.paymentControllerService.notifyGetCreatePaymentError.subscribe((response) => {
             this.handleCreatePaymentError(response);
         }));
-
-    }
-
-    protected subscribePaymentResponse()
-    {
-        this.paymentControllerService.notifyGetCreatePaymentData.pipe(take(1)).subscribe((resData) => {
+        this.subscriptions.push(this.paymentControllerService.notifyGetCreatePaymentData.subscribe((resData) => {
             this.paymentForm.reset();
             this.submitted = false;
             switch (this.contentType) {
@@ -173,7 +169,13 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
 
                 this.dialog.open(LimitNotificationsComponent, {data:{title: 'Limit Notifications',updatedData: resData.LimitInfo, message: true}})
             }
-        })
+        }))
+
+    }
+
+    protected subscribePaymentResponse()
+    {
+
     }
     public popupCenter(url, target, w, h, settings = true) {
         const dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen['left'];
@@ -196,6 +198,7 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
     }
 
     createPayment(request) {
+        this.payload = request;
         this.subscribePaymentResponse();
         this.submitted = true;
         if (this.bonusData.length === 0) {
@@ -212,11 +215,6 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.bonusService.calculatedBonusAmount = null;
         this.subscriptions.forEach(s => s.unsubscribe());
-    }
-
-    public routeToSettings()
-    {
-        this.stateService.setPaymentNavigationState("fromDeposit");
     }
 
     get hasMinMaxError()
@@ -239,16 +237,34 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
         });
     }
 
-    private handleCreatePaymentError(response) {
+    private async handleCreatePaymentError(response) {
 
-        this.hasProfileError = Object.keys(UserProfileErrors).some(error => response.ResponseCode == error);
+        const hasProfileError = Object.keys(UserProfileErrors).some(error => response.ResponseCode == error);
 
-        if (!this.hasProfileError ) {
+        if (!hasProfileError ) {
             this.errorMessage = response['Description'];
             this.utilityService.showMessageWithDelay(this, [{'errorMessage': response['Description']}]);
         }
         this.paymentForm.reset();
         this.submitted = false;
+
+        if(hasProfileError)
+        {
+            const {ProfileModule} = await import('../../../../components/modals/profile/profile.module');
+            const moduleRef = createNgModule(ProfileModule);
+            const component = moduleRef.instance.getComponent();
+            this.dialog.open(component, {panelClass:"profile-popup"}).afterClosed().subscribe(result => {
+                if(result)
+                {
+                    this.resendLast();
+                }
+            });
+        }
+    }
+
+    private resendLast(){
+        if(this.payload)
+            this.createPayment(this.payload);
     }
 
 }

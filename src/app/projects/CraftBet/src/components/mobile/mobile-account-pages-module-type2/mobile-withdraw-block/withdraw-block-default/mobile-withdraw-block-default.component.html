@@ -16,7 +16,7 @@
                 <div class="paymet-item_bodyInfo"><span class="title">{{'User.Id' | translate}}</span> {{item?.Id}}
                 </div>
                 <div class="paymet-item_bodyInfo"><span
-                        class="title">{{'User.Status' | translate}}</span> {{item?.Status}}</div>
+                        class="title">{{'User.Status' | translate}}</span> {{item?.StatusName}}</div>
                 <div class="paymet-item_bodyInfo"><span
                         class="title">{{'User.BetShopId' | translate}}</span> {{item?.BetShopId}}
                 </div>
@@ -64,7 +64,7 @@
                                     <div class="info_text" style="-webkit-box-orient: vertical"
                                          [innerHTML]="'Withdraw.' + 'PAYMENT_MESSAGE' + item?.PaymentSystemId | translate | sanitizer: 'html'"></div>
                                     <div class="balance_info">
-                                        <span>{{"Payments.Minimum" | translate}}:{{currentPayment?.MinAmount | number}} {{ currencyId}},</span>
+                                        <span>{{"Payments.Minimum" | translate}}:{{currentPayment?.MinAmount | number}} {{ currencyId}}</span>
                                         <span>{{"Payments.Maximum" | translate}}:{{currentPayment?.MaxAmount | number}} {{ currencyId}}</span>
                                     </div>
                                     <ng-container *ngIf="item?.FixedFee;else commissionPercentRef">

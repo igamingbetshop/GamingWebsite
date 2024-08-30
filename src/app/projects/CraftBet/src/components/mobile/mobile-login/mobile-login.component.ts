@@ -19,7 +19,7 @@ export class MobileLoginComponent extends AppCommonLoginComponent {
     constructor(public injector: Injector, public configService: ConfigService) {
         super(injector);
         if (this.userLogined.isAuthenticated) {
-            this.router.navigate([this.configService.defaultOptions.HomePageType]);
+            this.router.navigate([this.configService.defaultOptions.HomePageUrl]);
         }
         this.location = injector.get(Location);
     }
@@ -59,7 +59,7 @@ export class MobileLoginComponent extends AppCommonLoginComponent {
                 localStorage.removeItem('payment-url');
                 this.router.navigate([openedUrl]);
             }
-            else this.router.navigate([this.configService.defaultOptions.HomePageType]);
+            else this.router.navigate([this.configService.defaultOptions.HomePageUrl]);
         }
         else
         {

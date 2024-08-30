@@ -33,8 +33,8 @@ export class MobileDepositBlockDefaultComponent extends BaseDepositComponent {
         super.ngOnInit();
     }
 
-    createComponent(Id: number, Type: number, ContentType: number, info?: number[]) {
-        super.createComponent(Id, Type, ContentType, info);
+    createComponent(Id: number, Type: number, ContentType: number, info?: number[], maxMinAmount?: any) {
+        super.createComponent(Id, Type, ContentType, info, maxMinAmount);
 
         switch (Type) {
             case 1: {
@@ -49,6 +49,7 @@ export class MobileDepositBlockDefaultComponent extends BaseDepositComponent {
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
                 this.componentRef.instance.nominals = info;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
 
@@ -56,6 +57,7 @@ export class MobileDepositBlockDefaultComponent extends BaseDepositComponent {
                 this.componentRef = this.entry.createComponent(MobileDepositType3Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
 
@@ -77,6 +79,7 @@ export class MobileDepositBlockDefaultComponent extends BaseDepositComponent {
                 this.componentRef = this.entry.createComponent(MobileDepositType6Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
 
@@ -84,6 +87,7 @@ export class MobileDepositBlockDefaultComponent extends BaseDepositComponent {
                 this.componentRef = this.entry.createComponent(MobileDepositType7Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
 
@@ -91,6 +95,7 @@ export class MobileDepositBlockDefaultComponent extends BaseDepositComponent {
                 this.componentRef = this.entry.createComponent(MobileDepositType8Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
 
@@ -98,6 +103,7 @@ export class MobileDepositBlockDefaultComponent extends BaseDepositComponent {
                 this.componentRef = this.entry.createComponent(MobileDepositType9Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
 
@@ -112,30 +118,35 @@ export class MobileDepositBlockDefaultComponent extends BaseDepositComponent {
                 this.componentRef = this.entry.createComponent(MobileDepositType11Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 13: {
                 this.componentRef = this.entry.createComponent(MobileDepositType13Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 15: {
                 this.componentRef = this.entry.createComponent(MobileDepositType15Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 16: {
                 this.componentRef = this.entry.createComponent(MobileDepositType16Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
             case 17: {
                 this.componentRef = this.entry.createComponent(MobileDepositType17Component);
                 this.componentRef.instance.paymentSystemId = Id;
                 this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 this.componentRef.instance.walletAddress = this.currentPayment.Address;
                 this.componentRef.instance.DestinationTag = this.currentPayment.DestinationTag;
                 break;

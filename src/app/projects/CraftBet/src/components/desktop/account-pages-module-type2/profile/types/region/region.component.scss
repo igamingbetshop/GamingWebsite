@@ -4,8 +4,8 @@
   .verify-icons {
     display: var(--settings-profile-verify-icons-display, block);
     position: absolute;
-    top: 18px;
-    right: -29px;
+    top: var(--settings-profile-verify-icons-item-top, 18px);
+    right: var(--settings-profile-verify-icons-item-right, -29px);
     font-size: 24px;
     cursor: pointer;
     .tooltip {
@@ -132,8 +132,8 @@
       //border: 1px solid $border-color;
       color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
       font-size: var(--settings-field-font-size, 16px);
-      text-indent: 0;
-      padding-left: 16px;
+      text-indent: var(--settings-field-text-indent, 0);
+      padding-left: var(--settings-field-padding-left, 16px);
       border: var(--settings-field-border, none);
       background: var(--settings-field-background, var(--account-content-item-bg-color));
       border-radius: var(--settings-field-border-radius, 6px);
@@ -216,5 +216,18 @@
 {
   input, select {
     width: 100% !important;
+  }
+}
+.rightToLeft {
+  label {
+    right: var(--settings-input-label-left, 8px);
+    left: auto;
+  }
+  .error-field-message {
+    right: 0;
+  }
+  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    text-align: right;
   }
 }

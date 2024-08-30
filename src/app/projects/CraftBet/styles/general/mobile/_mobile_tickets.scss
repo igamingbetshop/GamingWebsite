@@ -142,7 +142,7 @@
               font-size: var(--m-tickets-message-icon-font-size, 13px);
               right: var(--m-tickets-message-icon-right, 0);
               color: var(--m-tickets-message-icon-color, #ffffff);
-              transform: rotate(-90deg);
+              transform: var(--m-tickets-message-icon-transform, rotate(-90deg));
             }
 
             .fa {

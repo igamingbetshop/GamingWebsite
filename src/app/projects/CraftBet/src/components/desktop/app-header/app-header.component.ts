@@ -1,13 +1,13 @@
 import {Component, createNgModule, ElementRef, HostListener, Inject, Injector, ViewChild} from '@angular/core';
 import {AppCommonHeaderComponent} from '../../common/app-common-header/app-common-header.component';
 import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
-import { ActivatedRoute, NavigationEnd} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, NavigationStart} from "@angular/router";
 import {SaveData} from '../../../../../../@core/services/app/saveData.service';
 import {AppOpenTicketComponent} from "../app-open-ticket/app-open-ticket.component";
 import {PopupsService} from "@core/services/app/popups.service";
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import {Subject, switchMap, take, timer} from "rxjs";
-import {debounceTime, filter, map} from "rxjs/operators";
+import {Subject, take} from "rxjs";
+import {debounceTime} from "rxjs/operators";
 import {getParsedUrl} from "@core/utils";
 import {LimitNotificationsComponent} from "../../../../../../@theme/components/modals/limit-notifications/limit-notifications.component";
 import {MenuType, Methods} from "../../../../../../@core/enums";
@@ -73,6 +73,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
     private moreMenuWidth:number = 0;
     public menuDirection:string;
     public isExpandedMenu:boolean;
+    public isExpandedPart:boolean = false;
     public isOpenedDropdown:boolean;
     public isAnimated:boolean;
     public userLogined:UserLogined;
@@ -103,6 +104,13 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
 
                 this.asianWebRoute = e['url'].includes('asianweb');
                 this.getActiveRouteName(e['urlAfterRedirects']);
+                this.hideLeftSide();
+            }
+
+            if (e instanceof NavigationStart) {
+                if (e['url'].includes('category')) {
+                    this.getActiveRouteName(e['url']);
+                }
             }
         });
         this.getHeaderPanel1MenuItems();
@@ -163,6 +171,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
 
         this.menuDirection = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.direction || this.menuDirection;
         this.isExpandedMenu = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.expanded || this.isExpandedMenu;
+        this.isExpandedPart = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.expanded;
         this.isOpenedDropdown = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.opened_Dpd || this.isOpenedDropdown;
         this.isAnimated = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.animated || this.isAnimated;
 
@@ -243,6 +252,9 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                 if (parsedStyleTypeItem['key'] != undefined) {
                     item['dropdownKey'] = parsedStyleTypeItem['key'];
                 }
+                if (parsedStyleTypeItem['itemTitle'] != undefined) {
+                    item['itemTitle'] = parsedStyleTypeItem['itemTitle'];
+                }
                 if (this.isLogin)
                 {
                     if (parsedStyleTypeItem.visibility !== 'loggedOut')
@@ -296,9 +308,11 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
 
     public getActiveRouteName(url) {
         this.realRouteName = url.substring(url.indexOf("/") + 1);
-
         if (this.realRouteName.includes("#")) {
-            this.activeRouterName = this.realRouteName.substring(0, this.realRouteName.indexOf('#'));
+            if(this.realRouteName.includes("sport=65"))
+                this.activeRouterName = this.realRouteName;
+            else
+                this.activeRouterName = this.realRouteName.substring(0, this.realRouteName.indexOf('#'));
         } else {
             if (this.realRouteName.startsWith("product") || this.realRouteName.startsWith("category"))
                 this.activeRouterName = this.realRouteName;
@@ -442,16 +456,43 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         }
     }
 
+    hideLeftSide() {
+        let currentUrl = this.router.url;
+        currentUrl = currentUrl.substring(currentUrl.indexOf("/") + 1);
+        if(this.isExpandedMenu == true){
+            if (currentUrl.includes('sport/prematch') || currentUrl.includes('sport/live')) {
+                this.document.body.classList.add("isLeftMenu");
+                this.document.body.classList.remove("isExpandedLeftMenu");
+                this.isExpandedMenu = !this.isExpandedMenu;
+            }else {
+                this.document.body.classList.add("isExpandedLeftMenu");
+                this.document.body.classList.remove("isLeftMenu");
+                this.isExpandedMenu = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.expanded || this.isExpandedMenu;
+            }
+        } else if (this.isExpandedPart && !(currentUrl.includes('sport/prematch') || currentUrl.includes('sport/live'))) {
+            this.document.body.classList.add("isExpandedLeftMenu");
+            this.document.body.classList.remove("isLeftMenu");
+            this.isExpandedMenu = this.baseControllerService.GetMenuByType(MenuType.HEADER_PANEL_2_MENU)?.expanded || this.isExpandedMenu;
+        }
+    }
+
     ngOnInit()
     {
         super.ngOnInit();
-
+        let currentUrl = this.router.url;
+        currentUrl = currentUrl.substring(currentUrl.indexOf("/") + 1);
         if(this.menuDirection === 'left'){
             this.document.body.classList.add("isLeftMenu");
         }
         if(this.isExpandedMenu == true){
-            this.document.body.classList.add("isExpandedLeftMenu");
-            this.document.body.classList.remove("isLeftMenu");
+            if (currentUrl.includes('sport/prematch') || currentUrl.includes('sport/live')) {
+                this.document.body.classList.add("isLeftMenu");
+                this.document.body.classList.remove("isExpandedLeftMenu");
+                this.isExpandedMenu = !this.isExpandedMenu;
+            } else {
+                this.document.body.classList.add("isExpandedLeftMenu");
+                this.document.body.classList.remove("isLeftMenu");
+            }
         }
 
         this.saveData.openPopup.subscribe((data) => {
@@ -727,29 +768,5 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
         const moduleRef = createNgModule(LuckyGameModule, this.injector);
         const component = moduleRef.instance.getComponent();
         return component;
-    }
-
-    openLuckyGame()
-    {
-        let objectWithImageName = null;
-        for (const item of this.generalMenuItems) {
-            if (item && item.imageName) {
-                objectWithImageName = item;
-                objectWithImageName.Config = {
-                    ImageName: objectWithImageName.imageName,
-                };
-                if (objectWithImageName.coords) {
-                    objectWithImageName.Config.coords = objectWithImageName.coords;
-                }
-                break;
-            }
-        }
-        this.loadComponent().then(component => {
-            const dialogRef = this.dialog.open(component, {data:{title: 'LuckyGame',
-                    message: true, fragmentConfig: objectWithImageName}, hasBackdrop: true});
-            dialogRef.afterClosed().subscribe(result => {
-            });
-
-        });
     }
 }

@@ -28,6 +28,7 @@
       }
     }
     app-common-bonuses {
+      background: var(--m-deposit-app-common-bonuses-background, transparent);
       .mobile-default-scroll {
         width: var(--m-default-scroll-width, auto);
         margin: var(--m-default-scroll-margin, 0);
@@ -77,6 +78,7 @@
         margin-left: var(--m-bonus-refused-margin-left, 0px);
         margin-right: var(--m-bonus-refused-margin-right, 0px);
         width: var(--m-bonus-refused-width, 100%);
+        background: var(--m-bonus-refused-background, transparent);
       }
       .bonus-refused input[type="checkbox"] {
         position: absolute;
@@ -235,6 +237,12 @@
         margin-top: var(--m-withdraw-content-column-margin-top, 15px);
         text-align: var(--m-withdraw-text-align, justify);
 
+        .balance_info {
+          .hide-commission-percent {
+            display: var(--m-payment-row-item-commission-display, block);
+          }
+        }
+
         &:last-child {
           border-top: var(--m-withdraw-content-last-item-border, 1px solid $account-deposit-section-bg);
         }
@@ -357,6 +365,7 @@
     font-weight: var(--m-user-views-title-payments-font-weight, normal);
     margin-top: var(--m-user-views-title-payments-margin-top, 20px);
     padding: var(--m-user-views-title-payments-padding, 15px 0);
+    display: var(--m-user-views-title-payments-display, block);
   }
   .mobile-payment-section_content
   {
@@ -364,7 +373,7 @@
       width: 100%;
       display: flex;
       gap: $account-small-gap;
-      min-height: 600px;
+      min-height: var(--m-withdraw-block-min-height, 600px);
       height: auto;
       align-items: start;
 
@@ -446,19 +455,22 @@
                     font-size: fontSize(m-payment-row-header, 14px);
                     font-weight: fontWeight(m-payment-row-header, 400);
                     margin-bottom: marginBottom(m-payment-row-header, 6px);
+                    display: var(--m-payment-row-header-display, block);
 
                   }
                   .hide-commission-percent {
-                    display: var(--m-payment-row-item-commission-display, block);
+                    display: var(--m-payment-row-item-commission-display, block) !important;
                   }
                   .balance_info {
                     color: var(--m-account-payment-amount-color, #bbc6e9);
                     font-size: var(--m-account-payment-amount-font-size, 14px);
                     font-weight: var(--m-account-payment-amount-font-weight, 400);
                     line-height: var(--m-account-payment-amount-line-height, 20px);
+                    display: var(--m-account-payment-amount-display, block);
+                    flex-direction: var(--m-account-payment-amount-flex-direction, row);
                     span:nth-child(2)
                     {
-                      margin-left: 6px;
+                      margin-left: var(--m-account-payment-amount-second-margin-left, 6px);
                     }
                   }
                   .info_text {
@@ -471,6 +483,7 @@
                     color: var(--m-account-payment-amount-color, #bbc6e9);
                     font-size: var(--m-account-payment-amount-font-size, 14px);
                     line-height: var(--m-account-payment-amount-line-height, 20px);
+                    margin-top: var(--m-account-payment-amount-margin-top, 0px);
                   }
                 }
               }
@@ -552,6 +565,9 @@
                   height: var(--m-account-content-row-header-height, 46px);
                   line-height: var(--m-account-content-row-header-line-height, 46px);
                   margin-bottom: var(--m-account-content-row-header-margin-bottom, 24px);
+                  .content_row-payment-name {
+                    display: var(--m-account-content-row-payment-name-display, block);
+                  }
                 }
               }
               .payment_field {

@@ -20,6 +20,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
     categoryName:string;
     games: any[] = [];
     leftGamesCount: number = 0;
+    totalGamesCount: number = 0;
     private viewedGamesCount: number = 0;
     leftGamesCountMessage:WritableSignal<string> = signal("");
 
@@ -142,7 +143,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
                             this.games = [];
                             return;
                         }
-                        if(isAll && this.fragmentConfig.Config.hasOwnProperty('categories'))
+                        if(this.fragmentConfig.Config.hasOwnProperty('categories') && filter.categoryId !== null && filter.categoryId !== undefined)
                         {
                             req.CategoryIds = this.fragmentConfig.Config.categories;
                         }
@@ -171,7 +172,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
     getCategoryName(categoryId)
     {
         if(categoryId === -1)
-            this.categoryName = null;
+            this.categoryName = "AllGames";
         else
         {
             const category = this.configService.settings.MenuList.find(elem => elem.Type == MenuType.CASINO_MENU).Items.find(el => el.Type == categoryId);
@@ -200,6 +201,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
     private setGamesLeftCount(leftCount:number, totalCount:number = 0)
     {
         this.leftGamesCount = leftCount;
+        this.totalGamesCount = totalCount;
         this.viewedGamesCount = totalCount - this.leftGamesCount;
         this.translate.get("Game.LeftGamesCountMessage").subscribe((res: string) => {
             this.leftGamesCountMessage.set(res.replace("{VIEWED_COUNT}", this.viewedGamesCount.toString()).replace("{LEFT_COUNT}", this.leftGamesCount.toString()));

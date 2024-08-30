@@ -3,8 +3,8 @@
 .mobile-modal-content {
   margin: var(--m-info-modal-content-margin, 0px auto 0);
   border-radius: var(--m-info-modal-content-border-radius, 20px);
-  background: $account-deposit-section-bg;
-  padding: 16px 0;
+  background: var(--m-info-modal-content-background, $account-deposit-section-bg);
+  padding: var(--m-info-modal-content-padding, 16px 0);
 
   &.mobile-info-modal-content {
    /* height: 430px;*/
@@ -23,7 +23,7 @@
 
     & > div {
       margin: auto;
-      text-align: left;
+      //text-align: left;
       font-size: var(--m-user-info-history-description-font-size, 16px);
       font-weight: var(--m-user-info-history-description-font-weight, 600);
       font-stretch: normal;
@@ -63,22 +63,15 @@
         font-weight: var(--m-user-info-history-table-title-font-weight, 500);
         font-stretch: normal;
         font-style: normal;
-        text-align: left;
+        //text-align: left;
         color: var(--m-user-info-history-table-title-color, #000000);
         letter-spacing: -0.18px;
         align-self: flex-start;
-
-
-        /* white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
-         line-height: 1.31;
-         width: 15%;*/
       }
       .body-item
       {
         width: 50%;
-        text-align: right;
+        text-align: var(--m-user-info-history-table-description-text-align, right);
         color: var(--m-user-info-history-table-description-color, rgba(71, 71, 71, 0.69));
         font-size: var(--m-user-info-history-table-description-font-size, 14px);
         font-weight: var(--m-user-info-history-table-description-font-weight, 500);
@@ -147,5 +140,9 @@
     padding: 0;
   }
 }
-
+.rightToLeft {
+   .modal_content .mobile-user-history-content .history-table .table-list .table-list__row .body-item {
+    text-align: left;
+  }
+}
 

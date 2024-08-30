@@ -110,14 +110,18 @@
                     <div class="mobile-header-section_topPanel_right">
                         <fa-icon *ngIf="menuItem.icon; else joinUsRef" [icon]="faUser" [size]="'2x'" (click)="onRightSidebarOpen()"></fa-icon>
                         <ng-template #joinUsRef>
-                            <button class="join-us" (click)="saveData.getMobileLoginPreviousState()" [routerLink]="['/login']">{{'Login.join-us' | translate}} <fa-icon [icon]="['fas', 'angle-right']" class="global_login-btn_rightIcon"></fa-icon></button>
+                            <button class="join-us" (click)="saveData.getMobileLoginPreviousState()" [routerLink]="['/login']">{{'Login.join-us' | translate}}
+                                <span class="hidden-login-text" [innerHTML]="'Login.SignIn-Icon-mobile' | translate | sanitizer: 'html'"></span>
+                                <fa-icon [icon]="['fas', 'angle-right']" class="global_login-btn_rightIcon"></fa-icon></button>
                             <fa-icon class="join-us-icon" [icon]="faUser" [size]="'2x'" [routerLink]="['/login']"></fa-icon>
                         </ng-template>
                     </div>
                 </div>
 
-                <div class="sign-up" *ngIf="menuItem.contentType === 'signupBtn' && !isLogin" (click)="redirectToSignUp()">
-                    <button type="button"  class="signup_btn"  [routerLink]="['/signup']">{{ 'Login.Sign Up' | translate }}  <fa-icon [icon]="['fas', 'angle-right']" class="global_login-btn_rightIcon"></fa-icon></button>
+                <div class="sign-up" *ngIf="menuItem.contentType === 'signupBtn' && !isLogin">
+                    <button type="button"  class="signup_btn"  [routerLink]="['/signup']">{{ 'Login.Sign Up' | translate }}
+                        <span class="hidden-register-text" [innerHTML]="'Register.Registration-Icon-mobile' | translate | sanitizer: 'html'"></span>
+                        <fa-icon [icon]="['fas', 'angle-right']" class="global_login-btn_rightIcon"></fa-icon></button>
                 </div>
 
             </li>

@@ -20,6 +20,7 @@ import {BonusesService} from "../../../../../@core/services/api/bonuses.service"
 import {FunctionalBtnModule} from "../../../../../@theme/components/functional-btn/functional-btn.module";
 import {LanguageModule} from "../../../../../@theme/components/global-language/language.module";
 import {MobileFooterComponent} from "./mobile-footer/mobile-footer.component";
+import {SpinWheelOpenerComponent} from "../desktop/fragments/spin-wheel-opener/spin-wheel-opener.component";
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {MobileFooterComponent} from "./mobile-footer/mobile-footer.component";
         DropdownDirectiveModule,
         MobileAccountPageType2BalanceModule,
         LanguageModule,
-        MobileFooterComponent
+        MobileFooterComponent,
+        SpinWheelOpenerComponent
     ],
 
     providers: [

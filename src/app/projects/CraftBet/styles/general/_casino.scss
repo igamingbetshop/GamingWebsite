@@ -781,18 +781,23 @@
   cursor: pointer;
 }*/
 
-
+.live-parent-casino-section {
+  background-image: var(--parent-live-casino-section-background-image, unset) !important;
+}
 .casino-section {
 
-  background: color(product-background);
-  background-size: 100% 100% !important;
-  background-repeat: no-repeat!important;
+  background: var(--parent-casino-section-background, color(product-background));
+  background-size: var(--parent-casino-section-background-size, 100% 100%) !important;
+  background-repeat: var(--parent-casino-section-background-repeat, no-repeat) !important;
+  background-image: var(--parent-casino-section-background-image, unset);
+  background-attachment: var(--parent-casino-section-background-attachment, unset);
+  background-position: var(--parent-casino-section-background-position, unset);
 
   .banner_image {
     width: var(--casino-banner-image-width, 100%);
     height: var(--banner-image-height, 360px);
     position: relative;
-    background-image: linear-gradient(to right, #131a2c 1%, rgba(83, 83, 83, 0.02) 36%, rgba(84, 84, 84, 0) 45%);
+    background-image: var(--banner-image-background-image, linear-gradient(to right, #131a2c 1%, rgba(83, 83, 83, 0.02) 36%, rgba(84, 84, 84, 0) 45%));
     background-size: 100% 100% !important;
     background-repeat: no-repeat!important;
  /* url("../../assets/images/b/jackpot_banner.png"),*/
@@ -2462,8 +2467,8 @@
 
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      -webkit-box-shadow: inset 0 0 6px #1376f8;
-      background-color:#1376f8;
+      -webkit-box-shadow: var(--casino-scrollbar-webkit-box-shadow, inset 0 0 6px #1376f8);
+      background-color: var(--casino-scrollbar-webkit-background-color, #1376f8);
       max-height: 12px;
     }
   }

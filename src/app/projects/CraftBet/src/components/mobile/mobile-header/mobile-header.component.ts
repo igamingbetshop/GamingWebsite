@@ -405,7 +405,7 @@ export class MobileHeaderComponent extends AppCommonHeaderComponent {
     }
 
     redirectToSignUp() {
-        localStorage.setItem('product-url', this.defaultOptions.RedirectUrl);
+        localStorage.setItem('product-url', this.defaultOptions.AfterLoginUrl);
     }
 
     onSelectedAccountChange(event)

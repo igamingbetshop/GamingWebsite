@@ -8,7 +8,8 @@
     display: flex;
     position: relative;
     justify-content: space-between;
-    gap: var(--settings-form-field-send-code-gap, 0px);
+    //gap: var(--settings-form-field-send-code-gap, 0px);
+    gap: var(--settings-form-field-send-code-gap, 7px);
     .error-field-message
     {
       font-size: var(--settings-profile-font-size, 15px);
@@ -72,22 +73,42 @@
       opacity: .8;
       border-color: #cecece !important;
     }
-    .mobileData_tabs .custom_dropdown_reg:first-child {
-      background: transparent;
+    .mobileData_tabs {
+      .custom_dropdown_reg {
+        .custom_dropdown_list{
+          li {
+            padding: var(--m-signup-custom-dropdown-padding, 5px 10px);
+            height: var(--m-signup-custom-dropdown-height, 30px);
+          }
+        }
+      }
+      .custom_dropdown_reg:first-child {
+        background: transparent;
+      }
     }
+
     .current_item {
-      border: 1px solid var(--account-content-item-bg-color);
+      border: 1px solid var(--m-settings-profile-country-list-border, transparent);
       border-radius: var(--settings-field-border-radius, 6px);
-      background: var(--account-content-item-bg-color);
-      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      background: var(--m-settings-profile-field-background, #101824);
+      color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6)));
       margin: var(--settings-profile-country-list-margin, -12px 0 0 0);
       height: var(--m-settings-profile-country-list-height, 40px);
+      position: var(--settings-profile-country-list-position, relative);
       .custom-code-label {
         position: absolute;
-        color: var(--settings-focus-label-focused, #fff);
-        transform: var(--m-custom-send-code-label-transform, translateY(-27px) translateX(0px) scale(0.75));
+        color: var(--m-settings-profile-label-focused-color, var(--settings-focus-label-focused, #fff));
+        transform: var(--m-settings-profile-label-transform, translateY(-31px) translateX(-10px) scale(0.75));
         left: var(--m-custom-send-code-label-left, 0px);
         top: var(--m-custom-send-code-label-top, 0px);
+        font-size: var(--settings-font-size-label, 16px);
+      }
+      .custom-code-icon {
+        font-size: var(--m-custom-send-code-icon-font-size, 1.3rem);
+        position: var(--m-custom-send-code-icon-position, absolute);
+        right: var(--m-custom-send-code-icon-right, 11px);
+        top: var(--m-custom-send-code-icon-top, 1px);
+        color: var(--m-custom-send-code-icon-color, #fff);
       }
       .current_item-input {
         margin: var(--settings-profile-country-list-margin, -12px 0 0 0);
@@ -108,7 +129,7 @@
       display: flex!important;
       padding-left: 9px;
       span {
-        color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+        color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6)));
       }
     }
     .custom_dropdown_list {
@@ -119,7 +140,7 @@
     }
     input {
       margin: 10px 0 24px 0;
-      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6)));
       font-size: var(--settings-field-font-size, 16px);
       text-indent: 0;
       padding-left: 16px;
@@ -127,7 +148,7 @@
       background: var(--m-settings-profile-field-background, #101824);
       border-radius: var(--settings-field-border-radius, 6px);
       height: var(--settings-field-height, 40px);
-      width: var(--settings-field-send-code-width, 80%);
+      width: var(--settings-field-send-code-width, 100%);
       //flex: 1 80%;
     }
     .setting_btn {
@@ -152,7 +173,7 @@
       }
     }
     label {
-      color: var(--settings-input-label-color, #fff);
+      color: var(--m-settings-input-label-color, var(--settings-input-label-color, #fff));
       position: var(--m-settings-input-label-position, absolute);
       top: var(--m-settings-input-label-top, 19px);
       left: var(--settings-input-label-left, 8px);
@@ -200,7 +221,7 @@
       background-color: var(--settings-background-color, unset);
       height: var(--settings-label-focused-height, 22px);
       font-size: var(--settings-font-size-label, 16px);
-      color: var(--settings-focus-label-focused, #fff);
+      color: var(--m-settings-profile-label-focused-color, var(--settings-focus-label-focused, #fff));
       text-align: var(--settings-focus-label-focused-text-align, left);
       width: var(--settings-focus-label-focused-width, auto);
       padding-left: var(--settings-padding-left-focus-label-focused, 5px);
@@ -212,7 +233,7 @@
       transform:var(--m-settings-profile-label-transform, translateY(-31px) translateX(-10px) scale(0.75));
       top: var(--register-focused-select-label-top, 20px);
       font-size: var(register-focused-label-font-size, 16px);
-      color: var(--settings-focus-label-focused, #fff);
+      color: var(--m-settings-profile-label-focused-color, var(--settings-focus-label-focused, #fff));
       background-color: var(--settings-background-color-focus-label-focused, unset);
       padding-left: var(--settings-padding-left-focus-label-focused, 5px);
       padding-right: var(--settings-padding-right-focus-label-focused, 10px);
@@ -244,6 +265,24 @@
     background: linear-gradient(to bottom,var(--settings-button-gradient-first-color, #FFFFFF) 0%,var(--settings-button-gradient-second-color, #FFFFFF) 100%);
     color: var(--settings-button-text-color, #FFFFFF);
     font-weight: 500;
+  }
+  .select-mobile-code {
+    width: 50%;
+  }
+  select {
+    &:not(.choose_input) {
+      margin: 10px 0 24px 0;
+      color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6)));
+      font-size: var(--settings-field-font-size, 16px);
+      text-indent: 0;
+      padding-left: 6px;
+      border: var(--settings-field-border, none);
+      background: var(--account-content-item-bg-color);
+      border-radius: var(--settings-field-border-radius, 6px);
+      height: var(--settings-field-height, 40px);
+      appearance: var(--open-ticket-appearance, auto);
+    }
+    border: 1px solid rgba(219, 237, 255, 0.8);
   }
   .required-field
   {

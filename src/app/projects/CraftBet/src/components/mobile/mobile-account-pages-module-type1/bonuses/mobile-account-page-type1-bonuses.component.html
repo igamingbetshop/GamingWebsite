@@ -1,7 +1,7 @@
 <!--<div class="mobile-bonuses-section" [ngStyle]="layoutService.layoutStyle">-->
 <div class="mobile-bonuses-section">
 
-  <h2 class="mobile-bonuses-section_title">Bonuses</h2>
+  <h2 class="mobile-bonuses-section_title">{{'Settings.Bonuses' | translate}}</h2>
   <div class="send-promo-code-box mobile-send-promo-code-box">
     <input  id="name" name="name" #name="ngModel"  [(ngModel)]="promoCode" placeholder="{{'Account.PromoCode' | translate}}">
     <button class="craft_btn verify_btn setting_btn" (click)="activatePromoCode()" [ngClass]="{'disabled' : !promoCode}">
@@ -61,6 +61,9 @@
             <td *ngIf="bonus.IsCampaign">
               <button type="button" class="craft_btn" (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
             </td>
+              <td *ngIf="bonus.Collect">
+                  <button type="button" class="craft_btn" (click)="collect(bonus)">{{'User.Collect' | translate}}</button>
+              </td>
           </tr>
           </tbody>
         </table>

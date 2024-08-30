@@ -1,49 +1,68 @@
 <div class="mobile-homepage-section">
 
-    <app-mobile-home-banners *ngFor="let fragment of banners"
-                      [fragmentConfig]="fragment"
-                      [style.order]="fragment.Order"
-                      [style.margin-top.px]="fragment.Config.marginTop">
-    </app-mobile-home-banners>
-    <app-mobile-image-bar *ngFor="let fragment of imageBars"
-               [fragmentConfig]="fragment"
-               [style.order]="fragment.Order"
-               [style.margin-top.px]="fragment.Config.marginTop">
-    </app-mobile-image-bar>
-    <winners-widget *ngFor="let fragment of winnerWidgets"
-                    [fragmentConfig]="fragment"
-                    [style.margin-top.px]="fragment.Config.marginTop"
-                    [style.order]="fragment.Order">
-    </winners-widget>
-    @for (fragment of betsWidgets; track fragment.Id)
+    @for (fragment of fragments(); track fragment.Id)
+    {
+        @switch (fragment.Position)
         {
-       <bets-widget [fragmentConfig]="fragment"
-                [style.margin-top.px]="fragment.Config.marginTop"
-                [style.order]="fragment.Order">
+            @case ("ImageBars") {
+                <app-mobile-image-bar [attr.id]="fragment.Config.id"
+                           [fragmentConfig]="fragment"
+                           [style.order]="fragment.Order"
+                           [style.margin-bottom.px]="fragment.Config.marginBottom"
+                           [style.width]="fragment.Config.width"
+                           [style.margin-top.px]="fragment.Config.marginTop"
+                           [style.max-width]="fragment.Config.maxWidth">
+                </app-mobile-image-bar>
+            }
+            @case ("Banners"){
+                <app-mobile-home-banners [attr.id]="fragment.Config.id"
+                                  [fragmentConfig]="fragment"
+                                  [style.order]="fragment.Order"
+                                  [style.margin-bottom.px]="fragment.Config.marginBottom"
+                                  [style.margin-top.px]="fragment.Config.marginTop"
+                                  [style.max-width.px]="fragment.Config.maxWidth">
+                </app-mobile-home-banners>
+            }
+            @case ("Characters"){
+                @if (!userLogined.isAuthenticated){
+                    <mobile-fragment-characters [fragmentConfig]="fragment"
+                                         [attr.id]="fragment.Config.id"
+                                         [style.order]="fragment.Order"
+                                         [style.margin-bottom.px]="fragment.Config.marginBottom"
+                                         [style.width]="fragment.Config.width"
+                                         [style.height.px]="fragment.Config.height"
+                                         [style.margin-top.px]="fragment.Config.marginTop"
+                    ></mobile-fragment-characters>
+                }
 
-       </bets-widget>
-        }
-    <casino-search-fragment *ngFor="let fragment of casinoSearch"
-                            [fragmentConfig]="fragment"
-                            [style.margin-bottom.px]="fragment.Config.marginBottom"
-                            [style.width]="fragment.Config.width"
-                            [style.margin-top.px]="fragment.Config.marginTop"
-                            [style.order]="fragment.Order">
-    </casino-search-fragment>
-    <div  *ngFor="let fragment of iframes" [style.order]="fragment.Order" class="frame-fragment">
-        <div class="title" *ngIf="'HomeMenu.' + fragment.Config.titleVisibility" [innerHTML]="fragment.Title | translate | sanitizer: 'html'"></div>
-        <iframe [ngStyle]="fragment.Config.style" [src]="fragment.Href | sanitizer: 'resourceUrl'"></iframe>
-    </div>
-
-    <ng-container *ngIf="!userLogined.isAuthenticated">
-        <mobile-fragment-characters *ngFor="let fragment of characters"
-                             [fragmentConfig]="fragment"
-                             [style.order]="fragment.Order"
-                             [style.margin-bottom.px]="fragment.Config.marginBottom"
-                             [style.width]="fragment.Config.width"
-                             [style.height.px]="fragment.Config.height"
+            }
+            @case ("WinsWidgets"){
+                <winners-widget [fragmentConfig]="fragment"
+                                [style.margin-top.px]="fragment.Config.marginTop"
+                                [style.order]="fragment.Order">
+                </winners-widget>
+            }
+            @case ("BetsWidgets"){
+                <bets-widget [fragmentConfig]="fragment"
                              [style.margin-top.px]="fragment.Config.marginTop"
-        ></mobile-fragment-characters>
-    </ng-container>
-
+                             [style.order]="fragment.Order">
+                </bets-widget>
+            }
+            @case ("CasinoSearches"){
+                <casino-search-fragment [fragmentConfig]="fragment"
+                                        [attr.id]="fragment.Config.id"
+                                        [style.margin-bottom.px]="fragment.Config.marginBottom"
+                                        [style.width]="fragment.Config.width"
+                                        [style.margin-top.px]="fragment.Config.marginTop"
+                                        [style.order]="fragment.Order">
+                </casino-search-fragment>
+            }
+            @case ("Iframes"){
+                <div [style.order]="fragment.Order" class="frame-fragment" [attr.id]="fragment.Config.id">
+                    <div class="title" *ngIf="fragment.Config.titleVisibility" [innerHTML]="fragment.Title | translate | sanitizer: 'html'"></div>
+                    <iframe [ngStyle]="fragment.Config.style" [src]="fragment.Href | sanitizer: 'resourceUrl'" (load)="onLoadFrame($event, fragment)"></iframe>
+                </div>
+            }
+        }
+    }
 </div>

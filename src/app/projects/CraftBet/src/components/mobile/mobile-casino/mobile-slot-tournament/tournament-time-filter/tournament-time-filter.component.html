@@ -1,0 +1,11 @@
+<div class="popup-container">
+    <div class="modal-body">
+        <span class="icon-close-modal" (click)="close()"></span>
+    </div>
+    <div class="time-filter-list">
+        @for (tournament of data.tournaments; track $index){
+          <div class="list-row"   [ngClass]="{'selected': selectedTournamentId  == tournament.Id}" (click)="selectTournament(tournament.Id)">{{tournament.Name}}</div>
+        }
+    </div>
+
+</div>

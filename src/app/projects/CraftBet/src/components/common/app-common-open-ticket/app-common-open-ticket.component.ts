@@ -67,7 +67,7 @@ export class AppCommonOpenTicketComponent implements OnInit {
       }
     }));
 
-    if (this.data && this.data.notLogin)
+    if (this.data && this.data.data?.notLogin)
     {
       this.ticketForm.addControl('Email', new FormControl('', [Validators.required, Validators.email]));
     }
@@ -98,8 +98,7 @@ export class AppCommonOpenTicketComponent implements OnInit {
       let ticket: Ticket = new Ticket();
       ticket.Subject = this.ticketForm.get("Subject").value;
       ticket.Message = this.ticketForm.get("Message").value;
-
-      if (this.data && this.data.notLogin)
+    if (this.data && this.data.data?.notLogin)
       {
         ticket.Email = this.ticketForm.get("Email").value;
         this.ticketsService.CreateNotLoginTicket(ticket);

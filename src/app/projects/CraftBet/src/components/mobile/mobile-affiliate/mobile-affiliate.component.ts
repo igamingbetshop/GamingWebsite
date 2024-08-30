@@ -3,7 +3,7 @@ import { BaseAffiliateComponent } from '../../../../../../@theme/components/comm
 import { LayoutService } from '../../../../../../@core/services/app/layout.service';
 
 @Component({
-  selector: 'app-mobile-affiliate',
+  selector: 'app-mobile-affiliates',
   templateUrl: './mobile-affiliate.component.html',
   styleUrls: ['./mobile-affiliate.component.scss']
 })

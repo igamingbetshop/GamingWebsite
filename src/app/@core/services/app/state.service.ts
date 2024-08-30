@@ -87,20 +87,6 @@ export class StateService
         this._openModal.next(data);
     }
 
-    setPaymentNavigationState(state:string, forceUpdate = false)
-    {
-      if(!state)
-      {
-        if(forceUpdate === true || this.getPaymentNavigationState !== "fromProfile")
-          sessionStorage.clear();
-      }
-      else sessionStorage.setItem("paymentNavigationState", state);
-    }
-    get getPaymentNavigationState():string
-    {
-      return sessionStorage.getItem("paymentNavigationState");
-    }
-
   /*Chat state*/
 
   onChatStateChanged = (event) =>

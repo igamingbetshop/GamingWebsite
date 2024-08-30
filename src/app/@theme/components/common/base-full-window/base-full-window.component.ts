@@ -87,7 +87,7 @@ export class BaseFullWindowComponent extends BaseComponent {
                 }
             }
             const iframe = document.getElementById('main-game-iframe') as HTMLIFrameElement;
-            if (flag > 1) {
+            if (flag > 1 && val.sportType !== 'chart') {
                 if (iframe && iframe.contentWindow) {
                     iframe.contentWindow.postMessage({"from": "website", "openRoute": val.sportType}, "*");
                 }
@@ -162,6 +162,7 @@ export class BaseFullWindowComponent extends BaseComponent {
                     iframe.style.visibility = 'visible';
                 }*/
                 iframe['src'] = frameUrl.replace('localhost:4200', window['HostNameUrl']);
+                //iframe['src'] = frameUrl.replace('https://sportsbookwebsite.localhost:4200/website', 'http://localhost:4201');
             }
             else
             {

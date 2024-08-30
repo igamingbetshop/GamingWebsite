@@ -1,0 +1,84 @@
+.logout-container {
+  border-radius: 0.5rem;
+  .logout-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #1A2C38;
+    .title-text {
+      color: #fff;
+      font-weight: 600;
+      line-height: 1.5;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0;
+      .svg-icon {
+        fill: #b1bad3;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        transition: fill 0.3s ease;
+      }
+    }
+    .close-btn {
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+      transition-timing-function: cubic-bezier(.4,0,.2,1);
+      transition-duration: .15s;
+      color: rgba(177,186,211);
+      line-height: 1;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      .svg-icon {
+        fill: #b1bad3;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        transition: fill 0.3s ease;
+        cursor: pointer;
+        pointer-events: auto;
+      }
+      .svg-icon:hover {
+        color: #fff;
+        fill: #fff;
+      }
+    }
+  }
+  .logout-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1rem 1rem 1rem;
+    gap: 1.25rem;
+    background: #1A2C38;
+    color: #b1bad3;
+    .logout-body-text {
+      text-align: left;
+      width: 100%;
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+    .logout-red-btn {
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+      transition-timing-function: cubic-bezier(.4,0,.2,1);
+      transition-duration: .15s;
+      color: #fff;
+      line-height: 1;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 1rem 1.25rem 1rem 1.25rem;
+      background: rgba(233,17,60);
+      border-radius: calc(0.5rem - 4px);
+      text-align: center;
+      width: 100%;
+      cursor: pointer;
+      &:hover {
+        background: #BA0E30;
+      }
+    }
+  }
+}

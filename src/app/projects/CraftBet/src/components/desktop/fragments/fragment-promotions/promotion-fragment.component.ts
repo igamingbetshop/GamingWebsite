@@ -3,11 +3,13 @@ import {Promotion, PromotionFragment} from "../../../../../../../@core/models";
 import {TranslateModule} from "@ngx-translate/core";
 import {CommonModule} from "@angular/common";
 import {Router, RouterModule} from "@angular/router";
+import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanitizer.module";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'promotion-fragment',
   templateUrl: './promotion-fragment.component.html',
-  imports:[CommonModule,TranslateModule, RouterModule],
+    imports: [CommonModule, TranslateModule, RouterModule, SanitizerModule, FaIconComponent],
   standalone:true
 })
 export class PromotionFragmentComponent{

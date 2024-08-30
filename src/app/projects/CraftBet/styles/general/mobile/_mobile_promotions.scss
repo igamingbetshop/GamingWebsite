@@ -3,6 +3,11 @@
   width: 100%;
   display: grid;
   word-break: break-word;
+  background-size: var(--m-promotions-section-background-size, 100% 100%);
+  background-repeat: var(--m-promotions-section-background-repeat, no-repeat);
+  background-image: var(--m-promotions-section-background-image, unset);
+  background-attachment: var(--m-promotions-section-background-attachment, unset);
+  background-position: var(--m-promotions-section-background-position, unset);
 
   &_pagination {
     margin: 10px auto;
@@ -42,13 +47,14 @@
 
       .promotion-content {
         margin-top: 24px;
-        padding-left: paddingLeft(--m-promotions-content, 0);
-        padding-right: paddingRight(--m-promotions-content, 0);
+        padding-left: paddingLeft(m-promotions-content, 0);
+        padding-right: paddingRight(m-promotions-content, 0);
         .content-title
         {
           display: flex;
           align-items: center;
           margin-bottom: 16px;
+          justify-content: var(--m-promotions-content-title-justify-content, unset);
 
           >span
           {
@@ -68,16 +74,17 @@
 
        .get-bonuses
        {
-         margin-left: auto;
-         min-width: 124px;
-         height: 44px;
-         line-height: 44px;
+         margin-left: var(--m-get-bonuses-text-margin-left, auto);
+         min-width: var(--m-get-bonuses-text-min-width, 124px);
+         height: var(--m-get-bonuses-text-height, 44px);
+         line-height: var(--m-get-bonuses-text-line-height, 44px);
+         display: var(--m-get-bonuses-text-display, block);
          background: var(--m-get-bonuses-text-background-color, linear-gradient(180deg, #1DCDFE 0%, #1CA7EC 0.01%, #1FB5FF 54.17%, #26A1DE 100%));
          border-radius: var(--m-get-bonuses-text-border-radius, 6px);
          font-size: var(--m-get-bonuses-text-font-size, 14px);
          font-weight: var(--m-get-bonuses-text-font-weight, 500);
          color: var(--m-get-bonuses-text-color, rgba(19, 26, 44, 1));
-         border: none;
+         border: var(--m-get-bonuses-text-border, none);
          outline: none;
          cursor: pointer;
        }
@@ -312,6 +319,11 @@
 
 .mobile-promotion-fragments
 {
+  background-size: var(--m-promotions-section-background-size, 100% 100%);
+  background-repeat: var(--m-promotions-section-background-repeat, no-repeat);
+  background-image: var(--m-promotions-section-background-image, unset);
+  background-attachment: var(--m-promotions-section-background-attachment, unset);
+  background-position: var(--m-promotions-section-background-position, unset);
   .fragment-title
   {
     background: var(--m-fragment-title-background, transparent);
@@ -327,4 +339,22 @@
     border-radius: var(--m-promotion-item-title-border-radius, 0);
     text-align: var(--m-promotion-item-title-text-align, left);
   }
+}
+.rightToLeft {
+  .mobile-promotions-section .promotion-item .back i {
+    transform: rotate(90deg);
+  }
+  .promotion-title {
+    text-align: right;
+    padding-right: var(--m-promotion-title-padding-left, 0);
+    padding-left: 0;
+  }
+  .mobile-promotion-fragments .fragment-title {
+    margin: var(--m-promotion-item-title-right-margin, 0);
+  }
+  .mobile-promotions-section_top .promotion-item .promotion-content .content-title > span i {
+    margin-left: var(--m-promotions-content-icon-margin-right, 6px);
+    margin-right: 0;
+  }
+
 }

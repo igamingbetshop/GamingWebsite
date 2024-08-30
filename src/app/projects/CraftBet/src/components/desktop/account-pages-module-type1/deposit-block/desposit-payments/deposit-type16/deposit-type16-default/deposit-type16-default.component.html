@@ -12,7 +12,7 @@
                 <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input" placeholder="{{'Deposit.Amount-placeholder' | translate}}"
                        [(ngModel)] = "amount" [ngClass]="{'invalid-filed': ((paymentForm.get('Amount').hasError('required')  || paymentForm.get('Amount').hasError('minlength') || paymentForm.get('Amount').hasError('maxlength')) && paymentForm.get('Amount').touched)}"
                        formControlName="Amount" numbersOnly/>
-                <label class="payment-form-field__label">{{'DeposiaccountTypest.Amount' | translate}} ({{currencyId}})</label>
+                <label class="payment-form-field__label">{{'Deposit.Amount' | translate}} ({{currencyId}})</label>
                 <div class="error_message" *ngIf="hasMinMaxError">
                   <span class="text" *ngIf = "amount < maxMinAmount?.MinAmount">{{'Deposit.AmountLessThen' | translate : { amount: maxMinAmount?.MinAmount, currency: currencyId} }}</span>
                   <span class="text" *ngIf = "this.amount > this.maxMinAmount?.MaxAmount">{{'Deposit.AmountMoreThen' | translate : { amount: maxMinAmount?.MaxAmount, currency: currencyId} }}</span>
@@ -39,6 +39,13 @@
             <label class="payment-form-field__label">{{'Deposit.AccountType' | translate}}</label>
           </div>
         </div>
+
+          <div class="payment-form-field" *ngIf="promoData.length > 0">
+              <div class="payment-form-field__column">
+                  <input type="text" class="payment-input" placeholder="{{'Deposit.PromoCode-placeholder' | translate}}" formControlName="PromoCode"/>
+                  <label class="payment-form-field__label">{{'Deposit.PromoCode' | translate}}</label>
+              </div>
+          </div>
 
         <div class="payment-form-field">
           <div class="payment-form-field__column_btn">

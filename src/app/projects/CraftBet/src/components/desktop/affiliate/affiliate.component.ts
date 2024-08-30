@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BaseAffiliateComponent } from '../../../../../../@theme/components/common/base-affiliate/base-affiliate.component';
 
 @Component({
-  selector: 'app-affiliate',
+  selector: 'app-affiliates',
   templateUrl: './affiliate.component.html',
   styleUrls: ['./affiliate.component.scss']
 })

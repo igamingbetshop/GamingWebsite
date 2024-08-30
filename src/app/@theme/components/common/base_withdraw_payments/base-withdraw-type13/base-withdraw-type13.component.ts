@@ -33,7 +33,7 @@ export class BaseWithdrawType13Component extends BaseWithdrawPaymentComponent {
 
     ngOnInit() {
         super.ngOnInit();
-        this.getPaymentsService.getPaymentAccountTypes();
+        this.getPaymentsService.getPaymentAccountTypes(this.paymentSystemId);
 
         this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
         this.paymentForm.addControl('BankAccountNumber', new FormControl('', [Validators.required]));
@@ -50,7 +50,7 @@ export class BaseWithdrawType13Component extends BaseWithdrawPaymentComponent {
 
         this.subscriptions.push(this.getPaymentsService.notifyGetPaymentAccountTypes$.subscribe((data) => {
             this.accountTypes = data;
-            this.paymentForm.get('AccountType').patchValue(this.accountTypes[0].Value);
+            this.paymentForm.get('AccountType').patchValue(this.accountTypes[0]?.Value);
         }));
 
         this.showList = false;

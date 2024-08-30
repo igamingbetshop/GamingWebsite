@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {ConfigService} from "@core/services";
+import {ConfigService, LocalStorageService} from "@core/services";
 import {BaseComponent} from '../../../../../../@theme/components/base/base.component';
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {MenuType} from "@core/enums";
@@ -18,6 +18,8 @@ export class CommonUserDefaultComponent extends BaseComponent {
   public savedDateService: SaveData;
   public tabType:string = 'top';
   public profileService: ProfileService;
+  public localStorageService: LocalStorageService;
+  public userData: any;
   public status: any;
   currentOpenMenu: any = null;
   currentOpenSubMenu: any = null;
@@ -26,8 +28,10 @@ export class CommonUserDefaultComponent extends BaseComponent {
     this.configService = injector.get(ConfigService);
     this.savedDateService = injector.get(SaveData);
     this.baseControllerService = injector.get(BaseControllerService);
+    this.localStorageService = injector.get(LocalStorageService);
     this.router = injector.get(Router);
     this.profileService = injector.get(ProfileService);
+    this.userData = this.localStorageService.get('user');
   }
 
   ngOnInit() {
@@ -69,8 +73,20 @@ export class CommonUserDefaultComponent extends BaseComponent {
               this.currentOpenSubMenu = el.SubMenu[0];
             }
           }
-        })
-      })
+        });
+        const agentsReportIndex = el.SubMenu.findIndex(item => item.Href === 'agents-report');
+        if (agentsReportIndex !== -1) {
+          const agentsReport = el.SubMenu[agentsReportIndex];
+          if (!agentsReport.StyleType) {
+            el.SubMenu.splice(agentsReportIndex, 1);
+          } else {
+            const styleTypeItem = JSON.parse(agentsReport.StyleType);
+            if (!styleTypeItem || !(styleTypeItem.IsAgent && this.userData.IsAgent === true)) { // todo true
+              el.SubMenu.splice(agentsReportIndex, 1);
+            }
+          }
+        }
+      });
       const direction = this.baseControllerService.GetMenuByType(MenuType.ACCOUNT_TAB_LIST)?.direction;
       if(direction)
       {

@@ -1,4 +1,4 @@
-<div class="mobile-casino-section flex_column_center">
+<div class="mobile-casino-section flex_column_center" [ngClass]="{'mobile-live-casino-section': router.url.includes('/livecasino')}">
 
   <app-mobile-casino-banners *ngFor="let fragment of fragments?.Banners?.Items"
                              [fragmentConfig]="fragment"
@@ -12,6 +12,7 @@
   </app-mobile-casino-menu>
 
   <app-mobile-casino-providers *ngFor="let fragment of fragments?.Providers?.Items"
+                               [position]="position"
                                [style.order]="fragment.Order"
                                [fragmentConfig]="fragment">
   </app-mobile-casino-providers>
@@ -22,7 +23,7 @@
                                [class.search-view]="stateService.categoriesSearchViewState$ | async"
                                [fragmentConfig]="fragment">
   </app-mobile-casino-category>
-  <app-mobile-casino-search *ngFor="let fragment of fragments?.Search?.Items"
+  <app-mobile-casino-search *ngFor="let fragment of fragments?.Searches?.Items"
                             [style.margin-top.px]="fragment.Config.marginTop"
                             [style.order]="fragment.Order"
                             [fragmentConfig]="fragment">
@@ -40,7 +41,7 @@
                     [style.order]="fragment.Order">
     </winners-widget>
 
-  <mobile-character-hierarchy *ngFor="let fragment of fragments?.CharacterHierarchy?.Items"
+  <mobile-character-hierarchy *ngFor="let fragment of fragments?.CharacterHierarchies?.Items"
                               [style.margin-top.px]="fragment.Config.marginTop"
                               [style.order]="fragment.Order"
                               [fragmentConfig]="fragment">

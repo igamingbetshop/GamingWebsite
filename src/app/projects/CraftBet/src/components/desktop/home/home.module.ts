@@ -5,12 +5,12 @@ import {HomeComponent} from "./home.component";
 import {FragmentBannersModule} from "../fragments/banners/fragment-banners.module";
 import {CharactersModule} from "../fragments/characters/characters.module";
 import {RouterModule, Routes} from "@angular/router";
-import {ImageBarModule} from "../fragments/image-bar/image-bar.module";
 import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 import {FragmentCharactersModule} from "../fragments/fragment-characters/fragment-characters.module";
 import {CasinoSearchFragmentComponent} from "../../common/fragments/search/casino-search-fragment.component";
 import {WinnersWidgetModule} from "../fragments/winners-widget/winners-widget.module";
 import {BetsWidgetModule} from "../fragments/bets-widget/bets-widget.module";
+import {ImageBarComponent} from "../fragments/image-bar/image-bar.component";
 
 const routes:Routes = [{
   path: '',
@@ -22,14 +22,14 @@ const routes:Routes = [{
         CommonModule,
         TranslateModule,
         FragmentBannersModule,
-        ImageBarModule,
         CharactersModule,
         SanitizerModule,
         CasinoSearchFragmentComponent,
         RouterModule.forChild(routes),
         FragmentCharactersModule,
         WinnersWidgetModule,
-        BetsWidgetModule
+        BetsWidgetModule,
+        ImageBarComponent
     ],
   exports:[
     RouterModule

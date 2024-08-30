@@ -1,0 +1,89 @@
+<form [formGroup]="form" (ngSubmit)="submit(1)">
+    <div class="history-tools-panel">
+        <div class="history-tools">
+            <label>{{'User.Period-of-time' | translate}}</label>
+            <select formControlName="timeFilter">
+                <option *ngFor="let item of historyTimeFilter, let i = index" [ngValue]="i">
+                    {{item.Name | translate}}
+                </option>
+            </select>
+        </div>
+
+        <div class="history-tools">
+            <label>{{'User.Type' | translate}}</label>
+            <select formControlName="operationFilter"
+                    [ngClass]="{'disable_item': getTransactionsService.operationTypes.length <= 0}">
+                <option *ngFor="let item of getTransactionsService.operationTypes; let i = index"
+                        [ngValue]="item?.Id">
+                    {{item?.Name}}
+                </option>
+            </select>
+        </div>
+
+        <div *ngIf="customFilterShow" class="history-tools custom-tool">
+            <label>{{'User.From' | translate}}</label>
+            <input type="datetime-local" formControlName="changedate">
+        </div>
+
+        <div *ngIf="customFilterShow" class="history-tools custom-tool">
+            <label>{{'User.To' | translate}}</label>
+            <input type="datetime-local" formControlName="changetTodate">
+        </div>
+
+        <div class="history-tools">
+            <label></label>
+            <button class="craft_btn show-btn">{{'User.Show' | translate}}</button>
+        </div>
+    </div>
+</form>
+<table>
+    <tbody>
+    <!--        <tr>-->
+    <!--            <td>{{'User.DocumentId' | translate}}</td>-->
+    <!--            <td>{{'User.Date' | translate}}</td>-->
+    <!--            <td>{{'User.Type' | translate}}</td>-->
+    <!--            <td>{{'User.AccountTypeName' | translate}}</td>-->
+    <!--            <td>{{'User.Amount' | translate}}</td>-->
+    <!--            <td>{{'User.ProductName' | translate}}</td>-->
+    <!--            <td>{{'User.PaymentSystemName' | translate}}</td>-->
+    <!--        </tr>-->
+    <tr
+            *ngFor="let item of getTransactionsService.transactionsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getTransactionsService.transactionsListCount }, let i = index">
+        <td>
+            <div>{{item?.DocumentId}}</div>
+            <div></div>
+        </td>
+        <td>
+            <div>{{item?.CreationTime | date: 'dd/MM/yyyy hh:mm'}}</div>
+            <div *ngIf="item?.PaymentSystemName">{{item?.PaymentSystemName}}</div>
+            <div>{{item?.AccountTypeName}}</div>
+            <div *ngIf="!item?.PaymentSystemName">{{item?.ProductName}}</div>
+        </td>
+        <td>
+            <div>{{item?.OperationTypeName}}</div>
+            <div><span *ngIf="item?.Type == 2">-</span>{{item?.Amount | number: '1.2-2'}} {{item?.CurrencyId}}</div>
+        </td>
+        <!--            <td>{{item?.OperationTypeName}}</td>-->
+        <!--            <td>{{item?.AccountTypeName}}</td>-->
+        <!--            <td><span *ngIf="item.Type == 2">-</span>{{item?.Amount | number}}</td>-->
+        <!--            <td>{{item?.ProductName}}</td>-->
+        <!--            <td>{{item?.PaymentSystemName}}</td>-->
+    </tr>
+    </tbody>
+
+</table>
+<div class="empty-bets empty-block" *ngIf="getTransactionsService.transactionsList.length == 0">
+    <section class="empty-bets empty-block">
+        <span class="icon-transactions icon"></span>
+        <span class="empty-block-text">{{'User.Transactions-empty' | translate}}</span>
+        <span class="empty-history-text">{{noHistory}}</span>
+    </section>
+</div>
+
+<!--  <loader></loader>-->
+
+<div class="pagination_section">
+    <pagination-controls
+            autoHide="true"
+            (pageChange)="getTransactionsHistory($event)"></pagination-controls>
+</div>

@@ -1,6 +1,7 @@
-<div class="promotion-item-content">
+<div class="promotion-item-content" [ngClass]="{'modal-content': promotionData.Style?.popup}">
+    <span class="icon-close-modal" (click)="close()" [style.display]="promotionData.Style?.popup ? 'block' : 'none'"></span>
     <div class="promotion-item-image">
-        <img  src="../../../../../../../assets/images/promotions/{{promotionData.ImageName}}">
+        <img src="../../../../../../../assets/images/promotions/{{promotionData.ImageName}}">
     </div>
     <div class="promotion-description">
         <h2 [innerHtml]="promotionData.Description | sanitizer: 'html'"></h2>

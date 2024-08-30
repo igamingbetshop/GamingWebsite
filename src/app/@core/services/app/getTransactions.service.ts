@@ -26,7 +26,9 @@ export class GetTransactionsService {
 
   public operationTypes: any[] = [];
   public transactionsList: any[] = [];
-  public transactionsListCount: any[] = [];
+  public transactionsListCount: number;
+  public transactionsReportList: any[] = [];
+  public transactionsReportListCount: number;
 
   public userData: any;
   public defaultOption: any;
@@ -84,6 +86,26 @@ export class GetTransactionsService {
       }
     });
 
+  }
+
+  getTransactionsReport(data: any) {
+    const filter = {
+      'ClientId': this.userData.Id,
+      'CurrencyId': this.userData.CurrencyId,
+      'PartnerId': this.defaultOption.PartnerId,
+      'TimeZone': this.configService.timeZone,
+      'FromDate': data.FromDate,
+      'ToDate': data.ToDate,
+      'SkipCount': data['index'],
+      'TakeCount': data.historyInPage
+    };
+
+    this.baseApiService.apiRequest(filter, Controllers.AGENT, Methods.GET_TRANSACTIONS).subscribe((data) => {
+      if (data['ResponseCode'] == 0) {
+        this.transactionsReportList = data.ResponseObject['Entities'];
+        this.transactionsReportListCount = data.ResponseObject['Count'];
+      }
+    });
   }
 
 }

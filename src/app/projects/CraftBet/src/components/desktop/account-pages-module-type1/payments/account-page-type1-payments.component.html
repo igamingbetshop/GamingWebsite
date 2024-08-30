@@ -9,33 +9,42 @@
     <form [formGroup]="form" (ngSubmit)="submit(1)">
       <div class="history-tools history-tools-field">
         <select formControlName="timeFilter">
-          <option *ngFor="let item of historyTimeFilter, let i = index" [ngValue]="item">{{item.Name | translate}}</option>
+            @for (item of historyTimeFilter; let i = $index; track i)
+            {
+                <option [ngValue]="i">{{item.Name | translate}}</option>
+            }
         </select>
         <label>{{'User.Period-of-time' | translate}}</label>
       </div>
 
-      <div class="history-tools custom-tool" *ngIf="customFilterShow">
-        <input type="datetime-local" formControlName="changedate">
-        <label>{{'User.From' | translate}}</label>
-      </div>
-
-      <div class="history-tools custom-tool" *ngIf="customFilterShow">
-        <input type="datetime-local" formControlName="changetTodate">
-        <label>{{'User.To' | translate}}</label>
-      </div>
+        @if(customFilterShow)
+        {
+            <div class="history-tools custom-tool">
+                <input type="datetime-local" formControlName="changedate">
+                <label>{{'User.From' | translate}}</label>
+            </div>
+            <div class="history-tools custom-tool">
+                <input type="datetime-local" formControlName="changetTodate">
+                <label>{{'User.To' | translate}}</label>
+            </div>
+        }
 
       <div class="history-tools history-tools-field">
         <select formControlName="status">
-          <option *ngFor="let statusFilter of paymentsFilter"
-                  [ngValue]="statusFilter">{{statusFilter.Name | translate}}</option>
+            @for(statusFilter of paymentsFilter; track statusFilter.Id)
+            {
+                <option [ngValue]="statusFilter.Id">{{statusFilter.Name | translate}}</option>
+            }
         </select>
         <label>{{'User.Status' | translate}}</label>
       </div>
 
       <div class="history-tools history-tools-field">
         <select formControlName="type">
-          <option *ngFor="let typeFilter of getPaymentsService.paymentTypesList"
-                  [ngValue]="typeFilter.Value">{{typeFilter?.Name}}</option>
+            @for (typeFilter of getPaymentsService.paymentTypesList; track typeFilter.Value)
+            {
+                <option [ngValue]="typeFilter.Value">{{typeFilter?.Name}}</option>
+            }
         </select>
         <label>{{'User.PaymentType' | translate}}</label>
       </div>

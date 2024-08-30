@@ -4,13 +4,8 @@ app-mobile-casino-category {
   }
 
   &.search-view {
-    &:not(.search) {
-      display: none
-    }
-
-    &.search {
-      display: block
-    }
+    &:not(.search){display: none}
+    &.search,&.filter{display: block}
   }
 }
 

@@ -63,6 +63,10 @@
     padding-right: paddingRight(search-field, 0);
     background-color: backgroundColor(search-field,#1d2e4a);
     margin-bottom: marginBottom(search-field, 26px);
+    margin-top: marginTop(search-field, 0);
+    margin-right: marginRight(search-field, 0);
+    margin-left: marginLeft(search-field, 0);
+    width: var(--casino-search-field-width, 100%);
 
     .search-icon
     {
@@ -70,8 +74,8 @@
       height: 36px;
       line-height: 36px;
       text-align: center;
-      border-radius: 5px;
-      box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+      border-radius: var(--search-games-icon-border-radius, 5px);
+      box-shadow: var(--search-games-icon-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
       background-image: linear-gradient(to bottom, itemColor(search-icon-gradient-first,#1376f8), itemColor(search-icon-gradient-second,#194074));
       cursor: pointer;
       font-size: 16px;

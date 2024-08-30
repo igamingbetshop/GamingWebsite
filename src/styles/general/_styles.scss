@@ -86,11 +86,11 @@
 }
 
 .slick-next {
-  right: 2% !important;
+  right: var(--banner-icon-slick-next-right, 2%) !important;
 }
 
 .slick-prev {
-  left: 2% !important;
+  left: var(--banner-icon-slick-prev-left, 2%) !important;
   z-index: 1;
 }
 

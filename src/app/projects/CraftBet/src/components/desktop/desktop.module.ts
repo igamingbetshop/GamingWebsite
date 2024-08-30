@@ -90,6 +90,12 @@ import {LoaderComponent} from "../common/loader/loader.component";
 import {NgxMaskDirective} from "ngx-mask";
 import {DefaultImageFallBackDirective} from "../../../../../@theme/directives/default-image-fall-back.directive";
 import {PointerOnLinkDirective} from "../../../../../@theme/directives/pointer-on-link/pointer-on-link.directive";
+import {SlotTournamentComponent} from "./app-casino/slot-tournament/slot-tournament.component";
+import {ClientsComponent} from "../../../../../@theme/components/clients/clients.component";
+import {SpinWheelOpenerComponent} from "./fragments/spin-wheel-opener/spin-wheel-opener.component";
+import {SearchOpenerComponent} from "./search-opener/search-opener.component";
+import {LoginPageComponent} from "./login-page/login-page.component";
+import {AccountStatementComponent} from "./account-statement/account-statement.component";
 
 
 @NgModule({
@@ -140,7 +146,12 @@ import {PointerOnLinkDirective} from "../../../../../@theme/directives/pointer-o
         CharacterHierarchyComponent,
         LoaderComponent,
         NgxMaskDirective,
-        DefaultImageFallBackDirective
+        DefaultImageFallBackDirective,
+        SlotTournamentComponent,
+        ClientsComponent,
+        SpinWheelOpenerComponent,
+        SearchOpenerComponent,
+        AccountStatementComponent
     ],
 
     exports: [PaymentsListComponent, AddBankAccountComponent, UserInfoComponent],
@@ -182,7 +193,8 @@ import {PointerOnLinkDirective} from "../../../../../@theme/directives/pointer-o
         ChatOpenerComponent,
         BalanceComponent,
         RegisterPageComponent,
-        PaymentErrorComponent
+        PaymentErrorComponent,
+        LoginPageComponent
     ]
 })
 export class DesktopModule

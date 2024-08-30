@@ -9,7 +9,7 @@
                     @if (hasFilterBox)
                     {
                         <div class="filter-fragments">
-                            @for (fragment of fragments?.Search?.Items; track fragment.Id)
+                            @for (fragment of fragments?.Searches?.Items; track fragment.Id)
                             {
                                 <casino-search [fragmentConfig]="fragment"></casino-search>
                             }
@@ -22,6 +22,9 @@
                                 <casino-providers [fragmentConfig]="fragment"></casino-providers>
                             }
                         </div>
+                    }
+                    @if(fragmentConfig.Config.titleVisibility){
+                        <div class="title" [innerHTML]="'WebFragments.' + fragmentConfig.Title | translate | sanitizer: 'html'"></div>
                     }
                     <ul class="product_list">
                         @for (game of games; track game.productId; let i = $index)
@@ -43,11 +46,14 @@
             }
             @else
             {
+                @if(fragmentConfig.Config.titleVisibility){
+                    <div class="title" [innerHTML]="'WebFragments.' + fragmentConfig.Title | translate | sanitizer: 'html'"></div>
+                }
                 <div infinite-scroll #infiniteScrollRef="infiniteScroll" (onLoadItems)="loadMoreItems()" [isLoading]="isLoading" [leftItemsCount]="leftGamesCount" [ngStyle]="fragmentConfig?.Config.style" class="filter-category-box filter">
                     @if(hasFilterBox)
                     {
                         <div class="filter-fragments">
-                            @for (fragment of fragments?.Search?.Items; track fragment.Id)
+                            @for (fragment of fragments?.Searches?.Items; track fragment.Id)
                             {
                                 <casino-search [fragmentConfig]="fragment"></casino-search>
                             }
@@ -93,7 +99,7 @@
                     <div class="title-field">
                         <div></div>
                         <div class="back-section" (click)="backFromSearch()">
-                            <i class="icon-back"></i>
+                            <span class="icon-arrow-to-left"></span>
                             <p>{{'Category.back'| translate}}</p>
                         </div>
                         @if(categoryName)
@@ -124,7 +130,7 @@
                     <div class="title-field">
                         <div></div>
                         <div class="back-section" (click)="backFromSearch()">
-                            <i class="icon-back"></i>
+                            <span class="icon-arrow-to-left"></span>
                             <p>{{'Category.back'| translate}}</p>
                         </div>
                         @if (categoryName)
@@ -201,7 +207,7 @@
                                         @for (game of group; track game.productId)
                                         {
                                             <li class="product_list_item">
-                                                <casino-game [game]="game"
+                                                <casino-game [game]="game" [fragmentConfig]="fragmentConfig"
                                                              (onOpen)="openGame($event.game?.productId, $event.type, $event.game?.openMode)">
                                                 </casino-game>
                                             </li>

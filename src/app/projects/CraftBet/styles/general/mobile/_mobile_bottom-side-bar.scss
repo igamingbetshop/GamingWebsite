@@ -17,6 +17,7 @@
     justify-content: space-between;
     position: relative;
     top: var(--bottom-sideBar-position, auto);
+    gap: var(--bottom-sideBar-gap, 0px);
     &__image{
       width: var(--bottom-sideBar-image-size, 23px);
       height: var(--bottom-sideBar-image-size, 23px);
@@ -78,13 +79,13 @@
     }
 
     &__text {
-      //font-family: Roboto;
       font-size: fontSize(bottom-sideBar-text,12px);
       line-height: 1.17;
       letter-spacing: normal;
       text-align: left;
       color: itemColor(bottom-sideBar-text, #243f6b);
       margin-top: marginTop(bottom-sideBar-text, 0px);
+      white-space: var(--bottom-sideBar-text-white-space, unset);
     }
     .bets-count
     {

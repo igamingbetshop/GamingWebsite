@@ -1,7 +1,7 @@
 import {Component, inject, Injector, OnInit} from '@angular/core';
 import {GetBetsHistoryService} from "../../../../../../@core/services/app/getBetsHistory.service";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {LocalStorageService} from "../../../../../../@core/services";
+import {LocalStorageService, SharedService} from "../../../../../../@core/services";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {CommonModule} from "@angular/common";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
@@ -33,16 +33,22 @@ export class MobileUserInfoComponent implements OnInit {
   public betStatuses;
   public getBetsHistoryService: GetBetsHistoryService;
   public localStorageService: LocalStorageService;
+  public sharedService: SharedService;
   public CurrencySymbol: any;
+  public rightToLeftOrientation: boolean = false;
 
   constructor(public injector: Injector) {
     this.getBetsHistoryService = injector.get(GetBetsHistoryService);
     this.localStorageService = injector.get(LocalStorageService);
+    this.sharedService = injector.get(SharedService);
     const userData = this.localStorageService.get('user');
     this.CurrencySymbol = userData ? userData.CurrencySymbol : '';
   }
 
   ngOnInit() {
+    this.sharedService.rightToLeftOrientation.subscribe((recponceData) => {
+      this.rightToLeftOrientation = recponceData;
+    });
     this.getBetsHistoryService.getBetsInfo(this.data.info).then((responseData:any) => {
       if (responseData['ResponseCode'] === 0)
       {

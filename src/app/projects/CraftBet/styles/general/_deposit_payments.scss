@@ -501,11 +501,14 @@
     }
     &__column {
       margin-top: var(--deposit-payments-columns-margin-top, 24px);
-      width: 100%;
+      margin-left: var(--deposit-payments-columns-margin-left, 0);
+      margin-right: var(--deposit-payments-columns-margin-right, 0);
+      margin-bottom: var(--deposit-payments-columns-margin-bottom, 0);
+      width: var(--deposit-payments-columns-width, 100%);
       height: auto;
-      line-height: 40px;
-      min-height: 40px;
-      position: relative;
+      line-height: var(--deposit-payments-columns-line-height, 40px);
+      min-height: var(--deposit-payments-columns-min-height, 40px);
+      position: var(--deposit-payments-columns-position, relative);
 
       input {
         &[readonly] {
@@ -535,6 +538,7 @@
         display: flex;
         justify-content: space-between;
         gap: 10px;
+        width: var(--deposit-payments-all-amount-width, 100%);
         button {
           width: var(--activate-bonus-btn-width, 180px);
           min-height: var(--activate-bonus-btn-height, 44px);
@@ -670,9 +674,11 @@
       }
 
       .error_message {
-        position: absolute;
+        position: var(--deposit-payments-item-position, absolute);
         top: itemTop(deposit-payments-item, 35px);
         left: itemLeft(deposit-payments-item, 0px);
+        right: itemRight(deposit-payments-item, auto);
+        text-align: var(--deposit-payments-item-text-align, left);
 
         .text {
           color: itemColor(error-message, #ff5e5e);

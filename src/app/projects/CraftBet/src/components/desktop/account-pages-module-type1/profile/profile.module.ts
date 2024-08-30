@@ -8,6 +8,7 @@ import {ProfileService} from "../../../../../../../@theme/components/profile/ser
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {RegExpInputDirectiveModule} from "../../../../../../../@theme/directives/reg-exp-input/reg-exp-input-directive.module";
 
+
 const routes: Routes = [
     {
         path: '',
@@ -33,5 +34,7 @@ const routes: Routes = [
 })
 export class ProfileModule
 {
-
+    getComponent() {
+        return ProfileComponent;
+    }
 }

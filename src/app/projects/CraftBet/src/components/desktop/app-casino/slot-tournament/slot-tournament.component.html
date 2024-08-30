@@ -1,0 +1,26 @@
+
+<div class="container" [ngClass]="filteredTournaments().length == 1? 'item-full-width':''">
+    @for (tournament of filteredTournaments(); track $index){
+        <div id="tournament" class="block-tournament">
+            <div class="wrapper"  style="background-image: url('../assets/images/tournament-bg.png')"></div>
+            <div class="info">{{'Start Date' | translate}}: {{tournament.StartTime | date:'dd.MM.yy HH:mm a'}}{{timezone}}</div>
+            <div class="t-block-title"><span>{{tournament.Name}}</span>{{'Slot Tournament'}}</div>
+            <div class="countdown-end-date">{{'Countdown to end date' | translate}}: {{tournament.FinishTime | date:'dd.MM.yy HH:mm a'}}{{timezone}}</div>
+
+            <time-count-down [closeTime] = "tournament.FinishTime"></time-count-down>
+
+            <div class="prize-fund">{{'Prize Fund' | translate}}</div>
+            <button class="prize-fund-button">
+                <span class="currency-id">{{tournament.CurrencyId}}</span>
+                <span>{{tournament.PrizePool}}</span>
+            </button>
+            <p>Your very smart and interesting text appears here something about something. a very extra long text and another text just to make it long enough for the this project</p>
+            <tournament-leaderboard [tournamentId]="tournament.Id" [bonus]="tournament.Bonus"></tournament-leaderboard>
+        </div>
+    }
+    @if (slotTournaments().length != 2  && slotTournaments().length != 1){
+        <button class="show-more" (click)="toggleShowMore()">{{showMore() ? 'Show Less': 'Show More' | translate}}</button>
+    }
+</div>
+
+

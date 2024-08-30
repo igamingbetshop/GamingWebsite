@@ -11,6 +11,7 @@
     right: var(--change-password-field-icon-right, 12px);
     cursor: pointer;
     display: display(change-password-field-icon, block);
+    color: var(--change-password-field-icon-color, var(--login-field-color, #d4d4d4))
   }
 }
 
@@ -18,6 +19,14 @@
 
 .rightToLeft {
   direction: rtl;
+  .login_PSection_redirect {
+    right: var(--modal-login-footer-item-right-left, var(--modal-login-footer-item-left, 0));
+    left: auto;
+  }
+  .login_modal_section .login-title {
+    right: var(--login-section-left, auto);
+    left: 0;
+  }
   .forgot_password {
     position: absolute;
     left: itemRight(forgot-password, 0);
@@ -25,11 +34,16 @@
   }
   .change-password-field-type {
     left: 7px;
+    position: absolute;
+  }
+  .change-password_form .form_row label {
+    right: var(--change-password-input-label-left, 8px);
+    left: auto;
   }
   .icon-close-modal
   {
-    right: auto;
-    left: var(--popup-close-icon-right, 38px);
+    right: auto !important;
+    left: var(--popup-close-icon-right, 38px) !important;
   }
   .mobile-login-top-part {
     .icon-close-modal {
@@ -37,6 +51,17 @@
       right: auto;
     }
   }
+  .login-section_field .floating-label {
+    right: var(--signin-input-label-left, 0);
+    left: auto;
+  }
+  .login-section_field  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    right: var(--login-field-focus-label-focused-left, -12px);
+    left: var(--login-field-focus-label-right-focused-left, auto) !important;
+    transform-origin: right !important
+  }
+
 }
 .login-page {
   display: var(--login-page-display, block);
@@ -102,8 +127,11 @@
 
   form {
     display: flex;
-    width: 100%;
     align-items: center;
+    width: var(--login-modal-section-form-width, 100%);
+    margin: var(--login-modal-section-form-margin, 0);
+    flex-direction: var(--login-modal-section-form-flex-direction, unset);
+    gap: var(--login-modal-section-form-gap, 0px);
   }
 
   .remember-me {
@@ -140,7 +168,6 @@
     border-top-left-radius: borderTopLeftRadius(login-field,6px);
     border-top-right-radius: borderTopRightRadius(login-field,6px);
     line-height: unset;
-    //border: 1px solid itemColor(login-field-border,#dbedff);
     border-left-style: borderLeftStyle(login-field-border, solid);
     border-right-style: borderRightStyle(login-field-border, solid);
     border-top-style: borderTopStyle(login-field-border, solid);
@@ -174,6 +201,7 @@
     i {
       font-size: var(--login-field-input-icon-font-size, 18px);
       color: var(--login-field-input-icon-color, #000);
+      display: var(--login-field-input-icon-display, block);
     }
 
     .logo-icon {
@@ -290,9 +318,7 @@
       }
     }
 
-
     &_top {
-      //height: 100%;
       position: relative;
     }
 
@@ -301,23 +327,21 @@
       outline: none;
       box-shadow: none;
       padding-left: 10px;
-      font-size: 14px;
-      //height: 100%;
-      //text-indent: unset!important;
-      text-indent: 16px;
+      font-size: var(--surname-input-font-size, 14px);
+      text-indent: var(--login-input-field-text-indent, 16px);
       color: var(--text-color, #FFFFFF);
       background: transparent;
-      border-radius: 6px;
+      border-radius: var(--login-input-field-border-radius, 6px);
       border: none;
-      font-weight: 400;
-      //&::placeholder{color: itemColor(login-field-placeholder, #000)!important;}
+      font-weight: var(--login-input-field-font-weight, 400);
       &:focus {
         border: 2px solid itemColor(login-field-focus, transparent);
       }
     }
   }
 
-  &.modal_section {
+  //&.modal_section {
+  &.login-section {
     form {
       display: grid;
       text-align: var(--modal-forget-password-text-align, center);
@@ -354,6 +378,12 @@
           color: var(--login-redirect-text-color, #ffffff);
           font-size: var(--register-redirect-font-size, 16px);
           text-align: var(--register-redirect-text-align, left);
+          .icon-safety-text {
+            margin: var(--logn-redirect-icon-safety-text-margin, 16px 0);
+          }
+          .icon-safety {
+            display: var(--login-redirect-icon-safety-display, block);
+          }
         }
         .login-dont-have-account-btn {
           color: var(--login-redirect-btn-color, #ffffff);
@@ -444,18 +474,29 @@
     width: var(--modal-content-forget-password-width, 106px);
   }
 
-  .login_btn, .form_field {
-
-  }
-
-  &.login_modal_section {
+  &.login-section  {
     width: 100%;
     .form_field1 {
-      width: width(login-modal-section-form-field-1, 100%) !important;
+      grid-column: span 4;
     }
 
     .form_field2 {
-      width: width(login-modal-section-form-field-2, 50%) !important;
+      grid-column: span 2;
+    }
+
+    .form_field3 {
+      grid-column: span 1;
+    }
+
+    .form_field4 {
+      grid-column: span 1;
+    }
+    .form-grid {
+      display: grid;
+      margin: var(--login-form-grid-margin, 0 0 20px 0);
+      grid-row-gap: var(--login-form-grid-row-gap, 0);
+      grid-column-gap: var(--login-form-grid-column-gap, 0);
+      grid-template-columns: var(--login-form-grid-template-columns, repeat(4,1fr));
     }
     .form_field {
       width: var(--login-modal-section-form-field-width, 100%);
@@ -512,6 +553,8 @@
       background-image: backgroundImage(login-button, linear-gradient(to bottom, itemColor(login-btn-gradient-first, #1376f8), itemColor(login-btn-gradient-second, #194074)));
       margin-top: marginTop(login-button, 0px);
       margin-left: marginLeft(login-button, 0px);
+      font-weight: var(--login-button-font-weight, 600);
+      font-size: var(--reg-btn-font-size, 18px);
       &.not_active{
         pointer-events: none;
         background-image: backgroundImage(next-btn-not-active, linear-gradient(to bottom, #1376f8, #194074));
@@ -581,355 +624,5 @@ app-app-confirm {
     margin-right: var(--login-redirect-href-text-margin-right, 0px);
     cursor: pointer;
     color: var(--login-redirect-href-text-color, #000000);
-  }
-}
-
-
-
-@media screen and (min-width: 0px) and (max-width: 1376px)
-{
-  .login-page {
-    .login-left-side-img {
-      height: calc(var(--login-left-side-img-height, auto) * .7);
-      width: calc(var(--login-left-side-img-width, auto) * .7);
-    }
-  }
-  .login-logo{
-    margin: 0 auto;
-    margin-top: calc(var(--login-logo-margin-top, 37px) * 0.7);
-    margin-bottom: calc(var(--login-logo-margin-bottom, 24px) * 0.7);
-    height: calc(var(--login-logo-height, auto) * 0.8);
-    //width: 110px;
-    /*height: 42px;*/
-  }
-
-  .login-section {
-    form {
-      width: 100%;
-    }
-
-    .remember-me {
-      margin-top: var(--login-section-remember-me-small-margin-top, 14px);
-
-      label.reg-conditions {
-        font-size: 10.5px;
-      }
-    }
-
-    &_field {
-      border-bottom-left-radius: borderBottomLeftRadius(login-field,6px);
-      border-bottom-right-radius: borderBottomRightRadius(login-field,6px);
-      border-top-left-radius: borderTopLeftRadius(login-field,6px);
-      border-top-right-radius: borderTopRightRadius(login-field,6px);
-      line-height: unset;
-      padding: var(--login-field-input-small-padding, 0 11px 0 33px);
-      width: 100%;
-      //height: 30.8px;
-      height: 33.8px;
-      font-size: 10px;
-      .logo-icon {
-        width: 10px;
-        height: 16px;
-      }
-
-      .inputText{
-        width: 100%;
-        height: 100%;
-      }
-
-      .floating-label {
-        //top: -7px;
-        //top: calc(var(--signin-input-label-top, 12px) * 0.5);
-        top: var(--signin-input-label-small-top, 7px);
-        left: var(--signin-input-label-small-left, 7px);
-        font-size: calc(var(--register-background-color-font-size-label, 20px) * 0.9);
-        padding-left: 4px;
-        padding-right: 4px;
-        display: display(login-fields-floating-label, block);
-      }
-      input:focus ~ label,
-      input:not(:placeholder-shown) ~ label {
-        font-size: calc(var(--register-background-color-font-size-label, 20px) * 0.9);
-        top: itemTop(signin-input-label, 14px);
-        display: var(--login-input-label-placeholder-small, block);
-      }
-      .ing-label:focus-within {
-        display: block;
-      }
-
-      input {
-        width: 93%;
-        padding-left: 7px;
-        font-size: 10px;
-        border-radius: 6px;
-      }
-
-    }
-
-    &.modal_section {
-      form {
-
-        .form_field {
-          margin: 18px auto 0 auto;
-        }
-
-        .social-login-text{
-          margin-top: calc(var(--social-login-text-margin-top, 60px) * 0.7);
-          margin-bottom: calc(var(--social-login-text-margin-bottom, 8px) * 0.7);
-          font-size: calc(var(--social-register-text-font-size, 14px) * 0.7);
-        }
-
-        ul{
-          width: 100%;
-          margin-bottom: calc(var(--login-social-icons-margin-bottom, 0) * 0.7);
-
-          li{
-            height: calc(var(--register-social-icons-height, 28px) * 0.7);
-            width: calc(var(--register-social-icons-width, 28px) * 0.7);
-            margin-right: calc(var(--register-social-icon-margin-right, 10px) * 0.7);
-          }
-
-        }
-
-      }
-    }
-
-    .fa-info-circle {
-      margin-right: 7px;
-      margin-left: 7px;
-    }
-
-    .login_btn {
-      padding: 0 18px;
-      font-size: 11px;
-      height: 30.8px;
-      line-height: 30.8px;
-    }
-
-
-    .forgot_password {
-      margin-left: calc(var(--modal-content-margin-left, 7px) * 0.7);
-      margin-right: calc(var(--modal-content-margin-right, 32px) * 0.7);
-      font-size: var(--modal-content-small-font-size, 10px);
-    }
-
-
-    &.login_modal_section {
-      width: 100%;
-      padding: 0;
-
-      .form_field {
-        width: 100%;
-      }
-
-      form {
-        width: var(--login-modal-section-small-form-width, 100%);
-        .forgot_password {
-          margin-right: var(--modal-forgot-password-text-small-margin-right, 32px);
-        }
-      }
-
-      button.login_btn {
-        width: 100%;
-        margin-top: var(--small-login-btn-margin-top, 0);
-        //height: calc(var(--login-button-height, 44px) * 0.6);
-      }
-    }
-
-  }
-
-
-  .modal-content {
-    .login-title{
-      font-size:  calc(var(--login-text-font-size, 20px) * 0.7);
-      top: calc(var(--login-section-top, 9px) * .8);
-    }
-    &.login_PSection {
-      .login-section.modal_section form .form_field {
-        &:nth-child(1) {
-          //margin-top: 14px;
-          margin-top: calc(var(--login-section-field-margin-top, 14px)* .7);
-        }
-
-        &:nth-child(2) {
-          margin-top: 21px;
-        }
-      }
-    }
-    .login_PSection_redirect a{
-      margin-left: calc(var(--login-redirect-href-text-margin-left, 15px) * 0.7);
-    }
-  }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1377px)  {
-  .login-section {
-    &_field2 {
-      width: 100%;
-    }
-  }
-}
-@media screen and (min-width: 1377px) and (max-width: 1610px)
-{
-  .login-page {
-    .login-left-side-img {
-      height: calc(var(--login-left-side-img-height, auto) * .9);
-      width: calc(var(--login-left-side-img-width, auto) * .9);
-    }
-  }
-  .login-logo{
-    margin: 0 auto;
-    margin-top: calc(var(--login-logo-margin-top, 37px) * 0.9);
-    margin-bottom: calc(var(--login-logo-margin-bottom, 24px) * 0.9);
-    //width: 148px;
-    /*  height: 54px;*/
-  }
-
-  .login-section {
-
-    form {
-      width: 100%;
-    }
-
-    .remember-me {
-      margin-top: var(--login-section-remember-me-medium-margin-top, 18px);
-      label.reg-conditions {
-        font-size: 13.5px;
-      }
-    }
-
-    &_field {
-      border-bottom-left-radius: borderBottomLeftRadius(login-field,6px);
-      border-bottom-right-radius: borderBottomRightRadius(login-field,6px);
-      border-top-left-radius: borderTopLeftRadius(login-field,6px);
-      border-top-right-radius: borderTopRightRadius(login-field,6px);
-      line-height: unset;
-      //padding: 0 12.6px;
-      padding: var(--login-field-input-padding, 0 12.6px 0 35px);
-      width: 100%;
-      height: 39.6px;
-      font-size: 12px;
-
-      .inputText{
-        width: 100%;
-        height: 100%;
-      }
-
-      .floating-label {
-        top: calc(var(--signin-input-label-top, 12px)* .9) !important;
-        left: calc(var(--signin-input-label-left, 9px)* .9);
-        //left: 9px;
-        font-size: 12.6px;
-        padding-left: 4px;
-        padding-right: 4px;
-      }
-      //.login-section_field input:focus ~ label, .login-section_field input:not(:placeholder-shown) ~ label {
-      //  left: calc(var(--login-field-focus-label-focused-left, -12px) * .9);
-      //}
-
-      input {
-        width: 93%;
-        padding-left: 9px;
-        font-size: 12px;
-        border-radius: 6px;
-      }
-
-    }
-    &_field2 {
-      width: 100%;
-    }
-
-    &.modal_section {
-      form {
-
-        .form_field {
-          margin: 12.5px auto 0 auto;
-        }
-
-        .social-login-text{
-          margin-top: calc(var(--social-login-text-margin-top, 60px) * 0.9);
-          margin-bottom: calc(var(--social-login-text-margin-bottom, 8px) * 0.9);
-          font-size: calc(var(--social-register-text-font-size, 14px) * 0.9);
-        }
-
-        ul{
-          width: 100%;
-          margin-bottom: calc(var(--login-social-icons-margin-bottom, 0) * 0.9);
-
-          li{
-            height: calc(var(--register-social-icons-height, 28px) * 0.9);
-            width: calc(var(--register-social-icons-width, 28px) * 0.9);
-            margin-right: calc(var(--register-social-icon-margin-right, 10px) * 0.9);
-          }
-
-        }
-
-      }
-    }
-
-    .fa-info-circle {
-      margin-right: 9px;
-      margin-left: 9px;
-    }
-
-    .login_btn {
-      padding: 0 22.5px;
-      font-size: 12.6px;
-      height: 39.6px;
-      line-height: 39.6px;
-    }
-
-
-    .forgot_password {
-      margin-left: var(--forgot-password-text-margin-left, 9px);
-      margin-right: var(--forgot-password-text-medium-margin-right, 32px);
-      font-size: var(--forgot-password-text-font-size, 14px);
-      bottom: var(--modal-content-bottom, unset);
-      left: var(--modal-content-left, unset);
-    }
-
-
-    &.login_modal_section {
-      width: 100%;
-      padding: var(--login-section-small-padding, 0 64px);
-
-      .form_field {
-        width: 100%;
-      }
-
-      form {
-        width: var(--login-modal-section-medium-form-width, 100%);
-        .forgot_password {
-          margin-right: var(--modal-forgot-password-text-medium-margin-right, 32px);
-        }
-      }
-
-      button.login_btn {
-        width: 100%;
-      }
-    }
-
-  }
-
-
-  .modal-content {
-    .login-title{
-      font-size:  calc(var(--login-text-font-size, 20px) * 0.9);
-      top: calc(var(--login-section-top, 9px)* .9);
-    }
-    &.login_PSection {
-      .login-section.modal_section form .form_field {
-        &:nth-child(1) {
-          margin-top: calc(var(--login-section-field-margin-top, 14px)* .9);
-        }
-
-        &:nth-child(2) {
-          margin-top: 21px;
-        }
-      }
-    }
-    .login_PSection_redirect a{
-      margin-left: calc(var(--login-redirect-href-text-margin-left, 15px) * 0.9);
-    }
   }
 }

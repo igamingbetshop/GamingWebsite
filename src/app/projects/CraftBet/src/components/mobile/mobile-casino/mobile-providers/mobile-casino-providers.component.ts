@@ -1,6 +1,9 @@
-import {Component, ElementRef, HostListener, Injector, } from '@angular/core';
+import {Component, ElementRef, HostListener, Injector, Input,} from '@angular/core';
 import { BaseCasinoProviders} from '../../../../../../../@theme/fragments/casino/providers/base-casino-providers';
 import { StateService} from '../../../../../../../@core/services/app/state.service';
+import {FragmentSource, FragmentType} from "@core/enums";
+import {getFragmentsByType} from "@core/utils";
+import {Fragment} from "@core/models";
 
 @Component({
     selector: 'app-mobile-casino-providers',
@@ -9,6 +12,8 @@ import { StateService} from '../../../../../../../@core/services/app/state.servi
 })
 export class MobileCasinoProvidersComponent extends BaseCasinoProviders
 {
+    @Input('position') position:string;
+    fragments: {[key: string]: Fragment};
     @HostListener('window:resize', ['$event'])
     onResize(event)
     {
@@ -25,6 +30,13 @@ export class MobileCasinoProvidersComponent extends BaseCasinoProviders
     {
         super(injector);
         this.calcGridItemCount();
+    }
+
+    ngOnInit()
+    {
+        super.ngOnInit();
+        const block = this.configService.defaultOptions[FragmentSource.Mobile];
+        this.fragments = getFragmentsByType(block, this.position, FragmentType.Provider);
     }
 
     private calcGridItemCount()

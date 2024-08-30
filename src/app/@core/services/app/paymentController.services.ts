@@ -19,7 +19,7 @@ export class PaymentControllerService {
     public userData: any;
 
     public savePaymentDetails:boolean = false;
-    public bonusRefused:boolean = true;
+    public bonusRefused:boolean = false;
 
     public notifyGetPaymentStatesList: Subject<any> = new Subject<any>();
     public notifyGetPaymentsList: Subject<any> = new Subject<any>();
@@ -132,7 +132,7 @@ export class PaymentControllerService {
     }
 
 
-    public getUserAccount() {
+    public getUserAccount(currencyId?) {
         const {WebApiUrl, PartnerId} = this.getSettings();
         let request = new Request();
         request.Controller = Controllers.CLIENT;
@@ -140,7 +140,7 @@ export class PaymentControllerService {
         request.Token = this.userData.Token;
         request.ClientId = this.userData.Id;
         request.PartnerId = PartnerId;
-        request.RequestData = JSON.stringify({'ClientId': this.userData.Id});
+        request.RequestData = JSON.stringify({'ClientId': this.userData.Id, 'CurrencyId': currencyId});
 
         this.http.post<any>(`${WebApiUrl}/${PartnerId}/api/Main/ApiRequest`, request).subscribe(data => {
             if (data['ResponseCode'] === 0) {

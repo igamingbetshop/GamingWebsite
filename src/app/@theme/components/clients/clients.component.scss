@@ -1,0 +1,33 @@
+:host{
+  display: block;
+  height: 100%;
+  .clients{
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    min-width: 120px;
+    &.opened{.clients-list{display: flex!important;}}
+    .clients-list
+    {
+      padding: 10px;
+      background: black;
+      position: absolute;
+      left: 0;
+      top: 45px;
+      display: none;
+      flex-direction: column;
+      max-height: 200px;
+      overflow-y: auto;
+      li{
+        padding: 10px;
+        &:hover{
+          background: var(--dropdown-style2-menu-item-hover-background-color, #222d3e);
+        }
+      }
+    }
+  }
+
+}
+

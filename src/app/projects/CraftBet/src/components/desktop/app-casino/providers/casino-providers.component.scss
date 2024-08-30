@@ -15,6 +15,22 @@
     color: #ffffff;
     height: 558px;
 
+    .title
+    {
+      display: var(--casino-providers-title-display, none);
+      font-size: var(--casino-providers-title-font-size, 18px);
+      font-weight: var(--casino-providers-title-font-weight, 500);
+      color: var(--casino-providers-title-color, #fff);
+      border-bottom: var(--casino-providers-title-border-bottom, none);
+      padding-bottom: paddingBottom(casino-providers-title, 0);
+      margin-bottom: marginBottom(casino-providers-title, 0px);
+      border-top: var(--casino-providers-title-border-top, none);
+      padding-top: var(--casino-providers-title-padding-top, 0px);
+      padding-left: var(--casino-providers-title-padding-left, 0px);
+      padding-right: var(--casino-providers-title-padding-right, 0px);
+      cursor: default;
+    }
+
     .selected-provider {
       width: 100%;
       font-size: 18px;
@@ -26,17 +42,33 @@
       }
     }
     .search-providers {
-      border-bottom: solid 1px #131a2c;
-      color: #ffffff;
-      margin-bottom: 24px;
+      border-bottom: var(--casino-search-providers-border-bottom, solid 1px #131a2c);
+      color: var(--casino-search-providers-color, #ffffff);
+      margin-bottom: var(--casino-search-providers-margin-bottom, 24px);
+      margin-top: var(--casino-search-providers-margin-top, 0);
+      margin-right: var(--casino-search-providers-margin-right, 0);
+      margin-left: var(--casino-search-providers-margin-left, 0);
+      width: var(--casino-search-providers-width, 100%);
+
+      .search-providers-box {
+        display: var(--casino-search-providers-box-display, block);
+        width: var(--casino-search-providers-box-width, auto);
+        justify-content: space-between;
+        align-items: center;
+      }
 
       input {
         height: 100%;
         border: none;
         outline: none;
         color: #ffffff;
-        padding: 0 0 8px 0;
+        padding: var(--casino-search-providers-input-padding, 0 0 8px 0);
         background: none;
+      }
+      .search-icon-disappeared {
+        font-size: fontSize(search-providers-icon, 18px);
+        color: itemColor(search-providers-icon, #fff);
+        display: var(--search-providers-icon-display, none);
       }
       header, .icon-close-modal
       {
@@ -104,11 +136,11 @@
       display: var(--provider-list-display, grid);
       grid-template-columns: var(--grid-template,repeat(25, 1fr));
       grid-auto-columns: minmax(min-content, max-content);
-      grid-gap: 8px;
+      grid-gap: var(--provider-list-grid-gap, 8px);
       align-items: center;
       overflow-y: auto;
       overflow-x: hidden;
-      padding: 7px;
+      padding: var(--provider-list-padding, 7px);
       height: height(provider-list-item, 72px);
       .providers-see-all {
         height: height(provider-list-horizontal, 50px);
@@ -122,7 +154,7 @@
       }
       li {
         height: 100%;
-        line-height: height(provider-list-item, 72px);
+        line-height: var(--provider-list-item-line-height, var(--provider-list-item-height, 72px));
         text-align: center;
         border-radius: var(--provider-fragment-item-radius, 6px);
         background-color: backgroundColor(provider-list-item,#192438);
@@ -138,10 +170,11 @@
           max-width: inherit;
         }
         &:hover {
-          font-size: 16px;
+          font-size: var(--provider-list-item-hover-font-size, 16px);
           transition: all .3s ease;
-          transform: scale(1.07);
-          filter: grayscale(0);
+          transform: var(--provider-list-item-hover-transform, scale(1.07));
+          filter: var(--provider-list-item-hover-filter, grayscale(0));
+          background: var(--provider-list-item-hover-background, var(--provider-list-item-background-color, #192438));
         }
 
         &.selected
@@ -230,6 +263,11 @@
           color: itemColor(search-providers-icon,#ff808e);
           font-size: fontSize(search-providers-icon, 18px);
         }
+        .search-icon-disappeared {
+          font-size: fontSize(search-providers-icon, 18px);
+          color: itemColor(search-providers-icon, #fff);
+          display: var(--search-providers-icon-display, none);
+        }
       }
       header {
         font-size: fontSize(search-providers-headers, 25px);
@@ -252,9 +290,9 @@
       padding: 7px;
       li {
         height: height(provider-list-item, 72px);
-        line-height: height(provider-list-item, 72px);
+        line-height: var(--provider-list-item-line-height, var(--provider-list-item-height, 72px));
         text-align: center;
-        border-radius: 6px;
+        border-radius: var(--provider-list-item-border-radius, 6px);
         background-color: backgroundColor(provider-list-item,#192438);
         border: none;
         transition: all .3s ease;
@@ -281,10 +319,11 @@
           max-width: inherit;
         }
         &:hover {
-          font-size: 16px;
+          font-size: var(--provider-list-item-hover-font-size, 16px);
           transition: all .3s ease;
-          transform: scale(1.07);
-          filter: grayscale(0);
+          transform: var(--provider-list-item-hover-transform, scale(1.07));
+          filter: var(--provider-list-item-hover-filter, grayscale(0));
+          background: var(--provider-list-item-hover-background, var(--provider-list-item-background-color, #192438));
         }
 
         &.selected
@@ -297,3 +336,35 @@
     }
   }
 }
+.left-menu
+{
+  .search-providers{display: none}
+  .provider-list {
+    li {
+      margin: var(--provider-list-item-margin, 0);
+      img
+      {
+        max-width: inherit;
+        max-height: var(--provider-list-item-img-max-height, 100%);
+      }
+      &.all-providers {
+        background: var(--all-providers-active-background, inherit);
+        color: var(--all-providers-active-color, inherit) !important;
+      }
+      &.selected
+      {
+        border: solid 1px var(--provider-active-border, #0c6be8);
+        background: var(--provider-active-background, transparent);
+        color: var(--provider-active-color, #fff) !important;
+      }
+      .providers-count {
+        margin-left: var(--provider-games-count-margin-left, 0);
+        background: var(--provider-games-count-background, transparent);
+        color: var(--provider-games-count-color, #000);
+        border-radius: var(--provider-games-count-border-radius, 0);
+        padding: var(--provider-games-count-padding, 0);
+      }
+    }
+  }
+}
+

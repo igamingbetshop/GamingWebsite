@@ -153,9 +153,9 @@ export class ConfigService {
         /*const oldRoute = localStorage.getItem('defaultRoute');
         if (oldRoute === null)
         {
-            localStorage.setItem('defaultRoute', this.defaultOptions['HomePageType']);
+            localStorage.setItem('defaultRoute', this.defaultOptions['HomePageUrl']);
         }*/
-        localStorage.setItem('defaultRoute', this.defaultOptions['HomePageType']);
+        localStorage.setItem('defaultRoute', this.defaultOptions['HomePageUrl']);
         const timezone = localStorage.getItem("timezone")
         if(timezone)
             this.timeZone = Number(timezone);

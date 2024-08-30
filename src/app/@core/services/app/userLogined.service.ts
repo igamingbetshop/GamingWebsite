@@ -3,9 +3,10 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {DeviceDetectorService} from "ngx-device-detector";
 import {User} from "@core/models";
 import {AuthService, ConfigService, LocalStorageService} from "@core/services";
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
+import {de} from "date-fns/locale";
 
 @Injectable()
 export class UserLogined {
@@ -25,9 +26,11 @@ export class UserLogined {
 
     public returnUrl: string;
     public errorMessage: string;
+    public disableLogin: any;
 
     private _notifyLoginError: Subject<any> = new Subject<any>();
     public onLoginError$ = this._notifyLoginError.asObservable();
+    public isSubmitting$ = new BehaviorSubject<boolean>(false);
 
     public defaultOptions: any;
 
@@ -38,7 +41,7 @@ export class UserLogined {
         this.route = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
         this.defaultOptions = this.configService.defaultOptions;
-        this.returnUrl = this.defaultOptions.RedirectUrl;
+        this.returnUrl = this.defaultOptions.AfterLoginUrl;
         this.deviceDetectorService = injector.get(DeviceDetectorService);
     }
 
@@ -59,14 +62,14 @@ export class UserLogined {
         return user;
     }
 
-    public userLogin(params, isClear: boolean = false, rememberMe = false): any {
+    public userLogin(params, firstLoginUrl?: boolean, isClear: boolean = false, rememberMe = false): any {
 
         params.PartnerId = this.defaultOptions.PartnerId;
         params.LanguageId = this.defaultOptions.DefaultLanguage;
         params.DeviceType = this.deviceDetectorService.isMobile() ? 2 : 1;
+        this.isSubmitting$.next(true);
         this.authService.login(params).then(async (responseData) => {
             if (responseData['ResponseCode'] === 0) {
-                // this.localStorageService.add('user', responseData);
                 if (responseData.IsTwoFactorEnabled) {
                     const {GoogleAuthenticateModule} = await import('../../../@theme/components/modals/google-authenticate/google-authenticate.module');
                     const moduleRef = createNgModule(GoogleAuthenticateModule);
@@ -83,10 +86,11 @@ export class UserLogined {
                             if (res['ResponseCode'] == 0) {
                                 data.callBack({});
                                 this.localStorageService.add('user', responseData);
-                                this.nextPartLoginLogic(isClear, responseData);
+                                this.nextPartLoginLogic(isClear, responseData, firstLoginUrl);
                             } else {
                                 data.callBack({ error: res['Description'] });
                             }
+                            this.isSubmitting$.next(false);
                         });
                     });
                     this.dialog.open(component, {data:{ error: this.errorMessage, onVerified: callback, prefixTitle: 'Enable-TwoFactor'}});
@@ -99,7 +103,8 @@ export class UserLogined {
                         this.localStorageService.remove('identifier');
                         this.localStorageService.remove('login');
                     }
-                    this.nextPartLoginLogic(isClear, responseData);
+                    this.nextPartLoginLogic(isClear, responseData, firstLoginUrl);
+                    this.isSubmitting$.next(false);
                 }
                 // this.nextPartLoginLogic(isClear, responseData);
 
@@ -108,11 +113,12 @@ export class UserLogined {
                     message: responseData['Description'],
                     statusCode: responseData['ResponseCode']
                 })
+                this.isSubmitting$.next(false);
             }
         });
     }
 
-    nextPartLoginLogic(isClear: boolean = false, loginData = {})
+    nextPartLoginLogic(isClear: boolean = false, loginData = {}, firstLoginUrl: boolean)
     {
         const productUrl = localStorage.getItem('product-url');
         const paymentUrl = localStorage.getItem('payment-url');
@@ -142,7 +148,11 @@ export class UserLogined {
             else{
                 const url = new URL(window.location.href);
                 url.search = "";
-                if(window.location.href === url.href)
+                if (firstLoginUrl) {
+                    window.location.reload();
+                    window.location.href = url.origin + this.defaultOptions.FirstLoginUrl;
+                }
+                else if(window.location.href === url.href)
                 {
                    window.location.reload();
                 }

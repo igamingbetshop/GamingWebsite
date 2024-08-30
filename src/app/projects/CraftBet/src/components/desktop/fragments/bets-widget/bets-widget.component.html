@@ -1,15 +1,15 @@
 <div class="bets-widget-container" [style.width.px]="fragmentConfig().Config.data?.width"
 [class.show-more]="showMore()">
-    <h2 class="title">{{'Game.' + fragmentConfig().Title | translate}}</h2>
+    <h2 class="title">{{fragmentConfig().Title | translate}}</h2>
     <div class="wrapper"></div>
     <div class="last-bets-content">
         <table>
             <thead>
                <tr>
-                 <th [style]="itemConfig?.idLabelCSS">{{'game' | translate}}</th>
-                 <th [style]="itemConfig?.idLabelCSS">{{'player' | translate}}</th>
-                 <th [style]="itemConfig?.idLabelCSS">{{'bet amount' | translate}}</th>
-                 <th [style]="itemConfig?.idLabelCSS">{{'profit amount' | translate}}</th>
+                 <th [style]="itemConfig?.idLabelCSS">{{'BetsWidget.game' | translate}}</th>
+                 <th [style]="itemConfig?.idLabelCSS">{{'BetsWidget.player' | translate}}</th>
+                 <th [style]="itemConfig?.idLabelCSS">{{'BetsWidget.bet amount' | translate}}</th>
+                 <th [style]="itemConfig?.idLabelCSS">{{'BetsWidget.profit amount' | translate}}</th>
                </tr>
             </thead>
             <tbody>
@@ -28,7 +28,7 @@
         </table>
     </div>
     <div class="show-more-btn" (click)="toggleShowMore()">
-        <span>{{showMore() ? 'Show less': 'Show More' | translate}}</span>
+        <span>{{showMore() ? ('BetsWidget.Show Less' | translate): 'BetsWidget.Show More' | translate}}</span>
         <i class="icon-arrow"></i>
     </div>
 </div>

@@ -344,8 +344,8 @@ export function getFragmentsByType(block, position:string, location:string = nul
       for (let i = 0; i < fragment.Items.length; i++)
       {
         const item =  fragment.Items[i];
-        item.Config =  item.Href && JSON.parse(item.Href);
-        item.Config.style = item.Config.style ?  {...item.Config.style,...{order:item.Order}} : {order:item.Order};
+        item.Config =  item.StyleType && JSON.parse(item.StyleType);
+        item.Config.style = item.Config?.style ?  {...item.Config.style,...{order:item.Order}} : {order:item.Order};
         if(item.Config.location == location)
         {
           item.Config.name = fragment.Items[0].Title;
@@ -473,4 +473,79 @@ export function getDomain():string
 export function isMobileUrl():boolean
 {
   return location.hostname.startsWith("m.");
+}
+
+export type Password = {val: boolean; name: string; condition: Function; valid: boolean | undefined };
+
+export function passwordValidOptions(config: ConfigService): Password[] {
+  const regExProperty = config.defaultOptions?.['RegExProperty'];
+  return [
+    {
+      val: regExProperty['IsLowercaseRequired'],
+      name: 'LowerCaseRequired',
+      condition: (x) => /[a-z]+/.test(x),
+      valid: undefined
+    },
+    {
+      val: regExProperty['IsUppercaseRequired'],
+      name: 'UpperCaseRequired',
+      condition: (x) => /[A-Z]+/.test(x),
+      valid: undefined
+    },
+    {
+      val: !regExProperty['Uppercase'] && !regExProperty['IsUppercaseRequired'] && (regExProperty['Lowercase'] || regExProperty['IsLowercaseRequired']),
+      name: 'UppercaseNotAllowed',
+      condition: (x) => !/[A-Z]+/.test(x),
+      valid: undefined
+    },
+    {
+      val: !regExProperty['Lowercase'] && !regExProperty['IsLowercaseRequired'] && (regExProperty['Uppercase'] || regExProperty['IsUppercaseRequired']),
+      name: 'LowercaseNotAllowed',
+      condition: (x) => !/[a-z]+/.test(x),
+      valid: undefined
+    },
+
+    {
+      val: !regExProperty['Uppercase'] && !regExProperty['IsUppercaseRequired'] && !regExProperty['Lowercase'] && !regExProperty['IsLowercaseRequired'],
+      name: 'LettersNotAllowed',
+      condition: (x) => !/[A-Za-z]+/.test(x),
+      valid: undefined
+    },
+    {
+      val: !regExProperty['Numeric'] && !regExProperty['IsDigitRequired'],
+      name: 'DigitNotAllowed',
+      condition: (x) => !/[0-9]+/.test(x),
+      valid: undefined
+    },
+    {
+      val: regExProperty['IsDigitRequired'],
+      name: 'DigitRequired',
+      condition: (x) => /[0-9]+/.test(x),
+      valid: undefined
+    },
+    {
+      val: !regExProperty['Symbol'] && !regExProperty['IsSymbolRequired'],
+      name: 'SymbolNotAllowed',
+      condition: (x) => !/[!@#~$%^&*\\()_+=\[{\]};:<>|./?,-]/.test(x),
+      valid: undefined
+    },
+    {
+      val: regExProperty['IsSymbolRequired'],
+      name: 'SymbolRequired',
+      condition: (x) => /[!@#$%^&*()_+=\[{\]};:<>|./?,-]/.test(x),
+      valid: undefined
+    },
+    {
+      val: regExProperty['MaxLength'],
+      name: 'PasswordMaxLength',
+      condition: (x) => x.length <= regExProperty['MaxLength'],
+      valid: undefined
+    },
+    {
+      val: regExProperty['MinLength'],
+      name: 'PasswordMinLength',
+      condition: (x) => x.length >= regExProperty['MinLength'],
+      valid: undefined
+    }
+  ].filter(item => item.val);
 }

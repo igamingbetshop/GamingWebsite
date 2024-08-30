@@ -1,72 +1,72 @@
 <div class="home-page">
-    @for (fragment of banners; track fragment.Id)
+    @for (fragment of fragments(); track fragment.Id)
     {
-        <fragment-banners [attr.id]="fragment.Config.id"
-                          [fragmentConfig]="fragment"
-                          [style.order]="fragment.Order"
-                          [style.margin-bottom.px]="fragment.Config.marginBottom"
-                          [style.margin-top.px]="fragment.Config.marginTop"
-                          [style.max-width.px]="fragment.Config.maxWidth">
-        </fragment-banners>
-    }
-    @for (fragment of imageBars; track fragment.Id)
-    {
-        <image-bar [attr.id]="fragment.Config.id"
-                   [fragmentConfig]="fragment"
-                   [style.order]="fragment.Order"
-                   [style.margin-bottom.px]="fragment.Config.marginBottom"
-                   [style.width]="fragment.Config.width"
-                   [style.margin-top.px]="fragment.Config.marginTop"
-                   [style.max-width]="fragment.Config.maxWidth">
-        </image-bar>
-    }
+        @switch (fragment.Position)
+        {
+            @case ("ImageBars") {
+                @defer
+                {
+                    <image-bar [attr.id]="fragment.Config.id"
+                               [fragmentConfig]="fragment"
+                               [style.order]="fragment.Order"
+                               [style.margin-bottom.px]="fragment.Config.marginBottom"
+                               [style.width]="fragment.Config.width"
+                               [style.margin-top.px]="fragment.Config.marginTop"
+                               [style.max-width]="fragment.Config.maxWidth">
+                    </image-bar>
+                }
+            }
+            @case ("Banners"){
+                <fragment-banners [attr.id]="fragment.Config.id"
+                                  [fragmentConfig]="fragment"
+                                  [style.order]="fragment.Order"
+                                  [style.margin-bottom.px]="fragment.Config.marginBottom"
+                                  [style.margin-top.px]="fragment.Config.marginTop"
+                                  [style.max-width.px]="fragment.Config.maxWidth">
+                </fragment-banners>
+            }
+            @case ("Characters"){
+                @if (!userLogined.isAuthenticated){
+                    <fragment-characters [fragmentConfig]="fragment"
+                                         [attr.id]="fragment.Config.id"
+                                         [style.order]="fragment.Order"
+                                         [style.margin-bottom.px]="fragment.Config.marginBottom"
+                                         [style.width]="fragment.Config.width"
+                                         [style.height.px]="fragment.Config.height"
+                                         [style.margin-top.px]="fragment.Config.marginTop"
+                    ></fragment-characters>
+                }
 
-    @for (fragment of winnerWidgets; track fragment.Id)
-    {
-        <winners-widget [fragmentConfig]="fragment"
-                        [style.margin-top.px]="fragment.Config.marginTop"
-                        [style.order]="fragment.Order">
-        </winners-widget>
-    }
-
-    @for (fragment of betsWidgets; track fragment.Id)
-    {
-        <bets-widget [fragmentConfig]="fragment"
-                        [style.margin-top.px]="fragment.Config.marginTop"
-                        [style.order]="fragment.Order">
-        </bets-widget>
-    }
-
-    @for (fragment of casinoSearch; track fragment.Id)
-    {
-        <casino-search-fragment [fragmentConfig]="fragment"
-                                [attr.id]="fragment.Config.id"
-                                [style.margin-bottom.px]="fragment.Config.marginBottom"
-                                [style.width]="fragment.Config.width"
+            }
+            @case ("WinsWidgets"){
+                <winners-widget [fragmentConfig]="fragment"
                                 [style.margin-top.px]="fragment.Config.marginTop"
                                 [style.order]="fragment.Order">
-        </casino-search-fragment>
-    }
-    @for (fragment of iframes; track fragment.Id)
-    {
-        <div [style.order]="fragment.Order" class="frame-fragment" [attr.id]="fragment.Config.id">
-            <div class="title" *ngIf="'HomeMenu.' + fragment.Config.titleVisibility" [innerHTML]="fragment.Title | translate | sanitizer: 'html'"></div>
-            <iframe [ngStyle]="fragment.Config.style" [src]="fragment.Href | sanitizer: 'resourceUrl'" (load)="onLoadFrame($event, fragment)"></iframe>
-        </div>
-    }
-
-    @if (!userLogined.isAuthenticated)
-    {
-        @for (fragment of characters; track fragment.Id)
-        {
-            <fragment-characters [fragmentConfig]="fragment"
-                                 [attr.id]="fragment.Config.id"
-                                 [style.order]="fragment.Order"
-                                 [style.margin-bottom.px]="fragment.Config.marginBottom"
-                                 [style.width]="fragment.Config.width"
-                                 [style.height.px]="fragment.Config.height"
-                                 [style.margin-top.px]="fragment.Config.marginTop"
-            ></fragment-characters>
+                </winners-widget>
+            }
+            @case ("BetsWidgets"){
+                <bets-widget [fragmentConfig]="fragment"
+                             [style.margin-top.px]="fragment.Config.marginTop"
+                             [style.order]="fragment.Order">
+                </bets-widget>
+            }
+            @case ("CasinoSearches"){
+                <casino-search-fragment [fragmentConfig]="fragment"
+                                        [attr.id]="fragment.Config.id"
+                                        [style.margin-bottom.px]="fragment.Config.marginBottom"
+                                        [style.width]="fragment.Config.width"
+                                        [style.margin-top.px]="fragment.Config.marginTop"
+                                        [style.order]="fragment.Order">
+                </casino-search-fragment>
+            }
+            @case ("Iframes"){
+                <div [style.order]="fragment.Order" class="frame-fragment" [attr.id]="fragment.Config.id">
+                    @if( fragment.Config.titleVisibility){
+                        <div class="title" [innerHTML]="fragment.Title | translate | sanitizer: 'html'"></div>
+                    }
+                    <iframe [ngStyle]="fragment.Config.style" [src]="fragment.Href | sanitizer: 'resourceUrl'" (load)="onLoadFrame($event, fragment)"></iframe>
+                </div>
+            }
         }
     }
 </div>

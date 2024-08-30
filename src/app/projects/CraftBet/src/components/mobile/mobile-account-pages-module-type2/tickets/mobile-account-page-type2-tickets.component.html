@@ -58,6 +58,12 @@
         </div>
       </div>
     </div>
+    <div class="empty-tickets empty-block" *ngIf="ticketsList.length == 0">
+      <section class="empty-tickets empty-block">
+        <span class="icon-ticket icon"></span>
+        <span class="empty-block-text">{{'User.Tickets-empty' | translate}}</span>
+      </section>
+    </div>
   </div>
 
 

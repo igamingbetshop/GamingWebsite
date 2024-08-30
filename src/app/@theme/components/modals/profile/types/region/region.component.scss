@@ -1,0 +1,220 @@
+.form_field {
+  width: 100%;
+  position: relative;
+  .verify-icons {
+    display: var(--settings-profile-verify-icons-display, block);
+    position: absolute;
+    top: 18px;
+    right: -29px;
+    font-size: 24px;
+    cursor: pointer;
+    .tooltip {
+      display: none;
+      position: absolute;
+      top: 35px;
+      left: -3px;
+      .selected {
+        color: var(--verify-tooltip-icon-color, #111115);
+        width: 0;
+        height: 0;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-bottom: 7px solid var(--verify-tooltip-icon-color, #111115);
+        position: absolute;
+        left: 6px;
+        top: -6px;
+      }
+      .tooltip-text {
+        font-size: var(--verify-tooltip-text-font-size, 14px);
+        background: var(--verify-tooltip-text-background, #111115);
+        color: var(--verify-tooltip-text-color, #fff);
+        padding: var(--verify-tooltip-text-padding, 5px 8px);
+        border-radius: var(--verify-tooltip-text-border-radius, 6px);
+        position: relative;
+        z-index: 100;
+        white-space: nowrap;
+        width: auto;
+      }
+    }
+    &:hover {
+      .tooltip {
+        display: block;
+      }
+    }
+  }
+  .icon-verified:before {
+    color: var(--profile-account-status-icon-verified-color, #4F9961);
+  }
+
+  .icon-pending:before {
+    color: var(--profile-account-status-icon-pending-color, #FFD439);
+  }
+
+  .icon-rejected:before {
+    color: var(--profile-account-status-icon-rejected-color, #5EA8FF);
+  }
+
+  .active_item {
+    pointer-events: unset;
+  }
+
+  .disable_item {
+    pointer-events: none;
+    opacity: .8;
+    border-color: #cecece !important;
+  }
+
+  label {
+    color: var(--settings-input-label-color, #fff);
+    position: absolute;
+    top: var(--settings-input-label-top, 20px);
+    left: var(--settings-input-label-left, 8px);
+    height: var(--settings-input-label-height, 25px);
+    transform-origin: 0 50%;
+    transition: transform 200ms, color 200ms;
+    pointer-events: none;
+    padding-left: var(--settings-input-label-padding-left, 6px);
+  }
+
+  input:focus ~ label {
+    width: var(--settings-input-field-label-width, inherit);
+    height: var(--settings-input-label-focused-height, 11px);
+    background: var(--settings-background-color, #FFFFFF);
+    color: var(--settings-field-focus-label, #fff);
+    top: var(--settings-label-top, 20px);
+    font-size: var(--settings-background-color-font-size, 16px);
+  }
+
+  input:focus ~ .cut,
+  input:not(:placeholder-shown) ~ .cut {
+    transform: translateY(8px);
+    display: block;
+  }
+
+  input:focus ~ .cut {
+    display: block;
+  }
+
+  input:focus::placeholder {
+    opacity: 1;
+  }
+
+  input::placeholder {
+    opacity: 0;
+  }
+
+  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    transform: var(--settings-label-transform, translateY(-27px) translateX(0px) scale(0.75));
+    background-color: var(--settings-background-color, unset);
+    height: var(--settings-label-focused-height, 22px);
+    font-size: var(--settings-font-size-label, 16px);
+    color: var(--settings-focus-label-focused, #fff);
+    text-align: var(--settings-focus-label-focused-text-align, left);
+    width: var(--settings-focus-label-focused-width, auto);
+    padding-left: var(--settings-padding-left-focus-label-focused, 10px);
+    padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+  }
+
+  select:focus ~ label,
+  select:not([value=""]):valid ~ label {
+    transform: var(--register-select-label-transform, translateY(-27px) translateX(0px) scale(0.75));
+    top: var(register-focused-select-label-top, 20px);
+    font-size: var(--register-focused-label-font-size, 16px);
+    color: var(--settings-focus-label-focused, #fff);
+    background-color: var(--settings-background-color-focus-label-focused, unset);
+    padding-left: var(--settings-padding-left-focus-label-focused, 10px);
+    padding-right: var(--settings-padding-right-focus-label-focused, 10px);
+  }
+
+  input, select {
+    &:not(.choose_input) {
+      //border: 1px solid $border-color;
+      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      font-size: var(--settings-field-font-size, 16px);
+      text-indent: 0;
+      padding-left: 16px;
+      border: var(--settings-field-border, none);
+      background: var(--settings-field-background, var(--account-content-item-bg-color));
+      border-radius: var(--settings-field-border-radius, 6px);
+      height: var(--settings-field-height, 40px);
+      appearance: var(--open-ticket-appearance, auto);
+    }
+
+    border: 1px solid rgba(219, 237, 255, 0.8);
+  }
+
+  ::placeholder {
+    color: var(--settings-field-color, rgba(255, 255, 255, 0.6)) !important;
+  }
+
+  input, .mobile_verify, > select {
+    margin: 10px 0 24px 0;
+  }
+
+  &.auto-complete
+  {
+    z-index: 10;
+    position: relative;
+    .dropdown-container
+    {
+      position: absolute;
+      background: white;
+      display: none;
+      top:60px;
+      border: 1px solid #cecece;
+      max-height: 300px;
+      overflow-y: auto;
+      .items
+      {
+        >div
+        {
+          cursor: pointer;
+          padding: 1px 16px;
+          color: #000000;
+          &:first-of-type
+          {
+            opacity: .5;
+          }
+          &:hover
+          {
+            background: #546bf9;
+            color:white;
+          }
+        }
+      }
+    }
+    &.opened
+    {
+      .dropdown-container{display: block}
+    }
+  }
+}
+.form_field::after {
+  content: "<>";
+  color: #898989;
+  transform: rotate(90deg);
+  right: 16px;
+  top: 24px;
+  position: absolute;
+  pointer-events: none;
+  visibility: var(--custom_dropdown_list_countries_icon, hidden);
+  font: 17px Consolas, monospace;
+  padding: 0px 0px 2px;
+}
+.required-field
+{
+  &:after
+  {
+    content: "*";
+    position: absolute;
+    top:-5px;
+    right: -6px;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1376px)
+{
+  input, select {
+    width: 100% !important;
+  }
+}

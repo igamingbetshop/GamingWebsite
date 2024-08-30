@@ -41,7 +41,7 @@ export class CommonMainComponent extends BaseMainComponent {
         {
             if(event.data['from'] == 'close-game')
             {
-                this.router.navigate([this.configService.defaultOptions.HomePageType || '/home']);
+                this.router.navigate([this.configService.defaultOptions.HomePageUrl || '/home']);
             }
             else if (typeof event.data['origin'] !== 'undefined') {
                 if (event.data['origin'] == 'sportsbook' && event.data['page'] == 'headerPanel')

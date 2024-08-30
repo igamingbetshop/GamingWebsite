@@ -1,104 +1,136 @@
 <!--<div class="mobile-settings-section" [ngStyle]="layoutService.layoutStyle">-->
-<div class="mobile-settings-section">
-    <div class="mobile-settings-section">
-        <h2 class="mobile-settings-section_title">{{ 'User.ProfileDetails' | translate }}</h2>
-        <div class="underline"></div>
-        <div class="tab-content-mobile">
-           <div class="settings_header-mobile">
-               <div class="settings_edit" *ngIf="!(profileService.editState$ | async).value" [ngClass]="(profileService.editState$ | async).value ? 'selected' : ''" (click)="toggleEdit()">
-                   <button class="setting_btn craft_btn settings_edit_text" type="submit" (click)="toggleEdit()" *ngIf="!(profileService.editState$ | async).value">
-                       <span class="icon-edit"></span>
-                       <span (click)="toggleEdit()">{{'Settings.Edit' | translate}}</span>
-                   </button>
-               </div>
-               <div class="submit-details" *ngIf="(profileService.editState$ | async).value">
-                   <button class="craft_btn setting_btn" type="button" (click)="resetProfileForm()" [ngClass]="{'cancel_btn': (profileService.editState$ | async).value}">
-                       <span class="icon-close-modal"></span>
-                       <span>{{'Settings.Cancel-changes' | translate}}</span>
-                   </button>
-                   <button class="craft_btn setting_btn" type="submit" (click)="updateProfile()" [class.disabled]="configService.defaultOptions['FormValidationType'] === 'blur' && !formGroup.valid">
-                       <fa-icon [icon]="['fas', 'save']" class="fas-save"></fa-icon>
-                       <span>{{'Settings.Save-Changes' | translate}}</span>
-                   </button>
-               </div>
-           </div>
-            <form [formGroup]="formGroup" *ngIf="formReady">
-                <div *ngFor="let formItem of formItems; let i = index" [style.order]="formItem.Order%2 ? formItem.Order - i : formItem.Order + i">
-                    <div [ngSwitch]="formItem.Type">
-                        <div *ngSwitchCase="'text'" class="form_field">
-                            <input type="text" [attr.disabled]="formItem.Config.disabled" [formControlName]="formItem.Title"
-                                   [placeholder]="formItem.Title" reg-exp-input [regExp]="formItem.RegExp"
-                                   [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formItem.Config?.disabled, 'active_item':  (profileService.editState$ | async).value, 'disable_input': (profileService.profileData$ | async)[formItem?.Title + 'Disabled']}">
-                            <label *ngIf="formItem.Config.hasLabel" [class.required-field]="formItem.Config?.mandatory">{{'User.' + formItem.Title | translate}}</label>
-                            <span class="error-field-message" *ngIf="formGroup.get(formItem?.Title).hasError('required') || formGroup.get(formItem?.Title).hasError('pattern')">{{'Error.' + formItem?.Title + 'FieldNotValid' | translate}}</span>
-                            <div class="verify-icons">
-                                <span class="{{'icon-' + (profileService.profileData$ | async)[formItem?.Title + 'VerificationState']}}"></span>
-                                <div class="tooltip">
-                                    <div class="selected"></div>
-                                    <div class="tooltip-text">
-                                        {{'User.icon-' + (profileService.profileData$ | async)[formItem?.Title + 'VerificationState'] | translate}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div *ngSwitchCase="'pin'" class="form_field">
-                            <input type="password" [formControlName]="formItem.Title"
-                                   [placeholder]="'****'" reg-exp-input [regExp]="formItem.RegExp" disabled
-                                   [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formItem.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}">
-                            <label *ngIf="formItem.Config.hasLabel" [class.required-field]="formItem.Config?.mandatory">{{'User.' + formItem.Title | translate}}</label>
-                            <span class="error-field-message" *ngIf="formGroup.get(formItem?.Title).touched && formGroup.get(formItem?.Title).hasError('pattern')">{{'Error.' + formItem?.Title + 'FieldNotValid' | translate}}</span>
-                            <span class="verify-icons icon-verified"></span>
-                        </div>
-                        <div *ngSwitchCase="'birth-date'" class="form_field">
-                            <ng-template #birthDateRef></ng-template>
-                        </div>
-                        <div *ngSwitchCase="'send-code'" class="form_field">
-                            <ng-container [ngSwitch]="formItem.Title">
-                                <ng-container *ngSwitchCase="'Email'">
-                                    <ng-template #emailRef></ng-template>
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'MobileNumber'">
-                                    <ng-template #mobileNumberRef></ng-template>
-                                </ng-container>
-                            </ng-container>
-                        </div>
-                        <div *ngSwitchCase="'region'" class="form_field">
-                            <ng-container [ngSwitch]="formItem.Title">
-                                <ng-container *ngSwitchCase="'CountryId'">
-                                    <ng-template #countryRef></ng-template>
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'DistrictId'">
-                                    <ng-template #districtRef></ng-template>
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'CityId'">
-                                    <ng-template #cityRef></ng-template>
-                                </ng-container>
-                                <ng-container *ngSwitchCase="'TownId'">
-                                    <ng-template #townRef></ng-template>
-                                </ng-container>
-                            </ng-container>
-                        </div>
-
-                        <div *ngSwitchCase="'checkbox'" class="form_field">
-                            <div class="checkbox-field">
-                                <span>{{'Profile.' + formItem.Title | translate}}</span>
-                                <input type="checkbox" [formControlName]="formItem.Title" [checked]="formItem.Title"
-                                       [ngClass]="{'disable_item':!(profileService.editState$ | async).value, 'active_item':  (profileService.editState$ | async).value}">
-                            </div>
-                        </div>
-                        <div *ngSwitchCase="'dropdown'" class="form_field">
-                            <!-- <input [formControlName]="formItem.Ttile">-->
-                        </div>
-                        <div *ngSwitchCase="'language'" class="form_field">
-                            <ng-template #languageRef></ng-template>
-                        </div>
-                    </div>
-                </div>
-            </form>
+<div class="mobile-settings-section"
+     [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
+    <h2 class="mobile-settings-section_title">{{ 'User.ProfileDetails' | translate }}</h2>
+    <div class="underline"></div>
+    <div class="settings_header-mobile">
+        <div class="settings_edit" *ngIf="!(profileService.editState$ | async).value"
+             [ngClass]="(profileService.editState$ | async).value ? 'selected' : ''" (click)="toggleEdit()">
+            <button class="setting_btn craft_btn settings_edit_text" type="submit" (click)="toggleEdit()"
+                    *ngIf="!(profileService.editState$ | async).value">
+                <span class="icon-edit"></span>
+                <span (click)="toggleEdit()">{{ 'Settings.Edit' | translate }}</span>
+            </button>
+        </div>
+        <div class="submit-details" *ngIf="(profileService.editState$ | async).value">
+            <button class="craft_btn setting_btn" type="button" (click)="resetProfileForm()"
+                    [ngClass]="{'cancel_btn': (profileService.editState$ | async).value}">
+                <span class="icon-close-modal"></span>
+                <span>{{ 'Settings.Cancel-changes' | translate }}</span>
+            </button>
+            <button class="craft_btn setting_btn" type="submit" (click)="updateProfile()"
+                    [class.disabled]="configService.defaultOptions['FormValidationType'] === 'blur' && !formGroup.valid">
+                <fa-icon [icon]="['fas', 'save']" class="fas-save"></fa-icon>
+                <span>{{ 'Settings.Save-Changes' | translate }}</span>
+            </button>
         </div>
     </div>
-    <div *ngIf="updateDataMessage" class="success_message1" [ngClass]="{'error_message': updateDataMessage?.Error, 'success_message': !updateDataMessage?.Error }">
-        <fa-icon [icon]="['fas', 'check']" class="success-verify" *ngIf="updateDataMessage?.Message === 'Success'"></fa-icon>
-        <p>{{updateDataMessage?.Message}}</p>
+    <div class="tab-content-mobile" #scrollRef>
+        <form [formGroup]="formGroup" *ngIf="formReady">
+            @for(formItem of formItems; track formItem.Id; let i = $index)
+            {
+                <div [style.order]="formItem.Order%2 ? formItem.Order - i : formItem.Order + i">
+                    <div class="profile-main-container">
+                        @switch (formItem.Type)
+                        {
+                            @case ('text')
+                            {
+                                <div class="form_field">
+                                    <input type="text" [attr.disabled]="formItem.Config.disabled" [formControlName]="formItem.Title"
+                                           [placeholder]="'User.' + formItem.Title | translate" reg-exp-input [regExp]="formItem.RegExp"
+                                           [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formItem.Config?.disabled, 'active_item':  (profileService.editState$ | async).value, 'disable_input': (profileService.profileData$ | async)[formItem?.Title + 'Disabled']}">
+                                    <label *ngIf="formItem.Config.hasLabel"
+                                           [class.required-field]="formItem.Config?.mandatory">{{ 'User.' + formItem.Title | translate }}</label>
+                                    <span class="error-field-message"
+                                          *ngIf="formGroup.get(formItem?.Title).hasError('required') || formGroup.get(formItem?.Title).hasError('pattern')">{{ 'Error.' + formItem?.Title + 'FieldNotValid' | translate }}</span>
+                                    <div class="verify-icons">
+                                        <span class="{{'icon-' + (profileService.profileData$ | async)[formItem?.Title + 'VerificationState']}}"></span>
+                                        <div class="tooltip">
+                                            <div class="selected"></div>
+                                            <div class="tooltip-text">
+                                                {{ 'User.icon-' + (profileService.profileData$ | async)[formItem?.Title + 'VerificationState'] | translate }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            @case ('pin')
+                            {
+                                <div class="form_field">
+                                    <input type="password" [formControlName]="formItem.Title"
+                                           [placeholder]="'****'" reg-exp-input [regExp]="formItem.RegExp" disabled
+                                           [ngClass]="{'disable_item':!(profileService.editState$ | async).value || formItem.Config?.disabled, 'active_item':  (profileService.editState$ | async).value}">
+                                    <label *ngIf="formItem.Config.hasLabel"
+                                           [class.required-field]="formItem.Config?.mandatory">{{ 'User.' + formItem.Title | translate }}</label>
+                                    <span class="error-field-message"
+                                          *ngIf="formGroup.get(formItem?.Title).touched && formGroup.get(formItem?.Title).hasError('pattern')">{{ 'Error.' + formItem?.Title + 'FieldNotValid' | translate }}</span>
+                                    <span class="verify-icons icon-verified"></span>
+                                </div>
+                            }
+                            @case ('birth-date')
+                            {
+                                <div class="form_field">
+                                    <ng-template #birthDateRef></ng-template>
+                                </div>
+                            }
+                            @case ('send-code')
+                            {
+                                <div class="form_field">
+                                    <ng-container [ngSwitch]="formItem.Title">
+                                        <ng-container *ngSwitchCase="'Email'">
+                                            <ng-template #emailRef></ng-template>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="'MobileNumber'">
+                                            <ng-template #mobileNumberRef></ng-template>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                            }
+                            @case ('region')
+                            {
+                                <div class="form_field">
+                                    <ng-container [ngSwitch]="formItem.Title">
+                                        <ng-container *ngSwitchCase="'CountryId'">
+                                            <ng-template #countryRef></ng-template>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="'DistrictId'">
+                                            <ng-template #districtRef></ng-template>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="'CityId'">
+                                            <ng-template #cityRef></ng-template>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="'TownId'">
+                                            <ng-template #townRef></ng-template>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                            }
+                            @case ('checkbox')
+                            {
+                                <div class="form_field">
+                                    <div class="checkbox-field">
+                                        <span>{{ 'Profile.' + formItem.Title | translate }}</span>
+                                        <input type="checkbox" [formControlName]="formItem.Title" [checked]="formItem.Title"
+                                               [ngClass]="{'disable_item':!(profileService.editState$ | async).value, 'active_item':  (profileService.editState$ | async).value}">
+                                    </div>
+                                </div>
+                            }
+                            @case ('language')
+                            {
+                                <div class="form_field">
+                                    <ng-template #languageRef></ng-template>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </form>
     </div>
+</div>
+<div *ngIf="updateDataMessage" class="success_message1"
+     [ngClass]="{'error_message': updateDataMessage?.Error, 'success_message': !updateDataMessage?.Error }">
+    <fa-icon [icon]="['fas', 'check']" class="success-verify"
+             *ngIf="updateDataMessage?.Message === 'Success'"></fa-icon>
+    <p>{{ updateDataMessage?.Message }}</p>
 </div>

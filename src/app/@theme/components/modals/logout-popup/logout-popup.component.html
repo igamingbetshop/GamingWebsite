@@ -1,0 +1,20 @@
+<div class="logout-container">
+    <div class="logout-title">
+        <h2 class="title-text">
+            <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon" style=""><title></title>
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M23.174 48.96h15.174v-6.506h8V56.96H23.174V64L0 56.96V7.04L23.174 0v7.04h23.174v14.506h-8V15.04H23.174v33.92Zm25.332-25.895L64 32l-15.494 8.934V36h-16.16v-8h16.16v-4.934Z"></path>
+            </svg>
+            <span>{{ 'Header.Logout' | translate }}</span>
+        </h2>
+        <div class="close-btn" (click)="close()">
+            <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""><title></title>
+                <path d="m54.827 16.187-7.014-7.014L32 24.987 16.187 9.173l-7.014 7.014L24.987 32 9.173 47.813l7.014 7.014L32 39.013l15.813 15.814 7.014-7.014L39.013 32l15.814-15.813Z"></path>
+            </svg>
+        </div>
+    </div>
+    <div class="logout-body">
+        <div class="logout-body-text">{{ 'Login.AreYouSureLogout' | translate }}</div>
+        <div class="logout-red-btn" (click)="confirm()">{{ 'Login.Logout' | translate }}</div>
+    </div>
+</div>

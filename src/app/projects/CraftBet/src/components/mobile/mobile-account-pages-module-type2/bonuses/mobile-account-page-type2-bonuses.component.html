@@ -62,9 +62,19 @@
             <td *ngIf="bonus.IsCampaign">
               <button type="button" class="craft_btn" (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
             </td>
+              <td *ngIf="bonus.Collect">
+                  <button type="button" class="craft_btn" (click)="collect(bonus)">{{'User.Collect' | translate}}</button>
+              </td>
           </tr>
           </tbody>
         </table>
+        <div class="mobile-empty-bonuses empty-block" *ngIf="bonusesData?.body.length == 0">
+          <section class="mobile-empty-bonuses empty-block">
+            <span class="icon-bonus icon"></span>
+            <span class="empty-block-text">{{'User.Bonuses-empty' | translate}}</span>
+            <span class="empty-history-text">{{noHistory}}</span>
+          </section>
+        </div>
       </div>
     </div>
   </div>

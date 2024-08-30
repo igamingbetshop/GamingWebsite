@@ -14,10 +14,11 @@
             <li *ngFor="let provider of fragmentConfig.Config.showAll ? providers :  (providers | filterByName : casinoFilterService.providerPattern); let i = index"
                 (click)="stateService.changeProvidersPopupState(false);selectProvider(provider)"
                 [ngStyle]="provider.style"
-                [class.all-providers]="provider.Id == 0"
+                [class.all-providers]="casinoFilterService.providers.length === 0 && provider.Id == 0"
                 [class.selected]="casinoFilterService.providers | compareByKey: provider : 'Id'">
                 <img [src]="provider.imageSrc">
                 <span>{{provider?.Label}}</span>
+                <div *ngIf="fragmentConfig.Config.providersCount && provider?.GamesCount" class="providers-count">{{ provider?.GamesCount }}</div>
             </li>
             <button *ngIf="fragmentConfig.Config.showAll" (click)="stateService.changeProvidersPopupState(true)" class="providers-see-all"
                     [innerHTML]="'Providers.SeeAll' | translate | sanitizer : 'html'">

@@ -1,9 +1,8 @@
-import {Directive, inject, Injector, OnDestroy, OnInit} from "@angular/core";
+import {Directive, inject, Injector, OnDestroy, OnInit, signal} from "@angular/core";
 import {ConfigService} from "../../../@core/services";
-import {Fragment, FragmentData} from "../../../@core/models";
+import {FragmentData} from "../../../@core/models";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription, take} from "rxjs";
-import {BaseControllerService} from "../../../@core/services/app/baseController.service";
 import {StateService} from "../../../@core/services/app/state.service";
 import {BaseApiService} from "../../../@core/services/api/base-api.service";
 import {Methods} from "../../../@core/enums";
@@ -17,20 +16,11 @@ export class BaseHome implements OnInit, OnDestroy
     dialog = inject(MatDialog);
     config: ConfigService;
     fragmentKey: string;
-    fragments: {[key: string]: Fragment}
     position:string;
-
-    banners:FragmentData[] = [];
-    imageBars:FragmentData[] = [];
-    iframes: FragmentData[] = [];
-    characters: FragmentData[] = [];
-    casinoSearch: FragmentData[] = [];
-    winnerWidgets: FragmentData[] = [];
-    betsWidgets: FragmentData[] = [];
+    fragments = signal<FragmentData[]>([]);
 
     private readonly route: ActivatedRoute;
     private readonly router: Router;
-    private baseControllerService: BaseControllerService;
     private stateService:StateService;
 
     private subscription:Subscription = new Subscription();
@@ -42,7 +32,6 @@ export class BaseHome implements OnInit, OnDestroy
         this.config = injector.get(ConfigService);
         this.route = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
-        this.baseControllerService = injector.get(BaseControllerService);
         this.stateService = injector.get(StateService);
         this.baseApiService  = injector.get(BaseApiService);
         this.userLogined = injector.get(UserLogined);
@@ -62,57 +51,36 @@ export class BaseHome implements OnInit, OnDestroy
 
     private async getFragments()
     {
-        const menuType = this.fragmentKey === 'WebFragments' ? 'HomeMenu' : 'MobileHomeMenu';
-        const settings = await this.config.settings;
-        const fragments = settings['MenuList'].find(menu => menu.Type === menuType)['Items'];
-        fragments.forEach(menuItem =>
-        {
-            const fragmentData = new FragmentData();
-
-            if(menuItem.StyleType)
-                fragmentData.Config = JSON.parse(menuItem.StyleType);
-
-            fragmentData.Id = menuItem.Id;
-            fragmentData.Order = menuItem.Order;
-            fragmentData.Position = menuItem.Type;
-            fragmentData.Title = menuItem.Title;
-            fragmentData.Href = menuItem.Href;
-            fragmentData.Items = [];
-            if(menuItem.SubMenu.length)
+        const fragmentsObj = this.config.defaultOptions[this.fragmentKey];
+        const fragments = Object.entries(fragmentsObj).reduce((obj, [key, val]) => {
+            if (Array.isArray(val))
             {
-                menuItem.SubMenu.forEach(sbMenuItem => {
-                    const subFragmentData = new FragmentData();
-                    subFragmentData.Order = sbMenuItem.Order;
-                    subFragmentData.Title = sbMenuItem.Title;
-                    subFragmentData.Href = sbMenuItem.Href;
-                    subFragmentData.Src = window['debugPath'] + `/assets/images/home/home-menu/${sbMenuItem.Icon}`;
-                    if(sbMenuItem.StyleType)
-                        subFragmentData.Config = JSON.parse(sbMenuItem.StyleType);
-                    fragmentData.Items.push(subFragmentData);
-                });
-            }
-            switch (fragmentData.Position)
-            {
-                case 'imageBar':
-                    this.imageBars.push(fragmentData);
-                    break;
-                case 'banner':
-                    this.banners.push(fragmentData);
-                    break;
-                case 'characters' :
-                    this.characters.push(fragmentData);
-                    break;
-                case 'wins-widget' :
-                    this.winnerWidgets.push(fragmentData);
-                    break;
-                case 'bet-widget' :
-                    this.betsWidgets.push(fragmentData);
-                    break;
-                case 'casino-search' :
-                    this.casinoSearch.push(fragmentData);
-                    break;
-                case 'iframe':
-                    this.iframes.push(fragmentData);
+                const items =  val.filter(item => item.Position === this.position);
+                items.forEach(item => obj = [...obj, ...item.Items.map(item => {
+                    const fragmentData = new FragmentData();
+
+                    if(item.StyleType)
+                        fragmentData.Config = JSON.parse(item.StyleType);
+
+                    fragmentData.Id = item.Id;
+                    fragmentData.Order = item.Order;
+                    fragmentData.Position = key;
+                    fragmentData.Title = `WebFragments.${item.Title}`;
+                    fragmentData.Href = item.Href;
+                    fragmentData.Items = [];
+                    if(item.SubMenu && item.SubMenu.length)
+                    {
+                        item.SubMenu.forEach(sbMenuItem => {
+                            const subFragmentData = new FragmentData();
+                            subFragmentData.Order = sbMenuItem.Order;
+                            subFragmentData.Title = sbMenuItem.Title;
+                            subFragmentData.Href = sbMenuItem.Href;
+                            subFragmentData.Src = window['debugPath'] + `/assets/images/${this.fragmentKey.toLowerCase()}/${sbMenuItem.Icon}`;
+                            if(sbMenuItem.StyleType)
+                                subFragmentData.Config = JSON.parse(sbMenuItem.StyleType);
+                            fragmentData.Items.push(subFragmentData);
+                        });
+                    }
                     if(fragmentData.Config && fragmentData.Config.productId)
                     {
                         this.baseApiService.apiPost('', {ProductId:fragmentData.Config.productId}, Methods.GET_PRODUCT_URL, false).pipe(take(1)).subscribe(data => {
@@ -122,9 +90,12 @@ export class BaseHome implements OnInit, OnDestroy
                             }
                         });
                     }
-                    break;
+                    return fragmentData;
+                })]);
             }
-        });
+            return obj;
+        }, []);
+        this.fragments.set(fragments);
     }
 
     onLoadFrame(event:Event, fragment:FragmentData)

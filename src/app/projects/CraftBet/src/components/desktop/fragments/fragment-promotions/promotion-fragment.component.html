@@ -17,8 +17,8 @@
                 </div>
                 <div class="promotions_text">
                     <div>
-                        <p class="promotions_title" [innerHtml]="promotion.Title"></p>
-                        <p [innerHtml]="promotion.Description"></p>
+                        <p class="promotions_title" [innerHtml]="promotion.Title | sanitizer: 'html'"></p>
+                        <p [innerHtml]="promotion.Description | sanitizer: 'html'"></p>
                     </div>
                 </div>
             </div>

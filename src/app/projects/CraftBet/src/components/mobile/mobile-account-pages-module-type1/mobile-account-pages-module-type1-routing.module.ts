@@ -17,6 +17,8 @@ import {MobileAccountPageType1BettingStatementSportComponent} from './betting-st
 import {MobileAccountPageType1HistoryComponent} from "./history/mobile-account-page-type1-history.component";
 import {MobileChangePasswordComponent} from './change-password/mobile-change-password.component';
 import {MobileSelfLimitationComponent} from "./self-limitation/mobile-self-limitation.component";
+import {IsAgentGuard} from "../../../../../../@core/services/helpers/is-agent.guard";
+import {AccountsFilterStateService} from "@core/services/app/accounts-filter-state.service";
 
 const routes: Routes = [
     {
@@ -122,16 +124,22 @@ const routes: Routes = [
             {
                 path: 'payment',
                 loadChildren: () => import('./pay3000/mobile-account-page-type1-pay3000.module').then(m => m.MobileAccountPageType1Pay3000Module),
+            },
+            {
+                path: 'agents-report',
+                canActivate: [IsAgentGuard],
+                loadComponent: () => import('./agents-report/mobile-account-page-type1-agents-report.component').then(m => m.MobileAccountPageType1AgentsReportComponent)
             }
         ]
     }
-]
+];
 
 @NgModule({
     imports: [
         RouterModule.forChild(routes)
     ],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers:[AccountsFilterStateService]
 })
 
 

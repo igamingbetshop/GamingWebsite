@@ -54,7 +54,7 @@ body {
 }
 
 .modal-content {
-  background-color:#ffffff;
+  background-color: var(--all-modal-content-background, #ffffff);
   border-radius: 4px;
   //margin: 16px auto;
   margin: 0 auto;
@@ -139,14 +139,6 @@ body {
     color: itemColor(popup-close-icon, #fff);
     font-size: fontSize(popup-close-icon,16px);
     display: display(popup-close-icon, block);
-    @media screen and (min-width: 0px) and (max-width: 1376px)
-    {
-      font-size: calc(var(--popup-close-icon-font-size,16px) * 0.7);
-    }
-    @media screen and (min-width: 1377px) and (max-width: 1610px)
-    {
-      font-size: calc(var(--popup-close-icon-font-size,16px) * 0.9);
-    }
   }
 }
 
@@ -155,6 +147,39 @@ body {
 }
 .rightToLeft
 {
+  .filter-category-box .title-field .back-section {
+    flex-direction: row-reverse;
+    transform: rotate(180deg);
+    margin-right: 0;
+  }
+  .account-statement-section {
+    left: var(--account-info-right, -7px);
+    right: auto;
+  }
+  app-mobile-affiliate {
+    .affiliate-section .affiliate-tab .affiliate-tab-inner-title {
+      text-align: right !important;
+    }
+    .affiliate-section label {
+      right: var(--affiliate-input-label-left, 8px);
+      left: auto !important;
+    }
+  }
+  .affiliate .affiliate-tab-inner-title {
+    right: var(--affiliate-tab-inner-title-left, auto);
+    left: auto !important;
+    text-align: right !important;
+  }
+  winners-widget {
+    header {
+      direction: rtl;
+      >* {
+        &:nth-child(2) {
+          margin-right: var(--bets-widget-header-margin-left, 16px);
+        }
+      }
+    }
+  }
   .mobile-registration-section
   {
     form
@@ -202,6 +227,7 @@ body {
   .payment-systems__userAccount__name
   {
     float: right;
+    flex-direction: row-reverse;
   }
   .payment-systems__userAccount_balance
   {
@@ -247,9 +273,68 @@ body {
   .distans-right
   {
     margin-left: 15px;
-    margin-right: 0;
+    margin-right: 0 !important;
+  }
+  .user-default-section_top .user-right-panel_top .user-info {
+    margin-right: var(--user-info-section-icon-margin-left, auto);
+    margin-left: 0;
   }
   .websitePagesContent__content_title{text-align: right}
+  .self-limitation-section2 .self-limitation-tab input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    text-align: right;
+  }
+  .self-limitation-section2 .self-limitation-tab label {
+    right: var(--change-password-input-label-left, 8px);
+    left: auto;
+  }
+  .account-verification form .form_row2 .file-button {
+    left: var(--account-verification-file-button-right, 4px);
+    right: var(--account-verification-file-button-left, auto);
+  }
+  .account-verification form .form_row2 .choose-document-label {
+    right: var(--account-verify-input-label-left, 14px);
+  }
+  .history-section .history-tools-panel .history-tools select:focus~label,
+  select:not([value=""]):valid~label {
+    right: var(--history-focused-select-label-left, 0);
+  }
+  .history-section .block-head div, .history-section .bets-history-block-head div {
+    text-align: var(--payments-section-block-head-right-text-align, right);
+  }
+  .mobile-right-sidebar-section .flex_container .close_sidebar .info-block-top {
+    text-align: var(--right-side-bar-top-title-right-text-align, right);
+  }
+  .birth_date .birth_date_select select:focus~label,
+  select:not([value=""]):valid~label {
+    right: var(--settings-input-label-left, 8px);
+    left: auto !important;
+    transform-origin: right !important
+  }
+  .form_field_large .form_field .current_item .custom-code-icon {
+    left: var(--m-custom-send-code-icon-right, 11px);
+    right: auto !important;
+  }
+  .form_field_large .form_field .current_item .custom-code-label {
+    transform-origin: right;
+    left: auto;
+    right: 0;
+  }
+  .bets-widget-container .title {
+    text-align: var(--bets-widget-container-title-right-text-align, right) !important;
+  }
+  .last-bets-content table thead tr th {
+    text-align: var(--bets-widget-container-title-right-text-align, right) !important;
+  }
+  .last-bets-content table tbody tr td {
+    text-align: var(--bets-widget-table-td-right-text-align, right) !important;
+  }
+  .custom-slick-next {
+    right: var(--home-fragment-banner-icon-prev-left, 2%) !important;
+  }
+  .custom-slick-prev {
+    left: var(--home-fragment-banner-icon-next-right, 2%) !important;
+  }
 }
 
 
@@ -377,4 +462,9 @@ app-global-bottom-side-bar {
 }
 .grecaptcha-badge {
   bottom: 67px !important;
+}
+@media (max-width: 599px) {
+  .profile-popup {
+    --mat-dialog-container-small-max-width:95vw;
+  }
 }

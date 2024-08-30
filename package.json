@@ -5,11 +5,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start_craftbet": "ng serve --project craft-bet",
+    "start_craftbet": "ng serve --project craft-bet --configuration development",
+    "start_stake": "ng serve --project stake --port 4126",
     "start_craftbetTest": "node --max_old_space_size=4000 node_modules/@angular/cli/bin/ng serve --project craft-bet --configuration production",
     "start_craftbetla": "ng serve --project craft-bet-la",
     "build": "ng build  --configuration production",
     "build_craftbet": "node --max_old_space_size=4000 node_modules/@angular/cli/bin/ng build --project craft-bet --configuration production",
+    "build_stake": "node --max_old_space_size=4000 node_modules/@angular/cli/bin/ng build --project stake --configuration production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

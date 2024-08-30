@@ -40,6 +40,10 @@ export function asianRouteMatcher(url: UrlSegment[]) {
 
 const routes: Routes = [
     {
+        path: 'prematch/chart',
+        redirectTo:"sport/chart"
+    },
+    {
         path: 'home',
         loadChildren: () => import('./mobile-homepage/mobile-home.module').then(m => m.MobileHomeModule),
         data: {productName: 'top-games', slideKey: BannerTypes.MOBILE_HOME, position: FragmentPositions.Home, menuType: MenuType.LIVE_CASINO},
@@ -194,11 +198,16 @@ const routes: Routes = [
     },
     {
         path: 'category/:categoryId',
+        loadChildren: () => import('./mobile-casino/mobile-casino.module').then(m => m.MobileCasinoModule),
         data: {
+            isActiveFooter: false,
+            position: FragmentPositions.Category,
+        },
+        /*data: {
             isActiveFooter: false,
             slideKey: BannerTypes.CASINO
         },
-        loadChildren: () => import('./mobile-filter-game/mobile-filter-game.module').then(m => m.MobileFilterGameModule),
+        loadChildren: () => import('./mobile-filter-game/mobile-filter-game.module').then(m => m.MobileFilterGameModule),*/
     },
     {
         path: 'category/:id/:productId/:type',
@@ -261,6 +270,10 @@ const routes: Routes = [
         loadComponent: () => import('./mobile-casino/mobile-character-hierarchy/mobile-character-hierarchy.component').then(m => m.MobileCharacterHierarchyComponent),
     },
     {
+        path: 'slot-tournament',
+        loadComponent: () => import('./mobile-casino/mobile-slot-tournament/mobile-slot-tournament.component').then(m => m.MobileSlotTournamentComponent),
+    },
+    {
         path: 'payment-error',
         loadChildren: () => import('./mobile-payment-error/mobile-payment-error.module').then(m => m.MobilePaymentErrorModule),
     },
@@ -312,7 +325,7 @@ const routes: Routes = [
         loadChildren: () => import('./mobile-signup/mobile-signup.module').then(m => m.MobileSignupModule),
     },
     {
-        path: 'affiliate',
+        path: 'affiliates',
         loadChildren:() => import('./mobile-affiliate/mobile-affiliate.module').then(m => m.MobileAffiliateModule),
     }
 ];

@@ -5,6 +5,7 @@ import {Region} from "../../../../../@core/interfaces";
 import {Subscription} from "rxjs";
 import {BaseType} from "../base/base-type";
 import {StateService} from "../../../../../@core/services/app/state.service";
+import {SharedService} from "@core/services";
 
 @Directive()
 export class BaseRegion extends BaseType implements OnInit, OnDestroy
@@ -16,10 +17,12 @@ export class BaseRegion extends BaseType implements OnInit, OnDestroy
     regionOptions:Region[] = [];
 
     private isFirstTime:boolean = true;
+    public rightToLeftOrientation: boolean = false;
 
     private readonly registerService:UserRegisterService;
     private readonly stateService:StateService;
     private readonly changeDetectorRef:ChangeDetectorRef;
+    public sharedService: SharedService;
 
     private subscription:Subscription = new Subscription();
 
@@ -29,16 +32,20 @@ export class BaseRegion extends BaseType implements OnInit, OnDestroy
         this.registerService = injector.get(UserRegisterService);
         this.changeDetectorRef = injector.get(ChangeDetectorRef);
         this.stateService = injector.get(StateService);
+        this.sharedService = injector.get(SharedService);
     }
 
     ngOnInit()
     {
         this.subscription.add(this.profileService.editState$.subscribe(data => {
-            if(data.value === false && data.isReset === true || this.stateService.getPaymentNavigationState === "fromDeposit")
+            if(data.value === false && data.isReset === true)
             {
                 this.resetInitialState();
             }
         }));
+        this.sharedService.rightToLeftOrientation.subscribe((responseData) => {
+            this.rightToLeftOrientation = responseData;
+        });
     }
 
     selectRegionOption(region)

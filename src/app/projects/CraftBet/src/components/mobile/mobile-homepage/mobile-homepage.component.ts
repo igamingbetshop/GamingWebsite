@@ -8,9 +8,8 @@ import { FragmentSource} from '../../../../../../@core/enums';
     styleUrls: ['./mobile-homepage.component.scss']
 })
 export class MobileHomepageComponent extends BaseHome implements OnInit{
-    
+    fragmentKey = FragmentSource.Mobile;
     ngOnInit() {
-        this.fragmentKey = FragmentSource.Mobile;
         super.ngOnInit();
     }
 }

@@ -1,4 +1,4 @@
-import {Injectable, Injector} from '@angular/core';
+import {Directive, Injector} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { GetBetsHistoryService } from '@core/services/app/getBetsHistory.service';
 import { GetTransactionsService } from '@core/services/app/getTransactions.service';
@@ -8,8 +8,8 @@ import {BetsService} from "@core/services/app/bets.services";
 import {format} from "date-fns";
 import {LocalStorageService} from "@core/services";
 import {UtilityService} from "@core/services/app/utility.service";
-import * as moment from "moment/moment";
-@Injectable()
+import {AccountsFilterStateService} from "@core/services/app/accounts-filter-state.service";
+@Directive()
 export class BaseTransactionsComponent extends BaseComponent {
 
   public betsService: BetsService;
@@ -19,6 +19,7 @@ export class BaseTransactionsComponent extends BaseComponent {
   public translate: TranslateService;
   public localStorageService: LocalStorageService;
   public utilityService: UtilityService;
+  private accountsFilterStateService:AccountsFilterStateService;
   public historyTimeFilter: Array<any> = [
     { 'Name': 'Filter_Period.24 hours' },
     { 'Name': 'Filter_Period.3 days' },
@@ -29,7 +30,6 @@ export class BaseTransactionsComponent extends BaseComponent {
 
   public page: number = 1;
   public noHistory;
-  public historyPaymentFilterIndex: number = 0;
   public historyInPage: number = 10;
   public operationFilterIndex: number;
   public userData: any;
@@ -40,8 +40,6 @@ export class BaseTransactionsComponent extends BaseComponent {
   public historyTimeFilterIndex: number;
   public currentOperationFilter: any;
 
-  public customCreatedFrom: any;
-  public customCreatedBefore: any;
   public CurrencyId: any;
   public currencySymbol: any;
   public historyFilter = {
@@ -64,62 +62,56 @@ export class BaseTransactionsComponent extends BaseComponent {
     this.translate = injector.get(TranslateService);
     this.localStorageService = injector.get(LocalStorageService);
     this.utilityService = injector.get(UtilityService);
+    this.accountsFilterStateService = injector.get(AccountsFilterStateService);
     this.form = this.fb.group({
-      timeFilter: 0,
-      operationFilter: 0
+      timeFilter: this.accountsFilterStateService.getState("transactions")["timeFilterIndex"],
+      operationFilter: this.accountsFilterStateService.getState("transactions")["status"],
     });
+    this.operationFilterIndex = this.accountsFilterStateService.getState("transactions")["status"];
   }
 
   ngOnInit() {
     super.ngOnInit();
-    const userData = this.localStorageService.get('user');
-    this.CurrencyId = userData ? userData.CurrencyId : '';
-    this.currencySymbol = userData ? userData.CurrencySymbol : '';
-    this.getTransactionsService.getOperationTypes();
-
-    if (this.getTransactionsService.operationTypes.length > 0) {
-      this.getTransactionsHistory(1);
-    } else {
-      let subscription = this.getTransactionsService.notifyGetOperationTypes$.subscribe((data) => {
-        // With Custom Dropdowns use that variable(with current item)
-        this.currentOperationFilter = data[0];
-
-        this.getTransactionsHistory(1);
-        subscription.unsubscribe();
-      });
-    }
-
+    this.userData = this.localStorageService.get('user');
+    this.CurrencyId = this.userData ? this.userData.CurrencyId : '';
+    this.currencySymbol = this.userData ? this.userData.CurrencySymbol : '';
     this.form.get('timeFilter').valueChanges.subscribe((value) => {
       this.historyTimeFilterIndex = value;
       if (value == (this.historyTimeFilter.length - 1)) {
         this.customFilterShow = true;
         const date = new Date();
         date.setDate(date.getDate() - 1);
-        this.form.addControl('changedate', new FormControl(moment(new Date()).subtract(2, 'days').format('YYYY-MM-DDTHH:mm')));
-        this.form.addControl('changetTodate', new FormControl( moment(new Date()).format('YYYY-MM-DDTHH:mm')));
+        this.form.addControl('changedate', new FormControl(this.accountsFilterStateService.getState("transactions")["fromDate"]));
+        this.form.addControl('changetTodate', new FormControl(this.accountsFilterStateService.getState("transactions")["toDate"]));
       } else {
         this.customFilterShow = false;
         this.form.removeControl('changedate');
         this.form.removeControl('changetTodate');
       }
     });
-
-    this.form.get('operationFilter').valueChanges.subscribe((value) => {
-      this.operationFilterIndex = value;
-    });
-
-    this.getCreationDate(this.historyTimeFilter[0]);
+    this.form.get('timeFilter').setValue(this.accountsFilterStateService.getState("transactions")["timeFilterIndex"]);
+    this.form.get('operationFilter').setValue(this.accountsFilterStateService.getState("transactions")["status"]);
+    this.getData();
   }
 
-  public getCreationDate(input) {
-    const index = typeof input === 'object' ? input.Id : input;
-    if (index !== 4) {
-      this.historyFilter['CreatedFrom'] = this.betsService.getCreatedFrom(input);
-      this.historyFilter['CreatedBefore'] = this.betsService.getCreatedBefore();
-    } else {
-      this.historyFilter['CreatedFrom'] = this.form.get('changedate').value;
-      this.historyFilter['CreatedBefore'] = this.form.get('changetTodate').value;
+
+
+  getData() {
+    if (this.userData.IsAgent === false) { // todo false
+      this.getTransactionsService.getOperationTypes();
+      this.form.get('operationFilter').valueChanges.subscribe((value) => {
+        this.operationFilterIndex = value;
+      });
+      this.getTransactionsHistory(1);
+    } else if (this.userData.IsAgent === true)
+    {
+      this.getTransactionsReport(1);
     }
+  }
+
+  getCreationDate(index?) {
+    this.historyFilter['CreatedFrom'] = this.betsService.getCreatedFrom(index);
+    this.historyFilter['CreatedBefore'] = this.betsService.getCreatedBefore();
   }
 
   public onDateSelect() {
@@ -135,7 +127,7 @@ export class BaseTransactionsComponent extends BaseComponent {
 
   getTransactionsHistory(page) {
     this.page = page;
-    this.getCreationDate(this.form.getRawValue().timeFilter);
+    this.saveFilterState();
     if (this.form.valid) {
       const input = {
         id: null,
@@ -151,14 +143,49 @@ export class BaseTransactionsComponent extends BaseComponent {
     }
   }
 
-
+  getTransactionsReport(page) {
+    this.page = page;
+    this.saveFilterState();
+    const input = {
+      id: null,
+      index: page - 1,
+      FromDate: this.historyFilter['CreatedFrom'],
+      ToDate: this.historyFilter['CreatedBefore'],
+      historyInPage: this.historyInPage,
+      operationFilterIndex: this.operationFilterIndex,
+      operationTypeId: this.form.get('operationFilter').value
+    };
+    this.getTransactionsService.getTransactionsReport(input);
+  }
 
 
   submit(page) {
-    this.getTransactionsHistory(page);
-    if (this.getTransactionsService.transactionsList.length === 0) {
-      this.utilityService.showMessageWithDelay(this, [{ 'noHistory': this.translate.instant("User.No-History") }]);
+    if (this.userData.IsAgent === false) { // todo false
+      this.getTransactionsHistory(page);
+    } else if (this.userData.IsAgent === true) { // todo true
+      this.getTransactionsReport(page);
     }
+  }
+
+  private saveFilterState()
+  {
+    if (!this.customFilterShow)
+      this.getCreationDate(this.form.getRawValue().timeFilter);
+    else {
+      this.historyFilter['CreatedFrom'] = this.form.get('changedate').value;
+      this.historyFilter['CreatedBefore'] = this.form.get('changetTodate').value;
+    }
+
+    const state:any = {timeFilterIndex:this.form.getRawValue().timeFilter,
+      status:this.operationFilterIndex || 0};
+
+    if(this.customFilterShow)
+    {
+      state.fromDate = this.historyFilter['CreatedFrom'];
+      state.toDate = this.historyFilter['CreatedBefore'];
+    }
+
+    this.accountsFilterStateService.setState("transactions", state);
   }
 
   ngOnDestroy() {

@@ -5,6 +5,7 @@ import {ConfigService, LocalStorageService} from "@core/services";
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {HttpClient} from "@angular/common/http";
 import {Subject, take} from "rxjs";
+import {DownLineClient} from "../../../@theme/components/clients/clients.component";
 
 @Injectable()
 export class GamesUrlService {
@@ -49,11 +50,22 @@ export class GamesUrlService {
       'Position': sportPosition,
       'TimeZone': this.configService.timeZone
     };
+    const downLineClient:DownLineClient = this.localStorageService.get("downLineClient");
 
-    if (this.isLogined) {
-      data['Token'] = this.userData.Token;
-      data['ClientId'] = this.userData.Id;
+    if (this.isLogined)
+    {
       data['IsForDemo'] = false;
+      if(downLineClient?.Token)
+      {
+        data['Token'] = downLineClient.Token;
+        data['ClientId'] = downLineClient.Id;
+        data['IsAgent'] = false;
+      }
+      else
+      {
+        data['ClientId'] = this.userData.Id;
+        data['Token'] = this.userData.Token;
+      }
     } else {
       data['IsForDemo'] = true;
     }
@@ -89,8 +101,18 @@ export class GamesUrlService {
     };
     if (this.isLogined)
     {
-      data['Token'] = this.userData.Token;
-      data['ClientId'] = this.userData.Id;
+      const downLineClient:DownLineClient = this.localStorageService.get("downLineClient");
+      if(downLineClient?.Token)
+      {
+        data['Token'] = downLineClient.Token;
+        data['IsAgent'] = false;
+        data['ClientId'] = downLineClient.Id;
+      }
+      else
+      {
+        data['ClientId'] = this.userData.Id;
+        data['Token'] = this.userData.Token;
+      }
       if(type !== null)
         data['IsForDemo'] = !type.toString().startsWith('real');
     }

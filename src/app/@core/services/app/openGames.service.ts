@@ -10,6 +10,7 @@ import {HttpClient} from "@angular/common/http";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods} from "@core/enums";
 import {Subject, take} from "rxjs";
+import {DownLineClient} from "../../../@theme/components/clients/clients.component";
 
 @Injectable()
 export class OpenGamesService {
@@ -111,7 +112,16 @@ export class OpenGamesService {
             'DeviceType': 1
         };
 
-        this.baseApiService.apiRequest({}, Controllers.MAIN, Methods.GET_PRODUCT_URL, false, input).pipe(take(1)).subscribe((responseData) => {
+        const downLineClient:DownLineClient = this.localStorageService.get("downLineClient");
+        let data:any;
+        if(downLineClient?.Token)
+        {
+            data['Token'] = downLineClient.Token;
+            data['ClientId'] = downLineClient.Id;
+            data['IsAgent'] = false;
+        }
+
+        this.baseApiService.apiRequest(data, Controllers.MAIN, Methods.GET_PRODUCT_URL, false, input).pipe(take(1)).subscribe((responseData) => {
             if (responseData.ResponseCode == 0) {
                 this.notifyGetIframUrl.next(responseData.ResponseObject);
             } else {

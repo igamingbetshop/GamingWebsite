@@ -1,0 +1,9 @@
+<div class="balance_section" *ngIf="menuItem?.OpenInRouting && menuItem.contentType == 'AccountStatementTxt'" [routerLink]="menuItem.Href" (click)="navigateByHref(menuItem, $event)">
+    <span class="header-balance-text">{{'User.Balance' | translate}}</span>
+    <span>{{currencySymbol}} {{balance | toNumber | number: '.2'}} {{ !currencySymbol ? currencyId : '' }}</span>
+</div>
+<div class="balance_section" [attr.href]="menuItem?.Href ? menuItem?.Href : null" dropdown *ngIf="!menuItem?.OpenInRouting && menuItem.contentType == 'AccountStatementTxt'" (click)="navigateByHref(menuItem, $event)">
+    <span class="header-balance-text">{{'User.Balance' | translate}}</span>
+    <span>{{currencySymbol}} {{balance | toNumber | number: '.2'}} {{ !currencySymbol ? currencyId : '' }}</span>
+    <app-account-page-type1-statement class="balance-popup"></app-account-page-type1-statement>
+</div>

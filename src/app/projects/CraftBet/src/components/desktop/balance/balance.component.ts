@@ -15,6 +15,7 @@ export class BalanceComponent implements OnInit {
   public unusedBalance: string;
   public bonus: string;
   public currencySymbol: any;
+  public currencyId: any;
   public userData: any;
   public isLogin: boolean;
   public selectedAccount;
@@ -25,12 +26,13 @@ export class BalanceComponent implements OnInit {
                public userLogined: UserLogined) {
     this.userData = this.localStorageService.get('user');
     this.currencySymbol = this.userData ? this.userData.CurrencySymbol : '';
+    this.currencyId = this.userData ? this.userData.CurrencyId : '';
     this.isLogin = this.userLogined.isAuthenticated;
   }
 
   ngOnInit(): void {
-    if (this.menuItem['useAccountType'] != undefined) {
-      this.menuItem['useAccountType'] = this.menuItem['useAccountType'] === '1' ? true : false;
+    if (this.menuItem?.config['useAccountType'] != undefined) {
+      this.menuItem['useAccountType'] = this.menuItem?.config['useAccountType'] === '1' ? true : false;
     }
     this.balanceService.notifyUpdateBalance.subscribe(data => {
       this.accountBalances = this.groupBalances(data?.Balances);

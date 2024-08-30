@@ -1,9 +1,10 @@
-import {Component, Injector, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, Injector, Input, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
 import {MenuService, SharedService} from "../../../@core/services";
 import {ConfigService} from "../../../@core/services";
 import {UserLogined} from "../../../@core/services/app/userLogined.service";
 import {Subscription} from "rxjs";
+import {StateService} from "@core/services/app/state.service";
 
 @Component({
     selector: 'app-global-bottom-side-bar',
@@ -37,6 +38,7 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
     public menuService: MenuService;
     private configService:ConfigService;
     private loggedService:UserLogined;
+    private stateService = inject(StateService);
     public betsCount:number = 0;
     public selectedMoreItem = false;
     public showBetslip = false;
@@ -124,6 +126,10 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
                 break;
             case 'AnimatedLeftSideBar' : {
                 this.toggleMenu(item);
+                break;
+            }
+            case 'Chat' : {
+                this.stateService.toggleChat();
                 break;
             }
             case 'more-menu' : {

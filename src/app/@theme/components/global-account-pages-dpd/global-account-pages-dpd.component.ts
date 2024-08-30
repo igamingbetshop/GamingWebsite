@@ -35,8 +35,9 @@ export class GlobalAccountPagesDpdComponent implements OnInit {
     dialog = inject(MatDialog);
     public faCaretDown = faCaretDown;
     public selectedItem;
+    public selectedUrl;
 
-    constructor(private baseControllerService: BaseControllerService, private router: Router, public localStorageService: LocalStorageService, public configService: ConfigService, public injector: Injector,
+    constructor(private baseControllerService: BaseControllerService, public router: Router, public localStorageService: LocalStorageService, public configService: ConfigService, public injector: Injector,
                 public getSettingsInfoService: GetSettingsInfoService) {
         this.savedDateService = injector.get(SaveData);
         this.userData = localStorageService.get('user');
@@ -71,6 +72,10 @@ export class GlobalAccountPagesDpdComponent implements OnInit {
         if (this.menuItem.config && this.menuItem.config['hoverHighlight'] !== undefined) {
             this.menuItem['hoverHighlight'] = this.menuItem.config['hoverHighlight'] === '1' ? true : false;
         }
+        this.selectedUrl = this.router.url;
+        this.router.events.subscribe(() => {
+            this.selectedUrl = this.router.url;
+        });
     }
 
     private mergeSubMenus(source)
@@ -116,9 +121,10 @@ export class GlobalAccountPagesDpdComponent implements OnInit {
         }
         event.stopPropagation();
         this.selectedItem = index;
-        // this.router.navigate([url]);
     }
-
+    isSelected(href: string): boolean {
+        return this.selectedUrl === '/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + href;
+    }
     headNavigate()
     {
         if(this.menuItem?.Href)

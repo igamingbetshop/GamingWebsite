@@ -5,12 +5,20 @@ import {StateService} from "@core/services/app/state.service";
 
 const desktopPreloadModules = [
     {
+        path:"telegramauth",
+        loadComponent:() => import("../app/social-networks/telegram.component").then(c => c.TelegramComponent)
+    },
+    {
         path: '', loadChildren: () =>
             import('./projects/CraftBet/src/components/desktop/desktop.module').then(d => d.DesktopModule)
     }
 ];
 
 const mobilePreloadModules = [
+    {
+        path:"telegramauth",
+        loadComponent:() => import("../app/social-networks/telegram.component").then(c => c.TelegramComponent)
+    },
     {
         path: '', loadChildren: () =>
             import('./projects/CraftBet/src/components/mobile/mobile.module').then(d => d.MobileModule)

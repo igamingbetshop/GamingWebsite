@@ -111,9 +111,9 @@
                                 {
                                     <div class="transform-logo">
                                         <div class="header-section_topPanel_left">
-                                            <img class="logo_img" pointerOnLink="{{menuItem.Href}}"
-                                                 (click)="clickInRoute('/' + configService.defaultOptions['HomePageType'])"
-                                                 [routerLink]="['/' + configService.defaultOptions['HomePageType']]"
+                                            <img style="max-width: 200px" class="logo_img" pointerOnLink="{{menuItem.Href}}"
+                                                 (click)="clickInRoute('/' + configService.defaultOptions['HomePageUrl'])"
+                                                 [routerLink]="['/' + configService.defaultOptions['HomePageUrl']]"
                                                  [src]="logoUrl" (error)="errorHandler($event)"/>
                                         </div>
                                     </div>
@@ -155,12 +155,15 @@
                                 }
                                 @case('signupBtn')
                                 {
-                                    <div class="default_width">
-                                        <app-global-sign-up-btn class="{{menuItem.className}}-type"
-                                                                itemClassname="{{menuItem.className}}"
-                                                                [menuItem]="menuItem">
-                                        </app-global-sign-up-btn>
-                                    </div>
+                                    @if(!router.url.includes("register"))
+                                    {
+                                        <div class="default_width">
+                                            <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                                    itemClassname="{{menuItem.className}}"
+                                                                    [menuItem]="menuItem">
+                                            </app-global-sign-up-btn>
+                                        </div>
+                                    }
                                 }
                                 @case('commonBtn')
                                 {
@@ -197,7 +200,13 @@
                                 @case('balanceTxt')
                                 {
                                     <div>
-                                        <app-balance [menuItem]="menuItem.config"></app-balance>
+                                        <app-balance [menuItem]="menuItem"></app-balance>
+                                    </div>
+                                }
+                                @case('AccountStatementTxt')
+                                {
+                                    <div>
+                                        <account-statement [menuItem]="menuItem" [balance]="balance"></account-statement>
                                     </div>
                                 }
                                 @case('bonusBalanceTxt')
@@ -342,6 +351,9 @@
                                  'animated infinite pulse': menuItem?.animated}">
                                     @switch(menuItem.contentType)
                                     {
+                                        @case ('searchBtn') {
+                                            <search-opener></search-opener>
+                                        }
                                         @case ('standard')
                                         {
                                             @if (menuItem.OpenInRouting)
@@ -365,11 +377,29 @@
                                                 {{'Header.Deposite' | translate}}
                                             </div>
                                         }
+                                        @case ('character')
+                                        {
+                                            @if (userLogined.user?.CharacterId)
+                                            {
+                                                <div class="character-img">
+                                                    <img  src="../../../../../../../assets/images/characters/{{userLogined.user?.CharacterId}}.png">
+                                                </div>
+                                            }
+                                        }
                                         @case ('chatBtn')
                                         {
                                             <div class="default_width">
                                                 <chant-opener></chant-opener>
                                             </div>
+                                        }
+                                        @case ('clientsDpd')
+                                        {
+                                            @if (userData?.IsAgent)
+                                            {
+                                                <div class="default_width clients-dropdown">
+                                                    <clients></clients>
+                                                </div>
+                                            }
                                         }
                                         @case ('commonBtn')
                                         {
@@ -384,17 +414,20 @@
                                             <div>
                                                 <div class="header-section_topPanel_left">
                                                     <img class="logo_img" pointerOnLink="{{menuItem.Href}}"
-                                                         (click)="clickInRoute('/' + configService.defaultOptions['HomePageType'])"
-                                                         [routerLink]="['/' + configService.defaultOptions['HomePageType']]"
+                                                         (click)="clickInRoute('/' + configService.defaultOptions['HomePageUrl'])"
+                                                         [routerLink]="['/' + configService.defaultOptions['HomePageUrl']]"
                                                          [src]="logoUrl"  (error)="errorHandler($event)"/>
                                                 </div>
                                             </div>
                                         }
                                         @case ('loginBtn')
                                         {
-                                            <div class="default_width">
-                                                <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
-                                            </div>
+                                            @if(!router.url.includes("login"))
+                                            {
+                                                <div class="default_width">
+                                                    <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
+                                                </div>
+                                            }
                                         }
                                         @case ('loginDpd')
                                         {
@@ -436,12 +469,15 @@
                                         }
                                         @case ('signupBtn')
                                         {
-                                            <div class="default_width">
-                                                <app-global-sign-up-btn class="{{menuItem.className}}-type"
-                                                                        [menuItem]="menuItem"
-                                                                        itemClassname="{{menuItem.className}}">
-                                                </app-global-sign-up-btn>
-                                            </div>
+                                            @if(!router.url.includes("register"))
+                                            {
+                                                <div class="default_width">
+                                                    <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                                            [menuItem]="menuItem"
+                                                                            itemClassname="{{menuItem.className}}">
+                                                    </app-global-sign-up-btn>
+                                                </div>
+                                            }
                                         }
                                         @case ('userIdTxt')
                                         {
@@ -453,7 +489,13 @@
                                         @case ('balanceTxt')
                                         {
                                             <div>
-                                                <app-balance [menuItem]="menuItem.config"></app-balance>
+                                                <app-balance [menuItem]="menuItem"></app-balance>
+                                            </div>
+                                        }
+                                        @case('AccountStatementTxt')
+                                        {
+                                            <div>
+                                                <account-statement [menuItem]="menuItem" [balance]="balance"></account-statement>
                                             </div>
                                         }
                                         @case ('bonusBalanceTxt')
@@ -643,10 +685,7 @@
                                     {
                                         @if (menuDirection === 'left')
                                         {
-                                            <div class="lucky-img" (click)="openLuckyGame()">
-                                                <img class="left-menu-showed" src="../../../../../../../assets/images/{{menuItem?.Title}}.svg">
-                                                <img class="left-menu-hidden" src="../../../../../../../assets/images/{{menuItem?.Title}}-closed.svg">
-                                            </div>
+                                            <spin-wheel-opener [menuItem]="menuItem"></spin-wheel-opener>
                                         }
                                     }
                                     @case ('time')
@@ -683,16 +722,19 @@
                                     }
                                     @case ('signupBtn')
                                     {
-                                        <div class="default_width">
-                                            <app-global-sign-up-btn class="{{menuItem.className}}-type"
-                                                                    [menuItem]="menuItem"
-                                                                    itemClassname="{{menuItem.className}}">
-                                            </app-global-sign-up-btn>
-                                        </div>
+                                        @if(!router.url.includes("register"))
+                                        {
+                                            <div class="default_width">
+                                                <app-global-sign-up-btn class="{{menuItem.className}}-type"
+                                                                        [menuItem]="menuItem"
+                                                                        itemClassname="{{menuItem.className}}">
+                                                </app-global-sign-up-btn>
+                                            </div>
+                                        }
                                     }
                                     @case ('languageDpd')
                                     {
-                                        <div class="default_width">
+                                        <div class="default_width global-language">
                                             <app-global-language [menuItem]="menuItem"></app-global-language>
                                         </div>
                                     }
@@ -718,14 +760,23 @@
                                     }
                                     @case ('loginBtn')
                                     {
-                                        <div>
-                                            <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
-                                        </div>
+                                        @if(!router.url.includes("login"))
+                                        {
+                                            <div>
+                                                <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
+                                            </div>
+                                        }
                                     }
                                     @case ('balanceTxt')
                                     {
                                         <div>
-                                            <app-balance [menuItem]="menuItem.config"></app-balance>
+                                            <app-balance [menuItem]="menuItem"></app-balance>
+                                        </div>
+                                    }
+                                    @case('AccountStatementTxt')
+                                    {
+                                        <div>
+                                            <account-statement [menuItem]="menuItem" [balance]="balance"></account-statement>
                                         </div>
                                     }
                                     @case ('unusedBalanceTxt')
@@ -750,6 +801,13 @@
                                                 <span>{{bonus}} {{currencySymbol}}</span>
                                             </div>
                                         }
+                                    }
+                                    @case ('chatBtn')
+                                    {
+                                        <div class="header-item-chat-icon">
+                                            <chant-opener></chant-opener>
+                                            <div> {{'Header.' + menuItem?.Title | translate}}</div>
+                                        </div>
                                     }
                                 }
 
@@ -889,9 +947,12 @@
                                     }
                                     @case ('loginBtn')
                                     {
-                                        <div >
-                                            <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
-                                        </div>
+                                        @if(!router.url.includes("login"))
+                                        {
+                                            <div>
+                                                <app-global-login-btn [menuItem]="menuItem"></app-global-login-btn>
+                                            </div>
+                                        }
                                     }
                                     @case ('userIdTxt')
                                     {
@@ -902,7 +963,13 @@
                                     @case ('balanceTxt')
                                     {
                                         <div>
-                                            <app-balance [menuItem]="menuItem.config"></app-balance>
+                                            <app-balance [menuItem]="menuItem"></app-balance>
+                                        </div>
+                                    }
+                                    @case('AccountStatementTxt')
+                                    {
+                                        <div>
+                                            <account-statement [menuItem]="menuItem" [balance]="balance"></account-statement>
                                         </div>
                                     }
                                     @case ('unusedBalanceTxt')

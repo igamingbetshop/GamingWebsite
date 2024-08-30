@@ -6,7 +6,7 @@
 
   <div class="modal_content">
         <form [formGroup]="ticketForm" novalidate (ngSubmit)="submit()" class="open-ticket-form-fields">
-          <div class="form_row" *ngIf="data?.notLogin">
+          <div class="form_row" *ngIf="data?.data.notLogin">
             <label class="ticket_label">{{'Register.Email' | translate}}</label>
             <div class="form_field">
               <input type="email" class="ticket_input" name="Email" formControlName="Email"/>

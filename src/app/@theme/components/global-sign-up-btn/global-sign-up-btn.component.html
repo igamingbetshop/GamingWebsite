@@ -4,12 +4,12 @@
   </div>
   {{'Register.Registration' | translate}}
   <i class="icon-eighteen"></i>
+    <span class="hidden-register-text" [innerHTML]="'Register.Registration-Icon' | translate | sanitizer: 'html'"></span>
   <ng-container *ngIf="menuItem?.Src; else menuItemIcon">
     <img [src]="menuItem?.Src" alt="">
   </ng-container>
   <ng-template #menuItemIcon>
     <fa-icon *ngIf="hasIcon" [icon]="['fas', 'angle-right']" class="global_register-btn_rightIcon"></fa-icon>
   </ng-template>
-<!--  <fa-icon *ngIf="hasIcon" [icon]="['fas', 'angle-right']" class="global_register-btn_rightIcon"></fa-icon>-->
 </button>
 

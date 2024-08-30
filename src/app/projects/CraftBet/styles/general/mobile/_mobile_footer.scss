@@ -129,6 +129,7 @@
           flex-wrap: var(--footer-column-content-flex-wrap, unset);
           justify-content: var(--footer-column-content-justify-content, center);
           gap: var(--footer-column-content-gap, 0px);
+          cursor: var(--footer-column-content-cursor, pointer);
           .footer-column-item
           {
             display: block;
@@ -322,6 +323,7 @@
         font-weight: var(--m-ft-images-style1-title-font-weight, 600);
         position: var(--m-ft-images-style1-title-position, absolute);
         top: var(--m-ft-images-style1-title-top, 6px);
+        text-align: var(--m-ft-images-style1-title-text-align, left);
       }
 
       .ft-images-type1
@@ -370,6 +372,7 @@
         font-weight: var(--m-ft-images-style3-title-font-weight, 600);
         position: var(--m-ft-images-style3-title-position, absolute);
         top: var(--m-ft-images-style3-title-top, 6px);
+        text-align: var(--m-ft-images-style3-title-text-align, left);
       }
       display: grid;
       grid-template-columns: var(--m-ft-images-style3-template-columns,repeat(3, 1fr));
@@ -429,6 +432,7 @@
         font-weight: var(--m-ft-images-style2-title-font-weight, 600);
         position: var(--m-ft-images-style2-title-position, absolute);
         top: var(--m-ft-images-style2-title-top, 6px);
+        text-align: var(--m-ft-images-style2-title-text-align, left);
       }
       .ft-images-type3
       {

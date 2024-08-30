@@ -3,7 +3,6 @@
     <div class="user-default-section_top tab-{{tabType}}">
         <div class="user-left-panel">
             <ul class="user-left-panel_topList">
-<!--                <li *ngFor="let item of menuList" class="user-left-panel_header" collapse>-->
                 <div class="profile-info-details">
                     <div class="user-icon">
                         <span class="icon-user-info"></span>
@@ -75,9 +74,16 @@
                 </div>
             </div>
             <div class="user-right-panel_title" *ngIf="tabType !== 'top'">
-                <div *ngFor="let data of savedDateService.selectedItem?.SubMenu">
+                <div class="user-right-panel-list_title" *ngFor="let data of savedDateService.selectedItem?.SubMenu">
                     <div *ngIf="data?.Href !== '' && router.url.includes(data?.Href)">
                         {{'User.' + data.Title | translate}}
+                    </div>
+                </div>
+                <div class="user-icon">
+                    <span class="icon-user-info"></span>
+                    <div class="user-info_content">
+                        <app-account-page-type1-statement></app-account-page-type1-statement>
+                        <div class="selected"></div>
                     </div>
                 </div>
             </div>

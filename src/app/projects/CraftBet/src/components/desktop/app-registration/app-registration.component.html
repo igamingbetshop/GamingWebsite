@@ -15,7 +15,7 @@
             </button>
 
             <ng-container >
-                <div class="social-register-text">{{'Register.Social sign up text' |translate}}</div>
+                <div class="social-register-text" [innerHTML]="'Register.Social sign up text' | translate | sanitizer: 'html'"></div>
                 <ul *ngIf="configService?.defaultOptions?.SocialNetworkProviders.length">
                     <li *ngFor="let provider of configService?.defaultOptions?.SocialNetworkProviders"
                         (click)="redirectToSocialProviderLoginPage(provider)"
@@ -126,7 +126,7 @@
                                                        reg-exp-input [regExp]="form_elem.RegExp"
                                                        placeholder="{{'Register.Password-placeholder-p' | translate}}"
                                                        formControlName="{{form_elem?.Title}}"
-                                                       [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Password').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Password').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword').hasError('matchTo')) && regFormSteps[currentStep - 1].get('Password').touched)}"/>
+                                                       [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('Password').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Password').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword')?.hasError('matchTo')) && regFormSteps[currentStep - 1].get('Password').touched)}"/>
                                                 <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                                                 <div (click)="changePassType()" class="change-password-field-type change-password-field-type2">
                                                     <span [ngClass]="changePasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
@@ -143,22 +143,24 @@
 
                                         </div>
                                     </div>
-                                    <div class="form_field">
+                                    @if (confirmPassword)
+                                    {
+                                        <div class="form_field">
 
-                                        <input  type="{{changeConfirmPasswordType ? 'text' : 'password'}}"
-                                                formControlName="confirmPassword"
-                                                reg-exp-input [regExp]="form_elem.RegExp"
-                                                name="'confirmPassword'"
-                                                placeholder="{{'Register.Confirm-password-p' | translate}}"
-                                                [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('confirmPassword').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('confirmPassword').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword').hasError('matchTo')) && regFormSteps[currentStep - 1].get('confirmPassword').touched || (regFormSteps[currentStep - 1].get('Password').hasError('required') && submitted))}"/>
-                                        <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.ConfirmPassword' | translate}}</label>
-                                        <div (click)="changeConfirmPassType()" class="change-password-field-type change-password-field-type2">
-                                            <span [ngClass]="changeConfirmPasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                                            <input  type="{{changeConfirmPasswordType ? 'text' : 'password'}}"
+                                                    formControlName="confirmPassword"
+                                                    reg-exp-input [regExp]="form_elem.RegExp"
+                                                    name="'confirmPassword'"
+                                                    placeholder="{{'Register.Confirm-password-p' | translate}}"
+                                                    [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get('confirmPassword').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('confirmPassword').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword').hasError('matchTo')) && regFormSteps[currentStep - 1].get('confirmPassword').touched || (regFormSteps[currentStep - 1].get('Password').hasError('required') && submitted))}"/>
+                                            <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.ConfirmPassword' | translate}}</label>
+                                            <div (click)="changeConfirmPassType()" class="change-password-field-type change-password-field-type2">
+                                                <span [ngClass]="changeConfirmPasswordType ? 'icon-eye-password' : 'icon-eye-password-close'"></span>
+                                            </div>
+                                            <span class="error-field-message" *ngIf="(regFormSteps[currentStep - 1].get('confirmPassword').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword').hasError('matchTo')) && regFormSteps[currentStep - 1].get('confirmPassword').touched">{{ 'Error.PasswordMatchTo' | translate }}</span>
+                                            <span class="error-field-message error-field-message2" *ngIf="(regFormSteps[currentStep - 1].get('confirmPassword').hasError('required') || regFormSteps[currentStep - 1].get('confirmPassword').hasError('pattern')) && regFormSteps[currentStep - 1].get('confirmPassword').touched">{{'Error.ConfirmPasswordFieldNotValid' | translate}}</span>
                                         </div>
-                                        <!--                                    <span class="error-field-message" *ngIf="((regFormSteps[currentStep - 1].get('confirmPassword').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('confirmPassword').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword').hasError('matchTo')) && regFormSteps[currentStep - 1].get('confirmPassword').touched || (regFormSteps[currentStep - 1].get('Password').hasError('required') && submitted))">{{'Error.' + form_elem?.Title + 'FieldNotValid' | translate}}</span>-->
-                                       <!-- <span class="error-field-message" *ngIf="(regFormSteps[currentStep - 1].get('confirmPassword').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('confirmPassword').hasError('required') && regFormSteps[currentStep - 1].get('confirmPassword').touched) || (regFormSteps[currentStep - 1].get('Password').hasError('required') && submitted) || (regFormSteps[currentStep - 1].get('Password').hasError('required') && regFormSteps[currentStep - 1].get('Password').touched)">{{'Error.' + form_elem?.Title + 'FieldNotValid' | translate}}</span>-->
-                                        <span class="error-field-message" *ngIf="(regFormSteps[currentStep - 1].get('confirmPassword').hasError('required')  || regFormSteps[currentStep - 1].get('confirmPassword').hasError('matchTo')) && regFormSteps[currentStep - 1].get('confirmPassword').touched">{{ 'Error.PasswordMatchTo' | translate }}</span>
-                                    </div>
+                                    }
                                 </div>
                                 <div *ngSwitchCase="'text'" class="form_field">
 
@@ -212,6 +214,7 @@
                                                    [showMaskTyped]="false"
                                                    placeHolderCharacter="0"
                                                    numbersOnly
+                                                   [preventFirstDigit]="0"
                                                    name="'MobileNumber'"
                                                    [mask]="currentValueMobileCode.Mask"
                                                    placeholder="{{currentValueMobileCode.Mask ? currentValueMobileCode.Mask : 'Register.Mobile-number-placeholder' | translate}}"
@@ -601,8 +604,16 @@
                         </div>
 
 
-                        <div class="error_message register_error_message">
-                            {{errorMessage}}
+                        <div class="error_message register_error_message" *ngIf="errorMessage">
+                            <span class="icon-close register-icon-close"></span>
+                            <div class="register-error-part">
+                                <div class="register-error-text">
+                                    {{'Error.Register-Error' | translate}}
+                                </div>
+                                <div>
+                                    {{errorMessage}}
+                                </div>
+                            </div>
                         </div>
 
 
@@ -672,19 +683,21 @@
                                             </div>
                                         </div>
 
-                                        <div>
-
-                                            <div class="form_field">
-                                                <input type="password"
-                                                       name="'confirmPassword'"
-                                                       formControlName="confirmPassword"
-                                                       placeholder="{{'Register.Confirm-password' | translate}}"
-                                                       [ngClass]="{'invalid-filed': ((quickRegForm.get('confirmPassword').hasError('required') && submitted) || (quickRegForm.get('confirmPassword').hasError('required')  || quickRegForm.get('confirmPassword').hasError('matchTo')) && quickRegForm.get('confirmPassword').touched)}"/>
-                                                <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.ConfirmPassword' | translate}}</label>
-                                                <span class="error-field-message" *ngIf="(quickRegForm.get('confirmPassword').hasError('required')  || quickRegForm.get('confirmPassword').hasError('matchTo')) && quickRegForm.get('confirmPassword').touched">{{ 'Error.PasswordMatchTo' | translate }}</span>
+                                        @if(confirmPassword)
+                                        {
+                                            <div>
+                                                <div class="form_field">
+                                                    <input type="password"
+                                                           name="'confirmPassword'"
+                                                           formControlName="confirmPassword"
+                                                           placeholder="{{'Register.Confirm-password' | translate}}"
+                                                           [ngClass]="{'invalid-filed': ((quickRegForm.get('confirmPassword').hasError('required') && submitted) || (quickRegForm.get('confirmPassword').hasError('required')  || quickRegForm.get('confirmPassword').hasError('matchTo')) && quickRegForm.get('confirmPassword').touched)}"/>
+                                                    <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.ConfirmPassword' | translate}}</label>
+                                                    <span class="error-field-message" *ngIf="(quickRegForm.get('confirmPassword').hasError('required')  || quickRegForm.get('confirmPassword').hasError('matchTo')) && quickRegForm.get('confirmPassword').touched">{{ 'Error.PasswordMatchTo' | translate }}</span>
+                                                    <span class="error-field-message error-field-message2" *ngIf="(quickRegForm.get('confirmPassword').hasError('required') || quickRegForm.get('confirmPassword').hasError('pattern')) && quickRegForm.get('confirmPassword').touched">{{'Error.ConfirmPasswordFieldNotValid' | translate}}</span>
+                                                </div>
                                             </div>
-                                        </div>
-
+                                        }
 
                                     </div>
                                 </div>
@@ -748,6 +761,7 @@
                                                    name="'MobileNumber'"
                                                    placeHolderCharacter="0"
                                                    numbersOnly
+                                                    [preventFirstDigit]="0"
                                                    placeholder="{{currentValueMobileCode.Mask ? currentValueMobileCode.Mask : 'Register.Mobile-number-placeholder' | translate}}"
                                                    [ngClass]="{'invalid-filed': ((quickRegForm.get('MobileNumber').hasError('required') && submitted) || (quickRegForm.get('MobileNumber').hasError('required')  || quickRegForm.get('MobileNumber').hasError('MobileNumber') || quickRegForm.get('MobileNumber').hasError('maxlength')) && quickRegForm.get('MobileNumber').touched)}"/>
                                             <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
@@ -795,8 +809,6 @@
 
                                 <div *ngSwitchCase="'Currency'" class="form_field">
 
-
-
                                     <select [formControlName]="form_elem.Title"
                                             [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}">
                                         <option *ngFor="let currency of currencyList; let i = index" [value]="currency"
@@ -817,8 +829,6 @@
                                         <option value="2">{{'User.Female' | translate}}</option>
                                     </select>
                                 </div>
-
-
                                 <div *ngSwitchCase="'Region2'" class="form_field form_field__{{form_elem?.Type}}">
 
                                     <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
@@ -843,8 +853,6 @@
                                     </div>
 
                                 </div>
-
-
                                 <div *ngSwitchCase="'Region1'" class="form_field form_field__{{form_elem?.Type}}">
 
                                     <div class="begion_tabs begion_tabs__{{form_elem?.Type}}">
@@ -858,11 +866,7 @@
                                         <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                                     </div>
                                 </div>
-
                                 <div *ngSwitchCase="'select'" class="form_field">
-
-
-
                                     <select [formControlName]="form_elem.Title"
                                             (change)="changeCustomDropdownValue(form_elem.Title, $event.target.value, currentStep)"
                                             [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}"
@@ -875,10 +879,7 @@
                                     </select>
                                     <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                                 </div>
-
                                 <div *ngSwitchCase="'dropdown'" class="form_field">
-
-
                                     <div class="form_field_top">
                                         <select (change)="changeQuickRegisterType($event.target.value)"
                                                 class="custom_dropdown_reg">
@@ -889,8 +890,6 @@
                                         <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                                     </div>
                                 </div>
-
-
                                 <div *ngSwitchCase="'checkbox'" class="form_field">
 
                                     <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
@@ -936,8 +935,16 @@
 
 
 
-                        <div class="error_message register_error_message">
-                            {{errorMessage}}
+                        <div class="error_message register_error_message" *ngIf="errorMessage">
+                            <span class="icon-close register-icon-close"></span>
+                            <div class="register-error-part">
+                                <div class="register-error-text">
+                                    {{'Error.Register-Error' | translate}}
+                                </div>
+                                <div>
+                                    {{errorMessage}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -948,8 +955,6 @@
             </div>
         </ng-container>
     </div>
-
-
 </div>
 
 <loader></loader>

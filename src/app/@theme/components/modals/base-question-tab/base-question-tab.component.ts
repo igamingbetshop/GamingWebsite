@@ -11,8 +11,12 @@ export class BaseQuestionTabComponent {
   data:any = inject(MAT_DIALOG_DATA);
   dialogRef = inject(MatDialogRef<BaseQuestionTabComponent>);
 
-  close(confirm:boolean = false)
+  close()
   {
+    this.dialogRef.close();
+  }
+
+  confirm() {
     this.dialogRef.close(true);
   }
 

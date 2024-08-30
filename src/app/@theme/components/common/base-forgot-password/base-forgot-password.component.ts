@@ -73,11 +73,13 @@ export class BaseForgotPasswordComponent extends BaseComponent implements AfterV
     this.baseService = injector.get(BaseService);
     this.translate = injector.get(TranslateService);
     this.router = injector.get(Router);
-    this.recaptchaV3Service = injector.get(ReCaptchaV3Service);
+    this.defaultOption = this.configService.defaultOptions;
+    if (this.defaultOption.IsReCaptcha) {
+      this.recaptchaV3Service = injector.get(ReCaptchaV3Service);
+    }
     this.inputElement = injector.get(ElementRef);
     this.userLogined = injector.get(UserLogined);
     this.isLogined = this.userLogined.isAuthenticated;
-    this.defaultOption = this.configService.defaultOptions;
     this.saveData = injector.get(SaveData);
     this.baseApiService = injector.get(BaseApiService);
     this.changeDetectionRef = injector.get(ChangeDetectorRef);
@@ -95,12 +97,6 @@ export class BaseForgotPasswordComponent extends BaseComponent implements AfterV
         Validators.email
       ]]
     });
-    if (this.defaultOption.IsReCaptcha) {
-      this.subscriptions.push(this.recaptchaV3Service.execute("register").subscribe(token => {
-        this.forgotPasswordForm.addControl('ReCaptcha', new FormControl(token));
-        console.log('recovery captcha key is :' + token);
-      }));
-    }
     this.saveData.openPopup.subscribe((data) => {
       if (data === 1) {
         this.step = 1;
@@ -192,58 +188,18 @@ export class BaseForgotPasswordComponent extends BaseComponent implements AfterV
         } else {
           this.utilityService.showMessageWithDelay(this, [{'showErrorMessage': this.translate.instant("Recovery.Wrong-recovery-input") }]);
         }
-        // else {
-        //   let value = this.forgotPasswordForm.get('fEmail').value;
-        //   if (isNaN(parseInt(value))) {
-        //     // this.showErrorMessage = true;
-        //     this.utilityService.showMessageWithDelay(this, [{'showErrorMessage': this.translate.instant("Recovery.Wrong-recovery-input") }]);
-        //   } else {
-        //     const symbols = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-        //     if ((this.forgotPasswordForm.get('fEmail').value.match(symbols))) {
-        //       // this.showErrorMessage = true;
-        //       this.utilityService.showMessageWithDelay(this, [{'showErrorMessage': this.translate.instant("Recovery.Wrong-recovery-input") }]);
-        //     } else {
-        //       const numberRegExp = /^[0-9]+$/;
-        //       let res = this.forgotPasswordForm.get('fEmail').value.charAt(0);
-        //       console.log('ress', res);
-        //       if (res == "+") {
-        //         let cutedText = this.forgotPasswordForm.get('fEmail').value.substring(1);
-        //         console.log('cutedText', cutedText);
-        //         if (isNaN(parseInt(cutedText))) {
-        //           // this.showErrorMessage = true;
-        //
-        //           this.utilityService.showMessageWithDelay(this, [{'showErrorMessage': this.translate.instant("Recovery.Wrong-recovery-input") }]);
-        //         } else {
-        //           if (cutedText.includes('+') && this.forgotPasswordForm.get('fEmail').value.match(numberRegExp)) {
-        //             console.log('hos3');
-        //             // this.showErrorMessage = true;
-        //             this.sendData();
-        //           } else {
-        //             // this.showErrorMessage = false;
-        //             this.utilityService.showMessageWithDelay(this, [{'showErrorMessage': this.translate.instant("Recovery.Wrong-recovery-input") }]);
-        //           }
-        //         }
-        //       } else {
-        //           this.utilityService.showMessageWithDelay(this, [{'showErrorMessage': this.translate.instant("Recovery.Wrong-recovery-input") }]);
-        //       }
-        //       // if (this.forgotPasswordForm.get('fEmail').value.match(numberRegExp)) {
-        //       //   console.log('hos3');
-        //       //   // this.showErrorMessage = false;
-        //       //   this.sendData();
-        //       // } else {
-        //       //   // this.showErrorMessage = true;
-        //       //   this.utilityService.showMessageWithDelay(this, [{'showErrorMessage': this.translate.instant("Recovery.Wrong-recovery-input") }]);
-        //       // }
-        //     }
-        //   }
-        // }
-
       }
     }
   }
 
   sendData()
   {
+    if (this.defaultOption.IsReCaptcha) {
+      this.subscriptions.push(this.recaptchaV3Service.execute("register").subscribe(token => {
+        this.forgotPasswordForm.addControl('ReCaptcha', new FormControl(token));
+        console.log('recovery captcha key is :' + token);
+      }));
+    }
     this.baseService.forgotPassword(this.forgotPasswordForm.getRawValue()).pipe(take(1)).subscribe(data => {
       if(data.ResponseCode === 0)
       {

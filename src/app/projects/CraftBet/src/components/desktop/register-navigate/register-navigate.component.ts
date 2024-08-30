@@ -10,7 +10,7 @@ export class RegisterNavigateComponent {
 
   constructor(private router:Router, private savedData:SaveData, private config:ConfigService)
   {
-    this.router.navigate([this.config.defaultOptions.HomePageType]).then(data => {
+    this.router.navigate([this.config.defaultOptions.HomePageUrl]).then(data => {
       this.savedData.openPopup.next(2);
     });
   }

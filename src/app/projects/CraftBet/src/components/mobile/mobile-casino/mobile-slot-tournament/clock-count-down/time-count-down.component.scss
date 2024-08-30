@@ -1,0 +1,165 @@
+.m-clock-count-down {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  background: var(--m-clock-count-down-bg-color,rgba(0, 0, 0, 0.4));
+  padding: 10px 24px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  margin: 0 auto;
+
+  .time-section {
+    text-align: center;
+    font-size: 24px;
+
+    &:first-of-type {
+      .time-group {
+        .colon {
+          display: none;
+        }
+      }
+    }
+
+    .time-group {
+      display: flex;
+      gap: 2px;
+     /* height: 28px;*/
+
+      .colon {
+        color: var(--pb-count-down-name-color, #FFF);
+        font-size: 2vw;
+        height: 100%;
+        align-items: center;
+        display: flex;
+        padding-right: 4px;
+        padding-left: 2px;
+        margin-top: .5vw;
+      }
+
+      .time-segment {
+        display: block;
+        font-size: 16px;
+        font-weight: 500;
+        width: 34px;
+        height: 34px;
+
+        .segment-display {
+          position: relative;
+          height: 100%;
+
+          .segment-display-top,
+          .segment-display-bottom {
+            overflow: hidden;
+            text-align: center;
+            width: 100%;
+            height: 50%;
+            position: relative;
+          }
+
+          .segment-display-top {
+            line-height: 2.1;
+            color: var(--count-down-number-color,rgba(219, 239, 255, 1));
+            background: var(--count-down-number-bg-color,radial-gradient(137.2% 127.99% at 135.7% -32.27%, #6D8FD1 0%, #3C5991 44.49%));
+            border-top-left-radius: var(--time-segment-border-radius, 4px);
+            border-top-right-radius: var(--time-segment-border-radius, 4px);
+          }
+
+          .segment-display-bottom {
+            line-height: 0;
+            color: var(--count-down-number-color,rgba(219, 239, 255, 1));
+            background: var(--count-down-number-bg-color,radial-gradient(137.2% 127.99% at 135.7% -32.27%, #6D8FD1 0%, #3C5991 44.49%));
+            border-bottom-left-radius: var(--time-segment-border-radius, 4px);
+            border-bottom-right-radius: var(--time-segment-border-radius, 4px);
+          }
+
+          .segment-overlay {
+            position: absolute;
+            top: 0;
+            perspective: 400px;
+            height: 100%;
+            width: 100%;
+
+            &.flip {
+              .segment-overlay-top {
+                animation: flip-top 0.8s linear;
+              }
+
+              .segment-overlay-bottom {
+                animation: flip-bottom 0.8s linear;
+              }
+            }
+          }
+
+          .segment-overlay-top,
+          .segment-overlay-bottom {
+            position: absolute;
+            overflow: hidden;
+            text-align: center;
+            width: 100%;
+            height: 50%;
+          }
+
+          .segment-overlay-top {
+            top: 0;
+            line-height: 2.1;
+            color: var(--count-down-number-color,rgba(219, 239, 255, 1));
+            transform-origin: bottom;
+            background: var(--count-down-number-bg-color,radial-gradient(137.2% 127.99% at 135.7% -32.27%, #6D8FD1 0%, #3C5991 44.49%));
+            border-top-left-radius: var(--time-segment-border-radius, 4px);
+            border-top-right-radius: var(--time-segment-border-radius, 4px);
+
+          }
+
+          .segment-overlay-bottom {
+            bottom: 0;
+            line-height: 0;
+            color: var(--count-down-number-color,rgba(219, 239, 255, 1));
+            background: var(--count-down-number-bg-color,radial-gradient(137.2% 127.99% at 135.7% -32.27%, #6D8FD1 0%, #3C5991 44.49%));
+            border-top: 2px solid  var(--clock-count-down-bg-color,rgba(9, 54, 94, 1));
+            transform-origin: top;
+            border-bottom-left-radius: var(--time-segment-border-radius, 4px);
+            border-bottom-right-radius: var(--time-segment-border-radius, 4px);
+          }
+        }
+      }
+    }
+
+    &:first-of-type {
+      .time-name {
+        padding: 0 0 0 0;
+      }
+    }
+
+    .time-name {
+      padding: 0 0 0 10px;
+      margin: 8px 0 0 0;
+      font-size: 10px;
+      color: var(--pb-count-down-name-color, #FFF);
+    }
+  }
+}
+
+@keyframes flip-top {
+  0% {
+    transform: rotateX(0deg);
+  }
+
+  50%,
+  100% {
+    transform: rotateX(-90deg);
+  }
+}
+
+@keyframes flip-bottom {
+
+  0%,
+  50% {
+    transform: rotateX(90deg);
+  }
+
+  100% {
+    transform: rotateX(0deg);
+  }
+}

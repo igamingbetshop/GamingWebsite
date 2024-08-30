@@ -1,0 +1,56 @@
+<form [formGroup]="form" (ngSubmit)="submit(1)">
+    <div class="history-tools-panel">
+        <div class="history-tools">
+            <label>{{'User.Period-of-time' | translate}}</label>
+            <select formControlName="timeFilter">
+                <option *ngFor="let item of historyTimeFilter, let i = index" [ngValue]="i">
+                    {{item.Name | translate}}
+                </option>
+            </select>
+        </div>
+
+        <div *ngIf="customFilterShow" class="history-tools custom-tool">
+            <label>{{'User.From' | translate}}</label>
+            <input type="datetime-local" formControlName="changedate">
+        </div>
+
+        <div *ngIf="customFilterShow" class="history-tools custom-tool">
+            <label>{{'User.To' | translate}}</label>
+            <input type="datetime-local" formControlName="changetTodate">
+        </div>
+
+        <div class="history-tools">
+            <label></label>
+            <button class="craft_btn show-btn">{{'User.Show' | translate}}</button>
+        </div>
+    </div>
+</form>
+<table>
+    <tbody>
+    <tr>
+        <td><span>{{'User.Id' | translate}}</span></td>
+        <td><span>{{'User.UserId' | translate}}</span></td>
+        <td><span>{{'User.UserName' | translate}}</span></td>
+        <td><span>{{'User.Amount' | translate}}</span></td>
+        <td><span>{{'User.LastUpdateTime' | translate}}</span></td>
+    </tr>
+    <tr *ngFor="let item of getTransactionsService.transactionsReportList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getTransactionsService.transactionsReportListCount }, let i = index">
+        <td>{{item?.Id}}</td>
+        <td>{{item?.UserId}}</td>
+        <td>{{item?.UserName}}</td>
+        <td>{{ CurrencyId }} {{item?.Amount | number:'1.2-2'}}</td>
+        <td>{{item?.LastUpdateTime | date: 'dd/MM/yyyy HH:mm'}}</td>
+    </tr>
+    </tbody>
+</table>
+<div class="empty-bets empty-block" *ngIf="getTransactionsService.transactionsReportList.length == 0">
+    <section class="empty-bets empty-block">
+        <span class="icon-transactions icon"></span>
+        <span class="empty-block-text">{{'User.Transactions-empty' | translate}}</span>
+    </section>
+</div>
+<div class="pagination_section">
+    <pagination-controls previousLabel="{{'User.Previous' | translate}}" nextLabel="{{'User.Next' | translate}}"
+                         autoHide="true"
+                         (pageChange)="getTransactionsReport($event)"></pagination-controls>
+</div>

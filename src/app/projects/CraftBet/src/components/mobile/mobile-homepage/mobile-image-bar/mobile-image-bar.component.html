@@ -1,4 +1,6 @@
-<div class="title" [innerHTML]="'HomeMenu.' + fragmentConfig.Title | translate | sanitizer: 'html'"></div>
+@if (fragmentConfig.Config.titleVisibility){
+    <div class="title" [innerHTML]="fragmentConfig.Title | translate | sanitizer: 'html'"></div>
+}
 <ng-container [ngSwitch]="fragmentConfig.Config.type">
     <ng-container *ngSwitchCase="'horizontal'">
         <div class="image-bar horizontal"

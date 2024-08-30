@@ -10,7 +10,7 @@
     >
         <div class="flex_container">
             <div class="close_sidebar left-close-sidebar">
-                <div class="sidebar_heading"> {{'Header.Menu' | translate}}</div>
+                <div class="sidebar_heading" [innerHTML]="'Header.Menu' | translate | sanitizer: 'html'"></div>
                 <span class="icon-close-modal sidebar_heading_icon"></span>
                 <span class="icon-right-arrow sidebar_heading_icon"></span>
             </div>
@@ -53,24 +53,34 @@
                         </div>
 
                         <ul class="general-menu" [class.no-header]="generalMenuItems.length == 1">
-                            <li class="general-menu_item" *ngFor="let menuItem of menuHeading.SubMenu"
-                                (click)="clickInRoute(menuItem)">
-                                <a class="general-menu_item_link" *ngIf="menuItem?.OpenInRouting"
-                                   routerLinkActive="active-item">
-       								<ng-container *ngIf="menuItem?.Src; else menuItemIcon">
-                                        <img [src]="menuItem?.Src" alt="">
-                                    </ng-container>
-                                    <ng-template #menuItemIcon>
-                                        <i class="icon-{{menuItem?.Icon}}"></i>
-                                    </ng-template>
-                                    <span class="page-name"> {{'Header.' + menuItem?.Title | translate}}</span>
-                                </a>
-                                <a class="general-menu_item_link" *ngIf="!menuItem?.OpenInRouting" target="_blank"
-                                   href="{{menuItem.Href}}">
-                                    {{'Header.' + menuItem?.Title | translate}}
-                                </a>
-                                <fa-icon [icon]="faAngleRight" class="left-menu-arrow"></fa-icon>
-                            </li>
+                            @for(menuItem of menuHeading.SubMenu; track menuItem.Id)
+                            {
+                                @if(menuItem.Type)
+                                {
+                                    <spin-wheel-opener [menuItem]="menuItem"></spin-wheel-opener>
+                                }
+                                @else
+                                {
+                                    <li class="general-menu_item"
+                                        (click)="clickInRoute(menuItem)">
+                                        <a class="general-menu_item_link" *ngIf="menuItem?.OpenInRouting"
+                                           routerLinkActive="active-item">
+                                            <ng-container *ngIf="menuItem?.Src; else menuItemIcon">
+                                                <img [src]="menuItem?.Src" alt="">
+                                            </ng-container>
+                                            <ng-template #menuItemIcon>
+                                                <i class="icon-{{menuItem?.Icon}}"></i>
+                                            </ng-template>
+                                            <span class="page-name"> {{'Header.' + menuItem?.Title | translate}}</span>
+                                        </a>
+                                        <a class="general-menu_item_link" *ngIf="!menuItem?.OpenInRouting" target="_blank"
+                                           href="{{menuItem.Href}}">
+                                            {{'Header.' + menuItem?.Title | translate}}
+                                        </a>
+                                        <fa-icon [icon]="faAngleRight" class="left-menu-arrow"></fa-icon>
+                                    </li>
+                                }
+                            }
                         </ul>
                     </li>
                     <div class="left-sidebar-menu-bottom-img-part" [innerHTML]="'Header.Menu-bottom-img' | translate | sanitizer: 'html'">
@@ -80,8 +90,8 @@
             <div class="lang_container" (click)="openLanguageMenu($event)" [class.hide] = "hideLanguageDropdown">
                 <ul class="lang_list" #langContainerRef [hidden]="!showLanguageDropdown">
                     <li *ngFor="let lang of languages" (click)="changeLanguage(lang.key)" class="list_item"
-                        [ngClass]="{'selected-language': currentLang.key === lang?.key}">
-                        <div class="lang_item" *ngIf="currentLang.key !== lang?.key">
+                        [ngClass]="{'selected-language': currentLang?.key === lang?.key}">
+                        <div class="lang_item" *ngIf="currentLang?.key !== lang?.key">
                             <div
                                     [ngStyle]="{
                 'background-image':

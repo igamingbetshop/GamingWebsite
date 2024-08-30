@@ -1,7 +1,7 @@
 <button type="button" class="global_login-btn {{itemClassname}}-type-btn pointer" (click)="openLoginPopup($event)">
   <div class="global_login-btn_leftIcon" *ngIf="hasIcon"></div>
   {{'Login.Sign In' | translate}}
-<!--  <fa-icon *ngIf="hasIcon" [icon]="['fas', 'angle-right']" class="global_login-btn_rightIcon"></fa-icon>-->
+    <span class="hidden-login-text" [innerHTML]="'Login.SignIn-Icon' | translate | sanitizer: 'html'"></span>
   <ng-container *ngIf="menuItem?.Src; else menuItemIcon">
     <img [src]="menuItem?.Src" alt="">
   </ng-container>

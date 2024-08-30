@@ -35,6 +35,7 @@ export class BaseAffiliateComponent extends BaseComponent implements OnInit {
     public selectedTypeName;
     public affiliateDetails = false;
     public checkboxDetail = false;
+    public defaultOption: any;
 
     constructor(public injector: Injector) {
         super(injector);
@@ -43,7 +44,10 @@ export class BaseAffiliateComponent extends BaseComponent implements OnInit {
         this.utilityService = injector.get(UtilityService);
         this.translate = this.injector.get(TranslateService);
         this.configService = injector.get(ConfigService);
-        this.recaptchaV3Service = injector.get(ReCaptchaV3Service);
+        this.defaultOption = this.configService.defaultOptions;
+        if (this.defaultOption.IsReCaptcha) {
+            this.recaptchaV3Service = injector.get(ReCaptchaV3Service);
+        }
         const regex = new RegExp(this.configService.defaultOptions.PassRegEx);
         this.affiliateForm = this.fb.group({
             'FirstName': ['', [
@@ -81,12 +85,6 @@ export class BaseAffiliateComponent extends BaseComponent implements OnInit {
         this.affiliateForm.get('Password').valueChanges.subscribe(val => {
             val && this.affiliateForm.get('ConfirmPassword').updateValueAndValidity();
         });
-        if (this.configService.defaultOptions['IsReCaptcha']) {
-            this.subscriptions.push(this.recaptchaV3Service.execute('register').subscribe(token => {
-                this.affiliateForm.addControl('ReCaptcha', new FormControl(token));
-                console.log('recovery captcha key is :' + token);
-            }));
-        }
     }
 
     ngOnInit() {
@@ -95,6 +93,11 @@ export class BaseAffiliateComponent extends BaseComponent implements OnInit {
 
     submitAffiliate() {
         const value = this.affiliateForm.getRawValue();
+        if (this.defaultOption.IsReCaptcha) {
+            this.subscriptions.push(this.recaptchaV3Service.execute('register').subscribe(token => {
+                value.ReCaptcha = token;
+            }));
+        }
         value.MobileNumber = String(value.MobileNumber);
         delete value.ConfirmPassword;
         this.baseApiService.apiPost('', value, Methods.REGISTER_AFFILIATE, false).subscribe(data => {

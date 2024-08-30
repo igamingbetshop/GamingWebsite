@@ -1,0 +1,170 @@
+
+.fortuna
+{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+.container {
+  max-width: max-content;
+  height: 100%;
+}
+
+.board
+{
+  position: relative;
+  border-radius: 100%;
+  padding: 15px;
+  background: linear-gradient(88deg, #94CAFF 10%, #FFFFFF 20%, #94CAFF 30%, #94CAFF 30%, #426D99 80%, #7DACD9 100%);
+  .logo{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45px;
+    z-index: 999;
+  }
+}
+
+.wheel {
+  position: relative;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.dial {
+  height: 100%;
+  transition: all 10s ease-out;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+
+  &.spinning {
+    animation-duration: 10s;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    animation-name: fortuna-spinning;
+  }
+  &:before {
+    content: '';
+    text-align: center;
+    display: block;
+    line-height: 60px;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    background: white;
+    box-shadow: 0 0 5px 5px rgba(#000, .1);
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    border-radius: 100%;
+    z-index: 200;
+  }
+  .slice
+  {
+    z-index: 150;
+    position: absolute;
+    color: white;
+    display: block;
+    background-image: linear-gradient( #00007c 0%, #1717FF 30%, #389CFF 100%);
+
+    transform-origin: bottom;
+    left: 50%;
+    &.even
+    {
+      background-image: linear-gradient(#932d00 0%,#FF601A 30% ,#EFC929 100%);
+    }
+    .slice-content
+    {
+      position: relative;
+      top: 0; left: 0; bottom: 0; right: 0;
+      .label
+      {
+        position: absolute;
+        font-weight: 600;
+        font-size: 30px;
+        left: 50%;
+        transform: translate(-48%, 60px) rotate(270deg);
+        white-space: nowrap;
+        img{vertical-align: middle; transform: translateX(4px)}
+        .spin-name
+        {
+          display: inline-block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          width: calc(100% - 78px);
+        }
+      }
+    }
+  }
+}
+
+.arrow {
+  position: absolute;
+  height: 30px;
+  width: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  display: block;
+  top: 0px;
+}
+
+.spin-box
+{
+  width: 100%;
+  .spin-box-title
+  {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    background: linear-gradient(180deg, #FFB800 -22.73%, #FFD056 46.82%, #EC671C 72.73%, #FFB800 91.14%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  button {
+    background: #c27028;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    height: 64px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 20px 40px 20px 40px;
+    border-radius: 50px;
+    background: linear-gradient(97.27deg, #FFA31A 0%, #FF4D00 100%);
+    outline: none;
+    position: relative;
+    z-index: 1;
+    border: none;
+    &:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 100px;
+      border: 1px solid transparent;
+      background: var(--spin-button-border-color, linear-gradient(180deg, rgba(255, 191, 26, 0) 0%, #FFBF1A 100%) border-box);
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+    }
+  }
+}
+@media screen and (min-width: 0px) and (max-width: 1200px) {
+  .dial {
+    .slice .slice-content {
+      .label {
+        transform: translate(-48%, 34px) rotate(270deg);
+      }
+    }
+  }
+}

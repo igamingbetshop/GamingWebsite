@@ -5,6 +5,7 @@
   height: var(--modal-payment-frame-height, 500px);
   max-height: var(--modal-payment-frame-max-height, 500px);
   margin: var(--modal-payment-frame-margin, 0 auto)!important;
+  background-color: var(--modal-payment-frame-background, #ffffff);
   //top:50%;
   //transform: translateY(-50%)!important;
 
@@ -22,8 +23,8 @@
   }
 
   &.small-size {
-    width: 95%;
-    min-width: 95%;
+    width: var(--modal-payment-frame-small-width, 95%);
+    min-width: var(--modal-payment-frame-small-min-width, 95%);
   }
   iframe
   {

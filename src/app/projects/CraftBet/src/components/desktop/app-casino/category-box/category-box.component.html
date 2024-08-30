@@ -1,0 +1,10 @@
+@for(fragment of fragments?.Categories?.Items; track fragment.Id)
+{
+    <casino-category  class="{{fragment.Config.type}}"
+                      [position]="position"
+                      [style.margin-top.px]="fragment.Config.marginTop"
+                      [style.max-width.px]="fragment.Config.maxWidth"
+                      [fragmentConfig]="fragment">
+    </casino-category>
+}
+

@@ -21,7 +21,10 @@
                *ngFor="let ticket of ticketsList | paginate:{ itemsPerPage: 10, currentPage: page, totalItems: ticketsCount }; trackBy: trackByMethod, let i = index">
             <div class="messages-block_top_row">
               <div class="message-header messages-block_item">{{ticket.Id}}</div>
-              <div class="message-header messages-block_item">{{ticket.Status == 1 ? ('Settings.Active' | translate) : ('Settings.Closed' | translate)}}</div>
+              <div class="message-header messages-block_item">
+                  {{ticket.Status == 1 ? ('Settings.Active' | translate) : ('Settings.Closed' | translate)}}
+                  <span *ngIf="ticket?.UnreadMessagesCount > 0" class="unread-messages">{{ticket?.UnreadMessagesCount}}</span>
+              </div>
               <div class="message-header messages-block_item">{{ticket.Subject}}</div>
               <div class="message-header messages-block_item">{{ticket.CreationTime | date : 'HH:mm dd/MM/yyyy'}}</div>
               <div class="ticket-small messages-block_item">

@@ -44,6 +44,12 @@ import {DesktopModule} from "../desktop.module";
 import {NgxMaskDirective} from "ngx-mask";
 import {DropdownDirectiveModule} from "../../../../../../@theme/directives/dropdown/dropdown-directive.module";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {
+    AccountPageType2ClientsTransactionsComponent
+} from "./transactions/clients-transactions/account-page-type2-clients-transactions.component";
+import {
+    AccountPageType2AgentsTransactionsComponent
+} from "./transactions/agents-transactions/account-page-type2-agents-transactions.component";
 
 
 @NgModule({
@@ -84,7 +90,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
         GlobalLogoutModule,
         CollapseDirectiveModule,
         DesktopModule,
-        DropdownDirectiveModule
+        DropdownDirectiveModule,
+        AccountPageType2ClientsTransactionsComponent,
+        AccountPageType2AgentsTransactionsComponent
     ],
   providers:[
     GetSettingsService,

@@ -1,10 +1,14 @@
 import {Component, Injector } from '@angular/core';
 import {UserAccountStatmentComponent} from "../../../../../../../@theme/components";
 import {DefaultService} from "@core/services";
+import {CommonModule} from "@angular/common";
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-account-page-type1-statement',
-  templateUrl: './account-page-type1-statement.component.html'
+  templateUrl: './account-page-type1-statement.component.html',
+  standalone: true,
+  imports: [CommonModule, TranslateModule]
 })
 export class AccountPageType1StatementComponent extends UserAccountStatmentComponent{
 

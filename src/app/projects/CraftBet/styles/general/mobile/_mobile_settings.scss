@@ -6,12 +6,21 @@
   color: color(m-settings-field-label);
   margin-top: var(--m-user-views-margin-top, 62px);
   margin-bottom: var(--m-user-views-margin-bottom, 0px);
-  min-height: var(--m-settings-min-height, calc(100vh - 62px));
+  min-height: var(--m-settings-min-height, calc(100vh - 130px));
   background: color(m-user-views-background);
   .account-verification{
     padding: var(--m-account-verification-section-padding, 0);
     width: var(--m-account-verification-section-width, 95%);
+    background: var(--m-account-verification-section-background, var(--account-main-bg-color, #213454));
     margin: var(--m-account-verification-section-margin, 0 auto) !important;
+    form {
+      .mobile-upload-doc-row {
+        margin: var(--m-upload-document-row-margin, 8px auto);
+        width: var(--m-upload-document-row-width, 90%);
+        float: var(--m-change-password-form-row-float, none);
+        position: relative;
+      }
+    }
   }
   .mobile-self-limitation_edit {
     width: var(--m-self-limit-edit-btn-width, 93%);
@@ -56,10 +65,11 @@
   }
   &_title {
     text-align: center;
-    font-size: var(--m-user-views-title-font-size, 24px);
+    font-size: var(--m-user-views-title-font-size, 20px);
     font-weight: var(--m-user-views-title-font-weight, normal);
     color: color(m-user-views-title);
     margin-top: var(--m-user-views-title-margin-top, 64px);
+    margin-bottom: var(--m-user-views-title-margin-bottom, 18px);
     padding-top: var(--m-user-views-title-padding-top, 0);
     padding-bottom: var(--m-user-views-title-padding-bottom, 0);
     background: var(--m-user-views-title-background, unset);
@@ -193,8 +203,8 @@
   .m-change-password_form{
     width: 100%;
     label {
-      color: itemColor(change-password-input-label, #fff);
-      position: absolute;
+      color: var(--m-change-password-input-label-color, var(--change-password-input-label-color, #fff));
+      position: var(--m-change-password-input-label-position, absolute);
       top: itemTop(m-change-password-input-label, 8px);
       left: itemLeft(change-password-input-label, 8px);
       height: height(change-password-input-label, 25px);
@@ -226,10 +236,10 @@
     }
     input:focus ~ label,
     input:not(:placeholder-shown) ~ label {
-      transform: var(--change-password-label-transform, translateY(-29px) translateX(10px) scale(0.75));
+      transform: var(--m-change-password-label-transform, var(--change-password-label-transform, translateY(-29px) translateX(10px) scale(0.75)));
       background-color: var(--change-password-background-color-focus-label-focused, unset);
       height: var(--change-password-label-focused-height, 20px);
-      font-size: var(--change-password-font-size-label, 20px);
+      font-size: var(--m-change-password-font-size-label, var(--change-password-font-size-label, 20px));
       color: var(--change-password-focus-label-focused, #fff);
       text-align: var(--change-password-focus-label-focused-text-align, left);
       width: width(change-password-input-field-label, auto);
@@ -270,9 +280,11 @@
     }
     .self-tab-bar_item:first-child {
       color: var(--self-tab-bar-first-item-color, #C2394B);
+      border: var(--m-self-tab-bar-first-item-border, none);
     }
     .self-tab-bar_item:last-child {
       color: var(--self-tab-bar-last-item-color, #ffffff);
+      border: var(--m-self-tab-bar-last-item-border, none);
     }
     .self-tab-bar_item:hover {
       color: var(--self-tab-bar-item-hover-color, unset);
@@ -518,7 +530,8 @@
     margin: var(--m-settings-verification-table-margin, 15px auto);
 
     thead {
-      background: var(--settings-table-row-background-color);
+      background: var(--m-settings-verification-table-head-background, var(--settings-table-row-background-color));
+      color: var(--m-settings-verification-table-head-color, var(--settings-table-row-color, #fff));
       margin-bottom: 2px;
       height: height(settings-table-row, 30px);
       tr {
@@ -592,7 +605,7 @@
       border-radius: var(--history-info-account-status-border-radius, 0);
       margin-top: var(--m-history-info-account-status-margin-top, 0);
       padding: var(--m-history-info-account-status-padding, 0);
-      width: 100%;
+      width: var(--m-history-info-account-status-width, 100%);
       gap: 3px;
       .item-status{
         margin: var(--history-info-account-status-margin, 0);
@@ -621,7 +634,9 @@
     @include m-common-button;
     color: var(--m-profile-settings-edit-btn-color, $account-settings-btn);
     white-space: nowrap;
-    margin: 16px 0;
+    margin: var(--m-profile-settings-edit-btn-margin, 16px 0);
+    height: var(--m-profile-settings-edit-btn-height, 44px);
+    line-height: var(--m-profile-settings-edit-btn-line-height, 44px);
     font-size: var(--m-change-password-btn-font-size, 16px);
     outline: none;
   }
@@ -822,7 +837,7 @@
       padding: 0 7px;
 
       &:not(.choose_input), &:not(.mobile_settings_change_name) {
-        border: 1px solid #929292;
+        border: var(--m-account-verify-select-border, 1px solid #929292);
         color: var(--m-account-verify-select-color, rgba(255, 255, 255, 0.6));
         background: var(--m-account-verify-select-background, transparent);
       }

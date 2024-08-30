@@ -4,38 +4,50 @@
     <form [formGroup]="form" (ngSubmit)="submit(1)">
       <div class="history-tools history-tools-field">
         <select formControlName="timeFilter">
-          <option *ngFor="let item of historyTimeFilter; let i = index" [ngValue]="i">
-            {{item.Name | translate}}
-          </option>
+            @for( item of historyTimeFilter; let i = $index; track i)
+            {
+                <option [ngValue]="i">
+                    {{item.Name | translate}}
+                </option>
+            }
         </select>
         <label>{{'User.Period-of-time' | translate}}</label>
       </div>
 
-      <div *ngIf="customFilterShow" class="history-tools custom-tool">
-        <input type="datetime-local" formControlName="changedate">
-        <label>{{'User.From' | translate}}</label>
-      </div>
+        @if(customFilterShow)
+        {
+            <div class="history-tools custom-tool">
+                <input type="datetime-local" formControlName="changedate">
+                <label>{{'User.From' | translate}}</label>
+            </div>
 
-      <div *ngIf="customFilterShow" class="history-tools custom-tool">
-        <input type="datetime-local" formControlName="changetTodate">
-        <label>{{'User.To' | translate}}</label>
-      </div>
+            <div class="history-tools custom-tool">
+                <input type="datetime-local" formControlName="changetTodate">
+                <label>{{'User.To' | translate}}</label>
+            </div>
+        }
 
       <div class="history-tools history-tools-field">
         <select formControlName="operationFilter"
                 [ngClass]="{'disable_item': getBetsHistoryService.betStatuses.length <= 0}">
-          <option *ngFor="let item of getBetsHistoryService.betStatuses; let i = index" [ngValue]="item.Value">
-            {{item?.Name}}
-          </option>
+            @for (item of getBetsHistoryService.betStatuses; let i = $index; track item.Value)
+            {
+                <option [ngValue]="item.Value">
+                    {{item?.Name}}
+                </option>
+            }
         </select>
         <label>{{'User.Status' | translate}}</label>
       </div>
 
       <div class="history-tools history-tools-field">
         <select formControlName="productId">
-          <option *ngFor="let product of products" [ngValue]="product.Id">
-            {{product.Name}}
-          </option>
+            @for ( product of products; track product.Id)
+            {
+                <option [ngValue]="product.Id">
+                    {{product.Name}}
+                </option>
+            }
         </select>
         <label>{{'User.Products' | translate}}</label>
       </div>

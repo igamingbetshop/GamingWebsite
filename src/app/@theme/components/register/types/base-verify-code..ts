@@ -293,6 +293,7 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
 
     private verifyCode()
     {
+        console.log(this.type);
         switch (this.type)
         {
             case 'mobile':
@@ -345,6 +346,11 @@ export class BaseVerifyCode implements OnInit, OnDestroy, ControlValueAccessor
                         email = this.prevFormGroup.get('Email').value
                     }
                     const code = this.model1 + this.model2 + this.model3 + this.model4 + this.model5 + this.model6;
+                    // this.baseApiService.apiRequest({
+                    //     Key:code,
+                    //     Email: email,
+                    //     Type:this.verificationCodeType
+                    // }, Controllers.CLIENT, Methods.VERIFY_CLIENT_EMAIL, true).pipe(take(1)).subscribe(data => {
                     this.baseApiService.apiRequest({
                         Code:code,
                         Email: email,

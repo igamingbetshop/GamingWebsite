@@ -7,6 +7,7 @@ import {FilterMobileCodePipeModule} from "../../../../../../../../../@theme/pipe
 import {OnlyNumberDirectiveModule} from "../../../../../../../../../@theme/directives/only-number/only-number.directive.module";
 import {DropdownDirectiveModule} from "../../../../../../../../../@theme/directives/dropdown/dropdown-directive.module";
 import {NgxMaskDirective} from "ngx-mask";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {NgxMaskDirective} from "ngx-mask";
         FilterMobileCodePipeModule,
         OnlyNumberDirectiveModule,
         NgxMaskDirective,
-        DropdownDirectiveModule
+        DropdownDirectiveModule,
+        FaIconComponent
     ],
     exports: [
         SendCodeComponent

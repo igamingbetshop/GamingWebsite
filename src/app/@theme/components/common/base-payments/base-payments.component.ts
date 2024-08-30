@@ -9,18 +9,18 @@ import {BaseInfoBlockComponent} from "../../modals/base-info-block/base-info-blo
 import {BetsService} from "@core/services/app/bets.services";
 import {format} from "date-fns";
 import {UtilityService} from "@core/services/app/utility.service";
-import * as moment from "moment/moment";
 import {MatDialog} from "@angular/material/dialog";
+import {AccountsFilterStateService} from "@core/services/app/accounts-filter-state.service";
 
 @Directive()
 
 export class BasePaymentsComponent extends BaseComponent {
   public historyTimeFilter: Array<any> = [
-    {"Id": 0, "Name": "Filter_Period.24 hours"},
-    {"Id": 1, "Name": "Filter_Period.3 days"},
-    {"Id": 2, "Name": "Filter_Period.7 days"},
-    {"Id": 3, "Name": "Filter_Period.1 month"},
-    {"Id": 4, "Name": "Filter_Period.Custom"}
+    {"Name": "Filter_Period.24 hours"},
+    {"Name": "Filter_Period.3 days"},
+    {"Name": "Filter_Period.7 days"},
+    {"Name": "Filter_Period.1 month"},
+    {"Name": "Filter_Period.Custom"}
   ];
 
   public paymentsFilter = [
@@ -62,8 +62,9 @@ export class BasePaymentsComponent extends BaseComponent {
   public translate: TranslateService;
   public paymentControllerService: PaymentControllerService;
   dialog = inject(MatDialog);
-  public utilityService: UtilityService;
-  public configService: ConfigService;
+  utilityService: UtilityService;
+  configService: ConfigService;
+  private accountsFilterStateService:AccountsFilterStateService;
 
   constructor(public injector: Injector) {
     super(injector);
@@ -77,11 +78,12 @@ export class BasePaymentsComponent extends BaseComponent {
     this.utilityService = injector.get(UtilityService);
     this.configService = injector.get(ConfigService);
     this.allowCancelConfirmedWithdraw = this.configService.defaultOptions.AllowCancelConfirmedWithdraw;
+    this.accountsFilterStateService = injector.get(AccountsFilterStateService);
 
     this.form = this.fb.group({
-      timeFilter: [this.historyTimeFilter[0]],
-      type: [null, []],
-      status: [this.paymentsFilter[0]]
+      timeFilter: this.accountsFilterStateService.getState("payments")["timeFilterIndex"],
+      type:  this.accountsFilterStateService.getState("payments")["type"],
+      status: this.accountsFilterStateService.getState("payments")["status"],
     });
   }
 
@@ -91,36 +93,28 @@ export class BasePaymentsComponent extends BaseComponent {
     this.CurrencyId = userData ? userData.CurrencyId : '';
     this.getPaymentsService.getPaymentsTypesList();
 
-    if (this.getPaymentsService.paymentTypesList.length > 0) {
-      this.getPaymentData(1);
-    } else {
-      let subscription = this.getPaymentsService.notifyGetPaymentTypesList$.subscribe(() => {
-        this.getPaymentData(1);
-        subscription.unsubscribe();
-      });
-
-
-    }
-
     this.getPaymentsService.notifyGetCancelPaymentMessage$.subscribe((data) => {
       this.getPaymentData(this.page);
       this.paymentControllerService.getUserAccountData();
     });
 
-    this.form.get('timeFilter').valueChanges.subscribe((data) => {
-      this.historyTimeFilterIndex = data;
-      if (data.Id == (this.historyTimeFilter.length - 1)) {
+    this.form.get('timeFilter').valueChanges.subscribe((value) => {
+      this.historyTimeFilterIndex = value;
+      if (value == (this.historyTimeFilter.length - 1)) {
         this.customFilterShow = true;
         const date = new Date();
         date.setDate(date.getDate() - 1);
-        this.form.addControl('changedate', new FormControl(moment(new Date()).subtract(2, 'days').format('YYYY-MM-DDTHH:mm')));
-        this.form.addControl('changetTodate', new FormControl( moment(new Date()).format('YYYY-MM-DDTHH:mm')));
+        this.form.addControl('changedate', new FormControl(this.accountsFilterStateService.getState("payments")["fromDate"]));
+        this.form.addControl('changetTodate', new FormControl(this.accountsFilterStateService.getState("payments")["toDate"]));
       } else {
         this.customFilterShow = false;
         this.form.removeControl('changedate');
         this.form.removeControl('changetTodate');
       }
     });
+    this.form.get('timeFilter').setValue(this.accountsFilterStateService.getState("payments")["timeFilterIndex"]);
+    this.form.get('status').setValue(this.accountsFilterStateService.getState("payments")["status"]);
+    this.getPaymentData(1);
   }
 
   public onDateSelect() {
@@ -134,17 +128,9 @@ export class BasePaymentsComponent extends BaseComponent {
     }
   }
 
-  public getCreationDate(input?) {
-    const index = typeof input === 'object' ? input.Id : input;
-
-    if (index !== 4) {
-      this.historyFilter['CreatedFrom'] = this.betsService.getCreatedFrom(index);
-      this.historyFilter['CreatedBefore'] = this.betsService.getCreatedBefore();
-    } else {
-      this.historyFilter['CreatedFrom'] = this.form.get('changedate').value;
-      this.historyFilter['CreatedBefore'] = this.form.get('changetTodate').value;
-    }
-
+  public getCreationDate(index) {
+    this.historyFilter['CreatedFrom'] = this.betsService.getCreatedFrom(index);
+    this.historyFilter['CreatedBefore'] = this.betsService.getCreatedBefore();
   }
 
   public canselPayment(paymentId) {
@@ -161,13 +147,33 @@ export class BasePaymentsComponent extends BaseComponent {
 
   public getPaymentData(page) {
     this.page = page;
-    !this.filterChanged && this.getCreationDate(this.form.getRawValue().timeFilter);
     const formValue = this.form.getRawValue();
+
+    if (!this.customFilterShow)
+      this.getCreationDate(formValue.timeFilter);
+    else {
+      this.historyFilter['CreatedFrom'] = this.form.get('changedate').value;
+      this.historyFilter['CreatedBefore'] = this.form.get('changetTodate').value;
+    }
+
+    const state:any = {timeFilterIndex:formValue.timeFilter,
+      type:formValue.type,
+      status:formValue.status || 0};
+
+    if(this.customFilterShow)
+    {
+      state.fromDate = this.historyFilter['CreatedFrom'];
+      state.toDate = this.historyFilter['CreatedBefore'];
+    }
+
+    this.accountsFilterStateService.setState("payments", state);
+
+
     const input = {
       createdFrom: this.historyFilter['CreatedFrom'],
       createdBefore: this.historyFilter['CreatedBefore'],
-      status: formValue['status']['Statuses'],
-      type: formValue['type'] == null ? null : formValue['type'],
+      status: this.paymentsFilter.find(p => p.Id === formValue.status).Statuses,
+      type: formValue['type'],
       page: page - 1,
       takeCount: this.takeCount
     };

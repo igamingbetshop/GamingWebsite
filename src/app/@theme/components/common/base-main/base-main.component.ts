@@ -241,14 +241,21 @@ export class BaseMainComponent implements OnInit {
         if (!this.userLogined.isAuthenticated)
         {
             let urlParams = getParsedUrl(window.location.href);
-            let isAffiliateData = urlParams.hasOwnProperty("ReferenceCode") ||
-                urlParams.hasOwnProperty("BonusCode") ||
-                urlParams.hasOwnProperty("clickid") ||
-                urlParams.hasOwnProperty("stag") ||
-                urlParams.hasOwnProperty("btag") ||
-                urlParams.hasOwnProperty("sourceid") ||
-                urlParams.hasOwnProperty("AgentCode") ||
-                urlParams.hasOwnProperty("AffiliatePlatformId");
+
+            const affiliateKeys = [
+                "ReferenceCode",
+                "BonusCode",
+                "clickid",
+                "stag",
+                "btag",
+                "sourceid",
+                "AgentCode",
+                "AffiliatePlatformId",
+                "P",
+                "C"
+            ];
+            let isAffiliateData = affiliateKeys.some(key => urlParams.hasOwnProperty(key));
+
             if(isAffiliateData)
             {
                 this.localStorageService.add('AffiliateData', JSON.stringify(urlParams));
@@ -261,14 +268,7 @@ export class BaseMainComponent implements OnInit {
                 this.savedData.registerReferalData = urlParams;
                 let url = new URL(window.location.href);
                 let params:any = new URLSearchParams(url.search);
-                params.delete('ReferenceCode');
-                params.delete('BonusCode');
-                params.delete('clickid');
-                params.delete('stag');
-                params.delete('btag');
-                params.delete('sourceid');
-                params.delete('AgentCode');
-                params.delete('AffiliatePlatformId');
+                affiliateKeys.forEach(key => params.delete(key));
                 url.search = params;
                 history.pushState({}, null, url);
             }
@@ -347,7 +347,7 @@ export class BaseMainComponent implements OnInit {
     private initialNavigation()
     {
         const productUrl = localStorage.getItem('product-url');
-        const returnedUrl = this.configService.defaultOptions.RedirectUrl;
+        const returnedUrl = this.configService.defaultOptions.AfterLoginUrl;
 
         this.router.navigateByUrl(productUrl ? productUrl : returnedUrl);
         localStorage.removeItem('product-url');

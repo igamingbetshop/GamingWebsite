@@ -18,3 +18,9 @@
   position: var(--header-reg-btn-icon-position, relative);
   top: var(--header-reg-btn-icon-top, 3px);
 }
+.hidden-register-text {
+  display: var(--header-reg-btn-custom-icon-display, none);
+  position: var(--header-reg-btn-custom-icon-position, relative);
+  width: var(--header-reg-btn-custom-icon-width, 100%);
+  height: var(--header-reg-btn-custom-icon-height, auto);
+}

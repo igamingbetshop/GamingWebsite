@@ -5,7 +5,7 @@
             <div class="payment-form-field">
 
                 <div class="payment-form-field__column">
-                    <div class="payment-form-field__column">
+                    <div class="payment-form-field__column all-amount">
                         <input *ngIf="!nominals; else nominalsRef" type="text" class="payment-input"
                                placeholder="{{'Withdraw.Amount-placeholder' | translate}}"
                                formControlName="Amount" numbersOnly/>

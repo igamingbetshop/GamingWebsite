@@ -2,6 +2,7 @@ import {AfterViewInit, Directive, ElementRef, Injector, OnDestroy, OnInit, ViewC
 import {UtilityService} from "../../../../../@core/services/app/utility.service";
 import {FormControl} from "@angular/forms";
 import {BaseType} from "../base/base-type";
+import {SharedService} from "@core/services";
 
 @Directive()
 export class BaseBirthDate extends BaseType implements OnInit, AfterViewInit, OnDestroy
@@ -21,13 +22,16 @@ export class BaseBirthDate extends BaseType implements OnInit, AfterViewInit, On
         },
         Year: 0
     };
+    public rightToLeftOrientation: boolean = false;
 
     utilityService: UtilityService;
+    public sharedService: SharedService;
 
     constructor(protected injector:Injector)
     {
         super(injector);
         this.utilityService = injector.get(UtilityService);
+        this.sharedService = injector.get(SharedService);
     }
 
     ngOnInit()
@@ -50,6 +54,9 @@ export class BaseBirthDate extends BaseType implements OnInit, AfterViewInit, On
         this.date.Day = d.getDate();
         this.date.Month.Id = d.getMonth() + 1;
         this.date.Year = (d.getFullYear() < this.years[this.years.length - 1]) ? this.years[this.years.length - 1] : d.getFullYear();
+        this.sharedService.rightToLeftOrientation.subscribe((responseData) => {
+            this.rightToLeftOrientation = responseData;
+        });
     }
 
     private addControls()

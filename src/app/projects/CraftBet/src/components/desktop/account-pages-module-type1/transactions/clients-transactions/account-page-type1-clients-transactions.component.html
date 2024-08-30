@@ -1,0 +1,94 @@
+<div class="history-tools-panel">
+    <form [formGroup]="form" (ngSubmit)="submit(1)" class="transactions-form">
+        <div class="history-tools history-tools-field">
+            <select formControlName="timeFilter">
+                <option *ngFor="let item of historyTimeFilter; let i = index" [ngValue]="i">
+                    {{ item.Name | translate }}
+                </option>
+            </select>
+            <label>{{ 'User.Period-of-time' | translate }}</label>
+        </div>
+
+        <div *ngIf="customFilterShow" class="history-tools custom-tool">
+            <input type="datetime-local" formControlName="changedate">
+            <label>{{ 'User.From' | translate }}</label>
+        </div>
+
+        <div *ngIf="customFilterShow" class="history-tools custom-tool">
+            <input type="datetime-local" formControlName="changetTodate">
+            <label>{{ 'User.To' | translate }}</label>
+        </div>
+
+
+        <div class="history-tools history-tools-field">
+            <select formControlName="operationFilter"
+                    [ngClass]="{'disable_item': getTransactionsService.operationTypes.length <= 0}">
+                <option *ngFor="let item of getTransactionsService.operationTypes; let i = index" [ngValue]="item?.Id">
+                    {{ item?.Name }}
+                </option>
+            </select>
+            <label>{{ 'User.Type' | translate }}</label>
+        </div>
+
+        <div class="history-tools show-custom-btn">
+            <label></label>
+            <button class="craft_btn show-btn">{{ 'User.Show' | translate }}</button>
+        </div>
+    </form>
+</div>
+
+
+<!--  <table>-->
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--      <td>{{'User.Date' | translate}}</td>-->
+<!--      <td>{{'User.BetId' | translate}}</td>-->
+<!--      <td>{{'User.Type' | translate}}</td>-->
+<!--      <td>{{'User.Amount' | translate}}</td>-->
+<!--    </tr>-->
+<!--    <tr-->
+<!--      *ngFor="let item of getTransactionsService.transactionsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getTransactionsService.transactionsListCount }, let i = index">-->
+<!--      <td>{{item?.CreationTime | date: 'dd/MM/yyyy h:mm'}}</td>-->
+<!--      <td>{{item?.DocumentId}}</td>-->
+<!--      <td>{{item?.OperationTypeName}}</td>-->
+<!--      <td>{{item?.Amount | number}}</td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+
+<div class="transactions-block-head block-head">
+    <div>{{ 'User.Date' | translate }}</div>
+    <div>{{ 'User.BetId' | translate }}</div>
+    <div>{{ 'User.Type' | translate }}</div>
+    <div>{{ 'User.AccountTypeName' | translate }}</div>
+    <div>{{ 'User.Amount' | translate }}</div>
+</div>
+<ng-container *ngIf="getTransactionsService.transactionsList.length > 0; else emptyTransactions">
+    <section>
+        <div class="bets-content"
+             *ngFor="let item of getTransactionsService.transactionsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getTransactionsService.transactionsListCount }, let i = index">
+            <div class="transactions-block block">
+                <div class="transactions-block_item block_item">{{ item?.CreationTime | date: 'dd/MM/yyyy HH:mm' }}</div>
+                <div class="transactions-block_item block_item">{{ item?.DocumentId }}</div>
+                <div class="transactions-block_item block_item">{{ item?.OperationTypeName }}</div>
+                <div class="transactions-block_item block_item">{{ item?.AccountTypeName }}</div>
+                <div class="transactions-block_item block_item">{{ CurrencyId }} {{ item?.Amount | number:'1.2-2' }}</div>
+            </div>
+        </div>
+        <div class="pagination_section">
+            <pagination-controls previousLabel="{{'User.Previous' | translate}}" nextLabel="{{'User.Next' | translate}}"
+                                 autoHide="true"
+                                 (pageChange)="getTransactionsHistory($event)"></pagination-controls>
+        </div>
+    </section>
+</ng-container>
+<ng-template #emptyTransactions>
+    <section class="empty-transactions empty-block">
+        <span class="icon-transactions icon"></span>
+        <span class="empty-block-text">{{ 'User.Transactions-empty' | translate }}</span>
+        <span class="empty-history-text">{{ noHistory }}</span>
+    </section>
+</ng-template>
+
+
+<!--  <loader></loader>-->

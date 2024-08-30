@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import {Subject} from "rxjs";
 import {ConfigService, LocalStorageService} from "@core/services";
+import {User} from "@core/models";
 
 @Injectable()
 export class SignalRService {
@@ -41,8 +42,10 @@ export class SignalRService {
     init() {
         const timeZone = this.configService.timeZone;
         const lang = localStorage.getItem('lang') || this.configService.defaultOptions.DefaultLanguage;
-        const token = this.localStorageService.get("user")?.Token ? this.localStorageService.get("user").Token : '';
-        const socketQueryString = `/basehub?PartnerId=${this.configService.defaultOptions["PartnerId"]}&Token=${token}&LanguageId=${lang}&TimeZone=${timeZone}`;
+        const user:User = this.localStorageService.get("user");
+        const token = user && user.Token || "";
+        const isAgent = user && user.IsAgent || "";
+        const socketQueryString = `/basehub?PartnerId=${this.configService.defaultOptions["PartnerId"]}&Token=${token}&LanguageId=${lang}&TimeZone=${timeZone}&IsAgent=${isAgent}`;
 
         this.connection = new signalR.HubConnectionBuilder()
             .configureLogging(signalR.LogLevel.Information)

@@ -30,7 +30,7 @@ export class MobileSignupComponent extends BaseRegisterDynamicFieldsComponent {
       if (this.mobileLoginPreviousState) {
         this.router.navigateByUrl(this.mobileLoginPreviousState);
       } else {
-        this.router.navigateByUrl('/' + this.configService.defaultOptions.HomePageType);
+        this.router.navigateByUrl('/' + this.configService.defaultOptions.HomePageUrl);
       }
   }
 

@@ -5,10 +5,10 @@
   h2
   {
     color: var(--m-map-title-color,#000);
-    font-size: 20px;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-align: center;
+    font-size: var(--m-map-title-font-size, 20px);
+    font-weight: var(--m-map-title-font-weight, 700);
+    text-transform: var(--m-map-title-text-transform, uppercase);
+    text-align: var(--m-map-title-text-align, center);
     z-index: 1;
     width: 100%;
     height: fit-content;
@@ -214,8 +214,8 @@
       height: fit-content;
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
+      //flex-wrap: wrap;
+      //justify-content: center;
       gap: var(--m-character-hierarchy-content-item-gap,13px);
       width:var(--m-character-hierarchy-content-width, 100%);
       min-height: unset;
@@ -233,6 +233,7 @@
           border-radius: 6px;
           width: 100%;
           height: 100%;
+          min-width: var(--m-character-hierarchy-item-level-min-width, 350px);
 
           .level-item{
             top: 0;

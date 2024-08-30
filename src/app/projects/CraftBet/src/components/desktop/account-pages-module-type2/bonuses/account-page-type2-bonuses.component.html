@@ -1,9 +1,12 @@
 <div class="bonuses-section history-section">
     <div class="bonus-tab-bar">
         <div class="bonus-tab-bar_top">
-            <div class="bonus-tab-bar_item" *ngFor="let tab of tabs" (click)="selectTab(tab)"
-                 [ngClass]="{'active':selectedTab.Title == tab.Title}">{{'User.' + tab.Title | translate}}
-            </div>
+            @for(tab of tabs; track $index)
+            {
+                <div class="bonus-tab-bar_item" (click)="selectTab(tab)"
+                     [ngClass]="{'active':selectedTab.Title == tab.Title}">{{'User.' + tab.Title | translate}}
+                </div>
+            }
         </div>
 
         <div class="filter-panel">
@@ -58,6 +61,13 @@
                                 <button type="button" class="info-btn"
                                         (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
                             </div>
+                            @if(bonus.Collect)
+                            {
+                                <div>
+                                    <button type="button" class="info-btn"
+                                            (click)="collect(bonus);">{{'User.Collect' | translate}}</button>
+                                </div>
+                            }
                             <div class="delete-icon">
                                 <fa-icon [icon]="['fas', 'trash-alt']" (click)="deleteBonus(bonus, $event)" [ngStyle]="{'visibility' : (bonus?.StatusId === 1 && bonus?.TypeIdActive) ? 'visible' : 'hidden'}"></fa-icon>
                             </div>

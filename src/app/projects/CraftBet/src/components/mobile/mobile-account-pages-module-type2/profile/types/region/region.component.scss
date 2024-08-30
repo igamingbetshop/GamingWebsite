@@ -54,9 +54,9 @@
   }
 
   label {
-    color: var(--settings-input-label-color, #fff);
+    color: var(--m-settings-input-label-color, var(--settings-input-label-color, #fff));
     position: absolute;
-    top: var(--settings-input-label-top, 20px);
+    top: var(--m-settings-input-label-top, 19px);
     left: var(--settings-input-label-left, 8px);
     height: var(--settings-input-label-height, 25px);
     transform-origin: 0 50%;
@@ -97,7 +97,7 @@
     background-color: var(--settings-background-color, unset);
     height: var(--settings-label-focused-height, 22px);
     font-size: var(--settings-font-size-label, 16px);
-    color: var(--settings-focus-label-focused, #fff);
+    color: var(--m-settings-profile-label-focused-color, var(--settings-focus-label-focused, #fff));
     text-align: var(--settings-focus-label-focused-text-align, left);
     width: var(--settings-focus-label-focused-width, auto);
     padding-left: var(--settings-padding-left-focus-label-focused, 5px);
@@ -107,9 +107,9 @@
   select:focus ~ label,
   select:not([value=""]):valid ~ label {
     transform: var(--m-settings-profile-label-transform, translateY(-31px) translateX(-10px) scale(0.75));
-    top: var(--register-focused-select-label-top, 20px);
-    font-size: var(--register-focused-label-font-size, 16px);
-    color: var(--settings-focus-label-focused, #fff);
+    top: var(--m-settings-label-top, 19px);
+    font-size: var(--settings-font-size-label, 16px);
+    color: var(--m-settings-profile-label-focused-color, var(--settings-focus-label-focused, #fff));
     background-color: var(--settings-background-color-focus-label-focused, unset);
     padding-left: var(--settings-padding-left-focus-label-focused, 5px);
     padding-right: var(--settings-padding-right-focus-label-focused, 10px);
@@ -118,7 +118,7 @@
   input, select {
     &:not(.choose_input) {
       //border: 1px solid $border-color;
-      color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
+      color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6)));
       font-size: var(--settings-field-font-size, 16px);
       text-indent: 0;
       padding-left: 16px;
@@ -133,7 +133,7 @@
   }
 
   ::placeholder {
-    color: var(--settings-field-color, rgba(255, 255, 255, 0.6)) !important;
+    color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6))) !important;
   }
 
   input, .mobile_verify, > select {

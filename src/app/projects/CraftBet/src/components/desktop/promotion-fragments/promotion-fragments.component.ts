@@ -10,11 +10,12 @@ import {AppConfirmComponent} from "../app-confirm/app-confirm.component";
 import {MobilePromotionFragmentComponent} from "../../mobile/mobile-promotion/mobile-promotion-fragment.component";
 import {PromotionContentComponent} from "./promotion-content/promotion-content.component";
 import {Promotion} from "@core/models";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-promotion-fragments',
   standalone: true,
-  imports: [CommonModule, PromotionFragmentComponent, SlickCarouselModule, SanitizerModule, TranslateModule, RouterModule, MobilePromotionFragmentComponent, PromotionContentComponent],
+  imports: [CommonModule, PromotionFragmentComponent, SlickCarouselModule, SanitizerModule, TranslateModule, RouterModule, MobilePromotionFragmentComponent, PromotionContentComponent, FaIconComponent],
   templateUrl: './promotion-fragments.component.html',
   styleUrls: ['./promotion-fragments.component.scss']
 })
@@ -58,6 +59,7 @@ export class PromotionFragmentsComponent extends BasePromotionFragments{
         promotion.Date = data.date;
         promotion.ImageName = data.image;
         promotion.Type = data.type;
+        promotion.Style = fragment.Style;
         this.dialog.open(PromotionContentComponent, {data:promotion});
       });
     }
