@@ -29,7 +29,7 @@
       transition: transform 250ms;
       &:hover
       {
-        transform: scale(var(--fragment-image-bar-scale, 1.1));
+        transform: var(--fragment-image-bar-transform, scale(var(--fragment-image-bar-scale, 1.1)));
       }
     }
     &.icon
@@ -41,10 +41,11 @@
       width: 100%;
       max-width: 100%;
       border-radius: inherit;
+      height: inherit
     }
     .image-bar-title
     {
-      top: 50%;
+      top: var(--fragment-image-bar-title-top, 50%);
       color: itemColor(fragment-image-bar-title, white);
       font-size: fontSize(fragment-image-bar-title, 30px);
       right: itemRight(fragment-image-bar-title, 7px);

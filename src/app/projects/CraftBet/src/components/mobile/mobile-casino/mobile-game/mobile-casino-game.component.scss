@@ -128,7 +128,7 @@
 
   &.has-game-name {
     .icon-user-info {
-      right: 10px;
+      right: var(--m-casino-game-has-game-info-icon-right, 10px);
     }
 
     .icon-layer {
@@ -143,7 +143,7 @@
     }
 
     .game-img {
-      height: calc(100% - 52px);
+      height: var(--m-casino-game-has-game-img-height, calc(100% - 52px));
     }
 
     .show-hovered-game-names {
@@ -302,10 +302,10 @@
 
   .detailed-info {
     width: 100%;
-    height: calc(100% - 52px);
+    height: var(--m-detailed-info-height, calc(100% - 52px));
     background: var(--m-detailed-info-background, #fff);
     color: var(--m-detailed-info-color, #002776);
-    padding: 16px 24px 30px 16px;
+    padding: var(--m-detailed-info-padding, 16px 24px 30px 16px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -320,27 +320,34 @@
       width: 168px;
       background-color: #E2E2E2;
       margin: auto;
+      display: var(--m-detailed-info-content-name-line-display, block);
     }
 
     > div {
 
       .name {
-        font-size: 16px;
-        line-height: 19px;
-        margin-bottom: 4px;
-        text-align: center;
+        font-size: var(--m-detailed-info-content-name-font-size, 16px);
+        line-height: var(--m-detailed-info-content-name-line-height, 19px);
+        margin-bottom: var(--m-detailed-info-content-name-margin-bottom, 4px);
+        margin-top: var(--m-detailed-info-content-name-margin-top, 0px);
+        text-align: var(--m-detailed-info-content-name-text-align, center);
+        .icon-back {
+          display: var(--m-detailed-info-content-name-icon-display, block);
+        }
       }
 
       .text {
-        color: #676B80;
-        font-size: 14px;
-        line-height: 17px;
-        padding-left: 10px;
-        text-align: center;
+        color: var(--m-detailed-info-content-text-color, #676B80);
+        font-size: var(--m-detailed-info-content-text-font-size, 14px);
+        line-height: var(--m-detailed-info-content-text-line-height, 17px);
+        padding-left: var(--m-detailed-info-content-text-padding-left, 10px);
+        text-align: var(--m-detailed-info-content-text-text-align, center);
+        display: var(--m-detailed-info-content-text-display, block);
       }
 
       .title {
-        color: #333333;
+        display: var(--m-detailed-info-content-title-display, block);
+        color: var(--m-detailed-info-content-title-color, #333333);
         font-size: 12px;
         text-transform: uppercase;
         margin-bottom: 12px;
@@ -361,6 +368,7 @@
       }
 
       .content {
+        display: var(--m-detailed-info-content-display, block);
         font-size: 10px;
         text-transform: uppercase;
 

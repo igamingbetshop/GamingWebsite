@@ -191,6 +191,7 @@
       background-color: backgroundColor(m-join-us-btn, unset);
       white-space: nowrap;
       justify-content: var(--m-join-us-btn-justify-content, space-between);
+      gap: var(--m-join-us-btn-gap, 0);
       min-width: var(--m-join-us-btn-min-width, auto);
       align-items: center;
       .hidden-login-text {
@@ -949,7 +950,7 @@
   .sign-up {
     margin-bottom: marginBottom(m-button-style1, 0);
     margin-top: marginTop(m-button-style1, 0);
-    margin-left: var(--m-button-style1-btn-margin-left, var(--m-button-style1-margin-left));
+    margin-left: var(--m-button-style1-btn-margin-left, 0);
     margin-right: marginRight(m-button-style1, 0);
     width: var(--m-button-style1-btn-width, auto);
 
@@ -958,7 +959,7 @@
       color: color(m-button-style1);
       background-image: backgroundImage(m-button-style1,  linear-gradient(180deg, rgba(219, 237, 255, 0.15) 0%, rgba(6, 42, 88, 0.15) 100%));
       background-color: backgroundColor(m-button-style1, unset);
-      border: 1px solid itemColor(m-button-style1, unset);
+      border: 1px solid var(--m-button-style1-border-color, var(--m-button-style1-color));
       line-height: var(--m-button-style1-line-height, 20px);
 
       padding-right: paddingRight(m-button-style1, 10px);
@@ -973,6 +974,7 @@
       font-size: var(--m-button-style1-font-size, 14px);
       font-weight: var(--m-button-style1-font-weight, 500);
       display: var(--m-button-style1-display, block);
+      gap: var(--m-button-style1-gap, 0);
       justify-content: var(--m-button-style1-justify-content, space-between);
       align-items: center;
       .hidden-register-text {

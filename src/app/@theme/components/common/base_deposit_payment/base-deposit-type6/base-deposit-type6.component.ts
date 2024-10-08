@@ -11,7 +11,7 @@ export class BaseDepositType6Component extends BaseDepositPaymentComponent {
 
   ngOnInit() {
     super.ngOnInit();
-    this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
+    this.paymentForm.addControl('Amount', new FormControl(this.quickDepositAmount, [Validators.required]));
     this.paymentForm.addControl('CardNumber', new FormControl('', [Validators.required]));
 
    /* this.paymentControllerService.notifyGetCreatePaymentData.subscribe((data) => {

@@ -26,6 +26,7 @@ export class BaseBirthDate extends BaseType implements OnInit, AfterViewInit, On
 
     utilityService: UtilityService;
     public sharedService: SharedService;
+    #birthDate:any;
 
     constructor(protected injector:Injector)
     {
@@ -36,6 +37,7 @@ export class BaseBirthDate extends BaseType implements OnInit, AfterViewInit, On
 
     ngOnInit()
     {
+        this.#birthDate = this.profileService.getProfile.BirthDate;
         this.initDate();
         this.years = this.utilityService.getYearsList();
         this.months = this.utilityService.changeYear(0);
@@ -50,10 +52,14 @@ export class BaseBirthDate extends BaseType implements OnInit, AfterViewInit, On
 
     private initDate()
     {
-        const d = new Date(this.profileService.getProfile.BirthDate);
-        this.date.Day = d.getDate();
-        this.date.Month.Id = d.getMonth() + 1;
-        this.date.Year = (d.getFullYear() < this.years[this.years.length - 1]) ? this.years[this.years.length - 1] : d.getFullYear();
+        if(this.#birthDate)
+        {
+            const d = new Date(this.#birthDate);
+            this.date.Day = d.getDate();
+            this.date.Month.Id = d.getMonth() + 1;
+            this.date.Year = (d.getFullYear() < this.years[this.years.length - 1]) ? this.years[this.years.length - 1] : d.getFullYear();
+        }
+
         this.sharedService.rightToLeftOrientation.subscribe((responseData) => {
             this.rightToLeftOrientation = responseData;
         });

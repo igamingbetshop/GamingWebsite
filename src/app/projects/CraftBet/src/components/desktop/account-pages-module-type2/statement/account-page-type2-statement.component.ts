@@ -28,7 +28,7 @@ export class AccountPageType2StatementComponent extends UserAccountStatmentCompo
     };
 
     let responseData = await this.defaultService.defaultRequest(input);
-    const realBalance:any = {AccountTypeName:'Real Balance', Balance:0, CurrencyId:''};
+    const realBalance:any = {AccountTypeName: this.translate.instant('Balance.Real Balance'), Balance:0, CurrencyId:''};
     for (let i = 0; i < responseData.ResponseObject.Accounts.length; i++)
     {
       if(responseData.ResponseObject.Accounts[i].TypeId === 1 || responseData.ResponseObject.Accounts[i].TypeId === 2)

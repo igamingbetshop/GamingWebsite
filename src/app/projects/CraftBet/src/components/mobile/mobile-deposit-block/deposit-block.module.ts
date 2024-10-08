@@ -47,6 +47,10 @@ import {
 } from "./deposit-payments/deposit-type17/deposit-type17-default/mobile-deposit-type17-default.component";
 import {QRCodeModule} from "angularx-qrcode";
 import {LoaderComponent} from "../../common/loader/loader.component";
+import {MobileDepositType19Component} from "./deposit-payments/deposit-type19/mobile-deposit-type19.component";
+import {
+    MobileDepositType19DefaultComponent
+} from "./deposit-payments/deposit-type19/deposit-type19-default/mobile-deposit-type19-default.component";
 
 
 
@@ -85,7 +89,9 @@ import {LoaderComponent} from "../../common/loader/loader.component";
     MobileDepositType16Component,
     MobileDepositType16DefaultComponent,
     MobileDepositType17Component,
-    MobileDepositType17DefaultComponent
+    MobileDepositType17DefaultComponent,
+    MobileDepositType19Component,
+    MobileDepositType19DefaultComponent
   ],
     imports: [
         CommonModule,

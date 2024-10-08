@@ -11,7 +11,8 @@ export class CasinoProvidersService
     currentFilter;
     providers:any = [];
 
-    constructor(private apiService: BaseApiService, private translate: TranslateService)
+    constructor(private apiService: BaseApiService,
+                private translate: TranslateService)
     {
 
     }

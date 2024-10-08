@@ -33,7 +33,7 @@ export class VerificationService
   }
 
 
-  public getVerificationCode(mobileOrEmail, verificationType = null):Observable<any>
+  getVerificationCode(mobileOrEmail:'email'| 'mobile', verificationType = null):Observable<any>
   {
     const {WebApiUrl, PartnerId} = this.getSettings();
     this.userData = this.localStorageService.get('user');

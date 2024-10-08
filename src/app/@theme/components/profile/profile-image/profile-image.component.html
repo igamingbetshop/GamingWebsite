@@ -1,0 +1,16 @@
+<span>{{'Settings.ProfileImage' | translate}}</span>
+<span>{{'Settings.ProfileImageDescription' | translate}}</span>
+<div class="content">
+    @if(selectedImage())
+    {
+        <img src="https://www.w3schools.com/howto/img_avatar.png">
+    }
+    @else {
+        <div class="skeleton"></div>
+    }
+    <div class="button" (click)="openEditMode()">{{'Settings.EditProfileImage' | translate}}</div>
+</div>
+
+
+
+

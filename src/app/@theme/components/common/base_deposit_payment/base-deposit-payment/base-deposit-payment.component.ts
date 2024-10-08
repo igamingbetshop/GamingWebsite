@@ -61,6 +61,8 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
     public hasProfileError = false;
     public stateService:StateService;
 
+    quickDepositAmount = localStorage.getItem("quickDepositAmount") || '';
+
     protected subscriptions: Subscription[] = [];
     protected paymentService: GetPaymentsService;
     protected utilityService: UtilityService;
@@ -169,6 +171,7 @@ export class BaseDepositPaymentComponent implements OnInit, OnDestroy {
 
                 this.dialog.open(LimitNotificationsComponent, {data:{title: 'Limit Notifications',updatedData: resData.LimitInfo, message: true}})
             }
+            this.quickDepositAmount = "";
         }))
 
     }

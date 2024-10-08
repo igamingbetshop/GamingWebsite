@@ -6,6 +6,8 @@
 }
 .hidden-login-text {
   display: var(--header-login-btn-custom-icon-display, none);
+  align-items: var(--header-login-btn-custom-icon-align-items, center);
+  justify-content: var(--header-login-btn-custom-icon-justify-content, unset);
   position: var(--header-login-btn-custom-icon-position, relative);
   width: var(--header-login-btn-custom-icon-width, 100%);
   height: var(--header-login-btn-custom-icon-height, auto);

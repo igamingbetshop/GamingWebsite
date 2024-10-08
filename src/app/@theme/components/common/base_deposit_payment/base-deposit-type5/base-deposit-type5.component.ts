@@ -15,7 +15,7 @@ export class BaseDepositType5Component extends BaseDepositPaymentComponent {
 
   ngOnInit() {
     super.ngOnInit();
-    this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
+    this.paymentForm.addControl('Amount', new FormControl(this.quickDepositAmount, [Validators.required]));
     this.paymentForm.addControl('BankId', new FormControl('', [Validators.required]));
 
     this.paymentControllerService.getBanksList(this.paymentSystemId);

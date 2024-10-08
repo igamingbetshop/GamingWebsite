@@ -14,7 +14,10 @@
                             <qrcode *ngIf="qrData" [qrdata]="qrData.Data" [width]="145" [errorCorrectionLevel]="'M'"></qrcode>
                         </div>
                         <div class="two-factor-steps-description-in" [innerHtml]="'Settings.Otp-step2-description' | translate | sanitizer: 'html'"></div>
-                        <div>{{ qrData?.Key }}</div>
+                        <div class="qr-key">
+                            <div #copyAddressRef>{{ qrData?.Key }}</div>
+                            <img (click)="copyAddress(copyAddressRef)" class="copy-img" src="../../../../../../../assets/images/copy.png" alt="">
+                        </div>
                     </div>
                 </li>
                 <li>

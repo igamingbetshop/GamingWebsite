@@ -11,6 +11,9 @@ export class NavigationService
         localStorage.setItem('casinoFilterGame', null);
         router.events.subscribe(event =>
         {
+            const url = location.pathname;
+            if(url === '/sport/prematch' || url === '/sport/live')
+                return;
             if (event instanceof NavigationEnd)
             {
                 this.initialNavigation(event.url);

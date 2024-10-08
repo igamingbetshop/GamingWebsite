@@ -252,6 +252,8 @@ export class PaymentControllerService {
             this.paymentParams['AccountType'] = data['AccountType'] ? data['AccountType'] : '';
             this.paymentParams['NameSurname'] = data['NameSurname'] ? data['NameSurname'] : '';
             this.paymentParams['Amount'] = data['Amount'] ? data['Amount'] : '';
+            this.paymentParams['Provider'] = data['Provider'] ? data['Provider'] : '';
+            this.paymentParams['TxName'] = data['TxName'] ? data['TxName'] : '';
             this.paymentParams['WalletNumber'] = data['WalletNumber'] ? data['WalletNumber'] : '';
             this.paymentParams['BankName'] = data['BankName'] ? data['BankName'] : '';
             this.paymentParams['ToBankNumber'] = data['ToBankNumber'] ? data['ToBankNumber'] : '';

@@ -24,8 +24,8 @@
                         <span>{{userData?.UserName}}</span>
                     </div>
                     <div class="left-sidebar-deposit-btn"
-                         [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/deposit'">
-                        {{'Header.Deposite' | translate}}
+                         [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/deposit'"
+                         [innerHTML]="'Header.Deposite' | translate | sanitizer: 'html'">
                     </div>
                 </div>
                 <div class="left-sidebar-user-part-not-logined" *ngIf="!isLogin" [innerHTML]="'Header.Left-Menu-bottom-img' | translate | sanitizer: 'html'">

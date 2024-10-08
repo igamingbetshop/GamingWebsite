@@ -346,7 +346,7 @@ a {
   line-height: 40px;
   opacity: 0.9;
   color: itemColor(btn, #fff);
-  border: none;
+  border: var(--common-button-border, none);
   cursor: pointer;
 }
 .custom-dropdown {

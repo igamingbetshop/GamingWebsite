@@ -173,7 +173,9 @@ export enum Methods
   GET_REPORT_BY_AGENTS = "GetReportByAgents",
   GET_TRANSACTIONS = "GetTransactions",
   GET_PARTNER_CURRENCIES = "GetPartnerCurrencies",
-  GET_BET_INFO = "GetBetInfo"
+  GET_BET_INFO = "GetBetInfo",
+  GET_PAYMENT_SYSTEM_INFO = "GetPaymentSystemInfo",
+  GET_CLIENT_STATISTICS = "GetClientStatistics"
 }
 
 export enum DateTypes
@@ -246,7 +248,8 @@ export enum FragmentPositions {
   Games = 'games',
   MyCasino = 'mycasino',
   Home = 'home',
-  Category = 'category'
+  Category = 'category',
+  Group = 'group'
 }
 
 export enum FragmentTypes {
@@ -255,6 +258,7 @@ export enum FragmentTypes {
   Menus = 'Menus',
   Providers = 'Providers',
   ProgressBars = 'ProgressBars',
+  BetsWidgets = 'BetsWidgets',
   CharacterHierarchy = 'CharacterHierarchies'
 }
 export enum FragmentType {
@@ -263,6 +267,7 @@ export enum FragmentType {
   Menu = 'menu',
   Provider = 'provider',
   ProgressBar = 'progressBar',
+  BetsWidgets = 'betsWidgets',
   CharacterHierarchy = 'CharacterHierarchy'
 }
 
@@ -273,7 +278,7 @@ export enum FragmentSource
   Mobile = 'MobileFragments'
 }
 
-export enum PartnerCurrencyTypes
+export enum CurrencyTypes
 {
   Fiat = 1,
   Crypto = 2

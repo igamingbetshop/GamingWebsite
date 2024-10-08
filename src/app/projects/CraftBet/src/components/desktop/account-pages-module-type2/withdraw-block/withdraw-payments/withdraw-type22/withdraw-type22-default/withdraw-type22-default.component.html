@@ -34,14 +34,14 @@
       <div class="payment-form-field">
         <div class="payment-form-field__column">
           <input type="text" class="payment-input" (click)="$event.stopPropagation()"
-                 formControlName="BankCode" required/>
-          <span class="floating-label">{{'Withdraw.BankCode' | translate}}*</span>
+                 formControlName="BankCode"/>
+          <span class="floating-label">{{'Withdraw.BankCode' | translate}}</span>
         </div>
       </div>
       <div class="payment-form-field">
         <div class="payment-form-field__column">
           <input type="text" class="payment-input" (click)="$event.stopPropagation()"
-                 formControlName="BankBranchName" required/>
+                 formControlName="BankBranchName" />
           <span class="floating-label">{{'Withdraw.BankBranchName' | translate}}*</span>
         </div>
       </div>

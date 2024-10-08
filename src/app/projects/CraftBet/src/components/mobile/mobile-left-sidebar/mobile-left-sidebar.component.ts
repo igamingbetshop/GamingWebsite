@@ -74,6 +74,22 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
             }
 
             this.generalMenuItems = data;
+            const originalSubMenu = [...this.generalMenuItems[0]?.SubMenu];
+            const filteredSubMenu = originalSubMenu.filter((item) => {
+                if (item.StyleType) {
+                    const styleTypeItem = item['StyleType'];
+                    const parsedItem = JSON.parse(JSON.parse(styleTypeItem));
+                    if (this.isLogin && parsedItem.visibility === 'loggedIn') {
+                        return item;
+                    } else if (!this.isLogin && parsedItem.visibility === 'loggedOut') {
+                        return item;
+                    }
+                } else {
+                    return true;
+                }
+            });
+            this.generalMenuItems[0].SubMenu = filteredSubMenu.length > 0 ? filteredSubMenu : originalSubMenu;
+            console.log(this.generalMenuItems);
             this.generalMenuItems.map((item) => {
                 return item.SubMenu.map((itemPic) => { itemPic.Src = itemPic.Icon.includes('.') ? '../../../../../../../assets/images/mobile-menu/' + itemPic.Icon : null; });
             });

@@ -1,4 +1,12 @@
-import {AfterViewInit, Component, createNgModule, Injector, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  createNgModule,
+  HostBinding,
+  Injector,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {BaseDefaultSportComponent} from "../../../../../../@theme/components/common/base-default-sport/base-default-sport.component";
 import {ConfigService} from "@core/services";
 import {LayoutService} from "@core/services/app/layout.service";
@@ -6,12 +14,14 @@ import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-mobile-default-sport',
-  templateUrl: './mobile-default-sport.component.html'
+  templateUrl: './mobile-default-sport.component.html',
 })
 export class MobileDefaultSportComponent extends BaseDefaultSportComponent implements AfterViewInit
 {
 
   isMigrated:boolean;
+
+  @HostBinding('style.min-height') minHeight = this.layoutService.layoutStyle['min-height'];
 
   @ViewChild('sportComponentRef', { read: ViewContainerRef }) sportComponentRef;
   @ViewChild('frameComponentRef', { read: ViewContainerRef }) frameComponentRef;

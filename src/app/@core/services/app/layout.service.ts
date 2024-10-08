@@ -59,17 +59,16 @@ export class LayoutService {
             }
         });
 
-        if (this.configService.defaultOptions["ShowMobileNavPanel"] === "1") {
-            this.layoutStyle = {
-                'height': `calc(100% - ${this.headerHeight + this.layoutHeight + this.headerSecondLineHeight + this.bottomSideBarHeight}px)`,
-                "margin-top": `${this.headerHeight + this.layoutHeight + this.headerSecondLineHeight}px`
-            }
-        } else {
-            this.layoutStyle = {
-                'height': `calc(100% - ${this.headerHeight + this.headerSecondLineHeight + this.bottomSideBarHeight}px)`,
-                "margin-top": `${this.headerHeight + this.headerSecondLineHeight}px`
-            }
-        }
+        const baseHeight = this.headerHeight + this.headerSecondLineHeight;
+        const navPanelActive = this.configService.defaultOptions["ShowMobileNavPanel"] === "1";
+        const additionalHeight = navPanelActive ? this.layoutHeight + this.bottomSideBarHeight : this.bottomSideBarHeight;
+        const additionalMargin = navPanelActive ? this.layoutHeight : 0;
+
+        this.layoutStyle = {
+            'height': `calc(100dvh - ${baseHeight + additionalHeight}px)`,
+            'min-height': `calc(100dvh - ${baseHeight}px)`,
+            'margin-top': `${baseHeight + additionalMargin}px`
+        };
     }
 }
 

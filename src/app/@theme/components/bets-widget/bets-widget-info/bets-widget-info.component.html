@@ -1,0 +1,69 @@
+<div class="modal-close-btn" (click)="close()">
+    <svg fill="#fff" viewBox="0 0 64 64" class="svg-icon" style=""> <title></title> <path d="m54.827 16.187-7.014-7.014L32 24.987 16.187 9.173l-7.014 7.014L24.987 32 9.173 47.813l7.014 7.014L32 39.013l15.813 15.814 7.014-7.014L39.013 32l15.814-15.813Z"></path></svg>
+</div>
+<div>
+    <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path d="M59.732 0H4.266A4.266 4.266 0 0 0 0 4.266V60c0 2.21 1.79 4 4 4h56c2.21 0 4-1.79 4-4V4.266A4.266 4.266 0 0 0 59.734 0h-.002ZM17.998 50.24l-8-8 4.266-4.266 3.866 3.894 9.734-9.866 4.266 4.266L17.998 50.24Zm0-20-8-8 4.134-4.374 3.866 3.894 9.866-9.894 4.266 4.266L17.998 30.24Zm36 14.774h-14v-6.026h14v6.026Zm0-20h-14v-6.026h14v6.026Z"></path></svg>
+    <span>{{'Game.Bet' | translate}}</span>
+</div>
+<div>{{bet.GameName}}</div>
+<div>
+    <span>ID {{bet.ProductId}}</span>
+    <div tooltip="{{'Game.DataCopied' | translate}}" actionType="click" (click)="copyAddress(bet.ProductId)">
+        <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path d="M61.334 64H16V12.986h45.334V64ZM2.666 0v45.466H9.28V6.506h38.96V0H2.666Z"></path></svg>
+    </div>
+    <div tooltip="{{'Game.CopiedAndShare' | translate}}" actionType="click" (click)="shareAddress()">
+        <svg  fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path d="M56.01 31.292a21.908 21.908 0 0 1-1.402 3.943 23.156 23.156 0 0 1-2.17 3.679 9.58 9.58 0 0 1 2.329 11.3 9.686 9.686 0 0 1-12.889 4.632l-14.74-6.934a9.606 9.606 0 0 1-5.505-8.442 9.046 9.046 0 0 1 0-1.456v-.847c.031-.205.075-.409.132-.608.15-.524.336-1.037.556-1.535.267-.536.577-1.05.926-1.535l.238-.292a8.922 8.922 0 0 1 1.191-1.27 9.686 9.686 0 0 1 6.643-2.355 9.395 9.395 0 0 1 4.128.926l4.447 2.09a9.74 9.74 0 0 1-6.405 2.277h-2.17a4.235 4.235 0 0 0-3.811 2.434 4.182 4.182 0 0 0 1.244 5.108c1.543.43 3.136.652 4.737.662A17.863 17.863 0 0 0 41.11 9.114L26.423 2.18a17.89 17.89 0 1 0-15.165 32.34l2.647 1.218a17.864 17.864 0 0 0 9.898 19.584l14.714 6.934a17.838 17.838 0 0 0 23.819-8.548 17.864 17.864 0 0 0-6.325-22.416Zm-45.969-17.07a9.712 9.712 0 0 1 8.76-5.558 9.58 9.58 0 0 1 4.102.927l14.82 6.934a9.659 9.659 0 0 1 5.293 8.442l-4.181-1.985a17.864 17.864 0 0 0-21.754 5.293l-2.647-1.191a9.66 9.66 0 0 1-4.393-12.862Z"></path></svg>
+    </div>
+</div>
+<div>
+    <span>
+        <span>Placed by</span>
+        @if(bet.Hidden)
+        {
+            <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path fill-rule="evenodd" clip-rule="evenodd" d="M42.05 8.613c2.815 0 5.192 1.879 5.955 4.494l3.64 12.792H12.253l3.64-12.792.01-.044a6.197 6.197 0 0 1 5.944-4.45H42.05ZM61.488 30.77H2.461a2.461 2.461 0 0 0 0 4.921c8.873 1.271 19.12 1.997 29.539 1.997s20.664-.726 30.696-2.131l-.598.068a2.461 2.461 0 0 0-.56-4.858l-.05.003ZM33.484 43.074h-3.05c-6.335-1.515-13.677-1.22-21.547 0v2.501l3.05.58s0 9.233 9.233 9.233c6.223 0 8.247-5.583 8.908-9.233h3.721c.661 3.65 2.685 9.233 8.908 9.233 9.233 0 9.233-9.233 9.233-9.233l3.05-.58v-2.501c-7.718-1.24-15.008-1.485-21.506 0Z"></path></svg>
+            <span>Hidden</span>
+        }
+        @else
+        {
+            <span>{{bet.ClientName}}</span>
+        }
+    </span>
+    <span>on {{bet.Date | date:'M/d/yyyy'}} at {{bet.Date | date:'h:mm a'}}</span>
+</div>
+
+<div>
+    <img [ngSrc]="'https://stake22.com/assets/images/logo.svg'" width="40" height="20">
+</div>
+
+<div>
+    <div>
+        <div>
+            <span>{{'Game.Bet' | translate}}</span>
+            <div>
+                <span tooltip="{{bet.Amount}}" iconSrc="{{bet.ImageUrl}}">{{bet.Amount}}</span>
+                <img [ngSrc]="bet.ImageUrl" width="15px" height="15px">
+            </div>
+        </div>
+        <div>
+            <span>{{'Game.Multiplier' | translate}}</span>
+            <div>
+                <span>{{bet.Multiplayer}}x</span>
+            </div>
+        </div>
+        <div>
+            <span>{{'Game.Payout' | translate}}</span>
+            <div>
+                <span tooltip="{{bet.BetAmount}}" iconSrc="{{bet.ImageUrl}}">{{bet.BetAmount}}</span>
+                <img [ngSrc]="bet.ImageUrl" width="15px" height="15px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="common-button" (click)="openGame()">{{'Game.Play' | translate}} {{bet.GameName}}</div>
+
+
+
+
+
+

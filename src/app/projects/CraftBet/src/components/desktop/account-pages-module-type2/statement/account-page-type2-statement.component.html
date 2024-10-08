@@ -16,7 +16,7 @@
         <div class="account-statement-section_row" *ngFor="let account of accountData">
             <div class="item_cell"> {{account?.AccountTypeName | translate}}</div>
             <div class="item_cell">
-                <span> {{account?.CurrencySymbol}} {{account?.Balance | number}} {{!account?.CurrencySymbol ? account?.CurrencyId : ''}}</span>
+                <span> {{account?.CurrencySymbol}} {{!account?.CurrencySymbol ? account?.CurrencyId : ''}} {{account?.Balance | number}}</span>
             </div>
         </div>
 

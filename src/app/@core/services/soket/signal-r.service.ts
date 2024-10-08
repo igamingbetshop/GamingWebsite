@@ -30,6 +30,9 @@ export class SignalRService {
     private notifyLogout: Subject<any> = new Subject<any>();
     public onLogout$ = this.notifyLogout.asObservable();
 
+    #notifyEmailVerified: Subject<any> = new Subject<any>();
+    onEmailVerified$ = this.#notifyEmailVerified.asObservable();
+
     constructor(
         private configService: ConfigService,
         private localStorageService: LocalStorageService
@@ -84,6 +87,9 @@ export class SignalRService {
 
         this.connection.on("onLogout", (data) => {
             this.notifyLogout.next(data);
+        });
+        this.connection.on("onEmailVerified", (data) => {
+            this.cmsPopupInfo.next(data);
         });
     }
 

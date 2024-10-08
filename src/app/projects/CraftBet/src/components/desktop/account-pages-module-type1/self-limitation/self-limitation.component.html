@@ -282,7 +282,7 @@
             <div class="self-exclusion-row-btn">
                 <div class="error-message" *ngIf="errorMessage">{{errorMessage}}</div>
                 <div class="success-message">{{successMessage}}</div>
-                <button type="button" [disabled]="setConfirmPassword === '' || (selectedExclusionType !== selfExclusionTypes.Permanently && exclusionDate === null)" class="common-button"
+                <button type="button" [disabled]="setConfirmPassword === '' || (selectedExclusionType !== selfExclusionTypes.Permanently && exclusionDate === null)" class="common-button confirm-button"
                         (click)="openConfirmWindow()"
                 >{{'User.Confirm' | translate}}</button>
             </div>

@@ -36,10 +36,17 @@ export class BaseCasinoProviders implements OnInit {
 
     getProviders()
     {
-        let req = null;
+        let req:any = {};
 
         if(this.fragmentConfig.Config.hasOwnProperty('categories'))
             req = {CategoryIds:this.fragmentConfig.Config.categories};
+
+        if(this.casinoFilterService.menuCategoryIds.length)
+        {
+            if(req.CategoryIds && req.CategoryIds.length)
+                req.CategoryIds = [...req.CategoryIds,...this.casinoFilterService.menuCategoryIds];
+            else req.CategoryIds = [...this.casinoFilterService.menuCategoryIds];
+        }
 
         const logoFormat = this.fragmentConfig.Config.logoFormat || ".png";
 

@@ -9,7 +9,7 @@ import {StateService} from "../../../../../../@core/services/app/state.service";
 import {CasinoProvidersService} from "../../../../../../@theme/fragments/casino/providers/casino-providers.service";
 import {BaseApiService} from "../../../../../../@core/services/api/base-api.service";
 import {MatDialog} from "@angular/material/dialog";
-import {filter} from "rxjs/operators";
+import {filter, skip} from "rxjs/operators";
 import {FragmentPositions} from "@core/enums";
 type LeftMenuFragmentType = "Menus" | "Providers";
 type LeftMenuFragment = {
@@ -56,6 +56,7 @@ export class BaseCasino implements OnInit, OnDestroy {
     this.fragments = getFragmentsByType(block, this.position);
 
     this.checkLeftMenu();
+    this.#checkCategory(this.route.snapshot.params);
     this.subscription.add(this.route.queryParams.subscribe(params =>
     {
       if(params)
@@ -84,14 +85,19 @@ export class BaseCasino implements OnInit, OnDestroy {
       }
 
     }));
-    this.subscription.add(this.route.params.subscribe(params =>
+    this.subscription.add(this.route.params.pipe(skip(1)).subscribe(params =>
     {
-        let categoryId:any;
-        if(params.categoryId || params.categoryId == 0)
-          categoryId = params.categoryId;
-        else if(params.typeId)
-          categoryId = params.typeId;
-        this.casinoFilterService.changeCategoryFromUrl(categoryId);
+      if(params.groupId)
+      {
+        /*For the group type, this reloads the same component.*/
+        this.router.navigate(['casino/all-games']).then(() => {
+          this.router.navigate(['/group', params.groupId]);
+        });
+      }
+      else
+      {
+        this.#checkCategory(params);
+      }
     }));
     this.router.events
         .pipe(
@@ -163,16 +169,29 @@ export class BaseCasino implements OnInit, OnDestroy {
 
   private getMappedPosition(position:string):string
   {
-    if(position === FragmentPositions.Category)
+    const params = this.route.snapshot.params;
+
+    switch (position)
     {
-      const categoryId = this.route.snapshot.params.categoryId;
-      if(categoryId)
-      {
-        return `${position}_${this.route.snapshot.params.categoryId}`;
-      }
-      else return position;
+      case FragmentPositions.Category:
+        return params.categoryId ? `${position}_${params.categoryId}` : position;
+
+      case FragmentPositions.Group:
+        return params.groupId ? `${position}_${params.groupId}` : position;
+
+      default:
+        return position;
     }
-    else return position;
+  }
+
+  #checkCategory(params:any)
+  {
+    let categoryId:any;
+    if(params.categoryId || params.categoryId == 0)
+      categoryId = params.categoryId;
+    else if(params.typeId)
+      categoryId = params.typeId;
+    this.casinoFilterService.changeCategoryFromUrl(categoryId);
   }
 
   ngOnDestroy()

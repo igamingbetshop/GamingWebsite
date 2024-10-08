@@ -50,4 +50,6 @@ export class AccountPageType2DefaultComponent extends CommonUserDefaultComponent
   ngOnInit() {
     super.ngOnInit();
   }
+
+  protected readonly self = self;
 }

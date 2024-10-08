@@ -5,7 +5,7 @@
   transform: var(--text-style2-text-transform, skew(25deg));
   justify-content: var(--text-style2-text-justify-content, unset);
   span:first-child{
-    margin-right: 8px;
+    margin-right: var(--text-style-user-id-span-margin-right, 8px);
     color: var(--text-style-user-id-span-color, inherit);
   }
 }

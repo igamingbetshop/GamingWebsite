@@ -1,6 +1,6 @@
 
 <div class="mobile-promotions-section" [ngStyle]="{'display' : selectedFragment ? 'block' : 'none'}">
-    <div class="mobile-promotions-section_top" [ngStyle]="layoutService.layoutStyle">
+    <div class="mobile-promotions-section_top" [style.margin-top]="layoutService.layoutStyle['margin-top']">
         <div class="promotion-item"
              >
             <div class="back">
@@ -35,7 +35,7 @@
 </div>
 
 <div [ngStyle]="{'display' : selectedFragment ? 'none' : 'block'}">
-    <h1 class="promotion-title" [ngStyle]="layoutService.layoutStyle"> <i class="icon-specials"></i> {{'Promotions.Promotions' | translate}}</h1>
+    <h1 class="promotion-title" [style.margin-top]="layoutService.layoutStyle['margin-top']"> <i class="icon-specials"></i> {{'Promotions.Promotions' | translate}}</h1>
 </div>
 
 @if (filteredFragment)

@@ -13,6 +13,18 @@
                (currentStep !> 1) ? 'hidden':'']">
                 <div class="reg_item_text">{{'Register.' + item.Title | translate}}</div>
             </button>
+            <div *ngIf="(registerType?.Title == registerTypes.FULL && regFormSteps.length > 0) || (registerType === undefined)">
+                <ul class="regSteps-left-part" *ngIf="regFormSteps.length > 1">
+                    <ng-container *ngFor="let elem of regFormSteps; let i = index">
+                        <li class="regStep" [ngClass]="{'regStep_active': i + 1 === currentStep,
+                                                        'regStep_prev': currentStep - 1 > 0 && i <= currentStep - 2}">
+                            <img class="regSteps-img" src="../../../../../../../assets/images/register/Step{{(i + 1)}}.svg">
+                            <span class="regSteps-text">{{'Register.' + 'Step' + [i+1] | translate}}</span>
+                        </li>
+                        <div *ngIf="i < regFormSteps.length - 1" class="separator-line"></div>
+                    </ng-container>
+                </ul>
+            </div>
 
             <ng-container >
                 <div class="social-register-text" [innerHTML]="'Register.Social sign up text' | translate | sanitizer: 'html'"></div>
@@ -71,6 +83,10 @@
                         </ul>
 
                         <div class="hidden-title" [innerHTML]="'Register.AccountInformation' | translate | sanitizer: 'html'"></div>
+                        <div class="quick-full-reg-btns">
+                            <div class="quick-full-reg-btn" *ngFor="let item of defaultOptions?.RegisterType"
+                                 (click)="selectRegType(item)" [ngClass]="{'active-full':item.Title == registerType?.Title}">{{'Register.' + item.Title | translate}}</div>
+                        </div>
                         <div class="title-error" *ngIf="userRegisterService.errorMessage">
                             {{userRegisterService.errorMessage}}
                         </div>
@@ -299,7 +315,7 @@
                                 </div>
 
 
-                                <div *ngSwitchCase="'Currency'" class="form_field currency-field-display">
+                                <div *ngSwitchCase="'Currency'" class="form_field select-wrapper currency-field-display">
                                     <select [formControlName]="form_elem.Title"
                                             [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}">
                                         <option *ngFor="let currency of currencyList; let i = index" [value]="currency"
@@ -308,7 +324,7 @@
                                     <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                                 </div>
 
-                                <div *ngSwitchCase="'Gender'" class="form_field">
+                                <div *ngSwitchCase="'Gender'" class="form_field select-wrapper">
 
                                     <select [formControlName]="form_elem.Title"
                                             [ngClass]="{'invalid-filed': ((regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required') && submitted) || (regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('required')  || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('minlength') || regFormSteps[currentStep - 1].get(form_elem?.Title).hasError('maxlength')) && regFormSteps[currentStep - 1].get(form_elem?.Title).touched)}"
@@ -515,7 +531,7 @@
                                     </div>
                                 </div>
 
-                                <div *ngSwitchCase="'select'" class="form_field choose-country">
+                                <div *ngSwitchCase="'select'" class="form_field choose-country select-wrapper">
                                     <select [formControlName]="form_elem.Title"
                                             (change)="changeCustomDropdownValue(form_elem.Title, $event.target.value, currentStep)"
                                             [ngClass]="{'disable-selected-Item' : form_elem['selectList']?.length == 1,
@@ -532,7 +548,7 @@
                                 <div *ngSwitchCase="'dropdown'" class="form_field">
 
 
-                                    <div class="form_field_top">
+                                    <div class="form_field_top select-wrapper">
 
                                         <select (change)="changeQuickRegisterType($event.target.value)"
                                                 class="custom_dropdown_reg">
@@ -654,6 +670,10 @@
                 <form [formGroup]="quickRegForm" autocomplete="off" novalidate class="quickForms">
                     <div class="allFormItems allFormItemsDesktop" *ngIf="quickFormTemplate.length > 0">
                         <div class="hidden-title" [innerHTML]="'Register.AccountInformation' | translate | sanitizer: 'html'"></div>
+                        <div class="quick-full-reg-btns">
+                            <div class="quick-full-reg-btn" *ngFor="let item of defaultOptions?.RegisterType"
+                                 (click)="selectRegType(item)" [ngClass]="{'active-quick':item.Title == registerType?.Title}">{{'Register.' + item.Title | translate}}</div>
+                        </div>
                         <div *ngFor="let form_elem of quickFormTemplate; trackBy: trackByMethod"
                              class="form-row-item form-row{{form_elem?.FieldSize}}"
                              [ngClass]="{'form-row-item__autoHeight': form_elem?.Type === 'Region4',
@@ -807,7 +827,7 @@
                                 </div>
 
 
-                                <div *ngSwitchCase="'Currency'" class="form_field">
+                                <div *ngSwitchCase="'Currency'" class="form_field select-wrapper">
 
                                     <select [formControlName]="form_elem.Title"
                                             [ngClass]="{'invalid-filed': ((quickRegForm.get(form_elem?.Title).hasError('required') && submitted) || (quickRegForm.get(form_elem?.Title).hasError('required')  || quickRegForm.get(form_elem?.Title).hasError('minlength') || quickRegForm.get(form_elem?.Title).hasError('maxlength')) && quickRegForm.get(form_elem?.Title).touched)}">
@@ -818,7 +838,7 @@
                                 </div>
 
 
-                                <div *ngSwitchCase="'Gender'" class="form_field">
+                                <div *ngSwitchCase="'Gender'" class="form_field select-wrapper">
                                     <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
 
 
@@ -880,9 +900,15 @@
                                     <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>
                                 </div>
                                 <div *ngSwitchCase="'dropdown'" class="form_field">
-                                    <div class="form_field_top">
+                                    <div class="form_field_top select-wrapper">
+                                        <div class="custom-register-type-checkboxes">
+                                            <div *ngFor="let item of quickRegTypeList" class="checkbox-content" (change)="changeQuickRegisterType($event.target.value)">
+                                                <input [checked]="item?.Type === quickRegisterType?.Type" type="radio" name="options" [value]="item?.Type" class="checkbox-type-input">
+                                                <label class="checkbox-type-label">{{ item?.Type }}</label>
+                                            </div>
+                                        </div>
                                         <select (change)="changeQuickRegisterType($event.target.value)"
-                                                class="custom_dropdown_reg">
+                                                class="custom_dropdown_reg custom-register-by">
                                             <option *ngFor="let item of quickRegTypeList" [value]="item.Type">
                                                 {{item?.Type}}
                                             </option>

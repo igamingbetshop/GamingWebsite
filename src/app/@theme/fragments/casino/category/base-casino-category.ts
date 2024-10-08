@@ -21,7 +21,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
     games: any[] = [];
     leftGamesCount: number = 0;
     totalGamesCount: number = 0;
-    private viewedGamesCount: number = 0;
+    public viewedGamesCount: number = 0;
     leftGamesCountMessage:WritableSignal<string> = signal("");
 
     protected router:Router;
@@ -37,12 +37,6 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
     markForSave:boolean = false;
     isLoading:boolean;
 
-    /*@HostListener('window:scroll', ['$event'])
-    onScroll(event)
-    {
-       this.updateScrollPosition();
-    }*/
-
     constructor(protected injector:Injector)
     {
         this.apiService = injector.get(BaseApiService);
@@ -55,18 +49,14 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
         this.translate = injector.get(TranslateService);
     }
 
-    /*updateScrollPosition()
-    {
-        const {pageIndex, pageSize} = this.casinoFilterService;
-        this.saveData.updateScrollPositionData(false, pageIndex, pageSize);
-    }*/
-
-
     getGames(filter, concatData = false, autoScroll = null): void
     {
         this.isLoading = true;
         if(filter.CategoryId === -1)
             filter.CategoryId = null;
+
+        if(filter.CategoryId == null && filter.CategoryIds?.length === 0)
+            filter.CategoryIds = this.casinoFilterService.menuCategoryIds;
 
         this.apiService.apiRequest(filter, undefined, Methods.GET_GAMES, false).pipe(take(1))
             .subscribe(data => {
@@ -126,11 +116,12 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
                     if(filter)
                     {
                         req = {
-                            Name:filter.gamePattern,
+                            Pattern:filter.gamePattern,
                             ProviderIds:filter.providers.map(p => p.Id),
                             CategoryId:this.categoryId || filter.categoryId,
                             PageIndex:filter.pageIndex,
                             PageSize:filter.pageSize,
+                            OrderByNameDesc:filter.orderByNameDesc
                         }
                     }
 
@@ -143,10 +134,10 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
                             this.games = [];
                             return;
                         }
-                        if(this.fragmentConfig.Config.hasOwnProperty('categories') && filter.categoryId !== null && filter.categoryId !== undefined)
-                        {
-                            req.CategoryIds = this.fragmentConfig.Config.categories;
-                        }
+                    }
+                    if(this.fragmentConfig.Config.hasOwnProperty('categories') && (filter.categoryId !== null || filter.categoryId !== undefined))
+                    {
+                        req.CategoryIds = this.fragmentConfig.Config.categories;
                     }
 
                     if(filter.categoryId || filter.categoryId === 0)
@@ -204,7 +195,8 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
         this.totalGamesCount = totalCount;
         this.viewedGamesCount = totalCount - this.leftGamesCount;
         this.translate.get("Game.LeftGamesCountMessage").subscribe((res: string) => {
-            this.leftGamesCountMessage.set(res.replace("{VIEWED_COUNT}", this.viewedGamesCount.toString()).replace("{LEFT_COUNT}", this.leftGamesCount.toString()));
+            this.leftGamesCountMessage.set(res.replace("{VIEWED_COUNT}", this.viewedGamesCount.toString()).replace("{LEFT_COUNT}", this.totalGamesCount.toString()));
+            this.leftGamesCountMessage.set(res.replace("{VIEWED_COUNT}", this.viewedGamesCount.toString()).replace("{LEFT_COUNT}", this.totalGamesCount.toString()));
         });
     }
 }

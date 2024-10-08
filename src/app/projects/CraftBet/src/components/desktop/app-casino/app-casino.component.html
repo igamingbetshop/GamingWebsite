@@ -37,59 +37,77 @@
 }
 
 <ng-template #casinoHref>
-    <casino-banners *ngFor="let fragment of fragments?.Banners?.Items"
-                    [fragmentConfig]="fragment"
-                    [style.order]="fragment.Order"
-                    [style.margin-top.px]="fragment.Config.marginTop"
-                    [style.max-width.px]="fragment.Config.maxWidth">
-    </casino-banners>
-    <winners-widget *ngFor="let fragment of fragments?.BetsWidgets?.Items"
-                    [fragmentConfig]="fragment"
-                    [style.margin-top.px]="fragment.Config.marginTop"
-                    [style.order]="fragment.Order">
-    </winners-widget>
-    <casino-menu *ngFor="let fragment of fragments?.Menus?.Items"
-                 [style.order]="fragment.Order"
-                 [position]="position"
-                 [style.margin-top.px]="fragment.Config.marginTop"
-                 [style.max-width.px]="fragment.Config.maxWidth"
-                 [fragmentConfig]="fragment">
-    </casino-menu>
-    <casino-providers *ngFor="let fragment of fragments?.Providers?.Items"
-                      [style.order]="fragment.Order"
-                      [position]="position"
-                      [style.margin-top.px]="fragment.Config.marginTop"
-                      [style.max-width.px]="fragment.Config.maxWidth"
-                      [fragmentConfig]="fragment">
-    </casino-providers>
+    @for (fragment of fragments?.Banners?.Items; track fragment.Id)
+    {
+        <casino-banners [fragmentConfig]="fragment"
+                        [style.order]="fragment.Order"
+                        [style.margin-top.px]="fragment.Config.marginTop"
+                        [style.max-width.px]="fragment.Config.maxWidth">
+        </casino-banners>
+    }
 
-    <casino-category  *ngFor="let fragment of fragments?.Categories?.Items"
-                      class="{{fragment.Config.type}}"
-                      [position]="position"
-                      [style.margin-top.px]="fragment.Config.marginTop"
-                      [style.max-width.px]="fragment.Config.maxWidth"
-                      [class.search-view]="stateService.categoriesSearchViewState$ | async"
-                      [fragmentConfig]="fragment">
-    </casino-category>
-    <casino-search *ngFor="let fragment of fragments?.Searches?.Items"
-                   [style.margin-top.px]="fragment.Config.marginTop"
-                   [style.order]="fragment.Order"
-                   [fragmentConfig]="fragment">
-    </casino-search>
+    @for (fragment of fragments?.BetsWidgets?.Items; track fragment.Id)
+    {
+        <winners-widget [fragmentConfig]="fragment"
+                        [style.margin-top.px]="fragment.Config.marginTop"
+                        [style.order]="fragment.Order">
+        </winners-widget>
+    }
 
-    <progress-bar  *ngFor="let fragment of fragments?.ProgressBars?.Items"
-                   [style.margin-top.px]="fragment.Config.marginTop"
-                   [style.order]="fragment.Order"
-                   [fragmentConfig]="fragment">
-    </progress-bar>
+    @for (fragment of fragments?.Menus?.Items; track fragment.Id)
+    {
+        <casino-menu [style.order]="fragment.Order"
+                     [position]="position"
+                     [style.margin-top.px]="fragment.Config.marginTop"
+                     [style.max-width.px]="fragment.Config.maxWidth"
+                     [fragmentConfig]="fragment">
+        </casino-menu>
+    }
 
-    <character-hierarchy
-            *ngFor="let fragment of fragments?.CharacterHierarchies?.Items"
-            [style.margin-top.px]="fragment.Config.marginTop"
-            [style.order]="fragment.Order"
-            [fragmentConfig]="fragment">
+    @for (fragment of fragments?.Providers?.Items; track fragment.Id)
+    {
+        <casino-providers [style.order]="fragment.Order"
+                          [position]="position"
+                          [style.margin-top.px]="fragment.Config.marginTop"
+                          [style.max-width.px]="fragment.Config.maxWidth"
+                          [fragmentConfig]="fragment">
+        </casino-providers>
+    }
 
-    </character-hierarchy>
+    @for (fragment of fragments?.Categories?.Items; track fragment.Id)
+    {
+        <casino-category  class="{{fragment.Config.type}}"
+                          [position]="position"
+                          [style.margin-top.px]="fragment.Config.marginTop"
+                          [style.max-width.px]="fragment.Config.maxWidth"
+                          [class.search-view]="stateService.categoriesSearchViewState$ | async"
+                          [fragmentConfig]="fragment">
+        </casino-category>
+    }
+
+    @for (fragment of fragments?.Searches?.Items; track fragment.Id)
+    {
+        <casino-search [style.margin-top.px]="fragment.Config.marginTop"
+                       [style.order]="fragment.Order"
+                       [fragmentConfig]="fragment">
+        </casino-search>
+    }
+    @for (fragment of fragments?.ProgressBars?.Items; track fragment.Id)
+    {
+        <progress-bar  [style.margin-top.px]="fragment.Config.marginTop"
+                       [style.order]="fragment.Order"
+                       [fragmentConfig]="fragment">
+        </progress-bar>
+    }
+
+    @for (fragment of fragments?.CharacterHierarchies?.Items; track fragment.Id)
+    {
+        <character-hierarchy
+                [style.margin-top.px]="fragment.Config.marginTop"
+                [style.order]="fragment.Order"
+                [fragmentConfig]="fragment">
+        </character-hierarchy>
+    }
 
     <div class="open-lucky-game" (click)="openLuckyGame()"
          *ngIf="fragments?.OpenLuckyGame?.Items?.length">

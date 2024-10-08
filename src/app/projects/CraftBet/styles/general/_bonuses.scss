@@ -87,7 +87,7 @@
       color: var(--account-content-item-color, #fff);
       padding: var(--history-select-padding, 12px 16px);
       font-size: var(--font-size-16, 16px);
-      border: none;
+      border: var(--promo-code-input-field-border, none);
       &::placeholder {
         color: var(--bonuses-promo-placeholder-color, rgb(117, 117, 117));
       }
@@ -103,8 +103,8 @@
       font-weight: var(--promo-code-activate-font-weight, 700);
       font-size: var(--promo-code-activate-font-size, 16px);
       padding: var(--promo-code-activate-padding, 0 20px);
+      border: var(--promo-code-activate-border, none);
     }
-  ;
   }
 
   .bonus-tab-bar {

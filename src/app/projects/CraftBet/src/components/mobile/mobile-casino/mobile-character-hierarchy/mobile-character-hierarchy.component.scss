@@ -214,8 +214,8 @@
       height: fit-content;
       display: flex;
       flex-direction: row;
-      //flex-wrap: wrap;
-      //justify-content: center;
+      flex-wrap: var(--m-character-hierarchy-content-item-wrap, nowrap);
+      justify-content: var(--m-character-hierarchy-content-item-position, start);
       gap: var(--m-character-hierarchy-content-item-gap,13px);
       width:var(--m-character-hierarchy-content-width, 100%);
       min-height: unset;

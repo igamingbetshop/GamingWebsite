@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {getParsedUrl, isMobileUrl} from "@core/utils";
+import {Snackbar} from "@core/interfaces";
 
 @Injectable()
 export class StateService
@@ -26,6 +27,9 @@ export class StateService
 
   private readonly _desktopHeaderResize = new BehaviorSubject<string>("calc(100vh - 117px)");
   public readonly onDesktopHeaderResize$ = this._desktopHeaderResize.asObservable();
+
+  private _snackbarSubject = new BehaviorSubject<Snackbar>(null);
+  public onGetSnackbar = this._snackbarSubject.asObservable();
 
 
   constructor()
@@ -123,5 +127,9 @@ export class StateService
     const productHeight:string = ` calc(100vh - ${sizes.height}px)`;
     sizes.productHeight = productHeight || "calc(100vh - 117px)";
     this._desktopHeaderResize.next(sizes);
+  }
+
+  showSnackbar(message: string, status: 'success' | 'info' | 'error' | 'welcome', delay: number = 5000) {
+    this._snackbarSubject.next({ message, status, delay });
   }
 }

@@ -54,9 +54,20 @@ export class ProfileService
   updateProfile(profile)
   {
     const d = new Date(profile.BirthDate);
-    profile.BirthDay = d.getDate();
-    profile.BirthMonth = d.getMonth() + 1;
-    profile.BirthYear = d.getFullYear();
+    const current = new Date();
+    if(current.getFullYear() - d.getFullYear() > 100)
+    {
+      profile.BirthDay = null;
+      profile.BirthMonth = null;
+      profile.BirthYear = null;
+      profile.BirthDate = null;
+    }
+    else
+    {
+      profile.BirthDay = d.getDate();
+      profile.BirthMonth = d.getMonth() + 1;
+      profile.BirthYear = d.getFullYear();
+    }
     this._profileData.next(profile);
   }
 

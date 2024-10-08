@@ -1,6 +1,5 @@
 import {ActivatedRoute, Router, RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {AppComponent} from './app.component';
 import {StateService} from "@core/services/app/state.service";
 
 const desktopPreloadModules = [
@@ -10,7 +9,7 @@ const desktopPreloadModules = [
     },
     {
         path: '', loadChildren: () =>
-            import('./projects/CraftBet/src/components/desktop/desktop.module').then(d => d.DesktopModule)
+            import('./projects/Stake/src/components/desktop/desktop.module').then(d => d.DesktopModule)
     }
 ];
 
@@ -21,7 +20,7 @@ const mobilePreloadModules = [
     },
     {
         path: '', loadChildren: () =>
-            import('./projects/CraftBet/src/components/mobile/mobile.module').then(d => d.MobileModule)
+            import('./projects/Stake/src/components/mobile/mobile.module').then(d => d.MobileModule)
     },
 
 ];
@@ -31,7 +30,6 @@ const mobilePreloadModules = [
 const appRoutes: Routes = [
     {
         path:'',
-        component:AppComponent,
         children:[...desktopPreloadModules]
     },
     {
@@ -72,10 +70,8 @@ export class AppRoutingModule
         const routes: Routes = appRoutes;
 
         if (isMobile) {
-            routes[0].component = AppComponent;
             routes[0].children = mobilePreloadModules;
         } else {
-            routes[0].component = AppComponent;
             routes[0].children = desktopPreloadModules;
         }
 

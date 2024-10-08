@@ -99,6 +99,7 @@
                 "src/assets",
                 "src/assets/images/left-arrow.png",
                 "src/assets/images/right-arrow.png",
+                "src/assets/html/income-returns.html",
                 "src/mobile.html",
                 {
                   "input": "src/init/production",

@@ -1,3 +1,4 @@
+profile-image{width: 326px; margin-left: 10px}
 .tab-content {
   padding: var(--account-content-row-paddding);
   background: var(--account-main-bg-color);
@@ -11,7 +12,18 @@
   justify-content: space-between;
   align-items: center;
   height: var(--change-password-second-tab-heirght, 32px);
-  span{cursor:default}
+  span{
+    cursor:default;
+    height: var(--profile-details-tab-height, 32px);
+    line-height: var(--profile-details-tab-height, 32px);
+    background-color: var(--profile-details-tab-bg-color,transparent);
+    color: var(--profile-details-tab-color,#000);
+    border-radius: var(--profile-details-tab-border-radius,0);
+    display: inline-block;
+    padding: var(--profile-details-tab-padding, 0);
+    margin-left: var(--profile-details-tab-margin-left, 0);
+    margin-right: var(--profile-details-tab-margin-right, 0);
+  }
   .settings_edit {
     display: flex;
     align-items: center;
@@ -21,6 +33,7 @@
     height: var(--edit-button-height, 40px);
     background-color: var(--edit-button-background-color, none);
     border-radius: var(--edit-button-border-radius, 0px);
+    border: var(--edit-button-border, none);
     cursor: pointer;
     &_text {
       background: none!important;

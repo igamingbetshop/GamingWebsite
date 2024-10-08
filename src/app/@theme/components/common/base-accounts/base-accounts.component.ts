@@ -7,6 +7,7 @@ import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods} from "@core/enums";
 import {MatDialog} from "@angular/material/dialog";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
+import {TranslateService} from "@ngx-translate/core";
 
 @Directive()
 
@@ -15,6 +16,7 @@ export class BaseAccountsComponent extends BaseComponent {
     protected savedDateService: SaveData;
     public baseApiService: BaseApiService;
     public localStorageService: LocalStorageService;
+    public translate: TranslateService;
     dialog = inject(MatDialog);
     private route: ActivatedRoute;
     public Accounts: any;
@@ -41,6 +43,7 @@ export class BaseAccountsComponent extends BaseComponent {
         this.localStorageService = injector.get(LocalStorageService);
         this.route = injector.get(ActivatedRoute);
         this.baseApiService = injector.get(BaseApiService);
+        this.translate = injector.get(TranslateService);
     }
 
     ngOnChanges(changes: SimpleChanges)
@@ -112,7 +115,7 @@ export class BaseAccountsComponent extends BaseComponent {
                 if(this.templateType == 2)
                 {
                     this.hideUnusedAvailableBalance = true;
-                    const realBalance:any = {AccountTypeName:'Real Balance', Balance:0, CurrencyId:'', Id: this.Accounts[0].Id};
+                    const realBalance:any = {AccountTypeName: this.translate.instant('Balance.Real Balance'), Balance:0, CurrencyId:'', Id: this.Accounts[0].Id};
                     for (let i = 0; i < this.Accounts.length; i++)
                     {
                         if(this.Accounts[i].TypeId === 1 || this.Accounts[i].TypeId === 2)

@@ -1,5 +1,5 @@
 
-  <div class="info_us_section_content" [ngStyle]="layoutService.layoutStyle">
+  <div class="info_us_section_content" [style.margin-top]="layoutService.layoutStyle['margin-top']">
     <h2>{{'Header.Information' + route.snapshot.paramMap.get('productId')  | translate}}</h2>
     <div class="content" (click)="onTemplateClick($event)" [innerHTML]="content | sanitizer:'html'"></div>
   </div>

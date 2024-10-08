@@ -253,6 +253,9 @@ body
                             background: var(--header-menu-item-style3-general-sub-menu-item-background, transparent);
                             padding: var(--header-menu-item-style3-general-sub-menu-item-padding, 0);
                             border-radius: var(--header-menu-item-style3-general-sub-menu-item-border-radius, 0);
+                            &.hover {
+                              background: var(--header-menu-item-style3-general-sub-menu-item-hover-background, transparent);
+                            }
                             .general-menu_item_link {
                               display: block;
                             }
@@ -366,6 +369,7 @@ body
     background-image: var(--main-icon-to-top-bgImage, linear-gradient(to bottom, #1376f8, #194074));
     background-color: backgroundColor(main-icon-to-top, unset);
     color: var(--main-icon-top-color, #000);
+    z-index: var(--m-main-icon-top-z-index, 2);
     transform: rotate(-90deg);
     cursor: pointer;
     outline: none;

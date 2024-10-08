@@ -17,6 +17,7 @@ import {MobileDepositType13Component} from "../deposit-payments/deposit-type13/m
 import {MobileDepositType15Component} from "../deposit-payments/deposit-type15/mobile-deposit-type15.component";
 import {MobileDepositType16Component} from "../deposit-payments/deposit-type16/mobile-deposit-type16.component";
 import {MobileDepositType17Component} from "../deposit-payments/deposit-type17/mobile-deposit-type17.component";
+import {MobileDepositType19Component} from "../deposit-payments/deposit-type19/mobile-deposit-type19.component";
 
 
 @Component({
@@ -149,6 +150,13 @@ export class MobileDepositBlockDefaultComponent extends BaseDepositComponent {
                 this.componentRef.instance.maxMinAmount = maxMinAmount;
                 this.componentRef.instance.walletAddress = this.currentPayment.Address;
                 this.componentRef.instance.DestinationTag = this.currentPayment.DestinationTag;
+                break;
+            }
+            case 19: {
+                this.componentRef = this.entry.createComponent(MobileDepositType19Component);
+                this.componentRef.instance.paymentSystemId = Id;
+                this.componentRef.instance.contentType = ContentType;
+                this.componentRef.instance.maxMinAmount = maxMinAmount;
                 break;
             }
         }

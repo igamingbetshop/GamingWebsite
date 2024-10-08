@@ -88,8 +88,8 @@
                                 {
                                     @if(menuItem.OpenInRouting)
                                     {
-                                        <a class="general-menu_item_link"   pointerOnLink="{{menuItem.Href}}">
-                                            {{'Header.' + menuItem?.Title | translate}}
+                                        <a class="general-menu_item_link" pointerOnLink="{{menuItem.Href}}"
+                                           [innerHTML]="'Header.' + menuItem?.Title | translate | sanitizer: 'html'">
                                         </a>
                                     }
                                     @else
@@ -103,8 +103,7 @@
                                 }
                                 @case ('depositBtn')
                                 {
-                                    <div>
-                                        {{'Header.Deposite' | translate}}
+                                    <div [innerHTML]="'Header.Deposite' | translate | sanitizer: 'html'">
                                     </div>
                                 }
                                 @case ('logoImg')
@@ -128,6 +127,12 @@
                                 {
                                     <div class="default_width">
                                         <chant-opener></chant-opener>
+                                    </div>
+                                }
+                                @case('profileImageBtn')
+                                {
+                                    <div class="default_width">
+                                        <profile-image-icon></profile-image-icon>
                                     </div>
                                 }
                                 @case('Btn')
@@ -373,8 +378,7 @@
                                         }
                                         @case ('depositBtn')
                                         {
-                                            <div>
-                                                {{'Header.Deposite' | translate}}
+                                            <div [innerHTML]="'Header.Deposite' | translate | sanitizer: 'html'">
                                             </div>
                                         }
                                         @case ('character')
@@ -390,6 +394,12 @@
                                         {
                                             <div class="default_width">
                                                 <chant-opener></chant-opener>
+                                            </div>
+                                        }
+                                        @case('profileImageBtn')
+                                        {
+                                            <div class="default_width">
+                                                <profile-image-icon></profile-image-icon>
                                             </div>
                                         }
                                         @case ('clientsDpd')
@@ -502,7 +512,7 @@
                                         {
                                             @if(bonus != '0.00')
                                             {
-                                                <div class="flex_column_center">
+                                                <div class="flex_column_center bonus-balance">
                                                     <span>{{'User.Bouns' | translate}}</span>
                                                     <span>{{bonus}} {{currencySymbol}}</span>
                                                 </div>
@@ -668,8 +678,7 @@
                                     }
                                     @case ('depositBtn')
                                     {
-                                        <div>
-                                            {{'Header.Deposite' | translate}}
+                                        <div [innerHTML]="'Header.Deposite' | translate | sanitizer: 'html'">
                                         </div>
                                     }
                                     @case ('character')
@@ -807,6 +816,12 @@
                                         <div class="header-item-chat-icon">
                                             <chant-opener></chant-opener>
                                             <div> {{'Header.' + menuItem?.Title | translate}}</div>
+                                        </div>
+                                    }
+                                    @case('profileImageBtn')
+                                    {
+                                        <div class="default_width">
+                                            <profile-image-icon></profile-image-icon>
                                         </div>
                                     }
                                 }
@@ -957,7 +972,8 @@
                                     @case ('userIdTxt')
                                     {
                                         <div class="user_id" [routerLink]="['/user/account']">
-                                            {{userData?.Id}}
+                                            <span>{{'User.User_Id' | translate}}</span>
+                                            <span>{{userData?.Id}}</span>
                                         </div>
                                     }
                                     @case ('balanceTxt')
@@ -987,6 +1003,37 @@
                                                 <span>{{bonus}} {{currencySymbol}}</span>
                                             </div>
                                         }
+                                    }
+                                    @case ('accountPagesDpd')
+                                    {
+                                        <div>
+                                            <app-global-account-pages-dpd class="{{menuItem.className}}-type"
+                                                                          [menuItem]="menuItem"
+                                                                          itemClassname="{{menuItem.className}}"
+                                                                          [openModal]="openModal">
+                                            </app-global-account-pages-dpd>
+                                        </div>
+                                    }
+                                    @case ('ticketsImg')
+                                    {
+                                        <div class="envelope-item">
+                                            @if(isLogin)
+                                            {
+                                                <div>
+                                                    <app-global-tickets unreadMessagesCount="{{unreadMessagesCount}}"
+                                                                        [menuItem]="menuItem"
+                                                                        class="{{menuItem.className}}-type"
+                                                                        [openModal]="openModal">
+                                                    </app-global-tickets>
+                                                </div>
+                                            }
+                                            @else
+                                            {
+                                                <div class="user_tickets" (click)="openNotLoginNewTicket(menuItem)">
+                                                    <i class="icon icon-message"></i>
+                                                </div>
+                                            }
+                                        </div>
                                     }
                                 }
                                 @if (menuItem.SubMenu.length && menuItem.SubMenu[0].Title)

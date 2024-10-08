@@ -34,9 +34,12 @@
 
     <div class="mobile-sign-up-container" *ngIf="(registerType?.Title == registerTypes.FULL && regFormSteps.length > 0) || (registerType === undefined)">
         <ul class="regSteps" *ngIf="regFormSteps.length > 1">
-            <li *ngFor="let elem of regFormSteps; let i = index" class="regStep"
-                [ngClass]="{'regStep_active': (i+1) == currentStep, 'regStep_prev': ((currentStep-1) > 0) &&
-                            (i <= (currentStep-2))}"></li>
+            <ng-container *ngFor="let elem of regFormSteps; let i = index">
+                <li class="regStep"
+                    [ngClass]="{'regStep_active': (i+1) == currentStep, 'regStep_prev': ((currentStep-1) > 0) &&
+                            (i <= (currentStep-2))}"><span class="regStep-number">{{ i+1 }}</span></li>
+                <div class="regSteps-text">{{'Register.' + 'Step' + [i+1] | translate}} <div *ngIf="i < regFormSteps.length - 1" class="separator-line"></div></div>
+            </ng-container>
         </ul>
         <div class="title-error" *ngIf="userRegisterService.errorMessage">
             {{userRegisterService.errorMessage}}
@@ -48,9 +51,7 @@
                 <button class="authentication-button" (click)="openModal('Register', $event)" [ngClass]="{'active': openedLogin}">{{'Register.Registration' | translate}}</button>
             </div>
             <div class="allFormItems" *ngIf="formTemplates[currentStep - 1].length > 0">
-                <div class="hidden-title">
-                    {{'Register.AccountInformation' | translate}}
-                </div>
+                <div class="hidden-title" [innerHTML]="'Register.AccountInformation' | translate | sanitizer: 'html'"></div>
                 <div *ngFor="let form_elem of formTemplates[currentStep - 1]"
                      [ngClass]="{'form-row-item__autoHeight': form_elem?.Type === 'Region4',
                       'newHeight': ((this.stepsLength.length > 1) && (form_elem?.Type == 'password')),
@@ -611,9 +612,7 @@
     <div *ngIf="registerType?.Title == registerTypes.QUICK">
         <form [formGroup]="quickRegForm" autocomplete="off" novalidate>
             <div class="allFormItems" *ngIf="quickFormTemplate.length > 0">
-                <div class="hidden-title">
-                    {{'Register.AccountInformation' | translate}}
-                </div>
+                <div class="hidden-title" [innerHTML]="'Register.AccountInformation' | translate | sanitizer: 'html'"></div>
                 <div *ngFor="let form_elem of quickFormTemplate; trackBy: trackByMethod"
 
                      class="form-row-item form-row {{form_elem?.Type}}-mobile form-row{{form_elem?.FieldSize == '1' ? form_elem?.FieldSize : 0.5*form_elem?.FieldSize}}"
@@ -947,7 +946,7 @@
                             <div class="form_field_top">
                                 <div class="custom-register-type-checkboxes">
                                     <div *ngFor="let item of quickRegTypeList" class="checkbox-content" (change)="changeQuickRegisterType($event.target.value)">
-                                        <input type="radio" name="options" [value]="item?.Type" class="checkbox-type-input">
+                                        <input [checked]="item?.Type === quickRegisterType?.Type" type="radio" name="options" [value]="item?.Type" class="checkbox-type-input">
                                         <label class="checkbox-type-label">{{ item?.Type }}</label>
                                     </div>
                                 </div>

@@ -78,6 +78,21 @@
       .two-factor-steps-description-in {
         margin: var(--two-factor-step-text-description-in-margin, 10px 0);
       }
+      .qr-key
+      {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background-color: var(--qr-key-background-color, transparent);
+        border-radius: var(--qr-key-border-radius,0);
+        color: var(--qr-key-color, #fff);
+        .copy-img
+        {
+          width: var(--copy-icon-width,18px);
+          height: var(--copy-icon-height,18px);
+          cursor: pointer;
+        }
+      }
       .enabled-mode {
         position: relative;
         .enable-otp-btn {

@@ -6,6 +6,7 @@
     <img class="login-logo-svg" src="../../../../../../../assets/images/logo.svg"/>
     <div class="login-section {{mainClass}} {{sectionClass}}">
         <p class="login-title">{{'Login.Sign In' | translate}}</p>
+        <p class="login-title-custom">{{'Login.SignInCustom' | translate}}</p>
         <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()" (keyup.enter)="submit()" *ngIf="formReady">
             <div class="authentication-buttons">
                 <button class="authentication-button" (click)="openModal('Login', $event)"

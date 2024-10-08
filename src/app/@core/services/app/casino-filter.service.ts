@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, debounceTime, Subject} from "rxjs";
+import {SaveData} from "@core/services";
 
 @Injectable()
 export class CasinoFilterService {
@@ -26,10 +27,13 @@ export class CasinoFilterService {
   selectedCategory:any;
 
   providers:any[] = [];
+  menuCategoryIds:number[] = [];
+  orderByNameDesc:number = 0;
 
-  constructor()
+  constructor(private savedData:SaveData)
   {
     this._gamePatternSbj.pipe(debounceTime(500)).subscribe(result => {
+      this.#resetPagination();
       this.gamePattern = result;
       this._notifyGamePatternChangeSbj.next(result);
       this.notifyFilterChange();
@@ -70,6 +74,15 @@ export class CasinoFilterService {
     }
     this.#resetPagination();
     this.notifyFilterChange();
+  }
+
+  clearCategory(emitChange:boolean = false)
+  {
+    this.selectedCategory = null;
+    this.categories = [];
+    this.#resetPagination();
+    if(emitChange)
+      this.notifyFilterChange();
   }
 
   addProvider(provider, multiselect = false)
@@ -117,6 +130,7 @@ export class CasinoFilterService {
       categories:this.categories,
       gamePattern:this.gamePattern,
       pageIndex:this.pageIndex,
+      orderByNameDesc:this.orderByNameDesc,
       pageSize:this.pageSize,
       categoryId:this.selectedCategory ? this.selectedCategory.Id : null,
       concatData:concatData
@@ -136,9 +150,6 @@ export class CasinoFilterService {
     }
   }
 
-
-
-
   changeCategoryFromUrl(type)
   {
     const category = {Id:null, Name:''};
@@ -157,6 +168,15 @@ export class CasinoFilterService {
     }
     this.addCategory(category);
 
+  }
+
+  changeOrderByName(value:number)
+  {
+    if(value !== this.orderByNameDesc)
+    {
+      this.orderByNameDesc = value;
+      this.notifyFilterChange();
+    }
   }
 
   nextPage()
@@ -182,7 +202,9 @@ export class CasinoFilterService {
   #resetPagination()
   {
     this.pageSize = this.DEFAULT_PAGE_SIZE;
-    this.pageIndex = this.DEFAULT_PAGE_INDEX
+    this.pageIndex = this.DEFAULT_PAGE_INDEX;
+    this.savedData.deleteCasinoGames();
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
 }

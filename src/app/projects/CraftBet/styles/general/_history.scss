@@ -29,8 +29,15 @@
     gap: var(--bonuses-block-head-gap, 10px);
     font-size: var(--bonuses-block-head-font-size, 16px) !important;
   }
+  .verification-table{
+    border: 1px solid var(--history-block-border,transparent);
+    border-radius: var(--history-block-border-radius, 8px);
+    padding:  var(--history-block-padding,0);
+    background-color: var(--history-block-section-bg, #16233a);
+  }
   .block-head, .bets-history-block-head {
     border-radius: var(--history-block-head-bg-border-radius, 8px);
+    border-bottom: 1px solid var(--history-block-head-border-bottom, transparent);
     background-image: var(--history-block-head-bg, linear-gradient(to bottom, #16233a, #151a23));
     padding-left: var(--history-block-head-pdleft, 16px);
     padding-right: var(--history-block-head-pdright, 16px);
@@ -39,6 +46,7 @@
     margin-bottom: var(--history-block-head-mrgbottom, 8px);
     color: var(--history-block-head-color, #fff);
     font-size: var(--history-block-head-font-size, 16px);
+
     .hide-form-row {
       display: var(--bank-account-hide-field-display, block);
     }
@@ -58,7 +66,11 @@
     display: flex;
     flex-direction: column;
     gap: $account-extra-big-gap;
-    border-radius: 6px;
+    border-radius: var(--history-block-section-border-radius,6px);
+    border-bottom: 1px solid var(--history-block-section-border-bottom, transparent);
+    border-top: 1px solid var(--history-block-section-border-top, transparent);
+    border-left: 1px solid var(--history-block-section-border-left, transparent);
+    border-right: 1px solid var(--history-block-section-border-right, transparent);
     background-color: var(--history-block-section-bg, #16233a);
     padding: 15px 14px 32px 14px;
     height: var(--history-block-section-height, auto);
@@ -190,40 +202,45 @@
           line-height: 27px;
           padding: 0 14px;
           border-radius: 4px;
-          color: rgba(12, 106, 230, 1);
-          background: rgba(20, 46, 84, 1);
+          color: itemColor(history-status,rgba(12, 106, 230, 1));
+          background: backgroundColor(history-status,rgba(20, 46, 84, 1));
           font-weight: 500;
 
           &.status-Pending
           {
-            color: #f5a711;
-            background: rgba(56, 60, 65, 1);
+            color: itemColor(history-status-panding,#f5a711);
+            background: backgroundColor(history-status-panding,rgba(56, 60, 65, 1));
           }
           &.status-Won
           {
-            color: rgba(34, 207, 180, 1);
-            background-color: rgba(23, 52, 70, 1);
+            color: itemColor(history-status-won,rgba(34, 207, 180, 1));
+            background: backgroundColor(history-status-won,rgba(23, 52, 70, 1));
           }
           &.status-Lost
           {
-            background: rgba(57, 42, 62, 1);
-            color: rgba(216, 0, 39, 1);
+            color: itemColor(history-status-lost,rgba(216, 0, 39, 1));
+            background: backgroundColor(history-status-lost,rgba(57, 42, 62, 1));
           }
           &.status-Deleted{
-            background: rgba(57, 47, 66, 1);
-            color:rgba(253, 114, 114, 1);
+            color: itemColor(history-status-deleted,rgba(253, 114, 114, 1));
+            background: backgroundColor(history-status-deleted,rgba(57, 47, 66, 1));
           }
           &.status-Cashouted{
-            background: rgba(38, 43, 83, 1);
-            color: rgba(128, 84, 223, 1);
+            color: itemColor(history-status-cashouted,rgba(128, 84, 223, 1));
+            background: backgroundColor(history-status-cashouted, rgba(38, 43, 83, 1));
           }
           &.status-Waiting{
-            color: rgba(248, 203, 107, 1);
-            background: rgba(56, 60, 65, 1);
+            color: itemColor(history-status-waiting,rgba(248, 203, 107, 1));
+            background: backgroundColor(history-status-waiting, rgba(56, 60, 65, 1));
           }
           &.status-Returned{
-            background: rgba(31, 57, 81, 1);
-            color:rgba(84, 183, 211, 1);
+            color: itemColor(history-status-waiting,rgba(84, 183, 211, 1));
+            background: backgroundColor(history-status-waiting, rgba(31, 57, 81, 1));
+          }
+          &.status-Failed
+          {
+            color: itemColor(history-status-failed,rgba(216, 0, 39, 1));
+            background: backgroundColor(history-status-failed,rgba(57, 42, 62, 1));
           }
         }
 
@@ -341,6 +358,7 @@
         height: height(edit-button, 40px);
         border-radius: var(--edit-button-border-radius, 3px);
         width: var(--history-tools-show-btn-width, auto);
+        border: var(--history-tools-show-btn-border, none);
         cursor: pointer;
       }
       &:last-child {

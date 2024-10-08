@@ -1,4 +1,4 @@
-window.HostNameUrl = 'inxbet.com';
+window.HostNameUrl = 'craftbet.com';
 window.PartnerName = 'CraftBet';
 window['debugPath'] = 'https://' + window.HostNameUrl;
 

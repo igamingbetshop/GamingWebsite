@@ -52,7 +52,7 @@ export class MobileMoreMenuComponent implements OnInit, OnDestroy {
 
   onMenu(item)
   {
-    this.menuService.close('more-menu');
+    this.menuService.toggle(false);
     if(item.Href.startsWith('sport') && this.configService.defaultOptions.SportOpenMode === 'migrated')
     {
       this.sharedService.notifyMigratedSportRouteChange(item.Href);

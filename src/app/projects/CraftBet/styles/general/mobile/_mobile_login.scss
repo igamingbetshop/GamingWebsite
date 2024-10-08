@@ -48,6 +48,17 @@ app-mobile-login
       top: var(--m-login-top-part-top, auto);
       left: var(--m-login-top-part-left, auto);
     }
+    .top-login-text-custom-part {
+      color: itemColor(m-login-top-part-custom, #fff);
+      margin-top: marginTop(m-login-top-part-custom, 20px);
+      margin-left: marginLeft(m-login-top-part-custom, 0px);
+      font-size: fontSize(m-login-top-part-custom, 16px);
+      font-weight: fontWeight(m-login-top-part-custom, 400);
+      position: var(--m-login-top-part-custom-position, relative);
+      top: var(--m-login-top-part-custom-top, auto);
+      left: var(--m-login-top-part-custom-left, auto);
+      display: var(--m-login-top-part-custom-display, none);
+    }
     .top-login-text-part::before {
       content: '';
       position: absolute;
@@ -102,11 +113,19 @@ app-mobile-login
   }
 
   .error-message{
-    display: flex;
-    //position: absolute;
-    bottom: 48px;
-    margin-top: 16px;
-    width: 100%;
+    display: var(--m-login-error-message-display, flex);
+    gap: var(--m-login-error-message-gap, 5px);
+    bottom: var(--m-login-error-message-bottom, 48px);
+    margin-top: var(--m-login-error-message-margin-top, 16px);
+    width: var(--m-login-error-message-width, 100%);
+    background-color: var(--m-login-error-message-background-color, var(--error-message-background-color, #fff));
+    border-left: var(--m-login-error-message-border-left, 2px solid rgb(255, 72, 72));
+    padding: var(--m-login-error-message-padding, 0 10px);
+    .icon-error-message {
+      font-size: var(--m-login-error-message-icon-font-size, 14px);
+      margin-right: var(--m-login-error-message-icon-margin-right, 10px);
+      display: var(--m-login-error-message-icon-display, block);
+    }
     .error-message-text {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -120,6 +139,9 @@ app-mobile-login
     margin: 0 auto;
     margin-top: var(--m-login-logo-margin-top, 11px);
     margin-bottom: var(--m-login-logo-margin-bottom, 29px);
+    position: var(--m-login-logo-position, relative);
+    top: var(--m-login-logo-item-top, 0);
+    left: var(--m-login-logo-item-left, 0);
   }
   .mobile-login-logo-svg {
     height: height(m-login-logo, 36px);
@@ -130,6 +152,9 @@ app-mobile-login
     margin-left: var(--m-login-logo-margin-left, auto);
     margin-right: var(--m-login-logo-margin-right, auto);
     background: var(--m-login-logo-background, transparent);
+    position: var(--m-login-logo-position, relative);
+    top: var(--m-login-logo-item-top, 0);
+    left: var(--m-login-logo-item-left, 0);
   }
 
   &_field_top {

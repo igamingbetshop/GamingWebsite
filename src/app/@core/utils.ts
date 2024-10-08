@@ -1,6 +1,7 @@
 import {environment} from "../../environments/environment";
 import * as JsEncryptModule from 'jsencrypt';
 import {ConfigService} from "@core/services";
+import {FragmentData} from "@core/models";
 
 const publicKey = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxDV6Tkh5noY4NWUd5G3q
@@ -63,6 +64,16 @@ export function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function getRandomUpcomingDate() {
+  const today = new Date();
+  const secondsToAdd = Math.floor(Math.random() * 60) + 1;
+  const randomDate = new Date(today);
+
+  randomDate.setSeconds(today.getSeconds() + secondsToAdd);
+
+  return randomDate;
 }
 
 export function getAmountNominalsByCurrency(currencyId:string):Array<any>
@@ -350,6 +361,17 @@ export function getFragmentsByType(block, position:string, location:string = nul
         {
           item.Config.name = fragment.Items[0].Title;
           filteredByLocation.push(item);
+        }
+        if(item.SubMenu && item.SubMenu.length)
+        {
+          item.SubMenu.forEach(sbMenuItem => {
+            const subFragmentData = new FragmentData();
+            subFragmentData.Order = sbMenuItem.Order;
+            subFragmentData.Title = sbMenuItem.Title;
+            subFragmentData.Href = sbMenuItem.Href;
+            if(sbMenuItem.StyleType)
+              subFragmentData.Config = JSON.parse(sbMenuItem.StyleType);
+          });
         }
       }
       obj[key].Items = filteredByLocation;

@@ -3,7 +3,7 @@ import {
     Directive, EventEmitter, inject,
     Injector,
     OnDestroy,
-    OnInit,
+    OnInit, signal,
     ViewChild,
     ViewContainerRef
 } from "@angular/core";
@@ -62,6 +62,7 @@ export class BaseProfile implements OnInit, OnDestroy
     private subscription:Subscription;
     private isFirstTimeUpdateClient:boolean = true;
     public rightToLeftOrientation: boolean = false;
+    showProfileImage = signal<boolean>(false);
 
     constructor(protected injector:Injector)
     {
@@ -93,6 +94,11 @@ export class BaseProfile implements OnInit, OnDestroy
                         const profileDetails = data.find((item) => item.Title == 'ProfileDetails');
                         if(profileDetails && profileDetails.SubMenu)
                         {
+                            if(profileDetails.StyleType)
+                            {
+                                const st = JSON.parse(profileDetails.StyleType);
+                                this.showProfileImage.set(st.profileImage);
+                            }
                             this.formItems =  profileDetails.SubMenu.map(elem => {
                                 if(elem.StyleType)
                                 {

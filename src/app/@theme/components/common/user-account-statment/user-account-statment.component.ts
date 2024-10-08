@@ -2,6 +2,7 @@ import {OnInit, Injector, Injectable} from '@angular/core';
 import {SaveData, ConfigService} from '@core/services';
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {BalanceService} from "@core/services/api/balance.service";
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Injectable()
@@ -10,7 +11,7 @@ export class UserAccountStatmentComponent implements OnInit {
     public userLogined: UserLogined;
     public saveData: SaveData;
     public configService: ConfigService;
-
+    public translate: TranslateService;
 
     public isLogin: boolean;
     public userInfo: any;
@@ -24,6 +25,7 @@ export class UserAccountStatmentComponent implements OnInit {
         this.userLogined = injector.get(UserLogined);
         this.saveData = injector.get(SaveData);
         this.configService = injector.get(ConfigService);
+        this.translate = injector.get(TranslateService);
     }
 
     async ngOnInit() {
@@ -41,6 +43,13 @@ export class UserAccountStatmentComponent implements OnInit {
             this.pageSubTitle = data['subTitle'];
         });
 
+    }
+
+    protected formatValue(value:number):string
+    {
+        if(Number.isInteger(value))
+            return value.toFixed(2);
+        else return (Math.trunc(value * 100) / 100).toFixed(2);
     }
 
 }

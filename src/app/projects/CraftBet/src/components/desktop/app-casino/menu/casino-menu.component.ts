@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input } from '@angular/core';
 import {BaseCasinoMenu} from "../../../../../../../@theme/fragments/casino/menu/base-casino-menu";
 import {Fragment} from "../../../../../../../@core/models";
 import {getFragmentsByType} from "../../../../../../../@core/utils";
@@ -11,13 +11,16 @@ import {FragmentSource, FragmentType} from "../../../../../../../@core/enums";
 })
 export class CasinoMenuComponent extends BaseCasinoMenu
 {
-    @Input('position') position:string;
+    /*@Input('position') position:string;*/
+    position = input.required<string, string>({transform:position => {
+            return position;
+        }})
     fragments: {[key: string]: Fragment};
 
     ngOnInit()
     {
         super.ngOnInit();
         const block = this.configService.defaultOptions[FragmentSource.Web];
-        this.fragments = getFragmentsByType(block, this.position, FragmentType.Menu);
+        this.fragments = getFragmentsByType(block, this.position(), FragmentType.Menu);
     }
 }

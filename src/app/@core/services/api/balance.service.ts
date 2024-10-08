@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ConfigService} from '../app/config.service';
 import {Balance, Request} from "@core/models";
 import {LocalStorageService} from "@core/services/app/localStorage.service";
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {Controllers, Methods} from "@core/enums";
 import {SignalRService} from "@core/services/soket/signal-r.service";
 import {BaseApiService} from "@core/services/api/base-api.service";
@@ -123,7 +123,7 @@ export class BalanceService {
         return balance;
     }
 
-    getPartnerCurrenciesByType(): any {
+    getPartnerCurrenciesByType(): Observable<any> {
         return this.baseApiService.apiRequest(null, Controllers.MAIN, Methods.GET_PARTNER_CURRENCIES, false);
     }
 }

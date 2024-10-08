@@ -1,3 +1,7 @@
+@if(showProfileImage())
+{
+    <profile-image></profile-image>
+}
 <div class="mobile-settings-section" [ngStyle]="layoutService.layoutStyle"
      [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
     <h2 class="mobile-settings-section_title">{{ 'User.ProfileDetails' | translate }}</h2>

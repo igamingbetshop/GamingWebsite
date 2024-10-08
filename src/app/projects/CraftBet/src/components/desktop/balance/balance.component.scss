@@ -5,6 +5,15 @@
   transform: var(--text-style2-text-transform, skew(25deg));
   justify-content: var(--text-style2-text-justify-content, unset);
   margin: var(--text-style2-text-margin, 0);
+  gap: var(--text-style2-text-gap, 0);
+  .icon-arrow-to-left {
+    display: var(--header-balance-icon-display, none);
+    transform: rotate(-90deg);
+    font-size: var(--header-balance-icon-font-size, 12px);
+    position: var(--header-balance-icon-position, relative);
+    right: var(--header-balance-icon-right, 0);
+    top: var(--header-balance-icon-top, 0);
+  }
   span:first-child{margin-right: 8px}
 }
 .header-user-name
@@ -50,6 +59,7 @@
   }
   &.opened:not([href])
   {
+    .icon-arrow-to-left{transform: rotate(90deg);transition: all 0.4s ease;}
     .balance-popup{display: block;}
     .balance-popup::before {
       display: var(--balance-popup-icon-display, none);

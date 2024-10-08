@@ -55,7 +55,7 @@ export class BaseFriendsComponent implements OnInit {
   ngOnInit() {
     this.defaultOptions = this.configService.defaultOptions;
     const platformId = this.defaultOptions.PartnerId * 100;
-    this.referralLink = window.location.origin +  '/signup' + "/?ReferenceCode=" + this.userData.Id + "&AffiliatePlatformId=" + platformId;
+    this.referralLink = window.location.origin +  '/signup' + "/?C=" + this.userData.Id + "&P=" + platformId;
     this.getFriends(this.selectedTimeFilter.Range);
   }
 

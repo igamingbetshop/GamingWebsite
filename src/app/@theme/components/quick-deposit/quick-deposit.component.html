@@ -1,0 +1,20 @@
+<span>{{'Deposit.QuickDepositTitle' | translate}}</span>
+<span>{{'Deposit.QuickDepositDescription' | translate}}</span>
+<div class="content">
+    <ul>
+        @for(nominal of nominals(); track nominal.Amount)
+        {
+            <li [class.selected]="nominal.Amount === selectedAmount()" (click)="selectNominal(nominal)">{{nominal.Amount}}</li>
+        }
+    </ul>
+    <div class="amount">
+        <input type="number" [value]="selectedAmount()" (input)="updateInput($event.target.value)" inputmode="numeric">
+        <span>{{currencyId}}</span>
+    </div>
+    <div class="button" (click)="deposit()">{{'Deposit.QuickDeposit' | translate}}</div>
+</div>
+
+
+
+
+

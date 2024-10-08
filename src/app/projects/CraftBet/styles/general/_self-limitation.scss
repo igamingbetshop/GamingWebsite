@@ -121,15 +121,18 @@
         display: flex;
         gap: 21px;
         .limit-type {
+          display: var(--limit-type-display,block);
+          gap: var(--limit-type-gap,20px);
           .limit-underline {
             @include account-underline;
             width: var(--limit-type-underline-width, 0px);
           }
           &_row {
             display: grid;
-            grid-template-columns: var(--limit-type-grid-templates, repeat(5,1fr));
+            grid-template-columns: var(--limit-type-grid-templates, repeat(4,1fr));
             gap: var(--limit-type-grid-gap, 28px);
-            align-items: center;
+            align-items: var(--limit-type-grid-item-align,center);
+            grid-template-rows: var(--limit-type-grid-template-rows,minmax(0, auto));
             margin-bottom: var(--limit-type-margin-bottom, 28px);
             position: relative;
             .limit-type-title {
@@ -240,6 +243,8 @@
           .date-input {
             position: unset;
             margin-bottom: var(--self-exclusion-row-date-label-margin-bottom, -15px);
+            font-size: var(--date-input-label-font-size, 14px);
+            font-weight: var(--date-input-label-font-weight, normal);
           }
           input::-webkit-datetime-edit-fields-wrapper {
             display: none;
@@ -285,6 +290,12 @@
             top: var(--self-limit-password-icon-top, 13px);
             cursor: pointer;
           }
+          >.date-input{
+            top: var(--date-input-label-top, 12px);
+            left: var(--date-input-label-left, 8px);
+            font-size: var(--date-input-label-font-size, 14px);
+            font-weight: var(--date-input-label-font-weight, normal);
+          }
         }
         .periods {
           .period-label {
@@ -314,6 +325,10 @@
         height: var(--self-limitation-button-height, 40px);
         border-radius: var(--edit-button-border-radius, 3px);
         cursor: pointer;
+        &.confirm-button{
+          background:linear-gradient(180deg, var(--confirm-button-gradient-first-color, #FFFFFF) 0%, var(--confirm-button-gradient-second-color, #FFFFFF) 100%);
+          color: var(--confirm-button-text-color, #000);
+        }
       }
     }
     label {
@@ -355,10 +370,11 @@
       font-size: var(--change-password-font-size-label, 20px);
       color: var(--change-password-focus-label-focused, #fff);
       text-align: var(--change-password-focus-label-focused-text-align, left);
+      display: var(--change-password-focus-label-focused-display,block);
     }
     input, select
     {
-      width: var(--self-limitation-fields-width, auto);
+      width: var(--self-limitation-fields-width, 100%);
       height: var(--self-limitation-fields-height, 44px);
       background-color: $account-content-item-bg-color;
       padding: var(--self-limitation-fields-padding, 12px 16px);

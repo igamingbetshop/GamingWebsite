@@ -49,7 +49,7 @@
 
   <div class="mobile-history-table">
     <table>
-      <tbody class="bet-history-tbody">
+     <thead>
       <tr>
         <td><span>{{'User.Date' | translate}}</span></td>
         <td><span>{{'User.Id' | translate}}</span></td>
@@ -61,6 +61,8 @@
         <td><span>{{'User.View' | translate}}</span></td>
         <!--      <td><span>{{'User.Info' | translate}}</span></td>-->
       </tr>
+     </thead>
+        <tbody class="bet-history-tbody">
       <tr class="status-{{item?.statusName}}" *ngFor="let item of getBetsHistoryService.betsHistoryList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getBetsHistoryService.betsHistoryListCount }, let i = index">
         <td>{{item?.BetDate | date: 'dd/MM/yyyy H:mm'}}</td>
         <td>{{item?.BetDocumentId}}</td>

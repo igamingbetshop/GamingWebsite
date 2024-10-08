@@ -1,10 +1,9 @@
 .mobile-sports-section, .mobile-lottery-sports-section {
-  height: calc(100% - 64px);
+  min-height: calc(100% - 64px);
   margin-top:64px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  position: absolute;
   width: 100%;
   background: backgroundColor(m-product-bg,  #FFFFFF);
 

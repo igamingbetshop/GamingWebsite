@@ -20,6 +20,8 @@
 }
 .hidden-register-text {
   display: var(--header-reg-btn-custom-icon-display, none);
+  align-items: var(--header-reg-btn-custom-icon-align-items, center);
+  justify-content: var(--header-reg-btn-custom-icon-justify-content, unset);
   position: var(--header-reg-btn-custom-icon-position, relative);
   width: var(--header-reg-btn-custom-icon-width, 100%);
   height: var(--header-reg-btn-custom-icon-height, auto);

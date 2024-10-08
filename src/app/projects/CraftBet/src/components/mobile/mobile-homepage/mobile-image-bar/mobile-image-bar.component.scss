@@ -19,7 +19,7 @@
       transition: transform 250ms;
       &:hover
       {
-        transform: scale(var(--fragment-image-bar-scale, 1.1));
+        transform: var(--m-fragment-image-bar-transform, scale(var(--fragment-image-bar-scale, 1.1)));
       }
     }
     &.horizontal
@@ -40,6 +40,7 @@
       width: 100%;
       max-width: 100%;
       border-radius: inherit;
+      height: inherit;
     }
     .image-bar-title
     {

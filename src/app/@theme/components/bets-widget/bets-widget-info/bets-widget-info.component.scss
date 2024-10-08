@@ -1,0 +1,121 @@
+:host{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: clamp(200px, 95vw, 500px);
+  background: #1a2c38;
+  max-height: calc(100vh - 40px);
+  border-radius: 8px;
+  padding: 16px;
+  >div
+  {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    &:nth-of-type(2){
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      svg{
+        color: #b1bad3;
+        width: 16px;
+        height: 16px;
+      }
+    }
+    &:nth-of-type(3){
+      text-align: center;
+      margin-top: 4px;
+    }
+    &:nth-of-type(4)
+    {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      svg
+      {
+        width: 14px;
+        height: 14px;
+        cursor: pointer;
+        position: relative;
+        &:active{
+          scale: 0.8;
+        }
+        &:hover{
+          color: #FFFFFF;
+        }
+      }
+    }
+    &:nth-of-type(5)
+    {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #b1bad3;
+      font-size: 14px;
+      svg{width: 16px; height: 16px}
+      >span{
+        &:first-of-type{display: inline-flex; gap: 8px; align-items: center}
+      }
+    }
+    &:nth-of-type(6)
+    {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 16px;
+      height: 45px;
+      &:after, &:before{
+        content: "";
+        height: 3px;
+        flex-grow: 1;
+        background:#2f4553;
+      }
+    }
+    &:nth-of-type(7)
+    {
+      background: #0f212e;
+      border-radius: 4px;
+      padding: 14px;
+      >div{
+        display: flex;
+        >div
+        {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: calc(100% / 3);
+          padding: 0 15px;
+          gap: 8px;
+          span{
+            color: rgb(177, 186, 211);
+            font-size: 14px;
+          }
+          div
+          {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            span{
+              color: #FFFFFF;
+              min-width: 50px;
+              overflow: hidden;
+              text-overflow:ellipsis;
+              font-weight: 600;
+              text-align: center;
+            }
+            img{width: 15px;}
+          }
+          &:not(:last-of-type)
+          {
+            border-right: 1px solid rgb(177, 186, 211);
+          }
+        }
+      }
+    }
+  }
+}
+

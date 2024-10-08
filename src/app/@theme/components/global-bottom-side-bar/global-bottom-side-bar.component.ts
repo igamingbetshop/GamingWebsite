@@ -68,14 +68,7 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
                // this.selectedOrder = undefined;
             }
         }));
-        this.menuService.onClose$.subscribe((requestData:any) => {
-            if (typeof requestData === "object") {
-                let filterItem = this.menuList.filter((item: any) => (item.Type === requestData?.position));
-                this.toggleMenu(filterItem[0]);
-            } else if (requestData === 'more-menu') {
-                this.selectedMoreItem = false;
-            }
-        });
+
         window.removeEventListener('betslipChange', this.onBetslipChange);
         window.addEventListener('betslipChange', this.onBetslipChange);
 
@@ -106,6 +99,8 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
             this.selectedOrder = this.menuList.find(menuItem => this.router.url.slice(1) === menuItem['Href'])?.Order;
             this.selectedItemHref = this.menuList.find(menuItem => this.router.url.slice(1) === menuItem['Href'])?.Href;
         }
+        if(item.Type !== 'AnimatedLeftSideBar')
+            this.menuService.toggle(false);
         switch (item.Type) {
             case 'MobileMenu' :
                 this.onLeftSidebarOpen();
@@ -125,7 +120,7 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
                 this.openStatement();
                 break;
             case 'AnimatedLeftSideBar' : {
-                this.toggleMenu(item);
+                this.menuService.toggle();
                 break;
             }
             case 'Chat' : {
@@ -171,14 +166,6 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
         }
     }
 
-    toggleMenu(item) {
-        item['selected'] = !item['selected'];
-        if (item['selected']) {
-            this.menuService.open('menu');
-        } else {
-            this.menuService.close('menu');
-        }
-    }
 
     onLeftSidebarOpen() {
         this.sharedService.mobileLeftSidebarOpen.next({'toggle': true, 'fullScreen': true})

@@ -11,4 +11,9 @@ import {BaseLoaderComponent} from "../../../../../../@theme/components/base/base
 export class LoaderComponent extends BaseLoaderComponent
 {
 
+  constructor()
+  {
+    super();
+  }
+
 }

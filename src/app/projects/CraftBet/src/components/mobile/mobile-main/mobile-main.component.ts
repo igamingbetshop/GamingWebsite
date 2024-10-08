@@ -23,15 +23,19 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
 
   public rightToLeftOrientation: boolean = false;
   isShowDeviceLayoutBackground:boolean = false;
-  private readonly footerExcludedUrls = [
+  private readonly footerExcludedUrls = this.configService.defaultOptions.SportOpenMode === 'migrated' ?  [
+    '/login',
+    '/signup',
+    '/chart',
+    '/profile-details'
+  ] : [
     '/prematch',
     'sport/live',
     '/esport',
     '/login',
     '/signup',
     '/chart',
-    '/profile-details'
-  ];
+  ]
 
 
   @HostListener('window:resize', ['$event'])
@@ -46,6 +50,7 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
 
   isExpired: true;
   @ViewChild('bottomSideBarRef', { read: ViewContainerRef }) bottomSideBarRef;
+
   bottomSideBarComponent:ComponentRef<any>;
   hideFooter:boolean = true;
 
@@ -127,8 +132,9 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
   }
   protected menuReady()
   {
-    setTimeout(() => {
-      this.renderLazyLoadComponents()
+    const p = setTimeout(() => {
+      this.renderLazyLoadComponents();
+      clearTimeout(p);
     }, 10);
     this.checkFooterDisplay();
   }
@@ -137,14 +143,16 @@ export class MobileMainComponent extends CommonMainComponent implements OnInit, 
   {
     if(this.mobileBottomSideBar.length > 0)
     {
-       if(!this.bottomSideBarComponent)
+       if(!window['bottomBar'])
        {
+         window['bottomBar'] = true;
          const { BottomSideBarModule } = await import("../../../../../../@theme/components/global-bottom-side-bar/bottom-side-bar.module");
          const moduleRef = createNgModule(BottomSideBarModule, this.injector);
          const component = moduleRef.instance.getComponent();
          this.bottomSideBarComponent = this.bottomSideBarRef.createComponent(component, {ngModuleRef: moduleRef});
        }
-      this.bottomSideBarComponent.instance.menuList = this.mobileBottomSideBar;
+       if( this.bottomSideBarComponent?.instance)
+        this.bottomSideBarComponent.instance.menuList = this.mobileBottomSideBar;
     }
   }
 

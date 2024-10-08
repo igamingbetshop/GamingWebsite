@@ -32,7 +32,10 @@ export class AccountPageType1StatementComponent extends UserAccountStatmentCompo
     };
 
     let responseData = await this.defaultService.defaultRequest(input);
-    this.accountData = responseData.ResponseObject.Accounts;
+    this.accountData = responseData.ResponseObject.Accounts.map(account => {
+      account.FromattedValue = account.CurrencyId ? this.formatValue(account.Balance) : account.Balance;
+      return account;
+    });
   }
 
 }

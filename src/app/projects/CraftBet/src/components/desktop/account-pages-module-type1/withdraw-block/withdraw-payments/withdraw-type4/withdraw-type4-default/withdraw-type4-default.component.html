@@ -8,13 +8,12 @@
           <div class="payment-form-field__column">
             <div class="payment-form-field__column all-amount">
               <input *ngIf="!nominals; else nominalsRef" type="text"
-                     [(ngModel)] = "amount"
                      class="payment-input" placeholder="{{'Withdraw.Amount-placeholder' | translate}}"
                      formControlName="Amount" numbersOnly/>
               <label class="payment-form-field__label">{{'Withdraw.Amount' | translate}} ({{currencyId}})</label>
               <div class="error_message" *ngIf="hasMinMaxError">
-                <span class="text" *ngIf = "amount < maxMinAmount?.MinAmount">{{'Deposit.AmountLessThen' | translate : { amount: maxMinAmount?.MinAmount, currency: currencyId} }}</span>
-                <span class="text" *ngIf = "this.amount > this.maxMinAmount?.MaxAmount">{{'Deposit.AmountMoreThen' | translate : { amount: maxMinAmount?.MaxAmount, currency: currencyId} }}</span>
+                <span class="text" *ngIf = "paymentForm.get('Amount').value < maxMinAmount?.MinAmount">{{'Deposit.AmountLessThen' | translate : { amount: maxMinAmount?.MinAmount, currency: currencyId} }}</span>
+                <span class="text" *ngIf = "paymentForm.get('Amount').value > this.maxMinAmount?.MaxAmount">{{'Deposit.AmountMoreThen' | translate : { amount: maxMinAmount?.MaxAmount, currency: currencyId} }}</span>
               </div>
               <ng-template #nominalsRef>
                 <app-common-payment-nominals [nominals]="nominals" (nominalChange)="onNominalChange($event)"></app-common-payment-nominals>
@@ -26,15 +25,40 @@
           </div>
         </div>
 
-        <div class="payment-form-field">
-          <div class="payment-form-field__column" (click)="editField = true">
-            <input type="text" class="payment-input" placeholder="{{'Withdraw.MobileNumber-placeholder' | translate}}"
-                   [ngClass]="{'active': editField, 'disable-item': !editField}"
-                   ngModel="{{MobileNumber}}"
-                   formControlName="MobileNumber"/>
-            <label class="payment-form-field__label">{{'Withdraw.MobileNumber' | translate}}</label>
-          </div>
-        </div>
+          @if (paymentSystemId === 385)
+          {
+              <div style="display: flex; float: left; width: 100%; gap: 10px; align-items: center">
+                  <div class="payment-form-field" style="width: 120px">
+                      <div class="payment-form-field__column column-select">
+                          <select formControlName="MobileCode" class="payment-select">
+                              @for(code of mobileCodes; track code.Type)
+                              {
+                                  <option value="" disabled>{{'Withdraw.SelectCode' | translate}}</option>
+                                  <option [value]="code.Type">{{code.Title}}({{code.Type}})</option>
+                              }
+                          </select>
+                          <label class="payment-form-field__label">{{'Withdraw.MobileCode' | translate}}</label>
+                      </div>
+                  </div>
+                  <div class="payment-form-field">
+                      <div class="payment-form-field__column">
+                          <input type="text" class="payment-input" numbersOnly placeholder="{{'Withdraw.MobileNumber-placeholder' | translate}}"
+                                 formControlName="MobileNumber"/>
+                      </div>
+                  </div>
+              </div>
+          }
+          @else
+          {
+              <div class="payment-form-field">
+                  <div class="payment-form-field__column" (click)="editField = true">
+                      <input type="text" class="payment-input" placeholder="{{'Withdraw.MobileNumber-placeholder' | translate}}"
+                             [ngClass]="{'active': editField, 'disable-item': !editField}"
+                             formControlName="MobileNumber"/>
+                      <label class="payment-form-field__label">{{'Withdraw.MobileNumber' | translate}}</label>
+                  </div>
+              </div>
+          }
       </div>
 
       <div class="payment-form-field">

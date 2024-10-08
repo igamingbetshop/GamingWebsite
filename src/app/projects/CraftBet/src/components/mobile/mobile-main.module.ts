@@ -148,6 +148,16 @@ const routes: Routes = [
         data: {backUrl: '/'}
     },
     {
+        path: 'group/:groupId',
+        loadChildren: () => import('./mobile-casino/mobile-casino.module').then(m => m.MobileCasinoModule),
+        data: {position: FragmentPositions.Group}
+    },
+    {
+        path: 'group/:groupId/:productId/:type/:openType',
+        loadChildren: () => import('./mobile-open-games/mobile-open-games.module').then(m => m.MobileOpenGamesModule),
+        data: {backUrl: '/'}
+    },
+    {
         path: 'games/0',
         redirectTo: '/games/my-favorites',
         pathMatch: 'full'
@@ -342,7 +352,7 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class MobileMainModule {
-    constructor(private navigationService: NavigationService) {
+    constructor() {
 
     }
 }

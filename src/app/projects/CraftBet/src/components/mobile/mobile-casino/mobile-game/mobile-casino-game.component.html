@@ -6,6 +6,7 @@
     <img class="category-icon" *ngIf="fragmentConfig?.itemIcon" src="../../../../../../../assets/images/{{fragmentConfig.itemIcon}}"/>
     <fa-icon [icon]="game?.isFavorite ? ['fas', 'star'] : ['far', 'star']" class="icon-star-info"
              (click)="toggleFavorite(game)" aria-hidden="true"></fa-icon>
+    <i *ngIf="fragmentConfig?.showGameInfo" (click)="toggleInfo(game?.productId)" class="icon-user-info"></i>
 <!--    <div class="show-hovered-game-names">-->
 <!--        <fa-icon [icon]="game.isFavorite ? ['fas', 'star'] : ['far', 'star']" class="icon-star-info2"-->
 <!--                 (click)="toggleFavorite(game)" aria-hidden="true"></fa-icon>-->

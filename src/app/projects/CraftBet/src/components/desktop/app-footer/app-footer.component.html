@@ -17,9 +17,8 @@
                   class="footer-column {{customStyleName}}" *ngFor="let menuItem of commonItem.Menu"
                  [ngClass]="{'showFooter':animateFooter}">
 
-              <div class="footer-column_title" pointerOnLink="{{menuItem.Href}}" (click)="redirectInToPag(menuItem)">
-                {{'Footer.' + menuItem.Title | translate}}
-
+              <div class="footer-column_title" pointerOnLink="{{menuItem.Href}}" (click)="redirectInToPag(menuItem)"
+                   [innerHtml]="'Footer.' + menuItem.Title | translate | sanitizer: 'html'">
               </div>
               <div class="footer-column_line"></div>
               <ng-container *ngFor="let item of menuItem?.SubMenu">

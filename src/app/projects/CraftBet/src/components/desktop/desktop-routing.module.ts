@@ -243,11 +243,21 @@ const routes: Routes = [
                 data: {
                     position:FragmentPositions.Category
                 }
-               /* component: AppFilterGameComponent,
-                data: {.
+            },
+            {
+                path: 'group/:groupId',
+                component: AppCasinoComponent,
+                data: {
+                    position:FragmentPositions.Group
+                }
+            },
+            {
+                path: 'group/:groupId/:productId/:type/:openType',
+                component: CommonWindowComponent,
+                data: {
                     isActiveFooter: false,
                     slideKey: BannerTypes.CASINO
-                }*/
+                }
             },
             {
                 path: 'category/:id/:productId/:type/:openType',

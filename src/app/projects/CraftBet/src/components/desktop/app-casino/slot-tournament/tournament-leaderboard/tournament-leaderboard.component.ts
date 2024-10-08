@@ -70,8 +70,8 @@ export class TournamentLeaderboardComponent implements OnInit{
         const newItems = data['ResponseObject'];
 
       /*  const newItems = [
-          { Order: 11, Name: 'Has', Points:  Math.floor(Math.random() * (400 - 10 + 1)) + 10},
-          { Order: 2, Name: 'New Player', Points: Math.floor(Math.random() * (400 - 10 + 1)) + 10},
+          { Order: 5, Name: 'Has', Points:  Math.floor(Math.random() * (400 - 10 + 1)) + 10},
+          { Order: 11, Name: 'New Player', Points: Math.floor(Math.random() * (400 - 10 + 1)) + 10},
           { Order: 3, Name: 'Another New Player', Points: Math.floor(Math.random() * (400 - 10 + 1)) + 10},
         ]*/
         console.log('newItems',newItems);
@@ -117,19 +117,20 @@ export class TournamentLeaderboardComponent implements OnInit{
 
   rearrange() {
     setTimeout(() => {
-      this.items.forEach((item, idx) => {
+      this.items.forEach((item: ElementRef, i: number) => {
         const element = item.nativeElement as HTMLElement;
-        const newTop = idx * this.OFFSET_Y;
-        const currentTop = parseInt(element.style.top) || 0;
-        if (newTop != currentTop) {
-          element.style.top = `${newTop}px`;
-          element.classList.add('moving');
-          element.addEventListener('transitionend', function() {
-            element.classList.remove('moving');
-          });
-        }
+        const topValue = i * this.OFFSET_Y;
+
+
+        element.style.top = `${topValue}px`;
+
+        element.classList.add('moving');
+
+        element.addEventListener('transitionend', function () {
+          element.classList.remove('moving');
+        });
       });
-    }, 3000);
+    }, 1500);
   }
 
  /* setSorter() {

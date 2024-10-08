@@ -95,7 +95,7 @@
 
         button {
           width: 36%;
-          color: #fff;
+          color: var(--activate-bonus-btn-color, #fff);
           border-radius: 4px;
           outline: none;
           font-size: 14px;
@@ -542,7 +542,7 @@
         button {
           width: var(--activate-bonus-btn-width, 180px);
           min-height: var(--activate-bonus-btn-height, 44px);
-          color: $account-content-item-color;
+          color: var(--activate-bonus-btn-color, #fff);
           border-radius: 6px;
           outline: none;
           font-size: $font-size-5;
@@ -702,6 +702,7 @@
       display: display(account-verify-select-icon-arrow, none);
     }
   }
+  .promo-code{display: var(--promo-code-field-display, block)}
 
   &__form {
     &_top {

@@ -72,30 +72,34 @@
     <!--                </tbody>-->
     <!--            </table>-->
     <!--        </div>-->
-    <div class="account-verif-head block-head">
-        <div>{{'User.Creation Date' | translate}}</div>
-        <div>{{'User.Id' | translate}}</div>
-        <div>{{'User.Document type' | translate}}</div>
-        <div>{{'User.Status' | translate}}</div>
-    </div>
-    <ng-container *ngIf="getSettingsInfoService?.identityModelsList.length > 0; else emptyDocuments">
-        <section>
-            <div class="account-verif-block block"
-                 *ngFor="let item of getSettingsInfoService?.identityModelsList">
-                <div class="document-block_item block_item">{{item?.CreationTime | date: 'dd/MM/yyyy HH:mm'}}</div>
-                <div class="document-block_item block_item">{{item?.Id}}</div>
-                <div class="document-block_item block_item">{{item?.DocumentTypeName }}</div>
-                <div class="document-block_item block_item account-status" [ngClass]="{'red1': item?.Status === 2,'yellow1': item?.Status === 3,'green1':item?.Status === 1,'black1': item?.Status === 4}">
-                    <span [ngClass]="{'icon-rejected': item?.Status === 2 || item?.Status === 4,'icon-pending': item?.Status === 3,'icon-verified':item?.Status === 1}"></span>
-                    <p class="item-status" [ngClass]="{'red': item?.Status === 2,'yellow': item?.Status === 3,'green':item?.Status === 1}">{{item?.StatusName}}</p>
+    <div class="verification-table">
+        <div class="account-verif-head block-head">
+            <div>{{'User.Creation Date' | translate}}</div>
+            <div>{{'User.Id' | translate}}</div>
+            <div>{{'User.Document type' | translate}}</div>
+            <div>{{'User.Status' | translate}}</div>
+        </div>
+        <ng-container *ngIf="getSettingsInfoService?.identityModelsList.length > 0; else emptyDocuments">
+            <section>
+                <div class="account-verif-block block"
+                     *ngFor="let item of getSettingsInfoService?.identityModelsList">
+                    <div class="document-block_item block_item">{{item?.CreationTime | date: 'dd/MM/yyyy HH:mm'}}</div>
+                    <div class="document-block_item block_item">{{item?.Id}}</div>
+                    <div class="document-block_item block_item">{{item?.DocumentTypeName }}</div>
+                    <div class="document-block_item block_item account-status" [ngClass]="{'red1': item?.Status === 2,'yellow1': item?.Status === 3,'green1':item?.Status === 1,'black1': item?.Status === 4}">
+                        <span [ngClass]="{'icon-rejected': item?.Status === 2 || item?.Status === 4,'icon-pending': item?.Status === 3,'icon-verified':item?.Status === 1}"></span>
+                        <p class="item-status" [ngClass]="{'red': item?.Status === 2,'yellow': item?.Status === 3,'green':item?.Status === 1}">{{item?.StatusName}}</p>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </ng-container>
-    <ng-template #emptyDocuments>
-        <section class="empty-documents empty-block">
-            <span class="icon-documents icon"></span>
-            <span class="empty-block-text">{{'User.Documents-empty' | translate}}</span>
-        </section>
-    </ng-template>
+            </section>
+        </ng-container>
+        <ng-template #emptyDocuments>
+            <section class="empty-documents empty-block">
+                <span class="icon-documents icon"></span>
+                <span class="empty-block-text">{{'User.Documents-empty' | translate}}</span>
+            </section>
+        </ng-template>
+    </div>
+
+
 </div>

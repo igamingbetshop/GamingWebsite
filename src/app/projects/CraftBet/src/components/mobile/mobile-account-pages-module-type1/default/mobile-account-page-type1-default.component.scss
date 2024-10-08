@@ -17,15 +17,36 @@
     .user-default-list-item {
       background: var(--m-user-panel-menu-item-background, white);
       border-radius: var(--m-user-panel-menu-item-border-radius, 6px);
-      padding: var(--m-user-panel-menu-item-padding,7px 14px);
+      position: relative;
       .user-default-list-item-link {
         color: var(--m-user-panel-menu-item-color, #000);
+        z-index: 1;
+        position: relative;
+        width: 100%;
+        padding: var(--m-user-panel-menu-item-padding, 7px 14px);
+      }
+      &:after
+      {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--m-user-panel-menu-item-border-radius, 6px);
+        border: 1px solid transparent;
+        background: var(--m-user-panel-menu-item-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        display: var(--m-user-panel-menu-item-after-display, none);
       }
     }
     .active {
       background: var(--m-user-panel-menu-item-active-background, #e15341);
       .user-default-list-item-link {
         color: var(--m-user-panel-menu-item-active-color, #fff);
+      }
+      &:after
+      {
+        background: var(--m-user-panel-menu-item-ative-border-color, linear-gradient(360deg, #FFB300 0%, #e15341 100%) border-box);
       }
     }
   }

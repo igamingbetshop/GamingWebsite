@@ -80,7 +80,7 @@
           font-size: var(--settings-field-font-size, 16px);
           text-indent: 0;
           padding: var(--m-settings-field-padding, 0 4px);
-          border: var(--m-profile-details-form-input-border, var(--settings-field-border, none));
+          border: var(--m-profile-details-form-input-border, none);
           background: var(--m-profile-details-form-input-background, var(--account-content-item-bg-color));
           border-radius: var(--settings-field-border-radius, 6px);
           height: var(--settings-field-height, 40px);

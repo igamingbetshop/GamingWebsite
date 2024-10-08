@@ -27,7 +27,7 @@ export class BaseDepositType15Component extends BaseDepositPaymentComponent impl
     this.paymentForm.addControl('CardNumber', new FormControl('', [Validators.pattern(/^[0-9]{16}$/)]));
     this.paymentForm.addControl('ActivationCode', new FormControl('', [Validators.required]));
     this.paymentForm.addControl('ExpirationDate', new FormControl('', [Validators.required]));
-    this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
+    this.paymentForm.addControl('Amount', new FormControl(this.quickDepositAmount, [Validators.required]));
   }
 
   submit() {

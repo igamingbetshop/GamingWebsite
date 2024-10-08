@@ -15,7 +15,7 @@
                             }
                             @for (fragment of fragments?.Menus?.Items; track fragment.Id)
                             {
-                                <casino-menu [fragmentConfig]="fragment"></casino-menu>
+                                <casino-menu [fragmentConfig]="fragment" [position]="position"></casino-menu>
                             }
                             @for (fragment of fragments?.Providers?.Items; track fragment.Id)
                             {
@@ -59,7 +59,7 @@
                             }
                             @for (fragment of fragments?.Menus?.Items; track fragment.Id)
                             {
-                                <casino-menu [fragmentConfig]="fragment"></casino-menu>
+                                <casino-menu [fragmentConfig]="fragment" [position]="position"></casino-menu>
                             }
                             @for (fragment of fragments?.Providers?.Items; track fragment.Id)
                             {

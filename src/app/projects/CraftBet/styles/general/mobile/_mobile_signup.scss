@@ -77,8 +77,8 @@
     {
       content: "*";
       position: absolute;
-      top:-5px;
-      right: 0;
+      top: var(--m-verify-required-field-icon-top, -5px);
+      right: var(--m-verify-required-field-icon-right, 0);
     }
   }
 
@@ -152,6 +152,7 @@
     background-color: backgroundColor(register-tab-header,transparent);
     margin-top: marginTop(register-tab-header, unset);
     position: position(register-tab-header, relative);
+    top: var(--register-tab-header-top, 0);
     .go_back {
       padding: var(--m-signup-reg-go-back-padding, 0);
       position: var(--m-signup-reg-go-back-position, relative);
@@ -169,7 +170,9 @@
   }
   &_menu {
     display: flex;
-    width: 100%;
+    width: var(--m-reg-header-menu-width, 100%);
+    margin: var(--m-reg-header-menu-margin, 0);
+    border-radius: var(--m-reg-header-menu-border-radius, 0);
     justify-content: var(--m-reg-header-menu-center, unset);
     background: var(--m-reg-header-menu-background, transparent);
     gap: var(--m-reg-header-menu-gap, 14px);
@@ -191,6 +194,7 @@
       text-decoration: none;
       width: width(register-tab, fit-content);
       text-align: textAlign(register-tab, left);
+      padding: var(--register-tab-padding, 0);
 
       &.active {
         text-decoration: var(--register-tab-text-decoration,underline);
@@ -395,6 +399,7 @@
             display: var(--m-custom-register-type-checkbox-display, none);
             margin: var(--m-custom-register-type-checkbox-margin, 0 0 10px 0);
             gap: var(--m-custom-register-type-checkbox-gap, 15px);
+            justify-content: var(--m-custom-register-type-checkbox-justify-content, flex-start);
             align-items: center;
             .checkbox-content {
               display: flex;
@@ -480,11 +485,40 @@
   .regSteps {
     position: var(--m-signup-regStep-position, absolute);
     display: var(--m-signup-regStep-display, flex);
-    width: 100%;
+    gap: var(--m-signup-regStep-gap, 0);
+    width: var(--m-signup-regStep-full-width, 100%);
+    align-items: var(--m-signup-regStep-align-items, center);
+    justify-content: var(--m-signup-regStep-justify-content, center);
+    margin: var(--m-signup-regStep-margin, 0);
+    overflow-x: var(--m-signup-regStep-overflow-x, hidden);
+    .regStep-number {
+      display: var(--m-signup-regStep-number-display, none);
+      color: var(--m-signup-regStep-number-color, #fff);
+      text-align: var(--m-signup-regStep-number-text-align, center);
+      font-size: var(--m-signup-regStep-number-font-size, 15px);
+      width: var(--m-signup-regStep-number-width, auto);
+      height: var(--m-signup-regStep-number-height, auto);
+      margin: var(--m-signup-regStep-number-margin, 3px 0 0 0);
+    }
     .regStep {
       height: height(m-signup-regStep, 14px);
       width: width(m-signup-regStep, 14px);
       background-color: backgroundColor(m-signup-regStep, #000);
+    }
+  }
+  .regSteps-text {
+    display: var(--m-regStep-text-display, none);
+    align-items: center;
+    color: var(--m-regStep-text-color, #fff);
+    margin: var(--m-regStep-text-margin, 0);
+    font-size: var(--m-regStep-text-font-size, 12px);
+    .separator-line {
+      display: var(--m-regStep-progress-bar-left-part-display, none);
+      width: var(--m-regStep-progress-bar-width, 18px);
+      height: var(--m-regStep-progress-bar-height, 2px);
+      border-radius: var(--m-regStep-progress-bar-pborder-radius, 4px);
+      background-color: var(--regStep-progress-bar-background, #161f2c);
+      margin: var(--m-regStep-progress-bar-margin, 0 auto);
     }
   }
   .title-error {

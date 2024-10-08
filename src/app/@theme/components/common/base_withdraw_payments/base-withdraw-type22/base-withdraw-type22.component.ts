@@ -18,8 +18,11 @@ export class BaseWithdrawType22Component extends BaseWithdrawPaymentComponent {
     ngOnInit()
     {
         super.ngOnInit();
+        const validators = [];
+        if(this.paymentSystemId !== 357)
+            validators.push(Validators.required);
         this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
-        this.paymentForm.addControl('BankCode', new FormControl( '', [Validators.required]));
+        this.paymentForm.addControl('BankCode', new FormControl( '', validators));
         this.paymentForm.addControl('BankBranchName', new FormControl( '', [Validators.required]));
         this.paymentForm.addControl('BankAccountNumber', new FormControl( '', [Validators.required]));
     }
@@ -33,6 +36,8 @@ export class BaseWithdrawType22Component extends BaseWithdrawPaymentComponent {
             this.createPayment(requestData);
         } else this.markFormGroupTouched(this.paymentForm);
     }
+
+
 
     ngOnDestroy()
     {

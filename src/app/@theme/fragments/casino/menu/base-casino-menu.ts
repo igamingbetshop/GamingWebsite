@@ -25,6 +25,8 @@ export class BaseCasinoMenu implements OnInit
 
     private prevPath:string;
 
+    protected resourceFolderName:string = 'webfragments';
+
     constructor(protected injector: Injector)
     {
         this.configService = injector.get(ConfigService);
@@ -39,20 +41,29 @@ export class BaseCasinoMenu implements OnInit
         this.prevPath = this.router.url.split('/')[1];
         this.type = this.fragmentConfig.Config.type;
         this.showAllGamesCount = (this.fragmentConfig && this.fragmentConfig.Config && this.fragmentConfig.Config.showAllGamesCount) ?? true;
-        let menus = JSON.parse(JSON.stringify(this.configService.settings.MenuList.find(elem => elem.Type == this.route.snapshot.data['menuType']).Items));
+        let menus = this.fragmentConfig.SubMenu ?  this.fragmentConfig.SubMenu.map(menu => {
+            if(menu.Icon.includes('.'))
+                menu.IconSrc = `${window['debugPath']}/assets/images/${this.resourceFolderName}/${menu.Icon}`;
+            const type = parseInt(menu.Type);
+            menu.Id = isNaN(type) ? -1 : type;
+            menu.style = menu.StyleType ? JSON.parse(menu.StyleType) : this.fragmentConfig.Config.itemStyle;
+            menu.Href =  menu.Id === -1 ?  menu.Id : menu.Type;
+            return menu;
+        }) : [];
+
+        this.casinoFilterService.menuCategoryIds = [];
+        for(let i = 0; i < menus.length; i++)
+        {
+            if(menus[i].Id > -1)
+                this.casinoFilterService.menuCategoryIds.push(menus[i].Id);
+        }
+
         if(this.fragmentConfig.Config.hasOwnProperty('menus') && Array.isArray(this.fragmentConfig.Config.menus))
         {
             menus = menus.filter(m => this.fragmentConfig.Config.menus.includes(m.Type));
         }
-        this.menuItems = menus.map(menu => {
-            if(menu.Icon.includes('.'))
-                menu.IconSrc = window['debugPath'] + '/assets/images/casino-menu/' + menu.Icon;
-            const type = parseInt(menu.Type);
-            menu.Id = isNaN(type) ? -1 : type;
-            menu.style = this.fragmentConfig.Config.itemStyle;
-            menu.Href =  menu.Id === -1 ?  menu.Id : menu.Href;
-            return menu;
-        });
+
+        this.menuItems = menus;
         this.getAllGames();
     }
 
@@ -60,12 +71,15 @@ export class BaseCasinoMenu implements OnInit
     {
         this.casinoFilterService.addCategory(category, multiselect);
         const query = category.Href || 'all-games';
-        this.router.navigate([`/${this.prevPath}/` + query]);
+        if(this.prevPath !== "group")
+        {
+            this.router.navigate([`/${this.prevPath}/` + query]);
+        }
     }
 
     private getAllGames()
     {
-        this.apiService.apiRequest({PageSize:10}, undefined, Methods.GET_GAMES, false).pipe(take(1))
+        this.apiService.apiRequest({PageSize:10, CategoryIds:this.casinoFilterService.menuCategoryIds}, undefined, Methods.GET_GAMES, false).pipe(take(1))
             .subscribe(data => {
                 if (data.ResponseCode === 0)
                 {

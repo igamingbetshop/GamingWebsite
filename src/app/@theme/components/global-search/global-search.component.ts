@@ -96,7 +96,7 @@ export class GlobalSearchComponent implements OnInit {
 
     setRecentSearches(value:string[])
     {
-        this.recentSearches.update(value =>  []);
+        this.recentSearches.update(value =>  [...value]);
         this.#localStorageService.add("recent-searches", value);
     }
 
@@ -132,6 +132,11 @@ export class GlobalSearchComponent implements OnInit {
                 top: 0
             });
         });
+    }
+
+    focusIn()
+    {
+        this.recentSearches.set(this.#localStorageService.get("recent-searches") || []);
     }
 
     close()

@@ -123,7 +123,7 @@ export class BaseChangePassword implements OnInit, OnDestroy
             else
             {
                 this.getSettingsInfoService.changePassword(req).subscribe(data => {});
-                this.getSettingsInfoService._notifyGetChangePasswordResponseMessage.subscribe((data) => {
+                this.getSettingsInfoService.notifyGetChangePasswordResponseMessage$.subscribe((data) => {
                     this.changePasswordMessage = data;
                     if (this.changePasswordMessage.className === 'error_message')
                     {

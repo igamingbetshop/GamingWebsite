@@ -17,6 +17,7 @@
     border: none;
     outline: none;
     cursor: pointer;
+    display: var(--promotion-tab-btn-display, block);
     &.selected
     {
       background: linear-gradient(180deg, var(--promotion-filter-btn-gredient-first-color, #1376F8) 0%, var(--promotion-filter-btn-gredient-second-color, #194074) 100%);

@@ -9,4 +9,13 @@ import { BaseTwoFactor } from '../../../../../../../@theme/components/common/bas
 
 export class TwoFactorComponent extends BaseTwoFactor {
 
+
+    copyAddress(copyText: HTMLElement) {
+        const text = copyText.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
 }

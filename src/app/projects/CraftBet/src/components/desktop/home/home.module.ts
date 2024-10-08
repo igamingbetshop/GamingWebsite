@@ -11,6 +11,7 @@ import {CasinoSearchFragmentComponent} from "../../common/fragments/search/casin
 import {WinnersWidgetModule} from "../fragments/winners-widget/winners-widget.module";
 import {BetsWidgetModule} from "../fragments/bets-widget/bets-widget.module";
 import {ImageBarComponent} from "../fragments/image-bar/image-bar.component";
+import {QuickDepositComponent} from "../../../../../../@theme/components/quick-deposit/quick-deposit.component";
 
 const routes:Routes = [{
   path: '',
@@ -29,7 +30,8 @@ const routes:Routes = [{
         FragmentCharactersModule,
         WinnersWidgetModule,
         BetsWidgetModule,
-        ImageBarComponent
+        ImageBarComponent,
+        QuickDepositComponent
     ],
   exports:[
     RouterModule

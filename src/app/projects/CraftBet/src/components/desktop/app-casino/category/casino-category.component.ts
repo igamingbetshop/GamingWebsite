@@ -42,11 +42,11 @@ export class CasinoCategoryComponent extends BaseCasinoCategory
             [],
             {
                 relativeTo: this.route,
-                queryParams: { pattern: null},
+                queryParams: { pattern: null, providers:null},
                 skipLocationChange:false,
                 queryParamsHandling:'merge'
             }).then(() => {
-            if(this.router.url == `/${this.position}/all-games`)
+            if(this.router.url ==  `/${this.position}/all-games`)
             {
                 this.stateService.changeCategoriesSearchViewState(false);
             }

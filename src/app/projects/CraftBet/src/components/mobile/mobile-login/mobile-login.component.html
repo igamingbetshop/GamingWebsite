@@ -3,6 +3,7 @@
      [ngClass]="{'showPaddingTop': this.configService.defaultOptions.ShowMobileNavPanel == '1' }">
     <div class="mobile-login-top-part">
         <span class="top-login-text-part">{{'Login.Sign In' | translate}}</span>
+        <span class="top-login-text-custom-part">{{'Login.SignInCustom' | translate}}</span>
         <span class="icon-close-modal close-icon" (click)="goBack()"></span>
     </div>
     <img class="login-logo" [src]="logoUrl" defaultImageFallBack

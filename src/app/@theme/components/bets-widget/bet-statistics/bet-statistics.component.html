@@ -1,0 +1,92 @@
+<div class="modal-close-btn" (click)="close()">
+    <svg fill="#fff" viewBox="0 0 64 64" class="svg-icon" style=""> <title></title> <path d="m54.827 16.187-7.014-7.014L32 24.987 16.187 9.173l-7.014 7.014L24.987 32 9.173 47.813l7.014 7.014L32 39.013l15.813 15.814 7.014-7.014L39.013 32l15.814-15.813Z"></path></svg>
+</div>
+<div>
+    <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path fill-rule="evenodd" clip-rule="evenodd" d="M33.013 19.707 64 0v12.64L30.987 33.627 18.133 18.853 0 30.693V17.947L20.107 4.853l12.906 14.854ZM16 64H5.333V35.173L16 28.213V64Zm13.707-21.653-3.04-3.52V64h10.666V37.493l-2.773 1.76-4.853 3.094ZM58.667 64H48V30.72l10.667-6.8V64Z"></path></svg>
+    <span>{{'Game.Statistics' | translate}}</span>
+</div>
+<div>
+    <div>
+        <span>{{bet.ClientName}}</span>
+        <span>{{'Game.JoinedOn' | translate}} {{betStatistics().CreationTime | date : 'MMMM d, y'}}</span>
+    </div>
+   <!-- <div>
+        <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path fill-rule="evenodd" clip-rule="evenodd" d="M45.71 13.349v.024c0 4.316-2.076 8.146-5.32 10.57H24.61l-.034-.024a13.19 13.19 0 0 1-5.286-10.57c0-7.296 5.914-13.21 13.21-13.21 7.296 0 13.21 5.914 13.21 13.21Zm4.806 22.844H62.23v-3.19a5.31 5.31 0 0 0-5.3-5.31H10.14a5.624 5.624 0 0 1-5.24-5.608v-.014a4.914 4.914 0 0 1 0-.522v.012a5.546 5.546 0 0 1 5.51-5.11h3.85a17.489 17.489 0 0 1-.26-2.88v-.01H7.06A7.07 7.07 0 0 0 0 20.63v37.1a6.14 6.14 0 0 0 6.13 6.13h50.79a5.31 5.31 0 0 0 5.31-5.31v-3.19H50.5c-.092.004-.2.006-.31.006-5.296 0-9.59-4.294-9.59-9.59s4.294-9.59 9.59-9.59c.108 0 .218.002.326.006Zm4.733-22.63v2.89h-4.516a18.36 18.36 0 0 0 .267-2.89h4.25Zm-4.516 2.89-.02.11.017-.11h.003ZM8.66 21.983c0-.98.792-1.774 1.77-1.78h4.91l.044.122a17.843 17.843 0 0 0 1.956 3.618h-6.91a1.77 1.77 0 0 1-1.77-1.77v-.19ZM64 39.943v11.67l-13.488-.002a5.84 5.84 0 0 1-6.094-5.834 5.84 5.84 0 0 1 6.082-5.834H64Zm-13.06 8.5a2.67 2.67 0 0 0 2.67-2.66v-.01a2.67 2.67 0 1 0-2.67 2.67Zm-1.26-28.24a18.188 18.188 0 0 1-1.998 3.74h-.002l-.038.058.04-.058H58v-3.74h-8.32Z"></path></svg>
+        <span>Tip</span>
+    </div>-->
+    <div>
+        <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path fill-rule="evenodd" clip-rule="evenodd" d="M0 32c6.63-11.67 18.48-19.45 32-19.45S57.37 20.33 64 32c-6.63 11.67-18.48 19.45-32 19.45S6.63 43.67 0 32Zm18.19 0c0 7.66 6.21 13.87 13.87 13.87h.01c7.654 0 13.86-6.206 13.86-13.86V32c0-7.66-6.21-13.87-13.87-13.87-7.66 0-13.87 6.21-13.87 13.87Zm13.87 8.2a8.2 8.2 0 0 0 0-16.4 8.2 8.2 0 0 0 0 16.4Z"></path></svg>
+        <span>Ignore</span>
+    </div>
+</div>
+<div>
+    <svg tooltip="{{'Game.VipLevel' + betStatistics().VIPLevel | translate}}" fill="none" viewBox="0 0 96 96" class="svg-icon"> <title></title> <path d="M45.237 83.04 23.797 93.4c-3.76 1.8-8-1.28-7.44-5.4l3.28-24.12c.2-1.56-.32-3.16-1.4-4.32L1.437 42c-2.88-3-1.24-8 2.84-8.72l23.96-4.32a5.277 5.277 0 0 0 3.68-2.68l11.52-21.44c1.96-3.64 7.2-3.64 9.16 0l11.52 21.44c.76 1.4 2.12 2.4 3.68 2.68l23.96 4.32c4.08.72 5.72 5.72 2.84 8.72l-16.84 17.56a5.333 5.333 0 0 0-1.4 4.32L79.637 88c.56 4.12-3.68 7.2-7.44 5.4l-21.44-10.36c-1.72-.84-3.76-.84-5.52 0Z" fill="#6FDDE7"></path><path d="M23.997 72V36h10.88v36h-10.88Zm29.4 0-13.28-36h12.36l7.76 24.24L67.997 36h12.36l-13.28 36h-13.72.04Z" fill="#0F212E"></path></svg>
+    <img [ngSrc]="'https://stake22.com/assets/images/vip-level-' + betStatistics().VIPLevel" width="15px" height="15px">
+</div>
+
+<div>
+    @for(tab of tabs(); track tab)
+    {
+        <div (click)="selectTab(tab)" [class.selected]="selectedTab() === tab">{{tab}}</div>
+    }
+</div>
+<div>
+    <div>
+        <label>{{'Game.Type' | translate}}</label>
+        <div class="dropdown" dropdown>
+            <div class="selected">{{selectedType()}} <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon arrow"> <title></title> <path d="M32.271 49.763 9.201 26.692l6.928-6.93 16.145 16.145 16.144-16.144 6.93 6.929-23.072 23.07h-.005Z"></path></svg></div>
+            <div class="content">
+                <div class="tail"></div>
+                <ul class="options">
+                    @for (type of  types(); track $index)
+                    {
+                        <li (click)="selectType(type)">{{type}}</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <label>{{'Game.Currency' | translate}}</label>
+        <div class="dropdown" dropdown>
+            <div class="selected">
+                @if(selectedCurrency().Id !== 'All'){ <img [ngSrc]="selectedCurrency().ImageUrl" width="16" height="16">}
+                {{selectedCurrency().Id}} <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon arrow"> <title></title> <path d="M32.271 49.763 9.201 26.692l6.928-6.93 16.145 16.145 16.144-16.144 6.93 6.929-23.072 23.07h-.005Z"></path></svg>
+            </div>
+            <div class="content">
+                <div class="tail"></div>
+                <ul class="options">
+                    @for (currency of  currencies(); track currency.Id)
+                    {
+                        <li (click)="selectCurrency(currency)"> @if(currency.Id !== 'All'){<img [ngSrc]="currency.ImageUrl" width="16" height="16">}<span>{{currency.Id}}</span></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div>
+        <label>{{'Game.TotalBets' | translate}}</label>
+        <span>{{betStatistics().TotalBetCount}}</span>
+    </div>
+    <div>
+        <label>{{'Game.TotalWinCount' | translate}}</label>
+        <span>{{betStatistics().TotalWinCount}}</span>
+    </div>
+    <div>
+        <label>{{'Game.TotalLossCount' | translate}}</label>
+        <span>{{betStatistics().TotalLossCount}}</span>
+    </div>
+    <div>
+        <label tooltip="{{'Game.ConversationRateLabel' | translate}}">{{'Game.TotalBetAmount' | translate}}</label>
+        <span tooltip="{{betStatistics().TotalBetAmount}}"  iconSrc="{{selectedCurrency().ImageUrl}}">{{betStatistics().TotalBetAmount}} {{selectedCurrency().Symbol}}</span>
+    </div>
+</div>
+
+
+
+
+
+
+

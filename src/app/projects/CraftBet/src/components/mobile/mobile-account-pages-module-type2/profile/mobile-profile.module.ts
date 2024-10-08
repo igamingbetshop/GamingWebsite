@@ -7,6 +7,9 @@ import {TranslateModule} from "@ngx-translate/core";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {RegExpInputDirectiveModule} from "../../../../../../../@theme/directives/reg-exp-input/reg-exp-input-directive.module";
 import {LayoutService} from "../../../../../../../@core/services/app/layout.service";
+import {
+    ProfileImageComponent
+} from "../../../../../../../@theme/components/profile/profile-image/profile-image.component";
 
 const routes: Routes = [
     {
@@ -21,7 +24,8 @@ const routes: Routes = [
         TranslateModule,
         RouterModule.forChild(routes),
         FontAwesomeModule,
-        RegExpInputDirectiveModule
+        RegExpInputDirectiveModule,
+        ProfileImageComponent
     ],
     declarations:[
         MobileProfileComponent

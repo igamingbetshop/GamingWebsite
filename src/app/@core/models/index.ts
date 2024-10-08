@@ -336,7 +336,8 @@ export class FragmentData
     Config:any;
     NickName:string;
     State:string;
-    Items:any[]
+    Items:any[];
+    SubMenu:any[];
 }
 
 export class ActiveTournaments

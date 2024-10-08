@@ -16,7 +16,19 @@
     <div class="account-statement-section_row" *ngFor="let account of accountData">
       <div class="item_cell"> {{account?.AccountTypeName}}</div>
       <div class="item_cell">
-          <span> {{account?.CurrencySymbol}} {{account?.Balance | number}} {{!account?.CurrencySymbol ? account?.CurrencyId : ''}}</span>
+          <span>
+              @if(account?.CurrencyId)
+              {
+                  {{account?.CurrencySymbol}}
+                  {{account?.FromattedValue}}
+                  {{!account?.CurrencySymbol ? account?.CurrencyId : ''}}
+              }
+              @else
+              {
+                  {{account?.FromattedValue}}
+              }
+
+          </span>
       </div>
     </div>
 

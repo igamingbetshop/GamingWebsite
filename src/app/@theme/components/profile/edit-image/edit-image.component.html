@@ -1,0 +1,21 @@
+<fa-icon class="close-icon" [icon]="['fas', 'times']" (click)="close()"></fa-icon>
+<span class="title">{{'Settings.EditProfileImage' | translate}}</span>
+<img class="selected-image" [ngSrc]="selectedImage().Url" width="75" height="75">
+<div class="sub-title"></div>
+<ul>
+    <label class="chose-file">
+        <input #fileRef type="file" (change)="onSelectFile($event)">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+    </label>
+    @for (img of images(); track img.Name)
+    {
+        <li (click)="selectImage(img)" [class.selected]="img.Name === selectedImage().Name">
+            <img [id]="img.Name" [src]="img.Url"  crossorigin="anonymous">
+        </li>
+    }
+    <button (click)="uploadSelectedImage()">{{'Settings.Confirm' | translate}}</button>
+    <div class="error-txt">{{errorTxt()}}</div>
+</ul>
+
+
+

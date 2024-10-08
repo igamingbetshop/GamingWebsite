@@ -28,12 +28,18 @@
             </div>
 
             <div class="flex_child" style="height: 100%">
-
+                <div class="right-menu-logo" *ngIf="isLogin">
+                    <img class="right-menu-logo-img" src="../../../../../../../assets/images/logo-mobile.svg" alt="">
+                    <span class="icon-close" (click)="sidebarOpenState = !sidebarOpenState"></span>
+                </div>
                 <div class="close_sidebar right-close-sidebar" *ngIf="isLogin">
                     <div class="user_panel_title_top">
                         <fa-icon [icon]="['fas', 'user']" [size]="'2x'"></fa-icon>
-                        <span class="user_panel_title">{{userData?.Id}}</span>
-                        <span class="user_panel_title user_panel_title_name">{{userData?.UserName}}</span>
+                        <img class="mobile-account-img" src="../../../../../../../assets/images/mobile-account.png" alt="">
+                        <div class="user-panel-content">
+                            <span class="user_panel_title user_panel_title_name">{{userData?.UserName}}</span>
+                            <span class="user_panel_title user_panel_title_id"><span class="user-id-title">{{'User.User_Id' | translate}}:</span> {{userData?.Id}}</span>
+                        </div>
                         <span class="icon-close-modal" (click)="sidebarOpenState = !sidebarOpenState"></span>
                     </div>
                     <div class="ticket-info-block">
@@ -107,11 +113,10 @@
                                     <ul class="user-left-panel_subList">
                                         <li class="general-menu_item" *ngFor="let subItem of item?.SubMenu"
                                             routerLinkActive="active"
-                                            [routerLink]="(subItem?.Type === '1' ? '/' : '/user/' + this.configService.defaultOptions.AccountTemplateType+ '/') + subItem?.Href"
                                             (click)="changePage(subItem, item)">
                                             <div class="left-part-menuItem">
-                                                <ng-container *ngIf="subItem?.Src; else menuItemIcon">
-                                                    <img [src]="subItem?.Src" alt="">
+                                                <ng-container *ngIf="subItem?.Icon.includes('.'); else menuItemIcon">
+                                                    <img src="../../../../../../../assets/images/mobile-right-sidebar/{{subItem.Icon}}" alt="">
                                                 </ng-container>
                                                 <ng-template #menuItemIcon>
                                                     <span *ngIf="subItem?.Icon" class="item_menu__icon {{subItem?.Icon}}"></span>

@@ -36,7 +36,7 @@
     </div>
 </form>
 <table>
-    <tbody>
+   <thead>
     <tr>
         <td><span>{{'User.Date' | translate}}</span></td>
         <td><span>{{'User.BetId' | translate}}</span></td>
@@ -44,6 +44,8 @@
         <td><span>{{'User.AccountTypeName' | translate}}</span></td>
         <td><span>{{'User.Amount' | translate}}</span></td>
     </tr>
+   </thead>
+    <tbody>
     <tr
             *ngFor="let item of getTransactionsService.transactionsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getTransactionsService.transactionsListCount }, let i = index">
         <td>{{item?.CreationTime | date: 'dd/MM/yyyy HH:mm'}}</td>

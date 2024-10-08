@@ -56,6 +56,7 @@
       padding: 0;
       margin-bottom: 16px;
       border: none;
+      pointer-events: var(--promotions-products-list-item-pointer-events, auto);
       .promotions_item {
         position: relative;
         width: 100% !important;
@@ -112,10 +113,10 @@
         }
         &:hover
         {
-          &:before{display: block}
+          &:before{display: var(--promotions-see-more-animation-display, block)}
           .see-more-btn
           {
-            display: flex;
+            display: var(--promotions-see-more-btn-hover-display, flex);
           }
         }
       }

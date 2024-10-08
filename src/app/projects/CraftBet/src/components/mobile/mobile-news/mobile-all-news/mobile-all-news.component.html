@@ -1,5 +1,5 @@
 <div  [ngStyle]="{'display' : selectedFragment ? 'block' : 'none'}">
-  <div class="mobile-current-news-section" [ngStyle]="layoutService.layoutStyle" >
+  <div class="mobile-current-news-section" [style.margin-top]="layoutService.layoutStyle['margin-top']">
     <div class="news-title">
       <span class="section-name">{{'News.' + newsTypes[currentNews?.Type] | translate}}</span>
       <span class="seperator">|</span>
@@ -36,7 +36,7 @@
 </div>
 
 
-<div class="section-header" *ngIf="!selectedFragment" [ngStyle]="layoutService.layoutStyle" >
+<div class="section-header" *ngIf="!selectedFragment" [style.margin-top]="layoutService.layoutStyle['margin-top']">
   <h1 class="news-title">{{'News.News' | translate}}</h1>
   <div class="slides-dots">
 

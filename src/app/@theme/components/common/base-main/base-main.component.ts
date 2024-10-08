@@ -24,6 +24,7 @@ export class BaseMainComponent implements OnInit {
     public isFullContent:boolean = false;
     public hideBottomBar:boolean = false;
     public cmsPopupData: any;
+    public userData: any;
 
     public mobileBottomSideBar: Array<any> = [];
     private logoutHelper:LogoutHelper;
@@ -135,6 +136,7 @@ export class BaseMainComponent implements OnInit {
         }
 
         let userData = this.localStorageService.get("user");
+        this.userData = userData;
         let showLastLoginInfoPopup = this.configService.defaultOptions?.ShowLastLoginInfoPopup;
         if (userData != null)
         {

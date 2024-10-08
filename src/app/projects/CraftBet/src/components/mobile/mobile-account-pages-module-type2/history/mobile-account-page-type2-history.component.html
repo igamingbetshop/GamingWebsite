@@ -1,4 +1,4 @@
-<div class="mobile-history-section" [ngStyle]="layoutService.layoutStyle">
+<div class="mobile-history-section" [style.margin-top]="layoutService.layoutStyle['margin-top']">
   <h2 class="mobile-history-section_title">{{'User.Bets-History' | translate}}</h2>
   <div>
     <form [formGroup]="form" (ngSubmit)="submit(1)" class="history-tools-panel">

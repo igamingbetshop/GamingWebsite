@@ -22,7 +22,7 @@ export class BaseDepositType16Component extends BaseDepositPaymentComponent {
       });
     });
     this.paymentService.getBanks(this.paymentSystemId);
-    this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
+    this.paymentForm.addControl('Amount', new FormControl(this.quickDepositAmount, [Validators.required]));
     this.paymentForm.addControl('AccountType', new FormControl('', [Validators.required]));
     this.paymentForm.addControl('BankName', new FormControl('', ));
     this.paymentForm.get('AccountType').valueChanges.subscribe(data => {

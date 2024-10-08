@@ -800,9 +800,11 @@
     background-image: var(--banner-image-background-image, linear-gradient(to right, #131a2c 1%, rgba(83, 83, 83, 0.02) 36%, rgba(84, 84, 84, 0) 45%));
     background-size: 100% 100% !important;
     background-repeat: no-repeat!important;
+    border-radius: var(--casino-banner-image-border-radius,0);
  /* url("../../assets/images/b/jackpot_banner.png"),*/
     img {
       width: 100%;
+      border-radius: var(--casino-banner-image-border-radius,0);
     }
 
   .banner-wrapper {

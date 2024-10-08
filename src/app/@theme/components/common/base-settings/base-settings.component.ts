@@ -378,14 +378,14 @@ export class BaseSettingsComponent extends BaseComponent{
         this.getProfileFormValue();
         this.exclusionMinDate = format(add(new Date(), {days: this.configService.defaultOptions['SelfExclusionPeriod'] ? this.configService.defaultOptions['SelfExclusionPeriod'] : 1}), 'yyyy-MM-dd');
         this.getDocumentTypes();
-        this.getSettingsInfoService._notifyGetChangePasswordResponseMessage.subscribe((data) => {
+        this.getSettingsInfoService.notifyGetChangePasswordResponseMessage$.subscribe((data) => {
             this.changePasswordMessage = data;
 
             this.changePasswordRequestMessage.emit(data);
             this.isSubmited = false;
             this.utilityService.showError('', this, 'changePasswordMessage');
         });
-        this.getSettingsInfoService._notifyGetChooseFileName.subscribe((data) => {
+        this.getSettingsInfoService.notifyGetChooseFileName$.subscribe((data) => {
             this.fileData = data;
         });
 

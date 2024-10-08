@@ -18,20 +18,45 @@
           : {{ (amountValue * CommissionPercent) / 100 | number: '.2'}} {{'Withdraw.Payout' | translate}}
           : {{amountValue - (amountValue * CommissionPercent) / 100 | number: '.2'}}
         </div>
-
       </div>
 
-      <div class="payment-form-field">
-        <div class="payment-form-field__column">
-          <input type="text" class="payment-input" placeholder="{{'Withdraw.MobileNumber-placeholder' | translate}}"
-                 formControlName="MobileNumber"/>
-          <label class="payment-form-field__label">{{'Withdraw.MobileNumber' | translate}}</label>
-        </div>
-      </div>
+        @if (paymentSystemId === 385)
+        {
+            <div style="display: flex; float: left; width: 100%; gap: 10px; align-items: center">
+                <div class="payment-form-field" style="width: 120px">
+                    <div class="payment-form-field__column column-select">
+                        <select formControlName="MobileCode" class="payment-select">
+                            @for(code of mobileCodes; track code.Type)
+                            {
+                                <option value="" disabled>{{'Withdraw.SelectCode' | translate}}</option>
+                                <option [value]="code.Type">{{code.Title}}({{code.Type}})</option>
+                            }
+                        </select>
+                        <label class="payment-form-field__label">{{'Withdraw.MobileCode' | translate}}</label>
+                    </div>
+                </div>
+                <div class="payment-form-field">
+                    <div class="payment-form-field__column">
+                        <input type="text" class="payment-input" numbersOnly placeholder="{{'Withdraw.MobileNumber-placeholder' | translate}}"
+                               formControlName="MobileNumber"/>
+                    </div>
+                </div>
+            </div>
+        }
+        @else
+        {
+            <div class="payment-form-field">
+                <div class="payment-form-field__column">
+                    <input type="text" class="payment-input" placeholder="{{'Withdraw.MobileNumber-placeholder' | translate}}"
+                           formControlName="MobileNumber"/>
+                    <label class="payment-form-field__label">{{'Withdraw.MobileNumber' | translate}}</label>
+                </div>
+            </div>
+        }
 
       <div class="payment-form-field">
         <div class="payment-deposit-btn-field">
-          <button type="submit" [disabled]="submitted" class="payment-deposit-btn">
+          <button type="submit" [disabled]="submitted || paymentForm.invalid" class="payment-deposit-btn">
             <span class="payment-btn__span"> {{'Withdraw.Confirm' | translate}} </span>
           </button>
 

@@ -34,17 +34,21 @@ export class GetSettingsInfoService {
     public validDocumentFormat: boolean;
     private msgTimeout;
 
-    public _notifyGetChangePasswordResponseMessage = new Subject<any>();
-    private notifyGetChangePasswordResponseMessage$ = this._notifyGetChangePasswordResponseMessage.asObservable();
+    #notifyGetChangePasswordResponseMessage = new Subject<any>();
+    notifyGetChangePasswordResponseMessage$ = this.#notifyGetChangePasswordResponseMessage.asObservable();
 
-    public _notifyGetDocumentTypesList = new Subject<any>();
-    private notifyGetDocumentTypesList$ = this._notifyGetDocumentTypesList.asObservable();
 
-    public _notifyGetDocumentTypesResponse = new Subject<any>();
-    private notifyGetDocumentTypesResponse$ = this._notifyGetDocumentTypesResponse.asObservable();
+    #notifyGetDocumentTypesResponse = new Subject<any>();
+    notifyGetDocumentTypesResponse$ = this.#notifyGetDocumentTypesResponse.asObservable();
 
-    public _notifyGetChooseFileName = new Subject<any>();
-    private notifyGetChooseFileName$ = this._notifyGetChooseFileName.asObservable();
+    #notifyDocumentList = new Subject<any>();
+    onUserDocuments$ = this.#notifyDocumentList.asObservable();
+
+    #notifySubmittedDocuments = new Subject<any>();
+    onSubmittedDocuments$ = this.#notifySubmittedDocuments.asObservable();
+
+    #notifyGetChooseFileName = new Subject<any>();
+    notifyGetChooseFileName$ = this.#notifyGetChooseFileName.asObservable();
 
     public _notifyGetDocumentError = new Subject<any>();
     private notifyGetDocumentError$ = this._notifyGetDocumentError.asObservable();
@@ -96,12 +100,12 @@ export class GetSettingsInfoService {
     {
        return  this.baseApiService.apiRequest(data, Controllers.CLIENT, Methods.CHANGE_CLIENT_PASSWORD).pipe(tap(responseData => {
            if (responseData.ResponseCode === 0) {
-               this._notifyGetChangePasswordResponseMessage.next({
+               this.#notifyGetChangePasswordResponseMessage.next({
                    'className': 'success_message',
                    'message': 'Your password has been changed successfully.'
                });
            } else {
-               this._notifyGetChangePasswordResponseMessage.next({
+               this.#notifyGetChangePasswordResponseMessage.next({
                    'className': 'error_message',
                    'message': responseData['Description']
                });
@@ -119,13 +123,13 @@ export class GetSettingsInfoService {
         const input = {};
         this.baseApiService.apiRequest(input, Controllers.CLIENT, Methods.KYC_DOCUMENT_TYPES_ENUM).subscribe((responseData) => {
             if (responseData.ResponseCode === 0) {
-                this._notifyGetDocumentTypesResponse.next(responseData['ResponseObject']);
+                this.#notifyGetDocumentTypesResponse.next(responseData['ResponseObject']);
                 const documentTypesResponse = responseData['ResponseObject'];
 
                 this.uploadDocumentData().subscribe((responses): any => {
                     let clientIndentityModels, kycdocumentStatesEnum;
                     this.documentTypesList = documentTypesResponse;
-                    this._notifyGetDocumentTypesList.next(documentTypesResponse);
+                    this.#notifyDocumentList.next(documentTypesResponse);
 
                     responses.forEach((item) => {
                         if (item['ResponseCode'] === 0) {
@@ -134,14 +138,9 @@ export class GetSettingsInfoService {
                         }
                     });
 
-                    if (clientIndentityModels !== null) {
+                    if (clientIndentityModels !== null)
+                    {
                         clientIndentityModels.map((element) => {
-
-                            /*for (let i = 0; i < documentTypesResponse.length; i++) {
-                              if (element.DocumentTypeId === documentTypesResponse[i].Id) {
-                                element.DocumentName = documentTypesResponse[i].Name;
-                              }
-                            }*/
 
                             for (let k = 0; k < kycdocumentStatesEnum.length; k++) {
                                 if (element.Status === kycdocumentStatesEnum[k].Id) {
@@ -150,11 +149,12 @@ export class GetSettingsInfoService {
                             }
                         });
                         this.identityModelsList = clientIndentityModels;
+                        this.#notifySubmittedDocuments.next(this.identityModelsList);
                     }
                 });
 
             } else {
-                this._notifyGetDocumentTypesResponse.next(responseData['Description']);
+                this.#notifyGetDocumentTypesResponse.next(responseData['Description']);
             }
         });
 
@@ -185,7 +185,7 @@ export class GetSettingsInfoService {
                     if(file.size < 700000)
                     {
                         this.uploadObj.ImageData = binaryString.substr(binaryString.indexOf(',') + 1);
-                        this._notifyGetChooseFileName.next(this.uploadObj);
+                        this.#notifyGetChooseFileName.next(this.uploadObj);
                     }
                     else
                     {
@@ -200,7 +200,7 @@ export class GetSettingsInfoService {
                                         reader.onloadend = () =>  {
                                             const base64data = reader.result as string;
                                             this.uploadObj.ImageData = base64data.substr(binaryString.indexOf(',') + 1);
-                                            this._notifyGetChooseFileName.next(this.uploadObj);
+                                            this.#notifyGetChooseFileName.next(this.uploadObj);
                                         }
                                     }
                                 },

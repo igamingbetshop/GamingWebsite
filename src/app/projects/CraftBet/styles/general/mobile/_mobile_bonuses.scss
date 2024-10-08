@@ -23,6 +23,7 @@
     display: flex;
     justify-content: space-between;
     gap: var(--m-bonuses-promo-code-gap, 0px);
+    border: var(--m-promo-code-activate-border, none);
 
     &__form {
       display: flex;
@@ -85,6 +86,7 @@
       width: width(m-promo-bonus-button, 120px);
       line-height: height(m-promo-bonus-button-line, 44px);
       border-radius: var(--m-promo-bonus-button-border-radius, 4px);
+      border: var(--m-promo-bonus-button-border, none);
     }
   }
 
@@ -148,9 +150,13 @@
               margin: 0;
               padding: 10px 5px;
               font-weight: 500;
-              .craft_btn {
-                color: var(--m-bonus-box-info-btn-color, #000);
+              button
+              {
+                &.craft_btn {
+                  color: var(--m-bonus-box-info-btn-color, #000);
+                }
               }
+
               .delete-state {
                 height: var(--m-bonus-box-header-delete-icon, 44px);
                 display: flex;

@@ -4,26 +4,25 @@
         {
             <div class="dropdown" dropdown>
                 <div class="selected">{{selectedOption()}} <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon arrow"> <title></title> <path d="M32.271 49.763 9.201 26.692l6.928-6.93 16.145 16.145 16.144-16.144 6.93 6.929-23.072 23.07h-.005Z"></path></svg></div>
-                <ul class="options">
+                <div class="content">
                     <div class="tail"></div>
-                    @for (option of  options(); track $index)
-                    {
-                        <li (click)="selectOption(option)">{{option}}</li>
-                    }
-                </ul>
+                    <ul class="options">
+                        @for (option of  options(); track $index)
+                        {
+                            <li (click)="selectOption(option)">{{option}}</li>
+                        }
+                    </ul>
+                </div>
+
             </div>
         }
         <div class="search-icon">
             <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path fill-rule="evenodd" clip-rule="evenodd" d="M10.266 3.893a23.1 23.1 0 1 1 25.668 38.414A23.1 23.1 0 0 1 10.266 3.893Zm5.112 30.764a13.9 13.9 0 1 0 15.444-23.114 13.9 13.9 0 0 0-15.444 23.114ZM38.55 46.33a28.002 28.002 0 0 0 7.78-7.78L64 56.22 56.22 64 38.55 46.33Z"></path></svg>
         </div>
-        <input [value]="pattern()" (input)="updatePattern($event)" placeholder="{{'Casino.SearchPattern' | translate}}">
-        @if(isModal)
-        {
-            <div class="filter-close modal-close-btn" (click)="close()">
-                <svg fill="#fff" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path d="m54.827 16.187-7.014-7.014L32 24.987 16.187 9.173l-7.014 7.014L24.987 32 9.173 47.813l7.014 7.014L32 39.013l15.813 15.814 7.014-7.014L39.013 32l15.814-15.813Z"></path></svg>
-            </div>
-        }
-
+        <input dropdown [value]="pattern()" (focusin)="focusIn()" (input)="updatePattern($event)" placeholder="{{'Casino.SearchPattern' | translate}}">
+        <div class="filter-close modal-close-btn" (click)="close()">
+            <svg fill="#fff" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path d="m54.827 16.187-7.014-7.014L32 24.987 16.187 9.173l-7.014 7.014L24.987 32 9.173 47.813l7.014 7.014L32 39.013l15.813 15.814 7.014-7.014L39.013 32l15.814-15.813Z"></path></svg>
+        </div>
     </div>
     <div class="result-box">
         @if(loading())
@@ -67,7 +66,7 @@
                             {
                                 <span class="recent">
                                 <span (click)="setPattern(recent)">{{recent}}</span>
-                                <span (click)="removeRecent(i)">
+                                <span (click)="removeRecent(i); $event.stopPropagation()">
                                     <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style=""> <title></title> <path d="m54.827 16.187-7.014-7.014L32 24.987 16.187 9.173l-7.014 7.014L24.987 32 9.173 47.813l7.014 7.014L32 39.013l15.813 15.814 7.014-7.014L39.013 32l15.814-15.813Z"></path></svg>
                                 </span>
                             </span>

@@ -1,4 +1,4 @@
-import {Component, createNgModule} from '@angular/core';
+import {Component, createNgModule, HostBinding} from '@angular/core';
 import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
@@ -24,6 +24,8 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 })
 export class MobileSlotTournamentComponent extends BaseSlotTournament {
 
+    @HostBinding('style.min-height') minHeight = this.layoutService.layoutStyle['min-height'];
+    @HostBinding('style.margin-top') marginTop = this.layoutService.layoutStyle['margin-top'];
     protected readonly faBars = faBars;
     currentTournamentIndex = 0;
 

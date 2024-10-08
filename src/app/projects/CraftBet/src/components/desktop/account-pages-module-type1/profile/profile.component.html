@@ -1,3 +1,7 @@
+@if(showProfileImage())
+{
+    <profile-image></profile-image>
+}
 <div class="tab-content" [ngClass]="{'leftTORight': !rightToLeftOrientation, 'rightToLeft': rightToLeftOrientation}">
     <div class="settings_header">
         <span>{{'User.PersonalDetails' | translate }}</span>

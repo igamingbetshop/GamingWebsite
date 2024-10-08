@@ -562,8 +562,6 @@ export class BaseRegisterDynamicFieldsComponent extends RegistrationComponent {
 
                         this.allRegTypeList = this.quickRegTypeList;
 
-                        console.log(this.allRegTypeList);
-
                         this.currentRegTypeList = this.quickRegTypeList.filter((item, index) => {
                             if (index > 0) {
                                 return item;

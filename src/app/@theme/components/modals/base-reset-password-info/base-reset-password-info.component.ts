@@ -20,7 +20,7 @@ export class BaseResetPasswordInfoComponent implements  OnInit {
   ngOnInit() {
     this.deviceSize = window.innerWidth;
 
-    this.getSettingsInfoService._notifyGetChangePasswordResponseMessage.subscribe(data => {
+    this.getSettingsInfoService.notifyGetChangePasswordResponseMessage$.subscribe(data => {
       if (data.message == 'Success')
       {
         location.reload();

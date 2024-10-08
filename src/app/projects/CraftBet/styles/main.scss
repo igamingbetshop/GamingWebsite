@@ -13,6 +13,7 @@ html {
 }
 
 body {
+  -webkit-text-size-adjust: 100%;
   background: backgroundColor(m-common,  #FFFFFF);
 
   overflow-y: auto;
@@ -149,7 +150,7 @@ body {
 {
   .filter-category-box .title-field .back-section {
     flex-direction: row-reverse;
-    transform: rotate(180deg);
+    //transform: rotate(180deg);
     margin-right: 0;
   }
   .account-statement-section {

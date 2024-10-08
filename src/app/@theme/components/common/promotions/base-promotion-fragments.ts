@@ -50,35 +50,44 @@ export class BasePromotionFragments implements OnInit, OnDestroy {
   {
     this.getPromotionFragments();
     this.subscription.add(this.route.queryParams.subscribe(param => {
-      this.selectedPromotionId = param.id;
-      this.selectedFragmentId = param.groupId;
-      if(this.selectedPromotionId)
+      if(param.popup)
       {
-        this.getPromotionById(this.selectedPromotionId)
-        .subscribe(data => {
-          this.promotion.Content = data.content;
+        const p = new Promotion();
+        p.Id = param.id;
+        this.onSelectPromotion(p, {Style:{popup:true}});
+      }
+      else
+      {
+        this.selectedPromotionId = param.id;
+        this.selectedFragmentId = param.groupId;
+        if(this.selectedPromotionId)
+        {
+          this.getPromotionById(this.selectedPromotionId)
+              .subscribe(data => {
+                this.promotion.Content = data.content;
 
-          this.promotion.Title = data.title;
-          this.promotion.Description = data.description;
-          this.promotion.Id = data.id;
-          this.promotion.Date = data.date;
-          this.promotion.ImageName = data.image;
-          this.promotion.Type = data.type;
-          window.scrollTo(0,0);
-        });
-      }
-      if(this.promotionFragments.length)
-      {
-        this.selectFragmentByPromotionId();
-      }
-      if(this.selectedFragmentId)
-      {
+                this.promotion.Title = data.title;
+                this.promotion.Description = data.description;
+                this.promotion.Id = data.id;
+                this.promotion.Date = data.date;
+                this.promotion.ImageName = data.image;
+                this.promotion.Type = data.type;
+                window.scrollTo(0,0);
+              });
+        }
         if(this.promotionFragments.length)
         {
-          this.filteredFragment = this.promotionFragments.find(fragment =>  fragment.Id == this.selectedFragmentId);
+          this.selectFragmentByPromotionId();
         }
+        if(this.selectedFragmentId)
+        {
+          if(this.promotionFragments.length)
+          {
+            this.filteredFragment = this.promotionFragments.find(fragment =>  fragment.Id == this.selectedFragmentId);
+          }
+        }
+        else this.filteredFragment = null;
       }
-      else this.filteredFragment = null;
     }));
   }
 

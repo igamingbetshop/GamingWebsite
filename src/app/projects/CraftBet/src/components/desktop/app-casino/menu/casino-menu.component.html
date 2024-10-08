@@ -31,8 +31,7 @@
                               [ngTemplateOutletContext]="{menuItem:menuItem}">
                 </ng-container>
                 <span>{{'Game.' + menuItem?.Title | translate}}</span>
-<!--                <div class="games-count" *ngIf="first && allGamesCount">{{allGamesCount}}</div>-->
-                <div class="games-count" *ngIf="first && showAllGamesCount && allGamesCount">{{allGamesCount}}</div>
+                <div class="games-count" *ngIf="menuItem.Id === -1 && showAllGamesCount && allGamesCount">{{allGamesCount}}</div>
             </li>
         </ul>
     </div>

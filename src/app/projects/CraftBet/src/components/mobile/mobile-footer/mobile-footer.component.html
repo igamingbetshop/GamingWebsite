@@ -13,7 +13,7 @@
                                 <div class="footer-column {{customStyleName}}"
                                      [ngClass]="{'showFooter':animateFooter}" collapse>
                                     <div class="footer-column-title" (click)="redirectInToPag(menuItem)">
-                                        <span>{{'Footer.' + menuItem.Title | translate}}</span>
+                                        <span [innerHtml]="'Footer.' + menuItem.Title | translate | sanitizer: 'html'"></span>
                                         <i class="icon-arrow"></i>
                                     </div>
                                     <div class="footer-column-content">

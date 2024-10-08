@@ -9,7 +9,7 @@
             <div class="history-tools">
                 <label>{{'User.Period-of-time' | translate}}</label>
                 <select formControlName="timeFilter">
-                    <option *ngFor="let item of historyTimeFilter, let i = index" [ngValue]="item">{{item.Name | translate}}</option>
+                    <option *ngFor="let item of historyTimeFilter, let i = index" [ngValue]="i">{{item.Name | translate}}</option>
                 </select>
             </div>
 
@@ -27,7 +27,7 @@
                 <label>{{'User.Status' | translate}}</label>
                 <select formControlName="status">
                     <option *ngFor="let statusFilter of paymentsFilter"
-                            [ngValue]="statusFilter">{{statusFilter.Name | translate}}</option>
+                            [ngValue]="statusFilter.Id">{{statusFilter.Name | translate}}</option>
                 </select>
             </div>
 

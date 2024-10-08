@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
 import {finalize, tap} from 'rxjs';
-import {ConfigService, LoaderService, LocalStorageService} from "@core/services";
+import {LoaderService, LocalStorageService} from "@core/services";
 import {LogoutHelper} from "@core/services/helpers/logout.helper";
 import {Router} from "@angular/router";
 @Injectable({
@@ -13,7 +13,6 @@ export class JWTInterceptor implements HttpInterceptor {
     constructor(
         private logoutHelper: LogoutHelper,
         private localStorageService: LocalStorageService,
-        private config:ConfigService,
         private loaderService: LoaderService,
         private router: Router,
     ) {}
@@ -22,8 +21,13 @@ export class JWTInterceptor implements HttpInterceptor {
     {
         this.requests = this.requests.filter(request => request !== req);
         if(this.requests.length > 0)
+        {
             this.loaderService.show();
-        else this.loaderService.hide();
+        }
+        else
+        {
+            this.loaderService.hide();
+        }
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler)

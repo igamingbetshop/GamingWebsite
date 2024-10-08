@@ -1,4 +1,4 @@
-import {Injectable, Injector} from '@angular/core';
+import {Directive, Injector} from '@angular/core';
 import {ConfigService, LocalStorageService} from "@core/services";
 import {BaseComponent} from '../../../../../../@theme/components/base/base.component';
 import {BaseControllerService} from "@core/services/app/baseController.service";
@@ -6,8 +6,9 @@ import {MenuType} from "@core/enums";
 import {Router} from "@angular/router";
 import { SaveData } from "@core/services";
 import {ProfileService} from "../../../../../../@theme/components/profile/service/profile.service";
+import {StateService} from "@core/services/app/state.service";
 
-@Injectable()
+@Directive()
 export class CommonUserDefaultComponent extends BaseComponent {
   public defaultOption: any;
   public menuList: Array<any> = [];
@@ -23,6 +24,7 @@ export class CommonUserDefaultComponent extends BaseComponent {
   public status: any;
   currentOpenMenu: any = null;
   currentOpenSubMenu: any = null;
+  #stateService:StateService;
   constructor(public injector: Injector) {
     super(injector);
     this.configService = injector.get(ConfigService);
@@ -32,6 +34,7 @@ export class CommonUserDefaultComponent extends BaseComponent {
     this.router = injector.get(Router);
     this.profileService = injector.get(ProfileService);
     this.userData = this.localStorageService.get('user');
+    this.#stateService = injector.get(StateService);
   }
 
   ngOnInit() {
@@ -103,6 +106,26 @@ export class CommonUserDefaultComponent extends BaseComponent {
     } else {
       this.currentOpenMenu = item;
       this.currentOpenSubMenu = this.savedDateService.currentSubItem;
+    }
+  }
+
+  onSubMenuClick(event:MouseEvent, menu:any)
+  {
+    event.stopPropagation();
+    const st = menu.StyleType && JSON.parse(menu.StyleType);
+    if(st && st.action)
+    {
+      if(st.action === "openChat")
+      {
+        this.#stateService.toggleChat();
+      }
+    }
+    else
+    {
+      this.savedDateService.getItem(menu);
+      const accountTemplateType = this.configService.defaultOptions.AccountTemplateType;
+      const path = `/user/${accountTemplateType || '1'}/${menu.Href}`;
+      this.router.navigate([path]);
     }
   }
 

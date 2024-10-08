@@ -1,4 +1,4 @@
-<div class="mobile-user-default" [ngStyle]="layoutService.layoutStyle">
+<div class="mobile-user-default" [style.margin-top]="layoutService.layoutStyle['margin-top']">
     <ul class="user-default-list">
         <li class="user-default-list-item" *ngFor="let subItem of savedDateService.selectedItem?.SubMenu" routerLinkActive="active">
             <div class="user-default-list-item-link"

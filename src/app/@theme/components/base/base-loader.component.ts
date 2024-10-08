@@ -1,4 +1,4 @@
-import {OnInit, OnDestroy, Directive, HostBinding} from '@angular/core';
+import {OnInit, OnDestroy, Directive, HostBinding, inject} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoaderService } from '@core/services';
 import {LoaderState} from "../loader/loader";
@@ -9,16 +9,19 @@ export class BaseLoaderComponent implements OnInit, OnDestroy {
   @HostBinding('style.display') display:string;
 
   private subscription: Subscription;
+  private loaderService = inject(LoaderService);
 
-  constructor(private loaderService: LoaderService) {
+  constructor() {
+    this.subscription = this.loaderService.loaderState
+        .subscribe((state: LoaderState) => {
+          this.show = state.show;
+          this.display = this.show ? 'block' : 'none';
+          console.log(this.display);
+        });
   }
 
   ngOnInit() {
-    this.subscription = this.loaderService.loaderState
-      .subscribe((state: LoaderState) => {
-        this.show = state.show;
-        this.display = this.show ? 'block' : 'none';
-      });
+
   }
 
   ngOnDestroy() {

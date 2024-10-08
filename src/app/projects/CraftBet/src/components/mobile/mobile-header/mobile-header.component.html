@@ -89,6 +89,10 @@
                 <div *ngIf="menuItem.contentType == 'depositBtn'">
                     <img [src]="'../../../../../../../assets/images/' + menuItem.Icon"/>
                 </div>
+                <div *ngIf="menuItem.contentType == 'mobileDepositBtn'">
+                    <div [innerHTML]="'Header.mobileDeposite' | translate | sanitizer: 'html'">
+                    </div>
+                </div>
                 <div *ngIf="menuItem.contentType == 'loginBtn'">
                     <ng-template #loginButton></ng-template>
                 </div>

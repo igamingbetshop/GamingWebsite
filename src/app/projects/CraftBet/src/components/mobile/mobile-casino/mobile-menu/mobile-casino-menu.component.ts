@@ -1,8 +1,5 @@
-import {Component, Injector, Input} from '@angular/core';
+import {Component, Injector} from '@angular/core';
 import { BaseCasinoMenu } from '../../../../../../../@theme/fragments/casino/menu/base-casino-menu';
-import { Fragment } from '../../../../../../../@core/models';
-import { getFragmentsByType } from '../../../../../../../@core/utils';
-import { FragmentSource, FragmentType } from '../../../../../../../@core/enums';
 
 @Component({
     selector: 'app-mobile-casino-menu',
@@ -11,6 +8,7 @@ import { FragmentSource, FragmentType } from '../../../../../../../@core/enums';
 })
 export class MobileCasinoMenuComponent extends BaseCasinoMenu {
 
+    override resourceFolderName = 'mobilefragments';
     constructor(
         protected injector: Injector,
     ) {

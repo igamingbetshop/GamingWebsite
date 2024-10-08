@@ -1,9 +1,19 @@
-import {AfterViewInit, Component, createNgModule, Injector, Input, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    createNgModule,
+    inject,
+    Injector,
+    Input,
+    ViewChild,
+    ViewContainerRef
+} from '@angular/core';
 import {AppCommonHeaderComponent} from "../../common/app-common-header/app-common-header.component";
 import {BaseControllerService} from "@core/services/app/baseController.service";
 import {MenuType} from "@core/enums";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 import {SaveData} from "@core/services";
+import {StateService} from "@core/services/app/state.service";
 
 @Component({
     selector: 'app-mobile-right-sidebar',
@@ -27,6 +37,7 @@ export class MobileRightSidebarComponent extends AppCommonHeaderComponent implem
     public savedDateService: SaveData;
 
     public screenSize = window.innerWidth;
+    #stateService = inject(StateService);
 
     constructor(public injector: Injector,
                 public baseControllerService: BaseControllerService,
@@ -96,15 +107,30 @@ export class MobileRightSidebarComponent extends AppCommonHeaderComponent implem
         });
     }
 
-    changePage(item, submenu) {
-        if (item.Type === "device") {
-            let changeDeviceType = JSON.parse(localStorage.getItem('deviceType'));
-            localStorage.setItem('deviceType', JSON.stringify('2'));
-            window.location.reload();
+    changePage(subItem, item)
+    {
+        const st = subItem.StyleType && JSON.parse(subItem.StyleType);
+        if(st && st.action)
+        {
+            if(st.action === "openChat")
+            {
+                this.#stateService.toggleChat();
+            }
         }
-        window.scroll(0,0);
-        this.savedDateService.currentSubItem = submenu;
-        this.savedDateService.selectedItem = submenu;
+        else
+        {
+            if (item.Type === "device") {
+                let changeDeviceType = JSON.parse(localStorage.getItem('deviceType'));
+                localStorage.setItem('deviceType', JSON.stringify('2'));
+                window.location.reload();
+            }
+            window.scroll(0,0);
+            this.savedDateService.currentSubItem = subItem;
+            this.savedDateService.selectedItem = subItem;
+            const accountTemplateType = this.configService.defaultOptions.AccountTemplateType;
+            const path = `/user/${accountTemplateType || '1'}/${subItem.Href}`;
+            this.router.navigate([path]);
+        }
     }
     ngAfterViewInit()
     {

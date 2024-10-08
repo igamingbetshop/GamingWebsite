@@ -1,6 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TranslationService} from "@core/services/api/translation.service";
 import {BaseService} from "@core/services/app/base.service";
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {BaseComponent} from "../../base/base.component";

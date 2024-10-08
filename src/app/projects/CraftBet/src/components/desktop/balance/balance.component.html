@@ -13,6 +13,7 @@
     <p class="header-user-name">{{userData?.UserName}}</p>
     <span class="header-balance-text">{{'User.Balance' | translate}}</span>
     <span>{{currencySymbol}} {{ selectedAccountBalance !== undefined ?  (selectedAccountBalance | toNumber | number: '.2') : (balance | toNumber | number: '.2')}} {{ !currencySymbol ? currencyId : '' }}</span>
+    <span class="icon-arrow-to-left"></span>
     <app-account-page-type2-balance class="balance-popup" *ngIf="isLogin" [useAccountType]="menuItem.config.useAccountType" [balances]="accountBalances" [templateType]="2"
                                     (selectedAccountChange)="onSelectedAccountChange($event)"></app-account-page-type2-balance>
 </div>

@@ -93,18 +93,25 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 12px;
 	  margin: 0 auto;
-	  
-      tr {
-        font-size: 12px;
-        height: 36px;
+
+      thead
+      {
+        tr {
+          font-size: var(--m-bet-history-table-head-font-size, 12px);
+          height: 36px;
+          color: itemColor(bet-history-table-header, #fff);
+          background: var(--bet-history-table-header-background-color,linear-gradient(212.83deg, #000 17.26%, #000 78.04%));
+        }
       }
+
 
       tbody {
         tr {
-          background: color(history-table-header-background);
+          font-size: var(--m-bet-history-table-font-size, 12px);
+          background: backgroundColor(bet-history-table-body, #000);
           color: color(m-history-table-title);
+          height: 36px;
 
           td {
             text-align: center;

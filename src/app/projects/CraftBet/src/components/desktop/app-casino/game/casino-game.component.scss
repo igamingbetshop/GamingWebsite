@@ -97,11 +97,20 @@
       bottom: 0;
       border-radius: 10px;
     }
+    .hidden-game-name {
+      display: var(--casino-game-hover-name-display, none);
+      position: var(--casino-game-hover-name-position, absolute);
+      color: var(--casino-game-hover-name-color, #fff);
+      top: var(--casino-game-hover-name-top, 13%);
+      left: 50%;
+      transform: translate(-50%);
+      visibility: hidden;
+    }
   }
   &.has-game-name {
     .icon-user-info
     {
-      right: 10px;
+      right: var(--casino-game-has-game-info-icon-right, 10px);
     }
     .icon-layer
     {
@@ -155,6 +164,9 @@
         backdrop-filter: blur(10px);
         opacity: 1;
       }
+      .hidden-game-name {
+        visibility: visible;
+      }
     }
 
     .game-open, .game-btn, .icon-layer {
@@ -173,11 +185,17 @@
       }
     }
   }
+  .open-demo-mode {
+    display: var(--casino-game-open-demo-mode-display, block);
+    position: var(--casino-game-open-demo-mode-position, unset);
+    top: var(--casino-game-open-demo-mode-top, auto);
+    width: var(--casino-game-open-demo-mode-width, auto);
+  }
   .game-open {
-    position: absolute;
-    height: auto;
-    width: 100%;
-    text-align: center;
+    position: var(--casino-game-real-btn-position, absolute);
+    height: var(--casino-game-real-btn-height, auto);
+    width: var(--casino-game-real-btn-width, 100%);
+    text-align: var(--casino-game-real-btn-text-align, center);
     left: var(--casino-game-real-btn-left, 0);
     top: var(--casino-game-real-btn-top, 17%);
     visibility: hidden;
@@ -251,14 +269,15 @@
 
     &_real {
       //width: 118px;
-      max-width: 118px;
-      width: 50%;
-      height: 35px;
-      line-height: 35px;
-      border-radius: fontSize(product-real-button, 6px);
-      box-shadow: 0px 7px 10px 0 rgba(24, 33, 48, 0.94);
+      max-width: var(--product-real-button-max-width, 118px);
+      width: var(--product-real-button-width, 50%);
+      height: var(--product-real-button-height, 35px);
+      line-height: var(--product-real-button-line-height, 35px);
+      border-radius: var(--product-real-button-border-radius, 6px);
+      box-shadow: var(--product-real-button-down-box-shadow, 0px 7px 10px 0 rgba(24, 33, 48, 0.94));
       background-image: linear-gradient(to bottom, itemColor(product-real-button-down, #1376f8), itemColor(product-real-button-up, #194074));
       background-color: color(product-real-button-background);
+      color: var(--product-real-button-color, #fff)
     }
 
     &_demo {

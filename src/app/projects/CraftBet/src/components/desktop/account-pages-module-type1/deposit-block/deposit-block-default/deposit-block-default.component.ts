@@ -16,6 +16,7 @@ import {DepositType14Component} from "../desposit-payments/deposit-type14/deposi
 import {DepositType15Component} from "../desposit-payments/deposit-type15/deposit-type15.component";
 import {DepositType16Component} from "../desposit-payments/deposit-type16/deposit-type16.component";
 import {DepositType17Component} from "../desposit-payments/deposit-type17/deposit-type17.component";
+import {DepositType19Component} from "../desposit-payments/deposit-type19/deposit-type19.component";
 
 @Component({
   selector: 'app-deposit-block-default',
@@ -154,6 +155,13 @@ export class DepositBlockDefaultComponent extends BaseDepositComponent {
         this.componentRef.instance.maxMinAmount = maxMinAmount;
         this.componentRef.instance.walletAddress = this.currentPayment.Address;
         this.componentRef.instance.DestinationTag = this.currentPayment.DestinationTag;
+        break;
+      }
+      case 19: {
+        this.componentRef = this.entry.createComponent(DepositType19Component);
+        this.componentRef.instance.paymentSystemId = Id;
+        this.componentRef.instance.contentType = ContentType;
+        this.componentRef.instance.maxMinAmount = maxMinAmount;
         break;
       }
     }

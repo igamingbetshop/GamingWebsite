@@ -49,6 +49,10 @@ import {
 import {QRCodeModule} from "angularx-qrcode";
 import {NgxMaskDirective} from "ngx-mask";
 import {LoaderComponent} from "../../../common/loader/loader.component";
+import {DepositType19Component} from "./desposit-payments/deposit-type19/deposit-type19.component";
+import {
+    DepositType19DefaultComponent
+} from "./desposit-payments/deposit-type19/deposit-type19-default/deposit-type19-default.component";
 
 
 
@@ -88,6 +92,8 @@ import {LoaderComponent} from "../../../common/loader/loader.component";
         DepositType16DefaultComponent,
         DepositType17Component,
         DepositType17DefaultComponent,
+        DepositType19Component,
+        DepositType19DefaultComponent,
 
     ],
     imports: [

@@ -16,6 +16,13 @@
                     </image-bar>
                 }
             }
+            @case ("QuickDeposit")
+            {
+                @defer
+                {
+                    <quick-deposit [style.order]="fragment.Order" [fragmentConfig]="fragment"></quick-deposit>
+                }
+            }
             @case ("Banners"){
                 <fragment-banners [attr.id]="fragment.Config.id"
                                   [fragmentConfig]="fragment"

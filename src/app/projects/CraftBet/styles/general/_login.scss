@@ -86,6 +86,9 @@
   background-color: backgroundColor(login-logo, unset);
   width: width(login-logo, auto);
   height: height(login-logo, auto);
+  position: var(--login-logo-position, relative);
+  top: var(--login-logo-item-top, 0);
+  left: var(--login-logo-item-left, 0);
 }
 .login-logo-svg {
   display: var(--login-logo-svg-display, none);
@@ -96,6 +99,9 @@
   background-color: backgroundColor(login-logo, unset);
   width: width(login-logo, auto);
   height: height(login-logo, auto);
+  position: var(--login-logo-position, relative);
+  top: var(--login-logo-item-top, 0);
+  left: var(--login-logo-item-left, 0);
 }
 
 .login-section {
@@ -596,6 +602,20 @@ app-app-confirm {
     left: itemLeft(login-section, auto);
     padding-left: paddingLeft(login-text, 0px);
     padding-right: paddingRight(login-text, 0px);
+  }
+  .login-title-custom {
+    font-size: fontSize(login-text-custom, 16px);
+    font-weight: fontWeight(login-text-custom, 400);
+    color: itemColor(login-text-custom, #ffffff);
+    display: var(--login-text-modal-title-custom-display, none);
+    text-align: var(--login-text-modal-title-custom-text-align, left);
+    width: width(login-text-custom, auto);
+    margin: var(--login-text-custom-margin, 0);
+    position: var(--login-text-custom-position, absolute);
+    top: itemTop(login-text-custom, 0px);
+    left: itemLeft(login-text-custom, auto);
+    padding-left: paddingLeft(login-text-custom, 0px);
+    padding-right: paddingRight(login-text-custom, 0px);
   }
   .login-title::before {
     content: '';

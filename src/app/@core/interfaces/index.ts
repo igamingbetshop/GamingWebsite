@@ -76,3 +76,9 @@ export interface Tournament{
   CurrencyId:any,
   Bonus:number[],
 }
+
+export interface Snackbar {
+  message: string;
+  status: 'success' | 'info' | 'error' | 'welcome';
+  delay: number;
+}

@@ -130,7 +130,7 @@ export class TournamentLeaderboardComponent implements OnInit{
           });
         }
       });
-    }, 3000);
+    }, 1500);
   }
 
   setSorter() {

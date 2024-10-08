@@ -38,7 +38,7 @@ export class BaseDepositType9Component extends BaseDepositPaymentComponent {
 
   ngOnInit() {
     super.ngOnInit();
-    this.paymentForm.addControl('Amount', new FormControl('', [Validators.required]));
+    this.paymentForm.addControl('Amount', new FormControl(this.quickDepositAmount, [Validators.required]));
     this.paymentForm.addControl('BankName', new FormControl(''));
     this.paymentForm.addControl('BankAccountNumber', new FormControl('', [Validators.required]));
     this.paymentForm.addControl('TransactionDate', new FormControl(''));
@@ -51,7 +51,7 @@ export class BaseDepositType9Component extends BaseDepositPaymentComponent {
       this.paymentForm.get('BankName').patchValue(data[0]?.Id);
     });
 
-    this.getSettingsInfoService._notifyGetChooseFileName.subscribe((data) => {
+    this.getSettingsInfoService.notifyGetChooseFileName$.subscribe((data) => {
       this.fileData = data;
       this.paymentForm.get('PaymentForm').patchValue(data['ImageData']);
       this.paymentForm.get('ImageName').patchValue(data['Name']);

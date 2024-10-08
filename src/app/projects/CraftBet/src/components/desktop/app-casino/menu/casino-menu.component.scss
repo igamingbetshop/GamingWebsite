@@ -126,6 +126,18 @@
       -webkit-font-smoothing: antialiased;
       backface-visibility: hidden;
       font-size: fontSize(product-nav-tab, 16px);*/
+      &:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--product-navigation-tab-border-radius,4px);
+        border: 1px solid transparent;
+        background: var(--product-navigation-tab-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: destination-out;
+        mask-composite: exclude;
+        display: var(--product-nav-tab-before-display,none);
+      }
       img
       {
         width: var(--casino-menu-fragment-item-icon-size, 20px);
@@ -139,6 +151,7 @@
       {
         background-color: var(--casino-menu-fragment-item-bg-color, #1c3e3b);
         color: var(--casino-menu-fragment-item-color, #1c3e3b);
+        &:before{ background: var(--product-navigation-tab-active-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);}
       }
       &:hover
       {

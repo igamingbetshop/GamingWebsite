@@ -96,6 +96,9 @@ import {SpinWheelOpenerComponent} from "./fragments/spin-wheel-opener/spin-wheel
 import {SearchOpenerComponent} from "./search-opener/search-opener.component";
 import {LoginPageComponent} from "./login-page/login-page.component";
 import {AccountStatementComponent} from "./account-statement/account-statement.component";
+import {
+    ProfileImageIconComponent
+} from "../../../../../@theme/components/profile/profile-image-icon/profile-image-icon.component";
 
 
 @NgModule({
@@ -151,10 +154,11 @@ import {AccountStatementComponent} from "./account-statement/account-statement.c
         ClientsComponent,
         SpinWheelOpenerComponent,
         SearchOpenerComponent,
-        AccountStatementComponent
+        AccountStatementComponent,
+        ProfileImageIconComponent
     ],
 
-    exports: [PaymentsListComponent, AddBankAccountComponent, UserInfoComponent],
+    exports: [PaymentsListComponent, AddBankAccountComponent, UserInfoComponent, BalanceComponent],
     providers: [PaymentControllerService, BonusesService, GetPaymentsService, BetsService],
     declarations: [
         AppMainComponent,

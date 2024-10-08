@@ -1,0 +1,23 @@
+@if (snackbarMessage) {
+    <div class="snackbar-container">
+        <div class="snackbar-icon-part">
+            <span class="icon-warning" [ngClass]="snackbarMessage?.status"></span>
+        </div>
+        <div class="snackbar-message-part">
+            <div class="snackbar-message-type">
+                {{ 'Info.' + snackbarMessage?.status | translate }}
+            </div>
+            <div class="snackbar-message-status">
+                {{ snackbarMessage?.message }}
+            </div>
+        </div>
+        <div class="snackbar-close-btn" (click)="closeSnackbar()">
+            <svg fill="#fff" viewBox="0 0 64 64" class="svg-icon " style=""><title></title>
+                <path d="m54.827 16.187-7.014-7.014L32 24.987 16.187 9.173l-7.014 7.014L24.987 32 9.173 47.813l7.014 7.014L32 39.013l15.813 15.814 7.014-7.014L39.013 32l15.814-15.813Z"></path>
+            </svg>
+        </div>
+        <div class="snackbar-progress-bar">
+            <div class="progress" [style.width.%]="progress"></div>
+        </div>
+    </div>
+}

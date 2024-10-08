@@ -86,7 +86,7 @@
       }
     }
     .current_item {
-      border: var(--m-profile-details-form-input-border, var(--settings-field-border, none));
+      border: var(--m-profile-details-form-input-border,  none);
       border-radius: var(--settings-field-border-radius, 6px);
       background: var(--m-profile-details-form-input-background, var(--account-content-item-bg-color));
       color: var(--settings-field-color, rgba(255, 255, 255, 0.6));
@@ -145,7 +145,7 @@
       font-size: var(--settings-field-font-size, 16px);
       text-indent: 0;
       padding-left: 16px;
-      border: var(--m-profile-details-form-input-border, var(--settings-field-border, none));
+      border: var(--m-profile-details-form-input-border, none);
       background: var(--m-profile-details-form-input-background, var(--account-content-item-bg-color));
       border-radius: var(--settings-field-border-radius, 6px);
       height: var(--settings-field-height, 40px);
@@ -246,7 +246,7 @@
       font-size: var(--settings-field-font-size, 16px);
       text-indent: 0;
       padding-left: 6px;
-      border: var(--m-profile-details-form-input-border, var(--settings-field-border, none));
+      border: var(--m-profile-details-form-input-border, none);
       background: var(--account-content-item-bg-color);
       border-radius: var(--settings-field-border-radius, 6px);
       height: var(--settings-field-height, 40px);

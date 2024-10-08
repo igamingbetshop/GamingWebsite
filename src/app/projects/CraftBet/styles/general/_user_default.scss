@@ -32,6 +32,7 @@
         gap: $account-small-gap;
         width: 100%;
         justify-content: space-between;
+        padding:var(--user-default-section-padding, 0);
         .profile-info-details {
           display: var(--profile-info-details-display, none);
           flex-direction: column;
@@ -78,6 +79,33 @@
             color: green;
           }
         }
+        .user-info
+        {
+          display: var(--user-info-display,none);
+          align-items: center;
+          gap: var(--user-info-item-gap,12px);
+          background-color: var(--user-info-background-color,transparent);
+          border-radius: var(--user-info-border-radius, 0);
+          padding: var(--user-info-padding,0 8px);
+          height: var(--user-info-height,45px);
+          img
+          {
+            height: var(--user-info-icon-height,32px);
+            width: var(--user-info-icon-width,32px);
+          }
+          .user-panel-content
+          {
+            font-size: var(--user-panel-content-font-size,14px);
+            color: var(--user-panel-content-color,#000);
+            .user_id
+            {
+              font-weight: var(--user-id-font-weight, bold);
+              font-size: var(--user-id-font-size,14px);
+              color: var(--user-id-color,#000);
+              line-height: 1.2;
+            }
+          }
+        }
       }
 
       &_header {
@@ -105,6 +133,8 @@
           padding-left: paddingLeft(account-item-title, 20px);
           padding-right: paddingRight(account-item-title, 20px);
           border: var(--account-item-title-border, none);
+          position: relative;
+
           .title_menu_dropdown_icon {
             display: display(account-item-title-dropdown-icon, block);
           }
@@ -158,12 +188,28 @@
               transform: var(--user-left-panel-sublist-icon-rotate, rotate(0deg));
               transition: all .1s;
             }
+            &:before{ background: var(--account-active-item-title-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);}
           }
 
           &.active:hover {
             fa-icon {
               transform: var(--user-left-panel-sublist-icon-rotate-hovered, rotate(-180deg));
             }
+          }
+          &:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-bottom-left-radius: borderBottomLeftRadius(account-item-title, 6px);
+            border-bottom-right-radius: borderBottomRightRadius(account-item-title, 6px);
+            border-top-right-radius: borderTopRightRadius(account-item-title, 6px);
+            border-top-left-radius: borderTopLeftRadius(account-item-title, 6px);
+            border: 1px solid transparent;
+            background: var(--account-item-title-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            display: var(--account-item-title-gradient-border-display, none);
           }
         }
 
@@ -243,7 +289,7 @@
     .user-right-panel {
       //background:color(user-right-panel-background);
       height: var(--user-right-panel-height, 831px);
-      background: transparent;
+      background: var(--user-right-panel-bg-color,transparent);
       padding: var(--user-right-panel-padding, 16px);
       flex: 1;
       position: relative;
@@ -298,6 +344,19 @@
                   top: 34px;
                   display: var(--account-right-content-item-selected-display, block);
                 }
+                &:before{background: var(--account-content-active-item-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);}
+              }
+              &:before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: var(--account-content-item-border-radius, 6px);
+                border: 1px solid transparent;
+                background: var(--account-content-item-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);
+                -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+                -webkit-mask-composite: destination-out;
+                mask-composite: exclude;
+                display: var(--account-content-item-gradient-border-display, none);
               }
             }
           }
@@ -358,12 +417,15 @@
         height: height(user-right-panel-title, 52px);
         background: backgroundColor(user-right-panel-title, #FFE200);
         display: flex;
-        justify-content: center;
+        justify-content: var(--user-right-panel-title-justify,center);
         align-items: center;
         margin-bottom: marginBottom(user-right-panel-title, -10px);
         font-size: fontSize(user-right-panel-title, 16px);
+        font-weight: fontWeight(user-right-panel-title, normal);
         text-transform: var(--user-right-panel-title-text-transform, unset);
         border-radius: var(--user-right-panel-title-border-radius, 0px);
+        padding: var(--user-right-panel-title-padding,0);
+        border-bottom: 1px solid var(--user-right-panel-title-border-color,transparent);
         .user-right-panel-list_title {
           margin-left: var(--user-right-panel-list-title-margin-left, 0);
         }
@@ -402,7 +464,7 @@
         }
       }
       &_content {
-
+        margin-top: 2px;
       }
     }
 
@@ -516,6 +578,7 @@
             padding-bottom: paddingBottom(account-item-title, 12px);
             padding-left: paddingLeft(account-item-title, 20px);
             padding-right: paddingRight(account-item-title, 20px);
+            position: relative;
 
             div {
               display: flex;
@@ -541,7 +604,6 @@
               box-shadow: none;
               border: 2px solid itemColor(account-title-border, transparent);
             }
-
           }
 
           .user-left-panel_subList {

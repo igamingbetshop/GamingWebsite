@@ -57,7 +57,21 @@
       text-decoration: var(--right-sidebar-deposit-btn-text-decoration, none);
       cursor: pointer;
     }
-
+    .right-menu-logo {
+      display: var(--right-sidebar-header-logo-display, none);
+      flex-direction: var(--right-sidebar-header-logo-flex-direction, row);
+      justify-content: var(--right-sidebar-header-logo-justify-content, space-between);
+      padding: var(--right-sidebar-header-logo-padding, 20px 20px 20px 20px);
+      border-bottom: var(--right-sidebar-header-logo-border-bottom, none);
+      align-items: center;
+      .right-menu-logo-img {
+        margin: var(--right-sidebar-header-logo-img-margin, 0 auto);
+      }
+      .icon-close {
+        color: var(--right-sidebar-header-logo-icon-color, #fff);
+        font-size: var(--right-sidebar-header-logo-icon-font-size, 20px);
+      }
+    }
     .close_sidebar {
       background-image: backgroundImage(m-close-sidebar, unset);
 
@@ -125,17 +139,32 @@
       margin: var(--right-sidebar-header-tab-margin, 0);
       border-bottom: 1px solid itemColor(right-sidebar-header-tab-border,black);
       align-items: center;
-      text-align: right;
+      text-align: var(--right-sidebar-header-tab-border-text-align, right);
 
       .user_panel_title_top {
         display: flex;
-        justify-content: space-between;
-        width: 100%;
+        justify-content: var(--right-sidebar-header-top-panel-justify-content, flex-start);
+        gap: var(--right-sidebar-header-top-panel-gap, 0);
+        width: var(--right-sidebar-header-top-panel-width, 100%);
         align-items: center;
         flex-direction: var(--right-sidebar-header-top-panel-flex-direction, row);
         i {
           color: color(m-drawer-menu-close-icon) !important;
           font-size: fontSize(m-drawer-menu-close-icon, 20px);
+        }
+        .mobile-account-img {
+          display: var(--right-sidebar-account-image-display, none);
+          width: var(--right-sidebar-account-image-width, auto);
+          height: var(--right-sidebar-account-image-height, auto);
+        }
+
+        .user-panel-content {
+          margin-top: var(--right-sidebar-user-panel-content-margin-top, 0);
+        }
+
+        .icon-close-modal {
+          margin-left: var(--m-drawer-menu-icon-close-margin-left, auto);
+          display: var(--m-drawer-menu-icon-close-display, block);
         }
 
         .user_panel_title {
@@ -145,12 +174,19 @@
           margin-right: marginRight(m-drawer-menu-title-text, auto);
           margin-left: marginLeft(m-drawer-menu-title-text, 10px);
           display: var(--m-header-user-id-display, block);
+          gap: var(--m-header-user-id-gap, 5px);
           span:first-child {
-            display: var(--header-user-id-display, block);
+            display: var(--header-user-id-display, none);
           }
         }
         .user_panel_title_name {
           display: var(--m-header-first-name-display, none);
+        }
+        .user_panel_title_id {
+          color: var(--m-drawer-menu-title-text-id-color, var(--m-drawer-menu-title-text-color));
+          .user-id-title {
+            display: var(--m-header-user-id-title-display, none);
+          }
         }
         .ng-fa-icon{
           color: itemColor(right-sidebar-user-icon,black);
@@ -175,7 +211,11 @@
         width: width(right-side-bar-top-title, 100%);
         text-align: textAlign(right-side-bar-top-title, left);
         margin-top: marginTop(right-side-bar-top-title, 10px);
+        margin-left: marginLeft(right-side-bar-top-title, 0px);
         display: display(right-side-bar-top-title, block);
+        background: var(--right-side-bar-top-title-background, transparent);
+        border-radius: var(--right-side-bar-top-title-border-radius, 0);
+        padding: var(--right-side-bar-top-title-padding, 0);
         .info-block-top-label {
           color: itemColor(right-side-bar-top-title-label, #fff);
           font-size: fontSize(right-side-bar-top-title-label, 16px);
@@ -234,6 +274,7 @@
         .log-out-logo {
           margin-right: var(--m-logout-icon-log-out-icon-margin-right, 0);
           display: var(--m-logout-icon-log-out-icon-display, block);
+          color: var(--m-logout-icon-log-out-icon-color, var(--right-menu-item-color, #000000))
         }
       }
 
@@ -351,10 +392,13 @@
         padding: var(--right-menu-title-padding, 0);
         margin: var(--right-menu-title-margin, 0);
         align-items: var(--right-menu-title-align-items, center);
+        gap: var(--right-menu-title-gap, 0);
         font-weight: var(--right-menu-title-font-weight, 400);
         font-size: var(--right-menu-title-font-size, 14px);
         width: var(--right-menu-title-width, auto);
-        color: var(--right-menu-title-color, var(--right-menu-item-color));
+        background: var(--right-menu-title-background, transparent);
+        border-radius: var(--right-menu-title-border-radius, 0);
+        color: var(--right-menu-title-color, #fff);
         .title_menu_img {
           width: var(--right-menu-title-img-width, auto);
           height: var(--right-menu-title-img-height, auto);
@@ -405,6 +449,7 @@
         margin-left: marginLeft(m-right-menu-item-title, 25px);
         margin-top: marginTop(m-right-menu-item-title, 0);
         margin-bottom: marginBottom(m-right-menu-item-title, 0);
+        width: var(--m-right-menu-item-title-width, auto);
       }
 
       .balance_row {
@@ -415,7 +460,7 @@
       &_item {
         display: flex;
         align-items: center;
-
+        gap: var(--right-menu-item-gap, 0);
         justify-content: justifyContent(right-menu-item, space-between);
 
         &.logout {
@@ -425,7 +470,8 @@
           padding-right: var(--right-menu-item-logout-padding-right, var(--right-menu-item-padding-right, 15px));
           width: var(--right-menu-item-logout-width, auto);
           margin: var(--right-menu-item-logout-margin, 0);
-          background: var(--right-menu-item-logout-width, transparent);
+          background: var(--right-menu-item-logout-background, transparent);
+          border-radius: var(--right-menu-item-logout-border-radius, var(--right-menu-item-border-radius, 0))
         }
 
         font-size: fontSize(right-menu-item, 14px);
@@ -468,6 +514,8 @@
   align-items: center;
   img {
     margin-right: marginRight(right-menu-item-icon, 16px);
+    width: var(--right-menu-item-icon-width, auto);
+    height: var(--right-menu-item-icon-height, auto);
   }
 
   .item_menu__icon {

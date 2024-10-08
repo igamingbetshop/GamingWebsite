@@ -1,3 +1,4 @@
+profile-image{width: 326px; margin-left: 10px}
 .tab-content {
   padding: var(--account-content-row-paddding);
   background: var(--account-main-bg-color);
@@ -288,6 +289,7 @@ form {
     }
   }
 }
+
 @media screen and (min-width: 1200px) and (max-width: 1376px)
 {
   input, select {

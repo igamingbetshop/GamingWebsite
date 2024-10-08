@@ -16,6 +16,13 @@
                         <span>{{'User.' + status | translate}}</span>
                     </div>
                 </div>
+                <div class="user-info">
+                    <img class="mobile-account-img" src="../../../../../../../assets/images/user.png" alt="">
+                    <div class="user-panel-content">
+                        <div class="">{{'User.User_Id' | translate}}</div>
+                        <div class="user_id">{{userData?.Id}}</div>
+                    </div>
+                </div>
                 <li
                         *ngFor="let item of menuList" class="user-left-panel_header" collapse (click)="toggleMenu(item, $event)"
                         [ngClass]="{'opened': (currentOpenMenu == item) || (item.SubMenu.includes(currentOpenSubMenu))}">
@@ -32,9 +39,8 @@
                     <ul class="user-left-panel_subList" *ngIf="(currentOpenMenu == item) || (item.SubMenu.includes(currentOpenSubMenu))"
                             [collapse]="true">
                         <div>
-                            <li class="user-left-panel_list" *ngFor="let subItem of item?.SubMenu" (click)="savedDateService.getItem(item); $event.stopPropagation()">
+                            <li class="user-left-panel_list" *ngFor="let subItem of item?.SubMenu" (click)="onSubMenuClick($event, subItem)">
                                 <a class="item_menu" routerLinkActive="active"
-                                   [routerLink]="'/user/' + (this.configService.defaultOptions.AccountTemplateType == undefined ? '1' : this.configService.defaultOptions.AccountTemplateType) + '/' + subItem.Href"
                                    *ngIf="subItem.Type != 4">
                                     {{'User.' + subItem?.Title | translate}}
                                 </a>

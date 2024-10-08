@@ -235,6 +235,7 @@ export class AppHeaderComponent extends AppCommonHeaderComponent {
                 }
 
                 item['contentType'] = itemType;
+                item['config'] = parsedStyleTypeItem;
                 if(itemType == 'logoImg')
                     this.logoExtension = item.Icon;
                 if (parsedStyleTypeItem['images'] != undefined) {

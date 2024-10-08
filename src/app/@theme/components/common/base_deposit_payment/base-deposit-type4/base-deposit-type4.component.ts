@@ -14,7 +14,7 @@ export class BaseDepositType4Component extends BaseDepositPaymentComponent {
 
   ngOnInit() {
     super.ngOnInit();
-    this.paymentForm.addControl('MobileNumber', new FormControl('', [Validators.required]));
+    this.paymentForm.addControl('MobileNumber', new FormControl(this.quickDepositAmount, [Validators.required]));
 
     this.subscriptions.push(this.paymentControllerService.notifyGetSmsCodeError.subscribe((responseData) => {
       this.errorMessage = responseData;
