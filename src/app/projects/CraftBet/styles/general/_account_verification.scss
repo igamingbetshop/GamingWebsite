@@ -12,6 +12,8 @@
       align-items: var(--account-verify-section-block-align-items, center);
       width: var(--account-verify-section-block-width, 100%);
       height: var(--account-verify-section-block-height, 30px);
+      padding: var(--account-verify-section-block-padding, 0);
+      border-bottom: var(--account-verify-section-block-border-bottom, none);
       .document-block_item {
         width: var(--account-verify-section-item-width, calc(100% / 6));
       }
@@ -115,13 +117,11 @@
         background: $account-content-item-bg-color;
         border-radius: var(--account-verify-select-border-radius, 4px);
         border: var(--account-verify-border, none);
-        appearance: none;
-        background-image: var(--account-verify-background-image, linear-gradient(
-                        45deg, transparent 50%, #fff 50%), linear-gradient(
-                        135deg, #fff 50%, transparent 50%), linear-gradient(to right, transparent, transparent));
-        background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px), 100% 0;
-        background-size: 12px 8px, 12px 8px, 2.5em 2.5em;
-        background-repeat: no-repeat;
+        appearance: var(--account-verify-appearance, none);
+        //background-image: var(--account-verify-background-image, linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%), linear-gradient(to right, transparent, transparent));
+        //background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px), 100% 0;
+        //background-size: 12px 8px, 12px 8px, 2.5em 2.5em;
+        //background-repeat: no-repeat;
         height: height(account-verify-select, 40px);
         margin: var(--account-verify-select-margin, 10px 0 24px 0);
       }
@@ -189,14 +189,14 @@
           min-width: var(--account-verification-choose-input-min-width, 308px);
           background: var(--select-file-bg, linear-gradient(180deg, #314566 0%, #192333 100%));
           border-radius: var(--account-verification-choose-input-border-radius, 6px);
-          border: none;
+          border: var(--account-verification-choose-input-border, none);
           height: height(account-verification-choose-input, 40px);
           width: width(account-verification-choose-input, 100%);
           margin: var(--settings-inputs-margin, 10px 0 24px 0);
           &::placeholder {
-            color: #fff!important;
-            font-weight: 300 !important;
-            font-size: 16px;
+            color: var(--account-verification-choose-input-placeholder-color, #fff) !important;
+            font-weight: var(--account-verification-choose-input-placeholder-font-weight, 300) !important;
+            font-size: var(--account-verification-choose-input-placeholder-font-size, 16px);
           }
         }
         &.change_name_active {
@@ -212,6 +212,7 @@
         font-weight: fontWeight(account-verification-btn, 600);
         border-radius: var(--account-verification-btn-border-radius, 4px);
         height: height(account-verification-btn, 40px);
+        color: var(--account-verification-btn-color, var(--btn-color, #fff))
       }
     }
   }
@@ -224,6 +225,10 @@
   .icon {
     font-size: var(--history-info-pagination-section-icon-font-size, 90px);
     color: var(--history-info-pagination-section-icon-color, #fff);
+
+  }
+  .account-verification-icon {
+    display: var(--account-verification-icon-display, block);
   }
   .empty-block-text {
     color: var(--history-info-pagination-section-text-color, #fff);

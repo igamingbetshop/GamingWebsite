@@ -108,6 +108,13 @@
                 [fragmentConfig]="fragment">
         </character-hierarchy>
     }
+    @for (fragment of fragments?.Jackpots?.Items; track fragment.Id)
+        {
+            <jackpot
+                    [style.order]="fragment.Order"
+                    [fragmentConfig]="fragment">
+            </jackpot>
+        }
 
     <div class="open-lucky-game" (click)="openLuckyGame()"
          *ngIf="fragments?.OpenLuckyGame?.Items?.length">

@@ -1,11 +1,11 @@
 
 <div class="mobile-promotions-section" [ngStyle]="{'display' : selectedFragment ? 'block' : 'none'}">
-    <div class="mobile-promotions-section_top" [style.margin-top]="layoutService.layoutStyle['margin-top']">
+    <div class="mobile-promotions-section_top">
         <div class="promotion-item"
              >
             <div class="back">
                 <i class="icon-arrow-down" [routerLink]="['/promotions']"></i>
-                <span class="promotion-item-title" [innerHtml]="promotion.Title | sanitizer: 'html'"></span>
+                <span class="promotion-item-title" [innerHtml]="promotion.Title | translate | sanitizer: 'html'"></span>
             </div>
 
             <div class="promotion-item_image">
@@ -16,7 +16,7 @@
                 <div class="content-title">
                   <span>
                       <i class="icon-specials"></i>
-                      <span class="title" [innerHtml]="promotion.Description | sanitizer: 'html'"></span>
+                      <span class="title" [innerHtml]="promotion.Description | translate | sanitizer: 'html'"></span>
                   </span>
 
                     <button class="get-bonuses selected"
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="text-content" >
-                    <p [innerHtml]="promotion.Content | sanitizer: 'html'"></p>
+                    <p [innerHtml]="promotion.Content | translate | sanitizer: 'html'"></p>
                 </div>
                 <p class="publish-date">{{'Promotion.PublishedDate' | translate}} {{promotion.Date}}</p>
             </div>
@@ -35,7 +35,7 @@
 </div>
 
 <div [ngStyle]="{'display' : selectedFragment ? 'none' : 'block'}">
-    <h1 class="promotion-title" [style.margin-top]="layoutService.layoutStyle['margin-top']"> <i class="icon-specials"></i> {{'Promotions.Promotions' | translate}}</h1>
+    <h1 class="promotion-title"> <i class="icon-specials"></i> {{'Promotions.Promotions' | translate}}</h1>
 </div>
 
 @if (filteredFragment)

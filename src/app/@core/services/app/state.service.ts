@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {computed, inject, Injectable, signal} from '@angular/core';
+import {BehaviorSubject, Subject} from "rxjs";
 import {getParsedUrl, isMobileUrl} from "@core/utils";
-import {Snackbar} from "@core/interfaces";
+import {DOCUMENT} from "@angular/common";
 
 @Injectable()
 export class StateService
@@ -28,8 +28,18 @@ export class StateService
   private readonly _desktopHeaderResize = new BehaviorSubject<string>("calc(100vh - 117px)");
   public readonly onDesktopHeaderResize$ = this._desktopHeaderResize.asObservable();
 
-  private _snackbarSubject = new BehaviorSubject<Snackbar>(null);
-  public onGetSnackbar = this._snackbarSubject.asObservable();
+  #profileImageChange = new Subject<string>();
+  onProfileImageChange$ = this.#profileImageChange.asObservable();
+
+  #document = inject(DOCUMENT);
+  #theme = signal<'light' | 'dark'>(localStorage.getItem('theme') as 'light' | 'dark' || 'dark');
+  theme = computed(() => {
+    localStorage.setItem('theme', this.#theme());
+    const oppositeTheme =  this.#theme() === 'dark' ? 'light' : 'dark';
+    this.#document.body.classList.remove(oppositeTheme);
+    this.#document.body.classList.add( this.#theme());
+    return this.#theme();
+  });
 
 
   constructor()
@@ -129,7 +139,14 @@ export class StateService
     this._desktopHeaderResize.next(sizes);
   }
 
-  showSnackbar(message: string, status: 'success' | 'info' | 'error' | 'welcome', delay: number = 5000) {
-    this._snackbarSubject.next({ message, status, delay });
+  changeProfileImage(url:string)
+  {
+    this.#profileImageChange.next(url);
   }
+
+  updateTheme(value: 'light' | 'dark')
+  {
+    this.#theme.set(value);
+  }
+
 }

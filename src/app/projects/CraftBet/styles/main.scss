@@ -10,6 +10,10 @@
 */
 html {
   scroll-behavior: smooth;
+  &.cdk-global-scrollblock{
+    position: static!important;
+    overflow-y: hidden;
+  }
 }
 
 body {
@@ -21,6 +25,9 @@ body {
   {
     height: auto!important;
     padding-bottom: 50px;
+  }
+  .cdk-overlay-container{
+    background: rgba(0, 0, 0, 0.32);
   }
 }
 .grab{

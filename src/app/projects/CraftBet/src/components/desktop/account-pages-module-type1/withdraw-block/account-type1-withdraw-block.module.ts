@@ -5,7 +5,7 @@ import {WithdrawBlockDefaultComponent} from './withdraw-block-default/withdraw-b
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {NgxPrintModule} from "ngx-print";
 import {ThemeModule} from "../../../../../../../@theme/theme.module";
 import {DesktopMobileCommonModule} from "../../../common/common.module";
@@ -75,8 +75,7 @@ import {NgxMaskDirective} from "ngx-mask";
 import {LoaderComponent} from "../../../common/loader/loader.component";
 
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         WithdrawBlockDefaultComponent,
         WithdrawType1Component,
         WithdrawType2Component,
@@ -126,15 +125,12 @@ import {LoaderComponent} from "../../../common/loader/loader.component";
         WithdrawType24DefaultComponent,
         WithdrawType25Component,
         WithdrawType25DefaultComponent
-    ],
-    imports: [
-        CommonModule,
+    ], imports: [CommonModule,
         AccountType1WithdrawBlockRoutingModule,
         TranslateModule,
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        HttpClientModule,
         NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
@@ -143,8 +139,6 @@ import {LoaderComponent} from "../../../common/loader/loader.component";
         CommonPaymentNominalsModule,
         CommonAccountsModule,
         DropdownDirectiveModule,
-        LoaderComponent
-    ]
-})
+        LoaderComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AccountType1WithdrawBlockModule {
 }

@@ -71,6 +71,8 @@ export interface Tournament{
   Name:string,
   StartTime:Date,
   FinishTime: Date,
+  FormatedStartTime?:Date,
+  FormatedFinishTime?:Date,
   Info: string,
   PrizePool:number,
   CurrencyId:any,
@@ -81,4 +83,5 @@ export interface Snackbar {
   message: string;
   status: 'success' | 'info' | 'error' | 'welcome';
   delay: number;
+  showMessage: boolean;
 }

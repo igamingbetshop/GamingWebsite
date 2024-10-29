@@ -1027,7 +1027,7 @@
         /*width: calc(100% - var(--enter-payment-info-width));*/
         flex: 2;
         overflow-y: hidden;
-        padding: 0;
+        padding: var(--withdraw-payment-list-padding, 0);
         border-radius: var(--withdraw-payment-list-border-radius, 0);
 
         .payment_list {
@@ -1081,6 +1081,7 @@
                     border-bottom-right-radius: borderBottomRightRadius(payment-list-item-img, 4px);
                     border-top-left-radius: borderTopLeftRadius(payment-list-item-img, 4px);
                     border-top-right-radius: borderTopRightRadius(payment-list-item-img, 4px);
+                    border: var(--payment-list-item-img-border, none);
                   }
                 }
 
@@ -1140,7 +1141,7 @@
               border-radius: unset;
               padding: var(--account-content-row-paddding, 20px);
               color: $account-content-item-color;
-              background-color: var(--product-background-color, #FFFFFF);
+              background: var(--withdraw-account-content-row-background, var(--product-background-color, #FFFFFF));
               .bonus-refused {
                 display: var(--bonus-refused-display, flex);
                 align-items: center;

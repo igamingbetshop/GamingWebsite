@@ -1,0 +1,14 @@
+<div class="m-clock-count-down">
+  @for (segment of timeSegments; track segment) {
+    <div class="time-section">
+
+      <div class="time-group">
+        @for (number of segment.numbers; track number) {
+            <div class="segment-display-top" #overlayRef>{{number.displayTop}}</div>
+        }
+      </div>
+
+      <div class="time-name">{{segment.temporalUnits}}</div>
+    </div>
+  }
+</div>

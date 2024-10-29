@@ -671,7 +671,8 @@ input[type=number] {
     display: block;
     width: 100%;
     background: var(--settings-table-row-background-color, #16233A);
-    border-radius: 6px;
+    border-radius: var(--m-settings-table-tbody-border-radius, 6px);
+    border: var(--m-settings-table-tbody-border, none);
     color: var(--settings-table-row-color, #fff);
     margin: var(--m-settings-table-tbody-margin, 0);
     text-align: var(--m-settings-table-tbody-text-align, center);
@@ -772,11 +773,15 @@ input[type=number] {
   width: var(--change-password-form-width, 100%);
   background: var(--change-password-form-background, unset);
   border-radius: var(--change-password-form-border-radius, 6px);
+  gap: var(--change-password-form-gap, 0);
   .change-password-inputs {
     display: flex;
     flex-direction: column;
     gap: var(--change-password-inputs-gap, 24px);
     width: width(change-password-inputs, 100%);
+    .comment {
+      display: var(--change-password-comment-display, block);
+    }
   }
   .form_row {
     line-height: unset;
@@ -802,6 +807,23 @@ input[type=number] {
     .error_message1 {
       font-size: var(--change-password-inputs-error-message-font-size, 13px);
       top: itemTop(change-password-error-message, -6px);
+    }
+    .password-valid-options{
+      display: var(--change-password-validation-display, flex);
+      flex-direction: column;
+      li{
+        display: inline-flex;
+        color: var(--change-password-validation-text-color, #fff);
+        align-items: center;
+        gap: var(--change-password-validation-text-gap, 5px);
+        font-size: var(--change-password-validation-text-font-size, 14px);
+        .pass-check-icon{
+          color: var(--change-password-validation-valid-icon-color, rgb(0, 184, 1));
+          font-size: var(--change-password-validation-valid-icon-font-size, 16px);
+          display: none;
+        }
+        &.valid{.pass-check-icon{display: block;}}
+      }
     }
     label {
       color: itemColor(change-password-input-label, #fff);

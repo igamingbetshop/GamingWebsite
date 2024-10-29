@@ -1,0 +1,98 @@
+@import "../../../../../styles/helpers/variables";
+@import "../../../../../../../../styles/helpers/variables";
+
+.jackpot-winner-box
+{
+  position: relative;
+  width: 341px;
+  height: 355px;
+  border-radius: 20px;
+  background: radial-gradient(50% 50% at 50% 50%, #3A38AF 0%, #162056 100%);
+  margin: 90px auto;
+  &:before
+  {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background: linear-gradient(180deg, #88B0ED 0%, #476BE9 100%) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    z-index: 1;
+  }
+  .win-bg-image
+  {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+  }
+  .jackpot-winner-content
+  {
+    z-index: 1;
+    width:100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
+    position: relative;
+    .modal-body
+    {
+      position: absolute;
+      right: 16.5px;
+      top: 16.5px;
+      color: rgba(253, 253, 253, 1);
+      padding: 0;
+      cursor: pointer;
+    }
+    h1
+    {
+      color: rgb(253, 253, 253);
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0;
+      margin-top: 50px;
+      width: 70%;
+      text-transform: uppercase;
+    }
+    .jackpot-amount
+    {
+      span
+      {
+        font-size: 50px;
+        font-weight: 700;
+        background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8));
+
+        text-shadow: 0 0 18.5229549407959px rgba(186, 171, 239, 0.88), 0 0 7.1708269119262695px rgba(93, 64, 199, 0.5), 0 0 71.70828247070312px rgba(53, 35, 116, 0.5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text;
+        background-clip: text;
+      }
+    }
+    button
+    {
+      background: linear-gradient(180deg, #57FF48 0%, #2D953E 100%);
+      width:321px;
+      height:48px;
+      line-height: 48px;
+      border-radius: 40px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 20px;
+      color: rgba(253, 253, 253, 1);
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+}

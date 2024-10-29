@@ -35,9 +35,9 @@
                placeholder="{{'Account.PromoCode' | translate}}">
         <button class="craft_btn verify_btn setting_btn" (click)="activatePromoCode()"
                 [ngClass]="{'disabled' : !promoCode}">
-      <span>
-        {{'Payments.ActivateBonus' | translate}}
-      </span>
+          <span>
+            {{'Payments.ActivateBonus' | translate}}
+          </span>
         </button>
         <div class="bonus-success-message" *ngIf="promoCodeSuccessMessage">
             {{promoCodeSuccessMessage}}
@@ -45,6 +45,18 @@
         <div class="bonus-error-message" *ngIf="promoCodeErrorMessage">
             {{promoCodeErrorMessage}}
         </div>
+        @if(firstWagerBonus())
+        {
+            <div class="range-box">
+                <div class="range-label">
+                    <span>{{'Bonus.TurnoverAmount' | translate}}</span>
+                    <span>{{userInfo.CurrencyId}} {{firstWagerBonus().TurnoverTotal}}</span>
+                </div>
+                <div class="range">
+                    <div class="fill" [style.width.%]="firstWagerBonus().TurnoverLeftPercent"></div>
+                </div>
+            </div>
+        }
     </div>
     <div class="bonus-tab-content">
 -
@@ -59,7 +71,7 @@
                     }
                     <div class="bonus-header-name bonus-empty-header-name"></div>
                 }
-                @for(bonus of bonusesData?.body; track bonus.Id)
+                @for(bonus of bonusesData?.body | paginate: { itemsPerPage: 10, currentPage: page }; track bonus.Id)
                 {
                     @for(head of bonusesData?.headers; track head)
                     {
@@ -92,7 +104,14 @@
                         <span class="empty-history-text">{{noHistory}}</span>
                     </section>
                 }
+
+            </div>
+            <div class="pagination_section">
+                <pagination-controls autoHide="true" previousLabel="{{'User.Previous' | translate}}" nextLabel="{{'User.Next' | translate}}"
+                                     (pageChange)="page = $event" class="ngx-pagination"></pagination-controls>
             </div>
         </div>
+
     </div>
+
 </div>

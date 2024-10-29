@@ -1,4 +1,4 @@
-import {AfterViewChecked, Injectable, Injector, OnDestroy, OnInit, Sanitizer} from '@angular/core';
+import {AfterViewChecked, Directive, Injectable, Injector, OnDestroy, OnInit, Sanitizer, signal} from '@angular/core';
 import {LocalStorageService, SaveData} from "@core/services";
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
@@ -7,7 +7,7 @@ import {UtilityService} from "@core/services/app/utility.service";
 import {SafeResourceUrl} from "@angular/platform-browser";
 import {take} from "rxjs";
 
-@Injectable()
+@Directive()
 export class BaseMobileOpenGameComponent implements OnInit, AfterViewChecked, OnDestroy {
     protected openType: number;
     protected iframeUrl: SafeResourceUrl;
@@ -18,7 +18,7 @@ export class BaseMobileOpenGameComponent implements OnInit, AfterViewChecked, On
     protected route: ActivatedRoute;
     protected utilityService: UtilityService;
     protected openGamesService: OpenGamesService;
-
+    openProductErrorMessage = signal<string>("");
     protected isLogin: boolean;
     protected redirectUrl: string;
     protected showErrorTag: boolean = false;
@@ -74,10 +74,12 @@ export class BaseMobileOpenGameComponent implements OnInit, AfterViewChecked, On
         this.openGamesService.notifyGetIframUrl.pipe(take(1)).subscribe((responseData) => {
             if (responseData) {
                 this.showGame(responseData);
+                this.openProductErrorMessage.set("");
             }
         });
-        this.openGamesService.notifyGetIframUrlError.subscribe((responseData) => {
+        this.openGamesService.notifyGetIframUrlError.subscribe((data) => {
             this.showErrorTag = true;
+            this.openProductErrorMessage.set(data);
         });
     }
 

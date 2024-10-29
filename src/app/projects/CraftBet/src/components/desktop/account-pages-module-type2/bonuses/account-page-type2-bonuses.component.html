@@ -9,6 +9,43 @@
             }
         </div>
 
+<!--        <div class="filter-panel">-->
+<!--            <form [formGroup]="form" (ngSubmit)="submit()">-->
+<!--                <div class="history-tools">-->
+<!--                    <select formControlName="status">-->
+<!--                        <option value="">{{'User.Select Status' | translate}}</option>-->
+<!--                        <option *ngFor="let item of statusList, let i = index"-->
+<!--                                [ngValue]="item">{{item?.Name | translate}}</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+
+
+<!--                <div class="history-tools">-->
+<!--                    <label></label>-->
+<!--                    <button class="craft_btn show-btn">{{'User.Show' | translate}}</button>-->
+<!--                </div>-->
+
+<!--            </form>-->
+<!--        </div>-->
+    </div>
+    <div class="send-promo-code-box">
+       <div>
+           <input id="name" name="name" #name="ngModel" [(ngModel)]="promoCode"
+                  placeholder="{{'Account.PromoCode' | translate}}">
+           <button class="craft_btn verify_btn setting_btn" (click)="activatePromoCode()"
+                   [ngClass]="{'disabled' : !promoCode}">
+              <span>
+                {{'Payments.ActivateBonus' | translate}}
+              </span>
+           </button>
+           <div class="bonus-success-message" *ngIf="promoCodeSuccessMessage">
+               {{promoCodeSuccessMessage}}
+           </div>
+           <div class="bonus-error-message" *ngIf="promoCodeErrorMessage">
+               <span class="icon-close-modal"></span>
+               <p>{{promoCodeErrorMessage}}</p>
+           </div>
+       </div>
         <div class="filter-panel">
             <form [formGroup]="form" (ngSubmit)="submit()">
                 <div class="history-tools">
@@ -27,23 +64,18 @@
 
             </form>
         </div>
-    </div>
-    <div class="send-promo-code-box">
-        <input id="name" name="name" #name="ngModel" [(ngModel)]="promoCode"
-               placeholder="{{'Account.PromoCode' | translate}}">
-        <button class="craft_btn verify_btn setting_btn" (click)="activatePromoCode()"
-                [ngClass]="{'disabled' : !promoCode}">
-      <span>
-        {{'Payments.ActivateBonus' | translate}}
-      </span>
-        </button>
-        <div class="bonus-success-message" *ngIf="promoCodeSuccessMessage">
-            {{promoCodeSuccessMessage}}
-        </div>
-        <div class="bonus-error-message" *ngIf="promoCodeErrorMessage">
-            <span class="icon-close-modal"></span>
-            <p>{{promoCodeErrorMessage}}</p>
-        </div>
+        @if(firstWagerBonus())
+        {
+            <div class="range-box">
+                <div class="range-label">
+                    <span>{{'Bonus.TurnoverAmount' | translate}}</span>
+                    <span>{{userInfo.CurrencyId}} {{firstWagerBonus().TurnoverTotal}}</span>
+                </div>
+                <div class="range">
+                    <div class="fill" [style.width.%]="firstWagerBonus().TurnoverLeftPercent"></div>
+                </div>
+            </div>
+        }
     </div>
     <div class="bonus-tab-content">
 
@@ -60,6 +92,9 @@
                             <div *ngIf="bonus.IsCampaign">
                                 <button type="button" class="info-btn"
                                         (click)="openTriggers(bonus); $event.stopPropagation()">{{'User.Info' | translate}}</button>
+                                <div class="history-icon-user-info" (click)="openTriggers(bonus); $event.stopPropagation()">
+                                    <span class="icon-user-info"></span>
+                                </div>
                             </div>
                             @if(bonus.Collect)
                             {

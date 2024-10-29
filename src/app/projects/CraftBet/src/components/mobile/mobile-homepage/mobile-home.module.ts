@@ -14,6 +14,7 @@ import {CasinoSearchFragmentComponent} from "../../common/fragments/search/casin
 import {WinnersWidgetModule} from "../../desktop/fragments/winners-widget/winners-widget.module";
 import {BetsWidgetModule} from "../../desktop/fragments/bets-widget/bets-widget.module";
 import {FragmentCharactersModule} from "./mobile-fragment-characters/mobile-fragment-characters.module";
+import {MobileJackpotModule} from "../mobile-fragments/mobile-jackpot/mobile-jackpot.module";
 
 const routes: Routes = [
     {
@@ -40,6 +41,7 @@ const routes: Routes = [
         CasinoSearchFragmentComponent,
         WinnersWidgetModule,
         BetsWidgetModule,
+        MobileJackpotModule,
     ]
 })
 export class MobileHomeModule {

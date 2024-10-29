@@ -1,4 +1,4 @@
-.login-page
+.login-page-content
 {
   max-width: var(--login-page-max-width, 1000px);
   margin: var(--login-page-margin, 0 auto);
@@ -11,7 +11,23 @@
   .login-page-full {
     width: var(--login-section-width, 100%);
     margin: var(--login-section-margin, 0);
+    border-radius: var(--login-section-border-radius, 0);
+    box-shadow: var(--login-section-box-shadow, none);
     .login-page .login-section {
+      .login-title-custom {
+        font-size: fontSize(login-text-custom, 16px);
+        font-weight: fontWeight(login-text-custom, 400);
+        color: itemColor(login-text-custom, #ffffff);
+        display: var(--login-text-modal-title-custom-display, none);
+        text-align: var(--login-text-modal-title-custom-text-align, left);
+        width: width(login-text-custom, auto);
+        margin: var(--login-text-custom-margin, 0);
+        position: var(--login-text-custom-position, absolute);
+        top: itemTop(login-text-custom, 0px);
+        left: itemLeft(login-text-custom, auto);
+        padding-left: paddingLeft(login-text-custom, 0px);
+        padding-right: paddingRight(login-text-custom, 0px);
+      }
       form  {
         .form_field_checked {
           .forgot_password {

@@ -4,11 +4,12 @@ import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {TranslateModule} from "@ngx-translate/core";
 import {LayoutService} from "../../../../../../@core/services/app/layout.service";
+import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 
 @Component({
   selector: 'mobile-promotion-fragment',
   templateUrl: './mobile-promotion-fragment.component.html',
-  imports:[CommonModule, RouterModule, TranslateModule],
+    imports: [CommonModule, RouterModule, TranslateModule, SanitizerModule],
   standalone:true
 })
 export class MobilePromotionFragmentComponent implements OnInit{

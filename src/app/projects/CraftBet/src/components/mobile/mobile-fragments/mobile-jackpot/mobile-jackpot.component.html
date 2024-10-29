@@ -1,0 +1,39 @@
+@for (jackpot of jackpotGames; track $index){
+ <div class="jackpot-section" [ngStyle]="style">
+    <img class="bg-image" src="../../../../../../../assets/images/jackpot-bg.png">
+    <img class="logo" src="../../../../../../../assets/images/logo.png" [class.position-center]="logoPosition === 'center'">
+    <div class="jackpot-content" (click)="showGamesPopup($index)">
+        <i class="icon-arrow-to-left"></i>
+        <img class="jackpot-icon" src="../../../../../../../assets/images/jackpot-icon.png">
+        <div class="central-block">
+            <div class="jackpot-header">{{partnerName}}-{{'Jackpot' | translate}}</div>
+            <div class="jackpot-amount">{{currencySymbol}}{{jackpot.Amount}}</div>
+        </div>
+        @if (openPopupIndex  === $index){
+            <img class="icon-dice" src="../../../../../../../assets/images/icon-dice.png"
+                 (click)="openWinnerPopup()">
+        }
+        <i class="icon-arrow-right"></i>
+    </div>
+    @if (openPopupIndex  === $index){
+        <div class="jackpot-games-popup"
+             [class.position-top]="jackpot.Games.length <= 6">
+            @if (jackpot.Games.length > 9){
+                <div class="wrapper" ></div>
+            }
+            <div class="jackpot-games-popup-header">
+                <span>{{'Jackpot-Games' | translate}} ({{jackpot.Games.length}})</span>
+                <i class="icon-close-modal" (click)="closeGamesPopup()"></i>
+            </div>
+            <p class="description">Discover an Array of Jackpot Games Available and Uncover the Terms Applied for Each.</p>
+            <div class="games-block">
+                @for (game of jackpot.Games; track $even){
+                    <div class="game">
+                        <img  alt="" [src]="game?.Image">
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+}

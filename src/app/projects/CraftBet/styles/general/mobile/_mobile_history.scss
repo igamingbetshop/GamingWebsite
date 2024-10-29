@@ -12,7 +12,6 @@
 
   &_title {
     text-align: center;
-    //color: $register-active-menu;
     font-size: var(--m-user-views-title-font-size, 24px);
     font-weight: var(--m-user-views-title-font-weight, normal);
     margin-top: var(--m-user-views-title-margin-top, 20px);
@@ -100,6 +99,7 @@
           -webkit-mask-composite: xor;
           mask-composite: exclude;
           display: var(--m-show-btn-after-display, none);
+
         }
 
         &.craft_btn-mobile {
@@ -147,7 +147,8 @@
     }
   }
   table {
-    width: 100%;
+    width: var(--m-history-info-table-width,100%);
+    margin: 0 auto;
     border-collapse: collapse;
 
     thead
@@ -165,9 +166,13 @@
     tbody {
       tr {
         font-size: var(--m-bet-history-table-font-size, 12px);
-        height: 36px;
+        height: var(--m-bet-history-table-height, 36px);
         background: backgroundColor(bet-history-table-body, #000);
         color: itemColor(bet-history-table-body, #fff);
+        margin-bottom: var(--m-bet-history-table-margin-bottom, 0);
+        border-radius: var(--m-bet-history-table-border-radius, 0);
+        width: var(--m-bet-history-table-width, 100%);
+        display: var(--m-bet-history-table-display, table-row);
         .hide-form-row {
           display: var(--bank-account-hide-field-display, block);
         }
@@ -186,10 +191,11 @@
           }
         }
         td {
-          text-align: center;
+          text-align: var(--m-bet-history-table-text-align, center);
           outline-offset: 10px;
-          width: 80px;
+          width: var(--m-bet-history-table-width, 80px);
           min-width: var(--m-bet-history-table-min-width, auto);
+          padding: var(--m-bet-history-table-padding, 0);
 
           &.status-Deleted {
             color: itemColor(mobile-status-deleted, #000);

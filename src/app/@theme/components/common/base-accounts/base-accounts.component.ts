@@ -19,7 +19,7 @@ export class BaseAccountsComponent extends BaseComponent {
     public translate: TranslateService;
     dialog = inject(MatDialog);
     private route: ActivatedRoute;
-    public Accounts: any;
+        public Accounts: any;
     public mappedAccounts: any;
     public TotalAvailableBalance: number = 0;
     public BonusBalance:any;

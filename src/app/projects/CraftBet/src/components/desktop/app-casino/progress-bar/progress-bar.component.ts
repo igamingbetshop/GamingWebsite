@@ -25,7 +25,7 @@ export class ProgressBarComponent extends BaseProgressBar
     {
         super.ngOnInit();
         const block = this.configService.defaultOptions[FragmentSource.Web];
-        this.fragments = getFragmentsByType(block, this.position, FragmentType.ProgressBar);
+        this.fragments = getFragmentsByType(block, this.position, FragmentType.ProgressBar, this.userLogged);
 
     }
 }

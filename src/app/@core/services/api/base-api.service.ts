@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {Request} from "@core/models";
 import {Methods} from "@core/enums";
 import {ConfigService} from "@core/services";
@@ -41,7 +41,7 @@ export class BaseApiService
         request.Email = data && data.Email ? data.Email : null;
         request.Code = data && data.Code ? data.Code : null;
         request.Type = data && data.Type ? data.Type : null;
-        request.ClientId = data && data.ClientId ? data.ClientId : null;
+        request.CurrencyId = data && data.CurrencyId ? data.CurrencyId : null;
         request.PaymentInfo = data && data.PaymentInfo ? data.PaymentInfo : null;
         request.RequestData = typeof data == "object" ? JSON.stringify(data) : data;
         if (data?.Pattern) request.Pattern = data.Pattern;
@@ -57,6 +57,8 @@ export class BaseApiService
             request.ClientId = data?.ClientId || this.authService.user.Id;
             request.Token = data?.Token || this.authService.user.Token;
             request.TimeZone = this.configService.timeZone;
+            if(data && Object.hasOwn(data, "IsAgent"))
+                request.IsAgent = data.IsAgent;
         }
         else delete request.ClientId;
 
@@ -67,7 +69,7 @@ export class BaseApiService
             });
     }
 
-    apiGet(url:string, data = null, contentType:string = 'application/json')
+    apiGet(url:string, data = null, contentType:string = 'application/json', responseType?:'arraybuffer'|'blob'|'json'|'text')
     {
         let reqUrl:string;
         if(url.startsWith('http'))
@@ -107,6 +109,9 @@ export class BaseApiService
                 'Content-Type':  contentType
             });
         }
+        if(responseType)
+            options.responseType = 'text';
+
         return this.http.get<any>(reqUrl, options);
     }
 
@@ -119,9 +124,8 @@ export class BaseApiService
 
         if (this.authService.user)
         {
-            if(!data.ClientId)
-                data.ClientId = this.authService.user.Id;
-            data.Token = this.authService.user.Token;
+            data.ClientId = data.ClientId || this.authService.user.Id;
+            data.Token = data.Token || this.authService.user.Token;
             data.TimeZone = this.configService.timeZone;
         }
 
@@ -132,5 +136,18 @@ export class BaseApiService
             data, {
                 headers: new HttpHeaders({'Content-Type': 'application/json'}),
             });
+    }
+
+    buildPath(method:string):string
+    {
+        const { WebApiUrl, PartnerId} = this.configService.defaultOptions;
+        const  url = new URL(`${WebApiUrl}/${PartnerId}/api/Main/${method.toLowerCase()}`);
+        if (this.authService.user)
+        {
+            url.searchParams.set('clientId', this.authService.user.Id.toString());
+            url.searchParams.set('token', this.authService.user.Token);
+            url.searchParams.set('timeZone', this.configService.timeZone.toString());
+        }
+        return url.toString();
     }
 }

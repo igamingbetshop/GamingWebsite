@@ -7,6 +7,7 @@ import {GetSettingsInfoService} from "@core/services/app/getSettingsInfo.service
 import {take} from "rxjs";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {Image} from "../profile-image/profile-image.component";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'edit-image',
@@ -34,7 +35,14 @@ export class EditImageComponent implements OnInit{
 
   ngOnInit()
   {
-
+    this.#getSettingsInfoService.notifyGetDocumentUploadResponseMessage$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(data => {
+      if(data.className === "error_message")
+        this.#showErrorTxt(data.message);
+      else
+      {
+        this.#getProfileImage();
+      }
+    });
   }
 
   selectImage(image:Image)
@@ -46,15 +54,10 @@ export class EditImageComponent implements OnInit{
   {
     this.#getSettingsInfoService.notifyGetChooseFileName$.pipe(take(1)).subscribe(data => {
       this.#getSettingsInfoService.uploadDocument(8);
-      this.#getSettingsInfoService.notifyGetDocumentUploadResponseMessage$.pipe(take(1)).subscribe(data => {
-          if(data.className === "error_message")
-            this.#showErrorTxt(data.message);
-          else
-          {
-            this.#getProfileImage();
-          }
-      });
-    })
+    });
+    this.#getSettingsInfoService.onChooseFileError$.pipe(take(1)).subscribe(data => {
+      this.#showErrorTxt(data);
+    });
     this.#getSettingsInfoService.uploadFile(e);
     this.#resetFile();
   }
@@ -111,9 +114,7 @@ export class EditImageComponent implements OnInit{
 
   #getProfileImage()
   {
-    this.#apiService.apiGet("GetProfilePicture").subscribe(data => {
-        this.close(data);
-    });
+      this.close(this.#apiService.buildPath("GetProfilePicture"));
   }
 
 }

@@ -1,0 +1,7 @@
+<label class="dark-light">
+    <input type="checkbox" [checked]="stateService.theme() === 'dark'" (change)="stateService.updateTheme(stateService.theme() === 'dark' ? 'light' : 'dark')">
+    <span class="slider"></span>
+</label>
+
+
+

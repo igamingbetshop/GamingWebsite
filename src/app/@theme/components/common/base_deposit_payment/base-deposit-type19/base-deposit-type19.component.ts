@@ -51,7 +51,7 @@ export class BaseDepositType19Component extends BaseDepositPaymentComponent {
             this.utilityService.showError('', this, 'fileData');
         });
 
-        this.getSettingsInfoService._notifyGetDocumentError.subscribe((data) => {
+        this.getSettingsInfoService.onChooseFileError$.subscribe((data) => {
             this.selectedDocumentErrorMessage = data;
             this.utilityService.showError('', this, 'selectedDocumentErrorMessage');
         });

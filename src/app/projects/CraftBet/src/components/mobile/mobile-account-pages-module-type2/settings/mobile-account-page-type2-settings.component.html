@@ -1,4 +1,4 @@
-<div class="mobile-settings-section" [ngStyle]="layoutService.layoutStyle">
+<div class="mobile-settings-section">
   <h2 class="mobile-settings-section_title">{{'Settings.Settings' | translate}}</h2>
 
   <div class="form_row">
@@ -86,7 +86,7 @@
         <ng-template #emptyDocuments>
           <section class="empty-documents empty-block">
             <span class="icon-acount-verification icon"></span>
-            <span class="empty-block-text">{{'User.Documents-empty' | translate}}</span>
+              <span class="empty-block-text" [innerHTML]="'User.Documents-empty' | translate | sanitizer: 'html'"></span>
           </section>
         </ng-template>
         </tbody>

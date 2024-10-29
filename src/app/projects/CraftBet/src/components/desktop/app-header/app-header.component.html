@@ -404,7 +404,7 @@
                                         }
                                         @case ('clientsDpd')
                                         {
-                                            @if (userData?.IsAgent)
+                                            @if (userLogined.agent)
                                             {
                                                 <div class="default_width clients-dropdown">
                                                     <clients></clients>
@@ -648,7 +648,7 @@
                                 }
                                 @if (menuItem?.new)
                                 {
-                                    <span class="new-logo-item">New</span>
+                                    <span class="new-logo-item">{{'Header.New' | translate}}</span>
                                 }
                                 @switch (menuItem.contentType)
                                 {
@@ -906,7 +906,7 @@
                                 }
                                 @if (menuItem?.new)
                                 {
-                                    <span class="new-logo-item">New</span>
+                                    <span class="new-logo-item">{{'Header.New' | translate}}</span>
                                 }
                                 @switch (menuItem.contentType)
                                 {

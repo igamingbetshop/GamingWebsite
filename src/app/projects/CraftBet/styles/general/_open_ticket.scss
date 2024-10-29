@@ -132,6 +132,10 @@
   }
   .form_row {
     margin: var(--open-tickets-form-row-margin, 15px 0);
+    .open-ticket-label {
+      font-size: var(--open-tickets-label-font-size, 16px);
+      font-weight: var(--open-tickets-label-font-weight, 400);
+    }
   }
   .form_row .form_field label {
     width: width(register-form-field-label, inherit);

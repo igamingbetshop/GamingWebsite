@@ -1,6 +1,7 @@
 <div class="clients" dropdown>
     <span>{{selectedClient().UserName}}</span>
     <ul class="clients-list">
+        <li (click)="selectAgent()">{{userLogin.agent.UserName}}</li>
         @for (client of clients(); track client.Id)
         {
             <li (click)="selectClient(client)">{{client.UserName}}</li>

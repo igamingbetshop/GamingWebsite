@@ -9,7 +9,7 @@ import {DropdownDirectiveModule} from "../../../directives/dropdown/dropdown-dir
 import {BalanceService} from "@core/services/api/balance.service";
 import {Currency} from "@core/types";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {Controllers, CurrencyTypes, Methods} from "@core/enums";
+import {Controllers, Methods} from "@core/enums";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {TooltipDirective} from "../../../directives/tooltip";
 
@@ -61,7 +61,7 @@ export class BetStatisticsComponent implements OnInit{
   types = signal<Type[]>(["all","casino", "sport"]);
   selectedType = signal<Type>(this.types()[0]);
 
-  #allCurrency:Currency = {Id:"All", Name:"All", Type:2, Symbol:"", CurrentRate:1, ImageUrl:""};
+  #allCurrency:Currency = {Id:"All", Name:"All", Type:2, Symbol:"$", CurrentRate:1, ImageUrl:""};
   currencies = signal<Currency[]>([]);
   selectedCurrency = signal<Currency>(this.#allCurrency);
   betStatistics = signal<BetStatistics>({TotalBetCount:0,TotalBetAmount:0,TotalLossCount:0,TotalWinCount:0, VIPLevel:0, CreationTime:new Date()})
@@ -89,15 +89,12 @@ export class BetStatisticsComponent implements OnInit{
     this.#balanceService.getPartnerCurrenciesByType()
         .pipe(takeUntilDestroyed(this.#destroyRef))
         .subscribe(data => {
-          if (data.ResponseCode === 0)
-          {
-            let currencies = [this.#allCurrency];
-            const allCurrencies = data.ResponseObject as Currency[];
-            allCurrencies.forEach(c => {
-              currencies.push({...c, ImageUrl:`${window['debugPath']}/assets/images/currencies/${c.Id}.svg`});
-            });
-            this.currencies.set(currencies);
-          }
+          let currencies = [this.#allCurrency];
+          const allCurrencies = data;
+          allCurrencies.forEach(c => {
+            currencies.push({...c, ImageUrl:`${window['debugPath']}/assets/images/currencies/${c.Id}.svg`});
+          });
+          this.currencies.set(currencies);
         });
   }
 

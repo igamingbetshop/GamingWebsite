@@ -15,11 +15,12 @@
     display: var(--m-promo-code-box-display, flex) !important;
   }
   .send-promo-code-box {
-    height: 40px;
-    line-height: 40px;
-    position: relative;
+    height: var(--m-bonuses-promo-code-box-height, 40px);
+    width: var(--m-bonuses-promo-code-box-width, 100%);
+    line-height: var(--m-bonuses-promo-code-box-line-height, 40px);
+    position: var(--m-bonuses-promo-code-box-position, relative);
     align-items: center;
-    margin: 20px 0;
+    margin: var(--m-bonuses-promo-code-box-margin,  20px 0);
     display: flex;
     justify-content: space-between;
     gap: var(--m-bonuses-promo-code-gap, 0px);
@@ -34,6 +35,7 @@
       align-items: center;
       height: 100%;
       gap: inherit;
+      position: var(--send-promo-code-form-position, relative);
     }
 
     .success-message, .error_message {
@@ -61,6 +63,7 @@
       height: var(--m-bonuses-promo-code-height, 100%);
       border: var(--m-bonuses-promo-code-border, none);
       border-radius: var(--bonuses-select, 4px);
+      padding: var(--m-bonuses-promo-code-padding, 0);
       color: itemColor(m-bonuses-promo-code,#303030);
       background: backgroundColor(m-bonuses-promo-code,transparent);
       flex: 1;
@@ -77,49 +80,75 @@
       color: itemColor(m-bonuses-promo-placeholder,#757575);
     }
     button {
-      height: 100%;
+      height: var(--m-promo-bonus-button-height, 100%);
       white-space: nowrap;
       @include m-common-button;
+      background: var(--m-promo-bonus-button-background, -webkit-linear-gradient(90deg,var(--payment-button-background-gradient-first-color) 0,var(--payment-button-background-gradient-second-color) 100%));
       color: var(--m-promo-bonus-button-color, #fefefe);
       font-weight: var(--m-promo-bonus-button-font-weight, 700);
+      font-size: var(--m-promo-bonus-button-font-size, 16px);
       padding: var(--m-promo-bonus-button-padding, 0 20px);
       width: width(m-promo-bonus-button, 120px);
       line-height: height(m-promo-bonus-button-line, 44px);
       border-radius: var(--m-promo-bonus-button-border-radius, 4px);
       border: var(--m-promo-bonus-button-border, none);
+      position: var(--m-promo-bonus-button-position, relative);
+      top: var(--m-promo-bonus-button-top, 0);
+      right: var(--m-promo-bonus-button-right, 0);
     }
   }
 
   &_title {
     color: color(m-user-views-title);
-    font-size: 24px;
-    margin-bottom: 15px;
-    font-weight: normal;
-    text-align: center;
+    font-size: var(--m-user-views-title-bonuses-font-size, 24px);
+    margin-bottom: var(--m-user-views-title-bonuses-margin-bottom, 15px);
+    font-weight: var(--m-user-views-title-bonuses-font-weight, normal);
+    text-align: var(--m-user-views-title-bonuses-text-align, center);
     margin-top: var(--m-user-views-title-bonuses-margin-top, 20px);
+    display: var(--m-user-views-title-bonuses-display, block);
   }
 
   .bonus-tab-bar {
     margin-top: var(--m-bonus-tab-bar-margin-top, 10px);
     margin-bottom: var(--m-bonus-tab-bar-margin-bottom, 0px);
     display: flex;
-
+    justify-content: var(--m-bonus-tab-bar-content-align,start);
+    gap: var(--m-bonus-tab-bar-content-gap,0);
     &_item {
       padding: var(--m-bonus-tab-bar-padding, 10px 20px);
-      cursor: pointer;
       background: backgroundColor(m-bonus-tab-bar, $header-top-bg);
       color: var(--m-bonus-tab-bar-color, $font-color);
+      border-radius: var(--m-bonus-tab-bar-border-radius, 0);
+      font-size: var(--m-bonus-tab-bar-font-size, 16px);
+      position: var(--m-bonus-tab-bar-position, relative);
+      cursor: pointer;
+      &:after
+      {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--m-bonus-tab-bar-border-radius, 0);
+        border: 1px solid transparent;
+        background: var(--m-bonus-tab-bar-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        display: var(--m-bonus-tab-bar-after-display, none);
+      }
 
       &.active {
         background: backgroundColor(m-bonus-tab-bar-active, $header-menu-active);
         color: var(--m-bonus-tab-bar-active-color, $font-color);
         text-decoration: var(--m-bonus-tab-bar-active-text-decoration, none);
+        &:after
+        {
+          background: var(--m-bonus-tab-active-border-color, linear-gradient(360deg, #FFB300 0%, #FFDF8E 100%) border-box);
+        }
       }
     }
   }
 
   .bonus-tab-content {
-    min-height: 300px;
+    min-height: var(--m-bonus-tab-content-min-height, 300px);
     background: backgroundColor(m-bonus-tab-content, $header-menu-active);
     color: var(--m-bonus-tab-content-color, $font-color);
 
@@ -134,26 +163,36 @@
 
         table {
           width: 100%;
-          margin-top: 20px;
+          margin-top: var(--m-bonus-table-margin-top, 20px);
           border-collapse: collapse;
           border-spacing: 0;
-          font-size: 12px;
+          font-size: var(--m-bonus-table-font-size, 12px);
+          thead{
+            tr{
+              background: backgroundColor(m-bonus-box-header,$header-top-bg);
+            }
+          }
 
           tr {
             cursor: pointer;
 
             td {
-              color: $font-color;
-              background: backgroundColor(m-bonus-box-header,$header-top-bg);
-              text-align: center;
+              color: var(--m-bonus-table-box-color, $font-color);
+              text-align: var(--m-bonus-table-box-text-align, center);
               vertical-align: middle;
-              margin: 0;
-              padding: 10px 5px;
-              font-weight: 500;
+              margin: var(--m-bonus-table-box-margin, 0);
+              padding: var(--m-bonus-table-box-padding, 10px 5px);
+              font-weight: var(--m-bonus-table-box-font-weight, 500);
               button
               {
                 &.craft_btn {
                   color: var(--m-bonus-box-info-btn-color, #000);
+                  background: var(--m-bonus-box-info-btn-background, var(--button-background-color, rgb(239, 239, 239)));
+                  font-size: var(--m-bonus-box-info-btn-font-size, 16px);
+                  font-weight: var(--m-bonus-box-info-btn-font-weight, 600);
+                  height: var(--m-bonus-box-info-btn-height, 44px);
+                  line-height: var(--m-bonus-box-info-btn-line-height, 44px);
+                  border-radius: var(--m-bonus-box-info-btn-border-radius, 4px);
                 }
               }
 

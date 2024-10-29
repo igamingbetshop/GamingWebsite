@@ -18,7 +18,7 @@ import {AccountPageType1AnnouncementsComponent} from './announcements/account-pa
 import {TranslateModule} from "@ngx-translate/core";
 import {AccountPageType1BankAccountsComponent} from './bank-accounts/account-page-type1-bank-accounts.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {NgxPrintModule} from "ngx-print";
 import {ThemeModule} from "../../../../../../@theme/theme.module";
 import { AccountPageType1OpenTicketsComponent } from './open-tickets/account-page-type1-open-tickets.component';
@@ -50,35 +50,31 @@ import {
     AccountPageType1AgentsTransactionsComponent
 } from "./transactions/agents-transactions/account-page-type1-agents-transactions.component";
 
-@NgModule({
-  declarations: [
-    AccountPageType1SettingsComponent,
-    AccountPageType1FriendsComponent,
-    AccountPageType1BetsComponent,
-    AccountPageType1PaymentsComponent,
-    AccountPageType1TransactionsComponent,
-    AccountPageType1BonusesComponent,
-    AccountPageType1TicketsComponent,
-    AccountPageType1MenuComponent,
-    AccountPageType1DefaultComponent,
-    AccountPageType1BettingStatmentItemComponent,
-    AccountPageType1BettingStatmentSportItemComponent,
-    AccountPageType1AnnouncementsComponent,
-    AccountPageType1BankAccountsComponent,
-    AccountPageType1OpenTicketsComponent,
-    AccountPageType1HistoryComponent,
-    AccountPageType1ChangePasswordComponent,
-    SelfLimitationComponent,
-    AccountPageType1VerificationComponent
-  ],
-    imports: [
-        CommonModule,
+@NgModule({ declarations: [
+        AccountPageType1SettingsComponent,
+        AccountPageType1FriendsComponent,
+        AccountPageType1BetsComponent,
+        AccountPageType1PaymentsComponent,
+        AccountPageType1TransactionsComponent,
+        AccountPageType1BonusesComponent,
+        AccountPageType1TicketsComponent,
+        AccountPageType1MenuComponent,
+        AccountPageType1DefaultComponent,
+        AccountPageType1BettingStatmentItemComponent,
+        AccountPageType1BettingStatmentSportItemComponent,
+        AccountPageType1AnnouncementsComponent,
+        AccountPageType1BankAccountsComponent,
+        AccountPageType1OpenTicketsComponent,
+        AccountPageType1HistoryComponent,
+        AccountPageType1ChangePasswordComponent,
+        SelfLimitationComponent,
+        AccountPageType1VerificationComponent
+    ], imports: [CommonModule,
         AccountPagesModuleType1RoutingModule,
         TranslateModule,
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        HttpClientModule,
         NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
@@ -89,23 +85,20 @@ import {
         DropdownDirectiveModule,
         AccountPageType1ClientsTransactionsComponent,
         AccountPageType1AgentsTransactionsComponent,
-        AccountPageType1StatementComponent
-    ],
-  providers:[
-    GetSettingsService,
-    FriendsService,
-    BonusesService,
-    GetBetsHistoryService,
-    PaymentControllerService,
-    BetsService,
-    GetTransactionsService,
-    GetPaymentsService,
-    ProfileService,
-    ExportDataService,
-    DatePipe,
-      { provide: MatDialogRef, useValue: {} },
-      { provide: MAT_DIALOG_DATA, useValue: {} }
-  ]
-
-})
+        AccountPageType1StatementComponent], providers: [
+        GetSettingsService,
+        FriendsService,
+        BonusesService,
+        GetBetsHistoryService,
+        PaymentControllerService,
+        BetsService,
+        GetTransactionsService,
+        GetPaymentsService,
+        ProfileService,
+        ExportDataService,
+        DatePipe,
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AccountPagesModuleType1Module {}

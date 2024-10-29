@@ -74,6 +74,14 @@
                     <iframe [ngStyle]="fragment.Config.style" [src]="fragment.Href | sanitizer: 'resourceUrl'" (load)="onLoadFrame($event, fragment)"></iframe>
                 </div>
             }
+            @case ("Jackpots"){
+                <jackpot  [fragmentConfig]="fragment"
+                          [style.margin-top.px]="fragment.Config.marginTop"
+                          [style.order]="fragment.Order">
+
+                </jackpot>
+
+            }
         }
     }
 </div>

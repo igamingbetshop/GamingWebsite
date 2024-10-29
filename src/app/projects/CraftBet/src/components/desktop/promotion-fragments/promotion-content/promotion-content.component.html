@@ -4,9 +4,9 @@
         <img src="../../../../../../../assets/images/promotions/{{promotionData.ImageName}}">
     </div>
     <div class="promotion-description">
-        <h2 [innerHtml]="promotionData.Description | sanitizer: 'html'"></h2>
+        <h2 [innerHtml]="promotionData.Description | translate | sanitizer: 'html'"></h2>
 
-        <div class="text-content" [innerHtml]="promotionData.Content | sanitizer: 'html'"></div>
+        <div class="text-content" [innerHtml]="promotionData.Content | translate | sanitizer: 'html'"></div>
 
         <p class="publish-date">{{'Promotion.PublishedDate' | translate}} {{promotionData.Date}}</p>
     </div>

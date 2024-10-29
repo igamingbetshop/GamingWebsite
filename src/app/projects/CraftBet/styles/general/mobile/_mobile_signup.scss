@@ -35,6 +35,9 @@
   padding-right: paddingRight(m-register-section, 16px);
   padding-left: paddingLeft(m-register-section, 16px);
   padding-bottom: paddingBottom(m-register-section, 16px);
+  background-image: var(--m-register-section-background-image, unset);
+  background-size: var(--m-register-section-background-size, cover);
+  background-repeat: var(--m-register-section-background-repeat, no-repeat);
   .mobile-register-top-part {
     display: var(--m-register-top-part-display, none);
     justify-content: var(--m-register-top-part-justify-content, space-between);
@@ -92,6 +95,10 @@
     font-weight: var(--reg-header-font-weight, 400);
     left: var(--reg-header-item-left, auto);
     margin-top: var(--reg-header-item-margin-top, 0px);
+  }
+  .reg-header-custom {
+    position: var(--m-reg-header-custom-position, relative);
+    display: var(--m-reg-header-custom-display, none);
   }
  div
  {
@@ -255,6 +262,7 @@
     background: color(m-register-button-background);
     color: color(m-register-button-text);
     text-transform: var(--m-register-button-text-transform, uppercase);
+    box-shadow: var(--m-register-button-text-box-shadow, none);
     font-weight: 400;
 
     &.register_abled {
@@ -595,6 +603,9 @@
     margin-top: var(--m-register-form-item-margin-top, 0);
     height: var(--m-register-form-item-height,44px) !important;
 
+  }
+  .register-bottom-text {
+    display: var(--m-register-bottom-text-display, none);
   }
   .show-reg-step-navigate-button-login {
     display: var(--m-login-redirect-btn-display, none);

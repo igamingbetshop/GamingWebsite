@@ -28,7 +28,9 @@ export class Request {
     CategoryIds:number[];
     Pattern?: string;
     Name?: string;
+    CurrencyId?: string;
     Email?: string;
+    IsAgent:boolean;
 }
 
 export class TicketMessage {
@@ -70,6 +72,8 @@ export class Trigger {
 export class Bonus {
     BonusId: number;
     Amount: number;
+    RealAmount: number;
+    RealTurnoverAmountLeft: number;
     BonusPercent: number;
     AwardingTime: number;
     CalculationTime: number;
@@ -94,6 +98,8 @@ export class Bonus {
     PlayerId: number;
     ReuseNumber:number;
     StatusId:number;
+    TurnoverTotal:number;
+    TurnoverLeftPercent:number;
 }
 
 export class BonusBet {
@@ -379,4 +385,5 @@ export class PartnerCurrency {
     Symbol: any;
     Type: any;
     Balance: number;
+    Icon: string;
 }

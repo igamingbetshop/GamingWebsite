@@ -975,6 +975,7 @@
       font-weight: var(--m-button-style1-font-weight, 500);
       display: var(--m-button-style1-display, block);
       gap: var(--m-button-style1-gap, 0);
+      pointer-events: var(--m-button-style1-pointer-events, auto);
       justify-content: var(--m-button-style1-justify-content, space-between);
       align-items: center;
       .hidden-register-text {

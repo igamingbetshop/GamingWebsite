@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UtilityService} from "@core/services/app/utility.service";
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {UserLogined} from "@core/services/app/userLogined.service";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods} from "@core/enums";
 import {Subject, take} from "rxjs";
@@ -39,10 +39,6 @@ export class OpenGamesService {
     public notifyGetIframUrlError: Subject<any> = new Subject<any>();
     public notifyGetProductInfo: Subject<any> = new Subject<any>();
     public notifyGetProductInfoError: Subject<any> = new Subject<any>();
-    public notifySpecialGamesList: Subject<any> = new Subject<any>();
-    public notifySpecialGamesError: Subject<any> = new Subject<any>();
-    public notifyGetBannersList: Subject<any> = new Subject<any>();
-    public notifyGetBannersError: Subject<any> = new Subject<any>();
 
     constructor(public injector: Injector) {
         this.baseApiService = injector.get(BaseApiService);
@@ -111,16 +107,7 @@ export class OpenGamesService {
             'TimeZone': this.configService.timeZone,
             'DeviceType': 1
         };
-
-        const downLineClient:DownLineClient = this.localStorageService.get("downLineClient");
         let data:any;
-        if(downLineClient?.Token)
-        {
-            data['Token'] = downLineClient.Token;
-            data['ClientId'] = downLineClient.Id;
-            data['IsAgent'] = false;
-        }
-
         this.baseApiService.apiRequest(data, Controllers.MAIN, Methods.GET_PRODUCT_URL, false, input).pipe(take(1)).subscribe((responseData) => {
             if (responseData.ResponseCode == 0) {
                 this.notifyGetIframUrl.next(responseData.ResponseObject);

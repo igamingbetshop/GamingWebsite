@@ -28,6 +28,9 @@ app-mobile-login
   min-height: calc(100vh);
   position: relative;
   padding: var(--m-login-section-padding, 0 15px);
+  background-image: var(--m-login-section-background-image, unset);
+  background-size: var(--m-login-section-background-size, cover);
+  background-repeat: var(--m-login-section-background-repeat, no-repeat);
   &_field {
     &.invalid-filed {
       border: 2px solid itemColor(login-email-border, #ff4848) !important;
@@ -47,17 +50,23 @@ app-mobile-login
       position: var(--m-login-top-part-position, relative);
       top: var(--m-login-top-part-top, auto);
       left: var(--m-login-top-part-left, auto);
+      text-align: var(--m-login-top-part-text-align, left);
+      display: var(--m-login-top-part-text-display, block);
     }
     .top-login-text-custom-part {
       color: itemColor(m-login-top-part-custom, #fff);
       margin-top: marginTop(m-login-top-part-custom, 20px);
+      margin-bottom: marginBottom(m-login-top-part-custom, 0px);
       margin-left: marginLeft(m-login-top-part-custom, 0px);
+      margin-right: marginRight(m-login-top-part-custom, 0px);
       font-size: fontSize(m-login-top-part-custom, 16px);
       font-weight: fontWeight(m-login-top-part-custom, 400);
       position: var(--m-login-top-part-custom-position, relative);
       top: var(--m-login-top-part-custom-top, auto);
       left: var(--m-login-top-part-custom-left, auto);
       display: var(--m-login-top-part-custom-display, none);
+      text-align: var(--m-login-top-part-custom-text-align, left);
+      width: var(--m-login-top-part-custom-width, auto);
     }
     .top-login-text-part::before {
       content: '';
@@ -105,7 +114,7 @@ app-mobile-login
   {
     color: itemColor(m-login-close-icon, #fff);
     margin-left: auto;
-    margin-top: 21px;
+    margin-top: var(--m-login-close-icon-margin-top, 21px);
     margin-right: var(--m-login-close-icon-margin-right, 0);
     position: var(--m-login-close-icon-position, relative);
     right: var(--m-login-close-icon-right, auto);
@@ -164,9 +173,19 @@ app-mobile-login
     margin-bottom: marginBottom(auth-form-field,0);
     border: var(--auth-form-field-border, 1px solid rgba(219, 237, 255, 0.7));
     border-radius: var(--auth-form-field-border-radius, 6px);
+    height: var(--auth-form-field-height, 44px);
+    justify-content: var(--auth-form-field-justify-content, space-between);
+    i {
+      font-size: var(--m-login-field-input-icon-font-size, 18px);
+      color: var(--m-login-field-input-icon-color, #000);
+      display: var(--m-login-field-input-icon-display, none);
+      border-right: var(--m-login-field-input-icon-border-right, none);
+      padding-right: var(--m-login-field-input-icon-padding-right, 0);
+      padding-left: var(--m-login-field-input-icon-padding-left, 0);
+    }
     .input_field
     {
-      text-indent: 16px;
+      text-indent: var(--m-login-form-field-text-indent, 16px);
       &::placeholder{
         color: itemColor(m-login-form-field-placeholder, #fff);
         opacity: var(--m-login-form-field-placeholder-opacity, 0.3);
@@ -182,8 +201,9 @@ app-mobile-login
     input:-webkit-autofill:focus {
       background-color: backgroundColor(auth-form-field, transparentize) !important;
       color: #555 !important;
-      -webkit-box-shadow: 0 0 0 1000px white inset !important;
+      -webkit-box-shadow: var(--auth-form-field-back-box-shadow, 0 0 0 1000px white inset) !important;
       -webkit-text-fill-color: var(--auth-form-field-back-color, transparentize) !important;
+      border-radius: var(--auth-form-field-back-border-radius, inherit);
     }
     .floating-label
     {
@@ -234,6 +254,7 @@ app-mobile-login
 
       .input_field {
         color: itemColor(m-login-form-field-text, #FFFFFF);
+        height: var(--m-login-form-field-text-height, 100%);
       }
       .form_field1 {
         grid-column: span 4;
@@ -287,6 +308,7 @@ app-mobile-login
     height: height(m-login-btn, 44px);
     border-radius: var(--auth-form-field-border-radius, 4px);
     font-weight: var(--m-login-btn-font-weight, 600);
+    box-shadow: var(--m-login-btn-box-shadow, none);
   }
   .login-submit-btn {
     width: width(m-login-btn, 100%);
@@ -361,6 +383,7 @@ app-mobile-login
       display: display(m-forgot-password-btn,none);
       border-radius: var(--m-forgot-password-btn-border-radius, 4px);
       font-weight: var(--m-forgot-password-btn-font-weight, 600);
+      text-decoration: var(--m-forgot-password-btn-text-decoration, none);
     }
   }
 
@@ -409,6 +432,9 @@ app-mobile-login
     .icon-safety{margin-right: 8px}
     .icon-safety-text {
       display: var(--m-login-secure-text-display, none);
+    }
+    .safe-secure {
+      display: var(--m-login-safe-secure-text-display, block);
     }
   }
   .login-language-bar {

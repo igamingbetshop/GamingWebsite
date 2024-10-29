@@ -168,6 +168,7 @@
     margin: 0px auto 0 auto;
     display: block;
     background: color(register-button-background);
+    box-shadow: var(--register-button-background-box-shadow, none);
     color: color(register-button-text);
     text-transform: var(--reg-btn-text-transform, uppercase);
     font-weight: var(--reg-btn-font-weight, 400);
@@ -187,6 +188,7 @@
     color: color(register-condition-text);
     display: inline-block;
     flex: 1;
+    text-align: var(--register-condition-text-text-align, center);
 
     a {
       color: color(register-terms-and-condition-text);
@@ -466,6 +468,9 @@
     }
 
   }
+  .register-background-text {
+    display: var(--register-background-text-display, none);
+  }
 
   .register-form_section{
     //width: calc(100% - var(--register-background-width));
@@ -481,6 +486,7 @@
     align-items: center;
     padding-right: paddingRight(registration-section, 0);
     min-width: var(--registration-section-min-width, 300px);
+    background: var(--registration-section-background, transparent);
     .authentication-buttons {
       display: var(--register-authentication-btns-display, none);
       margin: var(--register-authentication-btns-margin, 0);
@@ -1797,7 +1803,7 @@ select {
       }
     }
     input[type="checkbox"] {
-      accent-color: #599F61;
+      accent-color: var(--reg-checkbox-input-accent-color, #599F61);
     }
     input::-ms-reveal,
     input::-ms-clear {

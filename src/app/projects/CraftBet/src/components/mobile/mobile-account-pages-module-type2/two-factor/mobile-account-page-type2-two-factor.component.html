@@ -1,6 +1,6 @@
-<div class="container" [ngStyle]="layoutService.layoutStyle">
+<div class="container">
     <div class="container-section">
-        <div class="two-factor-section" *ngIf="IsTwoFactorEnabled === false">
+        <div class="two-factor-section"  *ngIf="IsTwoFactorEnabled === false">
             <h2 class="mobile-factor-section_title">{{ 'Settings.Otp-required' | translate }}</h2>
             <ol class="two-factor-ordered-list">
                 <li>
@@ -23,8 +23,23 @@
                 <li>
                     <div class="two-factor-steps-title">{{ 'Settings.Otp-step3-title' | translate }}</div>
                     <div class="two-factor-steps-description">
-                        <input type="text" class="two-factor-input" maxlength="6" [(ngModel)]="twoFactorCode" (ngModelChange)="validateTwoFactorCode()"
-                               (input)="onInput($event)" (keydown)="preventKeys($event)" placeholder="{{ 'Settings.Otp-input' | translate }}">
+                        <ng-container *ngFor="let digit of digits; let i = index">
+                            <input
+                                    type="text"
+                                    class="two-factor-input"
+                                    maxlength="1"
+                                    [(ngModel)]="digit"
+                                    (input)="onDigitInput($event, i)"
+                                    (ngModelChange)="validateTwoFactorCode()"
+                                    placeholder="0"
+                                    (keydown)="preventKeys($event)"
+                                    #inputRef
+                                    [attr.autofocus]="i === 0"
+                            />
+                            <span *ngIf="i === 2" class="dash">-</span>
+                        </ng-container>
+                      <!--  <input type="text" class="two-factor-input" maxlength="6" [(ngModel)]="twoFactorCode" (ngModelChange)="validateTwoFactorCode()"
+                               (input)="onInput($event)" (keydown)="preventKeys($event)" placeholder="{{ 'Settings.Otp-input' | translate }}">-->
                         <div class="two-factor-steps-description-in">{{ 'Settings.Otp-step3-description' | translate }}</div>
                     </div>
                 </li>

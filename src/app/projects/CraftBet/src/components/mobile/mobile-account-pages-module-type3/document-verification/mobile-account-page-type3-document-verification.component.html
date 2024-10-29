@@ -86,7 +86,7 @@
                         <ng-template #emptyDocuments>
                             <section class="empty-documents empty-block">
                                 <span class="icon-documents icon"></span>
-                                <span class="empty-block-text">{{'User.Documents-empty' | translate}}</span>
+                                <span class="empty-block-text" [innerHTML]="'User.Documents-empty' | translate | sanitizer: 'html'"></span>
                             </section>
                         </ng-template>
                         </tbody>

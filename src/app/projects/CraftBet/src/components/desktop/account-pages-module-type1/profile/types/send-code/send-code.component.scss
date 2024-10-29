@@ -162,6 +162,7 @@
       margin: var(--settings-field-send-code-btn-margin,  7px 0 24px 0);
       width: var(--settings-field-send-code-btn-width, 104px);
       height: var(--settings-field-send-code-btn-height, auto);
+      line-height: var(--settings-field-send-code-btn-line-height, 44px);
       border-radius: var(--settings-field-send-code-btn-border-radius, 4px);
       white-space: nowrap;
       background: linear-gradient(to bottom,var(--settings-button-gradient-first-color, #FFFFFF) 0%,var(--settings-button-gradient-second-color, #FFFFFF) 100%);

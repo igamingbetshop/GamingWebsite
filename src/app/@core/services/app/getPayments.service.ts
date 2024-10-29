@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {Controllers, Methods, RegionTypes} from "@core/enums";
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {TranslateService} from "@ngx-translate/core";
 import {Subject} from "rxjs";
 import {BankAccount} from "@core/models";

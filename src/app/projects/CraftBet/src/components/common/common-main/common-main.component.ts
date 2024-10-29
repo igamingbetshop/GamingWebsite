@@ -71,6 +71,12 @@ export class CommonMainComponent extends BaseMainComponent {
                         this.saveData.openPopup.next('1');
                     }
                 }
+                else if(event.data['type'] === 'betslipChange')
+                {
+                    const state = event.data['state'];
+                    const newEvent = new CustomEvent('betslipChange', {detail: {state: state}});
+                    window.dispatchEvent(newEvent);
+                }
             }
         });
         window.removeEventListener('openLogin', this.onOpenLogin);

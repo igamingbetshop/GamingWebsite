@@ -48,6 +48,7 @@ import {
 import {
     MobileAccountPageType2AgentsTransactionsComponent
 } from "./transactions/agents-transactions/mobile-account-page-type2-agents-transactions.component";
+import {ToNumberPipeModule} from "../../../../../../@theme/pipes/to-number/to-number-pipe.module";
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import {
         OrderByPipeModule,
         DropdownDirectiveModule,
         MobileAccountPageType2ClientsTransactionsComponent,
-        MobileAccountPageType2AgentsTransactionsComponent
+        MobileAccountPageType2AgentsTransactionsComponent,
+        ToNumberPipeModule
     ],
     providers:[
         ExportDataService,

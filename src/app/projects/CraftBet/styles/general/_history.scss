@@ -1,6 +1,6 @@
 .history-section {
   background: $account-main-bg-color;
-  border-radius: 6px;
+  border-radius: var(--account-content-row-border-radius, 6px);
   color: $account-content-item-color;
   padding: var(--account-content-row-paddding);
   height: var(--payment-section-content-width, auto);
@@ -38,6 +38,9 @@
   .block-head, .bets-history-block-head {
     border-radius: var(--history-block-head-bg-border-radius, 8px);
     border-bottom: 1px solid var(--history-block-head-border-bottom, transparent);
+    border-top: var(--history-block-head-border-top, none);
+    border-left: var(--history-block-head-border-left, none);;
+    border-right: var(--history-block-head-border-right, none);;
     background-image: var(--history-block-head-bg, linear-gradient(to bottom, #16233a, #151a23));
     padding-left: var(--history-block-head-pdleft, 16px);
     padding-right: var(--history-block-head-pdright, 16px);
@@ -46,6 +49,7 @@
     margin-bottom: var(--history-block-head-mrgbottom, 8px);
     color: var(--history-block-head-color, #fff);
     font-size: var(--history-block-head-font-size, 16px);
+    box-shadow: var(--history-block-head-box-shadow, none);
 
     .hide-form-row {
       display: var(--bank-account-hide-field-display, block);
@@ -72,7 +76,7 @@
     border-left: 1px solid var(--history-block-section-border-left, transparent);
     border-right: 1px solid var(--history-block-section-border-right, transparent);
     background-color: var(--history-block-section-bg, #16233a);
-    padding: 15px 14px 32px 14px;
+    padding: var(--history-block-section-padding, 15px 14px 32px 14px);
     height: var(--history-block-section-height, auto);
     overflow-y: auto;
     overflow-x: hidden;
@@ -89,6 +93,10 @@
         font-size: var(--history-block-section-font-size, 16px);
         padding: var(--history-block-section-bets-padding, 0);
         border-bottom: var(--history-block-section-bets-border-bottom, none);
+        border-top: var(--history-block-section-bets-border-top, none);
+        border-radius: var(--history-block-section-bets-border-radius, 0);
+        background: var(--history-block-section-bets-background, transparent);
+        color: var(--history-block-section-bets-color, var(--account-content-item-color, #fff));
         .hide-form-row {
           display: var(--bank-account-hide-field-display, block);
         }
@@ -160,11 +168,16 @@
             height: var(--history-info-btn-height, 25px);
             background: linear-gradient(
                             180deg, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
-            border: none;
+            border: var(--history-info-btn-border, none);
             color: var(--history-info-btn-color, #fff);
             display: var(--history-info-btn-display, block);
             font-size: $font-size-3;
-            border-radius: 4px;
+            border-radius: var(--history-info-btn-border-radius, 4px);
+            cursor: pointer;
+          }
+          .history-icon-user-info {
+            display: var(--history-info-btn-icon-display, none);
+            color: var(--history-info-btn-icon-color, #000);
             cursor: pointer;
           }
           &.item-transl {
@@ -192,19 +205,22 @@
             text-align: var(--history-amount-currency-item-text-align, right);
             margin-top: 0;
             margin-bottom: 0;
-            width: 38%;
+            width: var(--history-amount-currency-item-width, 38%);
           }
         }
 
         .status{
-          display: inline-block;
-          height: 27px;
-          line-height: 27px;
-          padding: 0 14px;
-          border-radius: 4px;
+          display: var(--history-status-display, inline-block);
+          gap: var(--history-status-gap, 0);
+          height: var(--history-status-height, 27px);
+          line-height: var(--history-status-line-height, 27px);
+          padding: var(--history-status-padding, 0 14px);
+          border-radius: var(--history-status-border-radius, 4px);
+          align-items: center;
           color: itemColor(history-status,rgba(12, 106, 230, 1));
           background: backgroundColor(history-status,rgba(20, 46, 84, 1));
-          font-weight: 500;
+          font-weight: var(--history-status-font-weight, 500);
+          //min-width: var(--history-status-min-width, 100%);
 
           &.status-Pending
           {
@@ -241,6 +257,39 @@
           {
             color: itemColor(history-status-failed,rgba(216, 0, 39, 1));
             background: backgroundColor(history-status-failed,rgba(57, 42, 62, 1));
+          }
+          .point {
+            width: var(--history-status-point-width, 0);
+            height: var(--history-status-point-height, 0);
+            border-radius: var(--history-status-point-border-radius, 50%);
+            &.status-Pending
+            {
+              background: backgroundColor(history-status-point-panding,#f5a711);
+            }
+            &.status-Won
+            {
+              background: backgroundColor(history-status-point-won,rgba(34, 207, 180, 1));
+            }
+            &.status-Lost
+            {
+              background: backgroundColor(history-status-point-lost,rgba(216, 0, 39, 1));
+            }
+            &.status-Deleted{
+              background: backgroundColor(history-status-point-deleted,rgba(253, 114, 114, 1));
+            }
+            &.status-Cashouted{
+              background: backgroundColor(history-status-point-cashouted, rgba(128, 84, 223, 1));
+            }
+            &.status-Waiting{
+              background: backgroundColor(history-status-point-waiting, rgba(248, 203, 107, 1));
+            }
+            &.status-Returned{
+              background: backgroundColor(history-status-point-waiting, rgba(84, 183, 211, 1));
+            }
+            &.status-Failed
+            {
+              background: backgroundColor(history-status-point-failed, rgba(216, 0, 39, 1));
+            }
           }
         }
 

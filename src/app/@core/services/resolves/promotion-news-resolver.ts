@@ -1,7 +1,7 @@
 import { ActivatedRouteSnapshot } from "@angular/router";
 import {Injectable} from "@angular/core";
 import {Observable, forkJoin} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {LangService} from "@core/services/app/lang.service";
 import {BaseApiService} from "@core/services/api/base-api.service";
 import {Controllers, Methods} from "@core/enums";

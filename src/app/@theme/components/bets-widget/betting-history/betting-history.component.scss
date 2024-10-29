@@ -1,0 +1,211 @@
+@import "../../../../projects/Stake/styles/helpers/variables";
+@import "../../../../../styles/helpers/variables";
+
+.live-stats-container
+{
+  border-radius: .5rem;
+  background-color: #213743;
+  min-height: 270px;
+  max-width: 280px;
+  .live-stats-popup-header
+  {
+    height: 38px;
+    line-height: 38px;
+    cursor: move;
+    display: flex;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background: #1a2c38;
+    border-radius: .5rem .5rem 0 0;
+    padding-left: 16px;
+    font-size: 14px;
+    color: #FFFFFF;
+    .stats{margin-right: 6px}
+  }
+
+  .live-stats-popup-content
+  {
+    border-radius: 0 0 .5rem .5rem;
+    padding: 1rem;
+    .svg-icon
+    {
+      color: rgb(177 186 211);
+      &:hover{color: #FFFFFF}
+    }
+    .filter-row, .race-block
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      >div{
+        .svg-icon{cursor: pointer}
+      }
+      .dropdown
+      {
+        .race-dropdown-title{
+          color: #FFFFFF;
+          .svg-icon
+          {
+            vertical-align: middle;
+            margin-left: 6px;
+          }
+        }
+        .content
+        {
+          top: 39px;
+          .options{
+            ul{li
+            {
+              color: rgb(47 69 83);
+              white-space: nowrap;
+              &.selected{color: rgb(20 117 225)}
+            }}
+          }
+        }
+      }
+    }
+    .filter-row{height: 40px;}
+    .race-block
+    {
+      height: 155px;
+      width: 100%;
+      display: block;
+      background: #0f212e;
+      color: #d5dceb;
+      margin-top: 24px;
+      font-size: 14px;
+      padding: 16px;
+      border-radius: 10px;
+      p{
+        width: 100%;
+        text-align: center;
+        min-height: 93px;
+        line-height: 93px;
+      }
+    }
+
+    .bet-block
+    {
+      margin-top: 12px;
+      .main-info
+      {
+        display: flex;
+        background: #0f212e;
+        padding: 16px;
+        border-radius: 8px;
+        .statistic-card
+        {
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+          .statistic
+          {
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            span
+            {
+              color: #b1bad3;
+              font-weight: 600;
+              font-size: 14px;
+              line-height: 2;
+            }
+            .loss{ color: #ed4163}
+            &:first-child{
+              margin-bottom: 8px;
+              .currency{
+                color: #00e701
+              }
+            }
+          }
+        }
+        .divider
+        {
+          background: #213743;
+          width: 2px;
+          display: flex;
+          margin: 0 1rem;
+        }
+      }
+      >.card
+      {
+        display: flex;
+        background: #0f212e;
+        padding: 16px;
+        border-radius: 8px;
+        margin-top: 12px;
+        .graph-wrap
+        {
+          position: relative;
+          min-height: 192px;
+          display: flex;
+          justify-content: flex-end;
+          flex-direction: column;
+          .graph-amount
+          {
+            color: #00e701;
+            font-weight: 600;
+            font-size: 14px;
+            display: none;
+          }
+          .graph-tooltip
+          {
+            position: absolute;
+            bottom: 0;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+            display: none;
+          }
+          &:hover
+          {
+            .graph-amount, .graph-tooltip{display: block}
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.bets-filter
+{
+  padding: 12px 16px;
+  height: fit-content;
+  border-radius: 48px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: capitalize;
+  background: rgb(15 33 46);
+
+  &.all{width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  .svg-icon
+  {
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  &:hover
+  {
+    background: rgb(7 24 36);
+  }
+}
+.all{width: 100%;
+  .content{width: fit-content;
+    .options
+    {
+      min-width: 46px;
+      ul{li{min-width: 46px;}}
+    }
+  }
+}

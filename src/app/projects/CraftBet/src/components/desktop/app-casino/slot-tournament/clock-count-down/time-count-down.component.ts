@@ -95,18 +95,50 @@ export class TimeCountDownComponent implements OnInit, AfterViewInit, OnDestroy 
     segmentOverlay.addEventListener('animationend', finishAnimation);
   }
 
-  updateTimeSection(index: number, timeValue: any, segment: any) {
 
-    const firstNumber = Math.floor(timeValue / 10) || 0;
-    const secondNumber = timeValue % 10 || 0;
-    const startedElement = index * 2;
-    const endedElement = index * 2 + 1;
-    const segmentOverlay = this.overlays().filter((el, i) => (i >= startedElement && i <= endedElement));
+  /*updateTimeSection(index: number, timeValue: any, segment: any) {
+    let timeString = timeValue.toString();
 
-    this.updateTimeSegment(firstNumber, segment.numbers[0], segmentOverlay[0].nativeElement);
-    this.updateTimeSegment(secondNumber, segment.numbers[1], segmentOverlay[1].nativeElement);
-  }
+    if (timeString.length === 1) {
+      timeString = timeString.padStart(2, '0');
+    }
 
+    while (segment.numbers.length < timeString.length) {
+      segment.numbers.push({
+        displayTop: null,
+        displayBottom: null,
+        overlayTop: null,
+        overlayBottom: null
+      });
+    }
+
+    for (let i = 0; i < timeString.length; i++) {
+      const digit = parseInt(timeString[i], 10);
+
+      const startedElement = index * timeString.length + i;
+      console.log('startedElement',startedElement)
+      const endedElement = (index + 1) * timeString.length - 1;
+      console.log('endedElement',endedElement)
+      const segmentOverlay = this.overlays().filter((el, idx) => idx >= startedElement && idx <= endedElement);
+
+      this.updateTimeSegment(digit, segment.numbers[i], segmentOverlay[0].nativeElement);
+    }
+  }*/
+
+
+
+
+   updateTimeSection(index: number, timeValue: any, segment: any) {
+
+     const firstNumber = Math.floor(timeValue / 10) || 0;
+     const secondNumber = timeValue % 10 || 0;
+     const startedElement = index * 2;
+     const endedElement = index * 2 + 1;
+     const segmentOverlay = this.overlays().filter((el, i) => (i >= startedElement && i <= endedElement));
+
+     this.updateTimeSegment(firstNumber, segment.numbers[0], segmentOverlay[0].nativeElement);
+     this.updateTimeSegment(secondNumber, segment.numbers[1], segmentOverlay[1].nativeElement);
+   }
   getTimeRemaining(targetDateTime: any) {
     const nowTime = Date.now();
     const complete = nowTime >= targetDateTime;

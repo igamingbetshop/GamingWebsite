@@ -1,5 +1,5 @@
 window.HostNameUrl = 'craftbet.com';
-window.PartnerName = 'CraftBet';
+window.PartnerName = 'Internal';
 window['debugPath'] = 'https://' + window.HostNameUrl;
 
 let versionScript = document.createElement('script');

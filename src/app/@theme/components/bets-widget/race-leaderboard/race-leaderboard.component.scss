@@ -1,0 +1,142 @@
+@import "../../../../projects/Stake/styles/helpers/variables";
+@import "../../../../../styles/helpers/variables";
+
+.race-leaderboard-section
+{
+  width: 100vw;
+  min-width: 200px;
+  max-width: 510px;
+  background: #1a2c38;
+  border-radius: 5px;
+  min-height: 437px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: 767px){
+    width: 92vw;
+  }
+  .promo-banner
+  {
+    width: 100%;
+    height: 386px;
+    background-color: #213743;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .race-modal-title
+    {
+      font-weight: 700;
+      font-size: 24px;
+      color: #fff;
+    }
+    .race-bg-image
+    {
+      width: 75%;
+      height: 95%;
+      margin: 0 auto;
+      @media (max-width: 767px){
+        width: 96%;
+      }
+    }
+    .count-down
+    {
+      position: absolute;
+      bottom: 16px;
+    }
+  }
+  .race-modal-content
+  {
+    width: 100%;
+    padding: 16px;
+    .race-position
+    {
+      background: #213743;
+      border-radius: 4px;
+      padding: 14px 0;
+      >div{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        @media (max-width: 767px){
+          grid-template-columns: repeat(2, 1fr);
+        }
+        >div
+        {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 0 15px;
+          gap: 8px;
+          span{
+            color: rgb(177, 186, 211);
+            font-size: 14px;
+          }
+          div
+          {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            span{
+              color: #FFFFFF;
+              min-width: 50px;
+              overflow: hidden;
+              text-overflow:ellipsis;
+              font-weight: 600;
+              text-align: center;
+            }
+            img{width: 15px;}
+          }
+          &:not(:last-of-type)
+          {
+            position: relative;
+            &:after
+            {
+              content: "";
+              position: absolute;
+              top: 6px;
+              right: 0;
+              height: 80%;
+              width: 1px;
+              background-color: #557086;
+            }
+            &.position{
+              @media (max-width: 767px){
+                grid-area: 1 / span 2;
+                margin-bottom: 16px;
+                &:after
+                {
+                  top: unset;
+                  bottom: -5px;
+                  height: 1px;
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .promo-description
+    {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: #b1bad3;
+      padding: 16px 0;
+      text-indent: 14px;
+      text-align: center;
+    }
+    .read-more
+    {
+      width: 100%;
+      color: #FFFFFF;
+      background-color: rgb(47, 69, 83);
+      height: 44px;
+      margin: 16px 0 0;
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 0.15s;
+      &:hover{background-color: rgb(85, 112, 134);}
+    }
+  }
+}

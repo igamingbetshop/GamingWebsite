@@ -89,7 +89,7 @@ export class SignalRService {
             this.notifyLogout.next(data);
         });
         this.connection.on("onEmailVerified", (data) => {
-            this.cmsPopupInfo.next(data);
+            this.#notifyEmailVerified.next(data);
         });
     }
 

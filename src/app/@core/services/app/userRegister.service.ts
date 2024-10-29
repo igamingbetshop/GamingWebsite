@@ -49,11 +49,7 @@ export class UserRegisterService {
                     this.localStorageService.add("welcome-bonus-key", responceData.WelcomeBonusActivationKey);
                 this.localStorageService.remove('AffiliateData');
                 this.paramsLogin = {'ClientIdentifier': responceData.UserName, 'Password': params.Password};
-                if (this.defaultOptions.FirstLoginUrl && this.defaultOptions.FirstLoginUrl !== '') {
-                    firstLoginUrl = true;
-                }
-                console.log(firstLoginUrl);
-                login && this.userLogined.userLogin(this.paramsLogin, firstLoginUrl);
+                login && this.userLogined.userLogin(this.paramsLogin, true);
             }
         });
     }

@@ -8,6 +8,7 @@ import {BaseApiService} from "../../../@core/services/api/base-api.service";
 import {Methods} from "../../../@core/enums";
 import {UserLogined} from "../../../@core/services/app/userLogined.service";
 import {MatDialog} from "@angular/material/dialog";
+import {checkVisibility} from "@core/utils";
 
 
 @Directive()
@@ -95,7 +96,7 @@ export class BaseHome implements OnInit, OnDestroy
             }
             return obj;
         }, []);
-        this.fragments.set(fragments);
+        this.fragments.set(fragments.filter((f:FragmentData) => checkVisibility(f.Config.visibility, this.userLogined)));
     }
 
     onLoadFrame(event:Event, fragment:FragmentData)

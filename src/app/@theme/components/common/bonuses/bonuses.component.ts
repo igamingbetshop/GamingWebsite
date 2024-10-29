@@ -1,4 +1,4 @@
-import {Directive, inject, Injector} from '@angular/core';
+import {Directive, inject, Injector, signal} from '@angular/core';
 import {BaseComponent} from '../../base/base.component';
 import {BonusesService} from "@core/services/api/bonuses.service";
 import {Bonus, BonusBet} from "@core/models";
@@ -65,6 +65,9 @@ export class BonusesComponent extends BaseComponent {
 
     public statusList: Array<any> = [];
     public filterChanged = false;
+    #hideSpinWheelResults:boolean = false;
+    #wagerBonusTypes:number[] = [];
+    firstWagerBonus = signal<Bonus | null>(null);
 
     constructor(public injector: Injector)
     {
@@ -102,6 +105,21 @@ export class BonusesComponent extends BaseComponent {
             let index = this.bonuses.findIndex(item => item.Id == data.Id);
             if (index > -1)
                 this.bonuses[index].State = data.State;
+            this.baseControllerService.GetMenu(MenuType.ACCOUNT_TAB_LIST).then((data: any) =>
+            {
+                const bonusDetails = data.find((item) => item.Title == 'MyBonusesDetails');
+                if(bonusDetails.StyleType)
+                    this.#hideSpinWheelResults = JSON.parse(bonusDetails.StyleType).hideSpinWheelResults;
+                if(bonusDetails && bonusDetails.SubMenu)
+                {
+                    this.tabs = bonusDetails.SubMenu.map(menu =>  {
+                        menu.bonusData = JSON.parse(menu.Href);
+                        return menu;
+                    });
+                    this.selectedTab = this.tabs[0];
+                    this.getBonus(this.selectedTab.bonusData);
+                }
+            });
         }));
 
         this.subscriptions.push(this.bonusesService.notifyGetBonuses.subscribe((data) =>
@@ -139,7 +157,7 @@ export class BonusesComponent extends BaseComponent {
                         item['TypeIdActive'] = false;
                     }
                     item.IsCampaign = this.campaignTypes.includes(item.TypeId);
-                    data.Collect =  data.Type === 1 && data.Status === 7 && data.ValidUntil !== null;
+                    item.Collect =  item.TypeId === 1 && item.StatusId === 7 && item.ValidUntil !== null;
                     Object.keys(item).forEach(key =>
                     {
                         if(!excludedHeaders.includes(key))
@@ -148,6 +166,8 @@ export class BonusesComponent extends BaseComponent {
                                 item[key] = this.datePipe.transform(item[key].toString(), "dd/MM/yyyy HH:mm");
                         }
                     });
+                    item.RealAmount = item['Amount'];
+                    item.RealTurnoverAmountLeft = item['TurnoverAmountLeft'];
                     item['Amount'] =  this.userInfo.CurrencyId + " " + decimalPipe.transform(item['Amount'], '.2');
                     if (item.TypeId === 14) {
                         item['Count'] = parseFloat(item['Amount'].split(' ')[1]);
@@ -155,11 +175,21 @@ export class BonusesComponent extends BaseComponent {
                     }
                     item['FinalAmount'] !== null ? item['FinalAmount'] = this.userInfo.CurrencyId + " " + decimalPipe.transform(item['FinalAmount'], '.2') : null;
                     item['TurnoverAmountLeft'] !== null ? item['TurnoverAmountLeft'] = this.userInfo.CurrencyId + " " + decimalPipe.transform(item['TurnoverAmountLeft'], '.2') : null;
+                    item['ValidUntil'] !== null ? item['ValidUntil'] = this.datePipe.transform(item.ValidUntil.toString(), 'dd/MM/yyyy HH:mm') : null;
                     this.bonusesData.body.push(item);
                 }
 
                 if (data.length)
                     this.getBonusBets(data[0], this.selectedBonusIndex);
+
+                const firstCampaignBonus = this.bonusesData.body.find(b => b.StatusId === 1 && b.RealTurnoverAmountLeft !== null);
+
+                if(firstCampaignBonus)
+                {
+                    firstCampaignBonus.TurnoverTotal = firstCampaignBonus.TurnoverCount * firstCampaignBonus.RealAmount;
+                    firstCampaignBonus.TurnoverLeftPercent = 100 * (firstCampaignBonus.TurnoverTotal - firstCampaignBonus.RealTurnoverAmountLeft) / firstCampaignBonus.TurnoverTotal;
+                    this.firstWagerBonus.set(firstCampaignBonus);
+                }
             }
             else this.bonusesData = {headers:[],body:[]};
         }));
@@ -171,6 +201,8 @@ export class BonusesComponent extends BaseComponent {
         this.baseControllerService.GetMenu(MenuType.ACCOUNT_TAB_LIST).then((data: any) =>
         {
             const bonusDetails = data.find((item) => item.Title == 'MyBonusesDetails');
+            if(bonusDetails.StyleType)
+                this.#hideSpinWheelResults = JSON.parse(bonusDetails.StyleType).hideSpinWheelResults;
             if(bonusDetails && bonusDetails.SubMenu)
             {
                 this.tabs = bonusDetails.SubMenu.map(menu =>  {
@@ -245,7 +277,8 @@ export class BonusesComponent extends BaseComponent {
 
     collect(bonus)
     {
-        this.bonusesService.CollectClientBonus(bonus).pipe(take(1)).subscribe(data => {
+
+        this.bonusesService.CollectClientBonus({Id:bonus.Id}).pipe(take(1)).subscribe(data => {
             if(data['ResponseCode'] === 0)
                 bonus.Collect = false;
         });
@@ -259,7 +292,7 @@ export class BonusesComponent extends BaseComponent {
         }*/
         if(bonus.StatusId !== 7 && bonus.TypeId === 4 && bonus.TypeIdActive)
         {
-            this.dialog.open(SlotWheelComponent, {data:{title: 'slot-wheel', bonusId:bonus.BonusId, id:bonus.Id, reuseNumber:bonus.ReuseNumber}});
+            this.dialog.open(SlotWheelComponent, {data:{title: 'slot-wheel', bonusId:bonus.BonusId, id:bonus.Id, reuseNumber:bonus.ReuseNumber, hideSpinWheelResults:this.#hideSpinWheelResults}});
         }
         else
         {
@@ -286,7 +319,7 @@ export class BonusesComponent extends BaseComponent {
                             data['CalculationTime'] = this.datePipe.transform(data.CalculationTime.toString(), 'dd/MM/yyyy HH:mm');
                             data['AwardingTime'] = this.datePipe.transform(data.AwardingTime.toString(), 'dd/MM/yyyy HH:mm');
                             data['IsCampaign'] = this.campaignTypes.includes(data.TypeId);
-                            data['Collect'] =  data.Type === 1 && data.Status === 7 && data.ValidUntil !== null;
+                            data['Collect'] =  data.TypeId === 1 && data.StatusId === 7 && data.ValidUntil !== null;
                             return data;
                         }
                         return item;

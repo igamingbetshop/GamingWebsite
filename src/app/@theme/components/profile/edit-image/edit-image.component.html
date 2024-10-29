@@ -4,7 +4,7 @@
 <div class="sub-title"></div>
 <ul>
     <label class="chose-file">
-        <input #fileRef type="file" (change)="onSelectFile($event)">
+        <input #fileRef type="file" (change)="onSelectFile($event)" accept="image/png, image/jpeg, image/gif">
         <fa-icon [icon]="['fas', 'plus']"></fa-icon>
     </label>
     @for (img of images(); track img.Name)

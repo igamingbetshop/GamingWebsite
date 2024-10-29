@@ -55,7 +55,6 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
         this.isSingleLang = this.languages.length === 1;
         this.document = injector.get(DOCUMENT);
         this.baseControllerService.GetMenu(MenuType.MOBILE_MENU, 'en').then((data: any) => {
-            console.log(data);
             const langIndex = data.findIndex(item => item.Type === "languageDpd_dropdown");
             if(langIndex > -1)
             {
@@ -89,7 +88,6 @@ export class MobileLeftSidebarComponent extends AppCommonHeaderComponent impleme
                 }
             });
             this.generalMenuItems[0].SubMenu = filteredSubMenu.length > 0 ? filteredSubMenu : originalSubMenu;
-            console.log(this.generalMenuItems);
             this.generalMenuItems.map((item) => {
                 return item.SubMenu.map((itemPic) => { itemPic.Src = itemPic.Icon.includes('.') ? '../../../../../../../assets/images/mobile-menu/' + itemPic.Icon : null; });
             });

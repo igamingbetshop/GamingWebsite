@@ -1,4 +1,4 @@
-import {Directive, HostListener, Injectable, Injector, Input} from '@angular/core';
+import {Directive, HostListener, Injectable, Injector, Input, signal} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {BaseComponent} from "../../base/base.component";
 import {LocalStorageService} from "@core/services/app/localStorage.service";
@@ -29,6 +29,7 @@ export class BaseFullWindowComponent extends BaseComponent {
     public path: any;
     public partnerId: number;
     public scrollBar: string = "no";
+    openProductErrorMessage = signal<string>("");
     protected productId: string;
     protected isGamePage: boolean;
     protected location: Location;
@@ -134,11 +135,12 @@ export class BaseFullWindowComponent extends BaseComponent {
     openGame()
     {
         const iframe = document.getElementById('main-game-iframe') as HTMLIFrameElement;
-        //iframe.style.visibility = 'hidden';
+
         this.gamesUrlService.notifyGetGameUrl.pipe(take(1)).subscribe((resData) => {
             if (resData['ResponseCode'] === 0 && resData['ResponseObject'])
             {
                 this.showiFrame = true;
+                this.onProductUrlError("");
                 let defaultUrl:string = resData['ResponseObject'];
                 let frameUrl;
                 let hash = window.location.hash;
@@ -167,7 +169,7 @@ export class BaseFullWindowComponent extends BaseComponent {
             else
             {
                 iframe.style.visibility = 'visible';
-                this.onProductUrlError(resData);
+                this.onProductUrlError(resData.Description);
             }
         });
 
@@ -175,6 +177,7 @@ export class BaseFullWindowComponent extends BaseComponent {
     protected onProductUrlError(data)
     {
         this.showiFrame = false;
+        this.openProductErrorMessage.set(data);
     }
 
 

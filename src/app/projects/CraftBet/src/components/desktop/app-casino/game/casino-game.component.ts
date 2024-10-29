@@ -21,6 +21,7 @@ export class CasinoGameComponent implements OnInit
     productInfo:ProductIno;
     currencySymbol:string;
     tags:string;
+    playImgFormat: string;
 
     @Output('onOpen') onOpen:EventEmitter<any> = new EventEmitter<any>();
 
@@ -40,6 +41,7 @@ export class CasinoGameComponent implements OnInit
         this.user = this.localStorageService.get('user');
         this.currencySymbol = this.user ? this.user.CurrencySymbol : '';
         this.productInfo = new ProductIno();
+        this.playImgFormat = this.fragmentConfig?.Config.playImgFormat || '.png';
     }
 
     toggleFavorite(game: any)

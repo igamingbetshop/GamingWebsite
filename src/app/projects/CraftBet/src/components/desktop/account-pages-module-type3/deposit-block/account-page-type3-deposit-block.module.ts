@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgxPrintModule } from 'ngx-print';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -55,8 +55,7 @@ import {NgxMaskDirective} from "ngx-mask";
 import {LoaderComponent} from "../../../common/loader/loader.component";
 
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         DepositBlockDefaultComponent,
         DepositType1Component,
         DepositType2Component,
@@ -93,13 +92,13 @@ import {LoaderComponent} from "../../../common/loader/loader.component";
         DepositType18Component,
         DepositType18DefaultComponent,
     ],
-    imports: [
-        CommonModule,
+    exports: [
+        DepositBlockDefaultComponent
+    ], imports: [CommonModule,
         TranslateModule,
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        HttpClientModule,
         NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
@@ -111,16 +110,9 @@ import {LoaderComponent} from "../../../common/loader/loader.component";
         FilterByKeyPipeModule,
         QRCodeModule,
         DropdownDirectiveModule,
-        LoaderComponent
-    ],
-    exports: [
-        DepositBlockDefaultComponent
-    ],
-    providers: [
-        /* PaymentControllerService,
-         BonusesService*/
-    ]
-})
+        LoaderComponent], providers: [
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 
 export class AccountPageType3DepositBlockModule {
     getComponent() {

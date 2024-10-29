@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {DeviceDetectorService} from 'ngx-device-detector';
 import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, VKLoginProvider} from "@core/social-network";
 import {getDomain, getParsedUrl, loadExternalScript} from "@core/utils";

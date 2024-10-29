@@ -24,6 +24,6 @@ export class CasinoProvidersComponent extends BaseCasinoProviders
     {
         super.ngOnInit();
         const block = this.configService.defaultOptions[FragmentSource.Web];
-        this.fragments = getFragmentsByType(block, this.position, FragmentType.Provider);
+        this.fragments = getFragmentsByType(block, this.position, FragmentType.Provider, this.userLogin);
     }
 }

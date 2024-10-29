@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import { SaveData } from "@core/services";
 import {ProfileService} from "../../../../../../@theme/components/profile/service/profile.service";
 import {StateService} from "@core/services/app/state.service";
+import {BalanceService} from "@core/services/api/balance.service";
 
 @Directive()
 export class CommonUserDefaultComponent extends BaseComponent {
@@ -17,9 +18,10 @@ export class CommonUserDefaultComponent extends BaseComponent {
   public baseControllerService: BaseControllerService;
   public router: Router;
   public savedDateService: SaveData;
-  public tabType:string = 'top';
+  public tabType: string = 'top';
   public profileService: ProfileService;
   public localStorageService: LocalStorageService;
+  public balanceService: BalanceService;
   public userData: any;
   public status: any;
   currentOpenMenu: any = null;
@@ -33,6 +35,7 @@ export class CommonUserDefaultComponent extends BaseComponent {
     this.localStorageService = injector.get(LocalStorageService);
     this.router = injector.get(Router);
     this.profileService = injector.get(ProfileService);
+    this.balanceService = injector.get(BalanceService);
     this.userData = this.localStorageService.get('user');
     this.#stateService = injector.get(StateService);
   }

@@ -1,4 +1,4 @@
-import {Directive, Injector, Input, OnInit} from "@angular/core";
+import {DestroyRef, Directive, inject, Injector, Input, OnInit} from "@angular/core";
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {FragmentData} from "../../../../@core/models";
 import {CasinoFilterService} from "../../../../@core/services/app/casino-filter.service";
@@ -6,6 +6,9 @@ import {ConfigService} from "../../../../@core/services";
 import {
     CasinoProvidersService
 } from "./casino-providers.service";
+import {UserLogined} from "@core/services/app/userLogined.service";
+import {timer} from "rxjs";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Directive()
 export class BaseCasinoProviders implements OnInit {
@@ -19,6 +22,8 @@ export class BaseCasinoProviders implements OnInit {
     configService: ConfigService;
     casinoFilterService:CasinoFilterService;
     casinoProvidersService:CasinoProvidersService;
+    protected userLogin = inject(UserLogined);
+    #destroyRef = inject(DestroyRef)
 
     constructor( protected injector: Injector )
     {
@@ -31,7 +36,11 @@ export class BaseCasinoProviders implements OnInit {
     ngOnInit()
     {
         this.type = this.fragmentConfig.Config.type;
-        this.getProviders();
+        /*Get providers inside set timer because it depends on menu initialization*/
+
+        timer(0).pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(tick =>{
+            this.getProviders();
+        });
     }
 
     getProviders()

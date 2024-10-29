@@ -25,7 +25,7 @@ import {BaseControllerService} from '@core/services/app/baseController.service';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {ThemeModule} from '../../../../../../../@theme/theme.module';
 import {GlobalLogoutModule} from '../../../../../../../@theme/components/global-logout/global-logout.module';
 import {ProfileService} from '../../../../../../../@theme/components/profile/service/profile.service';
@@ -270,22 +270,16 @@ export class AccountPageType3DefaultComponent implements OnInit, AfterViewInit, 
 
 }
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AccountPageType3DefaultComponent
-    ],
-    imports: [
-        TranslateModule,
+    ], imports: [TranslateModule,
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        HttpClientModule,
         NgxMaskDirective,
         ThemeModule,
         GlobalLogoutModule,
-        HorizontalScrollDirectiveModule,
-    ],
-    providers: [
+        HorizontalScrollDirectiveModule], providers: [
         GetSettingsService,
         FriendsService,
         BonusesService,
@@ -295,8 +289,8 @@ export class AccountPageType3DefaultComponent implements OnInit, AfterViewInit, 
         GetTransactionsService,
         GetPaymentsService,
         ProfileService,
-        ExportDataService
-    ],
-})
+        ExportDataService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AccountPageType3DefaultModule {
 }

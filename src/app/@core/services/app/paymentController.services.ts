@@ -5,7 +5,7 @@ import {PaymentsService} from '../api/payments.service';
 import {DefaultService} from '../api/default.service';
 import {Request} from "@core/models";
 import {Controllers, Methods, RegionTypes, VerificationCodeTypes} from "@core/enums";
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {BonusesService} from "@core/services/api/bonuses.service";
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {Subject, tap} from "rxjs";
@@ -34,7 +34,6 @@ export class PaymentControllerService {
     public notifyGetSmsCodeError: Subject<any> = new Subject<any>();
     public notifyGetPartnerBetShops: Subject<any> = new Subject<any>();
     public notifyGetPartnerBetShopsError: Subject<any> = new Subject<any>();
-    public notifyGetClientAccountList: Subject<any> = new Subject<any>();
     public notifyGetUserAccountData: Subject<any> = new Subject<any>();
     public notifyGetRegionsList: Subject<any> = new Subject<any>();
     public notifyGetRegionsError: Subject<any> = new Subject<any>();
@@ -129,24 +128,6 @@ export class PaymentControllerService {
             this.paymentParams = {}
         }
 
-    }
-
-
-    public getUserAccount(currencyId?) {
-        const {WebApiUrl, PartnerId} = this.getSettings();
-        let request = new Request();
-        request.Controller = Controllers.CLIENT;
-        request.Method = Methods.GET_CLIENT_ACCOUNTS;
-        request.Token = this.userData.Token;
-        request.ClientId = this.userData.Id;
-        request.PartnerId = PartnerId;
-        request.RequestData = JSON.stringify({'ClientId': this.userData.Id, 'CurrencyId': currencyId});
-
-        this.http.post<any>(`${WebApiUrl}/${PartnerId}/api/Main/ApiRequest`, request).subscribe(data => {
-            if (data['ResponseCode'] === 0) {
-                this.notifyGetClientAccountList.next(data.ResponseObject['Accounts']);
-            }
-        });
     }
 
     /* Remove getUserAccountData function, and get data from GetUserAccounts function in to Resolver(from Routing Module) */

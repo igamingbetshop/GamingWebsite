@@ -35,12 +35,16 @@ export class AccountPageType2StatementComponent extends UserAccountStatmentCompo
       {
         realBalance.Balance += responseData.ResponseObject.Accounts[i].Balance;
         realBalance.CurrencyId = responseData.ResponseObject.Accounts[i].CurrencyId;
+        realBalance.CurrencySymbol = responseData.ResponseObject.Accounts[i].CurrencySymbol;
         responseData.ResponseObject.Accounts.splice(i,1);
         i--;
       }
     }
-    responseData.ResponseObject.Accounts.unshift(realBalance);   
-    this.accountData = responseData.ResponseObject.Accounts;
+    responseData.ResponseObject.Accounts.unshift(realBalance);
+    this.accountData = responseData.ResponseObject.Accounts.map(account => {
+      account.FromattedValue = account.CurrencyId ? this.formatValue(account.Balance) : account.Balance;
+      return account;
+    });
   }
 
 }

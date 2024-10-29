@@ -389,7 +389,7 @@ export class BaseSettingsComponent extends BaseComponent{
             this.fileData = data;
         });
 
-        this.getSettingsInfoService._notifyGetDocumentError.subscribe((data) => {
+        this.getSettingsInfoService.onChooseFileError$.subscribe((data) => {
             this.selectedDocumentErrorMessage = data;
             this.utilityService.showError('', this, 'selectedDocumentErrorMessage');
         });

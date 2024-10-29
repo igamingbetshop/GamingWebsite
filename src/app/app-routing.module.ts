@@ -22,7 +22,6 @@ const mobilePreloadModules = [
         path: '', loadChildren: () =>
             import('./projects/Stake/src/components/mobile/mobile.module').then(d => d.MobileModule)
     },
-
 ];
 
 

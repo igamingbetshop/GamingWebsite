@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {ConfigService} from '../app/config.service';
 import {Request, Ticket, TicketMessage} from "@core/models";
 import {LocalStorageService} from "@core/services/app/localStorage.service";

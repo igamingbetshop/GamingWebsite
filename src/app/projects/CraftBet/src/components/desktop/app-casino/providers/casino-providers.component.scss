@@ -150,6 +150,7 @@
         font-size: fontSize(provider-list-horizontal, 16px);
         font-weight: fontWeight(provider-list-horizontal, 400);
         border: var(--provider-list-horizontal-border, none);
+        padding: var(--m-provider-list-horizontal-padding, 0);
         cursor: pointer;
       }
       li {

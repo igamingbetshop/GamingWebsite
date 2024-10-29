@@ -71,6 +71,7 @@
     margin: var(--m-account-page-title-margin, 0);
     font-size: var(--m-account-page-title-font-size, 24px);
     font-weight: var(--m-account-page-title-font-weight, 400);
+    display: var(--m-account-page-title-display, block);
   }
 
   &_table {
@@ -82,13 +83,19 @@
   }
 
   &_row {
-    display: table-row;
+    display: var(--m-user-table-row-display, table-row);
+    background: var(--m-user-table-row-background-color, linear-gradient(360deg, transparent 0%, transparent 100%));
+    border-radius: var(--m-user-table-row-border-radius, 0);
+    margin: var(--m-user-table-row-margin, 0);
+    font-weight: var(--m-user-table-row-font-weight, 500);
     &_title {
-      display: table-row;
+      display: var(--m-account-statement-title-display, table-row);
+      gap: var(--m-account-statement-title-gap, 0);
       color: color(m-account-statement-title);
       font-weight: var(--m-account-statement-title-font-weight, 500);
       font-size: var(--m-account-statement-title-font-size, 16px);
-      background: color(m-user-table-header-background);
+      background: var(--m-user-table-header-background-color, linear-gradient(360deg, #fff 0%, #fff 100%));
+      margin: var(--m-user-table-header-margin, 0);
 
       .item_cell {
         padding: 10px;
@@ -101,11 +108,24 @@
   }
 
   .item_cell {
-    display: table-cell;
-    margin-left: 2px;
+    display: var(--m-user-table-item-cell-display, table-cell);
+    width: var(--m-user-table-item-cell-width, auto);
+    margin-left: var(--m-user-table-item-cell-margin-left, 2px);
     vertical-align: middle;
-    padding: 10px;
+    padding: var(--m-user-table-item-cell-padding, 10px);
     white-space: nowrap;
+  }
+  .item_cell_header {
+    background: var(--m-user-table-item-cell-header-background, transparent);
+    border-radius: var(--m-user-table-item-cell-header-border-radius, 0);
+    text-align: var(--m-user-table-item-cell-header-text-align, left);
+    font-size: var(--m-user-table-item-cell-header-font-size, 16px);
+  }
+  .item_cell_left {
+    text-align: var(--m-user-table-item-cell-row-left-text-align, left);
+  }
+  .item_cell_right {
+    text-align: var(--m-user-table-item-cell-row-right-text-align, left);
   }
 
   .mobile-payment-system-block

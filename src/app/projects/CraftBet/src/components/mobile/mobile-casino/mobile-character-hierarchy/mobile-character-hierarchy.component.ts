@@ -44,6 +44,6 @@ export class MobileCharacterHierarchyComponent extends BaseCharacterHierarchy
     {
         super.ngOnInit();
         const block = this.configService.defaultOptions[FragmentSource.Mobile];
-        this.fragments = getFragmentsByType(block, this.position, FragmentType.CharacterHierarchy);
+        this.fragments = getFragmentsByType(block, this.position, FragmentType.CharacterHierarchy, this.userLogined);
     }
 }

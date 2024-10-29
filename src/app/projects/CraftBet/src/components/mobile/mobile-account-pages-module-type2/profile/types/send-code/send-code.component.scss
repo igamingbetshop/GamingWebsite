@@ -89,7 +89,7 @@
 
     .current_item {
       border: 1px solid var(--m-settings-profile-country-list-border, transparent);
-      border-radius: var(--settings-field-border-radius, 6px);
+      border-radius: var(--m-settings-profile-field-border-radius, var(--settings-field-border-radius, 6px));
       background: var(--m-settings-profile-field-background, #101824);
       color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6)));
       margin: var(--settings-profile-country-list-margin, -12px 0 0 0);
@@ -146,7 +146,7 @@
       padding-left: 16px;
       border: var(--settings-field-border, none);
       background: var(--m-settings-profile-field-background, #101824);
-      border-radius: var(--settings-field-border-radius, 6px);
+      border-radius: var(--m-settings-profile-field-border-radius, var(--settings-field-border-radius, 6px));
       height: var(--settings-field-height, 40px);
       width: var(--settings-field-send-code-width, 100%);
       //flex: 1 80%;
@@ -156,7 +156,7 @@
       padding: var(--settings-button-text-padding, 0 12px);
       margin: var(--settings-field-send-code-btn-margin,  7px 0 24px 0);
       width: var(--settings-field-send-code-btn-width, 104px);
-      height: var(--settings-field-send-code-btn-height, auto);
+      height: var(--m-settings-field-send-code-btn-height, auto);
       border-radius: var(--settings-field-send-code-btn-border-radius, 4px);
       white-space: nowrap;
       background: linear-gradient(to bottom,var(--settings-button-gradient-first-color, #FFFFFF) 0%,var(--settings-button-gradient-second-color, #FFFFFF) 100%);
@@ -246,12 +246,12 @@
       padding: 0 12px;
       margin: var(--m-custom-send-code-btn-margin, 0px 0px 24px 0);
       width: var(--m-custom-send-code-btn-width, 100%);
-      height: var(--settings-field-send-code-btn-height, auto);
+      height: var(--m-settings-field-send-code-btn-height, auto);
       border-radius: var(--settings-field-send-code-btn-border-radius, 4px);
       white-space: nowrap;
       background: linear-gradient(to bottom,var(--settings-button-gradient-first-color, #FFFFFF) 0%,var(--settings-button-gradient-second-color, #FFFFFF) 100%);
       color: var(--settings-button-text-color, #FFFFFF);
-      font-weight: 500;
+      font-weight: var(--m-settings-field-send-code-btn-font-weight,500);
     }
   }
   .custom-send-code-btn {
@@ -259,12 +259,12 @@
     padding: 0 12px;
     margin: var(--m-custom-send-code-btn-margin, 0px 0px 24px 0);
     width: var(--m-custom-send-code-btn-width, 100%);
-    height: var(--settings-field-send-code-btn-height, auto);
+    height: var(--m-settings-field-send-code-btn-height, auto);
     border-radius: var(--settings-field-send-code-btn-border-radius, 4px);
     white-space: nowrap;
     background: linear-gradient(to bottom,var(--settings-button-gradient-first-color, #FFFFFF) 0%,var(--settings-button-gradient-second-color, #FFFFFF) 100%);
     color: var(--settings-button-text-color, #FFFFFF);
-    font-weight: 500;
+    font-weight: var(--m-settings-field-send-code-btn-font-weight,500);
   }
   .select-mobile-code {
     width: 50%;
@@ -278,7 +278,7 @@
       padding-left: 6px;
       border: var(--settings-field-border, none);
       background: var(--account-content-item-bg-color);
-      border-radius: var(--settings-field-border-radius, 6px);
+      border-radius: var(--m-settings-profile-field-border-radius, var(--settings-field-border-radius, 6px));
       height: var(--settings-field-height, 40px);
       appearance: var(--open-ticket-appearance, auto);
     }

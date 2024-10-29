@@ -82,7 +82,7 @@
           padding: var(--m-settings-field-padding, 0 4px);
           border: var(--settings-field-border, none);
           background: var(--m-settings-profile-field-background, #101824);
-          border-radius: var(--settings-field-border-radius, 6px);
+          border-radius: var(--m-settings-profile-field-border-radius, var(--settings-field-border-radius, 6px));
           height: var(--settings-field-height, 40px);
           appearance: var(--open-ticket-appearance, auto);
         }

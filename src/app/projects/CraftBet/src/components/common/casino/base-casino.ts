@@ -11,6 +11,7 @@ import {BaseApiService} from "../../../../../../@core/services/api/base-api.serv
 import {MatDialog} from "@angular/material/dialog";
 import {filter, skip} from "rxjs/operators";
 import {FragmentPositions} from "@core/enums";
+import {UserLogined} from "@core/services/app/userLogined.service";
 type LeftMenuFragmentType = "Menus" | "Providers";
 type LeftMenuFragment = {
   type:LeftMenuFragmentType;
@@ -35,7 +36,8 @@ export class BaseCasino implements OnInit, OnDestroy {
 
   private subscription:Subscription = new Subscription();
   private savedData:SaveData;
-
+  #userLogin:UserLogined;
+  #prevUrl:string;
   constructor(protected injector: Injector)
   {
     this.config = injector.get(ConfigService);
@@ -46,6 +48,7 @@ export class BaseCasino implements OnInit, OnDestroy {
     this.stateService = injector.get(StateService);
     this.baseApiService = injector.get(BaseApiService);
     this.savedData = injector.get(SaveData);
+    this.#userLogin = injector.get(UserLogined);
   }
 
   ngOnInit()
@@ -53,7 +56,7 @@ export class BaseCasino implements OnInit, OnDestroy {
     const block = this.config.defaultOptions[this.fragmentKey];
     this.position = this.getMappedPosition(this.route.snapshot.data['position']);
 
-    this.fragments = getFragmentsByType(block, this.position);
+    this.fragments = getFragmentsByType(block, this.position, null, this.#userLogin);
 
     this.checkLeftMenu();
     this.#checkCategory(this.route.snapshot.params);
@@ -104,14 +107,19 @@ export class BaseCasino implements OnInit, OnDestroy {
             filter( event =>event instanceof NavigationStart)
         )
         .subscribe(
-            (event:NavigationStart) => {
-              if(!event.url.startsWith("/casino") && !event.url.startsWith("/livecasino"))
+            (event:NavigationStart) =>
+            {
+              if(!this.#prevUrl || event.url.split('/')[1] !== this.#prevUrl.split('/')[0])
               {
                 this.casinoFilterService.clearFilter();
                 this.savedData.setCasinoGames(this.savedData.deleteCasinoGames());
+                this.#prevUrl = event.url;
               }
             }
-        )
+        );
+    this.route.url.subscribe(segments => {
+
+    });
   }
 
   private subscribeForFilter()

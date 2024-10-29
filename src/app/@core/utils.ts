@@ -2,6 +2,8 @@ import {environment} from "../../environments/environment";
 import * as JsEncryptModule from 'jsencrypt';
 import {ConfigService} from "@core/services";
 import {FragmentData} from "@core/models";
+import {UserLogined} from "@core/services/app/userLogined.service";
+import {inject} from "@angular/core";
 
 const publicKey = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxDV6Tkh5noY4NWUd5G3q
@@ -329,6 +331,7 @@ export function getMappedGame(game:any):any
   game.nickName = game["nn"];
   game.openMode = game["o"];
   game.productId = game["p"];
+  game.playersCount = game["pc"];
   game.providerId = game["s"];
   game.providerName = game["sp"];
   game.rating = game["r"];
@@ -340,7 +343,7 @@ export function getMappedGame(game:any):any
   return game;
 }
 
-export function getFragmentsByType(block, position:string, location:string = null):any
+export function getFragmentsByType(block, position:string, location:string = null, login?):any
 {
   const fragments = Object.entries(block).reduce((obj, [key, val]) => {
     const fragment = block[key].find(item => item.Position === position);
@@ -374,7 +377,8 @@ export function getFragmentsByType(block, position:string, location:string = nul
           });
         }
       }
-      obj[key].Items = filteredByLocation;
+
+      obj[key].Items = filteredByLocation.filter(f => checkVisibility(f.Config.visibility,login));
     }
     return obj;
   }, {});
@@ -490,6 +494,13 @@ export function getDomain():string
   let re=/[-\w]+\.(?:[-\w]+\.xn--[-\w]+|[-\w]{2,}|[-\w]+\.[-\w]{2})$/i;
   let tld = re.exec(hostname);
   return tld[0];
+}
+
+export function checkVisibility(value:string, login:UserLogined):boolean
+{
+  if(!value) return true;
+  return (value === "loggedIn" && login.isAuthenticated) ||
+      (value === "loggedOut" && !login.isAuthenticated);
 }
 
 export function isMobileUrl():boolean

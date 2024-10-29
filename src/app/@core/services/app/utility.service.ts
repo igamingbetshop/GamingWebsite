@@ -1,5 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Injectable, signal, Signal} from '@angular/core';
 import {ConfigService} from './config.service';
+import {BehaviorSubject} from "rxjs";
+import {Snackbar} from "@core/interfaces";
 
 @Injectable()
 export class UtilityService {
@@ -18,10 +20,13 @@ export class UtilityService {
     public Days: Array<any> = [];
 
     delay: number;
-
+    message = signal<string>('');
 
     public months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     public daysSource = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+
+    public _snackbarSubject = new BehaviorSubject<Snackbar>(null);
+    public onGetSnackbar = this._snackbarSubject.asObservable();
 
 
     constructor(public configService: ConfigService) {
@@ -124,6 +129,11 @@ export class UtilityService {
                 resolve(true);
             }, this.delay);
         });
+    }
+
+    showSnackbar(message: string, status: 'success' | 'info' | 'error' | 'welcome', delay: number) {
+        this.message.set(message);
+        this._snackbarSubject.next({ message: this.message(), status, delay, showMessage: true });
     }
 
     /*

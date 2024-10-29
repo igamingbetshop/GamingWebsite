@@ -1,5 +1,6 @@
-@if (snackbarMessage) {
-    <div class="snackbar-container">
+<!--@if (snackbarMessage) {-->
+@if (snackbarProcess) {
+    <div class="snackbar-container" *ngIf="(utilityService._snackbarSubject | async)">
         <div class="snackbar-icon-part">
             <span class="icon-warning" [ngClass]="snackbarMessage?.status"></span>
         </div>

@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, HostBinding, Injector, OnInit} from '@angular/core';
 import { LayoutService } from '@core/services/app/layout.service';
 import {CommonUserDefaultComponent} from "../../../common/common-user-default/common-user-default.component";
 import {Router} from "@angular/router";
@@ -13,6 +13,10 @@ import {BaseControllerService} from "@core/services/app/baseController.service";
   styleUrls: ['./mobile-account-page-type1-default.component.scss']
 })
 export class MobileAccountPageType1DefaultComponent extends CommonUserDefaultComponent {
+
+  @HostBinding('style.min-height') minHeight = this.layoutService.layoutStyle['min-height'];
+  @HostBinding('style.margin-top') marginTop = this.layoutService.layoutStyle['margin-top'];
+
   public router: Router;
   public menuList: Array<any> = [];
   public baseControllerService: BaseControllerService;

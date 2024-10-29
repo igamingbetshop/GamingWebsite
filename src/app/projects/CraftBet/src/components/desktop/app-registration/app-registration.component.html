@@ -46,6 +46,7 @@
             </div>
 
         </div>
+        <div class="register-background-text" [innerHTML]="'Register.RegisterLeft' | translate | sanitizer: 'html'"></div>
         <ng-container *ngIf="formReady">
             <div class="register-form_section" *ngIf="(registerType?.Title == registerTypes.FULL && regFormSteps.length > 0) || (registerType === undefined)">
                 <div class="authentication-buttons">
@@ -904,13 +905,13 @@
                                         <div class="custom-register-type-checkboxes">
                                             <div *ngFor="let item of quickRegTypeList" class="checkbox-content" (change)="changeQuickRegisterType($event.target.value)">
                                                 <input [checked]="item?.Type === quickRegisterType?.Type" type="radio" name="options" [value]="item?.Type" class="checkbox-type-input">
-                                                <label class="checkbox-type-label">{{ item?.Type }}</label>
+                                                <label class="checkbox-type-label">{{'Register.' + item?.Type | translate}}</label>
                                             </div>
                                         </div>
                                         <select (change)="changeQuickRegisterType($event.target.value)"
                                                 class="custom_dropdown_reg custom-register-by">
                                             <option *ngFor="let item of quickRegTypeList" [value]="item.Type">
-                                                {{item?.Type}}
+                                                {{'Register.' + item?.Type | translate}}
                                             </option>
                                         </select>
                                         <label *ngIf="form_elem?.HasLabel" [class.required-field]="form_elem.ValidationName">{{'Register.' + form_elem?.Title | translate}}</label>

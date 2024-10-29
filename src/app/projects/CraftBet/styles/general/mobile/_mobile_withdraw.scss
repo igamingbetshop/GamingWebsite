@@ -353,7 +353,7 @@
 
 
 .mobile-payment-section2 {
-  margin-top: 62px;
+  margin-top: var(--m-account-content-item-margin-top, 62px);
   min-height: var(--m-account-content-item-min-height, calc(100vh - 62px));
   font-size: var(--m-account-content-item-font-size);
   color: var(--m-account-content-item-color, $account-content-item-color);
@@ -364,8 +364,13 @@
     font-size: var(--m-user-views-title-payments-font-size, 24px);
     font-weight: var(--m-user-views-title-payments-font-weight, normal);
     margin-top: var(--m-user-views-title-payments-margin-top, 20px);
+    margin-bottom: var(--m-user-views-title-payments-margin-bottom, 20px);
+    margin-left: var(--m-user-views-title-payments-margin-left, 0);
+    margin-right: var(--m-user-views-title-payments-margin-right, 0);
     padding: var(--m-user-views-title-payments-padding, 15px 0);
     display: var(--m-user-views-title-payments-display, block);
+    background: var(--m-user-views-title-payments-background, transparent);
+    border-radius: var(--m-user-views-title-payments-border-radius, 0);
   }
   .mobile-payment-section_content
   {
@@ -402,6 +407,7 @@
             background: var(--m-account-payment-row-background, linear-gradient(to left,rgba(44,44,53,.48),rgba(58,65,85,.48)));
             cursor: pointer;
             margin-bottom: marginBottom(m-account-payment-row, 10px);
+            margin-top: marginTop(m-account-payment-row, 0px);
 
 
 
@@ -418,8 +424,8 @@
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
-                gap: 10px;
+                align-items: var(--m-account-payment-list-row-align-items, center);
+                gap: var(--m-account-payment-list-row-gap, 10px);
                 fa-icon
                 {
                   justify-self: center;
@@ -442,6 +448,7 @@
                     border-bottom-right-radius: borderBottomRightRadius(m-payment-list-item-img, 4px);
                     border-top-left-radius: borderTopLeftRadius(m-payment-list-item-img, 4px);
                     border-top-right-radius: borderTopRightRadius(m-payment-list-item-img, 4px);
+                    border: var(--m-payment-list-item-img-border, none);
                   }
                 }
 
@@ -565,6 +572,7 @@
                   height: var(--m-account-content-row-header-height, 46px);
                   line-height: var(--m-account-content-row-header-line-height, 46px);
                   margin-bottom: var(--m-account-content-row-header-margin-bottom, 24px);
+                  display: var(--m-account-content-row-header-display, block);
                   .content_row-payment-name {
                     display: var(--m-account-content-row-payment-name-display, block);
                   }

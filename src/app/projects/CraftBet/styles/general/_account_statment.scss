@@ -119,19 +119,21 @@
   padding: var(--account-info-padding, 16px);
   color: var(--acount-info-color, #213454);
   width: var(--account-info-width, 373px);
-  position: absolute;
+  position: var(--account-info-position, absolute);
   right: var(--account-info-right, -7px);
   top: var(--account-info-top, auto);
   border: var(--account-info-border, none);
   box-shadow: var(--account-info-box-shadow, none);
-  z-index: 999;
-
+  z-index: var(--account-info-z-index, 999);
+  .account-statement-section_table {
+    width: 100%;
+  }
   &_row {
     @include flex-distance-between;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: var(--account-statement-row-item-padding-top, 10px);
+    padding-bottom: var(--account-statement-row-item-padding-bottom, 10px);
     gap: var(--account-statement-row-item-gap, 0);
-    border-bottom: 1px solid var(--acount-info-color);
+    border-bottom: 1px solid var(--account-statement-row-item-border-bottom-color, var(--acount-info-color));
     color: color(account-statement-item);
     &:first-child {
       padding-top: 0;
@@ -142,9 +144,11 @@
     }
 
     &_title {
-      display: table-row;
-      font-weight: 500;
-      background: color(settings-table-header-background);
+      display: var(--account-statement-title-display, none);
+      font-weight: var(--account-statement-title-font-weight, 500);
+      background: var(--account-statement-title-background, #fff);
+      justify-content: var(--account-statement-title-justify-content, flex-start);
+      align-items: center;
 
       .item_cell {
         display: table-cell;
@@ -156,16 +160,15 @@
         }
 
         border-bottom: 1px solid color(settings-table-header-background);
-        /* font-weight: 500;
-         background: backgroundColor(settings-header, black);
-         color:color(settings-table-header);*/
         background: backgroundColor(settings-table-header, #FFFFFF);
+        padding: var(--account-statement-item-title-padding, 0);
+        border-radius: var(--account-statement-item-title-border-radius, 0);
 
         tr {
           position: relative;
 
           .item_cell {
-            width: 220px;
+            width: var(--account-statement-table-item-cell-width, 220px);
 
             &:nth-child(1) {
               border-right: 1px solid color(settings-table-border);

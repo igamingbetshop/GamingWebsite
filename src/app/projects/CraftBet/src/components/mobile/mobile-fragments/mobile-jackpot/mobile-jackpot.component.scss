@@ -1,0 +1,154 @@
+@import "../../../../../styles/helpers/variables";
+@import "../../../../../../../../styles/helpers/variables";
+.jackpot-section
+{
+  width: 95vw;
+  height: 80px;
+  border-radius: 6px;
+  background: linear-gradient(0deg, #09002B 0%, #000000 100%);
+  position: relative;
+  padding: 0 6px;
+  color: #ffffff;
+  margin:0 auto;
+  .bg-image
+  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+  }
+  .logo
+  {
+    position: absolute;
+    width: 42px;
+    height: 16px;
+    top: 10px;
+    left: 16px;
+    z-index: 2;
+    &.position-center
+    {
+      width: 56px;
+      height: 16px;
+      left: 41%;
+    }
+  }
+
+  .jackpot-content
+  {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    i
+    {
+      font-size: 12px;
+      &:last-child{margin-left: auto; }
+    }
+    img{
+      &.jackpot-icon
+      {
+        width: 113px;
+        height: 80px;
+      }
+      &.icon-dice
+      {
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        height: 16px;
+        width: 16px;
+      }
+    }
+    .central-block
+    {
+      margin-left: 8%;
+      .jackpot-header
+      {
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 4px;
+      }
+      .jackpot-amount
+      {
+        font-size: 17px;
+        font-style: italic;
+        font-weight: 800;
+      }
+    }
+  }
+
+  .jackpot-games-popup
+  {
+    position: absolute;
+    bottom: 1px;
+    right: 10%;
+    border: 2px solid rgb(48, 47, 85);
+    background: rgb(7, 1, 31);
+    width: 80vw;
+    height: 412px;
+    border-radius: 20px;
+    padding: 16px 4px 16px 16px;
+    z-index: 3;
+    .wrapper
+    {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 173px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #07011F 100%);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+    .jackpot-games-popup-header
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 600;
+      span{}
+      i{font-size: 15px; cursor: pointer;  margin-right: 16px}
+    }
+    .description
+    {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(223, 223, 223, 1);
+      margin: 10px 0;
+    }
+    .games-block
+    {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+      height: calc(100% - 95px);
+      overflow-y: auto;
+      padding-right: 10px;
+      .game
+      {
+        height: 84px;
+        border-radius: 4px;
+        img
+        {
+          width: 100%;
+          height: 100%;
+          border-radius: 4px;
+        }
+      }
+    }
+    &.position-top
+    {
+      bottom: 57px;
+      height: 324px;
+    }
+  }
+}
+

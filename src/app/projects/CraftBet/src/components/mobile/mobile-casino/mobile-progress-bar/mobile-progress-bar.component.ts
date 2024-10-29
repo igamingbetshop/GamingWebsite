@@ -26,6 +26,6 @@ export class MobileProgressBarComponent extends BaseProgressBar
     {
         super.ngOnInit();
         const block = this.configService.defaultOptions[FragmentSource.Mobile];
-        this.fragments = getFragmentsByType(block, this.position, FragmentType.ProgressBar);
+        this.fragments = getFragmentsByType(block, this.position, FragmentType.ProgressBar, this.userLogged);
     }
 }

@@ -18,8 +18,8 @@
                 </div>
                 <div class="promotions_text">
                     <div>
-                        <p class="promotions_title" [innerHtml]="promotion.Title"></p>
-                        <p [innerHtml]="promotion.Description"></p>
+                        <p class="promotions_title" [innerHtml]="promotion.Title | translate | sanitizer: 'html'"></p>
+                        <p [innerHtml]="promotion.Description | translate | sanitizer: 'html'"></p>
                     </div>
                 </div>
             </div>

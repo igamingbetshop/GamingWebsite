@@ -36,7 +36,7 @@ export class MobileCasinoProvidersComponent extends BaseCasinoProviders
     {
         super.ngOnInit();
         const block = this.configService.defaultOptions[FragmentSource.Mobile];
-        this.fragments = getFragmentsByType(block, this.position, FragmentType.Provider);
+        this.fragments = getFragmentsByType(block, this.position, FragmentType.Provider, this.userLogin);
     }
 
     private calcGridItemCount()

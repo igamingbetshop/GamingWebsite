@@ -7,6 +7,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {RegExpInputDirectiveModule} from "../../../../../../../@theme/directives/reg-exp-input/reg-exp-input-directive.module";
 import {LayoutService} from "../../../../../../../@core/services/app/layout.service";
+import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
         TranslateModule,
         RouterModule.forChild(routes),
         FontAwesomeModule,
-        RegExpInputDirectiveModule
+        RegExpInputDirectiveModule,
+        SanitizerModule
     ],
     declarations: [
         MobileVerificationComponent

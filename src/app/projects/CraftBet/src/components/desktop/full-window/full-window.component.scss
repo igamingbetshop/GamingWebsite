@@ -1,6 +1,7 @@
 .game-content
 {
   width: 100%;
+  position: relative;
   .icon-full-screen
   {
     font-size: 50px;
@@ -15,6 +16,14 @@
     {
       opacity: 1;
     }
+  }
+  .open-product-error{
+    color: var(--open-product-error-color, #FFFFFF);
+    font-size: var(--open-product-error-size, 30px);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
   }
 }
 

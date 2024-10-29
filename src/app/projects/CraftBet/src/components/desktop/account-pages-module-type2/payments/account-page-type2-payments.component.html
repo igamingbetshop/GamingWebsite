@@ -49,37 +49,6 @@
         </form>
     </div>
 
-
-    <!--  <table>-->
-    <!--    <tbody>-->
-    <!--    <tr>-->
-    <!--      <th>{{'User.Id' | translate}}</th>-->
-    <!--      <th>{{'User.Type' | translate}}</th>-->
-    <!--      <th>{{'User.Status' | translate}}</th>-->
-    <!--      <th>{{'User.BetShop' | translate}}</th>-->
-    <!--      <th>{{'User.Amount' | translate}}</th>-->
-    <!--      <th>{{'User.Date' | translate}}</th>-->
-    <!--      <th>{{'User.Action' | translate}}</th>-->
-    <!--    </tr>-->
-    <!--    <tr-->
-    <!--      *ngFor="let item of getPaymentsService.paymentHistoryItemsList | paginate: { itemsPerPage: 10, currentPage: page, totalItems: getPaymentsService.paymentHistoryItemsCount }, let i = index" class="Payments-{{item?.StatusName}}">-->
-    <!--      <td>{{item?.Id}}</td>-->
-    <!--      <td>{{item?.StatusTypeName}}</td>-->
-    <!--      <td>{{item?.StatusName}}</td>-->
-    <!--      <td>{{item?.BetShopId}}</td>-->
-    <!--      <td>{{item?.Amount}}</td>-->
-    <!--      <td>{{item?.CreationTime | date: 'dd/MM/yyyy h:mm'}}</td>-->
-    <!--      <td>-->
-    <!--        <button class="default_btn default_btn_red history_btn" type="submit" (click)="canselPayment(item.Id)"-->
-    <!--                *ngIf="(item.Status == 1 || item.Status == 7) && item.Type == 1">-->
-    <!--          {{'User.Cancel' | translate}}-->
-    <!--        </button>-->
-    <!--        <fa-icon [icon]="['fas', 'info-circle']" class="payment-info-icon" (click)="openInfoBlock(item.Comment)" *ngIf="(item.Status == 6) && item.Type == 1" title="{{'User.PaymentInfo' | translate}}"></fa-icon>-->
-    <!--      </td>-->
-    <!--    </tr>-->
-    <!--    </tbody>-->
-    <!--  </table>-->
-
     <div class="payments-block-head block-head">
         <div>{{'User.Id' | translate}}</div>
         <div>{{'User.Date' | translate}}</div>
@@ -103,7 +72,8 @@
                         <p>{{item?.Amount | number:'1.2-2'}}</p>
                     </div>
                     <div class="payments-block_item block_item item-transl">{{item?.PaymentSystemName}}</div>
-                    <div class="payments-block_item block_item">{{item?.StatusName}}</div>
+<!--                    <div class="payments-block_item block_item">{{item?.StatusName}}</div>-->
+                    <div class="payments-block_item block_item"><span class="status status-{{item?.StatusName}}"><span class="point status-{{item?.StatusName}}"></span>{{item?.StatusName}}</span></div>
                     <div class="payments-block_item block_item">
                         <button class="info-btn" type="submit" (click)="canselPayment(item.Id)"
                                 *ngIf="(item.Status == 1 && item.Type == 1) || (item.Status == 7 && item.Type == 1 && allowCancelConfirmedWithdraw)">

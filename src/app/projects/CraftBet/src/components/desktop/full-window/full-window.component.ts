@@ -89,7 +89,8 @@ export class FullWindowComponent extends BaseFullWindowComponent implements Afte
     protected onProductUrlError(data) {
         super.onProductUrlError(data);
         /*If game hasn't demo mode*/
-        if (data.ResponseCode == 174) {
+        if (data.ResponseCode == 174)
+        {
             localStorage.setItem('product-url', this.router.url);
            const dialogRef =  this.dialog.open(AppConfirmComponent, {data:{ title: 'open_login',
                     message: true}});

@@ -55,6 +55,8 @@
         </td>
         <td>
             <div>{{item?.CreationTime | date: 'dd/MM/yyyy hh:mm'}}</div>
+        </td>
+        <td>
             <div *ngIf="item?.PaymentSystemName">{{item?.PaymentSystemName}}</div>
             <div>{{item?.AccountTypeName}}</div>
             <div *ngIf="!item?.PaymentSystemName">{{item?.ProductName}}</div>

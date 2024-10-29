@@ -9,6 +9,7 @@ import {Subscription} from "rxjs";
 import {DOCUMENT, Location} from '@angular/common';
 import {UserLogined} from "@core/services/app/userLogined.service";
 import {UtilityService} from "@core/services/app/utility.service";
+import {StateService} from "@core/services/app/state.service";
 
 
 @Directive()

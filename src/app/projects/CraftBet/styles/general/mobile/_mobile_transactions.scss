@@ -15,6 +15,7 @@
     font-size: var(--m-user-views-title-font-size, 24px);
     font-weight: var(--m-user-views-title-font-weight, normal);
     margin-top: var(--m-user-views-title-margin-top, 20px);
+    display: var(--m-user-transactions-views-title-display, block);
   }
 
   .history-tools-panel {
@@ -91,9 +92,9 @@
   .mobile-history-table {
     overflow-x: var(--mobile-history-table-overflow, auto);
     table {
-      width: 100%;
+      width: var(--m-history-info-table-width,100%);
+      margin: 0 auto;
       border-collapse: collapse;
-	  margin: 0 auto;
 
       thead
       {

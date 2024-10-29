@@ -4,47 +4,52 @@
     </div>
     <h2 class="container-header">{{'Spin Wheel' | translate}}</h2>
     <div class="slot-wheel-content">
-        <div class="prize-box">
-            <div class="box-header">{{'Prizes' | translate}}</div>
-            <div class="prize-box-content">
-                @for(slice of slices(); track slice.id)
-                {
-                  <div class="item-prize">
-                    <img [src]="slice.iconSrc" class="icon">
-                    <span>{{slice.label}}</span>
-                  </div>
-                }
+        @if (!data.hideSpinWheelResults)
+        {
+            <div class="prize-box">
+                <div class="box-header">{{'Prizes' | translate}}</div>
+                <div class="prize-box-content">
+                    @for(slice of slices(); track slice.id)
+                    {
+                        <div class="item-prize">
+                            <img [src]="slice.iconSrc" class="icon">
+                            <span>{{slice.label}}</span>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
+        }
         @if (ready())
         {
-            <fortuna-fragment (onWinnersInfo)="updateWinnersInfo()" [slices]="slices()" [wheelDiameter]="wheelDiameter" [bonus]="bonusInfo"></fortuna-fragment>
+            <fortuna-fragment (onWinnersInfo)="updateWinnersInfo()"  [slices]="slices()" [wheelDiameter]="wheelDiameter" [bonus]="bonusInfo"></fortuna-fragment>
         }
+        @if (!data.hideSpinWheelResults)
+        {
+            <div class="result-box">
+                <div class="box-header">{{'Promo Results' | translate}}</div>
+                <div class="result-box-content">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>{{'Prize' | translate}}</th>
+                            <th>{{'Client Id' | translate}}</th>
+                        </tr>
+                        </thead>
+                        <tbody class="result-row">
+                            @for (info of winnersInfo(); track info.ClientId)
+                            {
+                                <tr>
+                                    <td><span>{{info.Name}}</span></td>
+                                    <td class="spin-id"><span>{{info.ClientId}}</span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
-        <div class="result-box">
-            <div class="box-header">{{'Promo Results' | translate}}</div>
-            <div class="result-box-content">
-                <table>
-                    <thead>
-                      <tr>
-                          <th>{{'Prize' | translate}}</th>
-                          <th>{{'Client Id' | translate}}</th>
-                      </tr>
-                    </thead>
-                    <tbody class="result-row">
-                        @for (info of winnersInfo(); track info.ClientId)
-                        {
-                            <tr>
-                                <td><span>{{info.Name}}</span></td>
-                                <td class="spin-id"><span>{{info.ClientId}}</span></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
 
-
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>
 

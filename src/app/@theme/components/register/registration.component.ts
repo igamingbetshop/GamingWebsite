@@ -11,7 +11,7 @@ import {LangService} from "@core/services/app/lang.service";
 import {RegisterTypes} from "@core/enums";
 import * as html2pdf from 'html2pdf.js';
 import * as jsPDF from "jspdf";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {take} from "rxjs/operators";
 import {DeviceDetectorService} from "ngx-device-detector";
 

@@ -31,13 +31,14 @@
 .submit-details {
   display: flex;
   gap: var(--m-profile-submit-details-gap, 20px);
+  justify-content: var(--m-profile-submit-details-jusftify-content, flex-start);
   width: var(--settings-submit-details-width, auto);
   margin: var(--settings-submit-details-margin, 0);
   .setting_btn {
     font-size: var(--m-settings-profile-submit-details-font-size, 16px);
     font-weight: var(--settings-submit-details-font-weight, 500);
     padding: var(--settings-submit-details-padding, 0px 10px);
-    height: var(--settings-submit-details-height, 44px);
+    height: var(--m-settings-submit-details-height, 44px);
     width: var(--m-settings-submit-details-width, 50%);
     background: linear-gradient(to bottom, var(--settings-button-gradient-first-color) 0%, var(--settings-button-gradient-second-color) 100%);
     color: var(--settings-button-text-color);
@@ -211,14 +212,13 @@ form {
     }
     input, select {
       &:not(.choose_input) {
-        //border: 1px solid $border-color;
         color: var(--m-settings-field-color, var(--settings-field-color, rgba(255, 255, 255, 0.6)));
         font-size: var(--settings-field-font-size, 16px);
         text-indent: 0;
         padding-left: 16px;
         border: var(--settings-field-border, none);
         background: var(--m-settings-profile-field-background, #101824);
-        border-radius: var(--settings-field-border-radius, 6px);
+        border-radius: var(--m-settings-profile-field-border-radius, var(--settings-field-border-radius, 6px));
         height: var(--settings-field-height, 40px);
         appearance: var(--open-ticket-appearance, auto);
       }

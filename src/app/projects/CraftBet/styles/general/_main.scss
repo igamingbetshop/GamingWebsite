@@ -44,6 +44,9 @@ body
                       .general-menu_item_link
                       {
                       }
+                      .new-logo-item {
+                        display: none;
+                      }
                       .general-menu-sub-menu
                       {
                         display: none;
@@ -539,4 +542,18 @@ select{cursor: pointer}
 }
 :root {
   --mat-dialog-container-small-max-width: 95vw;
+  color-scheme: light dark;
+}
+body.dark
+{
+  color-scheme: dark;
+}
+body.light
+{
+  color-scheme: light;
+}
+@media (max-width: 599px) {
+  .cdk-overlay-pane.mat-mdc-dialog-panel {
+    min-width: var(--mat-dialog-container-small-min-width, 0) !important;
+  }
 }

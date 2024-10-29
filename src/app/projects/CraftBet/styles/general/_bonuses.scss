@@ -56,8 +56,10 @@
     height: var(--promo-code-box-height, 40px);
     position: relative;
     display: var(--promo-code-box-display, inline-flex);
+    justify-content: var(--promo-code-box-justify-content, space-between);
     align-items: center;
-    margin-bottom: 21px;
+    margin-bottom: var(--promo-code-box-margin-bottom, 21px);
+    width: var(--promo-code-box-width, 100%);
 
     .success-message, .error-message {
       position: absolute;
@@ -94,7 +96,6 @@
     }
 
     button {
-      flex: 1;
       margin-left: var(--promo-code-activate-margin-left, 20px);
       height: var(--promo-code-activate-height, 100%);
       border-radius: var(--promo-code-activate-border-radius, 4px);
@@ -104,6 +105,34 @@
       font-size: var(--promo-code-activate-font-size, 16px);
       padding: var(--promo-code-activate-padding, 0 20px);
       border: var(--promo-code-activate-border, none);
+    }
+    .range-box
+    {
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-left: auto;
+      height: 8px;
+      .range-label
+      {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color:#FFFFFF;
+      }
+      .range
+      {
+        width: 100%;
+        background: #393939;
+        border-radius: 5px;
+        height: 10px;
+        .fill{
+          background: linear-gradient(90deg, #A40C18 0%, #E20C1D 100%);
+          height: inherit;
+          border-radius: 5px;
+        }
+      }
     }
   }
 
@@ -127,21 +156,18 @@
     &_item {
       padding: var(--bonuses-items-btn-padding, 10px 20px);
       cursor: pointer;
-      font-weight: bold;
-      letter-spacing: 1.48px;
+      font-weight: var(--bonuses-items-btn-font-weight, bold);
+      font-size: var(--bonuses-items-btn-font-size, 16px);
+      letter-spacing: var(--bonuses-items-btn-letter-spacing, 1.48px);
       background-color: var(--bonuses-items-btn-background-color, unset);
       color: var(--bonuses-items-btn-color, #fff);
       border: var(--bonuses-items-btn-border, none);
       border-radius: var(--bonuses-items-btn-border-radius, 0px);
       &.active {
-        text-decoration: underline;
+        text-decoration: var(--bonuses-items-btn-selected-text-decoration, underline);
         background-color: var(--bonuses-items-btn-selected-background-color, unset);
         color: var(--bonuses-items-btn-selected-color, #fff);
       }
-    }
-    &_item:hover {
-      background-color: var(--bonuses-items-btn-hover-background-color, unset);
-      color: var(--bonuses-items-btn-hover-color, #fff);
     }
   }
 
@@ -151,6 +177,9 @@
 
     .sport-bonus-box {
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
       background-color: var(--history-block-section-bg, #16233a);
       .sport-bonus-column {
         width: 100%;
@@ -182,16 +211,23 @@
           padding-right: var(--bonus-block-body-padding-right, 0px);
           padding-top: var(--bonus-block-body-padding-top, 5px);
           padding-bottom: var(--bonus-block-body-padding-bottom, 3px);
+          font-size: var(--bonus-block-body-font-size, 16px);
+          border-bottom: var(--bonus-block-body-border-bottom, none);
           word-break: var(--bonuses-block-item-word-break);
           .info-btn {
             height: var(--history-info-btn-height, 25px);
             background: linear-gradient(
                             180deg, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
-            border: none;
+            border: var(--history-info-btn-border, none);
             color: var(--history-info-btn-color, #fff);
             display: var(--history-info-btn-display, block);
             font-size: $font-size-3;
-            border-radius: 4px;
+            border-radius: var(--history-info-btn-border-radius, 4px);
+            cursor: pointer;
+          }
+          .history-icon-user-info {
+            display: var(--history-info-btn-icon-display, none);
+            color: var(--history-info-btn-icon-color, #000);
             cursor: pointer;
           }
         }
@@ -409,8 +445,8 @@
       background-size: 5px 5px, 6px 5px, 2.5em 2.5em;
       background-repeat: no-repeat;
       font-size: var(--font-size-16, 16px);
-      border: none;
-      height: 44px;
+      border: var(--bonuses-history-select-border, none);
+      height: var(--bonuses-history-select-height, 44px);
     }
 
     button {

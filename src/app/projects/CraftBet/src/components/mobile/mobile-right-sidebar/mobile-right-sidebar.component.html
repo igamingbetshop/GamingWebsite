@@ -67,7 +67,7 @@
                         <div *ngFor="let item of menuList">
                             <li class="general-menu_header"
                                 *ngIf="isLogin ? (item.Type == 2 || item.Type == 3 || item.Type == 1) : (item.Type == 1)">
-                                <a class="title_menu" *ngIf="menuList.length > 1 && !item.OpenInRouting">
+                                <a class="title_menu title-{{item?.Id}}" *ngIf="menuList.length > 1 && !item.OpenInRouting">
                                     <img class="title_menu_img" *ngIf="item.Icon.includes('.')" src="../../../../../../../assets/images/mobile-right-sidebar/{{item?.Icon}}" alt="">
 
                                     <ng-container *ngIf="item?.Type == 3; else defaultTitles">

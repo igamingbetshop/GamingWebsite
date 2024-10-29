@@ -85,16 +85,22 @@
 
   .user-history-content {
     display: flex;
-    justify-content: space-between;
-    gap: 26px;
+    gap: 16px;
     height: 100%;
     .content-details
     {
-      width: 210px;
+      width: 250px;
       font-size: 16px;
       font-weight: 400;
       white-space: nowrap;
       line-height: 30px;
+      background-color: var(--ticket-details-background-color,#142338);
+      border-radius: var(--ticket-details-border-radius,4px);
+      padding:  var(--ticket-details-padding,16px);
+      >div{
+        display: flex;
+        justify-content: space-between;
+      }
       p{
         font-size: 18px;
         margin-bottom: 16px;
@@ -142,7 +148,7 @@
       font-weight: 700;
     }
     .short-column{
-      width: calc(100% / 8);
+     /* width: calc(100% / 8);*/
       position: relative;
       .column-text
       {
@@ -185,9 +191,10 @@
     }
     .bet-content
     {
-      width: calc(100% - 210px);
       height: 100%;
       position: relative;
+      overflow-x: auto;
+
       .bet-selections {
         height: 100%;
         overflow-y: auto;
@@ -200,16 +207,19 @@
           line-height: 44px;
           margin-bottom: 6px;
           margin-right: 12px;
+          width: fit-content;
           .content-row
-          {display: flex;
-            justify-content: space-between;
+          { display: grid;
+            grid-template-columns: repeat(8, 128px);
             gap: 16px;
           }
 
         }
         .bet-selections_content {
-          height: calc(100% - 50px);
+          height: calc(100% - 62px);
           overflow-y: auto;
+          overflow-x: hidden;
+          width: fit-content;
           .content-row {
             background-color: #324768;
             border-radius: 4px;
@@ -217,7 +227,8 @@
             height: 50px;
             line-height: 50px;
             margin-bottom: 2px;
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(8, 128px);
             margin-right: 10px;
             gap: 16px;
             &:hover
@@ -227,10 +238,11 @@
           }
         }
       }
+
     }
 
-
   }
+  ::-webkit-scrollbar-thumb { cursor: grab!important;}
 }
 
 @media (max-width: 500px) {

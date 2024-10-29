@@ -4,7 +4,7 @@ import {BaseComponent} from "../../base/base.component";
 import {TranslateService} from "@ngx-translate/core";
 import {News, NewsFragment} from "../../../../@core/models";
 import {LangService} from "../../../../@core/services/app/lang.service";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Controllers, Methods} from "../../../../@core/enums";
 import {Subscription} from "rxjs";
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";

@@ -25,7 +25,7 @@ export class MobileCasinoCategoryComponent extends BaseCasinoCategory {
     ngOnInit() {
         super.ngOnInit();
         const block = this.configService.defaultOptions[FragmentSource.Mobile];
-        this.fragments = getFragmentsByType(block, this.position, FragmentType.Category);
+        this.fragments = getFragmentsByType(block, this.position, FragmentType.Category, this.userLogged);
     }
 
     backFromSearch() {

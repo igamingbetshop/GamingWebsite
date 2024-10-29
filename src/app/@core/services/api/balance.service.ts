@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {computed, Injectable, signal} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import {ConfigService} from '../app/config.service';
 import {Balance, Request} from "@core/models";
 import {LocalStorageService} from "@core/services/app/localStorage.service";
@@ -7,19 +7,22 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {Controllers, Methods} from "@core/enums";
 import {SignalRService} from "@core/services/soket/signal-r.service";
 import {BaseApiService} from "@core/services/api/base-api.service";
-import {take} from "rxjs/operators";
+import {map, take} from "rxjs/operators";
+import {Account, Currency, Wallet, WalletSettings} from "@core/types";
 
 @Injectable()
 export class BalanceService {
 
-    public userData: any;
-    public showBalance: boolean = true;
+    userData: any;
+    showBalance: boolean = true;
 
-    public notifyUpdateBalance: BehaviorSubject<Balance> = new BehaviorSubject<any>(new Balance());
-    public notifyUpdateBalanceError: Subject<any> = new Subject<any>();
-    public notifyGetBonusBalance: Subject<any> = new Subject<any>();
-    public notifyGetBonusBalanceError: Subject<any> = new Subject<any>();
+    notifyUpdateBalance: BehaviorSubject<Balance> = new BehaviorSubject<any>(new Balance());
+    notifyUpdateBalanceError: Subject<any> = new Subject<any>();
+    notifyGetBonusBalance: Subject<any> = new Subject<any>();
+    notifyGetBonusBalanceError: Subject<any> = new Subject<any>();
 
+    #walletSettings = signal<WalletSettings>(this.localStorageService.get("walletSettings") || {Wallet:null,DisplayInFiat:false, HideZero:false});
+    walletSettings = computed(() => this.#walletSettings());
     constructor(
         private http: HttpClient,
         private localStorageService: LocalStorageService,
@@ -123,8 +126,38 @@ export class BalanceService {
         return balance;
     }
 
-    getPartnerCurrenciesByType(): Observable<any> {
-        return this.baseApiService.apiRequest(null, Controllers.MAIN, Methods.GET_PARTNER_CURRENCIES, false);
+    getPartnerCurrenciesByType(): Observable<Currency[]> {
+        return this.baseApiService.apiRequest(null, Controllers.MAIN, Methods.GET_PARTNER_CURRENCIES, false).pipe(map(data => {
+            return data.ResponseCode === 0 ?  data.ResponseObject as Currency[] : [];
+        }));
     }
+
+    getAccounts(currencyId?:string):Observable<Account[]>
+    {
+        return this.baseApiService.apiRequest({CurrencyId:currencyId}, Controllers.CLIENT, Methods.GET_CLIENT_ACCOUNTS, true).pipe(map(data => {
+            return data.ResponseCode === 0 ?  data.ResponseObject.Accounts : [];
+        }));
+    }
+
+    updateWalletSettings(settings:WalletSettings)
+    {
+        this.#walletSettings.set(settings);
+        this.localStorageService.add("walletSettings", this.walletSettings())
+    }
+
+
+    selectWallet(wallet:Wallet)
+    {
+        const req:any = {CurrencyId:wallet.Currency.Id};
+
+        if(wallet.Accounts.length)
+            req.Id = wallet.Accounts[0].Id;
+
+       return  this.baseApiService.apiRequest(req, Controllers.CLIENT, Methods.SELECT_SESSION_ACCOUNT).pipe(map(data => {
+           return data.ResponseCode === 0 ?  data.ResponseObject as Account : null;
+       }));
+    }
+
+
 }
 

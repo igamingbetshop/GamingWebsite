@@ -1,4 +1,4 @@
-import {Directive, Injector} from '@angular/core';
+import {Directive, Injector, signal} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {BaseComponent} from "../../../../../../@theme/components/base/base.component";
 import {OpenGamesService} from "@core/services/app/openGames.service";
@@ -9,16 +9,12 @@ import {BalanceService} from "@core/services/api/balance.service";
 export class CommonOpenGamesComponent extends BaseComponent {
     public route: ActivatedRoute;
     public router: Router;
-    private authService: AuthService;
     public openGamesService: OpenGamesService;
 
-    public iframeUrl: string;
     public showErrorTag: boolean = false;
     public redirectUrl: string;
-    public goBackUrl: string;
     public ratingPercent: number;
-    private balanceService: BalanceService;
-
+    openProductErrorMessage = signal<string>("");
     public rating: number;
     public name: string;
     public backgroundImage: string;
@@ -30,8 +26,6 @@ export class CommonOpenGamesComponent extends BaseComponent {
         this.route = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
         this.openGamesService = injector.get(OpenGamesService);
-        this.authService = injector.get(AuthService);
-        this.balanceService = injector.get(BalanceService);
         this.savedData = injector.get(SaveData);
     }
 
@@ -50,11 +44,12 @@ export class CommonOpenGamesComponent extends BaseComponent {
             if (responseData) {
                 this.fullScreenIframeUrl = responseData;
                 this.showErrorTag = false;
+                this.openProductErrorMessage.set("");
             }
         });
 
-        this.subscriptions.push(this.openGamesService.notifyGetIframUrlError.subscribe((responceData) => {
-            this.onProductUrlError(responceData);
+        this.subscriptions.push(this.openGamesService.notifyGetIframUrlError.subscribe((data) => {
+            this.onProductUrlError(data);
         }));
 
 
@@ -77,6 +72,7 @@ export class CommonOpenGamesComponent extends BaseComponent {
     protected onProductUrlError(data)
     {
         this.showErrorTag = true;
+        this.openProductErrorMessage.set(data);
     }
 
     redirectParentPage() {

@@ -41,6 +41,7 @@
         font-size: fontSize(m-provider-list-horizontal, 16px);
         font-weight: fontWeight(m-provider-list-horizontal, 400);
         border: var(--m-provider-list-horizontal-border, none);
+        padding: var(--m-provider-list-horizontal-padding, 0);
         cursor: pointer;
       }
 

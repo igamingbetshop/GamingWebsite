@@ -1,0 +1,43 @@
+<div class="race-leaderboard-section">
+    <div class="modal-close-btn" (click)="close()">
+        <svg fill="#fff" viewBox="0 0 64 64" class="svg-icon" style=""> <title></title> <path d="m54.827 16.187-7.014-7.014L32 24.987 16.187 9.173l-7.014 7.014L24.987 32 9.173 47.813l7.014 7.014L32 39.013l15.813 15.814 7.014-7.014L39.013 32l15.814-15.813Z"></path></svg>
+    </div>
+    <div class="promo-banner">
+        <div class="race-modal-title">
+           <span>
+            ${{ data.tournaments.PrizePool }} {{ 'Race' | translate }}-{{ data.tournaments.FormatedStartTime }}
+           </span>
+        </div>
+        <img class="race-bg-image" src="../../../../../../../assets/images/rocket.png"/>
+        <div class="count-down">
+            <time-count-down [closeTime]="data.tournaments.FinishTime"></time-count-down>
+        </div>
+    </div>
+    <div class="race-modal-content">
+        <div class="race-position">
+            <div>
+                <div class="position">
+                    <span>{{'User.YourPosition' | translate}}</span>
+                    <div>
+                        <span>-</span>
+
+                    </div>
+                </div>
+                <div>
+                    <span>{{'User.YourCurrentPrize' | translate}}</span>
+                    <div>
+                        <span>000</span>
+                    </div>
+                </div>
+                <div>
+                    <span>{{'User.YourWagered' | translate}}</span>
+                    <div>
+                        <span tooltip="0000" iconSrc="">000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="promo-description">{{'User.PromoDescription' | translate}}</div>
+        <button class="form-button read-more">{{'Read more' | translate}}</button>
+    </div>
+</div>

@@ -34,7 +34,7 @@ import {CommonPaymentNominalsModule} from "../../../common/app-common-payment-no
 import {CommonAccountsModule} from "../../../common/common-accounts/common-accounts.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {NgxPrintModule} from "ngx-print";
 import {OrderByPipeModule} from "../../../../../../../@theme/pipes/order-by/order-by-pipe.module";
 import {AccountType2WithdrawBlockRoutingModule} from "./account-type2-withdraw-block-routing.module";
@@ -70,8 +70,7 @@ import {NgxMaskDirective} from "ngx-mask";
 
 
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         WithdrawBlockDefaultComponent,
         WithdrawType1Component,
         WithdrawType2Component,
@@ -119,15 +118,12 @@ import {NgxMaskDirective} from "ngx-mask";
         WithdrawType24DefaultComponent,
         WithdrawType24Component,
         WithdrawType25DefaultComponent,
-    ],
-    imports: [
-        CommonModule,
+    ], imports: [CommonModule,
         AccountType2WithdrawBlockRoutingModule,
         TranslateModule,
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        HttpClientModule,
         NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
@@ -136,8 +132,6 @@ import {NgxMaskDirective} from "ngx-mask";
         CommonPaymentNominalsModule,
         CommonAccountsModule,
         CollapseDirectiveModule,
-        FontAwesomeModule
-    ],
-})
+        FontAwesomeModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AccountType2WithdrawBlockModule {
 }

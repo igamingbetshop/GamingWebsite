@@ -401,3 +401,337 @@
 }
 
 
+.self-limitation-type2
+{
+  height: var(--payment-section-content-width, auto);
+  margin-top: var(--payment-section-content-margin-top, 0px);
+  cursor: default;
+  background: $account-main-bg-color;
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  .self-limitation-blocks{
+    display: flex;
+    gap: 28px;
+    .self-limitation-tab
+    {
+
+      height: auto;
+
+      &.left-part {
+        flex: 1;
+        position: relative;
+        box-shadow: var(--amount-withdraw-box-shadow, none);
+        .limitation_header {
+          @include flex-distance-between;
+          height: var(--change-password-second-tab-heirght, 32px);
+          font-weight: var(--limitation-header-font-weight, 600);
+          font-size: var(--limitation-header-font-size, 20px);
+          margin-bottom: var(--limitation-header-margin-bottom, 8px);
+          .limit_edit {
+            display: flex;
+            align-items: center;
+            justify-content: justifyContent(edit-button, unset);
+            width: width(edit-button, 53px);
+            height: height(edit-button, 40px);
+            background-color: backgroundColor(edit-button, none);
+            border-radius: var(--edit-button-border-radius, 0px);
+            cursor: pointer;
+            &_text {
+              background: none!important;
+              border: none;
+              padding: 0!important;
+              color: var(--edit-button-color, #000);
+              font-size: fontSize(edit-button-text, 20px);
+              font-weight: fontWeight(edit-button-text, 600);
+              cursor: pointer;
+              white-space: nowrap;
+            }
+            .icon-edit{color: color(edit-icon);margin-right: 4px}
+            &.selected
+            {
+              button{ color: color(edit-button-selected)}
+              .icon-edit{color: color(edit-icon-selected)}
+            }
+          }
+          .setting_btn {
+            @include common-button;
+            font-weight: 500;
+            font-size: $font-size-5;
+          }
+        }
+        form {
+          .limit-type {
+            width: 100%;
+            &_row {
+              display: grid;
+              grid-template-columns: var(--limit-type-grid-templates, repeat(3,1fr));
+              gap: var(--limit-type-grid-gap, 4px);
+              align-items: var(--limit-type-grid-item-align,center);
+              grid-template-rows: var(--limit-type-grid-template-rows,minmax(0, auto));
+              margin-bottom: var(--limit-type-margin-bottom, 20px);
+              position: relative;
+              border: 1px solid var(--limit-type-border-color, #DBDBDB);
+              background: var(--limit-type-background-color, #F8F8F8);
+              border-radius: var(--limit-type-border-radius, 10px);
+              padding: 20px;
+
+              .limit-type-title {
+                grid-area: 1 / span 3;
+                font-size: var(--limit-type-title-font-size, 20px);
+                font-weight: var(--limit-type-title-font-weight, 600);
+                white-space: nowrap;
+                width: var(--limit-type-title-width, 150px);
+                color: var(--limit-type-title-color, #ffffff);
+              }
+              p
+              {
+                grid-area: 2 / span 3;
+                margin: 0;
+                padding: 0;
+                font-size: var(--limit-type-info-text-font-size, 14px);
+                font-weight: var(--limit-type-info-text-font-weight, 400);
+                color: var(--limit-type-info-text-color, #484848);
+                line-height: normal;
+              }
+              .limit-type-field {
+                position: relative;
+                .validation-error {
+                  position: absolute;
+                  bottom: auto;
+                  font-size: 12px;
+                  color: red;
+                }
+                .validation-input-error {
+                  border: 1px solid red;
+                }
+                &.session-minutes{grid-area: 3 / span 3;}
+              }
+              .error-message {
+                width: var(--self-limitation-error-message, 100%);
+              }
+            }
+            &_row:nth-child(5) {
+              margin-bottom: var(--limit-type-last-margin-bottom, 28px);
+            }
+          }
+        }
+        .limitation-actions {
+          display: flex;
+          gap: 21px;
+          margin-top: 53px;
+          width: 96%;
+          position: absolute;
+          bottom: 20px;
+          .success-message {
+            position: absolute;
+            top: itemTop(limitation-actions,-30px);
+            color: itemColor(limitation-actions, #fff);
+            font-size: fontSize(limitation-actions, 16px);
+          }
+          button {
+            margin: 0;
+            background: var(--limit-btn-bg, linear-gradient(180deg, #1376F8 0%, #0A254A 100%));
+            border-radius: 6px;
+            width: 50%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: $font-size-5;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            &.cancel_btn {
+              background: var(--limit-btn-cancel-bg, rgba(13, 18, 32, 0.5));
+            }
+          }
+        }
+        .error-message-self-limitation {
+          top: var(--self-limitation-error-message-top, 200px);
+          font-size: var(--self-limitation-error-message-font-size, 14px);
+          border-left: var(--self-limitation-error-message-border-left, 2px solid rgb(255, 72, 72));
+        }
+        .success-message-self-limitation {
+          top: var(--self-limitation-success-message-top, 200px);
+          color: var(--success-message-settings-color, #3c763d);
+        }
+      }
+      &.right-part {
+        width: var(--self-limitation-right-part-width, 590px);
+        display: var(--self-limitation-right-part-display, block);
+        box-shadow: var(--amount-withdraw-box-shadow, none);
+        border: 1px solid var(--limit-type-border-color, #DBDBDB);
+        background: var(--limit-type-background-color, #F8F8F8);
+        border-radius: var(--limit-type-border-radius, 10px);
+        padding: 20px;
+        height: 100%;
+        .self-limit-title {
+          font-weight: fontWeight(self-limit-title, 400);
+          font-size: fontSize(self-limit-title, 16px);
+          margin: var(--self-limit-title-margin, 0);
+          color: var(--self-limit-title-color, #ffffff);
+        }
+        .self-exclusion-section {
+          font-weight: fontWeight(self-limit-description, 500);
+          color: var(--self-limit-description-color, #ffffff);
+          margin-bottom: var(--self-limit-description-margin-bottom, 0);
+        }
+        .exclusion_header {
+          height: var(--change-password-second-tab-height, 32px);
+          color: var(--exclusion-header-color, #121212);
+          font-size: var(--exclusion-header-font-size, 20px);
+          font-weight: var(--exclusion-header-font-weight, 600);
+
+        }
+        .self-exclusion-box {
+          display: flex;
+          flex-direction: column;
+          height: calc(100% - var(--account-content-header-underline-margin-top) - var(--account-content-header-underline-margin-bottom));
+          justify-content: space-between;
+          .self-exclusion-row-btn {
+            margin-top: var(--self-limit-btn-margin-top, 24px);
+          }
+          .self-exclusion-row {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin-top: var(--self-exclusion-row-margin-top, 20px);
+            .change-password-field-type{top: 35px}
+          }
+        }
+      }
+
+      .self-limitation, .self-exclusion-box
+      {
+        .session-limit
+        {
+          .error-message{margin-left: 10px}
+        }
+        button
+        {
+          margin: var(--settings-button-text-margin, 0 auto);
+          display: block;
+          background: linear-gradient(180deg, var(--settings-button-gradient-first-color, #FFFFFF) 0%, var(--settings-button-gradient-second-color, #FFFFFF) 100%);
+          color: var(--settings-button-text-color, #FFFFFF);
+          font-weight: var(--tickets-list-title-font-weight, bold);
+          padding: var(--edit-button-padding, 0 32px);
+          height: var(--self-limitation-button-height, 40px);
+          border-radius: var(--edit-button-border-radius, 3px);
+          cursor: pointer;
+          &.confirm-button{
+            background:linear-gradient(180deg, var(--confirm-button-gradient-first-color, #FFFFFF) 0%, var(--confirm-button-gradient-second-color, #FFFFFF) 100%);
+            color: var(--confirm-button-text-color, #000);
+          }
+        }
+      }
+      label {
+        color: itemColor(change-password-input-label, #fff);
+        height: height(change-password-input-label, 25px);
+        font-size: var(--change-password-input-label-font-size, 18px);
+        font-weight: var(--change-password-input-label-font-weight, 500);
+        transform-origin: 0 50%;
+        transition: transform 200ms, color 200ms;
+        pointer-events: none;
+      }
+      input:not(.radio), select, .period-dropdown, .row-item
+      {
+        width: var(--self-limitation-fields-width, 100%);
+        height: var(--self-limitation-fields-height, 44px);
+        background-color: $account-content-item-bg-color;
+        padding: var(--self-limitation-fields-padding, 12px 16px);
+        border: var(--self-limitation-fields-border, none);
+        outline: none;
+        border-radius: var(--self-limitation-fields-border-radius, 6px);
+        color: var(--self-limitation-fields-color, #121212);
+        font-size: var(--self-limitation-fields-font-size, 16px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .icon-arrow-right
+        {
+          font-weight: bold;
+          font-size: 9px;
+          transform: rotate(90deg);
+          margin-right: -10px;
+        }
+
+        &.active_item
+        {
+          border: 1px solid var(--self-limitation-fields-border-color, rgba(219, 237, 255, 0.8));
+        }
+      }
+      ::placeholder{
+        color: var(--self-limitation-fields-color, #121212);
+        font-size: var(--self-limitation-fields-font-size, 16px);
+      }
+      .radio{display: block; right: unset;  padding: 0}
+      input[type="radio"].radio {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: #E4E4E4;
+        cursor: pointer;
+        outline: none;
+      }
+      input[type="radio"].radio:checked {
+        background-color: #133FAA;
+      }
+
+      input[type="radio"].radio:checked::after {
+        content: '✔';
+        position: absolute;
+        top: 0;
+        left: 4px;
+        font-size: 11px;
+        color: white;
+      }
+
+      .row-item
+      {
+        &.permanently{margin-bottom: 10px}
+        &.active
+        {
+          border: 1px solid var(--self-limitation-fields-active-border-color, #133FAA);
+          background: var(--self-limitation-fields-active-bg-color,#133FAA1A);
+
+        }
+      }
+    }
+  }
+  .submit-details {
+    margin-left: auto;
+    margin-top: 18px;
+    display: flex;
+    gap: var(--settings-submit-details-gap, 20px);
+    justify-content: flex-end;
+    width: width(settings-submit-details, auto);
+    .setting_btn {
+      font-size: var(--settings-submit-details-font-size, 16px);
+      font-weight: var(--settings-submit-details-font-weight, 500);
+      padding: var(--settings-submit-details-padding, 0px 10px);
+      border-radius: var(--settings-submit-details-border-radius, 6px);
+      height: height(settings-submit-details, 42px);
+      color: var(--settings-submit-details-color, #fff);
+      .icon-close-modal {
+        margin-right: var(--settings-submit-details-icon-margin-right, 13px);
+        font-size: calc(var(--settings-submit-details-font-size, 16px) - 2px);
+      }
+      .fas-save {
+        margin-right: var(--settings-submit-details-icon-margin-right, 13px);
+        font-size: calc(var(--settings-submit-details-font-size, 16px) + 2px);
+      }
+      &.cancel {
+        background: var(--settings-cancel-btn-bg, #3A3A3A)
+      }
+      &.save {
+        background: var(--settings-save-btn-bg, #133FAA)
+      }
+    }
+  }
+}
+
+

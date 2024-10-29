@@ -14,7 +14,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {SanitizerModule} from '../../../pipes/sanitizer/sanitizer.module';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DeviceDetectorService} from "ngx-device-detector";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Controllers, Methods} from "@core/enums";
 import {BaseApiService} from "@core/services/api/base-api.service";
 

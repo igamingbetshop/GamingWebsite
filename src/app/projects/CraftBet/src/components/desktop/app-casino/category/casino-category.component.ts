@@ -31,7 +31,7 @@ export class CasinoCategoryComponent extends BaseCasinoCategory
     {
         super.ngOnInit();
         const block = this.configService.defaultOptions[FragmentSource.Web];
-        this.fragments = getFragmentsByType(block, this.position, FragmentType.Category);
+        this.fragments = getFragmentsByType(block, this.position, FragmentType.Category, this.userLogged);
         this.hasFilterBox =  this.fragments[FragmentTypes.Menus]?.Items.length > 0 || this.fragments[FragmentTypes.Providers]?.Items.length > 0;
     }
 

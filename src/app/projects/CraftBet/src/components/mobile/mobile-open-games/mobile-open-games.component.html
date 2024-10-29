@@ -3,4 +3,8 @@
             allow="autoplay; fullscreen"
             allowfullscreen
             allowtransparency="yes" id="mobile-main-game-iframe" [src]="iframeUrl | sanitizer:'resourceUrl'"></iframe>
+    @if (openProductErrorMessage())
+    {
+        <div class="game-content"><span class="open-product-error">{{openProductErrorMessage()}}</span></div>
+    }
 </div>

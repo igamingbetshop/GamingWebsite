@@ -1,1 +1,44 @@
-<router-outlet></router-outlet>
+<div class="default-container">
+    <div class="mobile-user-info">
+        <img class="mobile-account-img" src="../../../../../../../assets/images/mobile-account.png" alt="">
+        <div class="mobile-user-panel-content">
+            <div class="">{{userData?.UserName}}</div>
+            <div class="mobile-account-user-id">{{'User.User_Id' | translate}}: {{userData?.Id}}</div>
+            <div class="mobile-account-panel-balance">
+                {{'User.Balance' | translate}}: {{balance | toNumber | number: '.2'}}{{ currencySymbol ? currencySymbol : currencyId }}
+            </div>
+        </div>
+    </div>
+    <ul class="user-subList" dropdown>
+        <li class="user-subList-title">
+            <ng-container *ngIf="selectedItemIcon?.includes('.'); else menuItemIcon">
+                <img src="../../../../../../../assets/images/mobile-right-sidebar/{{selectedItemIcon}}" alt="">
+            </ng-container>
+            <ng-template #menuItemIcon>
+                <span *ngIf="selectedItemIcon" class="item_menu__icon {{selectedItemIcon}}"></span>
+            </ng-template>
+            <span>{{selectedItem}}</span>
+            <i class="icon-arrow"></i>
+        </li>
+        <li class="user-subList-content">
+            @for (item of menuList; track item.Id)
+            {
+                <div class="account-part-menuItem" (click)="changePage(item)"
+                     [ngClass]="savedDateService.selectedItem == item? 'selected' : ''">
+                    <ng-container *ngIf="item?.Icon.includes('.'); else menuItemIcon">
+                        <img src="../../../../../../../assets/images/mobile-right-sidebar/{{item.Icon}}" alt="">
+                    </ng-container>
+                    <ng-template #menuItemIcon>
+                        <span *ngIf="item?.Icon" class="item_menu__icon {{item?.Icon}}"></span>
+                    </ng-template>
+                    <a class="item_menu">
+                        {{'User.' + item?.Title | translate}}
+                    </a>
+                </div>
+            }
+        </li>
+    </ul>
+
+    <router-outlet></router-outlet>
+
+</div>

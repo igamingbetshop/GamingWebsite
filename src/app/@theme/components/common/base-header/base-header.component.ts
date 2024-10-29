@@ -51,7 +51,7 @@ export class BaseHeaderComponent extends BaseComponent {
     public localStorageService: LocalStorageService;
     public ticketsService: TicketsService;
     public saveData: SaveData;
-    protected stateService:StateService;
+    stateService:StateService;
     public router: Router;
     public selectedItem;
 

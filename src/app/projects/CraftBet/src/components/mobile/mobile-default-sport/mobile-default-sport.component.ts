@@ -22,6 +22,7 @@ export class MobileDefaultSportComponent extends BaseDefaultSportComponent imple
   isMigrated:boolean;
 
   @HostBinding('style.min-height') minHeight = this.layoutService.layoutStyle['min-height'];
+  @HostBinding('style.margin-top') marginTop = this.layoutService.layoutStyle['margin-top'];
 
   @ViewChild('sportComponentRef', { read: ViewContainerRef }) sportComponentRef;
   @ViewChild('frameComponentRef', { read: ViewContainerRef }) frameComponentRef;

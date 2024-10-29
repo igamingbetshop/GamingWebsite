@@ -22,7 +22,7 @@ import {AccountPagesModuleType2RoutingModule} from "./account-pages-module-type2
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {NgxPrintModule} from "ngx-print";
 import {ThemeModule} from "../../../../../../@theme/theme.module";
 import { AccountPageType2PaymentsComponent } from './payments/account-page-type2-payments.component';
@@ -50,40 +50,41 @@ import {
 import {
     AccountPageType2AgentsTransactionsComponent
 } from "./transactions/agents-transactions/account-page-type2-agents-transactions.component";
+import {ToNumberPipeModule} from "../../../../../../@theme/pipes/to-number/to-number-pipe.module";
+import {CdkCopyToClipboard} from "@angular/cdk/clipboard";
 
 
-@NgModule({
-  declarations: [
-    AccountPageType2MenuComponent,
-    AccountPageType2StatementComponent,
-    AccountPageType2MenuStatementComponent,
-    AccountPageType2TicketsComponent,
-    AccountPageType2BonusesComponent,
-    AccountPageType2BetsComponent,
-    AccountPageType2FriendsComponent,
-    AccountPageType2SettingsComponent,
-    AccountPageType2TransactionsComponent,
-    AccountPageType2DefaultComponent,
-    AccountPageType2HistoryDefaultComponent,
-    AccountPageType2SelfLimitationComponent,
-    AccountPageType2BettingStatmentItemComponent,
-    AccountPageType2BettingStatmentSportItemComponent,
-    AccountPageType2AnnouncementsComponent,
-    AccountPageType2BankAccountsComponent,
-    AccountPageType2OpenTicketsComponent,
-    AccountPageType2HistoryComponent,
-    AccountPageType2PaymentsComponent,
-    AccountPageType2ChangePasswordComponent,
-    AccountPageType2VerificationComponent
-  ],
-    imports: [
-        CommonModule,
+@NgModule({ declarations: [
+        AccountPageType2MenuComponent,
+        AccountPageType2StatementComponent,
+        AccountPageType2MenuStatementComponent,
+        AccountPageType2TicketsComponent,
+        AccountPageType2BonusesComponent,
+        AccountPageType2BetsComponent,
+        AccountPageType2FriendsComponent,
+        AccountPageType2SettingsComponent,
+        AccountPageType2TransactionsComponent,
+        AccountPageType2DefaultComponent,
+        AccountPageType2HistoryDefaultComponent,
+        AccountPageType2SelfLimitationComponent,
+        AccountPageType2BettingStatmentItemComponent,
+        AccountPageType2BettingStatmentSportItemComponent,
+        AccountPageType2AnnouncementsComponent,
+        AccountPageType2BankAccountsComponent,
+        AccountPageType2OpenTicketsComponent,
+        AccountPageType2HistoryComponent,
+        AccountPageType2PaymentsComponent,
+        AccountPageType2ChangePasswordComponent,
+        AccountPageType2VerificationComponent
+    ],
+    bootstrap: [
+        AccountPageType2DefaultComponent
+    ], imports: [CommonModule,
         AccountPagesModuleType2RoutingModule,
         TranslateModule,
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        HttpClientModule,
         NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
@@ -92,26 +93,23 @@ import {
         DesktopModule,
         DropdownDirectiveModule,
         AccountPageType2ClientsTransactionsComponent,
-        AccountPageType2AgentsTransactionsComponent
-    ],
-  providers:[
-    GetSettingsService,
-    FriendsService,
-    BonusesService,
-    GetBetsHistoryService,
-    PaymentControllerService,
-    BetsService,
-    GetTransactionsService,
-    GetPaymentsService,
-    ProfileService,
-    ExportDataService,
-    DatePipe,
-      { provide: MatDialogRef, useValue: {} },
-      { provide: MAT_DIALOG_DATA, useValue: {} }
-  ],
-  bootstrap: [
-    AccountPageType2DefaultComponent
-  ]
-})
+        AccountPageType2AgentsTransactionsComponent,
+        ToNumberPipeModule,
+        CdkCopyToClipboard], providers: [
+        GetSettingsService,
+        FriendsService,
+        BonusesService,
+        GetBetsHistoryService,
+        PaymentControllerService,
+        BetsService,
+        GetTransactionsService,
+        GetPaymentsService,
+        ProfileService,
+        ExportDataService,
+        DatePipe,
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AccountPagesModuleType2Module {
 }

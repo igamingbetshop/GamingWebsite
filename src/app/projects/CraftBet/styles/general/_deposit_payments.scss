@@ -49,8 +49,11 @@
     {
       width: 100%;
       height: auto;
-      line-height: 40px;
-      min-height: 40px;
+      line-height: var(--payment-form-field-line-height, 40px);
+      min-height: var(--payment-form-field-min-height, 40px);
+      background: var(--payment-form-field-background, transparent);
+      border-radius: var(--payment-form-field-border-radius, 0);
+      padding: var(--payment-form-field-padding, 0);
       position: relative;
       display: flex;
       justify-content: space-between;
@@ -236,8 +239,13 @@
   }
 
   &__form {
-    width: 27%;
-    margin: 0 auto;
+    width: var(--deposit-payment-container-form-width, 27%);
+    margin: var(--deposit-payment-container-form-margin, 0 auto);
+    form {
+      display: var(--deposit-payment-form-display, block);
+      gap: var(--deposit-payment-form-gap, 0);
+      align-items: center;
+    }
     &_top {
       .payment-form-field {
         line-height: 25px;

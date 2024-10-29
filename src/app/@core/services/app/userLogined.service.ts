@@ -1,12 +1,11 @@
 import {createNgModule, EventEmitter, inject, Injectable, Injector} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 import {DeviceDetectorService} from "ngx-device-detector";
 import {User} from "@core/models";
 import {AuthService, ConfigService, LocalStorageService} from "@core/services";
 import {BehaviorSubject, Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
-import {de} from "date-fns/locale";
 
 @Injectable()
 export class UserLogined {
@@ -14,19 +13,20 @@ export class UserLogined {
     public localStorageService: LocalStorageService;
     public authService: AuthService;
     public configService: ConfigService;
-    private route: ActivatedRoute;
     private router: Router;
     private deviceDetectorService: DeviceDetectorService;
     dialog = inject(MatDialog);
     private _firstLoginSbj:Subject<any> = new Subject();
     public onFirstLogin$ = this._firstLoginSbj.asObservable();
 
+    #firstTimeLogin:Subject<any> = new Subject();
+    public onFirstTimeLogin$ = this.#firstTimeLogin.asObservable();
+
     private _characterUpdateSbj:Subject<any> = new Subject();
     public onCharacterUpdate$ = this._characterUpdateSbj.asObservable();
 
     public returnUrl: string;
     public errorMessage: string;
-    public disableLogin: any;
 
     private _notifyLoginError: Subject<any> = new Subject<any>();
     public onLoginError$ = this._notifyLoginError.asObservable();
@@ -38,7 +38,6 @@ export class UserLogined {
         this.localStorageService = injector.get(LocalStorageService);
         this.authService = injector.get(AuthService);
         this.configService = injector.get(ConfigService);
-        this.route = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
         this.defaultOptions = this.configService.defaultOptions;
         this.returnUrl = this.defaultOptions.AfterLoginUrl;
@@ -62,15 +61,22 @@ export class UserLogined {
         return user;
     }
 
-    public userLogin(params, firstLoginUrl?: boolean, isClear: boolean = false, rememberMe = false): any {
+    get agent(): User {
+        const agent: User = this.localStorageService.get('agent');
+        return agent;
+    }
+
+    public userLogin(params, firstTimeLogin = false, isClear: boolean = false, rememberMe = false): any {
 
         params.PartnerId = this.defaultOptions.PartnerId;
         params.LanguageId = this.defaultOptions.DefaultLanguage;
         params.DeviceType = this.deviceDetectorService.isMobile() ? 2 : 1;
         this.isSubmitting$.next(true);
         this.authService.login(params).then(async (responseData) => {
-            if (responseData['ResponseCode'] === 0) {
-                if (responseData.IsTwoFactorEnabled) {
+            if (responseData['ResponseCode'] === 0)
+            {
+                if (responseData.IsTwoFactorEnabled)
+                {
                     const {GoogleAuthenticateModule} = await import('../../../@theme/components/modals/google-authenticate/google-authenticate.module');
                     const moduleRef = createNgModule(GoogleAuthenticateModule);
                     const component = moduleRef.instance.getComponent();
@@ -86,7 +92,9 @@ export class UserLogined {
                             if (res['ResponseCode'] == 0) {
                                 data.callBack({});
                                 this.localStorageService.add('user', responseData);
-                                this.nextPartLoginLogic(isClear, responseData, firstLoginUrl);
+                                if(responseData.IsAgent)
+                                    this.localStorageService.add('agent', responseData);
+                                this.nextPartLoginLogic(isClear, responseData, firstTimeLogin);
                             } else {
                                 data.callBack({ error: res['Description'] });
                             }
@@ -96,6 +104,8 @@ export class UserLogined {
                     this.dialog.open(component, {data:{ error: this.errorMessage, onVerified: callback, prefixTitle: 'Enable-TwoFactor'}});
                 } else {
                     this.localStorageService.add('user', responseData);
+                    if(responseData.IsAgent)
+                        this.localStorageService.add('agent', responseData);
                     if (rememberMe) {
                         this.localStorageService.add('identifier', btoa(params.Password));
                         this.localStorageService.add('login', params.ClientIdentifier);
@@ -103,7 +113,7 @@ export class UserLogined {
                         this.localStorageService.remove('identifier');
                         this.localStorageService.remove('login');
                     }
-                    this.nextPartLoginLogic(isClear, responseData, firstLoginUrl);
+                    this.nextPartLoginLogic(isClear, responseData, firstTimeLogin);
                     this.isSubmitting$.next(false);
                 }
                 // this.nextPartLoginLogic(isClear, responseData);
@@ -118,8 +128,10 @@ export class UserLogined {
         });
     }
 
-    nextPartLoginLogic(isClear: boolean = false, loginData = {}, firstLoginUrl: boolean)
+    nextPartLoginLogic(isClear: boolean = false, loginData = {}, firstTimeLogin: boolean = false)
     {
+        if(firstTimeLogin)
+            this.#firstTimeLogin.next(true);
         const productUrl = localStorage.getItem('product-url');
         const paymentUrl = localStorage.getItem('payment-url');
         if (productUrl != undefined)
@@ -148,7 +160,8 @@ export class UserLogined {
             else{
                 const url = new URL(window.location.href);
                 url.search = "";
-                if (firstLoginUrl) {
+                if (firstTimeLogin && this.defaultOptions.FirstLoginUrl)
+                {
                     window.location.reload();
                     window.location.href = url.origin + this.defaultOptions.FirstLoginUrl;
                 }

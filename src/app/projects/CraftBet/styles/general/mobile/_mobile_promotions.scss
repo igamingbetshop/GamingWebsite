@@ -22,7 +22,7 @@
       width: 100%;
       box-sizing: border-box;
       max-width: 100%;
-      padding-top: 32px;
+      padding-top: var(--m-promo-item-padding-top,32px);
 
       &_image {
         height: var(--m-promotion-image-height, 266px);
@@ -46,7 +46,7 @@
       }
 
       .promotion-content {
-        margin-top: 24px;
+        margin-top: marginTop(m-promotions-content,24px);
         padding-left: paddingLeft(m-promotions-content, 0);
         padding-right: paddingRight(m-promotions-content, 0);
         .content-title
@@ -310,6 +310,7 @@
   padding-top: var(--m-promotion-title-padding-top, 23px);
   padding-left: var(--m-promotion-title-padding-left, 0);
   margin-bottom: -1px;
+  margin-top: var(--m-promotion-title-margin-top,0);
   i{
     font-size: 18px;
     margin-right: 6px;

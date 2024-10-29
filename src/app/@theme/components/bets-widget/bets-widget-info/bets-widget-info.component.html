@@ -40,7 +40,7 @@
         <div>
             <span>{{'Game.Bet' | translate}}</span>
             <div>
-                <span tooltip="{{bet.Amount}}" iconSrc="{{bet.ImageUrl}}">{{bet.Amount}}</span>
+                <span tooltip="{{bet.BetAmount}}" iconSrc="{{bet.ImageUrl}}">{{bet.BetAmount}}</span>
                 <img [ngSrc]="bet.ImageUrl" width="15px" height="15px">
             </div>
         </div>
@@ -53,7 +53,7 @@
         <div>
             <span>{{'Game.Payout' | translate}}</span>
             <div>
-                <span tooltip="{{bet.BetAmount}}" iconSrc="{{bet.ImageUrl}}">{{bet.BetAmount}}</span>
+                <span tooltip="{{bet.Amount}}" iconSrc="{{bet.ImageUrl}}">{{bet.Amount}}</span>
                 <img [ngSrc]="bet.ImageUrl" width="15px" height="15px">
             </div>
         </div>

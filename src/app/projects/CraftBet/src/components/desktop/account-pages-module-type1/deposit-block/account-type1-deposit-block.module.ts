@@ -5,7 +5,7 @@ import {AccountType1DepositBlockRoutingModule} from "./account-type1-deposit-blo
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {NgxPrintModule} from "ngx-print";
 import {ThemeModule} from "../../../../../../../@theme/theme.module";
 import {DepositType1Component} from "./desposit-payments/deposit-type1/deposit-type1.component";
@@ -56,8 +56,7 @@ import {
 
 
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         DepositBlockDefaultComponent,
         DepositType1Component,
         DepositType2Component,
@@ -94,16 +93,12 @@ import {
         DepositType17DefaultComponent,
         DepositType19Component,
         DepositType19DefaultComponent,
-
-    ],
-    imports: [
-        CommonModule,
+    ], imports: [CommonModule,
         AccountType1DepositBlockRoutingModule,
         TranslateModule,
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
-        HttpClientModule,
         NgxMaskDirective,
         NgxPrintModule,
         ThemeModule,
@@ -112,8 +107,6 @@ import {
         CommonBonusesModule,
         CommonPaymentNominalsModule,
         QRCodeModule,
-        LoaderComponent
-    ]
-})
+        LoaderComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AccountType1DepositBlockModule {
 }

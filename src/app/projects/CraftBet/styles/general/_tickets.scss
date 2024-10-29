@@ -58,10 +58,8 @@
     font-size: fontSize(tickets-list-edit-button, 16px);
     padding: var(--edit-button-padding, 0 32px);
     height: height(edit-button, 40px);
+    line-height: var(--tickets-list-new-btn-line-height, 44px);
     border-radius: var(--edit-button-border-radius, 3px);
-    //&:hover {
-    //  background: linear-gradient(to bottom, color(settings-button-gradient-active-first) 0%, color(settings-button-gradient-active-second) 100%);
-    //}
   }
 
 
@@ -153,6 +151,11 @@
       color: itemColor(ticket-icons, #fff);
       cursor: pointer;
 
+      .icon-arrow-to-left {
+
+        transition: all 0.4s ease;
+      }
+
       .fa-ban {
         pointer-events: none;
         cursor: no-drop;
@@ -215,6 +218,34 @@
         border-radius: var(--tickets-unread-messages-border-radius, 50%);
         color: itemColor(tickets-unread-messages, #fff);
       }
+      .messages-block_item-status {
+        display: var(--history-status-display, inline-block);
+        gap: var(--history-status-gap, 0);
+        height: var(--history-status-height, 27px);
+        line-height: var(--history-status-line-height, 27px);
+        padding: var(--history-status-padding, 0 14px);
+        border-radius: var(--history-status-border-radius, 4px);
+        align-items: center;
+      }
+      .messages-block_item-point {
+        width: var(--history-status-point-width, 0);
+        height: var(--history-status-point-height, 0);
+        border-radius: var(--history-status-point-border-radius, 50%);
+      }
+      .messages-block_item-1 {
+        color: itemColor(history-status-won,rgba(34, 207, 180, 1));
+        background: backgroundColor(history-status-won,rgba(23, 52, 70, 1));
+        .messages-block_item-point-1 {
+          background: backgroundColor(history-status-point-won,rgba(34, 207, 180, 1));
+        }
+      }
+      .messages-block_item-2 {
+        color: itemColor(history-status-deleted,rgba(253, 114, 114, 1));
+        background: backgroundColor(history-status-deleted,rgba(57, 47, 66, 1));
+        .messages-block_item-point-2 {
+          background: backgroundColor(history-status-point-deleted,rgba(253, 114, 114, 1));
+        }
+      }
     }
 
     .message-header {
@@ -241,6 +272,7 @@
       clear: both;
       float: var(--tickets-messages-send-message-float, right);
       margin-right: var(--tickets-messages-send-message-margin-right, 20px);
+      margin-left: var(--tickets-messages-send-message-margin-left, 0px);
       width: width(tickets-area, 500px);
       form {
         display: var(--tickets-messages-send-message-display, block);
@@ -307,7 +339,7 @@
         border-radius: var(--tickets-textarea-border-radius, 6px);
         height: height(tickets-textarea, 72px);
         padding: var(--tickets-textarea-padding, 16px);
-        border: none;
+        border: var(--tickets-textarea-border, none);
         overflow: auto;
         outline: none;
         resize: none;
@@ -337,26 +369,27 @@
 
     .all-message {
       position: relative;
-      color: $color-black;
-      margin-top: 10px;
+      color: var(--tickets-area-all-messages-color, $color-black);
+      margin-top: var(--tickets-area-all-messages-margin-top, 10px);
       margin-right: var(--tickets-my-message-margin-right, 20px);
       width: auto;
       clear: both;
       text-overflow: clip;
       word-wrap: break-word;
-      border-radius: 100px;
-      font-size: 14px;
+      border-radius: var(--tickets-area-all-messages-border-radius, 100px);
+      font-size: var(--tickets-area-all-messages-font-size, 14px);
       padding: var(--tickets-area-all-messages-padding, 8px 15px 8px 30px);
-      min-width: 190px;
-      max-width: 80%;
+      min-width: var(--tickets-area-all-messages-min-width, 190px);
+      max-width: var(--tickets-area-all-messages-max-width, 80%);
+      border-bottom: var(--tickets-area-all-messages-border-bottom, none);
 
       span {
-        display: block;
+        display: var(--tickets-area-message-display, block);
         text-align: var(--tickets-area-message-text-align, left);
       }
 
       &.my-message {
-        float: right;
+        float: var(--tickets-my-message-float, right);
         background: backgroundColor(tickets-my-message, rgb(191, 224, 167));
         width: width(tickets-my-message, 300px);
         border-radius: var(--tickets-my-message-border-radius, 100px);
@@ -364,7 +397,7 @@
       }
 
       &.your-message {
-        float: left;
+        float: var(--tickets-your-message-float, left);
         background: backgroundColor(tickets-your-message, #cecece);
         margin-left: marginLeft(tickets-your-message, 20px);
         border-radius: var(--tickets-my-message-border-radius, 100px);
@@ -376,6 +409,15 @@
         font-size: fontSize(tikcets-author-message, 15px);
         color: itemColor(tikcets-author-message, #000);
         padding: var(--tikcets-author-message-padding, 2px 0);
+        .message-creation-date {
+          font-weight: var(--tickets-author-message-date-font-weight, var(--tickets-author-message-font-weight, bolder));
+          font-size: var(--tickets-author-message-date-font-size, var(--tikcets-author-message-font-size, 15px));
+          color: var(--tickets-author-message-date-color, var(--tikcets-author-message-color, #000));
+          margin-left: var(--tickets-author-message-date-margin-left, 5px);
+        }
+      }
+      .message-get-message {
+        text-align: var(--tickets-get-message-text-align, left);
       }
     }
   }

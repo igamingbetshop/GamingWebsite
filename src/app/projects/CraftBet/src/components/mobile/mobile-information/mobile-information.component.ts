@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LayoutService} from "@core/services/app/layout.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {take} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
 import {LoaderService} from "@core/services";

@@ -8,23 +8,23 @@
   <div class="new_ticket">
     <form [formGroup]="ticketForm" novalidate >
       <div class="form_row" *ngIf="data?.notLogin">
-        <label>{{'Register.Email' | translate}}</label>
+        <label class="open-ticket-label">{{'Register.Email' | translate}}</label>
         <div class="form_field">
           <input type="text" class="ticket_input" name="Email" formControlName="Email"/>
         </div>
       </div>
 
       <div class="form_row">
-        <label>{{'User.Subject' | translate}}</label>
+        <label class="open-ticket-label">{{'User.Subject' | translate}}</label>
         <div class="form_field">
-          <input type="text" class="ticket_input" name="Subject" formControlName="Subject"/>
+          <input type="text" class="ticket_input" name="Subject" formControlName="Subject" placeholder="{{'User.Subject-placeholder' | translate}}"/>
         </div>
       </div>
 
       <div class="form_row">
-        <label>{{'User.Ticket' | translate}}</label>
+        <label class="open-ticket-label">{{'User.Ticket' | translate}}</label>
         <div class="form_textarea">
-          <textarea name="Message" formControlName="Message"></textarea>
+          <textarea name="Message" formControlName="Message" placeholder="{{'User.Message-placeholder' | translate}}"></textarea>
         </div>
       </div>
 

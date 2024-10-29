@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, InjectionToken, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from '@core/core.module';
@@ -43,50 +43,43 @@ export const WINDOW = new InjectionToken<Window>('Window_Inject_Token', {
 });
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    BrowserModule,
-    RecaptchaV3Module,
-    AppRoutingModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient, ConfigService]
-      }
-    }),
-    CoreModule.forRoot(),
-  ],
-
-  bootstrap: [AppComponent],
-  providers: [
-    {
-      provide: ErrorHandler,
-      useClass: GlobalErrorHandler
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initConfig,
-      deps: [ConfigService],
-      multi: true
-    },
-    [
-      {provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true},
-      { provide: RECAPTCHA_V3_SITE_KEY, useFactory: getRecaptchaKey, deps: [ConfigService]},
-      /*{
-        provide: AuthServiceConfig,
-        deps: [ConfigService],
-        useFactory: provideConfig
-      }*/
-      provideEnvironmentNgxMask(maskConfig)
-    ]
-  ]
-})
+@NgModule({ declarations: [
+        AppComponent,
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        RecaptchaV3Module,
+        AppRoutingModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient, ConfigService]
+            }
+        }),
+        CoreModule.forRoot()], providers: [
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initConfig,
+            deps: [ConfigService],
+            multi: true
+        },
+        [
+            { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true },
+            { provide: RECAPTCHA_V3_SITE_KEY, useFactory: getRecaptchaKey, deps: [ConfigService] },
+            /*{
+              provide: AuthServiceConfig,
+              deps: [ConfigService],
+              useFactory: provideConfig
+            }*/
+            provideEnvironmentNgxMask(maskConfig)
+        ],
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule
 {
 

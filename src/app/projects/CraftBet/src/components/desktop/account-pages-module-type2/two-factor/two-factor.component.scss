@@ -74,6 +74,7 @@
             border-radius: var(--two-factor-img-border-radius, 6px);
           }
         }
+        .dash{margin-right: var(--dash-margin-right, 10px)}
       }
       .two-factor-steps-description-in {
         margin: var(--two-factor-step-text-description-in-margin, 10px 0);
@@ -96,7 +97,7 @@
       .enabled-mode {
         position: relative;
         .enable-otp-btn {
-          width: var(--two-factor-enable-btn-width, auto);
+          width: var(--two-factor-enable-button-width, auto);
           margin: var(--two-factor-enable-btn-margin, 0 0 0 40px);
           padding: var(--two-factor-enable-btn-padding, 0 10px);
           background: var(--two-factor-enable-btn-background, #194e8e);

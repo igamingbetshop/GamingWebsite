@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {ConfigService} from '../app/config.service';
 import {Bonus, Request} from "@core/models";
 import {LocalStorageService} from "@core/services/app/localStorage.service";
@@ -69,7 +69,7 @@ export class BonusesService {
     {
         const {WebApiUrl, PartnerId} = this.getSettings();
         let request = new Request();
-        request.Controller = Controllers.DOCUMENT;
+        request.Controller = Controllers.CLIENT;
         request.Method = Methods.COLLECT_BONUS;
         request.Token = this.userData.Token;
         request.ClientId = this.userData.Id;

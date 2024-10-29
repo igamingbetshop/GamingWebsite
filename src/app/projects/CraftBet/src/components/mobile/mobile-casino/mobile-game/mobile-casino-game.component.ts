@@ -19,6 +19,7 @@ export class MobileCasinoGameComponent implements OnInit {
     showInfobox = false;
     productInfo: ProductIno;
     currencySymbol: string;
+    playImgFormat: string;
 
     @Output('onOpen') onOpen: EventEmitter<any> = new EventEmitter<any>();
     @Output('selectProductId') selectProductId: EventEmitter<any> = new EventEmitter<any>();
@@ -37,6 +38,7 @@ export class MobileCasinoGameComponent implements OnInit {
         this.user = this.localStorageService.get('user');
         this.currencySymbol = this.user ? this.user.CurrencySymbol : '';
         this.productInfo = new ProductIno();
+        this.playImgFormat = this.fragmentConfig?.Config.playImgFormat || '.png';
     }
 
     toggleFavorite(game: any) {

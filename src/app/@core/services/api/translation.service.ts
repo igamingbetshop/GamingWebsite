@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateLoader } from '@ngx-translate/core';
 import {ConfigService} from "@core/services";
 import {map} from "rxjs/operators";

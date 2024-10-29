@@ -2712,18 +2712,18 @@ app-header
 
 
 .new-logo-item {
-  position: absolute;
-  line-height: 11px;
-  right: 0;
-  top: 0;
+  position: var(--new-logo-item-position, absolute);
+  line-height: var(--new-logo-item-line-height, 11px);
+  right: var(--new-logo-item-right, 0);
+  top: var(--new-logo-item-top, 0);
   z-index: 11;
   background-color: backgroundColor(new-logo-item, #E5446D);
   color: itemColor(new-logo-item, #fff);
-  font-size: 9px;
-  border-radius: 2px;
-  text-align: center;
-  padding: 2.5px 7px;
-  text-transform: uppercase;
+  font-size: var(--new-logo-item-font-size, 9px);
+  border-radius: var(--new-logo-item-border-radius, 2px);
+  text-align: var(--new-logo-item-text-align, center);
+  padding: var(--new-logo-item-padding, 2.5px 7px);
+  text-transform: var(--new-logo-item-text-transform, uppercase);
 }
 
 .default_width {

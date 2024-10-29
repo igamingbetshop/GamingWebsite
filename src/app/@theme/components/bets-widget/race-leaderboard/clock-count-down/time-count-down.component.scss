@@ -1,0 +1,58 @@
+.m-clock-count-down {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  margin: 0 auto;
+
+  .time-section {
+    text-align: center;
+    font-size: 18px;
+    width: 54px;
+    height: 54px;
+    color: #FFF;
+    background: #0f212e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .time-group {
+      display: flex;
+      gap: 2px;
+
+      .time-segment {
+        display: block;
+        font-size: 16px;
+        font-weight: 500;
+        width: 34px;
+        height: 34px;
+
+        .segment-display {
+          position: relative;
+          height: 100%;
+
+          .segment-display-top
+        {
+            overflow: hidden;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+          }
+        }
+      }
+    }
+
+    .time-name {
+      font-size: 14px;
+      color: #b1bad3;
+      font-weight: 600;
+    }
+  }
+}
+
+
+

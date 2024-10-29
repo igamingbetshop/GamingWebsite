@@ -9,7 +9,9 @@
   min-height: var(--register-page-min-height, auto);
   padding: var(--register-page-padding, 0);
   .register-page-full {
-    width: var(--registration-section-width, 100%);
+    width: var(--registration-section-full-width, 100%);
     margin: var(--registration-section-margin, 0);
+    border-radius: var(--registration-section-border-radius, 0);
+    box-shadow: var(--registration-section-box-shadow, none);
   }
 }

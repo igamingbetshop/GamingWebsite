@@ -77,6 +77,17 @@
     background-repeat: var(--login-left-side-img-repeat, no-repeat);
     background-size: var(--login-left-side-img-background-size, cover);
   }
+  .login-custom-left-side-img {
+    display: var(--login-custom-left-side-display, none);
+    width: var(--login-custom-left-side-width, auto);
+    height: var(--login-custom-left-side-height, auto);
+    margin: var(--login-custom-left-side-margin, 0);
+    border-radius: var(--login-custom-left-side-border-radius, 0);
+    position: var(--login-custom-left-side-position, relative);
+  }
+  .login-custom-left-side {
+    display: var(--login-custom-left-side-text-display, none)
+  }
 }
 .login-logo{
   display: display(login-logo, block);
@@ -208,6 +219,8 @@
       font-size: var(--login-field-input-icon-font-size, 18px);
       color: var(--login-field-input-icon-color, #000);
       display: var(--login-field-input-icon-display, block);
+      border-right: var(--login-field-input-icon-border-right, none);
+      padding-right: var(--login-field-input-icon-padding-right, 0);
     }
 
     .logo-icon {
@@ -387,6 +400,9 @@
           .icon-safety-text {
             margin: var(--logn-redirect-icon-safety-text-margin, 16px 0);
           }
+          .safe-secure {
+            display: var(--login-safe-secure-text-display, block);
+          }
           .icon-safety {
             display: var(--login-redirect-icon-safety-display, block);
           }
@@ -399,6 +415,7 @@
           padding: var(--register-redirect-btn-padding, 0px);
           width: var(--register-redirect-btn-width, 100%);
           margin: var(--register-redirect-btn-margin, 0 auto);
+          display: var(--register-redirect-btn-display, block);
           cursor: pointer;
         }
       }
@@ -561,6 +578,7 @@
       margin-left: marginLeft(login-button, 0px);
       font-weight: var(--login-button-font-weight, 600);
       font-size: var(--reg-btn-font-size, 18px);
+      box-shadow: var(--login-button-box-shadow, none);
       &.not_active{
         pointer-events: none;
         background-image: backgroundImage(next-btn-not-active, linear-gradient(to bottom, #1376f8, #194074));

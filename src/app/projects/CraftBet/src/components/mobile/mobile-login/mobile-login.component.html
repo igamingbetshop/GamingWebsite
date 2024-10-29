@@ -3,7 +3,7 @@
      [ngClass]="{'showPaddingTop': this.configService.defaultOptions.ShowMobileNavPanel == '1' }">
     <div class="mobile-login-top-part">
         <span class="top-login-text-part">{{'Login.Sign In' | translate}}</span>
-        <span class="top-login-text-custom-part">{{'Login.SignInCustom' | translate}}</span>
+        <span class="top-login-text-custom-part" [innerHTML]="'Login.SignInCustom' | translate | sanitizer: 'html'"></span>
         <span class="icon-close-modal close-icon" (click)="goBack()"></span>
     </div>
     <img class="login-logo" [src]="logoUrl" defaultImageFallBack
@@ -23,6 +23,7 @@
                     <div *ngSwitchCase="'text'" class="mobile-login-section_field form_field form_field{{formItem?.FieldSize}}" [ngClass]="{'valid-input': loginForm.get(formItem?.Title).valid,
                 'invalid-filed': (loginForm.get(formItem?.Title).hasError('required') && loginForm.get(formItem?.Title).dirty) }">
                         <div class="mobile-login-section_field_top flex_between common-field">
+                            <i class="icon-person"></i>
                             <input type="text" [name]="formItem?.Title" [formControlName]="formItem?.Title"
                                    class="input_field"
                                    [ngClass]="{'invalid-filed': ((loginForm.get(formItem?.Title).hasError('required') && submitted) || (loginForm.get(formItem?.Title).touched && loginForm.get(formItem?.Title).hasError('required'))) }"
@@ -34,6 +35,7 @@
     'invalid-filed': ((loginForm.get('Password').hasError('required') && submitted) ||
     (loginForm.get('Password').touched && loginForm.get('Password').hasError('required'))) }">
                         <div class="mobile-login-section_field_top flex_between common-field">
+                            <i class="icon-lock"></i>
                             <input class="input_field password" type="{{changePasswordType ? 'text' : 'password'}}"
                                    [placeholder]="'Login.' + formItem.Title | translate"
                                    [ngClass]="{'valid-input': loginForm.get('Password').valid,
@@ -123,7 +125,7 @@
         <div class="login-bottom-text">
             <p class="icon-safety-text" [innerHTML]="'Login.Safe-and-Secure-Text' | translate | sanitizer: 'html'"></p>
             <span class="icon-safety"></span>
-            <span>{{ 'Login.Safe and Secure' | translate }}</span>
+            <span class="safe-secure" [innerHTML]="'Login.Safe and Secure' | translate | sanitizer: 'html'"></span>
         </div>
         <div class="login-language-bar">
             <app-global-language></app-global-language>

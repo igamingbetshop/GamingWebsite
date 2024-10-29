@@ -2,7 +2,7 @@ profile-image{width: 326px; margin-left: 10px}
 .tab-content {
   padding: var(--account-content-row-paddding);
   background: var(--account-main-bg-color);
-  border-radius: 6px;
+  border-radius: var(--profile-tab-content-border-radius, 6px);
   height: auto;
   margin: 0;
   display: block;
@@ -54,12 +54,14 @@ profile-image{width: 326px; margin-left: 10px}
     gap: 20px;
     width: var(--settings-submit-details-width, auto);
     margin: var(--settings-submit-details-margin, 0);
+    justify-content: var(--settings-submit-details-justify-content, flex-start);
     .setting_btn {
       font-size: var(--settings-submit-details-font-size, 16px);
       border-radius: var(--settings-submit-details-border-radius, 4px);
       font-weight: var(--settings-submit-details-font-weight, 500);
       padding: var(--settings-submit-details-padding, 0px 10px);
       height: var(--settings-submit-details-height, 44px);
+      line-height: var(--settings-submit-details-line-height, 44px);
       background: linear-gradient(to bottom, var(--settings-button-gradient-first-color) 0%, var(--settings-button-gradient-second-color) 100%);
       color: var(--settings-button-text-color);
       .icon-close-modal {

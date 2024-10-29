@@ -4,7 +4,7 @@ import {DesktopMobileCommonModule} from '../common/common.module';
 import {DesktopRoutingModule} from './desktop-routing.module';
 import {ThemeModule} from '../../../../../@theme/theme.module';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {AppMainComponent} from './app-main/app-main.component';
 import {AppCasinoComponent} from './app-casino/app-casino.component';
 import {AppLoginComponent} from './app-login/app-login.component';
@@ -99,17 +99,57 @@ import {AccountStatementComponent} from "./account-statement/account-statement.c
 import {
     ProfileImageIconComponent
 } from "../../../../../@theme/components/profile/profile-image-icon/profile-image-icon.component";
+import {DarkLightComponent} from "../../../../../@theme/components/dark-light/dark-light.component";
+import {JackpotModule} from "./fragments/jackpot/jackpot.module";
 
 
-@NgModule({
-    imports: [
-        DesktopMobileCommonModule,
+@NgModule({ exports: [PaymentsListComponent, AddBankAccountComponent, UserInfoComponent, BalanceComponent],
+    declarations: [
+        AppMainComponent,
+        AppCasinoComponent,
+        AppLoginComponent,
+        AppRegistrationComponent,
+        AppHeaderComponent,
+        AppFooterComponent,
+        AppForgotPasswordComponent,
+        AppConfirmComponent,
+        AppFilterGameComponent,
+        AppForgotPasswordRecoveryComponent,
+        AppOpenGamesComponent,
+        AppLiveCasinoComponent,
+        AppOpenTicketComponent,
+        UserInfoComponent,
+        AddBankAccountComponent,
+        FaqComponent,
+        TermsConditionsComponent,
+        AboutUsComponent,
+        ContactUsComponent,
+        PrivacyPolicyComponent,
+        ParentCasinoComponent,
+        AllNewsComponent,
+        CurrentNewsComponent,
+        EmailVerifyComponent,
+        ErrorPageComponent,
+        DefaultSportComponent,
+        FullWindowComponent,
+        AppHomepageComponent,
+        CommonWindowComponent,
+        InformationComponent,
+        PaymentsListComponent,
+        ProductsListComponent,
+        AffiliateComponent,
+        ChatOpenerComponent,
+        BalanceComponent,
+        RegisterPageComponent,
+        PaymentErrorComponent,
+        LoginPageComponent
+    ],
+    imports: [DesktopMobileCommonModule,
         PointerOnLinkDirective,
         DesktopRoutingModule,
         ThemeModule,
         TranslateModule.forChild(),
         FontAwesomeModule,
-        HttpClientModule,
         NgxPaginationModule,
         SlickCarouselModule,
         NgxPrintModule,
@@ -155,52 +195,8 @@ import {
         SpinWheelOpenerComponent,
         SearchOpenerComponent,
         AccountStatementComponent,
-        ProfileImageIconComponent
-    ],
-
-    exports: [PaymentsListComponent, AddBankAccountComponent, UserInfoComponent, BalanceComponent],
-    providers: [PaymentControllerService, BonusesService, GetPaymentsService, BetsService],
-    declarations: [
-        AppMainComponent,
-        AppCasinoComponent,
-        AppLoginComponent,
-        AppRegistrationComponent,
-        AppHeaderComponent,
-        AppFooterComponent,
-        AppForgotPasswordComponent,
-        AppConfirmComponent,
-        AppFilterGameComponent,
-        AppForgotPasswordRecoveryComponent,
-        AppOpenGamesComponent,
-        AppLiveCasinoComponent,
-        AppOpenTicketComponent,
-        UserInfoComponent,
-        AddBankAccountComponent,
-        FaqComponent,
-        TermsConditionsComponent,
-        AboutUsComponent,
-        ContactUsComponent,
-        PrivacyPolicyComponent,
-        ParentCasinoComponent,
-        AllNewsComponent,
-        CurrentNewsComponent,
-        EmailVerifyComponent,
-        ErrorPageComponent,
-        DefaultSportComponent,
-        FullWindowComponent,
-        AppHomepageComponent,
-        CommonWindowComponent,
-        InformationComponent,
-        PaymentsListComponent,
-        ProductsListComponent,
-        AffiliateComponent,
-        ChatOpenerComponent,
-        BalanceComponent,
-        RegisterPageComponent,
-        PaymentErrorComponent,
-        LoginPageComponent
-    ]
-})
+        ProfileImageIconComponent,
+        DarkLightComponent, JackpotModule], providers: [PaymentControllerService, BonusesService, GetPaymentsService, BetsService, provideHttpClient(withInterceptorsFromDi())] })
 export class DesktopModule
 {
 }

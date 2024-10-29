@@ -100,7 +100,6 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
         if(this.fragmentConfig.Config.type === 'filter' || this.fragmentConfig.Config.type === 'search')
         {
             this.subscription.add(this.casinoFilterService.onFilterChange$.subscribe(filter => {
-
                 const gamesFromCache = this.saveData.getCasinoGames();
                 /*Prevent get games from cache*/
                 this.isFirstTime = false;
@@ -167,6 +166,7 @@ export class BaseCasinoCategory implements OnInit, OnDestroy
         else
         {
             const category = this.configService.settings.MenuList.find(elem => elem.Type == MenuType.CASINO_MENU).Items.find(el => el.Type == categoryId);
+
             if(category)
                 this.categoryName =  category.Title;
         }

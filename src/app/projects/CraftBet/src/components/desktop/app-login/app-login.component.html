@@ -1,12 +1,13 @@
 <div class="login-page">
     <div class="login-left-side-img"
          [ngStyle]="{'background-image':'url(../../../../../../../assets/images/login.png)'}"></div>
+    <div class="login-custom-left-side" [innerHTML]="'Login.LoginLeft' | translate | sanitizer: 'html'"></div>
     <img class="login-logo" [src]="logoUrl" defaultImageFallBack
          [defaultSrc]="'../../../../../../../assets/images/logo.png'"/>
     <img class="login-logo-svg" src="../../../../../../../assets/images/logo.svg"/>
     <div class="login-section {{mainClass}} {{sectionClass}}">
         <p class="login-title">{{'Login.Sign In' | translate}}</p>
-        <p class="login-title-custom">{{'Login.SignInCustom' | translate}}</p>
+        <p class="login-title-custom" [innerHTML]="'Login.SignInCustom' | translate | sanitizer: 'html'"></p>
         <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()" (keyup.enter)="submit()" *ngIf="formReady">
             <div class="authentication-buttons">
                 <button class="authentication-button" (click)="openModal('Login', $event)"
@@ -81,7 +82,7 @@
                     <p class="icon-safety-text"
                        [innerHTML]="'Login.Safe-and-Secure-Text' | translate | sanitizer: 'html'"></p>
                     <span class="icon-safety"></span>
-                    <span>{{ 'Login.Safe and Secure' | translate }}</span>
+                    <span class="safe-secure" [innerHTML]="'Login.Safe and Secure' | translate | sanitizer: 'html'"></span>
                 </div>
             </div>
             <div class="form_field_checked remember-me">

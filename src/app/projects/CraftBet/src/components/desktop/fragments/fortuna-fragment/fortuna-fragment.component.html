@@ -3,13 +3,13 @@
         <div class="board">
             <div class="wheel" [style.width.px]="wheelDiameter()" [style.height.px]="wheelDiameter()">
                 <div class="dial" [class.spinning]="isSpinning()">
-                    @for(slice of slices(); track slice.id; let even = $even; let odd = $odd)
+                    @for(slice of slices(); track slice.id;)
                     {
-                        <div class="slice" [style]="style()" [style.transform]="slice.transform" [class.even]="even">
+                        <div class="slice" [style]="style()" [style.background]="slice.color" [style.rotate]="slice.rotate">
                             <div class="slice-content">
                                 <span class="label" [style.font-size.px]="labelSize()" [style.width.px]="this.wheelRadius()">
                                     <span class="spin-name" >{{slice.label}}</span>
-                                    <img width="32" height="32" [ngSrc]="slice.iconSrc">
+                                    <img [src]="slice.iconSrc">
                                 </span>
                             </div>
                         </div>
@@ -127,6 +127,17 @@
     </div>
     <div class="spin-box">
         <div class="spin-box-title">{{'Lucky Win' | translate}}</div>
-        <button [class.disabled]="bonus().StatusId !== 1" id="spin" (click)="spin()" [hidden]="this.isSpinning()">{{'Just Spin' | translate}}</button>
+        <button [class.disabled]="bonus().StatusId !== 1 && !spinAgain()" id="spin" (click)="spin()" [hidden]="this.isSpinning()">{{'Just Spin' | translate}}</button>
     </div>
+    @if(this.showResult())
+    {
+        <div class="result-box">
+            <img [src]="result()">
+            <div class="bonus-label">
+                <span>{{'Bonus.YouWin' | translate}}</span>
+                <span>{{resultBonusName()}}</span>
+            </div>
+            <div class="btn-continue" (click)="close()">{{'Bonus.Continue' | translate}}</div>
+        </div>
+    }
 </div>

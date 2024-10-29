@@ -1,0 +1,164 @@
+<div class="live-stats-container" cdkDrag>
+    <div class="live-stats-popup-header">
+        <div>
+            <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon stats" style=""> <title></title> <path fill-rule="evenodd" clip-rule="evenodd" d="M33.013 19.707 64 0v12.64L30.987 33.627 18.133 18.853 0 30.693V17.947L20.107 4.853l12.906 14.854ZM16 64H5.333V35.173L16 28.213V64Zm13.707-21.653-3.04-3.52V64h10.666V37.493l-2.773 1.76-4.853 3.094ZM58.667 64H48V30.72l10.667-6.8V64Z"></path></svg>
+            <span>{{'Live Stats' | translate}}</span>
+        </div>
+        <div class="modal-close-btn" (click)="closeComponent()">
+            <svg fill="#fff" viewBox="0 0 64 64" class="svg-icon " style=""><title></title>
+                <path d="m54.827 16.187-7.014-7.014L32 24.987 16.187 9.173l-7.014 7.014L24.987 32 9.173 47.813l7.014 7.014L32 39.013l15.813 15.814 7.014-7.014L39.013 32l15.814-15.813Z"></path>
+            </svg>
+        </div>
+    </div>
+    <div class="live-stats-popup-content">
+        <div class="filter-row">
+            <div class="dropdown" dropdown>
+                <span class="bets-filter">{{selectedFilterItem()}}
+                    <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon arrow">
+                        <title></title> <path d="M32.271 49.763 9.201 26.692l6.928-6.93 16.145 16.145 16.144-16.144 6.93 6.929-23.072 23.07h-.005Z"></path></svg>
+                </span>
+                <div class="content">
+                    <div class="tail"></div>
+                    <div class="options">
+                        <ul>
+                            @for (filterItem of filterItems(); track $index)
+                            {
+                                <li (click)="selectFilterItem(filterItem)"
+                                [class.selected]="selectedFilterItem() === filterItem">{{filterItem}}</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon " style="" tooltip="{{'Reset Live Stats' | translate }}" actionType="hover"> <title></title> <path fill-rule="evenodd" clip-rule="evenodd" d="M31.943 13.08c-9.37 0-17.128 6.904-18.476 16.004l4.798-.002-9.146 12.96-9.12-12.96h5.334l.012-.124C6.889 15.536 18.291 5.112 32.127 5.112a26.823 26.823 0 0 1 17.5 6.452l-5.334 6.186.02.018a18.584 18.584 0 0 0-12.37-4.688Zm22.937 8.752L64 34.792h-5.174l-.01.12C57.332 48.398 45.902 58.888 32.02 58.888a26.826 26.826 0 0 1-17.646-6.576l5.334-6.186a18.597 18.597 0 0 0 12.47 4.776c9.406 0 17.188-6.96 18.49-16.11h-4.934l9.146-12.96ZM19.708 46.126l-.016-.014.016.014Z"></path></svg>
+            </div>
+        </div>
+
+        @switch (selectedFilterItem()){
+            @case ('All')
+            {
+                <div class="bet-block">
+                    <div class="main-info">
+                        <div class="statistic-card">
+                            <div class="statistic">
+                                <span>Profit</span>
+                                <div class="currency">0.0000000</div>
+                            </div>
+                            <div class="statistic">
+                                <span>Wagered</span>
+                                <div class="currency">0.0000000</div>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="statistic-card">
+                            <div class="statistic">
+                                <span>Wins</span>
+                                <div class="currency">0</div>
+                            </div>
+                            <div class="statistic">
+                                <span>Losses</span>
+                                <div class="currency loss">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card variant-default">
+                        <div class="graph-wrap">
+                            <div class="graph-amount">0.00000</div>
+                            <div class="graph-tooltip"></div>
+                            <svg width="225" height="170"><mask id="positiveMask"><rect x="0" y="0" width="225" height="164" fill="white"></rect></mask><path fill-opacity="0.2" fill="var(--green-500)" d="M 6 164 L 219 164 L 6 164" mask="url(#positiveMask)"></path><path fill="none" stroke="var(--green-500)" stroke-width="2.5" d="M 6 164" mask="url(#positiveMask)"></path><mask id="negativeMask"><rect x="0" y="164" width="225" height="6" fill="white"></rect></mask><path fill-opacity="0.2" fill="var(--red-500)" d="M 6 164 L 219 164 L 6 164" mask="url(#negativeMask)"></path><path fill="none" stroke="var(--red-500)" stroke-width="2.5" d="M 6 164" mask="url(#negativeMask)"></path><path stroke="grey" stroke-width="1" stroke-opacity="0.5" d="M 6 164 L 219 164"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="race-block">
+                    <div class="dropdown" dropdown>
+                <span class="race-dropdown-title">{{'$100k Race - 24 Hours' | translate}}
+                    <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon arrow">
+                        <title></title> <path d="M32.271 49.763 9.201 26.692l6.928-6.93 16.145 16.145 16.144-16.144 6.93 6.929-23.072 23.07h-.005Z"></path></svg>
+                </span>
+                        <div class="content">
+                            <div class="tail"></div>
+                            <div class="options">
+                                <ul>
+                                    <li>{{'$100k Race - 24 Hours' | translate}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <p>{{'Wager to enter the race' | translate}}!</p>
+                </div>
+            }
+            @case ('Bets')
+            {
+                <div class="bet-block">
+                    <div class="dropdown all" dropdown>
+                <span class="bets-filter all">{{'All' | translate}}
+                    <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon arrow">
+                        <title></title> <path d="M32.271 49.763 9.201 26.692l6.928-6.93 16.145 16.145 16.144-16.144 6.93 6.929-23.072 23.07h-.005Z"></path></svg>
+                </span>
+                        <div class="content">
+                            <div class="tail"></div>
+                            <div class="options">
+                                <ul>
+                                    <li>{{'All' | translate}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-info">
+                        <div class="statistic-card">
+                            <div class="statistic">
+                                <span>Profit</span>
+                                <div class="currency">0.0000000</div>
+                            </div>
+                            <div class="statistic">
+                                <span>Wagered</span>
+                                <div class="currency">0.0000000</div>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="statistic-card">
+                            <div class="statistic">
+                                <span>Wins</span>
+                                <div class="currency">0</div>
+                            </div>
+                            <div class="statistic">
+                                <span>Losses</span>
+                                <div class="currency loss">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card variant-default">
+                        <div class="graph-wrap">
+                            <div class="graph-amount">0.00000</div>
+                            <div class="graph-tooltip"></div>
+                            <svg width="225" height="170"><mask id="positiveMask"><rect x="0" y="0" width="225" height="164" fill="white"></rect></mask><path fill-opacity="0.2" fill="var(--green-500)" d="M 6 164 L 219 164 L 6 164" mask="url(#positiveMask)"></path><path fill="none" stroke="var(--green-500)" stroke-width="2.5" d="M 6 164" mask="url(#positiveMask)"></path><mask id="negativeMask"><rect x="0" y="164" width="225" height="6" fill="white"></rect></mask><path fill-opacity="0.2" fill="var(--red-500)" d="M 6 164 L 219 164 L 6 164" mask="url(#negativeMask)"></path><path fill="none" stroke="var(--red-500)" stroke-width="2.5" d="M 6 164" mask="url(#negativeMask)"></path><path stroke="grey" stroke-width="1" stroke-opacity="0.5" d="M 6 164 L 219 164"></path></svg>
+                        </div>
+                    </div>
+                </div>
+            }
+            @case ('Race')
+            {
+                <div class="race-block">
+                    <div class="dropdown" dropdown>
+                <span class="race-dropdown-title">{{'$100k Race - 24 Hours' | translate}}
+                    <svg fill="currentColor" viewBox="0 0 64 64" class="svg-icon arrow">
+                        <title></title> <path d="M32.271 49.763 9.201 26.692l6.928-6.93 16.145 16.145 16.144-16.144 6.93 6.929-23.072 23.07h-.005Z"></path></svg>
+                </span>
+                        <div class="content">
+                            <div class="tail"></div>
+                            <div class="options">
+                                <ul>
+                                    <li>{{'$100k Race - 24 Hours' | translate}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <p>{{'Wager to enter the race' | translate}}!</p>
+                </div>
+            }
+        }
+
+
+    </div>
+</div>

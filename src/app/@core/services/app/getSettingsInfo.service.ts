@@ -50,8 +50,8 @@ export class GetSettingsInfoService {
     #notifyGetChooseFileName = new Subject<any>();
     notifyGetChooseFileName$ = this.#notifyGetChooseFileName.asObservable();
 
-    public _notifyGetDocumentError = new Subject<any>();
-    private notifyGetDocumentError$ = this._notifyGetDocumentError.asObservable();
+    #notifyChooseFileError = new Subject<any>();
+    onChooseFileError$ = this.#notifyChooseFileError.asObservable();
 
     private _notifyGetDocumentUploadResponseMessage = new Subject<any>();
     public notifyGetDocumentUploadResponseMessage$ = this._notifyGetDocumentUploadResponseMessage.asObservable();
@@ -174,7 +174,7 @@ export class GetSettingsInfoService {
         if (file)
         {
             this.validDocumentSize = file.size < 5000000;
-            this.validDocumentFormat = file.type === 'application/pdf' || file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg';
+            this.validDocumentFormat = file.type === 'application/pdf' || file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'image/gif';
             clearTimeout(this.msgTimeout);
             if (this.validDocumentSize && this.validDocumentFormat)
             {
@@ -216,7 +216,7 @@ export class GetSettingsInfoService {
             } else {
                 this.checkDocumentSize = false;
                 this.translate.get('Error.size_format').subscribe((message: string) => {
-                    this._notifyGetDocumentError.next(message);
+                    this.#notifyChooseFileError.next(message);
                 });
                 this.msgTimeout = setTimeout(() => {
                     this.validDocumentSize = undefined;

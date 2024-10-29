@@ -11,10 +11,16 @@ import {Router} from "@angular/router";
 })
 export class AccountPageType2DefaultComponent extends CommonUserDefaultComponent {
   public router: Router;
+  public balance: string;
+  public currencySymbol: any;
+  public currencyId: any;
+
   constructor(public injector: Injector) {
     super(injector);
     this.savedDateService = injector.get(SaveData);
     this.router = injector.get(Router);
+    this.currencySymbol = this.userData ? this.userData.CurrencySymbol : '';
+    this.currencyId = this.userData ? this.userData.CurrencyId : '';
     this.router.events.subscribe((currentRoute) => {
       this.menuList.forEach(el => {
         el.SubMenu.forEach(subMenuItem => {
@@ -49,6 +55,9 @@ export class AccountPageType2DefaultComponent extends CommonUserDefaultComponent
 
   ngOnInit() {
     super.ngOnInit();
+    this.balanceService.notifyUpdateBalance.subscribe(data => {
+      this.balance = Number(data.AvailableBalance).toFixed(2);
+    });
   }
 
   protected readonly self = self;

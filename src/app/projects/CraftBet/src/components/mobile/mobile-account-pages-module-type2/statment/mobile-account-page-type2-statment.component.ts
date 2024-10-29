@@ -1,7 +1,10 @@
-import {Component, Injector} from '@angular/core';
+import {Component,Injector} from '@angular/core';
 import {UserAccountStatmentComponent} from "../../../../../../../@theme/components";
-import {DefaultService} from "@core/services";
+import {ConfigService, DefaultService, SaveData} from "@core/services";
 import {LayoutService} from "@core/services/app/layout.service";
+import {MenuType} from "@core/enums";
+import {BaseControllerService} from "@core/services/app/baseController.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-mobile-account-page-type2-statment',
@@ -13,7 +16,10 @@ export class MobileAccountPageType2StatmentComponent extends UserAccountStatment
 
   constructor(public injector: Injector,
               public defaultService: DefaultService,
-              public layoutService: LayoutService) {
+              public layoutService: LayoutService,
+              public baseControllerService: BaseControllerService,
+              public savedDateService: SaveData,
+              public router: Router) {
     super(injector);
   }
 
@@ -31,6 +37,10 @@ export class MobileAccountPageType2StatmentComponent extends UserAccountStatment
     };
 
     let responseData = await this.defaultService.defaultRequest(input);
-    this.accountData = responseData.ResponseObject.Accounts;
+    this.accountData = responseData.ResponseObject.Accounts.map(account => {
+      account.FromattedValue = account.CurrencyId ? this.formatValue(account.Balance) : account.Balance;
+      return account;
+    });
   }
+
 }

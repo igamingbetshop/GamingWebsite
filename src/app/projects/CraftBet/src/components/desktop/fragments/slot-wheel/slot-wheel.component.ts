@@ -11,9 +11,10 @@ import {ConfigService} from "@core/services";
 
 export type Slice = {
   id: number;
-  transform: string;
-  label:number;
+  rotate: string;
+  label:string;
   iconSrc:string;
+  color:string;
 };
 
 type Results = {
@@ -21,9 +22,10 @@ type Results = {
   label:number;
 };
 
-type KeyValue = {
-  Key: number;
-  Value:number;
+type ConnectedBonus = {
+  Id: number;
+  Name:string;
+  Color:string;
 };
 
 export type WinnerInfo = {
@@ -69,19 +71,28 @@ export class SlotWheelComponent {
         if(length)
         {
           const angle = 360 / length;
-          const slices:Slice[] = data.Bonus.ConnectedBonuses.map((el:KeyValue, index:number) => {
+          if(data.Bonus.LinkedBonusId)
+          {
+            const index = data.Bonus.ConnectedBonuses.findIndex(b => b.Id === data.Bonus.LinkedBonusId);
+            if(index > -1)
+            {
+              data.Bonus.ConnectedBonuses.unshift(data.Bonus.ConnectedBonuses.splice(index, 1)[0]);
+            }
+          }
+          const slices:Slice[] = data.Bonus.ConnectedBonuses.map((el:ConnectedBonus, index:number) => {
             return {
-              id: el.Key,
-              transform: `translateX(-50%) rotate(${index * angle}deg`,
-              label:el.Value,
-              iconSrc:`${window.location.protocol}//${this.config.defaultOptions.Domain}/assets/images/bonuses/${el.Key}.png`
+              id: el.Id,
+              rotate: `${index * angle}deg`,
+              label:el.Name,
+              color:el.Color,
+              iconSrc:`${window.location.protocol}//${this.config.defaultOptions.Domain}/assets/images/bonuses/${el.Id}.png`
             }
           });
           this.slices.set(slices);
         }
         this.bonusInfo = data.Bonus;
+        this.getBonusWinnersInfo({BonusId: +this.bonusId});
       });
-     this.getBonusWinnersInfo({BonusId: +this.bonusId});
     }
   }
   close()

@@ -3,6 +3,23 @@
 
 .mobile-live-casino-section {
   background-image: var(--m-live-casino-section-background-image, unset) !important;
+  .game-content{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    min-height: inherit;
+    text-wrap: balance;
+    text-align: center;
+    background: var(--open-product-error-bg, #000000);
+    .open-product-error{
+      color: var(--open-product-error-color, #FFFFFF);
+      font-size: var(--open-product-error-size, 30px);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
+    }
+  }
 }
 .mobile-casino-section {
   min-height: calc(100vh - 62px);

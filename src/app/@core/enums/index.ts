@@ -136,6 +136,7 @@ export enum Methods
   CLIENT_IDENTITYMODELS = "GetClientIdentityModels",
   GET_CLIENT_STATUSES = "GetClientStatuses",
   UPLOAD_IMAGE = "UploadImage",
+  UPLOAD_KYC_DOCUMENT = "UploadKYCDocument",
   CHANGE_CLIENT_DETAILS = "ChangeClientDetails",
   ADD_BANK_ACCOUNT = "AddBankAccount",
   REMOVE_PAYMENT_ACCOUNT = "RemovePaymentAccount",
@@ -162,6 +163,7 @@ export enum Methods
   GET_CHARACTERS = "GetCharacters",
   GET_CHARACTER_CURRENT_STATE = "GetCharacterCurrentState",
   GET_CHARACTERS_HIERARCHY = "GetCharacterHierarchy",
+  GET_JACKPOTS = "GetJackpots",
   ADD_CHARACTER_TO_CLIENT = "AddCharacterToClient",
   GET_ACTIVE_TOURNAMENTS = "GetActiveTournaments",
   GET_TOURNAMENT_LEADERBOARD = "GetTournamentLeaderboard",
@@ -248,8 +250,10 @@ export enum FragmentPositions {
   Games = 'games',
   MyCasino = 'mycasino',
   Home = 'home',
+  Sport = 'sport',
   Category = 'category',
-  Group = 'group'
+  Group = 'group',
+  Product = 'product'
 }
 
 export enum FragmentTypes {

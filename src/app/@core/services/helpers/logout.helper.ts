@@ -37,9 +37,9 @@ export class LogoutHelper {
             this.localStorageService.remove('popupShown');
             localStorage.removeItem('defaultRoute');
             localStorage.removeItem('token');
-            localStorage.removeItem('selectedAccountId');
-            localStorage.removeItem('walletSettings');
-            this.localStorageService.remove("downLineClient");
+            this.localStorageService.remove('selectedAccountId');
+            this.localStorageService.remove('walletSettings');
+            this.localStorageService.remove("agent");
 
             if (this.configService.defaultOptions.ShowLogoutInfoPopup && (this.configService.defaultOptions.ShowLogoutInfoPopup == '1')) {
                 this.showConfirm(type);

@@ -1,6 +1,7 @@
+<div class="promotions-content">
 
 <div class="promotion-item-header" *ngIf="selectedPromotionId">
-    <span class="promotion-item-title"  [innerHtml]="promotion.Title | sanitizer: 'html'"></span>
+    <span class="promotion-item-title"  [innerHtml]="promotion.Title | translate | sanitizer: 'html'"></span>
     <button class="get-bonuses selected" (click)="getBonuses()"
     >{{'Promotions.Get Bonuses' | translate}}</button>
 </div>
@@ -23,8 +24,8 @@
                 </div>
 
                 <div class="promotions_text">
-                    <div class="promotions_title" [innerHtml]="item.Title"></div>
-                    <p [innerHtml]="item.Description"></p>
+                    <div class="promotions_title" [innerHtml]="item.Title | translate | sanitizer: 'html'"></div>
+                    <p [innerHtml]="item.Description | translate | sanitizer: 'html'"></p>
                 </div>
             </div>
 
@@ -54,4 +55,4 @@
         <promotion-fragment  [promotionFragment]="fragment" (onSelect)="onSelectPromotion($event, fragment)"></promotion-fragment>
     </div>
 }
-
+</div>

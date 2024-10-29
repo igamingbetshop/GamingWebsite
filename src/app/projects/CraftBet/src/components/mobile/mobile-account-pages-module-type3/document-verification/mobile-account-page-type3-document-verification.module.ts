@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownDirectiveModule } from '../../../../../../../@theme/directives/dropdown/dropdown-directive.module';
 import { GetSettingsService } from '../../../../../../../@core/services/app/getSettings.service';
 import { MobileAccountPageType3DocumentVerificationComponent } from './mobile-account-page-type3-document-verification.component';
+import {SanitizerModule} from "../../../../../../../@theme/pipes/sanitizer/sanitizer.module";
 
 const routes: Routes = [
     {
@@ -23,6 +24,7 @@ const routes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forChild(routes),
+        SanitizerModule,
     ],
     providers: [
         GetSettingsService

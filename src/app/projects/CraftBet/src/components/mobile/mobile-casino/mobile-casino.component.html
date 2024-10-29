@@ -48,6 +48,12 @@
 
   </mobile-character-hierarchy>
 
+  <mobile-jackpot  *ngFor="let fragment of fragments?.Jackpots?.Items"
+                   [style.order]="fragment.Order"
+                   [fragmentConfig]="fragment">
+
+  </mobile-jackpot>
+
   <div class="open-lucky-game" (click)="openLuckyGame()">
     <img class="" src="../assets/images/lucky-icon.svg">
   </div>

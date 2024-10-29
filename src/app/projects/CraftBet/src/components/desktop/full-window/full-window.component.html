@@ -14,8 +14,12 @@
     </div>
 </div>
 
-
-<div class="game-content" id="full-window-game-container" (fullscreenchange)="onFullScreenChange($event)">
+<div class="game-content" id="full-window-game-container" [hidden]="openProductErrorMessage()" (fullscreenchange)="onFullScreenChange($event)">
     <i *ngIf="isFullscreen" class="icon-full-screen" (click)="exitFullscreen()"></i>
     <iframe [scrolling]="scrollBar" id="main-game-iframe" allowfullscreen allow="clipboard-write"></iframe>
 </div>
+@if (openProductErrorMessage())
+{
+    <div class="game-content"><span class="open-product-error">{{openProductErrorMessage()}}</span></div>
+}
+

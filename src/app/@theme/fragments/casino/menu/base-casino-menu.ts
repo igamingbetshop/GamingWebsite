@@ -1,4 +1,4 @@
-import {Directive, Injector, Input, OnInit} from "@angular/core";
+import {Directive, inject, Injector, Input, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfigService} from "../../../../@core/services";
 import {FragmentData} from "../../../../@core/models";
@@ -6,6 +6,7 @@ import {CasinoFilterService} from "../../../../@core/services/app/casino-filter.
 import {BaseApiService} from "../../../../@core/services/api/base-api.service";
 import {Methods} from "../../../../@core/enums";
 import {take} from "rxjs/operators";
+import {UserLogined} from "@core/services/app/userLogined.service";
 
 @Directive()
 export class BaseCasinoMenu implements OnInit
@@ -26,6 +27,7 @@ export class BaseCasinoMenu implements OnInit
     private prevPath:string;
 
     protected resourceFolderName:string = 'webfragments';
+    protected userLogin = inject(UserLogined);
 
     constructor(protected injector: Injector)
     {

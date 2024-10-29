@@ -100,7 +100,6 @@ export class BaseWithdrawPaymentComponent implements OnInit {
                         {
                             this.translate.get(`Payment.${data.Description}`).subscribe((res: string) => {
                                 this.successMessage = res;
-                                this.paymentControllerService.getUserAccount();
                                 this.paymentControllerService.getUserAccountData();
                                 setTimeout(() => this.successMessage = '', 5000);
                             });
@@ -108,7 +107,6 @@ export class BaseWithdrawPaymentComponent implements OnInit {
                         else
                         {
                             this.successMessage = 'success';
-                            this.paymentControllerService.getUserAccount();
                             this.paymentControllerService.getUserAccountData();
                             setTimeout(() => this.successMessage = '', 5000);
                         }

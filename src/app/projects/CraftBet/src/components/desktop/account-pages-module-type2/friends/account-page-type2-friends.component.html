@@ -13,29 +13,32 @@
                 [ngValue]="timeFilter">{{timeFilter.Name | translate}}</option>
       </select>
     </div>
-    <div class="send-email">
-      <label>
-        {{'Account.Email' | translate}}
-      </label>
-      <div class="send-email_top">
-        <input id="name" class="send-email_input" name="name" #name="ngModel"
-               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$" [(ngModel)]="email"
-               placeholder="{{'Account.Email' | translate}}">
-        <button class="send-email_btn" (click)="inviteFriend()" [disabled]="name.invalid || !email">
-          <span>{{'Friends.SendLetter' | translate}}</span>
-        </button>
-        <div [ngClass]="{'error_message' : showError == 2, 'success-message' : showError == 1}" *ngIf="!!showError">
-          {{inviteMessage}}
-        </div>
-
-        <div class="error_message invalid-error-message" *ngIf="name.invalid && (name.dirty && name.touched)">
-          {{'Auth.EmailMustValid' | translate}}
-        </div>
-      </div>
-    </div>
+    <div></div>
   </div>
   <div class="custom-referral" [innerHTML]="'Friends.CustomReferralText' | translate | sanitizer: 'html'"></div>
-  <div class="referralLink">{{referralLink}}</div>
+  <div class="referralLink-container">
+      <span [cdkCopyToClipboard]="referralLink" class="referralLink">{{referralLink}}</span>
+      <div class="send-email">
+          <label>
+              {{'Account.Email' | translate}}
+          </label>
+          <div class="send-email_top">
+              <input id="name" class="send-email_input" name="name" #name="ngModel"
+                     pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$" [(ngModel)]="email"
+                     placeholder="{{'Account.Email' | translate}}">
+              <button class="send-email_btn" (click)="inviteFriend()" [disabled]="name.invalid || !email">
+                  <span>{{'Friends.SendLetter' | translate}}</span>
+              </button>
+              <div [ngClass]="{'error_message' : showError == 2, 'success-message' : showError == 1}" *ngIf="!!showError">
+                  {{inviteMessage}}
+              </div>
+
+              <div class="error_message invalid-error-message" *ngIf="name.invalid && (name.dirty && name.touched)">
+                  {{'Auth.EmailMustValid' | translate}}
+              </div>
+          </div>
+      </div>
+  </div>
 
 
   <div class="friends-block-head block-head">

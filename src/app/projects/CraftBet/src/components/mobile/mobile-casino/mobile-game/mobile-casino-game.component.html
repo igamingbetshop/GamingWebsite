@@ -30,7 +30,7 @@
                 {{'Game.Real' | translate}}
             </div>
             <div class="game-btn_real-pic">
-                <img class="game-btn game-btn_real-pic-inner" src="../../../../../../../assets/images/play-btn.png"
+                <img class="game-btn game-btn_real-pic-inner" src="../../../../../../../assets/images/play-btn{{playImgFormat}}"
                      (click)="openGame(game, 'real')">
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="game-btn game-btn_demo" title="{{'Game.Demo' | translate}}"
                (click)="openGame(game, 'demo')">
                 <img class="game-btn game-btn_demo game-btn_demo-pic"
-                     src="../../../../../../../assets/images/play-btn.png">
+                     src="../../../../../../../assets/images/play-btn{{playImgFormat}}">
                 <span class="game-btn_demo-text">{{'Game.Demo' | translate}}</span>
             </div>
         </div>

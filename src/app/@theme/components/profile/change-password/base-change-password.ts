@@ -1,4 +1,14 @@
-import {createNgModule, Directive, EventEmitter, inject, Injector, OnDestroy, OnInit} from "@angular/core";
+import {
+    createNgModule,
+    DestroyRef,
+    Directive,
+    EventEmitter,
+    inject,
+    Injector,
+    OnDestroy,
+    OnInit,
+    signal
+} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Validator} from "@core/validators/validators";
 import {GetSettingsInfoService} from "@core/services/app/getSettingsInfo.service";
@@ -13,6 +23,9 @@ import {TranslateService} from "@ngx-translate/core";
 import {LogoutHelper} from "@core/services/helpers/logout.helper";
 import {MatDialog} from "@angular/material/dialog";
 import {BaseControllerService} from "@core/services/app/baseController.service";
+import {Password, passwordValidOptions} from "@core/utils";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 
 @Directive()
 export class BaseChangePassword implements OnInit, OnDestroy
@@ -31,12 +44,14 @@ export class BaseChangePassword implements OnInit, OnDestroy
     private getSettingsInfoService:GetSettingsInfoService;
     private verificationService: VerificationService;
     dialog = inject(MatDialog);
-    public configService: ConfigService;
+    configService = inject(ConfigService);
+    #destroyRef = inject(DestroyRef);
     private utilityService: UtilityService;
     public translate: TranslateService;
     public logoutHelper: LogoutHelper;
     public localStorageService: LocalStorageService;
     private baseControllerService:BaseControllerService;
+    passwordValidOptions = signal<Password[]>(passwordValidOptions(this.configService));
 
     constructor(protected injector:Injector)
     {
@@ -65,13 +80,11 @@ export class BaseChangePassword implements OnInit, OnDestroy
             'NewPassword': ['', [
                 Validators.required,
                 Validator.noWhitespaceValidator,
-                Validators.minLength(6),
                 Validators.pattern(regex)
             ]],
             'ConfirmPassword': ['', [
                 Validators.required,
                 Validator.noWhitespaceValidator,
-                Validators.minLength(6),
                 Validators.pattern(regex)
             ]]
         });
@@ -79,7 +92,20 @@ export class BaseChangePassword implements OnInit, OnDestroy
         this.formGroup.get('NewPassword').valueChanges.subscribe(val => {
             val && this.formGroup.get('ConfirmPassword').updateValueAndValidity();
         });
+        this.newPassword.valueChanges.pipe(takeUntilDestroyed(this.#destroyRef), debounceTime(500), distinctUntilChanged()).subscribe(value => {
+            this.checkPassOptions(value);
+        });
         this.getSettings();
+    }
+
+    checkPassOptions(value:string)
+    {
+        this.passwordValidOptions.update(items => {
+            items.forEach(item => {
+                item.valid = value ? item.condition(value) : undefined;
+            });
+            return items;
+        });
     }
 
     private async getSettings()
@@ -208,4 +234,18 @@ export class BaseChangePassword implements OnInit, OnDestroy
         this.dialog.open(component, {data:{securityQuestionIds:questionIds, onSecurityConfirmed:callback}});
     }
 
+    get newPassword()
+    {
+        return this.formGroup.get('NewPassword');
+    }
+    get oldPassword()
+    {
+        return this.formGroup.get('OldPassword');
+    }
+    get confirmPassword()
+    {
+        return this.formGroup.get('ConfirmPassword');
+    }
+
 }
+

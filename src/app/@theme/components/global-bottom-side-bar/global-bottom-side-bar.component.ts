@@ -88,6 +88,7 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
 
     openTab(item)
     {
+        const styleTypeItem = JSON.parse(item.StyleType);
         this.selectedItem = item;
         if (this.selectedOrder !== item.Order)
         {
@@ -111,6 +112,9 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
             case 'Betslip':
                 this.showBetslip = !this.showBetslip;
                 this.openSportBetSlip('BetSlip');
+                if(!this.loggedService.isAuthenticated && styleTypeItem?.checkLogin == true){
+                    this.router.navigate(['/signup']);
+                }
                 break;
             case 'AllBets':
                 this.showBetslip = !this.showBetslip;
@@ -145,6 +149,7 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
         }
     }
 
+
     openSportBetSlip(tab:string = '')
     {
         if(tab == 'AllBets' && !this.loggedService.isAuthenticated)
@@ -155,6 +160,15 @@ export class GlobalBottomSideBarComponent implements OnInit, OnDestroy {
         {
             const event = new CustomEvent('betslipChangeFromParent', {detail: {tab:tab, open:true}});
             window.dispatchEvent(event);
+
+            if(this.configService.defaultOptions.SportOpenMode === 'iframe')
+            {
+                const iframe = document.getElementById('main-game-iframe') as HTMLIFrameElement;
+                if (iframe && iframe.contentWindow) {
+                    iframe.contentWindow.postMessage({"from": "website", "type": 'betslip', "state":{open:true}}, "*");
+                }
+            }
+
         }
     }
 

@@ -148,6 +148,7 @@
         width: var(--right-sidebar-header-top-panel-width, 100%);
         align-items: center;
         flex-direction: var(--right-sidebar-header-top-panel-flex-direction, row);
+        position: var(--right-sidebar-header-top-panel-position, relative);
         i {
           color: color(m-drawer-menu-close-icon) !important;
           font-size: fontSize(m-drawer-menu-close-icon, 20px);
@@ -165,6 +166,9 @@
         .icon-close-modal {
           margin-left: var(--m-drawer-menu-icon-close-margin-left, auto);
           display: var(--m-drawer-menu-icon-close-display, block);
+          position: var(--m-drawer-menu-icon-close-position, relative);
+          right: var(--m-drawer-menu-icon-close-right, 0);
+          top: var(--m-drawer-menu-icon-close-top, 0);
         }
 
         .user_panel_title {

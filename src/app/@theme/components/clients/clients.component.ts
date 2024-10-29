@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {BaseApiService} from "../../../@core/services/api/base-api.service";
 import {Controllers, Methods} from "../../../@core/enums";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
@@ -6,6 +6,7 @@ import {DropdownDirectiveModule} from "../../directives/dropdown/dropdown-direct
 import {take} from "rxjs/operators";
 import {LocalStorageService} from "@core/services";
 import {TranslateModule} from "@ngx-translate/core";
+import {UserLogined} from "@core/services/app/userLogined.service";
 
 @Component({
   selector: 'clients',
@@ -19,6 +20,7 @@ export class ClientsComponent  {
 
   clients = signal<DownLineClient[]>([]);
   selectedClient = signal<DownLineClient>({Id:0, UserName:"SelectClient", Token:null});
+  userLogin = inject(UserLogined);
 
   constructor(private baseApiService: BaseApiService, private localStorageService:LocalStorageService)
   {
@@ -28,12 +30,18 @@ export class ClientsComponent  {
 
   getDownLineClients()
   {
-    this.baseApiService.apiRequest(null, Controllers.AGENT, Methods.GET_DOWN_LINE_CLIENTS).pipe(takeUntilDestroyed()).subscribe(data => {
+    this.baseApiService.apiRequest({Token:this.userLogin.agent.Token, ClientId:this.userLogin.agent.Id, IsAgent:true}, Controllers.AGENT, Methods.GET_DOWN_LINE_CLIENTS).pipe(takeUntilDestroyed()).subscribe(data => {
         if(data.ResponseCode === 0)
         {
           this.clients.set(data.ResponseObject);
         }
     })
+  }
+
+  selectAgent()
+  {
+    this.localStorageService.add("user", this.userLogin.agent);
+    location.reload();
   }
 
   selectClient(client:DownLineClient)
@@ -46,10 +54,10 @@ export class ClientsComponent  {
   {
     if(this.selectedClient().Id)
     {
-      this.baseApiService.apiPost(null,{IsAgent:true, ClientId:this.selectedClient().Id}, Methods.CREATE_TOKEN, false).pipe(take(1)).subscribe(data => {
+      this.baseApiService.apiPost(null,{IsAgent:true, Token:this.userLogin.agent.Token, ClientId:this.selectedClient().Id}, Methods.CREATE_TOKEN, false).pipe(take(1)).subscribe(data => {
         if(data.ResponseCode === 0)
         {
-          this.localStorageService.add("downLineClient", {Id:data.Id, UserName:data.UserName, Token:data.Token});
+          this.localStorageService.add("user", data);
           location.reload();
         }
       });
@@ -58,9 +66,9 @@ export class ClientsComponent  {
 
   getClientIfExists()
   {
-    const client = this.localStorageService.get("downLineClient");
+    /*const client = this.localStorageService.get("downLineClient");
     if(client)
-      this.selectedClient.set(client);
+      this.selectedClient.set(client);*/
   }
 }
 

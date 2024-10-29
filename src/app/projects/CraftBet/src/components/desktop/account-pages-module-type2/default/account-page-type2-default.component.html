@@ -19,8 +19,11 @@
                 <div class="user-info">
                     <img class="mobile-account-img" src="../../../../../../../assets/images/user.png" alt="">
                     <div class="user-panel-content">
-                        <div class="">{{'User.User_Id' | translate}}</div>
-                        <div class="user_id">{{userData?.Id}}</div>
+                        <div class="">{{userData?.UserName}}</div>
+                        <div class="user_id">{{'User.User_Id' | translate}}: {{userData?.Id}}</div>
+                        <div class="user-panel-balance">
+                            {{'User.Balance' | translate}}: {{balance | toNumber | number: '.2'}}{{ currencySymbol ? currencySymbol : currencyId }}
+                        </div>
                     </div>
                 </div>
                 <li
@@ -33,16 +36,16 @@
                             <div class="title_menu_icon" [ngStyle]="{'background-image':'url(../../../../../../../assets/images/account-tabs-list/' + item?.Icon + ')'}"></div>
                             <span>{{'User.' + item?.Title | translate}}</span>
                         </div>
-                        <fa-icon [icon]="faCaretDown" *ngIf="item?.Title !== item?.SubMenu[0].Title"></fa-icon>
+                        <fa-icon class="title_menu-fa-icon" [icon]="faCaretDown" *ngIf="item?.Title !== item?.SubMenu[0].Title"></fa-icon>
                     </div>
-<!--                    <ul class="user-left-panel_subList"  *ngIf="item?.Title !== item?.SubMenu[0].Title" [collapse]="(savedDateService.selectedItem == item)">-->
                     <ul class="user-left-panel_subList" *ngIf="(currentOpenMenu == item) || (item.SubMenu.includes(currentOpenSubMenu))"
                             [collapse]="true">
                         <div>
                             <li class="user-left-panel_list" *ngFor="let subItem of item?.SubMenu" (click)="onSubMenuClick($event, subItem)">
                                 <a class="item_menu" routerLinkActive="active"
-                                   *ngIf="subItem.Type != 4">
-                                    {{'User.' + subItem?.Title | translate}}
+                                   *ngIf="subItem.Type != 4" [ngClass]="{'item_menu_active' : router.url.split('/')[3] === subItem.Href}">
+                                    <img *ngIf="subItem?.Icon" class="user-left-panel-item-img" src="../../../../../../../assets/images/account-tabs-list/{{subItem?.Icon}}">
+                                    <span>{{'User.' + subItem?.Title | translate}}</span>
                                 </a>
                             </li>
                         </div>
@@ -74,6 +77,14 @@
                     <div class="user-info_text">
                         {{'User.User info' | translate}}
                     </div>
+                </div>
+                <div class="user-right-panel_title" *ngIf="tabType !== 'top'">
+                    <ng-container class="user-right-panel-list_title" *ngFor="let data of savedDateService.selectedItem?.SubMenu">
+                        <ng-container *ngIf="data?.Href !== '' && router.url.includes(data?.Href)">
+                            <img *ngIf="data?.Icon" class="user-right-panel-list-img" src="../../../../../../../assets/images/account-tabs-list/{{data?.Icon}}">
+                            <span>{{'User.' + data.Title | translate}}</span>
+                        </ng-container>
+                    </ng-container>
                 </div>
             </div>
 

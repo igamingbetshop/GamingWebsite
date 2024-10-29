@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {ConfigService, LocalStorageService} from "@core/services";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Component({

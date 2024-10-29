@@ -4,7 +4,7 @@ import {Promotion, PromotionFragment} from "../../../../@core/models";
 import {Controllers, Methods} from "../../../../@core/enums";
 import {Subscription, take} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {LangService} from "../../../../@core/services/app/lang.service";
 import {UserLogined} from "../../../../@core/services/app/userLogined.service";
 import {ConfigService} from "../../../../@core/services";

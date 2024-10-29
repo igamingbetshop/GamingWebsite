@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 import {BasePromotionFragments} from "../../../../../../@theme/components/common/promotions/base-promotion-fragments";
 import {PromotionFragment} from "../../../../../../@core/models";
 import {CommonModule} from "@angular/common";
@@ -14,6 +14,9 @@ import {SanitizerModule} from "../../../../../../@theme/pipes/sanitizer/sanitize
   standalone:true
 })
 export class MobilePromotionFragmentsComponent extends BasePromotionFragments {
+
+  @HostBinding('style.min-height') minHeight = this.layoutService.layoutStyle['min-height'];
+  @HostBinding('style.margin-top') marginTop = this.layoutService.layoutStyle['margin-top'];
 
   @Input() promotionFragment:PromotionFragment;
 
